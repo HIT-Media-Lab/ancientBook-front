@@ -11,6 +11,10 @@
     import home from './home.vue'
     import  search from  './component/search/search.vue'
     import  login from  './login.vue'
+    window.onload=function ()
+    {
+        this.BeforeHttp('/ancient_books/getToken.action')
+    };
   export default{
         components:{home,search,login},
 

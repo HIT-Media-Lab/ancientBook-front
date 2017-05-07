@@ -41,10 +41,9 @@ Vue.prototype.HttpGet=function (url,[option]) {
     })
 };
 
-Vue.prototype.BeforeHttp=function (token_url,token) {
+Vue.prototype.BeforeHttp=function (token_url) {
     this.$http.get(token_url).then(function (response) {
-        token=response.token;
-        return token
+        return  response.token
     })
 };
 
