@@ -1,21 +1,26 @@
 <template>
-  <div id="app">
-    <login></login>
+  <div id="app" class="app">
+    <!--<login></login>-->
     <router-view></router-view>
     <search></search>
-    <store></store>
+    <home></home>
   </div>
 </template>
 
 <script>
-    import store from './store.vue'
+    import home from './home.vue'
     import  search from  './component/search/search.vue'
     import  login from  './login.vue'
   export default{
-        components:{store,search,login}
+        components:{home,search,login}
   }
 </script>
 
 <style>
-
+  .app{
+    position: absolute;
+    background-image:url("./assets/img/bg.png");
+    height: 100%;
+    width:100%;
+  }
 </style>

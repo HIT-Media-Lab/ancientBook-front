@@ -1,7 +1,7 @@
 <template>
     <div id="bookstore">
-        <spanp>
+        <span>
             我是古籍库
-        </spanp>
+        </span>
     </div>
 </template>

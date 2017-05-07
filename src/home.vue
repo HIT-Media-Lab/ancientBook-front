@@ -1,5 +1,5 @@
 <template>
-    <div id="store" class="store" v-show="show==true">
+    <div id="store" class="store" v-show="show">
         <div>
             <router-link to="/bookstore">
             <p class="bookstore">古籍库</p>
@@ -20,22 +20,28 @@
 </template>
 
 <script type="text/javascript">
-    import store from './store/index'
+//    import store from './store/index'
+
     export default{
         data(){
             return{
                 url:'/ancient_books/logout.action',
-                show:store.state.show
+//                show:store.state.show
+                show:true
             }
         },
         methods:{
+            Show() {
+                this.$emit('show_bar',this.show);
+            },
             logout:function () {
-                this.$http.get(this.url).then(function () {
-                    alert("注销成功");
-                    this.$router.push({path: '/login'})
-                },function () {
-                    alert("error")
-                })
+                this.show=false;
+//                this.$http.get(this.url).then(function () {
+//                    alert("注销成功");
+//                    this.$router.push({path: '/login'})
+//                },function () {
+//                    alert("error")
+//                })
             }
         }
     }
@@ -49,7 +55,7 @@
         left: 0;
         padding: 10px;
         background-color:#dac8c8;
-        height: 20px;
+        height: 40px;
         width: 100%;
     }
 
