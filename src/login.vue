@@ -43,6 +43,11 @@ import store from './store'
              account:'',
              pwd:'',
              v:'',
+             object:{
+                 account:this.account,
+                 pwd:this.pwd,
+                 v:this.v
+             },
              auto:false
          }
      },
@@ -72,24 +77,26 @@ import store from './store'
          Auto() {
            this.auto=!this.auto
          },
+         LoginSuccess(response){
+             if (response.result == 0)
+                 alert(response.info);
+             if (response.result == 1) {
+                 if (response.su == 1)
+                     this.$router.push({path: '/super_user'});
+                 if (response.su == 0) {
+                     if (response.v == 1)
+                         this.$router.push({path: '/user'});
+                     if (response.v == 0)
+                         document.getElementById("warning").innerHTML = "验证码错误"
+                 }
+             }
+         },
+         LoginFail(){
+           alert("error")
+         },
          Login() {
 //             this.$store.dispatch('login_show');
-             this.$http.post(this.login_url,{account:this.account,pwd:this.pwd,v:this.v,auto:this.auto}).then(function (response) {
-                 if(response.result==0)
-                     alert(response.info);
-                 if(response.result==1){
-                     if(response.su==1)
-                         this.$router.push({path: '/super_user'});
-                     if(response.su==0) {
-                         if (response.v == 1)
-                             this.$router.push({path: '/user'});
-                         if (response.v == 0)
-                             document.getElementById("warning").innerHTML = "验证码错误"
-                     }
-                 }
-             },function () {
-                 alert("error")
-             })
+             this.HttpPost(this.login_url,this.object,this.LoginSuccess(),this.LoginFail());
          },
          GetCode() {
              this.$http.get(this.code_url).then(function () {
@@ -116,7 +123,7 @@ import store from './store'
 <style>
     .warning{
         position:absolute;
-        width: 2000px;
+        width: 300px;
         height: 30px;
         font-size: 12px;
         color:red;

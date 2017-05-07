@@ -1,3 +1,4 @@
+
 <!--定义组件-->
 <template >
     <div id="user_box">
@@ -700,3 +701,4 @@
     }
 
 </style>
+

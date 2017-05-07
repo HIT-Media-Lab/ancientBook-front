@@ -13,52 +13,57 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(Vuex);
 
-Vue.prototype.HttpPost=function (url,[option]) {
 
-    this.$http.post(url, [option]).then(function (response) {
+Vue.prototype.Token='';
+
+Vue.prototype.HttpPost=function (url,object,success,fail) {
+    this.BeforeHttp(object);
+    this.$http.post(url, object).then(function (response) {
         "use strict";
         this.BeforeSuccess();
-        this.success(response);
+        success(response);
         this.AfterSuccess()
 
     },function () {
         "use strict";
-
+        fail()
     })
 };
 
-Vue.prototype.HttpGet=function (url,[option]) {
-
-    this.$http.get(url, [option]).then(function (response) {
+Vue.prototype.HttpGet=function (url,object,success,fail) {
+    this.$http.get(url, object).then(function (response) {
         "use strict";
         this.BeforeSuccess();
-        this.success(response);
+        success(response);
         this.AfterSuccess()
 
     },function () {
         "use strict";
-
+        fail()
     })
 };
 
-Vue.prototype.BeforeHttp=function (token_url) {
-    this.$http.get(token_url).then(function (response) {
-        return  response.token
-    })
+Vue.prototype.BeforeHttp=function (object) {
+    "use strict";
+    object.token = this.Token;
+    return object.token
 };
 
 
 Vue.prototype.BeforeSuccess=function () {
+    "use strict";
 
 };
 
 Vue.prototype.AfterSuccess=function () {
-
+    "use strict";
+    this.$http.get('/ancient_books/getToken.action').then(function (response) {
+        this.Token=respoense.token;
+        return this.Token
+    })
 };
 
-Vue.prototype.success=function (response) {
 
-};
 
 // 定义组件, 也可以像教程之前教的方法从别的文件引入
 import bookstore from './component/bookstore/index.vue'

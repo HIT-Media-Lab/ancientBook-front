@@ -13,11 +13,12 @@
     import  login from  './login.vue'
     window.onload=function ()
     {
-        this.BeforeHttp('/ancient_books/getToken.action')
+        this.$http.get('/ancient_books/getToken.action').then(function (response){
+            this.Token=response.token
+        })
     };
   export default{
-        components:{home,search,login},
-
+        components:{home,search,login}
   }
 </script>
 
