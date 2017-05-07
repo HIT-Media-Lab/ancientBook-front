@@ -49,6 +49,7 @@ Vue.prototype.BeforeHttp=function (object) {
     return object.token
 };
 
+
 Vue.prototype.BeforeSuccess=function () {
     "use strict";
 
@@ -61,6 +62,8 @@ Vue.prototype.AfterSuccess=function () {
         return this.Token
     })
 };
+
+
 
 // 定义组件, 也可以像教程之前教的方法从别的文件引入
 import bookstore from './component/bookstore/index.vue'
