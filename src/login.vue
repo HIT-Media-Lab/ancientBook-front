@@ -47,7 +47,7 @@ import store from './store'
          }
      },
      methods:{
-         check_in:function (){
+         check_in(){
              let x = document.getElementById("username").value;//获取输入框id
              let y = document.getElementById("pwd").value;
              //获取输入框value
@@ -69,10 +69,10 @@ import store from './store'
              }
          },
 
-         Auto:function () {
+         Auto() {
            this.auto=!this.auto
          },
-         Login:function () {
+         Login() {
 //             this.$store.dispatch('login_show');
              this.$http.post(this.login_url,{account:this.account,pwd:this.pwd,v:this.v,auto:this.auto}).then(function (response) {
                  if(response.result==0)
@@ -91,12 +91,12 @@ import store from './store'
                  alert("error")
              })
          },
-         GetCode:function () {
+         GetCode() {
              this.$http.get(this.code_url).then(function () {
 
              })
          },
-         AutoLogin:function () {
+         AutoLogin() {
              this.$http.get(this. autologin_url).then(function (response) {
                  if (response.result==1)
                      if(response.su==1)
