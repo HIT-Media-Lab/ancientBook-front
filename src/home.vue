@@ -1,5 +1,5 @@
 <template>
-    <div id="store" class="store">
+    <div id="store" class="store" v-show="show==true">
         <div>
             <router-link to="/bookstore">
             <p class="bookstore">古籍库</p>
@@ -10,16 +10,35 @@
             <p class="noumenon_store">本体库</p>
             </router-link>
         </div>
-        <div>
+        <div class="cancel">
             <router-link to="/user">
                 <p class="user_name">用户名</p>
             </router-link>
+            <button class="cancel_word" @click="logout">注销</button>
         </div>
     </div>
 </template>
 
-<script>
-
+<script type="text/javascript">
+    import store from './store/index'
+    export default{
+        data(){
+            return{
+                url:'/ancient_books/logout.action',
+                show:store.state.show
+            }
+        },
+        methods:{
+            logout:function () {
+                this.$http.get(this.url).then(function () {
+                    alert("注销成功");
+                    this.$router.push({path: '/login'})
+                },function () {
+                    alert("error")
+                })
+            }
+        }
+    }
 </script>
 
 <style>
@@ -64,4 +83,16 @@
         color:#999999;
         text-align:center;
     }
+    .cancel_word{
+        display: none;
+        position: absolute;
+        right: 70px;
+        margin-top: 20px;
+        width: 50px;
+    }
+    .cancel:hover .cancel_word{
+        display: inline-block;
+    }
+
+
 </style>
