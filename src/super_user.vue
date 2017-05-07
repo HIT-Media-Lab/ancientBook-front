@@ -91,7 +91,7 @@
                         <!--提示信息-->
                         <div class="warning_text">
                             <div>
-                                <span id="tip1" class="warning"></span>
+                                <span id="tip1" class="warning" v-model="warn_text">{{warn_text}}</span>
                             </div>
                             <div>
                                 <span id="tip2" class="warning"></span>
@@ -136,7 +136,7 @@
                         <p >
                             <span class="span_motal_1">新密码</span>
                             <span class="span_motal_2">:</span>
-                            <input type="password"  name="pwd" id="chan3" class="input_motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="check_in('chan2','chan1','chan3','tip4')" v-model="pwd" >
+                            <input type="password"  name="pwd" id="chan3" class="input_motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="check_in('chan2','chan','chan3','tip4')" v-model="pwd" >
                         </p>
 
                         <p>
@@ -181,6 +181,7 @@
                 show_create:false,
                 show_change:false,
 
+                warn_text:'',
                 userData: [],
                 user_name: '',
                 account: '',
@@ -257,6 +258,7 @@
                 this.account="";
                 this.pwd="";
                 this.confirm_pwd="";
+                this.warn_text="";
             },
             close_dialog() {
                 this.show_create = false;
@@ -270,8 +272,8 @@
                 //获取输入框value
                 //判断输入内容是否正确
                 if (x.match("^[\u4e00-\u9fa5a-zA-Z0-9]{1,9}$")===null||y.match("^[a-zA-Z0-9]{7,9}$")===null||z.match("^[a-zA-Z0-9]{5,15}$")===null) {
-                    console.log("good");
-                    document.getElementById(tag4).innerHTML = "输入1-8位英文、数字、下划线";
+                     //console.log("good");
+                    this.warn_text="lalalal";
                 } else {
                     document.getElementById(tag1).placeholder = "输入1-8位英文、数字、下划线";
                     document.getElementById(tag2).placeholder = "输入1-8位英文、数字、下划线";
@@ -658,10 +660,10 @@
         text-align:center;
         font-family: 楷体;
     }
-    .warning_text{
+   /* .warning_text{
         margin-bottom: 2%;
         margin-top: 1%;
-    }
+    }*/
     .input_pwd{
         background: transparent;
         border-top: 0px;
