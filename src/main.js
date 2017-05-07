@@ -41,12 +41,12 @@ Vue.prototype.HttpGet=function (url,[option]) {
     })
 };
 
-Vue.prototype.BeforeHttp=function (token_url,token) {
+Vue.prototype.BeforeHttp=function (token_url) {
     this.$http.get(token_url).then(function (response) {
-        token=response.token;
-        return token
+        return  response.token
     })
 };
+
 
 Vue.prototype.BeforeSuccess=function () {
 
@@ -58,7 +58,7 @@ Vue.prototype.AfterSuccess=function () {
 
 Vue.prototype.success=function (response) {
 
-}
+};
 
 // 定义组件, 也可以像教程之前教的方法从别的文件引入
 import bookstore from './component/bookstore/index.vue'
