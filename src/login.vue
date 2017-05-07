@@ -97,7 +97,7 @@ import store from './store'
              })
          },
          AutoLogin:function () {
-             this.$get(this. autologin_url).then(function (response) {
+             this.$http.get(this. autologin_url).then(function (response) {
                  if (response.result==1)
                      if(response.su==1)
                         this.$router.push({path: '/user'});

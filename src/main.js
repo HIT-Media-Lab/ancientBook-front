@@ -13,6 +13,53 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(Vuex);
 
+Vue.prototype.HttpPost=function (url,[option]) {
+
+    this.$http.post(url, [option]).then(function (response) {
+        "use strict";
+        this.BeforeSuccess();
+        this.success(response);
+        this.AfterSuccess()
+
+    },function () {
+        "use strict";
+
+    })
+};
+
+Vue.prototype.HttpGet=function (url,[option]) {
+
+    this.$http.get(url, [option]).then(function (response) {
+        "use strict";
+        this.BeforeSuccess();
+        this.success(response);
+        this.AfterSuccess()
+
+    },function () {
+        "use strict";
+
+    })
+};
+
+Vue.prototype.BeforeHttp=function (token_url,token) {
+    this.$http.get(token_url).then(function (response) {
+        token=response.token;
+        return token
+    })
+};
+
+Vue.prototype.BeforeSuccess=function () {
+
+};
+
+Vue.prototype.AfterSuccess=function () {
+
+};
+
+Vue.prototype.success=function (response) {
+
+}
+
 // 定义组件, 也可以像教程之前教的方法从别的文件引入
 import bookstore from './component/bookstore/index.vue'
 import  noumenon_store from  './component/noumenom_store/index.vue'

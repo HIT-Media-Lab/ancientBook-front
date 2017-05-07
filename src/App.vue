@@ -12,7 +12,8 @@
     import  search from  './component/search/search.vue'
     import  login from  './login.vue'
   export default{
-        components:{home,search,login}
+        components:{home,search,login},
+
   }
 </script>
 
