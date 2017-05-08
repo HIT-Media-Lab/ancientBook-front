@@ -148,7 +148,14 @@ const router = new VueRouter({
             path:'/search_index',
             component:search_index
         },
-        { path: '/', redirect: '/login' }
+        {
+            path: '/',
+            redirect: '/login'  //默认路由
+        },
+        {
+            path: '*',
+            redirect: '/login' // 输入其他不存在的地址自动跳回首页
+        }
 
     ]
 });
