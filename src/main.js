@@ -100,7 +100,7 @@ const router = new VueRouter({
             component:noumenon_store
         },
         {
-            path:'/bookstore',
+            path:'/ancientbooks/bookstore',
             component:bookstore
         },
         {
