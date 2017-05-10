@@ -1,33 +1,23 @@
 <template>
     <div class="user">
-        <div>
-            <div>
+        <div class="">
                <router-link to="/upload_step1">
-                   <img src="../../assets/img/u456.png" class="upload_img">
+                   <img src="/src/assets/img/u456.png" class="upload_img">
                    <span class="upload_word"> 上 传</span>
                </router-link>
-            </div>
-            <div>
-                <router-link to="/mybook_index">
+        </div>
+                <router-link to="/mybook_index" >
                     <img src="../../assets/img/u463.png" class="mybook_img">
                     <span class="mybook_word">我的古籍</span>
                 </router-link>
-            </div>
-            <div>
-                <router-link to="/mycollection">
+                <router-link to="/my_collection_index">
                     <img src="../../assets/img/u468.png" class="mycollection_img">
                     <span class="mycollection_word">我的收藏</span>
                 </router-link>
-            </div>
-            <div>
-                <router-link to="/myoffer_noumenon_edit">
+                <router-link to="/my_offer_index">
                     <img src="../../assets/img/u485.png" class="myoffer_img">
                     <span class="myoffer_word">我的贡献</span>
                 </router-link>
-            </div>
-
-        </div>
-
     </div>
 </template>
 
@@ -37,45 +27,56 @@
 
 <style>
     .user{
-        position: absolute;
-        top: 250px;
+        position: relative;
+        height: 100%;
+        margin-left: 300px;
+        margin-right: 300px;
+    }
+    #upload{
+        width: 50px;
+        height: 100px;
     }
     .upload_img{
-        position: absolute;
-         left: 300px;
+        height: auto;
+        width: auto;
+        /*margin-top: 300px;*/
     }
     .upload_word{
-        position: absolute;
-        left: 305px;
-        top: 55px;
+        margin-top: 30px;
         width: 50px;
+        display: block;
     }
     .mybook_img{
-        position: absolute;
-        left: 600px;
+        display: inline-block;
+        width: auto;
+        height: auto;
+        margin-top:300px;
+        margin-left: 312px;
     }
     .mybook_word{
-        position: absolute;
         left: 590px;
         top: 55px;
         width: 70px;
     }
     .mycollection_img{
-        position: absolute;
-        left: 900px;
+        width: auto;
+        height: auto;
+        display: inline-block;
+
+        margin-left: 624px;
     }
     .mycollection_word{
-        position: absolute;
         left: 890px;
         top: 55px;
         width: 70px;
     }
     .myoffer_img{
-        position: absolute;
-        left: 1200px;
+        display: inline-block;
+        width: auto;
+        height: auto;
+        margin-left: 936px;
     }
     .myoffer_word{
-        position: absolute;
         left: 1195px;
         top: 55px;
         width: 70px;

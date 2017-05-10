@@ -26,6 +26,6 @@
     position: absolute;
     background-image:url("./assets/img/bg.png");
     height: 100%;
-    width:100%;
+    width: 100%;
   }
 </style>
