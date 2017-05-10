@@ -58,7 +58,7 @@ Vue.prototype.BeforeSuccess=function () {
 Vue.prototype.AfterSuccess=function () {
     "use strict";
     this.$http.get('/ancient_books/getToken.action').then(function (response) {
-        this.Token=respoense.token;
+        this.Token=response.token;
         return this.Token
     })
 };
