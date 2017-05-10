@@ -100,7 +100,7 @@ const router = new VueRouter({
             component:noumenon_store
         },
         {
-            path:'/ancientbooks/bookstore',
+            path:'/bookstore',
             component:bookstore
         },
         {
@@ -160,7 +160,17 @@ const router = new VueRouter({
     ]
 });
 
-
+// router.beforeEach((to, from, next) => {
+//    if (to.meta.requirAuth){
+//        next();
+//    }
+//    else {
+//        next({
+//            path:'/login',
+//            query:{}
+//        })
+//    }
+// });
 
 
 

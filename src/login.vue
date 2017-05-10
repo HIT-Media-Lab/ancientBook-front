@@ -1,29 +1,27 @@
 <template>
     <div>
-        <div class="head">
+        <div class="head" onload="AutoLogin()">
             <span>古籍检索系统</span>
         </div>
         <div class="login">
             <div>
                 <span class="text1">账 号</span>
-                <input placeholder="输入8-11位英文、数字" type="text" class="username" v-model="account" id="username" @blur="check_in">
+                <input placeholder="输入8-11位英文、数字" type="text" class="username" v-model="account" id="username" @blur="check_in()">
                 <span class="text2">密 码</span>
-                <input placeholder="输入8-11位英文、数字" type="password" class="password" v-model="pwd" id="pwd" @blur="check_in">
+                <input placeholder="输入8-11位英文、数字" type="password" class="password" v-model="pwd" id="pwd" @blur="check_in()">
             </div>
             <div>
-                <input type="checkbox" id="save_password"  class="save_password_checkbox" @click="Auto">
+                <input type="checkbox" id="save_password"  class="save_password_checkbox" @click="Auto()">
                 <span class="save_password_word" >自动登录</span>
             </div>
             <div>
                 <input type="text"  class="verification_code_input" v-model="v">
-                <input type="button" value="验证码" class="verification_code_button" @click="GetCode">
+                <input type="button" value="验证码" class="verification_code_button" @click="GetCode()">
             </div>
                 <button   class="login_button" @click="Login">登  录</button>
         </div>
-        <div class="warning_text">
-            <div>
-                <span id="warning" class="warning"></span>
-            </div>
+        <div>
+            <span id="warning" class="warning-1"></span>
         </div>
     </div>
 </template>
@@ -43,15 +41,18 @@ import store from './store'
              account:'',
              pwd:'',
              v:'',
+             auto:false,
              object:{
                  account:this.account,
                  pwd:this.pwd,
-                 v:this.v
+                 v:this.v,
+                 auto:this.auto
              },
-             auto:false
          }
      },
-     methods:{
+     methods: {
+
+
          check_in(){
              let x = document.getElementById("username").value;//获取输入框id
              let y = document.getElementById("pwd").value;
@@ -83,24 +84,18 @@ import store from './store'
              if (response.result == 1) {
                  if (response.su == 1)
                      this.$router.push({path: '/super_user'});
-                 if (response.su == 0) {
-                     if (response.v == 1)
-                         this.$router.push({path: '/user'});
-                     if (response.v == 0)
-                         document.getElementById("warning").innerHTML = "验证码错误"
-                 }
+                 if (response.su == 0)
+                     this.$router.push({path: '/user'});
              }
          },
          LoginFail(){
            alert("error")
         },
          Login() {
-//             this.$store.dispatch('login_show');
              this.HttpPost(this.login_url,this.object,this.LoginSuccess(),this.LoginFail());
          },
          GetCode() {
              this.$http.get(this.code_url).then(function () {
-
              })
          },
          AutoLogin() {
@@ -121,7 +116,7 @@ import store from './store'
 </script>
 
 <style>
-    .warning{
+    .warning-1{
         position:absolute;
         width: 300px;
         height: 30px;

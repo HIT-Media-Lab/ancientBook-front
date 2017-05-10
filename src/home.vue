@@ -1,7 +1,7 @@
 <template>
     <div id="store" class="store" v-show="show">
         <div>
-            <router-link to="/ancientbooks/bookstore">
+            <router-link to="bookstore">
             <p class="bookstore">古籍库</p>
             </router-link>
         </div>
@@ -31,19 +31,16 @@
             }
         },
         methods:{
-            Show() {
-                this.$emit('show_bar',this.show);
-            },
             logout:function () {
-                this.show=false;
-//                this.$http.get(this.url).then(function () {
-//                    alert("注销成功");
-//                    this.$router.push({path: '/login'})
-//                },function () {
-//                    alert("error")
-//                })
+                this.$http.get(this.url).then(function () {
+                    alert("注销成功");
+                    this.$router.push({path: '/login'});
+                },function () {
+                    alert("error")
+                })
             }
         }
+
     }
 </script>
 
