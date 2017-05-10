@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="04582bf5-35eb-407a-bc5e-e7a95d2b8cc4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/assets/img/毛笔.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/super_user.vue" afterPath="$PROJECT_DIR$/src/super_user.vue" />
-    </list>
+    <list default="true" id="04582bf5-35eb-407a-bc5e-e7a95d2b8cc4" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -347,12 +342,12 @@
       <workItem from="1494158378028" duration="8557000" />
       <workItem from="1494240841815" duration="12000000" />
       <workItem from="1494333165783" duration="9716000" />
-      <workItem from="1494383852639" duration="13276000" />
+      <workItem from="1494383852639" duration="13846000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="135341000" />
+    <option name="totallyTimeSpent" value="135911000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
