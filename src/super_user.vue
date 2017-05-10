@@ -2,7 +2,7 @@
 =======
 
 <!--定义组件-->
-<template >
+<template xmlns:v-bind="http://www.w3.org/1999/xhtml">
     <div id="user_box">
 
         <!--正中间组件-->
@@ -697,20 +697,20 @@
         top: .5rem;
         right: .5rem;
         transition: .8s ease all;
-        -moz-transition: .8s ease all;
-        -webkit-transition: .8s ease all;
+           -moz-transition: .8s ease all;
+           -webkit-transition: .8s ease all;
         border: none;
         border-radius: 3px;
         color: #333;
         text-decoration: none;
         box-sizing: border-box;
-        -webkit-box-sizing: border-box;
+           -webkit-box-sizing: border-box;
     }
 
     .close:hover {
         transition: .8s ease all;
-        -moz-transition: .8s ease all;
-        -webkit-transition: .8s ease all;
+           -moz-transition: .8s ease all;
+           -webkit-transition: .8s ease all;
     }
 
     .close .iconfont {
@@ -724,8 +724,8 @@
 
     .rotate:hover {
         transition: transform 1.0s ease;
-        -moz-transition: -moz-transform 1.0s ease;
-        -webkit-transition: -webkit-transform 1.0s ease ;
+           -moz-transition: -moz-transform 1.0s ease;
+           -webkit-transition: -webkit-transform 1.0s ease ;
     }
 
     .close .iconfont {
@@ -737,9 +737,9 @@
         font-size: 33px;
         font-style: normal;
         margin-top: -0.8%;
-        -webkit-font-smoothing: antialiased;
-        -webkit-text-stroke-width: 0.2px;
-        -moz-osx-font-smoothing: grayscale;
+           -webkit-font-smoothing: antialiased;
+           -webkit-text-stroke-width: 0.2px;
+           -moz-osx-font-smoothing: grayscale;
     }
     .span_motal_1{
         font-family: 楷体;
