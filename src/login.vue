@@ -1,5 +1,5 @@
 <template>
-    <div :autologin="AutoLogin">
+    <div>
         <div class="head">
             <span>古籍检索系统</span>
         </div>
@@ -93,7 +93,7 @@ import store from './store'
          },
          LoginFail(){
            alert("error")
-         },
+        },
          Login() {
 //             this.$store.dispatch('login_show');
              this.HttpPost(this.login_url,this.object,this.LoginSuccess(),this.LoginFail());
@@ -125,7 +125,7 @@ import store from './store'
         position:absolute;
         width: 300px;
         height: 30px;
-        font-size: 12px;
+        font-size:12px;
         color:red;
         left: 615px;
         top: 270px;

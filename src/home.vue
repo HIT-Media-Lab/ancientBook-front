@@ -1,7 +1,7 @@
 <template>
     <div id="store" class="store" v-show="show">
         <div>
-            <router-link to="/bookstore">
+            <router-link to="/ancientbooks/bookstore">
             <p class="bookstore">古籍库</p>
             </router-link>
         </div>

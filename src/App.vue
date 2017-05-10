@@ -11,12 +11,11 @@
     import home from './home.vue'
     import  search from  './component/search/search.vue'
     import  login from  './login.vue'
-    window.onload=function ()
-    {
-        this.$http.get('/ancient_books/getToken.action').then(function (response){
-            this.Token=response.token
-        })
-    };
+//    window.onload=function a() {
+//        this.$http.get('/ancient_books/getToken.action').then(function (response){
+//            this.Token=response.token
+//        })
+//    };
   export default{
         components:{home,search,login}
   }
