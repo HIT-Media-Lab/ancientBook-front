@@ -17,6 +17,8 @@
             <div>
                 <input type="text"  class="verification_code_input" v-model="v">
                 <input type="button" value="验证码" class="verification_code_button" @click="GetCode()">
+                <img src="/ancient_books/get_v_picture.action" class="code-img">
+
             </div>
                 <button   class="login_button" @click="Login">登  录</button>
         </div>
@@ -80,11 +82,15 @@ import store from './store'
          },
          LoginSuccess(response){
              if (response.result == 0)
+                 console.log("hhh1");
                  alert(response.info);
              if (response.result == 1) {
+                 console.log("hhh2");
                  if (response.su == 1)
+                     console.log("hhh3");
                      this.$router.push({path: '/super_user'});
                  if (response.su == 0)
+                     console.log("hhh4");
                      this.$router.push({path: '/user'});
              }
          },
@@ -96,16 +102,22 @@ import store from './store'
          },
          GetCode() {
              this.$http.get(this.code_url).then(function () {
+                 console.log("hhh5");
              })
          },
          AutoLogin() {
              this.$http.get(this. autologin_url).then(function (response) {
+                 console.log("hhh6");
                  if (response.result==1)
+                     console.log("hhh7");
                      if(response.su==1)
+                         console.log("hhh8");
                         this.$router.push({path: '/user'});
                      if(response.su=0)
+                         console.log("hhh9");
                          this.$router.push({path: '/super_user'});
                  if (response.result==0)
+                     console.log("hhh10");
                      this.$router.push({path: '/login'});
              },function () {
                  alert("error")
@@ -194,6 +206,11 @@ import store from './store'
         color: gray;
         width: 76px;
         border: none;
+    }
+    .code-img{
+        position:absolute;
+        left: 220px;
+        top: 120px;
     }
     .login_button{
         position: absolute;

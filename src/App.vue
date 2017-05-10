@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="app">
+  <div id="app" class="app" onload="onload_token()">
     <!--<login></login>-->
     <router-view></router-view>
     <search></search>
@@ -11,13 +11,19 @@
     import home from './home.vue'
     import  search from  './component/search/search.vue'
     import  login from  './login.vue'
-//    window.onload=function a() {
-//        this.$http.get('/ancient_books/getToken.action').then(function (response){
-//            this.Token=response.token
-//        })
-//    };
   export default{
-        components:{home,search,login}
+        components:{home,search,login},
+      data(){
+
+        },
+      methods:{
+          onload_token(){
+                  this.$http.get('/ancient_books/getToken.action').then(function (response){
+                      console.log("成功得到token");
+                      this.Token=response.token
+                  })
+          }
+      }
   }
 </script>
 
