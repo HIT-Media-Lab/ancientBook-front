@@ -1,7 +1,7 @@
 
 
 <!--定义组件-->
-<template xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<template >
     <div id="user_box">
 
         <!--正中间组件-->
@@ -66,19 +66,19 @@
                         <p>
                             <span class="span_motal_1">用户名</span>
                             <span class="span_motal_2">:</span>
-                            <input type="text"  id="text1" class="input_motal" placeholder="输入2-10位中文、英文、数字" onfocus="this.placeholder=''" @blur="checkIn('text1','输入2-10位中文、英文、数字','[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',isActive1=true)"  v-model="user_name" v-bind:class="{warnBorder:isActive1}">
+                            <input type="text"  id="text1" class="input_motal" placeholder="输入2-10位中文、英文、数字" onfocus="this.placeholder=''" @blur="checkIn('text1','输入2-10位中文、英文、数字','^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',isActive1=true)"  v-model="user_name" v-bind:class="{warnBorder:isActive1}">
                         </p>
 
                         <p>
                             <span class="span_motal_1">账号</span>
                             <span class="span_motal_2">:</span>
-                            <input type="text"  id="text2" class="input_motal"  placeholder="输入8-10位数字、英文" onfocus="this.placeholder=''" @blur="checkIn('text2','输入8-10位数字、英文','[a-zA-Z0-9]{8,10}$',isActive2=true)" v-model="account" v-bind:class="{warnBorder:isActive2}">
+                            <input type="text"  id="text2" class="input_motal"  placeholder="输入8-10位数字、英文" onfocus="this.placeholder=''" @blur="checkIn('text2','输入8-10位数字、英文','^[a-zA-Z0-9]{8,10}$',isActive2=true)" v-model="account" v-bind:class="{warnBorder:isActive2}">
                         </p>
 
                         <p>
                             <span class="span_motal_1">密码</span>
                             <span class="span_motal_2">:</span>
-                            <input type="password"  id="text3" class="input_motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkIn('text3','输入6-16位数字、英文','[a-zA-Z0-9_]{6,16}$',isActive3=true)" v-model="pwd" v-bind:class="{warnBorder:isActive3}">
+                            <input type="password"  id="text3" class="input_motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkIn('text3','输入6-16位数字、英文','^[a-zA-Z0-9_]{6,16}$',isActive3=true)" v-model="pwd" v-bind:class="{warnBorder:isActive3}">
                         </p>
 
                         <p>
@@ -122,13 +122,13 @@
                         <p >
                             <span class="span_motal_1">用户名</span>
                             <span class="span_motal_2">:</span>
-                            <input type="text"  id="chan2" class="input_motal" v-model="back_username" @blur="checkIn('chan2','输入2-10位中文、英文、数字','[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',isActive1=true)" v-bind:class="{warnBorder:isActive1}">
+                            <input type="text"  id="chan2" class="input_motal" v-model="back_username" @blur="checkIn('chan2','输入2-10位中文、英文、数字','^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',isActive1=true)" v-bind:class="{warnBorder:isActive1}">
                         </p >
 
                         <p >
                             <span class="span_motal_1">新密码</span>
                             <span class="span_motal_2">:</span>
-                            <input type="password"  id="chan3" class="input_motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkIn('chan3','输入6-16位数字、英文','[a-zA-Z0-9_]{6,16}$',isActive3=true)" v-model="pwd"  v-bind:class="{warnBorder:isActive3}" >
+                            <input type="password"  id="chan3" class="input_motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkIn('chan3','输入6-16位数字、英文','^[a-zA-Z0-9_]{6,16}$',isActive3=true)" v-model="pwd"  v-bind:class="{warnBorder:isActive3}" >
                         </p>
 
                         <p>
@@ -170,7 +170,7 @@
                 show_change: false,
 
                 tip: '',//创建用户的错误提示
-                isActive1:'', //绑定css属性，判断对错分别显示错误输入框
+                isActive1:false, //绑定css属性，判断对错分别显示错误输入框
                 isActive2:false,
                 isActive3:false,
                 isActive4:false,
@@ -191,8 +191,8 @@
                 modify_url: '/ancient_books/modify_user.action',//修改用户
                 delete_url: '/ancient_books/delete_user_by_id.action',//删除用户
 
-                page: 0,//当前页面
-                max_page: 0,//总页数
+                page: 1,//当前页面
+                max_page: 1,//总页数
                 info_total: 0,  //当前总条数
                 info_num: 20,//每页最多纪录数
 
@@ -203,9 +203,8 @@
             }
         },
         mounted: function () {
-            this.getUsers(1);
+            this.getUsers(this.page);
         },
-
         methods: {
             //显示用户列表 get数据
             success_getUsers(response){
@@ -228,7 +227,7 @@
 
             getUsers(page){
                 this.get_user.page = page;
-                this.HttpGet(this.get_url, this.get_user, this.success_getUsers(response), this.fail_getUsers());
+                this.HttpGet(this.get_url, this.get_user, this.success_getUsers, this.fail_getUsers);
             },
 
             //获取用户显示信息
@@ -280,10 +279,10 @@
             },
 
             createUsers(){
-                this.post_user.name=this.name;
+                this.post_user.name=this.user_name;
                 this.post_user.account=this.account;
                 this.post_user.pwd=this.pwd;
-                this.HttpPost(this.post_url,this.post_user,this.success_postUsers(response),this.fail_postUsers());
+                this.HttpPost(this.post_url,this.post_user,this.success_postUsers,this.fail_postUsers);
             },
 
             /*createUsers(){
@@ -376,12 +375,12 @@
                         this.tip="输入密码不一致！";
                         document.getElementById(tag2).placeholder = "重复密码";
                         this.add_if=false;
-                        this.isActive4=false;
+                        return style;
                     }else{
-                        style=false;
                         this.tip="";
                         document.getElementById(tag2).placeholder = "重复密码";
-                        return style;
+                        this.isActive4=false;
+
                     }
                 }else{
                     document.getElementById(tag2).placeholder = "重复密码";
@@ -427,7 +426,7 @@
 
             deleteUsers(index){
                 this.delete_user.user_id=this.userData[index].user_id;
-                this.HttpPost(this.delete_url,this.delete_user,success_delete(response),fail_delete());
+                this.HttpPost(this.delete_url,this.delete_user,success_delete,fail_delete);
             },
 
             /*  deleteUsers(index){
@@ -487,7 +486,7 @@
                 this.modify_user.name=this.back_username;
                 this.modify_user.pwd=this.pwd;
                 this.modify_user.user_id=this.userData[this.back_index].user_id;
-                this.HttpPost(this.modify_url,this.modify_user,success_modify(response),fail_modify());
+                this.HttpPost(this.modify_url,this.modify_user,success_modify,fail_modify);
             },
             /* modifyUsers(){
              this.$http.post(this.modify_url,{name:this.back_username,pwd:this.pwd,user_id:this.userData[this.back_index].user_id,token:this.token}).then(
@@ -528,14 +527,14 @@
             },
 
             pre_page(){
-                if(this.page!==1){
-                    this.getUsers(this,page++);
+                if(this.page>1){
+                    this.getUsers(this.page--);
                 }
             },
 
             next_page(){
-                if(this.page<this.max_page&&this.page>=1){
-                    this.getUsers(this.page--);
+                if(this.page<=this.max_page&&this.page>=1){
+                    this.getUsers(this.page++);
                 }
             }
         }
@@ -696,20 +695,20 @@
         top: .5rem;
         right: .5rem;
         transition: .8s ease all;
-           -moz-transition: .8s ease all;
-           -webkit-transition: .8s ease all;
+        -moz-transition: .8s ease all;
+        -webkit-transition: .8s ease all;
         border: none;
         border-radius: 3px;
         color: #333;
         text-decoration: none;
         box-sizing: border-box;
-           -webkit-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
     }
 
     .close:hover {
         transition: .8s ease all;
-           -moz-transition: .8s ease all;
-           -webkit-transition: .8s ease all;
+        -moz-transition: .8s ease all;
+        -webkit-transition: .8s ease all;
     }
 
     .close .iconfont {
@@ -723,8 +722,8 @@
 
     .rotate:hover {
         transition: transform 1.0s ease;
-           -moz-transition: -moz-transform 1.0s ease;
-           -webkit-transition: -webkit-transform 1.0s ease ;
+        -moz-transition: -moz-transform 1.0s ease;
+        -webkit-transition: -webkit-transform 1.0s ease ;
     }
 
     .close .iconfont {
@@ -736,9 +735,9 @@
         font-size: 33px;
         font-style: normal;
         margin-top: -0.8%;
-           -webkit-font-smoothing: antialiased;
-           -webkit-text-stroke-width: 0.2px;
-           -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
     }
     .span_motal_1{
         font-family: 楷体;
