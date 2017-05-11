@@ -227,6 +227,7 @@
 
             getUsers(page){
                 this.get_user.page = page;
+                //this.get_user.token=this.Token;
                 this.HttpGet(this.get_url, this.get_user, this.success_getUsers, this.fail_getUsers);
             },
 
@@ -282,6 +283,7 @@
                 this.post_user.name=this.user_name;
                 this.post_user.account=this.account;
                 this.post_user.pwd=this.pwd;
+                this.post_user.token=this.Token;
                 this.HttpPost(this.post_url,this.post_user,this.success_postUsers,this.fail_postUsers);
             },
 
@@ -406,6 +408,7 @@
 
             deleteUsers(index){
                 this.delete_user.user_id=this.userData[index].user_id;
+                this.delete_user.token=this.Token;
                 this.HttpPost(this.delete_url,this.delete_user,success_delete,fail_delete);
             },
 
@@ -466,6 +469,7 @@
                 this.modify_user.name=this.back_username;
                 this.modify_user.pwd=this.pwd;
                 this.modify_user.user_id=this.userData[this.back_index].user_id;
+                this.modify_user.token=this.Token;
                 this.HttpPost(this.modify_url,this.modify_user,success_modify,fail_modify);
             },
             /* modifyUsers(){
