@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="app" onload="onload_token()">
+  <div id="app" class="app">
     <!--<login></login>-->
     <router-view></router-view>
     <search></search>
@@ -20,12 +20,18 @@
         },
       methods:{
           onload_token(){
-                  this.$http.get('/ancient_books/getToken.action').then(function (response){
-                      console.log("成功得到token");
-                      this.Token=response.token
-                  })
+              this.$http.get('/ancient_books/getToken.action').then(function (response) {
+                  console.log("成功得到token");
+                  this.Token = response.token;
+                  return this.Token
+              })
           }
+      },
+      mounted:function () {
+          this.onload_token();
       }
+
+
   }
 </script>
 
