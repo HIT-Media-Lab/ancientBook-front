@@ -345,26 +345,6 @@
                     this.isActive3=false;
                 }
             },
-            /*  check_in(tag1,tag2,tag3,tag4){
-             //判断输入内容是否正确
-             let x = document.getElementById(tag1).value;//获取输入框id
-             let y = document.getElementById(tag2).value;
-             let z = document.getElementById(tag3).value;
-             //获取输入框value
-             //判断输入内容是否正确
-             if (x.match("^[a-zA-Z0-9_]{0,17}$")===null||y.match("^[a-zA-Z0-9_]{0,17}$")===null||z.match("^[a-zA-Z0-9_]{0,17}$")===null) {
-             // console.log("good");
-             document.getElementById(tag4).innerHTML = "输入1-8位英文、数字、下划线";
-             document.getElementById(tag1).placeholder = "输入1-8位英文、数字、下划线";
-             document.getElementById(tag2).placeholder = "输入1-8位英文、数字、下划线";
-             document.getElementById(tag3).placeholder = "输入1-8位英文、数字、下划线";
-             }else {
-             document.getElementById(tag1).placeholder = "输入1-8位英文、数字、下划线";
-             document.getElementById(tag2).placeholder = "输入1-8位英文、数字、下划线";
-             document.getElementById(tag3).placeholder = "输入1-8位英文、数字、下划线";
-             this.tip1= "";
-             }
-             },*/
 
             //重复输入密码确认
             check_pwd(tag1,tag2,style){
