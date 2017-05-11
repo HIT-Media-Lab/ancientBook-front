@@ -17,7 +17,7 @@ Vue.use(Vuex);
 Vue.prototype.Token='';
 
 Vue.prototype.HttpPost=function (url,object,success,fail) {
-    this.BeforeHttp(get_token);
+    // this.BeforeHttp(object);
     this.$http.post(url, object).then(function (response) {
         "use strict";
         this.BeforeSuccess();
@@ -43,13 +43,13 @@ Vue.prototype.HttpGet=function (url,object,success,fail) {
     })
 };
 
-Vue.prototype.BeforeHttp=function (get_token) {
-    "use strict";
-    get_token.token = this.Token;
-    console.log("得到token成功");
-    return get_token.token
-
-};
+// Vue.prototype.BeforeHttp=function (object) {
+//     "use strict";
+//     object.token = this.Token;
+//     console.log("得到token成功");
+//     return object.token
+//
+// };
 
 
 Vue.prototype.BeforeSuccess=function () {
