@@ -13,17 +13,21 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(Vuex);
 
-
+// Vue.prototype.isLogin=false;
 Vue.prototype.Token='';
+Vue.prototype.response={};
 
 Vue.prototype.HttpPost=function (url,object,success,fail) {
     // this.BeforeHttp(object);
     this.$http.post(url, object).then(function (response) {
         "use strict";
+        // console.log("可以知晓")
+        this.response=response;
         this.BeforeSuccess();
-        success(response);
-        this.AfterSuccess()
-
+        success(this.response);
+        // console.log("success之后");
+        this.AfterSuccess();
+        console.log(JSON.stringify(response.body))
     },function () {
         "use strict";
         fail()
@@ -164,18 +168,13 @@ const router = new VueRouter({
 });
 
 // router.beforeEach((to, from, next) => {
-//    if (to.meta.requirAuth){
-//        next();
-//    }
-//    else {
-//        next({
-//            path:'/login',
-//            query:{}
-//        })
-//    }
+//     // 模拟登陆状态
+//     if (!this.isLogin) {
+//         next({path: '/login'});
+//     }else {
+//         next();
+//     }
 // });
-
-
 
 // 现在我们可以启动应用了！
 // 路由器会创建一个 App 实例，并且挂载到选择符 #app 匹配的元素上。

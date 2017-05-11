@@ -17,19 +17,7 @@
             return {
 
             }
-        },
-      methods:{
-          onload_token(){
-              this.$http.get('/ancient_books/getToken.action').then(function (response) {
-                  console.log("成功得到token");
-                  this.Token = response.token;
-                  return this.Token
-              })
-          }
-      },
-      mounted:function () {
-          this.onload_token();
-      }
+        }
 
 
   }

@@ -30,7 +30,15 @@
 
 <script type="text/javascript">
 import store from './store'
-
+//let Mock=require('mockjs');
+//Mock.mock(
+//  '/ancient_books/login.action',{
+//        "name": "姜鸿川",
+//        "su|0-1": 0,
+//        "result|0-1": 1,
+//        "info": "密码错误或者账号不存在"
+//    }
+//);
  export default{
 
      data(){
@@ -39,22 +47,25 @@ import store from './store'
              code_url:'/ancient_books/get_v_picture.action',
              judge_code_url:'/ancient_books/get_v_picture.action',
              autologin_url:'/ancient_books/get_user_info.action',
-             get_token:'/ancient_books/getToken.action',
              account:'',
              pwd:'',
              v:'',
              auto:false,
-             object:{
-                 account:this.account,
-                 pwd:this.pwd,
-                 v:this.v,
-                 auto:this.auto
-             },
+             object:{},
          }
      },
+
+     mounted:function () {
+         this.onload_token();
+     },
      methods: {
-
-
+         onload_token(){
+             this.$http.get('/ancient_books/getToken.action').then(function (response) {
+                 console.log("成功得到token");
+                 this.Token = response.token;
+                 return this.Token
+             })
+         },
          check_in(){
              let x = document.getElementById("username").value;//获取输入框id
              let y = document.getElementById("pwd").value;
@@ -81,18 +92,18 @@ import store from './store'
            this.auto=!this.auto
          },
          LoginSuccess(response){
-             if (response.result == 0) {
-                 console.log("hhh1");
+             if (response.body.result == 0) {
+//                 console.log("hhh1");
                  alert(response.info);
              }
-             if (response.result == 1) {
-                 console.log("hhh2");
-                 if (response.su == 1) {
-                     console.log("hhh3");
+             if (response.body.result == 1) {
+//                 console.log("hhh2");
+                 if (response.body.su == 1) {
+//                     console.log("hhh3");
                      this.$router.push({path: '/super_user'});
                  }
-                 if (response.su == 0) {
-                     console.log("hhh4");
+                 if (response.body.su == 0) {
+//                     console.log("hhh4");
                      this.$router.push({path: '/user'});
                  }
              }
@@ -101,26 +112,31 @@ import store from './store'
            alert("error")
         },
          Login() {
+             this.object.account=this.account;
+             this.object.pwd=this.pwd;
+             this.object.v=this.v;
+             this.object.auto=this.auto;
+//             console.log('hhhh');
              this.HttpPost(this.login_url,this.object,this.LoginSuccess,this.LoginFail);
          },
          GetCode() {
              this.$http.get(this.code_url).then(function () {
-                 console.log("hhh5");
+//                 console.log("hhh5");
              })
          },
          AutoLogin() {
              this.$http.get(this. autologin_url).then(function (response) {
-                 console.log("hhh6");
-                 if (response.result==1)
-                     console.log("hhh7");
-                     if(response.su==1)
-                         console.log("hhh8");
+//                 console.log("hhh6");
+                 if (response.body.result==1)
+//                     console.log("hhh7");
+                     if(response.body.su==1)
+//                         console.log("hhh8");
                         this.$router.push({path: '/user'});
-                     if(response.su=0)
-                         console.log("hhh9");
+                     if(response.body.su=0)
+//                         console.log("hhh9");
                          this.$router.push({path: '/super_user'});
-                 if (response.result==0)
-                     console.log("hhh10");
+                 if (response.body.result==0)
+//                     console.log("hhh10");
                      this.$router.push({path: '/login'});
              },function () {
                  alert("error")
