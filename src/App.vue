@@ -14,7 +14,9 @@
   export default{
         components:{home,search,login},
       data(){
+            return {
 
+            }
         },
       methods:{
           onload_token(){

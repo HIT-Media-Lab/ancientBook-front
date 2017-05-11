@@ -20,7 +20,7 @@
                 <img src="/ancient_books/get_v_picture.action" class="code-img">
 
             </div>
-                <button   class="login_button" @click="Login">登  录</button>
+                <button   class="login_button" @click="Login()">登  录</button>
         </div>
         <div>
             <span id="warning" class="warning-1"></span>
@@ -101,7 +101,7 @@ import store from './store'
            alert("error")
         },
          Login() {
-             this.HttpPost(this.login_url,this.object,this.LoginSuccess(),this.LoginFail());
+             this.HttpPost(this.login_url,this.object,this.LoginSuccess,this.LoginFail);
          },
          GetCode() {
              this.$http.get(this.code_url).then(function () {
