@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="head" onload="AutoLogin()">
+        <div class="head">
             <span>古籍检索系统</span>
         </div>
         <div class="login">
@@ -50,13 +50,13 @@ import store from './store'
              account:'',
              pwd:'',
              v:'',
-             auto:false,
-             object:{},
+             auto:false
          }
      },
 
      mounted:function () {
          this.onload_token();
+         this.AutoLogin()
      },
      methods: {
          onload_token(){
@@ -112,12 +112,17 @@ import store from './store'
            alert("error")
         },
          Login() {
-             this.object.account=this.account;
-             this.object.pwd=this.pwd;
-             this.object.v=this.v;
-             this.object.auto=this.auto;
+             const object =new FormData();
+             object.append("account",this.account);
+             object.append("pwd",this.pwd);
+             object.append("v",this.v);
+             object.append("auto",this.auto);
+//             this.object.account=this.account;
+//             this.object.pwd=this.pwd;
+//             this.object.v=this.v;
+//             this.object.auto=this.auto;
 //             console.log('hhhh');
-             this.HttpPost(this.login_url,this.object,this.LoginSuccess,this.LoginFail);
+             this.HttpPost(this.login_url,object,this.LoginSuccess,this.LoginFail);
          },
          GetCode() {
              this.$http.get(this.code_url).then(function () {
