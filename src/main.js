@@ -17,9 +17,30 @@ Vue.use(Vuex);
 Vue.prototype.Token='';
 Vue.prototype.response={};
 
-Vue.prototype.HttpPost=function (url,object,success,fail) {
+
+
+Vue.prototype.HttpPostJson=function (url,object,success,fail) {
     // this.BeforeHttp(object);
-    this.$http.post(url, object).then(function (response) {
+    this.$http.post(url, object,).then(function (response) {
+        "use strict";
+        // console.log("可以知晓")
+        this.response=response;
+        this.BeforeSuccess();
+        success(this.response);
+        // console.log("success之后");
+        this.AfterSuccess();
+        console.log(JSON.stringify(response.body))
+    },function () {
+        "use strict";
+        fail()
+    })
+};
+
+Vue.prototype.HttpPostForm=function (url,object,success,fail) {
+    // this.BeforeHttp(object);
+    this.$http.post(url, object,{
+        emulateJSON: true
+    }).then(function (response) {
         "use strict";
         // console.log("可以知晓")
         this.response=response;
