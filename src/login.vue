@@ -81,17 +81,20 @@ import store from './store'
            this.auto=!this.auto
          },
          LoginSuccess(response){
-             if (response.result == 0)
+             if (response.result == 0) {
                  console.log("hhh1");
                  alert(response.info);
+             }
              if (response.result == 1) {
                  console.log("hhh2");
-                 if (response.su == 1)
+                 if (response.su == 1) {
                      console.log("hhh3");
                      this.$router.push({path: '/super_user'});
-                 if (response.su == 0)
+                 }
+                 if (response.su == 0) {
                      console.log("hhh4");
                      this.$router.push({path: '/user'});
+                 }
              }
          },
          LoginFail(){

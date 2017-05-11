@@ -46,7 +46,9 @@ Vue.prototype.HttpGet=function (url,object,success,fail) {
 Vue.prototype.BeforeHttp=function (object) {
     "use strict";
     object.token = this.Token;
+    console.log("得到token成功");
     return object.token
+
 };
 
 
@@ -59,6 +61,7 @@ Vue.prototype.AfterSuccess=function () {
     "use strict";
     this.$http.get('/ancient_books/getToken.action').then(function (response) {
         this.Token=response.token;
+        console.log("更新token成功");
         return this.Token
     })
 };
