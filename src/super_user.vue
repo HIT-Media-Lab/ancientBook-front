@@ -231,7 +231,7 @@
             getUsers(page){
                 this.get_user.page = page;
                 //this.get_user.token=this.Token;
-                this.HttpGet(this.get_url, this.get_user, this.success_getUsers, this.fail_getUsers);
+                this.HttpGetForm(this.get_url, this.get_user, this.success_getUsers, this.fail_getUsers);
             },
 
             //创建用户 post用户数据 success回调函数

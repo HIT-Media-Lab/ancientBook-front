@@ -67,7 +67,7 @@ Vue.prototype.HttpGet=function (url,object,success,fail) {
     })
 };
 
-Vue.prototype.HttpGet=function (url,object,success,fail) {
+Vue.prototype.HttpGetForm=function (url,object,success,fail) {
     this.$http.get(url, object,{
         emulateJSON: true
     }).then(function (response) {
