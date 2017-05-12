@@ -58,8 +58,9 @@ Vue.prototype.HttpPostForm=function (url,object,success,fail) {
 //定义的get的vue-router全局函数，以json形式传递数据
 Vue.prototype.HttpGet=function (url,object,success,fail) {
     this.$http.get(url, object).then(function (response) {
+        this.response=response;
         this.BeforeSuccess();
-        success(response);
+        success(this.response);
         this.AfterSuccess()
 
     },function () {
@@ -71,8 +72,9 @@ Vue.prototype.HttpGetForm=function (url,object,success,fail) {
     this.$http.get(url, object,{
         emulateJSON: true
     }).then(function (response) {
+        this.response=response;
         this.BeforeSuccess();
-        success(response);
+        success(this.response);
         this.AfterSuccess()
 
     },function () {
