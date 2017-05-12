@@ -1,5 +1,5 @@
 <template>
-    //登录组件
+    <!--登录组件-->
     <div>
         <div class="head">
             <span>古籍检索系统</span>
@@ -7,9 +7,9 @@
         <div class="login">
             <div>
                 <span class="text1">账 号</span>
-                <input placeholder="输入8-11位英文、数字" type="text" class="username" v-model="account" id="username" @blur="check_in()">
+                <input placeholder="输入8-10位英文、数字" type="text" class="username" v-model="account" id="username" @blur="check_in()">
                 <span class="text2">密 码</span>
-                <input placeholder="输入8-11位英文、数字" type="password" class="password" v-model="pwd" id="pwd" @blur="check_in()">
+                <input placeholder="输入6-16位英文、数字" type="password" class="password" v-model="pwd" id="pwd" @blur="check_in()">
             </div>
             <div>
                 <input type="checkbox" id="save_password"  class="save_password_checkbox" @click="Auto()">
@@ -18,10 +18,11 @@
             <div>
                 <input type="text"  class="verification_code_input" v-model="v">
                 <input type="button" value="验证码" class="verification_code_button" @click="GetCode()">
-                <img src="/ancient_books/get_v_picture.action" class="code-img">  //验证码
+                <!--验证码获取位置-->
+                <img src="/ancient_books/get_v_picture.action" class="code-img">
 
             </div>
-                <button   class="login_button" @click="Login()">登  录</button>
+                <button class="login_button" @click="Login()" v-bind:disabled="disabled">登  录</button>
         </div>
         <div>
             <span id="warning" class="warning-1"></span>
@@ -52,6 +53,7 @@ import store from './store'
              account:'',
              pwd:'',
              v:'',
+             disabled:false,
              auto:false,
              object:{},
          }
@@ -77,12 +79,18 @@ import store from './store'
              //获取输入框value
              //判断输入内容是否正确
              if (x.match("^[a-zA-Z0-9_]{7,10}$")===null) {
-                 document.getElementById("warning").innerHTML = "用户名错误，请输入8-11位英文、数字、下划线";
+                 if (x.length!=0) {
+                     this.disabled = true;
+                     document.getElementById("warning").innerHTML = "用户名错误，请输入8-10位英文、数字";
+                 }
 //                 this.account = null;
 //                 this.pwd = null
 
              } else  if (y.match("^[a-zA-Z0-9_]{7,10}$")===null) {
-                 document.getElementById("warning").innerHTML = "密码错误，请输入8-11位英文、数字、下划线";
+                 if (y.length!=0) {
+                     this.disabled = true;
+                     document.getElementById("warning").innerHTML = "密码错误，请输入6-16位英文、数字";
+                 }
 //                 this.account = null;
 //                 this.pwd = null
 

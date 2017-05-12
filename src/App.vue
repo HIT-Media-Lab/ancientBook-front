@@ -2,7 +2,7 @@
   <div id="app" class="app">
     <home></home>
     <search></search>
-    <router-view></router-view>  //路由显示的位置
+   <router-view></router-view>   <!--路由显示的位置-->
   </div>
 </template>
 
@@ -11,14 +11,7 @@
     import  search from  './component/search/search.vue'
     import  login from  './login.vue'
   export default{
-        components:{home,search,login},
-      data(){
-            return {
-
-            }
-        }
-
-
+        components:{home,search,login}
   }
 </script>
 

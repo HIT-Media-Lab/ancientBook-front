@@ -15,7 +15,7 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(Vuex);
 
-// Vue.prototype.isLogin=false;
+Vue.prototype.isLogin=false;
 //定义的全局变量
 Vue.prototype.Token='';
 Vue.prototype.response={};
@@ -31,7 +31,7 @@ Vue.prototype.HttpPostJson=function (url,object,success,fail) {
         success(this.response);
         // console.log("success之后");
         this.AfterSuccess();
-        console.log(JSON.stringify(response.body))
+        // console.log(JSON.stringify(response.body))
     },function () {
         fail()
     })
@@ -200,8 +200,7 @@ const router = new VueRouter({
 
     ]
 });
-
-// router.beforeEach((to, from, next) => {
+// router.beforeEach(function(to, from, next){
 //     // 模拟登陆状态
 //     if (!this.isLogin) {
 //         next({path: '/login'});

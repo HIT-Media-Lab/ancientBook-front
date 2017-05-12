@@ -1,5 +1,5 @@
 <template>
-    //顶端固定不变的导航条
+    <!--顶端固定不变的导航条-->
     <div id="store" class="store" v-show="show">
         <div>
             <router-link to="bookstore">
