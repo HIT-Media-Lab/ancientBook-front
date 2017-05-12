@@ -200,14 +200,6 @@ const router = new VueRouter({
 
     ]
 });
-// router.beforeEach(function(to, from, next){
-//     // 模拟登陆状态
-//     if (!this.isLogin) {
-//         next({path: '/login'});
-//     }else {
-//         next();
-//     }
-// });
 
 // 现在我们可以启动应用了！
 // 路由器会创建一个 App 实例，并且挂载到选择符 #app 匹配的元素上。
@@ -216,3 +208,12 @@ const app = new Vue({
     store,
     render: h => h(App)
 }).$mount('#app');
+
+router.beforeEach(function(to, from, next){
+    // 模拟登陆状态
+    if (!this.isLogin) {
+        next({path: '/login'});
+    }else {
+        next();
+    }
+});

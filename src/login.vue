@@ -78,6 +78,9 @@ import store from './store'
              let y = document.getElementById("pwd").value;
              //获取输入框value
              //判断输入内容是否正确
+             if (x.length==0 || y.length==0){
+                 this.disabled=true
+             }
              if (x.match("^[a-zA-Z0-9_]{7,10}$")===null) {
                  if (x.length!=0) {
                      this.disabled = true;
@@ -147,14 +150,16 @@ import store from './store'
          AutoLogin() {
              this.$http.get(this. autologin_url).then(function (response) {
 //                 console.log("hhh6");
-                 if (response.body.result==1)
+                 if (response.body.result==1) {
+                     this.isLogin = false;
 //                     console.log("hhh7");
-                     if(response.body.su==1)
+                     if (response.body.su == 1)
 //                         console.log("hhh8");
-                        this.$router.push({path: '/user'});
-                     if(response.body.su=0)
+                         this.$router.push({path: '/user'});
+                     if (response.body.su = 0)
 //                         console.log("hhh9");
                          this.$router.push({path: '/super_user'});
+                 }
                  if (response.body.result==0)
 //                     console.log("hhh10");
                      this.$router.push({path: '/login'});
