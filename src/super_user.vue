@@ -152,6 +152,7 @@
 
         <!--翻页键-->
         <div class="page-box">
+            <span class="warn_tip" v-model="tip">{{tip}}</span>
             <input class="btn_pages" style="margin-left: 0;" value="上一页" @click="pre_page()">
             <span class="btn-pages" v-model="page,max_page">{{page}}/{{max_page}}</span>
             <input class="btn_pages" style="margin-right: 0;" value="下一页" @click="next_page()">
@@ -174,7 +175,7 @@
                 isActive2:false,
                 isActive3:false,
                 isActive4:false,
-                add_if:true,//判断是否执行创建/修改请求
+                add_if:true, //判断是否执行 创建/修改 请求
 
                 userData: [],
                 user_name: '',
@@ -206,10 +207,11 @@
             this.getUsers(this.page);
         },
         methods: {
-            //显示用户列表 get数据
+            // get数据显示用户列表 成功地回调函数
             success_getUsers(response){
-                console.log(JSON.stringify(response.body, null, 4));
+                //console.log(JSON.stringify(response.body, null, 4));
                 console.log("success get users ");
+
                 //将后端数据显示在前端页面里
                 this.max_page = response.body.max_page;
                 for (let i = 0; i <= 19; i++) {
@@ -225,35 +227,17 @@
                 console.log("fail get users!");
             },
 
+            //向后端发起请求获取用户数据列表，显示在前端页面
             getUsers(page){
                 this.get_user.page = page;
                 //this.get_user.token=this.Token;
                 this.HttpGet(this.get_url, this.get_user, this.success_getUsers, this.fail_getUsers);
             },
 
-            //获取用户显示信息
-            /*this.$http.get(this.get_url, [page]).then(function (response) {
-             console.log(JSON.stringify(response.body, null, 4));
-             console.log("success get users ");
-             //将后端数据显示在前端页面里
-             this.max_page = response.body.max_page;
-             for (let i = 1; i <= 20; i++) {
-             this.userData.push({
-             user_name: response.body.content[i].name,
-             account: response.body.content[i].account,
-             user_id: response.body.content[i].user_id
-             });
-             }
-             },function () {
-             console.log("fail get users!");
-             })
-             },*/
-
-            //创建用户 post用户数据
+            //创建用户 post用户数据 success回调函数
             success_postUsers(response){
                 if(response.body.result===1)
                 {
-                    console.log(JSON.stringify(response.body));
                     console.log("success create!");
                     this.userData.push({
                         user_name: this.user_name,
@@ -265,7 +249,6 @@
                     this.page=(this.info_total+ this.info_num-1)/this.info_num;
                     this.getUsers(this.page);  //发送get请求刷新用户列表
                 }else if (response.body.result===0) {
-                    console.log(JSON.stringify(response.body));
                     console.log("fail create!");
                 }
                 this.user_name = '';
@@ -284,33 +267,10 @@
                 this.post_user.account=this.account;
                 this.post_user.pwd=this.pwd;
                 this.post_user.token=this.Token;
-                this.HttpPost(this.post_url,this.post_user,this.success_postUsers,this.fail_postUsers);
+                this.HttpPostForm(this.post_url,this.post_user,this.success_postUsers,this.fail_postUsers);
             },
 
-            /*createUsers(){
-             this.$http.post(this.post_url,{name:this.user_name,account:this.account,pwd:this.pwd,token:this.token}).then(function (response) {
-             if(response.body.result===1)
-             {
-             console.log(JSON.stringify(response.body));
-             console.log(
-             "success create!");
-             this.userData.push({
-             user_name: this
-             .user_name, account: this.account,
-             pwd: this.pwd,
-             user_id: response.body.user_id
-             });
-             this.info_total++;
-             }else if (
-             response.body.result===0) {
-             console.log(JSON.stringify(response.body));
-             console.log("fail create!");
-             }
-             },function (){
-             console.log("error create!")
-             });
-             },*/
-
+            //创建用户的模态框 系列函数
             open_dialog(){
                 this.show_create = true;
                 this.user_name="";
@@ -318,8 +278,12 @@
                 this.pwd="";
                 this.confirm_pwd="";
                 this.tip="";
-                this.isActive=false;
+                this.isActive1=false;
+                this.isActive2=false;
+                this.isActive3=false;
+                this.isActive4=false;
             },
+
             close_dialog() {
                 this.show_create = false;
             },
@@ -362,7 +326,6 @@
                         this.tip="";
                         document.getElementById(tag2).placeholder = "重复密码";
                         this.isActive4=false;
-
                     }
                 }else{
                     document.getElementById(tag2).placeholder = "重复密码";
@@ -390,15 +353,14 @@
                 }
             },
 
-            //删除用户信息
+            //删除用户信息 success回调函数
             success_delete(response){
                 if (response.body.result === 1) {
-                    console.log(JSON.stringify(response.body));
                     console.log("success delete");
                     this.userData.splice(index, 1);
                     //删除数组里的部分数据用splice
                 } else if (response.body.result === 0) {
-                    console.log(JSON.stringify(response.body));console.log("fail delete");
+                    console.log("fail delete");
                 }
             },
 
@@ -409,32 +371,21 @@
             deleteUsers(index){
                 this.delete_user.user_id=this.userData[index].user_id;
                 this.delete_user.token=this.Token;
-                this.HttpPost(this.delete_url,this.delete_user,success_delete,fail_delete);
+                this.HttpPostForm(this.delete_url,this.delete_user,success_delete,fail_delete);
             },
 
-            /*  deleteUsers(index){
-             this.$http.post(this.delete_url, {user_id: this.userData[index].user_id, token: this.token}).then(function (response) {
-             if (response.body.result === 1) {
-             console.log(JSON.stringify(response.body));
-             console.log("success delete");
-             this.userData.splice(index, 1);
-             //删除数组里的部分数据用splice
-             } else if (response.body.result === 0) {
-             console.log(JSON.stringify(response.body));console.log("fail delete");
-             }
-             },function(){
-             console.log("error delete");
-             })
-             },*/
 
-
-            //修改用户信息
+            //修改用户信息 模态框系列
             open_chaDialog(index){
                 this.show_change=true;
                 this.back_index = index;
                 this.back_username =this. userData[index].user_name;
                 this.back_account = this.userData[index].account;
+                this.isActive1=false;
+                this.isActive3=false;
+                this.isActive4=false;
             },
+
             close_chaDialog(){
                 this.show_change=false;
                 this.back_username='';
@@ -446,12 +397,10 @@
 
             success_modify(response){
                 if(response.body.result===1){
-                    console.log(JSON.stringify(response.body));
                     console.log("success modify!");
                     this.userData.splice(this.back_index,1,{user_name:this.back_username,account:this.userData[this.back_index].account,pwd:this.pwd});
                 } else if(response.body.result===0){
                     console.log("fail modify!");
-                    console.log(JSON.stringify(response.body));
                 }
                 this.show_change= false;
                 this.back_account='';
@@ -465,35 +414,16 @@
                 console.log("error modify!");
             },
 
+            //修改的请求函数
             modifyUsers(){
                 this.modify_user.name=this.back_username;
                 this.modify_user.pwd=this.pwd;
                 this.modify_user.user_id=this.userData[this.back_index].user_id;
                 this.modify_user.token=this.Token;
-                this.HttpPost(this.modify_url,this.modify_user,success_modify,fail_modify);
+                this.HttpPostForm(this.modify_url,this.modify_user,success_modify,fail_modify);
             },
-            /* modifyUsers(){
-             this.$http.post(this.modify_url,{name:this.back_username,pwd:this.pwd,user_id:this.userData[this.back_index].user_id,token:this.token}).then(
-             function(response){
-             if(response.body.result===1){
-             console.log(JSON.stringify(response.body));
-             console.log("success modify!");
-             this.userData.splice(this.back_index,1,{user_name:this.back_username,account:this.userData[this.back_index].account,pwd:this.pwd});
-             this.show_change= false;
-             this.back_account='';
-             this.back_index='';
-             this.confirm_pwd='';
-             this.pwd='';
-             this.back_username='';
-             } else if(response.body.result===0){
-             console.log("fail modify!");
-             console.log(JSON.stringify(response.body));
-             }
-             },function(){
-             console.log("error modify!");
-             })
-             },*/ //确认修改的模态框显示隐藏
 
+            //修改执行的函数
             confirm_change(){
                 let x=document.getElementById("chan2").value;
                 let y=document.getElementById("chan3").value;
@@ -510,14 +440,20 @@
                 }
             },
 
+            //上一页函数
             pre_page(){
-                if(this.page>1){
+              if(this.page===1){
+                  this.tip="已经是第一页了！";
+              }else if(this.page>1){
                     this.getUsers(this.page--);
                 }
             },
 
+            //下一页函数
             next_page(){
-                if(this.page<=this.max_page&&this.page>=1){
+                if(this.page===this.max_page){
+                    this.tip="已经是最后一页了！";
+                }else if(this.page<=this.max_page&&this.page>=1){
                     this.getUsers(this.page++);
                 }
             }
