@@ -1,4 +1,5 @@
 <template>
+    //登录组件
     <div>
         <div class="head">
             <span>古籍检索系统</span>
@@ -17,7 +18,7 @@
             <div>
                 <input type="text"  class="verification_code_input" v-model="v">
                 <input type="button" value="验证码" class="verification_code_button" @click="GetCode()">
-                <img src="/ancient_books/get_v_picture.action" class="code-img">
+                <img src="/ancient_books/get_v_picture.action" class="code-img">  //验证码
 
             </div>
                 <button   class="login_button" @click="Login()">登  录</button>
@@ -30,6 +31,7 @@
 
 <script type="text/javascript">
 import store from './store'
+//mock模拟数据
 //let Mock=require('mockjs');
 //Mock.mock(
 //  '/ancient_books/login.action',{
@@ -54,12 +56,13 @@ import store from './store'
              object:{},
          }
      },
-
+     //组件刷新执行钩子
      mounted:function () {
          this.onload_token();
          this.AutoLogin()
      },
      methods: {
+         //网页启动得到token
          onload_token(){
              this.$http.get('/ancient_books/getToken.action').then(function (response) {
                  console.log("成功得到token");
@@ -67,6 +70,7 @@ import store from './store'
                  return this.Token
              })
          },
+         //正则判断输入是否规范
          check_in(){
              let x = document.getElementById("username").value;//获取输入框id
              let y = document.getElementById("pwd").value;
@@ -92,6 +96,7 @@ import store from './store'
          Auto() {
            this.auto=!this.auto
          },
+         //登录成功函数
          LoginSuccess(response){
              if (response.body.result == 0) {
 //                 console.log("hhh1");
@@ -109,27 +114,28 @@ import store from './store'
                  }
              }
          },
+         //登陆失败函数
          LoginFail(){
            alert("error")
         },
+         //点击登录按钮执行函数
          Login() {
-//             const object =new FormData();
-//             object.append("account",this.account);
-//             object.append("pwd",this.pwd);
-//             object.append("v",this.v);
-//             object.append("auto",this.auto);
+             //给对象object内容赋值
              this.object.account=this.account;
              this.object.pwd=this.pwd;
              this.object.v=this.v;
              this.object.auto=this.auto;
-             console.log('hhhh');
+//             console.log('hhhh');
+//        与后端对接的vue-resource
              this.HttpPostForm(this.login_url,this.object,this.LoginSuccess,this.LoginFail);
          },
+         //得到验证码图片
          GetCode() {
              this.$http.get(this.code_url).then(function () {
 //                 console.log("hhh5");
              })
          },
+         //自动登录
          AutoLogin() {
              this.$http.get(this. autologin_url).then(function (response) {
 //                 console.log("hhh6");

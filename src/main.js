@@ -1,3 +1,5 @@
+"use strict";
+
 import Vue from 'vue'
 import App from './App.vue'
 import  Vuex from  'vuex'
@@ -14,15 +16,15 @@ Vue.use(VueResource);
 Vue.use(Vuex);
 
 // Vue.prototype.isLogin=false;
+//定义的全局变量
 Vue.prototype.Token='';
 Vue.prototype.response={};
 
 
-
+//定义的post的vue-router全局函数，以json形式传递数据
 Vue.prototype.HttpPostJson=function (url,object,success,fail) {
     // this.BeforeHttp(object);
     this.$http.post(url, object,).then(function (response) {
-        "use strict";
         // console.log("可以知晓")
         this.response=response;
         this.BeforeSuccess();
@@ -31,17 +33,16 @@ Vue.prototype.HttpPostJson=function (url,object,success,fail) {
         this.AfterSuccess();
         console.log(JSON.stringify(response.body))
     },function () {
-        "use strict";
         fail()
     })
 };
 
+//定义的post的vue-router全局函数，以form-data形式传递数据
 Vue.prototype.HttpPostForm=function (url,object,success,fail) {
     // this.BeforeHttp(object);
     this.$http.post(url, object,{
         emulateJSON: true
     }).then(function (response) {
-        "use strict";
         // console.log("可以知晓")
         this.response=response;
         this.BeforeSuccess();
@@ -50,20 +51,31 @@ Vue.prototype.HttpPostForm=function (url,object,success,fail) {
         this.AfterSuccess();
         console.log(JSON.stringify(response.body))
     },function () {
-        "use strict";
         fail()
     })
 };
 
+//定义的get的vue-router全局函数，以json形式传递数据
 Vue.prototype.HttpGet=function (url,object,success,fail) {
     this.$http.get(url, object).then(function (response) {
-        "use strict";
         this.BeforeSuccess();
         success(response);
         this.AfterSuccess()
 
     },function () {
-        "use strict";
+        fail()
+    })
+};
+
+Vue.prototype.HttpGet=function (url,object,success,fail) {
+    this.$http.get(url, object,{
+        emulateJSON: true
+    }).then(function (response) {
+        this.BeforeSuccess();
+        success(response);
+        this.AfterSuccess()
+
+    },function () {
         fail()
     })
 };
@@ -76,14 +88,15 @@ Vue.prototype.HttpGet=function (url,object,success,fail) {
 //
 // };
 
-
+//回调success前的函数
 Vue.prototype.BeforeSuccess=function () {
-    "use strict";
+
 
 };
 
+//回调success后的函数
 Vue.prototype.AfterSuccess=function () {
-    "use strict";
+//更新token
     this.$http.get('/ancient_books/getToken.action').then(function (response) {
         this.Token=response.token;
         console.log("更新token成功");

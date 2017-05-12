@@ -1,4 +1,5 @@
 <template>
+    //顶端固定不变的导航条
     <div id="store" class="store" v-show="show">
         <div>
             <router-link to="bookstore">
@@ -31,6 +32,7 @@
             }
         },
         methods:{
+            //注销
             logout:function () {
                 this.$http.get(this.url).then(function () {
                     alert("注销成功");

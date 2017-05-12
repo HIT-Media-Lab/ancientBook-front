@@ -1,3 +1,5 @@
+
+//各种相关配置如项目入口
 const path = require('path');
 const webpack = require('webpack');
 

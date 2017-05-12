@@ -1,9 +1,8 @@
 <template>
   <div id="app" class="app">
-    <!--<login></login>-->
-    <router-view></router-view>
-    <search></search>
     <home></home>
+    <search></search>
+    <router-view></router-view>  //路由显示的位置
   </div>
 </template>
 
