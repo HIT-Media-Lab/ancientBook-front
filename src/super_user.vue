@@ -66,25 +66,25 @@
                         <p>
                             <span class="span_motal_1">用户名</span>
                             <span class="span_motal_2">:</span>
-                            <input type="text"  id="text1" class="input_motal" placeholder="输入2-10位中文、英文、数字" onfocus="this.placeholder=''" @blur="checkIn('text1','输入2-10位中文、英文、数字','^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',isActive1=true)"  v-model="user_name" v-bind:class="{warnBorder:isActive1}">
+                            <input type="text"  id="text1" class="input_motal" placeholder="输入2-10位中文、英文、数字" onfocus="this.placeholder=''" @blur="checkIn('text1','输入2-10位中文、英文、数字','^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0)"  v-model="user_name" v-bind:class="{warnBorder:isActive[0]}">
                         </p>
 
                         <p>
                             <span class="span_motal_1">账号</span>
                             <span class="span_motal_2">:</span>
-                            <input type="text"  id="text2" class="input_motal"  placeholder="输入8-10位数字、英文" onfocus="this.placeholder=''" @blur="checkIn('text2','输入8-10位数字、英文','^[a-zA-Z0-9]{8,10}$',isActive2=true)" v-model="account" v-bind:class="{warnBorder:isActive2}">
+                            <input type="text"  id="text2" class="input_motal"  placeholder="输入8-10位数字、英文" onfocus="this.placeholder=''" @blur="checkIn('text2','输入8-10位数字、英文','^[a-zA-Z0-9]{8,10}$',1)" v-model="account" v-bind:class="{warnBorder:isActive[1]}">
                         </p>
 
                         <p>
                             <span class="span_motal_1">密码</span>
                             <span class="span_motal_2">:</span>
-                            <input type="password"  id="text3" class="input_motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkIn('text3','输入6-16位数字、英文','^[a-zA-Z0-9_]{6,16}$',isActive3=true)" v-model="pwd" v-bind:class="{warnBorder:isActive3}">
+                            <input type="password"  id="text3" class="input_motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkIn('text3','输入6-16位数字、英文','^[a-zA-Z0-9_]{6,16}$',2)" v-model="pwd" v-bind:class="{warnBorder:isActive[2]}">
                         </p>
 
                         <p>
                             <span class="span_motal_1">重复密码</span>
                             <span class="span_motal_2">:</span>
-                            <input type="password" id="text4" class="input_motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="check_pwd('text3','text4',isActive4=true)" v-model="confirm_pwd" v-bind:class="{warnBorder:isActive4}">
+                            <input type="password" id="text4" class="input_motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="check_pwd('text3','text4')" v-model="confirm_pwd" v-bind:class="{warnBorder:isActive[3]}">
                         </p>
                     </div>
                     <footer class="dialog-footer" >
@@ -122,19 +122,19 @@
                         <p >
                             <span class="span_motal_1">用户名</span>
                             <span class="span_motal_2">:</span>
-                            <input type="text"  id="chan2" class="input_motal" v-model="back_username" @blur="checkIn('chan2','输入2-10位中文、英文、数字','^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',isActive1=true)" v-bind:class="{warnBorder:isActive1}">
+                            <input type="text"  id="chan2" class="input_motal" v-model="back_username" @blur="checkIn('chan2','输入2-10位中文、英文、数字','^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0)" v-bind:class="{warnBorder:isActive[0]}">
                         </p >
 
                         <p >
                             <span class="span_motal_1">新密码</span>
                             <span class="span_motal_2">:</span>
-                            <input type="password"  id="chan3" class="input_motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkIn('chan3','输入6-16位数字、英文','^[a-zA-Z0-9_]{6,16}$',isActive3=true)" v-model="pwd"  v-bind:class="{warnBorder:isActive3}" >
+                            <input type="password"  id="chan3" class="input_motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkIn('chan3','输入6-16位数字、英文','^[a-zA-Z0-9_]{6,16}$',2)" v-model="pwd"  v-bind:class="{warnBorder:isActive[2]}" >
                         </p>
 
                         <p>
                             <span class="span_motal_1">重复密码</span>
                             <span class="span_motal_2">:</span>
-                            <input type="password" id="chan4" class="input_motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="check_pwd('chan3','chan4',isActive4=true)" v-model="confirm_pwd" v-bind:class="{warnBorder:isActive4}">
+                            <input type="password" id="chan4" class="input_motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="check_pwd('chan3','chan4')" v-model="confirm_pwd" v-bind:class="{warnBorder:isActive[3]}">
                         </p>
                     </div>
 
@@ -152,7 +152,7 @@
 
         <!--翻页键-->
         <div class="page-box">
-            <span class="warn_tip" v-model="tip">{{tip}}</span>
+            <span class="warn_tip" style="display: block" v-model="tip">{{tip}}</span>
             <input class="btn_pages" style="margin-left: 0;" value="上一页" @click="pre_page()">
             <span class="btn-pages" v-model="page,max_page">{{page}}/{{max_page}}</span>
             <input class="btn_pages" style="margin-right: 0;" value="下一页" @click="next_page()">
@@ -164,6 +164,7 @@
 
 
 <script type="text/javascript">
+
     export default{
         data(){
             return {
@@ -171,10 +172,7 @@
                 show_change: false,
 
                 tip: '',//创建用户的错误提示
-                isActive1:false, //绑定css属性，判断对错分别显示错误输入框
-                isActive2:false,
-                isActive3:false,
-                isActive4:false,
+                isActive:[false,false,false,false], //错误提示显示红色框
                 add_if:true, //判断是否执行 创建/修改 请求
 
                 userData: [],
@@ -185,8 +183,6 @@
                 back_index: '',
                 back_username: '',
                 back_account: '',
-                token_url: '/ancient_books/getToken.action',//获取token
-                token: '',                              //
                 get_url: '/ancient_books/get_user_list.action',//显示用户列表
                 post_url: '/ancient_books/add_user.action',//创建普通用户
                 modify_url: '/ancient_books/modify_user.action',//修改用户
@@ -209,9 +205,7 @@
         methods: {
             // get数据显示用户列表 成功地回调函数
             success_getUsers(response){
-                //console.log(JSON.stringify(response.body, null, 4));
                 console.log("success get users ");
-
                 //将后端数据显示在前端页面里
                 this.max_page = response.body.max_page;
                 for (let i = 0; i <= 19; i++) {
@@ -229,9 +223,9 @@
 
             //向后端发起请求获取用户数据列表，显示在前端页面
             getUsers(page){
-                this.get_user.page = page;
-                //this.get_user.token=this.Token;
-                this.HttpGetForm(this.get_url, this.get_user, this.success_getUsers, this.fail_getUsers);
+                //this.get_user.page = page;
+               // console.log(JSON.stringify(this.page,null,4));
+                this.HttpGetForm('/ancient_books/get_user_list.action',page,this.success_getUsers, this.fail_getUsers);
             },
 
             //创建用户 post用户数据 success回调函数
@@ -278,10 +272,10 @@
                 this.pwd="";
                 this.confirm_pwd="";
                 this.tip="";
-                this.isActive1=false;
-                this.isActive2=false;
-                this.isActive3=false;
-                this.isActive4=false;
+                this.isActive[0]=false;
+                this.isActive[1]=false;
+                this.isActive[2]=false;
+                this.isActive[3]=false;
             },
 
             close_dialog() {
@@ -289,31 +283,31 @@
             },
 
             //失去焦点判断输入是否合法
-            checkIn(tag1,placeholder_text,juge_text,style){
+            checkIn(tag1,placeholder_text,juge_text,index){
                 let x=document.getElementById(tag1).value;
                 if(x!==""){
                     if(x.match(juge_text)){
                         this.tip="";
                         document.getElementById(tag1).placeholder =placeholder_text;
-                        this.isActive1=false;
-                        this.isActive2=false;
-                        this.isActive3=false;
+                        this.isActive[0]=false;
+                        this.isActive[1]=false;
+                        this.isActive[2]=false;
                     }else{
                         this.tip=placeholder_text;
                         document.getElementById(tag1).placeholder = placeholder_text;
                         this.add_if=false;
-                        return style;
+                        this.isActive[index]=true;
                     }
                 }else{
                     document.getElementById(tag1).placeholder =placeholder_text;
-                    this.isActive1=false;
-                    this.isActive2=false;
-                    this.isActive3=false;
+                   this.isActive[0]=false;
+                    this.isActive[1]=false;
+                    this.isActive[2]=false;
                 }
             },
 
             //重复输入密码确认
-            check_pwd(tag1,tag2,style){
+            check_pwd(tag1,tag2){
                 let x=document.getElementById(tag1).value;
                 let y=document.getElementById(tag2).value;
                 if(y!==""){
@@ -321,15 +315,15 @@
                         this.tip="输入密码不一致！";
                         document.getElementById(tag2).placeholder = "重复密码";
                         this.add_if=false;
-                        return style;
+                        this.isActive[3]=true;
                     }else{
                         this.tip="";
                         document.getElementById(tag2).placeholder = "重复密码";
-                        this.isActive4=false;
+                        this.isActive[3]=false;
                     }
                 }else{
                     document.getElementById(tag2).placeholder = "重复密码";
-                    this.isActive4=false;
+                    this.isActive[3]=false;
                 }
             },
 
@@ -381,9 +375,9 @@
                 this.back_index = index;
                 this.back_username =this. userData[index].user_name;
                 this.back_account = this.userData[index].account;
-                this.isActive1=false;
-                this.isActive3=false;
-                this.isActive4=false;
+                this.isActive[0]=false;
+                this.isActive[2]=false;
+                this.isActive[3]=false;
             },
 
             close_chaDialog(){
