@@ -266,13 +266,17 @@
             success_getUsers(response){
                     console.log("success get users ");
                     //将后端数据显示在前端页面里
-                   /* this.max_page = response.body.max_page;
-                    for (let i = 0; i <= 19; i++) {
-                        this.userData.push({
-                            user_name: response.body.content[i].name,
-                            account: response.body.content[i].account,
-                            user_id: response.body.content[i].user_id
-                        });*/
+                    if(!response.body.content) {
+                        console.log("没有返回数组！");
+                    }else {
+                        this.max_page = response.body.max_page;
+                        for (let i = 0; i <= 19; i++) {
+                            this.userData.push({
+                                user_name: response.body.content[i].name,
+                                account: response.body.content[i].account,
+                                user_id: response.body.content[i].user_id
+                            });
+                        }
                     }
             },
 
