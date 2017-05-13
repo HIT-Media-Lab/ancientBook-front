@@ -164,7 +164,20 @@
 
 
 <script type="text/javascript">
-
+  /*  let Mock = require('mockjs');
+    Mock.mock('/ancient_books/getToken.action','get',{
+        'token|1-100':100
+    });
+    //显示用户列表
+    Mock.mock('/ancient_books/get_user_list.action','get',{
+        "content|20":[{
+            'user_id|1-100':100,
+            'name':'@FIRST',
+            'account|1-100':100,
+            'pwd|1-100':100
+        }],
+        'max_page|1-100':100
+    });*/
     export default{
         data(){
             return {
@@ -183,7 +196,7 @@
                 back_index: '',
                 back_username: '',
                 back_account: '',
-                get_url: '/ancient_books/get_user_list.action',//显示用户列表
+                get_url: '/ancient_books/get_user_list.action;this.get_user.page=1',//显示用户列表
                 post_url: '/ancient_books/add_user.action',//创建普通用户
                 modify_url: '/ancient_books/modify_user.action',//修改用户
                 delete_url: '/ancient_books/delete_user_by_id.action',//删除用户
@@ -222,10 +235,10 @@
             },
 
             //向后端发起请求获取用户数据列表，显示在前端页面
-            getUsers(page){
-                //this.get_user.page = page;
-               // console.log(JSON.stringify(this.page,null,4));
-                this.HttpGetForm('/ancient_books/get_user_list.action',page,this.success_getUsers, this.fail_getUsers);
+            getUsers(pages){
+                this.get_user.key="page";
+                this.get_user.value=pages;
+                this.HttpGetForm('/ancient_books/get_user_list.action',this.get_user,this.success_getUsers, this.fail_getUsers);
             },
 
             //创建用户 post用户数据 success回调函数
@@ -336,10 +349,10 @@
                 if (x === "" || y === "" || z === "" || m === "") {
                     this.tip = "用户名、账号、密码等不能为空！"
                 } else {
-                    this.checkIn('text1','输入2-10位中文、英文、数字','[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',isActive1);
-                    this.checkIn('text2','输入8-10位数字、英文','[a-zA-Z0-9]{8,10}$',isActive2);
-                    this.checkIn('text3','输入6-16位数字、英文','[a-zA-Z0-9_]{6,16}$',isActive3);
-                    this.check_pwd('text3','text4',isActive4);
+                    this.checkIn('text1','输入2-10位中文、英文、数字','[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0);
+                    this.checkIn('text2','输入8-10位数字、英文','[a-zA-Z0-9]{8,10}$',1);
+                    this.checkIn('text3','输入6-16位数字、英文','[a-zA-Z0-9_]{6,16}$',2);
+                    this.check_pwd('text3','text4');
                     if (this.add_if===true) {
                         //空数组里添加数据用push,注意this的使用
                         this.createUsers();
