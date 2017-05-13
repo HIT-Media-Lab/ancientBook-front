@@ -17,9 +17,9 @@
             </div>
             <div>
                 <input type="text"  class="verification_code_input" v-model="v">
-                <input type="button" value="验证码" class="verification_code_button" @click="GetCode()">
+                <!--<input type="button" value="验证码" class="verification_code_button" @click="GetCode()">-->
                 <!--验证码获取位置-->
-                <img src="/ancient_books/get_v_picture.action" class="code-img" onclick="this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
+                <img src="/ancient_books/get_v_picture.action" class="code-img" @click="this.src=this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
 
             </div>
             <button class="login_button" @click="Login()" v-bind:disabled="disabled">登  录</button>
