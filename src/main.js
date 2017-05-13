@@ -15,8 +15,8 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(Vuex);
 
-Vue.prototype.isLogin=false;
 //定义的全局变量
+Vue.prototype.ifLogin=true;
 Vue.prototype.Token='';
 Vue.prototype.response={};
 
@@ -58,7 +58,7 @@ Vue.prototype.HttpPostForm=function (url,object,success,fail) {
 //定义的get的vue-router全局函数，以json形式传递数据
 Vue.prototype.HttpGetJson=function (url,object,success,fail) {
     let new_url=url+'?'+object.key+'='+object.value;
-    this.$http.get(new_url, object).then(function (response) {
+    this.$http.get(new_url).then(function (response) {
         this.response=response;
         this.BeforeSuccess();
         success(this.response);
@@ -78,6 +78,7 @@ Vue.prototype.HttpGetForm=function (url,object,success,fail) {
         this.BeforeSuccess();
         success(this.response);
         this.AfterSuccess()
+
     },function () {
         fail()
     })
@@ -204,6 +205,18 @@ const router = new VueRouter({
     ]
 });
 
+// router.beforeEach((to, from, next) => {
+//     // 模拟登陆状态
+//     if(to.path!='/login'){
+//         if (!this.ifLogin) {
+//             next('/login')
+//         }else {
+//             next();
+//         }
+//     }else {
+//         next()
+//     }
+// });
 // 现在我们可以启动应用了！
 // 路由器会创建一个 App 实例，并且挂载到选择符 #app 匹配的元素上。
 const app = new Vue({
@@ -212,11 +225,3 @@ const app = new Vue({
     render: h => h(App)
 }).$mount('#app');
 
-router.beforeEach(function(to, from, next){
-    // 模拟登陆状态
-    if (!this.isLogin) {
-        next({path: '/login'});
-    }else {
-        next();
-    }
-});
