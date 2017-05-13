@@ -66,25 +66,25 @@
                         <p>
                             <span class="span_motal_1">用户名</span>
                             <span class="span_motal_2">:</span>
-                            <input type="text"  id="text1" class="input_motal" placeholder="输入2-10位中文、英文、数字" onfocus="this.placeholder=''" @blur="checkIn('text1','输入2-10位中文、英文、数字','^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0)"  v-model="user_name" v-bind:class="{warnBorder:isActive[0]}">
+                            <input type="text"  id="text1" class="input_motal" placeholder="输入2-10位中文、英文、数字" onfocus="this.placeholder=''" @blur="checkIn('text1','输入2-10位中文、英文、数字','^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0)"  v-model="user_name" v-bind:class="{warnBorder:this.isActive[0]}">
                         </p>
 
                         <p>
                             <span class="span_motal_1">账号</span>
                             <span class="span_motal_2">:</span>
-                            <input type="text"  id="text2" class="input_motal"  placeholder="输入8-10位数字、英文" onfocus="this.placeholder=''" @blur="checkIn('text2','输入8-10位数字、英文','^[a-zA-Z0-9]{8,10}$',1)" v-model="account" v-bind:class="{warnBorder:isActive[1]}">
+                            <input type="text"  id="text2" class="input_motal"  placeholder="输入8-10位数字、英文" onfocus="this.placeholder=''" @blur="checkIn('text2','输入8-10位数字、英文','^[a-zA-Z0-9]{8,10}$',1)" v-model="account" v-bind:class="{warnBorder:this.isActive[1]}">
                         </p>
 
                         <p>
                             <span class="span_motal_1">密码</span>
                             <span class="span_motal_2">:</span>
-                            <input type="password"  id="text3" class="input_motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkIn('text3','输入6-16位数字、英文','^[a-zA-Z0-9_]{6,16}$',2)" v-model="pwd" v-bind:class="{warnBorder:isActive[2]}">
+                            <input type="password"  id="text3" class="input_motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkIn('text3','输入6-16位数字、英文','^[a-zA-Z0-9_]{6,16}$',2)" v-model="pwd" v-bind:class="{warnBorder:this.isActive[2]}">
                         </p>
 
                         <p>
                             <span class="span_motal_1">重复密码</span>
                             <span class="span_motal_2">:</span>
-                            <input type="password" id="text4" class="input_motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="check_pwd('text3','text4')" v-model="confirm_pwd" v-bind:class="{warnBorder:isActive[3]}">
+                            <input type="password" id="text4" class="input_motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="check_pwd('text3','text4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.isActive[3]}">
                         </p>
                     </div>
                     <footer class="dialog-footer" >
@@ -122,19 +122,19 @@
                         <p >
                             <span class="span_motal_1">用户名</span>
                             <span class="span_motal_2">:</span>
-                            <input type="text"  id="chan2" class="input_motal" v-model="back_username" @blur="checkIn('chan2','输入2-10位中文、英文、数字','^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0)" v-bind:class="{warnBorder:isActive[0]}">
+                            <input type="text"  id="chan2" class="input_motal" v-model="back_username" @blur="checkIn('chan2','输入2-10位中文、英文、数字','^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0)" v-bind:class="{warnBorder:this.isActive[0]}">
                         </p >
 
                         <p >
                             <span class="span_motal_1">新密码</span>
                             <span class="span_motal_2">:</span>
-                            <input type="password"  id="chan3" class="input_motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkIn('chan3','输入6-16位数字、英文','^[a-zA-Z0-9_]{6,16}$',2)" v-model="pwd"  v-bind:class="{warnBorder:isActive[2]}" >
+                            <input type="password"  id="chan3" class="input_motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkIn('chan3','输入6-16位数字、英文','^[a-zA-Z0-9_]{6,16}$',2)" v-model="pwd"  v-bind:class="{warnBorder:this.isActive[2]}" >
                         </p>
 
                         <p>
                             <span class="span_motal_1">重复密码</span>
                             <span class="span_motal_2">:</span>
-                            <input type="password" id="chan4" class="input_motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="check_pwd('chan3','chan4')" v-model="confirm_pwd" v-bind:class="{warnBorder:isActive[3]}">
+                            <input type="password" id="chan4" class="input_motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="check_pwd('chan3','chan4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.isActive[3]}">
                         </p>
                     </div>
 
@@ -164,6 +164,65 @@
 
 
 <script type="text/javascript">
+   /* let Mock = require('mockjs');
+
+    //显示用户列表
+    Mock.mock('/ancient_books/get_user_list.action?page=1','get',{
+        "content|20":[{
+            'user_id|1-100':100,
+            'name':'@FIRST',
+            'account|1-100':100,
+            'pwd|1-100':100
+        }],
+        'max_page|1-100':100
+    });
+
+    Mock.mock('/ancient_books/getToken.action','get',{
+        'token|1-100':100
+    });
+
+    //超级用户创建普通用户
+    Mock.mock('/ancient_books/add_user.action','post',{
+        'random_result|0-1':1,
+        'success': {
+            'result': 1,
+            'info': "添加成功",
+            'user_id|1-100':100
+        },
+        'fail':{
+            'result':0,
+            'info':"添加失败"
+        }
+    });
+
+    //修改用户列表
+    Mock.mock('/ancient_books/modify_user.action','post',{
+        'random_result|0-1':1,
+        'success': {
+            'result': 1,
+            'info': "修改成功",
+            'token|1-100':100
+        },
+        'fail':{
+            'result':0,
+            'info':"修改失败"
+        }
+    });
+
+    //删除用户
+    Mock.mock('/ancient_books/delete_user_by_id.action','post',{
+        'random_result|0-1':1,
+        'success': {
+            'result': 1,
+            'info': "删除成功",
+            'token|1-100':100
+        },
+        'fail': {
+            'result': 0,
+            'info':"删除失败"
+        }
+    });*/
+
     export default{
         data(){
             return {
