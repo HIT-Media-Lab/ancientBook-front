@@ -16,9 +16,10 @@ Vue.use(VueResource);
 Vue.use(Vuex);
 
 //定义的全局变量
-Vue.prototype.ifLogin=false;
+Vue.prototype.ifLogin=true;
 Vue.prototype.Token='';
 Vue.prototype.response={};
+
 
 
 //定义的post的vue-router全局函数，以json形式传递数据
@@ -49,7 +50,7 @@ Vue.prototype.HttpPostForm=function (url,object,success,fail) {
         success(this.response);
         // console.log("success之后");
         this.AfterSuccess();
-        console.log(JSON.stringify(response.body))
+        // console.log(JSON.stringify(response.body))
     },function () {
         fail()
     })
@@ -102,7 +103,7 @@ Vue.prototype.BeforeSuccess=function () {
 Vue.prototype.AfterSuccess=function () {
 //更新token
     this.$http.get('/ancient_books/getToken.action').then(function (response) {
-        this.Token=response.token;
+        this.Token=response.body.token;
         console.log("更新token成功");
         return this.Token
     })
@@ -207,7 +208,6 @@ const router = new VueRouter({
 
 // router.beforeEach((to, from, next) => {
 //     // 模拟登陆状态
-//     alert(this.ifLogin);
 //     if(to.path!='/login'){
 //         alert("禁用路由1");
 //         if (!this.ifLogin) {
