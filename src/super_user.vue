@@ -164,20 +164,6 @@
 
 
 <script type="text/javascript">
-  /*  let Mock = require('mockjs');
-    Mock.mock('/ancient_books/getToken.action','get',{
-        'token|1-100':100
-    });
-    //显示用户列表
-    Mock.mock('/ancient_books/get_user_list.action','get',{
-        "content|20":[{
-            'user_id|1-100':100,
-            'name':'@FIRST',
-            'account|1-100':100,
-            'pwd|1-100':100
-        }],
-        'max_page|1-100':100
-    });*/
     export default{
         data(){
             return {
@@ -378,7 +364,7 @@
             deleteUsers(index){
                 this.delete_user.user_id=this.userData[index].user_id;
                 this.delete_user.token=this.Token;
-                this.HttpPostForm(this.delete_url,this.delete_user,success_delete,fail_delete);
+                this.HttpPostForm(this.delete_url,this.delete_user,this.success_delete,this.fail_delete);
             },
 
 
@@ -427,7 +413,7 @@
                 this.modify_user.pwd=this.pwd;
                 this.modify_user.user_id=this.userData[this.back_index].user_id;
                 this.modify_user.token=this.Token;
-                this.HttpPostForm(this.modify_url,this.modify_user,success_modify,fail_modify);
+                this.HttpPostForm(this.modify_url,this.modify_user,this.success_modify,this.fail_modify);
             },
 
             //修改执行的函数
@@ -435,12 +421,12 @@
                 let x=document.getElementById("chan2").value;
                 let y=document.getElementById("chan3").value;
                 let z=document.getElementById("chan4").value;
-                if (x === "" || y === "" || z === "" || m === "") {
+                if (x === "" || y === "" || z === "" ) {
                     this.tip = "用户名、账号、密码等不能为空！"
                 } else {
-                    this.checkIn('chan2','输入2-10位中文、英文、数字','[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',isActive1);
-                    this.checkIn('chan3','输入6-16位数字、英文','[a-zA-Z0-9_]{6,16}$',isActive3);
-                    this.check_pwd('chan3','chan4',isActive4);
+                    this.checkIn('chan2','输入2-10位中文、英文、数字','[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0);
+                    this.checkIn('chan3','输入6-16位数字、英文','[a-zA-Z0-9_]{6,16}$',2);
+                    this.check_pwd('chan3','chan4');
                     if (this.add_if===true) {
                         this.modifyUsers();
                     }
