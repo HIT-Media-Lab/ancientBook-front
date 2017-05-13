@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c8a044c4-7b1e-451d-a17a-99c58ee11956" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/super_user.vue" afterPath="$PROJECT_DIR$/src/super_user.vue" />
-    </list>
+    <list default="true" id="c8a044c4-7b1e-451d-a17a-99c58ee11956" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -274,15 +271,15 @@
       <workItem from="1494510332864" duration="2935000" />
       <workItem from="1494585174757" duration="2624000" />
       <workItem from="1494657264332" duration="13688000" />
-      <workItem from="1494680486977" duration="5043000" />
+      <workItem from="1494680486977" duration="5522000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27939000" />
+    <option name="totallyTimeSpent" value="28418000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1930" height="1038" extended-state="0" />
+    <frame x="-8" y="0" width="1930" height="1038" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24787685" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
