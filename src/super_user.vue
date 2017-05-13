@@ -266,13 +266,13 @@
             success_getUsers(response){
                     console.log("success get users ");
                     //将后端数据显示在前端页面里
-                    this.max_page = response.body.max_page;
+                   /* this.max_page = response.body.max_page;
                     for (let i = 0; i <= 19; i++) {
                         this.userData.push({
                             user_name: response.body.content[i].name,
                             account: response.body.content[i].account,
                             user_id: response.body.content[i].user_id
-                        });
+                        });*/
                     }
             },
 
@@ -348,6 +348,7 @@
                     if(x.match(juge_text)){
                         this.tip="";
                         document.getElementById(tag1).placeholder =placeholder_text;
+                        this.add_if=true;
                         this.isActive[0]=false;
                         this.isActive[1]=false;
                         this.isActive[2]=false;
@@ -359,7 +360,8 @@
                     }
                 }else{
                     document.getElementById(tag1).placeholder =placeholder_text;
-                   this.isActive[0]=false;
+                    this.add_if=false;
+                    this.isActive[0]=false;
                     this.isActive[1]=false;
                     this.isActive[2]=false;
                 }
@@ -378,10 +380,12 @@
                     }else{
                         this.tip="";
                         document.getElementById(tag2).placeholder = "重复密码";
+                        this.add_if=true;
                         this.isActive[3]=false;
                     }
                 }else{
                     document.getElementById(tag2).placeholder = "重复密码";
+                    this.add_if=false;
                     this.isActive[3]=false;
                 }
             },
@@ -395,7 +399,7 @@
                 if (x === "" || y === "" || z === "" || m === "") {
                     this.tip = "用户名、账号、密码等不能为空！"
                 } else {
-                    this.checkIn('text1','输入2-10位中文、英文、数字','[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0);
+                   this.checkIn('text1','输入2-10位中文、英文、数字','[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0);
                     this.checkIn('text2','输入8-10位数字、英文','[a-zA-Z0-9]{8,10}$',1);
                     this.checkIn('text3','输入6-16位数字、英文','[a-zA-Z0-9_]{6,16}$',2);
                     this.check_pwd('text3','text4');
