@@ -116,7 +116,7 @@
                         <p>
                             <span class="span_motal_1">账号</span>
                             <span class="span_motal_2">:</span>
-                            <input type="text" name="user_name" id="chan1" class="input_motal" v-model="back_account" readonly style="color: dimgrey;font-size: 15px;font-weight: 400; ">
+                            <input type="text" name="user_name" id="chan1" class="input_motal" v-model="back_account" readonly style="color: dimgrey;font-size: 15px;font-weight: 400;border-color: transparent; ">
                         </p>
 
                         <p >
