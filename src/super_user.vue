@@ -258,8 +258,8 @@
             }
         },
         mounted: function () {
-            this.getUsers(this.page);
             console.log(this.Token);
+            this.getUsers(this.page);
         },
         methods: {
             // get数据显示用户列表 成功地回调函数
