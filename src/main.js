@@ -106,7 +106,6 @@ Vue.prototype.AfterSuccess=function () {
         this.Token=response.body.token;
         console.log("更新token成功");
         console.log(this.Token);
-        return this.Token
     })
 };
 

@@ -16,7 +16,7 @@
                 <span class="save_password_word" >自动登录</span>
             </div>
             <div>
-                <input type="text"  class="verification_code_input" v-model="v">
+                <input type="text" placeholder="验证码" class="verification_code_input" v-model="v">
                 <!--<input type="button" value="验证码" class="verification_code_button" @click="GetCode()">-->
                 <!--验证码获取位置-->
                 <img src="/ancient_books/get_v_picture.action" class="code-img" onclick="this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
@@ -55,7 +55,7 @@ import store from './store'
              v:'',
              disabled:true,
              auto:false,
-             object:{},
+             object:{}
          }
      },
      //组件刷新执行钩子
@@ -65,10 +65,7 @@ import store from './store'
      },
      methods: {
 //         test(){
-//             this.ifLogin=!this.ifLogin;
-//             alert(this.ifLogin);
-//             return this.ifLogin;
-////             alert(this.ifLogin);
+//            this.$store.state.show=false
 //         },
 //         网页启动得到token
          onload_token(){

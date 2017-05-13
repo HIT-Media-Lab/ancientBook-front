@@ -21,14 +21,13 @@
 </template>
 
 <script type="text/javascript">
-//    import store from './store/index'
+    import store from './store/index'
 
     export default{
         data(){
             return{
                 url:'/ancient_books/logout.action',
-//                show:store.state.show
-                show:true
+                show:store.state.show
             }
         },
         methods:{
