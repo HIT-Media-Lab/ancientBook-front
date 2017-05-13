@@ -22,7 +22,8 @@
                 <img src="/ancient_books/get_v_picture.action" class="code-img">
 
             </div>
-                <button class="login_button" @click="Login()" v-bind:disabled="disabled">登  录</button>
+            <button class="login_button" @click="Login()" v-bind:disabled="disabled">登  录</button>
+            <!--<button @click="test">测试</button>-->
         </div>
         <div>
             <span id="warning" class="warning-1"></span>
@@ -53,7 +54,7 @@ import store from './store'
              account:'',
              pwd:'',
              v:'',
-             disabled:false,
+             disabled:true,
              auto:false,
              object:{},
          }
@@ -65,6 +66,11 @@ import store from './store'
      },
      methods: {
          //网页启动得到token
+//         test(){
+//             this.ifLogin=!this.ifLogin;
+////             alert(this.ifLogin);
+//         },
+
          onload_token(){
              this.$http.get('/ancient_books/getToken.action').then(function (response) {
                  console.log("成功得到token");
@@ -74,35 +80,42 @@ import store from './store'
          },
          //正则判断输入是否规范
          check_in(){
-             let x = document.getElementById("username").value;//获取输入框id
-             let y = document.getElementById("pwd").value;
-             //获取输入框value
+             //获取输入框值
              //判断输入内容是否正确
-             if (x.length==0 || y.length==0){
-                 this.disabled=true
-             }
-             if (x.match("^[a-zA-Z0-9_]{7,10}$")===null) {
-                 if (x.length!=0) {
-                     this.disabled = true;
-                     document.getElementById("warning").innerHTML = "用户名错误，请输入8-10位英文、数字";
+              let x =this.account;
+              let y=this.pwd;
+             this.disabled=true;
+             document.getElementById("warning").innerHTML = "";
+             if (x.length != 0 || y.length != 0) {
+                 if (x.length != 0 && y.length == 0){
+                     if (x.match('[a-zA-Z0-9]{8,10}$') === null) {
+                         document.getElementById("warning").innerHTML = "用户名格式错误，请输入8-10位英文、数字";
+                     } else {
+                         document.getElementById("warning").innerHTML = "";
+                     }
+                 }else if (x.length == 0 && y.length != 0) {
+                     if (y.match('[a-zA-Z0-9_]{6,16}$') === null) {
+                         document.getElementById("warning").innerHTML =  "密码格式错误，请输入6-16位英文、数字";
+                     } else {
+                         document.getElementById("warning").innerHTML = "";
+                     }
+                 }else if (x.length != 0 && y.length != 0) {
+                     if (x.match('[a-zA-Z0-9]{8,10}$') === null) {
+                         document.getElementById("warning").innerHTML = "用户名格式错误，请输入8-10位英文、数字";
+                     } else if (y.match('[a-zA-Z0-9_]{6,16}$') === null) {
+                         document.getElementById("warning").innerHTML =  "密码格式错误，请输入6-16位英文、数字";
+                     }else {
+                         document.getElementById("warning").innerHTML = "";
+                         this.disabled=false
+                     }
                  }
-//                 this.account = null;
-//                 this.pwd = null
-
-             } else  if (y.match("^[a-zA-Z0-9_]{7,10}$")===null) {
-                 if (y.length!=0) {
-                     this.disabled = true;
-                     document.getElementById("warning").innerHTML = "密码错误，请输入6-16位英文、数字";
-                 }
-//                 this.account = null;
-//                 this.pwd = null
-
-             }else {
-//                 document.getElementById("username").placeholder = "输入8-11位英文、数字";
-//                 document.getElementById("pwd").placeholder = "输入8-11位英文、数字";
-                 document.getElementById("warning").innerHTML = "";
              }
          },
+
+
+
+
+
 
          Auto() {
            this.auto=!this.auto
