@@ -259,24 +259,21 @@
         },
         mounted: function () {
             this.getUsers(this.page);
+            console.log(this.Token);
         },
         methods: {
             // get数据显示用户列表 成功地回调函数
             success_getUsers(response){
-                if(response.body.content.length!==0) {
                     console.log("success get users ");
                     //将后端数据显示在前端页面里
                     this.max_page = response.body.max_page;
-                    for (let i = 0; i <= 3; i++) {
+                    for (let i = 0; i <= 19; i++) {
                         this.userData.push({
                             user_name: response.body.content[i].name,
                             account: response.body.content[i].account,
                             user_id: response.body.content[i].user_id
                         });
                     }
-                } else{
-                    console.log("null!");
-                }
             },
 
             fail_getUsers(){
