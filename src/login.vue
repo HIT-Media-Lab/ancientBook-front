@@ -19,8 +19,7 @@
                 <input type="text"  class="verification_code_input" v-model="v">
                 <!--<input type="button" value="验证码" class="verification_code_button" @click="GetCode()">-->
                 <!--验证码获取位置-->
-                <img src="/ancient_books/get_v_picture.action" class="code-img" @click="this.src=this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
-
+                <img src="/ancient_books/get_v_picture.action" class="code-img" onclick="this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
             </div>
             <button class="login_button" @click="Login()" v-bind:disabled="disabled">登  录</button>
             <!--<button @click="test">测试</button>-->
@@ -113,11 +112,6 @@ import store from './store'
              }
          },
 
-
-
-
-
-
          Auto() {
            this.auto=!this.auto
          },
@@ -125,7 +119,7 @@ import store from './store'
          LoginSuccess(response){
              if (response.body.result == 0) {
 //                 console.log("hhh1");
-                 alert(response.info);
+                 alert(response.body.info);
              }
              if (response.body.result == 1) {
 //                 console.log("hhh2");
@@ -247,27 +241,20 @@ import store from './store'
     .verification_code_input{
         position: absolute;
         height: 30px;
-        left: 40px;
+        left: 65px;
         top: 120px;
         width: 76px;
         text-align: center;
         border: none;
     }
-    .verification_code_button{
-        position: absolute;
-        left: 140px;
-        top: 120px;
-        height: 30px;
-        vertical-align:bottom;
-        background-color: white;
-        color: gray;
-        width: 76px;
-        border: none;
-    }
     .code-img{
         position:absolute;
-        left: 220px;
+        left: 165px;
         top: 120px;
+        width: 76px;
+        height: 30px;
+        vertical-align:bottom;
+        border: none;
     }
     .login_button{
         position: absolute;
