@@ -164,7 +164,7 @@
 
 
 <script type="text/javascript">
-   /* let Mock = require('mockjs');
+    /*  let Mock = require('mockjs');
 
     //显示用户列表
     Mock.mock('/ancient_books/get_user_list.action?page=1','get',{
@@ -177,8 +177,8 @@
         'max_page|1-100':100
     });
 
-    Mock.mock('/ancient_books/getToken.action','get',{
-        'token|1-100':100
+   Mock.mock('/ancient_books/getToken.action','get',{
+        'Token|1-100':100
     });
 
     //超级用户创建普通用户
@@ -263,15 +263,19 @@
         methods: {
             // get数据显示用户列表 成功地回调函数
             success_getUsers(response){
-                console.log("success get users ");
-                //将后端数据显示在前端页面里
-                this.max_page = response.body.max_page;
-                for (let i = 0; i <= 19; i++) {
-                    this.userData.push({
-                        user_name: response.body.content[i].name,
-                        account: response.body.content[i].account,
-                        user_id: response.body.content[i].user_id
-                    });
+                if(response.body.content.length!==0) {
+                    console.log("success get users ");
+                    //将后端数据显示在前端页面里
+                    this.max_page = response.body.max_page;
+                    for (let i = 0; i <= 3; i++) {
+                        this.userData.push({
+                            user_name: response.body.content[i].name,
+                            account: response.body.content[i].account,
+                            user_id: response.body.content[i].user_id
+                        });
+                    }
+                } else{
+                    console.log("null!");
                 }
             },
 
