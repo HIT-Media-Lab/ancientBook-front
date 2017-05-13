@@ -164,7 +164,6 @@ import store from './store'
              this.$http.get(this. autologin_url).then(function (response) {
 //                 console.log("hhh6");
                  if (response.body.result==1) {
-                     this.isLogin = false;
 //                     console.log("hhh7");
                      if (response.body.su == 1)
 //                         console.log("hhh8");
