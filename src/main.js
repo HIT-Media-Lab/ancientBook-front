@@ -205,20 +205,22 @@ const router = new VueRouter({
     ]
 });
 
-router.beforeEach((to, from, next) => {
-    // 模拟登陆状态
-    if(to.path!='/login'){
-        alert("禁用路由1");
-        if (this.ifLogin) {
-            next('/login');
-            alert("禁用路由2");
-            alert(this.ifLogin)
-        }else {
-            alert("禁用路由3");
-            next();
-        }
-    }
-});
+// router.beforeEach((to, from, next) => {
+//     // 模拟登陆状态
+//     if(to.path!='/login'){
+//         alert("禁用路由1");
+//         if (this.ifLogin) {
+//             next('/login');
+//             alert("禁用路由2");
+//             alert(this.ifLogin)
+//         }else {
+//             alert("禁用路由3");
+//             next();
+//         }
+//     }else {
+//         next()
+//     }
+// });
 // 现在我们可以启动应用了！
 // 路由器会创建一个 App 实例，并且挂载到选择符 #app 匹配的元素上。
 const app = new Vue({
