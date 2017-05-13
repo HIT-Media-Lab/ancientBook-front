@@ -207,13 +207,14 @@ const router = new VueRouter({
 
 // router.beforeEach((to, from, next) => {
 //     // 模拟登陆状态
+//     alert(this.ifLogin);
 //     if(to.path!='/login'){
 //         alert("禁用路由1");
-//         if (this.ifLogin) {
+//         if (!this.ifLogin) {
 //             next('/login');
 //             alert("禁用路由2");
 //             alert(this.ifLogin)
-//         }else {
+//         }else{
 //             alert("禁用路由3");
 //             next();
 //         }

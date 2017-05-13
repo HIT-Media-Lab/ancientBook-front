@@ -65,12 +65,13 @@ import store from './store'
          this.AutoLogin()
      },
      methods: {
-         //网页启动得到token
 //         test(){
 //             this.ifLogin=!this.ifLogin;
+//             alert(this.ifLogin);
+//             return this.ifLogin;
 ////             alert(this.ifLogin);
 //         },
-
+//         网页启动得到token
          onload_token(){
              this.$http.get('/ancient_books/getToken.action').then(function (response) {
                  console.log("成功得到token");
