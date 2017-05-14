@@ -24,7 +24,7 @@ Vue.prototype.response={};
 
 //定义的post的vue-router全局函数，以json形式传递数据
 Vue.prototype.HttpPostJson=function (url,object,success,fail) {
-    // this.BeforeHttp(object);
+    this.BeforeHttp(object);
     this.$http.post(url, object,).then(function (response) {
         // console.log("可以知晓")
         this.response=response;
@@ -40,9 +40,9 @@ Vue.prototype.HttpPostJson=function (url,object,success,fail) {
 
 //定义的post的vue-router全局函数，以form-data形式传递数据
 Vue.prototype.HttpPostForm=function (url,object,success,fail) {
-    // this.BeforeHttp(object);
+    this.BeforeHttp(object);
     this.$http.post(url, object,{
-        emulateJSON: true
+        emulateJSON: true   //将json形式转换为form-data
     }).then(function (response) {
         // console.log("可以知晓")
         this.response=response;
@@ -58,18 +58,16 @@ Vue.prototype.HttpPostForm=function (url,object,success,fail) {
 
 //定义的get的vue-router全局函数，以json形式传递数据
 Vue.prototype.HttpGetJson=function (url,object,success,fail) {
-    let new_url=url+'?'+object.key+'='+object.value;
+    let new_url=url+'?'+object.key+'='+object.value;  //get的数据传递格式
     this.$http.get(new_url).then(function (response) {
         this.response=response;
         this.BeforeSuccess();
         success(this.response);
-        this.AfterSuccess()
-
     },function () {
         fail()
     })
 };
-
+//定义的get的vue-router全局函数，以form-data形式传递数据
 Vue.prototype.HttpGetForm=function (url,object,success,fail) {
     let new_url=url+'?'+object.key+'='+object.value;
     this.$http.get(new_url,{
@@ -78,25 +76,24 @@ Vue.prototype.HttpGetForm=function (url,object,success,fail) {
         this.response=response;
         this.BeforeSuccess();
         success(this.response);
-        this.AfterSuccess()
-
     },function () {
         fail()
     })
 };
 
-// Vue.prototype.BeforeHttp=function (object) {
-//     "use strict";
-//     object.token = this.Token;
-//     console.log("得到token成功");
-//     return object.token
-//
-// };
+//判断是否有无token
+Vue.prototype.BeforeHttp=function (object) {
+    object.token = this.Token;
+    if (object.token.length == 0)
+    {
+        this.AfterSuccess()
+    }
+    console.log("得到token成功");
+    object.token =this.Token;
+};
 
 //回调success前的函数
 Vue.prototype.BeforeSuccess=function () {
-
-
 };
 
 //回调success后的函数
@@ -108,8 +105,6 @@ Vue.prototype.AfterSuccess=function () {
         console.log(this.Token);
     })
 };
-
-
 
 // 定义组件, 也可以像教程之前教的方法从别的文件引入
 import bookstore from './component/bookstore/index.vue'

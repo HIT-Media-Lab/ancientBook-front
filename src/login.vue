@@ -19,7 +19,7 @@
                 <input type="text" placeholder="验证码" class="verification_code_input" v-model="v">
                 <!--<input type="button" value="验证码" class="verification_code_button" @click="GetCode()">-->
                 <!--验证码获取位置-->
-                <img src="/ancient_books/get_v_picture.action" class="code-img" onclick="this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
+                <img src="code_url" class="code-img" onclick="this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
             </div>
             <button class="login_button" @click="Login()" v-bind:disabled="disabled">登  录</button>
             <!--<button @click="test">测试</button>-->
@@ -50,24 +50,26 @@ import store from './store'
              code_url:'/ancient_books/get_v_picture.action',
              judge_code_url:'/ancient_books/get_v_picture.action',
              autologin_url:'/ancient_books/get_user_info.action',
-             account:'',
-             pwd:'',
-             v:'',
-             disabled:true,
-             auto:false,
-             object:{}
+             account: '',
+             pwd: '',
+             v: '',
+             disabled: true,
+             auto: false,
+             object: {}
          }
      },
+
      //组件刷新执行钩子
      mounted:function () {
          this.onload_token();
          this.AutoLogin()
      },
+
      methods: {
-//         test(){
-//            this.$store.state.show=false
-//         },
-//         网页启动得到token
+         test(){
+            this.$store.commit("login_show")
+         },
+         // 网页启动得到token
          onload_token(){
              this.$http.get('/ancient_books/getToken.action').then(function (response) {
                  console.log("成功得到token");
@@ -75,7 +77,10 @@ import store from './store'
                  return this.Token
              })
          },
-         //正则判断输入是否规范
+
+         /**
+          *  正则判断输入是否规范
+          */
          check_in(){
              //获取输入框值
              //判断输入内容是否正确
@@ -110,13 +115,14 @@ import store from './store'
          },
 
          Auto() {
-           this.auto=!this.auto
+           this.auto = !this.auto
          },
          //登录成功函数
          LoginSuccess(response){
              if (response.body.result == 0) {
 //                 console.log("hhh1");
                  alert(response.body.info);
+                 this.src=this.src+'?'+(new Date()).getTime()
              }
              if (response.body.result == 1) {
 //                 console.log("hhh2");
@@ -142,15 +148,17 @@ import store from './store'
              this.object.v=this.v;
              this.object.auto=this.auto;
 //             console.log('hhhh');
-//        与后端对接的vue-resource
+             // 与后端对接的vue-resource
              this.HttpPostForm(this.login_url,this.object,this.LoginSuccess,this.LoginFail);
          },
+
          //得到验证码图片
          GetCode() {
              this.$http.get(this.code_url).then(function () {
 //                 console.log("hhh5");
              })
          },
+
          //自动登录
          AutoLogin() {
              this.$http.get(this. autologin_url).then(function (response) {

@@ -27,12 +27,13 @@
         data(){
             return{
                 url:'/ancient_books/logout.action',
-                show:store.state.show
+                show:this.$store.getters.GetShow
             }
         },
         methods:{
             //注销
             logout:function () {
+                alert(this.$store.getters.GetShow);
                 this.$http.get(this.url).then(function () {
                     alert("注销成功");
                     this.$router.push({path: '/login'});

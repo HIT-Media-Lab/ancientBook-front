@@ -20,7 +20,6 @@
 
             <!--用户信息表格-->
             <div id="table_box">
-                <form name="user_form">
                     <table id="table_all">
                         <!--表格第一行表头-->
                         <tr>
@@ -48,7 +47,6 @@
                             </td>
                         </tr>
                     </table>
-                </form>
             </div>
         </div>
 
@@ -164,65 +162,6 @@
 
 
 <script type="text/javascript">
-    /*  let Mock = require('mockjs');
-
-    //显示用户列表
-    Mock.mock('/ancient_books/get_user_list.action?page=1','get',{
-        "content|20":[{
-            'user_id|1-100':100,
-            'name':'@FIRST',
-            'account|1-100':100,
-            'pwd|1-100':100
-        }],
-        'max_page|1-100':100
-    });
-
-   Mock.mock('/ancient_books/getToken.action','get',{
-        'Token|1-100':100
-    });
-
-    //超级用户创建普通用户
-    Mock.mock('/ancient_books/add_user.action','post',{
-        'random_result|0-1':1,
-        'success': {
-            'result': 1,
-            'info': "添加成功",
-            'user_id|1-100':100
-        },
-        'fail':{
-            'result':0,
-            'info':"添加失败"
-        }
-    });
-
-    //修改用户列表
-    Mock.mock('/ancient_books/modify_user.action','post',{
-        'random_result|0-1':1,
-        'success': {
-            'result': 1,
-            'info': "修改成功",
-            'token|1-100':100
-        },
-        'fail':{
-            'result':0,
-            'info':"修改失败"
-        }
-    });
-
-    //删除用户
-    Mock.mock('/ancient_books/delete_user_by_id.action','post',{
-        'random_result|0-1':1,
-        'success': {
-            'result': 1,
-            'info': "删除成功",
-            'token|1-100':100
-        },
-        'fail': {
-            'result': 0,
-            'info':"删除失败"
-        }
-    });*/
-
     export default{
         data(){
             return {
@@ -248,8 +187,6 @@
 
                 page: 1,//当前页面
                 max_page: 1,//总页数
-                info_total: 0,  //当前总条数
-                info_num: 20,//每页最多纪录数
 
                 get_user: {},//显示用户数据对象
                 post_user:{},//创建用户数据对象
@@ -257,22 +194,26 @@
                 modify_user:{}//修改数据对象
             }
         },
-        mounted: function () {
-            this.getUsers(this.page);
-            console.log(this.Token);
+        created: function () {
+            console.log("super_user 已经created");
+            this.getUsers(1);
         },
         methods: {
             // get数据显示用户列表 成功地回调函数
             success_getUsers(response){
                     console.log("success get users ");
                     //将后端数据显示在前端页面里
-                   /* this.max_page = response.body.max_page;
-                    for (let i = 0; i <= 19; i++) {
-                        this.userData.push({
-                            user_name: response.body.content[i].name,
-                            account: response.body.content[i].account,
-                            user_id: response.body.content[i].user_id
-                        });*/
+                    if( response.body.content.length === 0 ){
+                        console.log("没有返回数组！");
+                    }else {
+                        this.max_page = response.body.max_page;
+                        for (let i = 0; i <= response.body.content.length-1; i++){
+                            this.userData.push({
+                                user_name: response.body.content[i].name,
+                                account: response.body.content[i].account,
+                                user_id: response.body.content[i].user_id
+                            });
+                        }
                     }
             },
 
@@ -292,15 +233,17 @@
                 if(response.body.result===1)
                 {
                     console.log("success create!");
-                    this.userData.push({
+                    this.userData.splice(0,this.userData.length);//清空数组，重新发送数据以便刷新
+                    this.getUsers(1);  //发送get请求刷新用户列表
+                    /*this.userData.push({   //数据放进前端数组删除修改可以使用
                         user_name: this.user_name,
                         account: this.account,
                         pwd: this.pwd,
                         user_id: response.body.user_id
-                    });
-                    this.info_total=this.userData.length;
-                    this.page=(this.info_total+ this.info_num-1)/this.info_num;
-                    this.getUsers(this.page);  //发送get请求刷新用户列表
+                    });*/
+                   // this.info_total=this.userData.length;
+                    //this.page=(this.info_total+ this.info_num-1)/this.info_num;
+
                 }else if (response.body.result===0) {
                     console.log("fail create!");
                 }
@@ -414,8 +357,8 @@
             success_delete(response){
                 if (response.body.result === 1) {
                     console.log("success delete");
-                    this.userData.splice(index, 1);
-                    //删除数组里的部分数据用splice
+                    this.userData.splice(0, this.userData.length);//删除数组里全部数据用splice
+                    this.getUsers(this.page);//发送请求重新获取当页数据显示
                 } else if (response.body.result === 0) {
                     console.log("fail delete");
                 }
@@ -436,11 +379,13 @@
             open_chaDialog(index){
                 this.show_change=true;
                 this.back_index = index;
-                this.back_username =this. userData[index].user_name;
+                this.back_username =this.userData[index].user_name;
                 this.back_account = this.userData[index].account;
+                this.tip="";
                 this.isActive[0]=false;
                 this.isActive[2]=false;
                 this.isActive[3]=false;
+
             },
 
             close_chaDialog(){
@@ -455,7 +400,9 @@
             success_modify(response){
                 if(response.body.result===1){
                     console.log("success modify!");
-                    this.userData.splice(this.back_index,1,{user_name:this.back_username,account:this.userData[this.back_index].account,pwd:this.pwd});
+                    //this.userData.splice(this.back_index,1,{user_name:this.back_username,account:this.userData[this.back_index].account,pwd:this.pwd});
+                    this.userData.splice(0,this.userData.length);//清空数组，重新发送数据以便刷新
+                    this.getUsers(this.page);
                 } else if(response.body.result===0){
                     console.log("fail modify!");
                 }
@@ -502,7 +449,10 @@
               if(this.page===1){
                   this.tip="已经是第一页了！";
               }else if(this.page>1){
-                    this.getUsers(this.page--);
+                  this.tip="";
+                  this.page=this.page-1;
+                  this.userData.splice(0,this.userData.length);//清空原有数组数据
+                  this.getUsers(this.page);
                 }
             },
 
@@ -510,8 +460,11 @@
             next_page(){
                 if(this.page===this.max_page){
                     this.tip="已经是最后一页了！";
-                }else if(this.page<=this.max_page&&this.page>=1){
-                    this.getUsers(this.page++);
+                }else if(this.page>=1 && this.page<=this.max_page){
+                    this.tip="";
+                    this.page=this.page+1;
+                    this.userData.splice(0,this.userData.length); //清空原有数组数据
+                    this.getUsers(this.page);
                 }
             }
         }
