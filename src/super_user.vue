@@ -203,7 +203,7 @@
             success_getUsers(response){
                     console.log("success get users ");
                     //将后端数据显示在前端页面里
-                    if( !response.body.content){
+                    if( response.body.content.length === 0){
                         console.log("没有返回数组！");
                     }else {
                         this.max_page = response.body.max_page;
