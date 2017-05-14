@@ -465,7 +465,7 @@
                     console.log("success modify!");
                     //this.userData.splice(this.back_index,1,{user_name:this.back_username,account:this.userData[this.back_index].account,pwd:this.pwd});
                     this.userData.splice(0,this.userData.length);//清空数组，重新发送数据以便刷新
-                    this.get_user(this.page);
+                    this.getUsers(this.page);
                 } else if(response.body.result===0){
                     console.log("fail modify!");
                 }
