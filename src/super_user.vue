@@ -257,11 +257,11 @@
                 modify_user:{}//修改数据对象
             }
         },
-        mounted: function () {
+        created: function () {
             console.log(this.Token);
             this.post_user.token=this.Token;
             console.log(this.post_user.token);
-           // this.getUsers(this.page);
+            this.getUsers(this.page);
         },
         methods: {
             // get数据显示用户列表 成功地回调函数
