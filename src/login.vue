@@ -7,20 +7,20 @@
         <div class="login">
             <div>
                 <span class="text1">账 号</span>
-                <input type="text" class="username" v-model="account" id="username" @blur="CheckLogin()" v-bind:class="{ warn-border: Active }">
+                <input type="text" class="username" v-model="account" id="username" @blur="CheckLogin()" v-bind:class="{ warnborder: Active1 }">
                 <span class="text2">密 码</span>
-                <input type="password" class="password" v-model="pwd" id="pwd" @blur="CheckLogin()">
+                <input type="password" class="password" v-model="pwd" id="pwd" @blur="CheckLogin()" v-bind:class="{ warnborder: Active2 }">
             </div>
             <div>
-                <input type="checkbox" id="save_password"  class="save_password_checkbox" @click="Auto()">
-                <span class="save_password_word" >自动登录</span>
+                <input type="checkbox" id="save-password"  class="save-password-checkbox" @click="Auto()">
+                <span class="save-password-word" >自动登录</span>
             </div>
             <div>
-                <input type="text" placeholder="验证码" class="verification_code_input" v-model="v">
+                <input type="text" placeholder="验证码" class="verification-code-input" v-model="v">
                 <!--验证码获取位置-->
                 <img src="/ancient_books/get_v_picture.action" class="code-img" onclick="this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
             </div>
-            <button class="login_button" @click="Login()" v-bind:disabled="disabled">登  录</button>
+            <button class="login-button" @click="Login()" v-bind:disabled="disabled">登  录</button>
             <!--<button @click="test">测试</button>-->
         </div>
         <div>
@@ -53,7 +53,8 @@ import store from './store'
              account: '',
              pwd: '',
              v: '',
-             Active:true,
+             Active1:false,
+             Active2:false,
              disabled: true,
              auto: false,
              object: {}
@@ -75,6 +76,7 @@ import store from './store'
              this.$http.get('/ancient_books/getToken.action').then(function (response) {
                  console.log("成功得到token");
                  this.Token = response.body.token;
+                 console.log(this.Token);
                  return this.Token
              })
          },
@@ -89,26 +91,36 @@ import store from './store'
               let y=this.pwd;
              this.disabled=true;
              this.warning = "";
+             this.Active1=false;
+             this.Active2=false;
              if (x.length != 0 || y.length != 0) {
                  if (x.length != 0 && y.length == 0){
                      if (x.match('[a-zA-Z0-9]{8,10}$') === null) {
                         this.warning = "用户名格式错误";
+                        this.Active1=true;
                      } else {
                         this.warning= "";
+                         this.Active1=false;
                      }
                  }else if (x.length == 0 && y.length != 0) {
                      if (y.match('[a-zA-Z0-9_]{6,16}$') === null) {
                          this.warning =  "密码格式错误";
+                         this.Active2=true;
                      } else {
                          this.warning = "";
+                         this.Active2=false;
                      }
                  }else if (x.length != 0 && y.length != 0) {
                      if (x.match('[a-zA-Z0-9]{8,10}$') === null) {
                          this.warning = "用户名格式错误";
+                         this.Active1=true;
                      } else if (y.match('[a-zA-Z0-9_]{6,16}$') === null) {
                          this.warning =  "密码格式错误";
+                         this.Active2=true;
                      }else {
                          this.warning = "";
+                         this.Active1=false;
+                         this.Active2=false;
                          this.disabled=false
                      }
                  }
@@ -143,7 +155,11 @@ import store from './store'
              this.object.v=this.v;
              this.object.auto=this.auto;
              this.object.token=this.Token;
+             console.log("全局token"+this.Token);
+             console.log("login需要穿给后台的token"+this.object.token);
              // 与后端对接的vue-resource
+             this.BeforeHttp(this.object);
+             this.object.token=this.Token;
              this.HttpPostForm(this.login_url,this.object,this.LoginSuccess,this.LoginFail);
          },
 
@@ -182,7 +198,7 @@ import store from './store'
         left: 615px;
         top: 270px;
     }
-    .warn-border{
+    .warnborder{
         border:2px solid red;
     }
 
@@ -222,18 +238,18 @@ import store from './store'
         left: 90px;
         top: 60px;
     }
-    .save_password_checkbox{
+    .save-password-checkbox{
         position: absolute;
         left: 40px;
         top: 159px;
     }
-    .save_password_word{
+    .save-password-word{
         position: absolute;
         font-size: 12px;
         left: 60px;
         top: 160px;
     }
-    .verification_code_input{
+    .verification-code-input{
         position: absolute;
         height: 30px;
         left: 65px;
@@ -251,7 +267,7 @@ import store from './store'
         vertical-align:bottom;
         border: none;
     }
-    .login_button{
+    .login-button{
         position: absolute;
         top: 200px;
         left: 80px;

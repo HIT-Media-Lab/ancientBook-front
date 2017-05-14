@@ -2,7 +2,7 @@
     <div class="user">
         <div class="">
                <router-link to="/upload_step1">
-                   <img src="/src/assets/img/u456.png" class="upload_img">
+                   <img src="../../assets/img/u456.png" class="upload_img">
                    <span class="upload_word"> 上 传</span>
                </router-link>
         </div>
