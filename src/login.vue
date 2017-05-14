@@ -18,7 +18,7 @@
             <div>
                 <input type="text" placeholder="验证码" class="verification_code_input" v-model="v">
                 <!--验证码获取位置-->
-                <img src="/ancient_books/login.action" class="code-img" onclick="this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
+                <img src="/ancient_books/get_v_picture.action" class="code-img" onclick="this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
             </div>
             <button class="login_button" @click="Login()" v-bind:disabled="disabled">登  录</button>
             <!--<button @click="test">测试</button>-->
@@ -46,6 +46,7 @@ import store from './store'
      data(){
          return{
              login_url:'/ancient_books/login.action',
+             code_url:'/ancient_books/get_v_picture.action',
              judge_code_url:'/ancient_books/get_v_picture.action',
              autologin_url:'/ancient_books/get_user_info.action',
              account: '',

@@ -80,12 +80,11 @@ Vue.prototype.HttpGetForm=function (url,object,success,fail) {
 
 //判断是否有无token
 Vue.prototype.BeforeHttp=function (object) {
-    object.token = this.Token;
     if (object.token.length == 0) {
           this.CheckToken();
-        }
+         object.token =this.Token;
+    }
     console.log("得到token成功");
-    object.token =this.Token;
 };
 
 //回调success前的函数
