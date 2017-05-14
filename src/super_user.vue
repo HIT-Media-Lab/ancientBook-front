@@ -268,6 +268,7 @@
                     if(!response.body.content) {
                         console.log("没有返回数组！");
                     }else {
+                        console.log(JSON.stringify(response.body.content));
                         this.max_page = response.body.max_page;
                         for (let i = 0; i <= 19; i++) {
                             this.userData.push({
@@ -511,8 +512,10 @@
               if(this.page===1){
                   this.tip="已经是第一页了！";
               }else if(this.page>1){
+                  this.tip="";
+                  let p=this.page-1;
                   this.userData.splice(0,this.userData.length);//清空原有数组数据
-                  this.getUsers(this.page--);
+                  this.getUsers(p);
                 }
             },
 
@@ -521,8 +524,10 @@
                 if(this.page===this.max_page){
                     this.tip="已经是最后一页了！";
                 }else if(this.page<=this.max_page&&this.page>=1){
+                    this.tip="";
+                    let p=this.page+1;
                     this.userData.splice(0,this.userData.length); //清空原有数组数据
-                    this.getUsers(this.page++);
+                    this.getUsers(p);
                 }
             }
         }
