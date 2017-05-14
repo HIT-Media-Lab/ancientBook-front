@@ -258,10 +258,7 @@
             }
         },
         created: function () {
-            console.log(this.Token);
-            this.post_user.token=this.Token;
-            console.log(this.post_user.token);
-            this.getUsers(this.page);
+            this.getUsers(1);
         },
         methods: {
             // get数据显示用户列表 成功地回调函数
@@ -298,15 +295,16 @@
                 if(response.body.result===1)
                 {
                     console.log("success create!");
-                    this.userData.push({
+                    this.getUsers(1);  //发送get请求刷新用户列表
+                    /*this.userData.push({   //数据放进前端数组删除修改可以使用
                         user_name: this.user_name,
                         account: this.account,
                         pwd: this.pwd,
                         user_id: response.body.user_id
-                    });
-                    this.info_total=this.userData.length;
-                    this.page=(this.info_total+ this.info_num-1)/this.info_num;
-                    this.getUsers(this.page);  //发送get请求刷新用户列表
+                    });*/
+                   // this.info_total=this.userData.length;
+                    //this.page=(this.info_total+ this.info_num-1)/this.info_num;
+
                 }else if (response.body.result===0) {
                     console.log("fail create!");
                 }
@@ -420,8 +418,8 @@
             success_delete(response){
                 if (response.body.result === 1) {
                     console.log("success delete");
-                    this.userData.splice(index, 1);
-                    //删除数组里的部分数据用splice
+                    //this.userData.splice(index, 1);//删除数组里的部分数据用splice
+                    this.getUsers(this.page);
                 } else if (response.body.result === 0) {
                     console.log("fail delete");
                 }
@@ -444,9 +442,11 @@
                 this.back_index = index;
                 this.back_username =this. userData[index].user_name;
                 this.back_account = this.userData[index].account;
+                this.tip="";
                 this.isActive[0]=false;
                 this.isActive[2]=false;
                 this.isActive[3]=false;
+
             },
 
             close_chaDialog(){
@@ -461,7 +461,8 @@
             success_modify(response){
                 if(response.body.result===1){
                     console.log("success modify!");
-                    this.userData.splice(this.back_index,1,{user_name:this.back_username,account:this.userData[this.back_index].account,pwd:this.pwd});
+                    //this.userData.splice(this.back_index,1,{user_name:this.back_username,account:this.userData[this.back_index].account,pwd:this.pwd});
+                    this.get_user(this.page);
                 } else if(response.body.result===0){
                     console.log("fail modify!");
                 }
@@ -508,6 +509,7 @@
               if(this.page===1){
                   this.tip="已经是第一页了！";
               }else if(this.page>1){
+                    this.userData=[];
                     this.getUsers(this.page--);
                 }
             },
@@ -517,6 +519,7 @@
                 if(this.page===this.max_page){
                     this.tip="已经是最后一页了！";
                 }else if(this.page<=this.max_page&&this.page>=1){
+                    this.userData=[];
                     this.getUsers(this.page++);
                 }
             }
