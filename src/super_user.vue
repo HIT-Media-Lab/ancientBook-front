@@ -20,7 +20,6 @@
 
             <!--用户信息表格-->
             <div id="table_box">
-                <form name="user_form">
                     <table id="table_all">
                         <!--表格第一行表头-->
                         <tr>
@@ -48,7 +47,6 @@
                             </td>
                         </tr>
                     </table>
-                </form>
             </div>
         </div>
 
@@ -164,65 +162,6 @@
 
 
 <script type="text/javascript">
-    /*  let Mock = require('mockjs');
-
-    //显示用户列表
-    Mock.mock('/ancient_books/get_user_list.action?page=1','get',{
-        "content|20":[{
-            'user_id|1-100':100,
-            'name':'@FIRST',
-            'account|1-100':100,
-            'pwd|1-100':100
-        }],
-        'max_page|1-100':100
-    });
-
-   Mock.mock('/ancient_books/getToken.action','get',{
-        'Token|1-100':100
-    });
-
-    //超级用户创建普通用户
-    Mock.mock('/ancient_books/add_user.action','post',{
-        'random_result|0-1':1,
-        'success': {
-            'result': 1,
-            'info': "添加成功",
-            'user_id|1-100':100
-        },
-        'fail':{
-            'result':0,
-            'info':"添加失败"
-        }
-    });
-
-    //修改用户列表
-    Mock.mock('/ancient_books/modify_user.action','post',{
-        'random_result|0-1':1,
-        'success': {
-            'result': 1,
-            'info': "修改成功",
-            'token|1-100':100
-        },
-        'fail':{
-            'result':0,
-            'info':"修改失败"
-        }
-    });
-
-    //删除用户
-    Mock.mock('/ancient_books/delete_user_by_id.action','post',{
-        'random_result|0-1':1,
-        'success': {
-            'result': 1,
-            'info': "删除成功",
-            'token|1-100':100
-        },
-        'fail': {
-            'result': 0,
-            'info':"删除失败"
-        }
-    });*/
-
     export default{
         data(){
             return {
@@ -248,8 +187,6 @@
 
                 page: 1,//当前页面
                 max_page: 1,//总页数
-                info_total: 0,  //当前总条数
-                info_num: 20,//每页最多纪录数
 
                 get_user: {},//显示用户数据对象
                 post_user:{},//创建用户数据对象
@@ -258,6 +195,7 @@
             }
         },
         created: function () {
+            console.log("super_user 已经created");
             this.getUsers(1);
         },
         methods: {
@@ -268,9 +206,8 @@
                     if(!response.body.content) {
                         console.log("没有返回数组！");
                     }else {
-                        console.log(JSON.stringify(response.body.content));
                         this.max_page = response.body.max_page;
-                        for (let i = 0; i <= 19; i++) {
+                        for (let i = 0; i <= response.body.content.length; i++) {
                             this.userData.push({
                                 user_name: response.body.content[i].name,
                                 account: response.body.content[i].account,
@@ -523,7 +460,7 @@
             next_page(){
                 if(this.page===this.max_page){
                     this.tip="已经是最后一页了！";
-                }else if(this.page<=this.max_page&&this.page>=1){
+                }else if(this.page>=1 && this.page<=this.max_page){
                     this.tip="";
                     this.page=this.page+1;
                     this.userData.splice(0,this.userData.length); //清空原有数组数据
