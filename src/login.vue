@@ -7,9 +7,9 @@
         <div class="login">
             <div>
                 <span class="text1">账 号</span>
-                <input placeholder="输入8-10位英文、数字" type="text" class="username" v-model="account" id="username" @blur="check_in()">
+                <input placeholder="输入8-10位英文、数字" type="text" class="username" v-model="account" id="username" @blur="CheckLogin()">
                 <span class="text2">密 码</span>
-                <input placeholder="输入6-16位英文、数字" type="password" class="password" v-model="pwd" id="pwd" @blur="check_in()">
+                <input placeholder="输入6-16位英文、数字" type="password" class="password" v-model="pwd" id="pwd" @blur="CheckLogin()">
             </div>
             <div>
                 <input type="checkbox" id="save_password"  class="save_password_checkbox" @click="Auto()">
@@ -60,16 +60,16 @@ import store from './store'
 
      //组件刷新执行钩子
      mounted:function () {
-         this.onload_token();
+         this.OnloadToken();
          this.AutoLogin()
      },
 
      methods: {
-         test(){
-            this.$store.commit("login_show")
-         },
+//         Test(){
+//            this.$store.commit("login_show")
+//         },
          // 网页启动得到token
-         onload_token(){
+         OnloadToken(){
              this.$http.get('/ancient_books/getToken.action').then(function (response) {
                  console.log("成功得到token");
                  this.Token = response.body.token;
@@ -80,7 +80,7 @@ import store from './store'
          /**
           *  正则判断输入是否规范
           */
-         check_in(){
+         CheckLogin(){
              //获取输入框值
              //判断输入内容是否正确
               let x =this.account;
