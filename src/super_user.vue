@@ -241,7 +241,7 @@
                         pwd: this.pwd,
                         user_id: response.body.user_id
                     });*/
-                   // this.info_total=this.userData.length;
+                    // this.info_total=this.userData.length;
                     //this.page=(this.info_total+ this.info_num-1)/this.info_num;
 
                 }else if (response.body.result===0) {
@@ -263,6 +263,8 @@
                 this.post_user.account=this.account;
                 this.post_user.pwd=this.pwd;
                 this.post_user.token=this.Token;
+                this.BeforeHttp(this.post_user);
+                this.post_user=this.Token;
                 this.HttpPostForm(this.post_url,this.post_user,this.success_postUsers,this.fail_postUsers);
             },
 
@@ -371,6 +373,8 @@
             deleteUsers(index){
                 this.delete_user.user_id=this.userData[index].user_id;
                 this.delete_user.token=this.Token;
+                this.BeforeHttp(this.delete_user);
+                this.delete_user=this.Token;
                 this.HttpPostForm(this.delete_url,this.delete_user,this.success_delete,this.fail_delete);
             },
 
@@ -424,6 +428,8 @@
                 this.modify_user.pwd=this.pwd;
                 this.modify_user.user_id=this.userData[this.back_index].user_id;
                 this.modify_user.token=this.Token;
+                this.BeforeHttp(this.modify_user);
+                this.modify_user=this.Token;
                 this.HttpPostForm(this.modify_url,this.modify_user,this.success_modify,this.fail_modify);
             },
 
