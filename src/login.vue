@@ -61,7 +61,7 @@ import store from './store'
      //组件刷新执行钩子
      mounted:function () {
          this.OnloadToken();
-         this.AutoLogin()
+         this.AutoLogin();
      },
 
      methods: {

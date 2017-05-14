@@ -16,7 +16,7 @@
             <router-link to="/user">
                 <p class="user_name">用户名</p>
             </router-link>
-            <button class="cancel_word" @click="logout">注销</button>
+            <button class="cancel_word" @click="Logout">注销</button>
         </div>
     </div>
 </template>
@@ -32,13 +32,13 @@
 
         data(){
             return{
-                url:'/ancient_books/logout.action',
-                show:this.$store.getters.GetShow
+                url: '/ancient_books/logout.action',
+                show: this.$store.getters.GetShow
             }
         },
         methods:{
             //注销
-            logout:function () {
+            Logout:function () {
                 alert(this.$store.getters.GetShow);
                 this.$http.get(this.url).then(function () {
                     alert("注销成功");
