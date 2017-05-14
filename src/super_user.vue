@@ -295,6 +295,7 @@
                 if(response.body.result===1)
                 {
                     console.log("success create!");
+                    this.userData.splice(0,this.userData.length);//清空数组，重新发送数据以便刷新
                     this.getUsers(1);  //发送get请求刷新用户列表
                     /*this.userData.push({   //数据放进前端数组删除修改可以使用
                         user_name: this.user_name,
@@ -418,8 +419,8 @@
             success_delete(response){
                 if (response.body.result === 1) {
                     console.log("success delete");
-                    //this.userData.splice(index, 1);//删除数组里的部分数据用splice
-                    this.getUsers(this.page);
+                    this.userData.splice(0, this.userData.length);//删除数组里全部数据用splice
+                    this.getUsers(this.page);//发送请求重新获取当页数据显示
                 } else if (response.body.result === 0) {
                     console.log("fail delete");
                 }
@@ -462,6 +463,7 @@
                 if(response.body.result===1){
                     console.log("success modify!");
                     //this.userData.splice(this.back_index,1,{user_name:this.back_username,account:this.userData[this.back_index].account,pwd:this.pwd});
+                    this.userData.splice(0,this.userData.length);//清空数组，重新发送数据以便刷新
                     this.get_user(this.page);
                 } else if(response.body.result===0){
                     console.log("fail modify!");
@@ -509,8 +511,8 @@
               if(this.page===1){
                   this.tip="已经是第一页了！";
               }else if(this.page>1){
-                    this.userData=[];
-                    this.getUsers(this.page--);
+                  this.userData.splice(0,this.userData.length);//清空原有数组数据
+                  this.getUsers(this.page--);
                 }
             },
 
@@ -519,7 +521,7 @@
                 if(this.page===this.max_page){
                     this.tip="已经是最后一页了！";
                 }else if(this.page<=this.max_page&&this.page>=1){
-                    this.userData=[];
+                    this.userData.splice(0,this.userData.length); //清空原有数组数据
                     this.getUsers(this.page++);
                 }
             }
