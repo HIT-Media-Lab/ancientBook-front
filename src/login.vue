@@ -7,9 +7,9 @@
         <div class="login">
             <div>
                 <span class="text1">账 号</span>
-                <input placeholder="输入8-10位英文、数字" type="text" class="username" v-model="account" id="username" @blur="CheckLogin()">
+                <input type="text" class="username" v-model="account" id="username" @blur="CheckLogin()" v-bind:class="{ warn-border: Active }">
                 <span class="text2">密 码</span>
-                <input placeholder="输入6-16位英文、数字" type="password" class="password" v-model="pwd" id="pwd" @blur="CheckLogin()">
+                <input type="password" class="password" v-model="pwd" id="pwd" @blur="CheckLogin()">
             </div>
             <div>
                 <input type="checkbox" id="save_password"  class="save_password_checkbox" @click="Auto()">
@@ -24,7 +24,7 @@
             <!--<button @click="test">测试</button>-->
         </div>
         <div>
-            <span id="warning" class="warning-1"></span>
+            <span id="warning" class="warning-1" v-model="warning">{{warning}}</span>
         </div>
     </div>
 </template>
@@ -45,13 +45,15 @@ import store from './store'
 
      data(){
          return{
-             login_url:'/ancient_books/login.action',
-             code_url:'/ancient_books/get_v_picture.action',
-             judge_code_url:'/ancient_books/get_v_picture.action',
-             autologin_url:'/ancient_books/get_user_info.action',
+             login_url: '/ancient_books/login.action',
+             code_url: '/ancient_books/get_v_picture.action',
+             judge_code_url: '/ancient_books/get_v_picture.action',
+             autologin_url: '/ancient_books/get_user_info.action',
+             warning:'',
              account: '',
              pwd: '',
              v: '',
+             Active:true,
              disabled: true,
              auto: false,
              object: {}
@@ -86,27 +88,27 @@ import store from './store'
               let x =this.account;
               let y=this.pwd;
              this.disabled=true;
-             document.getElementById("warning").innerHTML = "";
+             this.warning = "";
              if (x.length != 0 || y.length != 0) {
                  if (x.length != 0 && y.length == 0){
                      if (x.match('[a-zA-Z0-9]{8,10}$') === null) {
-                         document.getElementById("warning").innerHTML = "用户名格式错误，请输入8-10位英文、数字";
+                        this.warning = "用户名格式错误";
                      } else {
-                         document.getElementById("warning").innerHTML = "";
+                        this.warning= "";
                      }
                  }else if (x.length == 0 && y.length != 0) {
                      if (y.match('[a-zA-Z0-9_]{6,16}$') === null) {
-                         document.getElementById("warning").innerHTML =  "密码格式错误，请输入6-16位英文、数字";
+                         this.warning =  "密码格式错误";
                      } else {
-                         document.getElementById("warning").innerHTML = "";
+                         this.warning = "";
                      }
                  }else if (x.length != 0 && y.length != 0) {
                      if (x.match('[a-zA-Z0-9]{8,10}$') === null) {
-                         document.getElementById("warning").innerHTML = "用户名格式错误，请输入8-10位英文、数字";
+                         this.warning = "用户名格式错误";
                      } else if (y.match('[a-zA-Z0-9_]{6,16}$') === null) {
-                         document.getElementById("warning").innerHTML =  "密码格式错误，请输入6-16位英文、数字";
+                         this.warning =  "密码格式错误";
                      }else {
-                         document.getElementById("warning").innerHTML = "";
+                         this.warning = "";
                          this.disabled=false
                      }
                  }
@@ -141,7 +143,6 @@ import store from './store'
              this.object.v=this.v;
              this.object.auto=this.auto;
              this.object.token=this.Token;
-//             console.log('hhhh');
              // 与后端对接的vue-resource
              this.HttpPostForm(this.login_url,this.object,this.LoginSuccess,this.LoginFail);
          },
@@ -181,6 +182,9 @@ import store from './store'
         left: 615px;
         top: 270px;
     }
+    .warn-border{
+        border:2px solid red;
+    }
 
     .login{
         background-color: #d9d9d9;
@@ -207,7 +211,6 @@ import store from './store'
         position: absolute;
         left: 90px;
         top: 20px;
-        border: none;
     }
     .text2{
         position: absolute;
@@ -218,7 +221,6 @@ import store from './store'
         position: absolute;
         left: 90px;
         top: 60px;
-        border: none;
     }
     .save_password_checkbox{
         position: absolute;

@@ -26,11 +26,9 @@ Vue.prototype.response={};
 Vue.prototype.HttpPostJson=function (url,object,success,fail) {
     this.BeforeHttp(object);
     this.$http.post(url, object,).then(function (response) {
-        // console.log("可以知晓")
         this.response=response;
         this.BeforeSuccess();
         success(this.response);
-        // console.log("success之后");
         this.AfterSuccess(this.response);
         // console.log(JSON.stringify(response.body))
     },function () {
