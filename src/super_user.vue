@@ -207,7 +207,7 @@
                         console.log("没有返回数组！");
                     }else {
                         this.max_page = response.body.max_page;
-                        for (let i = 0; i <= response.body.content.length; i++){
+                        for (let i = 0; i <= response.body.content.length-1; i++){
                             this.userData.push({
                                 user_name: response.body.content[i].name,
                                 account: response.body.content[i].account,
