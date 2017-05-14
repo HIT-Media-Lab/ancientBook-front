@@ -140,6 +140,7 @@ import store from './store'
              this.object.pwd=this.pwd;
              this.object.v=this.v;
              this.object.auto=this.auto;
+             this.object.token=this.Token;
 //             console.log('hhhh');
              // 与后端对接的vue-resource
              this.HttpPostForm(this.login_url,this.object,this.LoginSuccess,this.LoginFail);

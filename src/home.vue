@@ -1,6 +1,7 @@
 <template>
     <!--顶端固定不变的导航条-->
     <div id="store" class="store" v-show="show">
+        <search></search>
         <div>
             <router-link to="bookstore">
             <p class="bookstore">古籍库</p>
@@ -22,8 +23,13 @@
 
 <script type="text/javascript">
     import store from './store/index'
+    import  search from  './component/search/search.vue'
 
     export default{
+        components:{
+            search
+        },
+
         data(){
             return{
                 url:'/ancient_books/logout.action',
