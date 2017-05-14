@@ -203,11 +203,11 @@
             success_getUsers(response){
                     console.log("success get users ");
                     //将后端数据显示在前端页面里
-                    if(!response.body.content) {
+                    if( response.body.content.length === 0 ){
                         console.log("没有返回数组！");
                     }else {
                         this.max_page = response.body.max_page;
-                        for (let i = 0; i <= response.body.content.length; i++) {
+                        for (let i = 0; i <= response.body.content.length; i++){
                             this.userData.push({
                                 user_name: response.body.content[i].name,
                                 account: response.body.content[i].account,
@@ -379,7 +379,7 @@
             open_chaDialog(index){
                 this.show_change=true;
                 this.back_index = index;
-                this.back_username =this. userData[index].user_name;
+                this.back_username =this.userData[index].user_name;
                 this.back_account = this.userData[index].account;
                 this.tip="";
                 this.isActive[0]=false;
