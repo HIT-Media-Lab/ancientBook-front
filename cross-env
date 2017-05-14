@@ -1,0 +1,10 @@
+Hash: b0de17b425e45600c5e7
+Version: webpack 2.3.2
+Time: 6296ms
+                                    Asset       Size  Chunks                    Chunk Names
+  bg.png?423e32457777b009381479b762c6dbaf     483 kB          [emitted]  [big]  
+u463.png?943353df72c2136490bfb055c95044d1  577 bytes          [emitted]         
+u468.png?9a4005b34de288ae7967992512b05c24  422 bytes          [emitted]         
+u485.png?6d45eabca9856e9cd2e16e3b3a266b63  482 bytes          [emitted]         
+                                 build.js     168 kB       0  [emitted]         main
+                             build.js.map    1.23 MB       0  [emitted]         main
