@@ -120,7 +120,7 @@
                         <p >
                             <span class="span_motal_1">用户名</span>
                             <span class="span_motal_2">:</span>
-                            <input type="text"  id="chan2" class="input_motal" v-model="user_name" @blur="checkIn('chan2','输入2-10位中文、英文、数字','^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0)" v-bind:class="{warnBorder:this.isActive[0]}">
+                            <input type="text"  id="chan2" class="input_motal" v-model="back_username" @blur="checkIn('chan2','输入2-10位中文、英文、数字','^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0)" v-bind:class="{warnBorder:this.isActive[0]}">
                         </p >
 
                         <p >
@@ -203,7 +203,7 @@
             success_getUsers(response){
                     console.log("success get users ");
                     //将后端数据显示在前端页面里
-                    if( response.body.content.length === 0){
+                    if( response.body.content.length === 0 ){
                         console.log("没有返回数组！");
                     }else {
                         this.max_page = response.body.max_page;
@@ -223,25 +223,34 @@
 
             //向后端发起请求获取用户数据列表，显示在前端页面
             getUsers(pages){
-                this.get_user.key = "page";
-                this.get_user.value = pages;
+                this.get_user.key="page";
+                this.get_user.value=pages;
                 this.HttpGetForm('/ancient_books/get_user_list.action',this.get_user,this.success_getUsers, this.fail_getUsers);
             },
 
             //创建用户 post用户数据 success回调函数
             success_postUsers(response){
-                if(response.body.result === 1)
+                if(response.body.result===1)
                 {
                     console.log("success create!");
                     this.userData.splice(0,this.userData.length);//清空数组，重新发送数据以便刷新
                     this.getUsers(1);  //发送get请求刷新用户列表
-                }else if (response.body.result === 0) {
+                    /*this.userData.push({   //数据放进前端数组删除修改可以使用
+                        user_name: this.user_name,
+                        account: this.account,
+                        pwd: this.pwd,
+                        user_id: response.body.user_id
+                    });*/
+                   // this.info_total=this.userData.length;
+                    //this.page=(this.info_total+ this.info_num-1)/this.info_num;
+
+                }else if (response.body.result===0) {
                     console.log("fail create!");
                 }
-                //this.user_name = '';
-                //this.account = '';   //添加数据后，添加文本框清空
-                //this.pwd = '';
-                //this.confirm_pwd = '';
+                this.user_name = '';
+                this.account = '';   //添加数据后，添加文本框清空
+                this.pwd = '';
+                this.confirm_pwd = '';
                 this.show_create = false;
             },
 
@@ -250,25 +259,25 @@
             },
 
             createUsers(){
-                this.post_user.name = this.user_name;
-                this.post_user.account = this.account;
-                this.post_user.pwd = this.pwd;
-                this.post_user.token = this.Token;
+                this.post_user.name=this.user_name;
+                this.post_user.account=this.account;
+                this.post_user.pwd=this.pwd;
+                this.post_user.token=this.Token;
                 this.HttpPostForm(this.post_url,this.post_user,this.success_postUsers,this.fail_postUsers);
             },
 
             //创建用户的模态框 系列函数
             open_dialog(){
                 this.show_create = true;
-                this.user_name = "";
-                this.account = "";
-                this.pwd = "";
-                this.confirm_pwd = "";
-                this.tip = "";
-                this.isActive[0] = false;
-                this.isActive[1] = false;
-                this.isActive[2] = false;
-                this.isActive[3] = false;
+                this.user_name="";
+                this.account="";
+                this.pwd="";
+                this.confirm_pwd="";
+                this.tip="";
+                this.isActive[0]=false;
+                this.isActive[1]=false;
+                this.isActive[2]=false;
+                this.isActive[3]=false;
             },
 
             close_dialog() {
@@ -277,67 +286,67 @@
 
             //失去焦点判断输入是否合法
             checkIn(tag1,placeholder_text,juge_text,index){
-                let x = document.getElementById(tag1).value;
-                if(x !== ""){
+                let x=document.getElementById(tag1).value;
+                if(x!==""){
                     if(x.match(juge_text)){
-                        this.tip = "";
-                        //document.getElementById(tag1).placeholder = placeholder_text;
-                        this.add_if = true;
-                        this.isActive[0] = false;
-                        this.isActive[1] = false;
-                        this.isActive[2] = false;
+                        this.tip="";
+                        document.getElementById(tag1).placeholder =placeholder_text;
+                        this.add_if=true;
+                        this.isActive[0]=false;
+                        this.isActive[1]=false;
+                        this.isActive[2]=false;
                     }else{
-                        this.tip = placeholder_text;
-                        //document.getElementById(tag1).placeholder = placeholder_text;
-                        this.add_if = false;
-                        this.isActive[index] = true;
+                        this.tip=placeholder_text;
+                        document.getElementById(tag1).placeholder = placeholder_text;
+                        this.add_if=false;
+                        this.isActive[index]=true;
                     }
                 }else{
-                    //document.getElementById(tag1).placeholder = placeholder_text;
-                    this.add_if = false;
-                    this.isActive[0] = false;
-                    this.isActive[1] = false;
-                    this.isActive[2] = false;
+                    document.getElementById(tag1).placeholder =placeholder_text;
+                    this.add_if=false;
+                    this.isActive[0]=false;
+                    this.isActive[1]=false;
+                    this.isActive[2]=false;
                 }
             },
 
             //重复输入密码确认
             check_pwd(tag1,tag2){
-                let x = document.getElementById(tag1).value;
-                let y = document.getElementById(tag2).value;
-                if(y !== ""){
-                    if(y !== x){
-                        this.tip = "输入密码不一致！";
+                let x=document.getElementById(tag1).value;
+                let y=document.getElementById(tag2).value;
+                if(y!==""){
+                    if(y!==x){
+                        this.tip="输入密码不一致！";
                         document.getElementById(tag2).placeholder = "重复密码";
-                        this.add_if = false;
-                        this.isActive[3] = true;
+                        this.add_if=false;
+                        this.isActive[3]=true;
                     }else{
-                        this.tip = "";
+                        this.tip="";
                         document.getElementById(tag2).placeholder = "重复密码";
-                        this.add_if = true;
-                        this.isActive[3] = false;
+                        this.add_if=true;
+                        this.isActive[3]=false;
                     }
                 }else{
                     document.getElementById(tag2).placeholder = "重复密码";
-                    this.add_if = false;
-                    this.isActive[3] = false;
+                    this.add_if=false;
+                    this.isActive[3]=false;
                 }
             },
 
             //添加用户信息
             add_msg(){
-                //let x = document.getElementById("text1").value;
-                //let y = document.getElementById("text2").value;
-                //let z = document.getElementById("text3").value;
-                //let m = document.getElementById("text4").value;
-                if (this.user_name === "" || this.account === "" || this.pwd === "" || this.confirm_pwd === "") {
+                let x = document.getElementById("text1").value;
+                let y = document.getElementById("text2").value;
+                let z = document.getElementById("text3").value;
+                let m = document.getElementById("text4").value;
+                if (x === "" || y === "" || z === "" || m === "") {
                     this.tip = "用户名、账号、密码等不能为空！"
                 } else {
                    this.checkIn('text1','输入2-10位中文、英文、数字','[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0);
-                   this.checkIn('text2','输入8-10位数字、英文','[a-zA-Z0-9]{8,10}$',1);
-                   this.checkIn('text3','输入6-16位数字、英文','[a-zA-Z0-9_]{6,16}$',2);
-                   this.check_pwd('text3','text4');
-                    if (this.add_if === true) {
+                    this.checkIn('text2','输入8-10位数字、英文','[a-zA-Z0-9]{8,10}$',1);
+                    this.checkIn('text3','输入6-16位数字、英文','[a-zA-Z0-9_]{6,16}$',2);
+                    this.check_pwd('text3','text4');
+                    if (this.add_if===true) {
                         //空数组里添加数据用push,注意this的使用
                         this.createUsers();
                     }
@@ -369,13 +378,9 @@
             //修改用户信息 模态框系列
             open_chaDialog(index){
                 this.show_change=true;
-                //this.back_index = index;
-                //this.back_username =this.userData[index].user_name;
-                this.back_account = this.userData[index].account;//该用户账号显示在页面上，不可更改的值
-                this.user_name="";
-                this.pwd="";
-                this.confirm_pwd="";
-                this.modify_user.user_id=this.userData[index].user_id; //获取用户id以便post
+                this.back_index = index;
+                this.back_username =this.userData[index].user_name;
+                this.back_account = this.userData[index].account;
                 this.tip="";
                 this.isActive[0]=false;
                 this.isActive[2]=false;
@@ -385,16 +390,13 @@
 
             close_chaDialog(){
                 this.show_change=false;
-                //this.back_username='';
+                this.back_username='';
                 this.back_account='';
-                //this.user_name="";
-               // this.account="";
-               // this.pwd='';
-               // this.confirm_pwd = '';
-                //this.back_index='';
+                this.pwd='';
+                this.confirm_pwd = '';
+                this.back_index='';
             },
 
-            //修改成功回调函数
             success_modify(response){
                 if(response.body.result===1){
                     console.log("success modify!");
@@ -405,33 +407,32 @@
                     console.log("fail modify!");
                 }
                 this.show_change= false;
-                //this.back_account='';
-                //this.back_index='';
-                //this.confirm_pwd='';
-                //this.pwd='';
-                //this.back_username='';
+                this.back_account='';
+                this.back_index='';
+                this.confirm_pwd='';
+                this.pwd='';
+                this.back_username='';
             },
 
-            //修改失败回调函数
             fail_modify(){
                 console.log("error modify!");
             },
 
             //修改的请求函数
             modifyUsers(){
-               // this.modify_user.name=this.back_username;
-                this.modify_user.name=this.user_name;
+                this.modify_user.name=this.back_username;
                 this.modify_user.pwd=this.pwd;
+                this.modify_user.user_id=this.userData[this.back_index].user_id;
                 this.modify_user.token=this.Token;
                 this.HttpPostForm(this.modify_url,this.modify_user,this.success_modify,this.fail_modify);
             },
 
             //修改执行的函数
             confirm_change(){
-                //let x=document.getElementById("chan2").value;
-                //let y=document.getElementById("chan3").value;
-                //let z=document.getElementById("chan4").value;
-                if (this.user_name === "" || this.pwd === "" || this.confirm_pwd === "" ) {
+                let x=document.getElementById("chan2").value;
+                let y=document.getElementById("chan3").value;
+                let z=document.getElementById("chan4").value;
+                if (x === "" || y === "" || z === "" ) {
                     this.tip = "用户名、账号、密码等不能为空！"
                 } else {
                     this.checkIn('chan2','输入2-10位中文、英文、数字','[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0);
