@@ -17,9 +17,8 @@
             </div>
             <div>
                 <input type="text" placeholder="验证码" class="verification_code_input" v-model="v">
-                <!--<input type="button" value="验证码" class="verification_code_button" @click="GetCode()">-->
                 <!--验证码获取位置-->
-                <img src="code_url" class="code-img" onclick="this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
+                <img src="/ancient_books/login.action" class="code-img" onclick="this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
             </div>
             <button class="login_button" @click="Login()" v-bind:disabled="disabled">登  录</button>
             <!--<button @click="test">测试</button>-->
@@ -47,7 +46,6 @@ import store from './store'
      data(){
          return{
              login_url:'/ancient_books/login.action',
-             code_url:'/ancient_books/get_v_picture.action',
              judge_code_url:'/ancient_books/get_v_picture.action',
              autologin_url:'/ancient_books/get_user_info.action',
              account: '',
@@ -117,21 +115,15 @@ import store from './store'
          Auto() {
            this.auto = !this.auto
          },
-         //登录成功函数
          LoginSuccess(response){
              if (response.body.result == 0) {
-//                 console.log("hhh1");
                  alert(response.body.info);
-                 this.src=this.src+'?'+(new Date()).getTime()
              }
              if (response.body.result == 1) {
-//                 console.log("hhh2");
                  if (response.body.su == 1) {
-//                     console.log("hhh3");
                      this.$router.push({path: '/super_user'});
                  }
                  if (response.body.su == 0) {
-//                     console.log("hhh4");
                      this.$router.push({path: '/user'});
                  }
              }
@@ -155,25 +147,19 @@ import store from './store'
          //得到验证码图片
          GetCode() {
              this.$http.get(this.code_url).then(function () {
-//                 console.log("hhh5");
              })
          },
 
          //自动登录
          AutoLogin() {
              this.$http.get(this. autologin_url).then(function (response) {
-//                 console.log("hhh6");
                  if (response.body.result==1) {
-//                     console.log("hhh7");
                      if (response.body.su == 1)
-//                         console.log("hhh8");
                          this.$router.push({path: '/user'});
                      if (response.body.su = 0)
-//                         console.log("hhh9");
                          this.$router.push({path: '/super_user'});
                  }
                  if (response.body.result==0)
-//                     console.log("hhh10");
                      this.$router.push({path: '/login'});
              },function () {
                  alert("error")

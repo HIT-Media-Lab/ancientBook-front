@@ -31,7 +31,7 @@ Vue.prototype.HttpPostJson=function (url,object,success,fail) {
         this.BeforeSuccess();
         success(this.response);
         // console.log("success之后");
-        this.AfterSuccess();
+        this.AfterSuccess(this.response);
         // console.log(JSON.stringify(response.body))
     },function () {
         fail()
@@ -44,13 +44,10 @@ Vue.prototype.HttpPostForm=function (url,object,success,fail) {
     this.$http.post(url, object,{
         emulateJSON: true   //将json形式转换为form-data
     }).then(function (response) {
-        // console.log("可以知晓")
         this.response=response;
         this.BeforeSuccess();
         success(this.response);
-        // console.log("success之后");
-        this.AfterSuccess();
-        // console.log(JSON.stringify(response.body))
+        this.AfterSuccess( this.response);
     },function () {
         fail()
     })
@@ -84,10 +81,9 @@ Vue.prototype.HttpGetForm=function (url,object,success,fail) {
 //判断是否有无token
 Vue.prototype.BeforeHttp=function (object) {
     object.token = this.Token;
-    if (object.token.length == 0)
-    {
-        this.AfterSuccess()
-    }
+    if (object.token.length == 0) {
+          this.CheckToken();
+        }
     console.log("得到token成功");
     object.token =this.Token;
 };
@@ -97,12 +93,18 @@ Vue.prototype.BeforeSuccess=function () {
 };
 
 //回调success后的函数
-Vue.prototype.AfterSuccess=function () {
+Vue.prototype.AfterSuccess=function (response) {
 //更新token
-    this.$http.get('/ancient_books/getToken.action').then(function (response) {
         this.Token=response.body.token;
-        console.log("更新token成功");
-        console.log(this.Token);
+        // console.log("更新token成功");
+        // console.log(this.Token);
+};
+
+Vue.prototype.CheckToken=function () {
+    this.$http.get('/ancient_books/getToken.action').then(function (response) {
+        this.Token = response.body.token;
+        // console.log("更新token成功");
+        // console.log(this.Token);
     })
 };
 
