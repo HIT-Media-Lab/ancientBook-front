@@ -513,9 +513,9 @@
                   this.tip="已经是第一页了！";
               }else if(this.page>1){
                   this.tip="";
-                  let p=this.page-1;
+                  this.page=this.page-1;
                   this.userData.splice(0,this.userData.length);//清空原有数组数据
-                  this.getUsers(p);
+                  this.getUsers(this.page);
                 }
             },
 
@@ -525,9 +525,9 @@
                     this.tip="已经是最后一页了！";
                 }else if(this.page<=this.max_page&&this.page>=1){
                     this.tip="";
-                    let p=this.page+1;
+                    this.page=this.page+1;
                     this.userData.splice(0,this.userData.length); //清空原有数组数据
-                    this.getUsers(p);
+                    this.getUsers(this.page);
                 }
             }
         }
