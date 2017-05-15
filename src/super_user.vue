@@ -245,9 +245,9 @@
                 }
             },
 
-            /*fail_postUsers(){
+            fail_postUsers(){
                 console.log("error create!");
-            },*/
+            },
 
             //添加用户post请求数据的赋值
             createUsers(){
@@ -258,13 +258,15 @@
                 this.BeforeHttp(this.post_user);
                 this.post_user.token=this.Token;
                 //this.HttpPostForm(this.post_url,this.post_user,this.success_postUsers,this.fail_postUsers);
-                this.$http.post(this.post_url,this.post_user,{headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}},{
+                this.$http.post(this.post_url,this.post_user,{
                     emulateJSON: true   //将json形式转换为form-data
-                }).then(function(response){
+                },{headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}}).then(function (response) {
+                    //this.response=response;
+                    //this.BeforeSuccess();
                     this.success_postUsers(response);
                     this.AfterSuccess(response);
-                },function(){
-                    console.log("error create!");
+                },function () {
+                    this.fail_postUsers();
                 })
             },
 
@@ -433,7 +435,7 @@
                 this.BeforeHttp(this.modify_user);
                 this.modify_user.token=this.Token;
                 //this.HttpPostForm(this.modify_url,this.modify_user,this.success_modify,this.fail_modify);
-                this.$http.post(this.modify_url,this.modify_user,{headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}},{
+                this.$http.post(this.modify_url,this.modify_user,{headers:'application/x-www-form-urlencoded;charset=UTF-8'},{
                     emulateJSON: true   //将json形式转换为form-data
                 }).then(function(response){
                     success_modify(response);
