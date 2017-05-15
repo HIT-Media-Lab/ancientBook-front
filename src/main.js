@@ -93,14 +93,12 @@ Vue.prototype.AfterSuccess=function (response) {
 //更新token
         this.Token=response.body.token;
         console.log("更新token"+this.token);
-        return this.Token;
 };
 
 Vue.prototype.CheckToken=function () {
     this.$http.get('/ancient_books/getToken.action').then(function (response) {
         this.Token = response.body.token;
         console.log("检测token成功"+this.Token );
-        return this.Token;
     })
 };
 

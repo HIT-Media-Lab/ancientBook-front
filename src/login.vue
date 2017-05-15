@@ -150,6 +150,7 @@ import store from './store'
              if (response.body.result == 1) {
                  if (response.body.su == 1) {
                      this.$router.push({path: '/super_user'});
+                     console.log("登录成功后的全局Token  "+this.Token)
                  }
                  if (response.body.su == 0) {
                      this.$router.push({path: '/user'});

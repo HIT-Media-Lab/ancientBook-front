@@ -12,7 +12,7 @@
             <span class="user_name cancel">用户名</span>
         </router-link>
         <div class="cancel_word">
-            <button @click="Logout">注销</button>
+            <button @click="Logout" type="button" class="btn btn-default btn-lg" disabled="disabled">注销</button>
         </div>
     </div>
 </template>
