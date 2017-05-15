@@ -63,11 +63,7 @@ import store from './store'
 
      //组件刷新执行钩子
      beforeMount:function () {
-         var token=this.OnloadToken();
-         if(token != undefined){
-         this.AutoLogin();
-         this.CreateVPicture()
-         }
+         this.OnloadToken();
      },
 
      methods: {
@@ -85,8 +81,13 @@ import store from './store'
                  var token=  response.body.token;
                  this.Token = token;
                  console.log(this.Token);
-                 return token;
-             });
+                 if (this.Token.length != 0){
+                     this.AutoLogin();
+                     this.CreateVPicture()
+                 }
+             },function () {
+                 alert("error")
+             })
          },
 
          /**
