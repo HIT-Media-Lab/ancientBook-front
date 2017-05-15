@@ -148,14 +148,15 @@
             </div>
         </div>
 
-        <page :con_page=this.page :con_max=this.max_page :pre=this.skip_page></page>
+        <page-component :con_page=this.page :con_max=this.max_page :pre=this.skip_page></page-component>
     </div>
 </template>
 
 
 <script type="text/javascript">
-    import page from "./page.vue"
+    import pageComponent from "./pageComponent.vue"
     export default{
+        components:{ pageComponent },
         data(){
             return {
                 show_create: false,
@@ -257,9 +258,11 @@
                 this.BeforeHttp(this.post_user);
                 this.post_user.token=this.Token;
                 //this.HttpPostForm(this.post_url,this.post_user,this.success_postUsers,this.fail_postUsers);
-
-                this.$http.post(this.post_url,this.post_user,{headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}}).then(function(response){
+                this.$http.post(this.post_url,this.post_user,{headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}},{
+                    emulateJSON: true   //将json形式转换为form-data
+                }).then(function(response){
                     this.success_postUsers(response);
+                    this.AfterSuccess(response);
                 },function(){
                     console.log("error create!");
                 })
@@ -417,9 +420,9 @@
                 this.back_username='';*/
             },
 
-            fail_modify(){
+            /*fail_modify(){
                 console.log("error modify!");
-            },
+            },*/
 
             //修改的请求函数
             modifyUsers(){
@@ -429,7 +432,15 @@
                 this.modify_user.token=this.Token;
                 this.BeforeHttp(this.modify_user);
                 this.modify_user.token=this.Token;
-                this.HttpPostForm(this.modify_url,this.modify_user,this.success_modify,this.fail_modify);
+                //this.HttpPostForm(this.modify_url,this.modify_user,this.success_modify,this.fail_modify);
+                this.$http.post(this.modify_url,this.modify_user,{headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}},{
+                    emulateJSON: true   //将json形式转换为form-data
+                }).then(function(response){
+                    success_modify(response);
+                    this.AfterSuccess(response);
+                },function(){
+                    console.log("error modify!");
+                })
             },
 
             //修改执行的函数
