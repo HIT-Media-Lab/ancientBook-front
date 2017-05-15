@@ -71,7 +71,7 @@ import store from './store'
 //            this.$store.commit("login_show")
 //         },
          CreateVPicture(){
-             document.getElementsByName('v_picture').setAttribute('src','/ancient_books/get_v_picture.action');
+             document.getElementsByName('img').setAttribute('src','/ancient_books/get_v_picture.action');
          },
 
          // 网页启动得到token
