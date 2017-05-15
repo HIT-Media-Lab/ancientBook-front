@@ -148,7 +148,7 @@
             </div>
         </div>
 
-        <page-component :con_page=this.page :con_max=this.max_page :pre=this.skip_page></page-component>
+        <page-component :con_page=this.page :con_max=this.max_page ></page-component>
     </div>
 </template>
 
@@ -180,7 +180,7 @@
                 delete_url: '/ancient_books/delete_user_by_id.action',//删除用户
 
                 page: 1,//当前页面
-                max_page: 1,//总页数
+                max_page: 3,//总页数
 
                 get_user: {},//显示用户数据对象
                 post_user:{},//创建用户数据对象
@@ -255,6 +255,7 @@
                 this.post_user.account=this.account;
                 this.post_user.pwd=this.pwd;
                 this.post_user.token=this.Token;
+                console.log("查查token   "+this.post_user.token )
                 this.BeforeHttp(this.post_user);
                 this.post_user.token=this.Token;
                 //this.HttpPostForm(this.post_url,this.post_user,this.success_postUsers,this.fail_postUsers);
@@ -464,6 +465,8 @@
 
             //页面跳转,清空数据，发送请求刷新页面
             skip_page(){
+                this.$on('pre_page');
+                this.$on('next_page');
                 this.userData.splice(0, this.userData.length);//清空原有数组数据
                 this.getUsers(this.page);
             }

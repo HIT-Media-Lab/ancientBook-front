@@ -1,7 +1,6 @@
 <template>
 <!--翻页键-->
 <div class="page-box">
-    <span class="warn_tip" style="display: block" v-model="tip">{{tip}}</span>
     <input class="btn_pages" style="margin-left: 0;" value="上一页" @click="pre_page()" v-bind:disable="ban_1">
     <span class="btn-pages" >{{ con_page }}/{{ con_max }}</span>
     <span>转到</span>
@@ -21,7 +20,7 @@
         },
         props:[
             'con_page',//当前页面
-            'con_max'//总页数
+            'con_max',//总页数
         ],
         methods: {
             //上一页函数
@@ -31,7 +30,7 @@
                 } else if (this.con_page > 1 && this.con_page <= this.con_max) {
                     this.ban_1 = false;
                     this.con_page = this.con_page - 1;
-                    this.$emit('pre');
+                    this.$emit('pre_page');
                 }
             },
 
@@ -42,7 +41,7 @@
                 } else if (this.con_page >= 1 && this.con_page <= this.con_max) {
                     this.ban_2 = false;
                     this.con_page = this.con_page + 1;
-                    this.$emit('pre');
+                    this.$emit('next_page');
                 }
             },
 
@@ -50,8 +49,8 @@
             skip_p(){
                 if(this.in_page >= 1 && this.in_page <= this.con_max){
                     if(this.in_page !== this.con_page){
-                        this.in_page = this.con_page;
-                        this.$emit('pre');
+                        this.con_page = this.in_page;
+                        this.$emit('pre_page');
                     }
                 }
             }
