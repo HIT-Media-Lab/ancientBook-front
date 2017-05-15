@@ -62,8 +62,28 @@ import store from './store'
      },
 
      //组件刷新执行钩子
-     created:function () {
-         this.OnloadToken();
+     created: {
+         OnloadToken(){
+             this.$http.get('/ancient_books/getToken.action').then(function (response) {
+                 console.log("成功得到token");
+                 this.Token = response.body.token;
+                 console.log(this.Token);
+             });
+         },
+         AutoLogin() {
+             this.$http.get(this. autologin_url).then(function (response) {
+                 if (response.body.result==1) {
+                     if (response.body.su == 1)
+                         this.$router.push({path: '/user'});
+                     if (response.body.su = 0)
+                         this.$router.push({path: '/super_user'});
+                 }
+                 if (response.body.result==0)
+                     this.$router.push({path: '/login'});
+             },function () {
+                 alert("error")
+             })
+         }
      },
 
      methods: {
@@ -71,14 +91,14 @@ import store from './store'
 //            this.$store.commit("login_show")
 //         },
          // 网页启动得到token
-         OnloadToken(){
-             this.$http.get('/ancient_books/getToken.action').then(function (response) {
-                 console.log("成功得到token");
-                 this.Token = response.body.token;
-                 console.log(this.Token);
-             });
-             this.AutoLogin();
-         },
+//         OnloadToken(){
+//             this.$http.get('/ancient_books/getToken.action').then(function (response) {
+//                 console.log("成功得到token");
+//                 this.Token = response.body.token;
+//                 console.log(this.Token);
+//             });
+//             this.AutoLogin();
+//         },
 
          /**
           *  正则判断输入是否规范
@@ -169,20 +189,20 @@ import store from './store'
          },
 
          //自动登录
-         AutoLogin() {
-             this.$http.get(this. autologin_url).then(function (response) {
-                 if (response.body.result==1) {
-                     if (response.body.su == 1)
-                         this.$router.push({path: '/user'});
-                     if (response.body.su = 0)
-                         this.$router.push({path: '/super_user'});
-                 }
-                 if (response.body.result==0)
-                     this.$router.push({path: '/login'});
-             },function () {
-                 alert("error")
-             })
-         }
+//         AutoLogin() {
+//             this.$http.get(this. autologin_url).then(function (response) {
+//                 if (response.body.result==1) {
+//                     if (response.body.su == 1)
+//                         this.$router.push({path: '/user'});
+//                     if (response.body.su = 0)
+//                         this.$router.push({path: '/super_user'});
+//                 }
+//                 if (response.body.result==0)
+//                     this.$router.push({path: '/login'});
+//             },function () {
+//                 alert("error")
+//             })
+//         }
      }
  }
 </script>
