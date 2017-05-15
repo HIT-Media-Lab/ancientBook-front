@@ -62,7 +62,7 @@ import store from './store'
      },
 
      //组件刷新执行钩子
-     beforeCreate:function () {
+     created:function () {
          this.OnloadToken();
      },
 
