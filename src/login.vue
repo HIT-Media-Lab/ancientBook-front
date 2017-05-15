@@ -16,9 +16,9 @@
                 <input type="checkbox" id="save-password"  class="save-password-checkbox" @click="Auto()">
                 <span class="save-password-word" >自动登录</span>
             </div>
-            <div id="v_picture">
+            <div>
                 <!--验证码获取位置-->
-                <img src="" name="v_picture" class="code-img" onclick="this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
+                <img src="" id="v_picture" class="code-img" onclick="this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
             </div>
             <button class="login-button" @click="Login()" v-bind:disabled="disabled">登  录</button>
             <!--<button @click="test">测试</button>-->
@@ -71,7 +71,7 @@ import store from './store'
 //            this.$store.commit("login_show")
 //         },
          CreateVPicture(){
-             document.getElementsByName('img').setAttribute('src','/ancient_books/get_v_picture.action');
+             document.getElementById("v_picture").src='/ancient_books/get_v_picture.action';
          },
 
          // 网页启动得到token
