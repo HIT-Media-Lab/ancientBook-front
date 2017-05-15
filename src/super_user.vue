@@ -148,19 +148,13 @@
             </div>
         </div>
 
-        <!--翻页键-->
-        <div class="page-box">
-            <span class="warn_tip" style="display: block" v-model="tip">{{tip}}</span>
-            <input class="btn_pages" style="margin-left: 0;" value="上一页" @click="pre_page()">
-            <span class="btn-pages" v-model="page,max_page">{{page}}/{{max_page}}</span>
-            <input class="btn_pages" style="margin-right: 0;" value="下一页" @click="next_page()">
-        </div>
-
+        <page :con_page=this.page :con_max=this.max_page :pre=this.skip_page></page>
     </div>
 </template>
 
 
 <script type="text/javascript">
+    import page from "./page.vue"
     export default{
         data(){
             return {
@@ -206,7 +200,7 @@
                         console.log("没有返回数组！");
                     }else {
                         this.max_page = response.body.max_page;
-                        for (let i = 0; i <= response.body.content.length-1; i++){
+                        for (let i = 0; i < response.body.content.length; i++){
                             this.userData.push({
                                 user_name: response.body.content[i].name,
                                 account: response.body.content[i].account,
@@ -228,12 +222,13 @@
             },
 
             //创建用户 post用户数据 success回调函数
-            success_postUsers(response){
+           success_postUsers(response){
                 if(response.body.result===1)
                 {
                     console.log("success create!");
                     this.userData.splice(0,this.userData.length);//清空数组，重新发送数据以便刷新
                     this.getUsers(1);  //发送get请求刷新用户列表
+                    this.show_create = false;
                     /*this.userData.push({   //数据放进前端数组删除修改可以使用
                         user_name: this.user_name,
                         account: this.account,
@@ -245,18 +240,15 @@
 
                 }else if (response.body.result===0) {
                     console.log("fail create!");
+                    this.tip = JSON.stringify(response.body.info);
                 }
-                this.user_name = '';
-                this.account = '';   //添加数据后，添加文本框清空
-                this.pwd = '';
-                this.confirm_pwd = '';
-                this.show_create = false;
             },
 
-            fail_postUsers(){
+            /*fail_postUsers(){
                 console.log("error create!");
-            },
+            },*/
 
+            //添加用户post请求数据的赋值
             createUsers(){
                 this.post_user.name=this.user_name;
                 this.post_user.account=this.account;
@@ -264,7 +256,13 @@
                 this.post_user.token=this.Token;
                 this.BeforeHttp(this.post_user);
                 this.post_user.token=this.Token;
-                this.HttpPostForm(this.post_url,this.post_user,this.success_postUsers,this.fail_postUsers);
+                //this.HttpPostForm(this.post_url,this.post_user,this.success_postUsers,this.fail_postUsers);
+
+                this.$http.post(this.post_url,this.post_user,{headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}}).then(function(response){
+                    this.success_postUsers(response);
+                },function(){
+                    console.log("error create!");
+                })
             },
 
             //创建用户的模态框 系列函数
@@ -406,15 +404,17 @@
                     //this.userData.splice(this.back_index,1,{user_name:this.back_username,account:this.userData[this.back_index].account,pwd:this.pwd});
                     this.userData.splice(0,this.userData.length);//清空数组，重新发送数据以便刷新
                     this.getUsers(this.page);
+                    this.show_change= false;
                 } else if(response.body.result===0){
                     console.log("fail modify!");
+                    this.tip = JSON.stringify(response.body.info);
                 }
-                this.show_change= false;
-                this.back_account='';
+
+                /*this.back_account='';
                 this.back_index='';
                 this.confirm_pwd='';
                 this.pwd='';
-                this.back_username='';
+                this.back_username='';*/
             },
 
             fail_modify(){
@@ -449,28 +449,10 @@
                 }
             },
 
-            //上一页函数
-            pre_page(){
-              if(this.page===1){
-                  this.tip="已经是第一页了！";
-              }else if(this.page>1){
-                  this.tip="";
-                  this.page=this.page-1;
-                  this.userData.splice(0,this.userData.length);//清空原有数组数据
-                  this.getUsers(this.page);
-                }
-            },
-
-            //下一页函数
-            next_page(){
-                if(this.page===this.max_page){
-                    this.tip="已经是最后一页了！";
-                }else if(this.page>=1 && this.page<=this.max_page){
-                    this.tip="";
-                    this.page=this.page+1;
-                    this.userData.splice(0,this.userData.length); //清空原有数组数据
-                    this.getUsers(this.page);
-                }
+            //页面跳转,清空数据，发送请求刷新页面
+            skip_page(){
+                this.userData.splice(0, this.userData.length);//清空原有数组数据
+                this.getUsers(this.page);
             }
         }
     }
