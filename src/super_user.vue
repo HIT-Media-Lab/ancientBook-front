@@ -156,7 +156,6 @@
             <input class="btn_pages" style="margin-right: 0;" value="下一页" @click="next_page()">
         </div>
 
-
     </div>
 </template>
 
@@ -225,7 +224,7 @@
             getUsers(pages){
                 this.get_user.key="page";
                 this.get_user.value=pages;
-                this.HttpGetForm('/ancient_books/get_user_list.action',this.get_user,this.success_getUsers, this.fail_getUsers);
+                this.HttpGetForm(this.get_url,this.get_user,this.success_getUsers, this.fail_getUsers);
             },
 
             //创建用户 post用户数据 success回调函数
@@ -241,7 +240,7 @@
                         pwd: this.pwd,
                         user_id: response.body.user_id
                     });*/
-                   // this.info_total=this.userData.length;
+                    // this.info_total=this.userData.length;
                     //this.page=(this.info_total+ this.info_num-1)/this.info_num;
 
                 }else if (response.body.result===0) {
@@ -262,6 +261,8 @@
                 this.post_user.name=this.user_name;
                 this.post_user.account=this.account;
                 this.post_user.pwd=this.pwd;
+                this.post_user.token=this.Token;
+                this.BeforeHttp(this.post_user);
                 this.post_user.token=this.Token;
                 this.HttpPostForm(this.post_url,this.post_user,this.success_postUsers,this.fail_postUsers);
             },
@@ -371,6 +372,8 @@
             deleteUsers(index){
                 this.delete_user.user_id=this.userData[index].user_id;
                 this.delete_user.token=this.Token;
+                this.BeforeHttp(this.delete_user);
+                this.delete_user.token=this.Token;
                 this.HttpPostForm(this.delete_url,this.delete_user,this.success_delete,this.fail_delete);
             },
 
@@ -423,6 +426,8 @@
                 this.modify_user.name=this.back_username;
                 this.modify_user.pwd=this.pwd;
                 this.modify_user.user_id=this.userData[this.back_index].user_id;
+                this.modify_user.token=this.Token;
+                this.BeforeHttp(this.modify_user);
                 this.modify_user.token=this.Token;
                 this.HttpPostForm(this.modify_url,this.modify_user,this.success_modify,this.fail_modify);
             },
