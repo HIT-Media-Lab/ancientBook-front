@@ -12,13 +12,13 @@
                 <input type="password" class="password" v-model="pwd" id="pwd" @blur="CheckLogin()" v-bind:class="{ warnborder: Active2 }">
             </div>
             <div>
+                <input type="text" placeholder="验证码" class="verification-code-input" v-model="v">
                 <input type="checkbox" id="save-password"  class="save-password-checkbox" @click="Auto()">
                 <span class="save-password-word" >自动登录</span>
             </div>
-            <div>
-                <input type="text" placeholder="验证码" class="verification-code-input" v-model="v">
+            <div id="v_picture">
                 <!--验证码获取位置-->
-                <img src="/ancient_books/get_v_picture.action" class="code-img" onclick="this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
+                <img src="" name="v_picture" class="code-img" onclick="this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
             </div>
             <button class="login-button" @click="Login()" v-bind:disabled="disabled">登  录</button>
             <!--<button @click="test">测试</button>-->
@@ -63,21 +63,30 @@ import store from './store'
 
      //组件刷新执行钩子
      beforeMount:function () {
-         this.OnloadToken();
+         var token=this.OnloadToken();
+         if(token != undefined){
+         this.AutoLogin();
+         this.CreateVPicture()
+         }
      },
 
      methods: {
 //         Test(){
 //            this.$store.commit("login_show")
 //         },
+         CreateVPicture(){
+             document.getElementsByName('v_picture').setAttribute('src','/ancient_books/get_v_picture.action');
+         },
+
          // 网页启动得到token
          OnloadToken(){
              this.$http.get('/ancient_books/getToken.action').then(function (response) {
                  console.log("成功得到token");
-                 this.Token = response.body.token;
+                 var token=  response.body.token;
+                 this.Token = token;
                  console.log(this.Token);
+                 return token;
              });
-             this.AutoLogin();
          },
 
          /**
