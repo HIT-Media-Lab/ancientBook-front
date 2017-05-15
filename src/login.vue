@@ -62,7 +62,7 @@ import store from './store'
      },
 
      //组件刷新执行钩子
-     mounted:function () {
+     beforeCreate:function () {
          this.OnloadToken();
      },
 
@@ -76,8 +76,8 @@ import store from './store'
                  console.log("成功得到token");
                  this.Token = response.body.token;
                  console.log(this.Token);
-                 this.AutoLogin();
-             })
+             });
+             this.AutoLogin();
          },
 
          /**
