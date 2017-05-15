@@ -2,21 +2,17 @@
     <!--顶端固定不变的导航条-->
     <div id="store" class="store" v-show="show">
         <search></search>
-        <div>
-            <router-link to="bookstore">
-            <p class="bookstore">古籍库</p>
-            </router-link>
-        </div>
-        <div>
-            <router-link to="/noumenon_store">
-            <p class="noumenon_store">本体库</p>
-            </router-link>
-        </div>
-        <div class="cancel">
-            <router-link to="/user">
-                <p class="user_name">用户名</p>
-            </router-link>
-            <button class="cancel_word" @click="Logout">注销</button>
+        <router-link to="bookstore">
+            <span class="bookstore">古籍库</span>
+        </router-link>
+        <router-link to="/noumenon_store">
+            <span class="noumenon_store">本体库</span>
+        </router-link>
+        <router-link to="/user">
+            <span class="user_name cancel">用户名</span>
+        </router-link>
+        <div class="cancel_word">
+            <button @click="Logout">注销</button>
         </div>
     </div>
 </template>
@@ -54,10 +50,8 @@
 
 <style>
     .store{
-        position: absolute;
-        z-index:1;
-        top: 0;
-        left: 0;
+        margin-top: 0;
+        margin-left: 0;
         padding: 10px;
         background-color:#dac8c8;
         height: 40px;
@@ -65,18 +59,17 @@
     }
 
     .bookstore{
-        position:absolute;
-        margin: 0;
-        right: 300px;
-        font-weight:700;
+        width: auto;
+        margin-left: 10px;
+        font-weight: 700;
         font-style:normal;
         font-size:16px;
         color:#999999;
     }
 
     .noumenon_store{
-        margin: 0;
-        position:absolute;
+        width: auto;
+        margin-left: 60px;
         right:180px;
         font-weight:700;
         font-style:normal;
@@ -85,9 +78,8 @@
     }
 
     .user_name{
-        margin: 0;
-        position:absolute;
-        right: 70px;
+        width: auto;
+        margin-left: 60px;
         font-weight:700;
         font-style:normal;
         font-size:16px;
@@ -95,14 +87,13 @@
         text-align:center;
     }
     .cancel_word{
-        display: none;
-        position: absolute;
-        right: 70px;
-        margin-top: 20px;
+        /*visibility: hidden;*/
+        margin-left: 1410px;
+        margin-top: 0;
         width: 50px;
     }
     .cancel:hover .cancel_word{
-        display: inline-block;
+      visibility: visible;
     }
 
 

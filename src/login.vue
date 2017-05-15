@@ -2,29 +2,33 @@
     <!--登录组件-->
     <div>
         <div class="head">
-            <span>古籍检索系统</span>
+            <h3>古籍检索系统</h3>
         </div>
         <div class="login">
-            <div>
-                <span class="text1">账 号</span>
-                <input type="text" class="username" v-model="account" id="username" @blur="CheckLogin()" v-bind:class="{ warnborder: Active1 }">
-                <span class="text2">密 码</span>
-                <input type="password" class="password" v-model="pwd" id="pwd" @blur="CheckLogin()" v-bind:class="{ warnborder: Active2 }">
+            <div class="input-ac-pwd">
+                <div class="input-ac">
+                    <span class="text1">账 号</span>
+                    <input type="text" class="username" v-model="account" id="username" @blur="CheckLogin()" v-bind:class="{ warnborder: Active1 }">
+                </div>
+                <div class="input-pwd">
+                    <span class="text2">密 码</span>
+                    <input type="password" class="password" v-model="pwd" id="pwd" @blur="CheckLogin()" v-bind:class="{ warnborder: Active2 }">
+                </div>
+                <div class="warning-1">
+                    <span id="warning" v-model="warning">{{warning}}</span>
+                </div>
             </div>
-            <div>
+            <div class="code">
                 <input type="text" placeholder="验证码" class="verification-code-input" v-model="v">
+                <img src="" id="v_picture" class="code-img" onclick="this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
+            </div>
+            <div class="auto">
+                <!--验证码获取位置-->
                 <input type="checkbox" id="save-password"  class="save-password-checkbox" @click="Auto()">
                 <span class="save-password-word" >自动登录</span>
             </div>
-            <div>
-                <!--验证码获取位置-->
-                <img src="" id="v_picture" class="code-img" onclick="this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
-            </div>
             <button class="login-button" @click="Login()" v-bind:disabled="disabled">登  录</button>
             <!--<button @click="test">测试</button>-->
-        </div>
-        <div>
-            <span id="warning" class="warning-1" v-model="warning">{{warning}}</span>
         </div>
     </div>
 </template>
@@ -78,8 +82,7 @@ import store from './store'
          OnloadToken(){
              this.$http.get('/ancient_books/getToken.action').then(function (response) {
                  console.log("成功得到token");
-                 var token=  response.body.token;
-                 this.Token = token;
+                 this.Token = response.body.token;
                  console.log(this.Token);
                  if (this.Token.length != 0){
                      this.AutoLogin();
@@ -142,6 +145,7 @@ import store from './store'
          LoginSuccess(response){
              if (response.body.result == 0) {
                  alert(response.body.info);
+                 document.getElementById("v_picture").src='/ancient_books/get_v_picture.action';
              }
              if (response.body.result == 1) {
                  if (response.body.su == 1) {
@@ -199,87 +203,89 @@ import store from './store'
 
 <style>
     .warning-1{
-        position:absolute;
         width: 300px;
         height: 30px;
         font-size:12px;
         color:red;
-        left: 615px;
-        top: 270px;
+        margin-top: 10px;
     }
     .warnborder{
         border:2px solid red;
     }
-
-    .login{
-        background-color: #d9d9d9;
-        width: 300px;
-        height: 320px;
-        left: 590px;
-        top: 150px;
-        position: relative;
-    }
     .head{
-        position: relative;
-        left: 630px;
-        top: 120px;
+        margin-left: 615px;
+        margin-top: 120px;
         width: 300px;
         letter-spacing: 20px;
         font-size: 20px;
     }
+    .login{
+        background-color: #d9d9d9;
+        width: 300px;
+        height: 320px;
+        margin-left: 590px;
+        margin-top: 20px;
+    }
+    .input-ac-pwd{
+        margin: 30px;
+        display: inline-block;
+    }
+    .input-ac{
+         margin-bottom: 10px;
+     }
+    .input-pwd{
+          margin-top: 20px;
+      }
+
     .text1{
-        position: absolute;
-        left: 40px;
-        top: 20px;
+        /*left: 40px;*/
+        /*top: 20px;*/
     }
     .username{
-        position: absolute;
-        left: 90px;
-        top: 20px;
+        margin-left: 20px;
     }
     .text2{
-        position: absolute;
-        left: 40px;
-        top: 60px;
+        /*left: 40px;*/
+        /*top: 60px;*/
     }
     .password{
-        position: absolute;
-        left: 90px;
-        top: 60px;
+        margin-left: 20px;
     }
-    .save-password-checkbox{
-        position: absolute;
-        left: 40px;
-        top: 159px;
-    }
-    .save-password-word{
-        position: absolute;
-        font-size: 12px;
-        left: 60px;
-        top: 160px;
+    .code{
+        margin-top: -30px;
+        margin-left: 60px;
     }
     .verification-code-input{
-        position: absolute;
         height: 30px;
-        left: 65px;
-        top: 120px;
         width: 76px;
         text-align: center;
         border: none;
     }
     .code-img{
-        position:absolute;
-        left: 165px;
-        top: 120px;
+        margin-left: 30px;
         width: 76px;
         height: 30px;
         vertical-align:bottom;
         border: none;
     }
+    .auto{
+        margin-left: 50px;
+        margin-top: 10px;
+    }
+    .save-password-checkbox{
+        vertical-align: text-bottom;
+        /*left: 40px;*/
+        /*top: 159px;*/
+    }
+    .save-password-word{
+        font-size: 12px;
+        /*left: 60px;*/
+        /*top: 160px;*/
+    }
     .login-button{
-        position: absolute;
-        top: 200px;
-        left: 80px;
+
+        margin-top: 20px;
+        margin-left: 75px;
         width: 160px;
         height: 30px;
         color: gray;

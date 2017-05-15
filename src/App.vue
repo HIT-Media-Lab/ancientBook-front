@@ -20,7 +20,7 @@
 
 <style>
   .app{
-    position: absolute;
+    background-size:cover;
     background-image:url("./assets/img/bg.png");
     height: 100%;
     width: 100%;
