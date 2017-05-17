@@ -148,13 +148,14 @@
             </div>
         </div>
 
-        <page-component :con_page=this.page :con_max=this.max_page ></page-component>
+        <page-component  :cur_max=this.max_page v-on:pre_page="pre_p" v-on:next_page="next_p" v-on:skip_page="skip_p"></page-component>
     </div>
 </template>
 
 
 <script type="text/javascript">
     import pageComponent from "./pageComponent.vue"
+
     export default{
         components:{ pageComponent },
         data(){
@@ -174,8 +175,8 @@
                 back_index: '',
                 back_username: '',
                 back_account: '',
-                get_url: '/ancient_books/get_user_list.action;this.get_user.page=1',//显示用户列表
-                post_url: '/ancient_books/add_user.action',//创建普通用户
+                get_url: '/ancient_books/get_user_list.action',//显示用户列表
+                add_url: '/ancient_books/add_user.action',//创建普通用户
                 modify_url: '/ancient_books/modify_user.action',//修改用户
                 delete_url: '/ancient_books/delete_user_by_id.action',//删除用户
 
@@ -183,7 +184,7 @@
                 max_page: 3,//总页数
 
                 get_user: {},//显示用户数据对象
-                post_user:{},//创建用户数据对象
+                add_user:{},//创建用户数据对象
                 delete_user:{},//删除用户数据对象
                 modify_user:{}//修改数据对象
             }
@@ -194,14 +195,14 @@
         },
         methods: {
             // get数据显示用户列表 成功地回调函数
-            success_getUsers(response){
+            success_get(response){
                     console.log("success get users ");
                     //将后端数据显示在前端页面里
                     if( response.body.content.length === 0 ){
                         console.log("没有返回数组！");
                     }else {
                         this.max_page = response.body.max_page;
-                        for (let i = 0; i < response.body.content.length; i++){
+                        for ( let i = 0; i < response.body.content.length; i++ ){
                             this.userData.push({
                                 user_name: response.body.content[i].name,
                                 account: response.body.content[i].account,
@@ -211,7 +212,7 @@
                     }
             },
 
-            fail_getUsers(){
+            fail_get(){
                 console.log("fail get users!");
             },
 
@@ -219,17 +220,16 @@
             getUsers(pages){
                 this.get_user.key="page";
                 this.get_user.value=pages;
-                this.HttpGetForm(this.get_url,this.get_user,this.success_getUsers, this.fail_getUsers);
+                this.HttpGetForm(this.get_url,this.get_user,this.success_get, this.fail_get);
             },
 
             //创建用户 post用户数据 success回调函数
-           success_postUsers(response){
-                if(response.body.result===1)
-                {
+           success_add(response){
+                if(response.body.result===1) {
                     console.log("success create!");
-                    this.userData.splice(0,this.userData.length);//清空数组，重新发送数据以便刷新
-                    this.getUsers(1);  //发送get请求刷新用户列表
-                    this.show_create = false;
+                    this.userData.splice(0,this.userData.length); //清空数组，重新发送数据以便刷新
+                    this.getUsers(1);  //发送get请求刷新用户列表到第一页
+                    this.show_create = false; //关闭创建用户的模态框
                     /*this.userData.push({   //数据放进前端数组删除修改可以使用
                         user_name: this.user_name,
                         account: this.account,
@@ -241,33 +241,34 @@
 
                 }else if (response.body.result===0) {
                     console.log("fail create!");
-                    this.tip = JSON.stringify(response.body.info);
+                    //this.tip = JSON.stringify(response.body.info);
                 }
             },
 
-            fail_postUsers(){
+            fail_add(){
                 console.log("error create!");
             },
 
             //添加用户post请求数据的赋值
             createUsers(){
-                this.post_user.name=this.user_name;
-                this.post_user.account=this.account;
-                this.post_user.pwd=this.pwd;
-                this.post_user.token=this.Token;
-                console.log("查查token   "+this.post_user.token )
-                this.BeforeHttp(this.post_user);
-                this.post_user.token=this.Token;
+                //将用户信息放进请求对象里
+                this.add_user.name=this.user_name;
+                this.add_user.account=this.account;
+                this.add_user.pwd=this.pwd;
+                this.add_user.token=this.Token;
+
+                console.log("查查token   "+this.add_user.token ); //检查token是否获取并成功赋值
+                this.BeforeHttp(this.add_user); //token为空则重新获取token并赋值
+                this.add_user.token=this.Token;
+
                 //this.HttpPostForm(this.post_url,this.post_user,this.success_postUsers,this.fail_postUsers);
-                this.$http.post(this.post_url,this.post_user,{
+                this.$http.post(this.add_url,this.add_user,{
                     emulateJSON: true   //将json形式转换为form-data
-                },{headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}}).then(function (response) {
-                    //this.response=response;
-                    //this.BeforeSuccess();
-                    this.success_postUsers(response);
+                },{headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}}).then(function (response) { //加请求头确保汉字字符
+                    this.success_add(response);
                     this.AfterSuccess(response);
                 },function () {
-                    this.fail_postUsers();
+                    this.fail_add();
                 })
             },
 
@@ -348,11 +349,10 @@
                     this.tip = "用户名、账号、密码等不能为空！"
                 } else {
                    this.checkIn('text1','输入2-10位中文、英文、数字','[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0);
-                    this.checkIn('text2','输入8-10位数字、英文','[a-zA-Z0-9]{8,10}$',1);
-                    this.checkIn('text3','输入6-16位数字、英文','[a-zA-Z0-9_]{6,16}$',2);
-                    this.check_pwd('text3','text4');
+                   this.checkIn('text2','输入8-10位数字、英文','[a-zA-Z0-9]{8,10}$',1);
+                   this.checkIn('text3','输入6-16位数字、英文','[a-zA-Z0-9_]{6,16}$',2);
+                   this.check_pwd('text3','text4');
                     if (this.add_if===true) {
-                        //空数组里添加数据用push,注意this的使用
                         this.createUsers();
                     }
                 }
@@ -405,27 +405,21 @@
             },
 
             success_modify(response){
-                if(response.body.result===1){
+                if( response.body.result === 1 ){
                     console.log("success modify!");
                     //this.userData.splice(this.back_index,1,{user_name:this.back_username,account:this.userData[this.back_index].account,pwd:this.pwd});
                     this.userData.splice(0,this.userData.length);//清空数组，重新发送数据以便刷新
                     this.getUsers(this.page);
-                    this.show_change= false;
-                } else if(response.body.result===0){
+                    this.show_change= false; //关闭模态框
+                } else if( response.body.result === 0 ){
                     console.log("fail modify!");
-                    this.tip = JSON.stringify(response.body.info);
+                    //this.tip = JSON.stringify(response.body.info);
                 }
-
-                /*this.back_account='';
-                this.back_index='';
-                this.confirm_pwd='';
-                this.pwd='';
-                this.back_username='';*/
             },
 
-            /*fail_modify(){
+            fail_modify(){
                 console.log("error modify!");
-            },*/
+            },
 
             //修改的请求函数
             modifyUsers(){
@@ -433,16 +427,18 @@
                 this.modify_user.pwd=this.pwd;
                 this.modify_user.user_id=this.userData[this.back_index].user_id;
                 this.modify_user.token=this.Token;
+
                 this.BeforeHttp(this.modify_user);
                 this.modify_user.token=this.Token;
+
                 //this.HttpPostForm(this.modify_url,this.modify_user,this.success_modify,this.fail_modify);
-                this.$http.post(this.modify_url,this.modify_user,{headers:'application/x-www-form-urlencoded;charset=UTF-8'},{
+                this.$http.post(this.modify_url,this.modify_user,{
                     emulateJSON: true   //将json形式转换为form-data
-                }).then(function(response){
-                    success_modify(response);
+                },{headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}}).then(function (response) { //加请求头确保汉字字符
+                    this.success_modify(response);
                     this.AfterSuccess(response);
-                },function(){
-                    console.log("error modify!");
+                },function () {
+                    this.fail_modify();
                 })
             },
 
@@ -463,13 +459,37 @@
                 }
             },
 
-            //页面跳转,清空数据，发送请求刷新页面
-            skip_page(){
-                this.$on('pre_page');
-                this.$on('next_page');
+            pre_p(){
+                this.page = --this.page;
                 this.userData.splice(0, this.userData.length);//清空原有数组数据
                 this.getUsers(this.page);
-            }
+                console.log("pre:"+this.page);
+            },
+
+            next_p(){
+                this.page= ++this.page;
+                this.userData.splice(0, this.userData.length);//清空原有数组数据
+                this.getUsers(this.page);
+                console.log("next:"+this.page);
+            },
+
+            skip_p(p){
+                this.page=p;
+                this.getUsers(this.page);
+                console.log("skip:"+this.page);
+            },
+
+          /*  toPc(data){
+                this.page=data;
+                console.log(data);
+                console.log("to:"+this.page);
+            }*/
+            //页面跳转,清空数据，发送请求刷新页面
+           /* skip_page(){
+                this.$on('pre_page',this.con_page);
+                this.$on('next_page',this.con_page);
+
+            }*/
         }
     }
 
@@ -715,27 +735,6 @@
         border-right: 0px;
         border-left: 0px;
         text-align: center;
-    }
-    .btn_pages{
-        background-color:transparent ;/*按钮填充颜色*/
-        color: darkgrey;/*按钮边框颜色*/
-        width:70px;/*按钮与表格下底的宽度*/
-        height: 28px;
-        border-radius: 8px;
-        border-color: darkgrey;
-        font-family: 楷体;
-        font-size: 15px;
-        border: solid;
-        /* position: absolute;*/
-    }
-    .page-box{
-        text-align: center;
-        padding: 1em 0;
-        padding-top: 3em;
-        padding-right: 0px;
-        padding-bottom: 1em;
-        padding-left: 0px;
-        clear: both;
     }
 
 
