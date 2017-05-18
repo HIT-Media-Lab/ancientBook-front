@@ -85,15 +85,16 @@ Vue.prototype.BeforeHttp=function (object) {
     console.log("检查超级用户是否有token "+this.Token);
     object.token=this.Token;
     console.log("object"+object.token);
-    var token=this.Token ;
-    if (object.token.length == 0 || this.Token == 0) {
+    let token = this.Token;
+    if (object.token.length == 0 || token.length == 0) {
         this.$http.get('/ancient_books/getToken.action').then(function (response) {
             token = response.body.token;
             console.log("检测token成功"+token );
         });
-        this.Token=token
+        this.Token=token;
+    }else {
+        console.log("不需要更token");
     }
-    console.log("得到token成功");
 };
 
 //回调success前的函数

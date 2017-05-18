@@ -162,7 +162,6 @@ import store from './store'
              this.object.v=this.v;
              this.object.auto=this.auto;
              console.log("全局token"+this.Token);
-             console.log("login需要穿给后台的token"+this.object.token);
              // 与后端对接的vue-resource
              this.HttpPostForm(this.login_url,this.object,this.LoginSuccess,this.LoginFail);
          },
