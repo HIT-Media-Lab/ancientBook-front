@@ -25,6 +25,8 @@ Vue.prototype.response={};
 //定义的post的vue-router全局函数，以json形式传递数据
 Vue.prototype.HttpPostJson=function (url,object,success,fail) {
     this.BeforeHttp(object);
+    object.token=this.Token;
+    console.log("你猜猜token有没有 "+object.token);
     this.$http.post(
         url,
         object,).then(function (response) {
@@ -92,8 +94,6 @@ Vue.prototype.BeforeHttp=function (object) {
             console.log("检测token成功"+token );
         });
         this.Token=token;
-        object.token=token;
-        return object.token;
     }else {
         console.log("不需要更token");
     }
