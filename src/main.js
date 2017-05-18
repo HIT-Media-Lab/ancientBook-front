@@ -92,6 +92,8 @@ Vue.prototype.BeforeHttp=function (object) {
             console.log("检测token成功"+token );
         });
         this.Token=token;
+        object.token=token;
+        return object.token;
     }else {
         console.log("不需要更token");
     }
