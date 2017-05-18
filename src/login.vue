@@ -166,7 +166,6 @@ import store from './store'
              console.log("login需要穿给后台的token"+this.object.token);
              // 与后端对接的vue-resource
              this.BeforeHttp(this.object);
-             this.object.token=this.Token;
              this.HttpPostForm(this.login_url,this.object,this.LoginSuccess,this.LoginFail);
          },
 
