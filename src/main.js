@@ -82,6 +82,7 @@ Vue.prototype.HttpGetForm=function (url,object,success,fail) {
 
 //判断是否有无token
 Vue.prototype.BeforeHttp=function (object) {
+    console.log("检查超级用户是否有token "+this.Token);
     object.token=this.Token;
     console.log("object"+object.token);
     var token=this.Token ;
