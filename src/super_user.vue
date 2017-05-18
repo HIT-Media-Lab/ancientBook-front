@@ -44,8 +44,9 @@
                         <input type="button" class="btn-general" value="删除" @click="deleteUsers(index)">
                     </td>
                 </tr>
-                    </table>
+            </table>
         </div>
+
 
         <!--创建用户的模态框-->
         <div class="dialogs" v-bind:show.sync="show_create">
@@ -58,29 +59,25 @@
                     </header>
 
                     <div class="dialog-body" >
-                        <p>
-                            <span class="span-motal1">用户名</span>
-                            <span class="span-motal2">:</span>
+                        <div class="strap">
+                            <span class="span-motal">用户名：</span>
                             <input type="text"  id="text1" class="input-motal" placeholder="输入2-10位中文、英文、数字" onfocus="this.placeholder=''" @blur="checkIn('text1','输入2-10位中文、英文、数字','^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0)"  v-model="user_name" v-bind:class="{warnBorder:this.is_active[0]}">
-                        </p>
+                        </div>
 
-                        <p>
-                            <span class="span-motal1">账号</span>
-                            <span class="span-motal2">:</span>
+                        <div>
+                            <span class="span-motal">账号：</span>
                             <input type="text"  id="text2" class="input-motal"  placeholder="输入8-10位数字、英文" onfocus="this.placeholder=''" @blur="checkIn('text2','输入8-10位数字、英文','^[a-zA-Z0-9]{8,10}$',1)" v-model="account" v-bind:class="{warnBorder:this.is_active[1]}">
-                        </p>
+                        </div>
 
-                        <p>
-                            <span class="span-motal1">密码</span>
-                            <span class="span-motal2">:</span>
+                        <div>
+                            <span class="span-motal">密码：</span>
                             <input type="password"  id="text3" class="input-motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkIn('text3','输入6-16位数字、英文','^[a-zA-Z0-9_]{6,16}$',2)" v-model="pwd" v-bind:class="{warnBorder:this.is_active[2]}">
-                        </p>
+                        </div>
 
-                        <p>
-                            <span class="span-motal1">重复密码</span>
-                            <span class="span-motal2">:</span>
+                        <div>
+                            <span class="span-motal">重复密码：</span>
                             <input type="password" id="text4" class="input-motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="checkPwd('text3','text4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.is_active[3]}">
-                        </p>
+                        </div>
                     </div>
                     <footer class="dialog-footer" >
                         <!--提示信息-->
@@ -108,29 +105,27 @@
                     </header>
 
                     <div class="dialog-body">
-                        <p>
-                            <span class="span-motal1">账号</span>
-                            <span class="span-motal2">:</span>
+                        <div>
+                            <span class="span-motal">账号:</span>
+
                             <input type="text" name="user_name" id="chan1" class="input-motal" v-model="back_account" readonly style="color: dimgrey;font-size: 15px;font-weight: 400;border-color: transparent; ">
-                        </p>
+                        </div>
 
-                        <p >
-                            <span class="span-motal1">用户名</span>
-                            <span class="span-motal2">:</span>
+                        <div>
+                            <span class="span-motal">用户名:</span>
+
                             <input type="text"  id="chan2" class="input-motal" v-model="back_username" @blur="checkIn('chan2','输入2-10位中文、英文、数字','^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0)" v-bind:class="{warnBorder:this.is_active[0]}">
-                        </p >
+                        </div >
 
-                        <p >
-                            <span class="span-motal1">新密码</span>
-                            <span class="span-motal2">:</span>
+                        <div>
+                            <span class="span-motal">新密码:</span>
                             <input type="password"  id="chan3" class="input-motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkIn('chan3','输入6-16位数字、英文','^[a-zA-Z0-9_]{6,16}$',2)" v-model="pwd"  v-bind:class="{warnBorder:this.is_active[2]}" >
-                        </p>
+                        </div>
 
-                        <p>
-                            <span class="span-motal1">重复密码</span>
-                            <span class="span-motal2">:</span>
+                        <div>
+                            <span class="span-motal">重复密码:</span>
                             <input type="password" id="chan4" class="input-motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="checkPwd('chan3','chan4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.is_active[3]}">
-                        </p>
+                        </div>
                     </div>
 
                     <footer class="dialog-footer" slot="footer">
@@ -191,6 +186,7 @@
         created: function () {
             console.log("super_user 已经created");
             this.getUsers(1);
+            console.log("created时的全局token"+this.Token);
         },
         methods: {
             // get数据显示用户列表 成功地回调函数
@@ -668,25 +664,16 @@
          -webkit-text-stroke-width: 0.2px;
          -moz-osx-font-smoothing: grayscale;
     }
-    .span-motal1{
+    .span-motal{
         font-family: 楷体;
         font-size: 20px;
         font-weight: bold;
         color: dimgrey;
 
-        text-align:left;
-        margin-left: 10%;
+        text-align:right;
+        padding-left: 10%;
     }
-    .span-motal2{
-        font-family: 楷体;
-        font-size: 20px;
-        font-weight: bold;
-        color: dimgrey;
-        left:34%;
-        /*position:fixed;*/
-        margin-left: 5%;
-        margin-right: 5%;
-    }
+
     .input-motal{
         width: 45%;
         right: 15%;
@@ -702,6 +689,10 @@
 
     .warnBorder {
         border: 2px solid red;
+    }
+
+    .strap{
+
     }
 
 
