@@ -2,8 +2,8 @@
 <!--翻页键-->
 <div class="page-box">
     <input type="button" class="btn-pages" style="margin-left: 0;" value="上一页" @click="pre_page()" v-bind:disable="ban_1">
-    <span class="text_pages" v-model="cur_max">
-        <input type="text" id="skip" class="text_input" v-model="cur_page" @blur="skip_page()">/{{cur_max}}
+    <span class="text-pages" v-model="cur_max">
+        <input type="text" id="skip" class="text-input" v-model="cur_page" @blur="skip_page()">/{{cur_max}}
     </span>
     <input type="button" class="btn-pages" style="margin-right: 0;" value="下一页" @click="next_page()" v-bind:disable="ban_2">
 </div>
@@ -78,19 +78,20 @@
     }
 
     /*页数显示位置*/
-    .text_pages{
-        padding-right: 1em;
-        padding-left: 1em;
-        color: dimgrey;
+    .text-pages{
         border-color: dimgrey;
+        padding-right: 1em;
+        padding-left: 0.5em;
+        color: dimgrey;
     }
 
     /*输入页数文本框样式*/
-    .text_input{
-        height: 20px;
-        width:35px;
+    .text-input{
+        height: 15px;
+        width:25px;
         background-color: transparent;
-        text-align: center;
+        border-color: transparent;
+        text-align: right;
     }
 
 
