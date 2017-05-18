@@ -7,12 +7,10 @@
 
 <script>
     import home from './home.vue'
-    import  search from  './component/search/search.vue'
     import  login from  './login.vue'
     export default{
         components:{
             home,
-            search,
             login
         }
     }
@@ -20,7 +18,7 @@
 
 <style>
   .app{
-    background-size:cover;
+    position: fixed;
     background-image:url("./assets/img/bg.png");
     height: 100%;
     width: 100%;

@@ -92,7 +92,7 @@ Vue.prototype.BeforeSuccess=function () {
 Vue.prototype.AfterSuccess=function (response) {
 //更新token
         this.Token=response.body.token;
-        console.log("更新token"+this.token);
+        console.log("更新token"+this.Token);
 };
 
 Vue.prototype.CheckToken=function () {

@@ -8,11 +8,11 @@
             <div class="input-ac-pwd">
                 <div class="input-ac">
                     <span class="text1">账 号</span>
-                    <input type="text" class="username" v-model="account" id="username" @blur="CheckLogin()" v-bind:class="{ warnborder: Active1 }">
+                    <input type="text" class="username" v-model="account" id="username" @blur="CheckUser()" v-bind:class="{ warnborder: Active1 }">
                 </div>
                 <div class="input-pwd">
                     <span class="text2">密 码</span>
-                    <input type="password" class="password" v-model="pwd" id="pwd" @blur="CheckLogin()" v-bind:class="{ warnborder: Active2 }">
+                    <input type="password" class="password" v-model="pwd" id="pwd" @blur="CheckPwd()" v-bind:class="{ warnborder: Active2 }">
                 </div>
                 <div class="warning-1">
                     <span id="warning" v-model="warning">{{warning}}</span>
@@ -96,45 +96,38 @@ import store from './store'
          /**
           *  正则判断输入是否规范
           */
-         CheckLogin(){
+         CheckUser(){
              //获取输入框值
              //判断输入内容是否正确
-              let x =this.account;
-              let y=this.pwd;
+              let account =this.account;
              this.disabled=true;
              this.warning = "";
              this.Active1=false;
+             if (account.length != 0) {
+                 if (account.match('[a-zA-Z0-9]{8,10}$')) {
+                     this.warning= "";
+                     this.Active1=false;
+                     this.disabled=false;
+                 } else {
+                     this.warning = "用户名格式错误";
+                     this.Active1=true;
+                 }
+             }
+         },
+
+         CheckPwd(){
+             let pwd =this.pwd;
+             this.disabled=true;
+             this.warning = "";
              this.Active2=false;
-             if (x.length != 0 || y.length != 0) {
-                 if (x.length != 0 && y.length == 0){
-                     if (x.match('[a-zA-Z0-9]{8,10}$') === null) {
-                        this.warning = "用户名格式错误";
-                        this.Active1=true;
-                     } else {
-                        this.warning= "";
-                         this.Active1=false;
-                     }
-                 }else if (x.length == 0 && y.length != 0) {
-                     if (y.match('[a-zA-Z0-9_]{6,16}$') === null) {
-                         this.warning =  "密码格式错误";
-                         this.Active2=true;
-                     } else {
-                         this.warning = "";
-                         this.Active2=false;
-                     }
-                 }else if (x.length != 0 && y.length != 0) {
-                     if (x.match('[a-zA-Z0-9]{8,10}$') === null) {
-                         this.warning = "用户名格式错误";
-                         this.Active1=true;
-                     } else if (y.match('[a-zA-Z0-9_]{6,16}$') === null) {
-                         this.warning =  "密码格式错误";
-                         this.Active2=true;
-                     }else {
-                         this.warning = "";
-                         this.Active1=false;
-                         this.Active2=false;
-                         this.disabled=false
-                     }
+             if (pwd.length != 0) {
+                 if (pwd.match('[a-zA-Z0-9_]{6,16}$')) {
+                     this.warning = "";
+                     this.Active2=false;
+                     this.disabled=false;
+                 } else {
+                     this.warning =  "密码格式错误";
+                     this.Active2=true;
                  }
              }
          },
