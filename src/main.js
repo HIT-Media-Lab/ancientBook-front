@@ -24,7 +24,10 @@ Vue.prototype.response={};
 
 //定义的post的vue-router全局函数，以json形式传递数据
 Vue.prototype.HttpPostJson=function (url,object,success,fail) {
-    this.$http.post(url, object,).then(function (response) {
+    this.BeforeHttp(object);
+    this.$http.post(
+        url,
+        object,).then(function (response) {
         this.response=response;
         this.BeforeSuccess();
         success(this.response);
@@ -37,9 +40,12 @@ Vue.prototype.HttpPostJson=function (url,object,success,fail) {
 
 //定义的post的vue-router全局函数，以form-data形式传递数据
 Vue.prototype.HttpPostForm=function (url,object,success,fail) {
-    this.$http.post(url, object,{
-        emulateJSON: true   //将json形式转换为form-data
-    }).then(function (response) {
+    this.BeforeHttp(object);
+    this.$http.post(
+        url,
+        object,
+        {emulateJSON: true},   //将json形式转换为form-data
+        {headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}}).then(function (response) {
         this.response=response;
         this.BeforeSuccess();
         success(this.response);
@@ -63,9 +69,9 @@ Vue.prototype.HttpGetJson=function (url,object,success,fail) {
 //定义的get的vue-router全局函数，以form-data形式传递数据
 Vue.prototype.HttpGetForm=function (url,object,success,fail) {
     let new_url=url+'?'+object.key+'='+object.value;
-    this.$http.get(new_url,{
-        emulateJSON: true
-    }).then(function (response) {
+    this.$http.get(
+        new_url,
+        {emulateJSON: true}).then(function (response) {
         this.response=response;
         this.BeforeSuccess();
         success(this.response);
@@ -76,9 +82,15 @@ Vue.prototype.HttpGetForm=function (url,object,success,fail) {
 
 //判断是否有无token
 Vue.prototype.BeforeHttp=function (object) {
+    object.token=this.Token;
     console.log("object"+object.token);
+    var token=this.Token ;
     if (object.token.length == 0 || this.Token == 0) {
-          this.CheckToken();
+        this.$http.get('/ancient_books/getToken.action').then(function (response) {
+            token = response.body.token;
+            console.log("检测token成功"+token );
+        });
+        this.Token=token
     }
     console.log("得到token成功");
 };
@@ -95,12 +107,12 @@ Vue.prototype.AfterSuccess=function (response) {
         console.log("更新token"+this.Token);
 };
 
-Vue.prototype.CheckToken=function () {
-    this.$http.get('/ancient_books/getToken.action').then(function (response) {
-        this.Token = response.body.token;
-        console.log("检测token成功"+this.Token );
-    })
-};
+// Vue.prototype.CheckToken=function () {
+//     this.$http.get('/ancient_books/getToken.action').then(function (response) {
+//         this.Token = response.body.token;
+//         console.log("检测token成功"+this.Token );
+//     })
+// };
 
 // 定义组件, 也可以像教程之前教的方法从别的文件引入
 import bookstore from './component/bookstore/index.vue'

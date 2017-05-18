@@ -137,13 +137,13 @@ import store from './store'
          },
          LoginSuccess(response){
              if (response.body.result == 0) {
+                 document.getElementById("v_picture").src='/ancient_books/get_v_picture.action'+'?'+(new Date()).getTime();
                  alert(response.body.info);
-                 document.getElementById("v_picture").src='/ancient_books/get_v_picture.action';
              }
              if (response.body.result == 1) {
                  if (response.body.su == 1) {
                      this.$router.push({path: '/super_user'});
-                     console.log("登录成功后的全局Token  "+this.Token)
+                     console.log("登录成功后的全局Token"+this.Token)
                  }
                  if (response.body.su == 0) {
                      this.$router.push({path: '/user'});
@@ -161,20 +161,16 @@ import store from './store'
              this.object.pwd=this.pwd;
              this.object.v=this.v;
              this.object.auto=this.auto;
-             this.object.token=this.Token;
              console.log("全局token"+this.Token);
              console.log("login需要穿给后台的token"+this.object.token);
              // 与后端对接的vue-resource
-             this.BeforeHttp(this.object);
              this.HttpPostForm(this.login_url,this.object,this.LoginSuccess,this.LoginFail);
          },
-
          //得到验证码图片
-         GetCode() {
-             this.$http.get(this.code_url).then(function () {
-             })
-         },
-
+//         GetCode() {
+//             this.$http.get(this.code_url).then(function () {
+//             })
+//         },
          //自动登录
          AutoLogin() {
              this.$http.get(this. autologin_url).then(function (response) {
