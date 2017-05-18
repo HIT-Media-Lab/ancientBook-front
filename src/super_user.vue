@@ -186,7 +186,9 @@
                 get_user: {},//显示用户数据对象
                 add_user:{},//创建用户数据对象
                 delete_user:{},//删除用户数据对象
-                modify_user:{}//修改数据对象
+                modify_user:{},//修改数据对象
+                check_name:{}, //检查用户名是否重复
+                check_account:{} //检查账号是否重复
             }
         },
         created: function () {
@@ -255,21 +257,15 @@
                 this.add_user.name=this.user_name;
                 this.add_user.account=this.account;
                 this.add_user.pwd=this.pwd;
-                this.add_user.token=this.Token;
-
-                console.log("查查token   "+this.add_user.token ); //检查token是否获取并成功赋值
-                this.BeforeHttp(this.add_user); //token为空则重新获取token并赋值
-                this.add_user.token=this.Token;
-
-                //this.HttpPostForm(this.post_url,this.post_user,this.success_postUsers,this.fail_postUsers);
-                this.$http.post(this.add_url,this.add_user,{
+                this.HttpPostForm(this.post_url,this.post_user,this.success_add,this.fail_add);
+                /*this.$http.post(this.add_url,this.add_user,{
                     emulateJSON: true   //将json形式转换为form-data
                 },{headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}}).then(function (response) { //加请求头确保汉字字符
                     this.success_add(response);
                     this.AfterSuccess(response);
                 },function () {
                     this.fail_add();
-                })
+                })*/
             },
 
             //创建用户的模态框 系列函数
@@ -375,9 +371,6 @@
 
             deleteUsers(index){
                 this.delete_user.user_id=this.userData[index].user_id;
-                this.delete_user.token=this.Token;
-                this.BeforeHttp(this.delete_user);
-                this.delete_user.token=this.Token;
                 this.HttpPostForm(this.delete_url,this.delete_user,this.success_delete,this.fail_delete);
             },
 
@@ -426,20 +419,18 @@
                 this.modify_user.name=this.back_username;
                 this.modify_user.pwd=this.pwd;
                 this.modify_user.user_id=this.userData[this.back_index].user_id;
-                this.modify_user.token=this.Token;
-
-                this.BeforeHttp(this.modify_user);
-                this.modify_user.token=this.Token;
-
-                //this.HttpPostForm(this.modify_url,this.modify_user,this.success_modify,this.fail_modify);
-                this.$http.post(this.modify_url,this.modify_user,{
-                    emulateJSON: true   //将json形式转换为form-data
-                },{headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}}).then(function (response) { //加请求头确保汉字字符
+                this.HttpPostForm(this.modify_url,this.modify_user,this.success_modify,this.fail_modify);
+                /*this.$http.post(
+                    this.modify_url,
+                    this.modify_user,
+                    { emulateJSON: true },
+                    { headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'} }
+                ).then(function (response) { //加请求头确保汉字字符
                     this.success_modify(response);
                     this.AfterSuccess(response);
                 },function () {
                     this.fail_modify();
-                })
+                })*/
             },
 
             //修改执行的函数
@@ -459,6 +450,7 @@
                 }
             },
 
+            
             pre_p(){
                 this.page = --this.page;
                 this.userData.splice(0, this.userData.length);//清空原有数组数据
@@ -474,22 +466,10 @@
             },
 
             skip_p(p){
-                this.page=p;
+                this.page = p;
                 this.getUsers(this.page);
-                console.log("skip:"+this.page);
-            },
-
-          /*  toPc(data){
-                this.page=data;
-                console.log(data);
-                console.log("to:"+this.page);
-            }*/
-            //页面跳转,清空数据，发送请求刷新页面
-           /* skip_page(){
-                this.$on('pre_page',this.con_page);
-                this.$on('next_page',this.con_page);
-
-            }*/
+                console.log("skip:" + this.page);
+            }
         }
     }
 
