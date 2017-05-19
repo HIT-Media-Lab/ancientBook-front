@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-bind="http://www.w3.org/1999/xhtml">
     <!--登录组件-->
     <div>
         <div class="head">
@@ -14,7 +14,7 @@
                     <span class="text2">密 码</span>
                     <input type="password" class="password" v-model="pwd" id="pwd" @blur="CheckPwd()" v-bind:class="{ warnborder: Active2 }">
                 </div>
-                <div class="warning-1">
+                <div class="warning-login">
                     <span id="warning" v-model="warning">{{warning}}</span>
                 </div>
             </div>
@@ -74,6 +74,45 @@ import store from './store'
 //         Test(){
 //            this.$store.commit("login_show")
 //         },
+
+         /**
+          *  账号 正则判断输入是否规范
+          */
+
+         CheckUser(){
+             this.disabled=false;
+             this.warning = "";
+             this.Active1=false;
+             let success1=this.checkuser(this.account);
+             if (success1){
+                 this.warning= "";
+                 this.Active1=false;
+                 this.disabled=false;
+             }else {
+                 this.warning = "用户名格式错误";
+                 this.Active1=true;
+             }
+         },
+
+
+         /**
+          *  密码 正则判断输入是否规范
+          */
+
+         CheckPwd(){
+             this.disabled=false;
+             this.warning = "";
+             this.Active2=false;
+             let success2=this.checkpwd(this.pwd);
+             if (success2){
+                 this.warning= "";
+                 this.Active2=false;
+                 this.disabled=false;
+             }else {
+                 this.warning = "密码格式错误";
+                 this.Active2=true;
+             }
+         },
          CreateVPicture(){
              document.getElementById("v_picture").src='/ancient_books/get_v_picture.action';
          },
@@ -93,48 +132,10 @@ import store from './store'
              })
          },
 
-         /**
-          *  正则判断输入是否规范
-          */
-         CheckUser(){
-             //获取输入框值
-             //判断输入内容是否正确
-              let account =this.account;
-             this.disabled=true;
-             this.warning = "";
-             this.Active1=false;
-             if (account.length != 0) {
-                 if (account.match('[a-zA-Z0-9]{8,10}$')) {
-                     this.warning= "";
-                     this.Active1=false;
-                     this.disabled=false;
-                 } else {
-                     this.warning = "用户名格式错误";
-                     this.Active1=true;
-                 }
-             }
-         },
-
-         CheckPwd(){
-             let pwd =this.pwd;
-             this.disabled=true;
-             this.warning = "";
-             this.Active2=false;
-             if (pwd.length != 0) {
-                 if (pwd.match('[a-zA-Z0-9_]{6,16}$')) {
-                     this.warning = "";
-                     this.Active2=false;
-                     this.disabled=false;
-                 } else {
-                     this.warning =  "密码格式错误";
-                     this.Active2=true;
-                 }
-             }
-         },
-
          Auto() {
            this.auto = !this.auto
          },
+         //登录的回调函数
          LoginSuccess(response){
              if (response.body.result == 0) {
                  document.getElementById("v_picture").src='/ancient_books/get_v_picture.action'+'?'+(new Date()).getTime();
@@ -190,7 +191,7 @@ import store from './store'
 </script>
 
 <style>
-    .warning-1{
+    .warning-login{
         width: 300px;
         height: 30px;
         font-size:12px;
@@ -226,15 +227,12 @@ import store from './store'
       }
 
     .text1{
-        /*left: 40px;*/
-        /*top: 20px;*/
     }
     .username{
         margin-left: 20px;
     }
     .text2{
-        /*left: 40px;*/
-        /*top: 60px;*/
+        margin-left: -70px;
     }
     .password{
         margin-left: 20px;
@@ -262,13 +260,9 @@ import store from './store'
     }
     .save-password-checkbox{
         vertical-align: text-bottom;
-        /*left: 40px;*/
-        /*top: 159px;*/
     }
     .save-password-word{
         font-size: 12px;
-        /*left: 60px;*/
-        /*top: 160px;*/
     }
     .login-button{
 

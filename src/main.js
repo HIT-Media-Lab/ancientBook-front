@@ -7,6 +7,7 @@ import VueRouter from "vue-router";
 import VueResource from 'vue-resource'
 import './assets/less/index.less'
 import store from './store'
+import './RegularExpression'
 
 //开启debug模式
 Vue.config.debug = true;
@@ -14,6 +15,7 @@ Vue.config.debug = true;
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(Vuex);
+
 
 //定义的全局变量
 Vue.prototype.ifLogin=true;
