@@ -42,7 +42,7 @@ Vue.prototype.HttpPostJson=function (url,object,success,fail) {
 //定义的post的vue-router全局函数，以form-data形式传递数据
 Vue.prototype.HttpPostForm=function (url,object,success,fail) {
     this.BeforeHttp(object);
-    object.token=this.Token;
+    object.token=this.$store.getters.GetToken();
     console.log("你猜猜token有没有 "+object.token);
     this.$http.post(
         url,
@@ -85,16 +85,16 @@ Vue.prototype.HttpGetForm=function (url,object,success,fail) {
 
 //判断是否有无token
 Vue.prototype.BeforeHttp=function (object) {
-    console.log("检查超级用户是否有token "+this.Token);
-    object.token=this.Token;
+    console.log("检查超级用户是否有token "+this.$store.getters.GetToken());
+    object.token=this.$store.getters.GetToken();
     console.log("object"+object.token);
-    let token = this.Token;
+    let token = this.$store.getters.GetToken();
     if (object.token.length == 0 || token.length == 0) {
         this.$http.get('/ancient_books/getToken.action').then(function (response) {
             token = response.body.token;
             console.log("检测token成功"+token );
         });
-        this.Token=token;
+        this.$store.state.Token=token;
     }else {
         console.log("不需要更token");
     }
@@ -108,8 +108,8 @@ Vue.prototype.BeforeSuccess=function () {
 //回调success后的函数
 Vue.prototype.AfterSuccess=function (response) {
 //更新token
-        this.Token=response.body.token;
-        console.log("更新token"+this.Token);
+        this.$store.state.Token=response.body.token;
+        console.log("更新token"+this.$store.state.Token);
 };
 
 // Vue.prototype.CheckToken=function () {
