@@ -2,51 +2,53 @@
 
 <!--定义组件-->
 <template >
-    <div>
+    <div id="user_box">
+
         <!--正中间组件-->
-        <div class="table-container">
+        <div id="table_container">
 
             <!--管理用户文字图片-->
-            <div class="user-text">
+            <div id="user_text">
                 <img class="image" src="src/assets/img/毛笔.png" height="25" width="25"/>
-                <span>管理用户</span>
+                <span class="span_user">管理用户</span>
             </div>
 
             <!--创建用户按钮-->
-            <input type="button" class="btn-general create-user" value="创建用户"  @click="openDialog()">
+            <div id="create_user">
+                <input type="button" class="btn_general" value="创建用户"  @click="open_dialog()">
+            </div>
 
             <!--用户信息表格-->
-            <table class="table-box">
-                <!--表格第一行表头-->
-                <tr>
-                    <th >用户名</th>
-                    <th >账号</th>
-                    <th >密码</th>
-                    <th></th>
-                </tr>
+            <div id="table_box">
+                    <table id="table_all">
+                        <!--表格第一行表头-->
+                        <tr>
+                            <th class="table_border">用户名</th>
+                            <th class="table_border">账号</th>
+                            <th class="table_border">密码</th>
+                            <th class="table_border"></th>
+                        </tr>
 
-                <!--显示用户信息-->
-                <tr v-for="(item,index) in user_data"> <!--v-for循环数据里的数组数据-->
-                    <td>
-                        {{item.user_name}}
-                    </td>
+                        <!--显示用户信息-->
+                        <tr v-for="(item,index) in userData"> <!--v-for循环数据里的数组数据-->
+                            <td class="table_border" >
+                                {{item.user_name}}
+                            </td>
+                            <td class="table_border">
+                                {{item.account}}
+                            </td>
+                            <td class="table_border">
+                                <input type="password" class="input_pwd" value="********" readonly>
 
-                    <td>
-                        {{item.account}}
-                    </td>
-
-                    <td>
-                        <input type="password" class="input-pwd" value="********" readonly>
-                    </td>
-
-                    <td>
-                        <input type="button" class="btn-general" value="修改" @click="openCha(index)">    <!--v-on click 依据index实现删除功能（格式）-->
-                        <input type="button" class="btn-general" value="删除" @click="deleteUsers(index)">
-                    </td>
-                </tr>
-            </table>
+                            </td>
+                            <td class="table_border">
+                                <input type="button"  class="btn_general" value="修改" @click="open_chaDialog(index)"><!--v-on click 依据index实现删除功能（格式）-->
+                                <input type="button" class="btn_general" value="删除" @click="deleteUsers(index)">
+                            </td>
+                        </tr>
+                    </table>
+            </div>
         </div>
-
 
         <!--创建用户的模态框-->
         <div class="dialogs" v-bind:show.sync="show_create">
@@ -55,37 +57,41 @@
 
                     <header class="dialog-header">
                         <span class="dialog-title">普通用户创建</span>
-                        <span class="close rotate iconfont icon-close" @click="closeDialog()">×</span><!--关闭图标-->
+                        <span class="close rotate iconfont icon-close" @click="close_dialog()">×</span><!--关闭图标-->
                     </header>
 
                     <div class="dialog-body" >
-                        <div class="strap">
-                            <span class="span-motal">用户名：</span>
-                            <input type="text"  id="text1" class="input-motal" placeholder="输入2-10位中文、英文、数字" onfocus="this.placeholder=''" @blur="checkIn('text1','输入2-10位中文、英文、数字','^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0)"  v-model="user_name" v-bind:class="{warnBorder:this.is_active[0]}">
-                        </div>
+                        <p>
+                            <span class="span_motal_1">用户名</span>
+                            <span class="span_motal_2">:</span>
+                            <input type="text"  id="text1" class="input_motal" placeholder="输入2-10位中文、英文、数字" onfocus="this.placeholder=''" @blur="checkIn('text1','输入2-10位中文、英文、数字','^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0)"  v-model="user_name" v-bind:class="{warnBorder:this.isActive[0]}">
+                        </p>
 
-                        <div>
-                            <span class="span-motal">账号：</span>
-                            <input type="text"  id="text2" class="input-motal"  placeholder="输入8-10位数字、英文" onfocus="this.placeholder=''" @blur="checkIn('text2','输入8-10位数字、英文','^[a-zA-Z0-9]{8,10}$',1)" v-model="account" v-bind:class="{warnBorder:this.is_active[1]}">
-                        </div>
+                        <p>
+                            <span class="span_motal_1">账号</span>
+                            <span class="span_motal_2">:</span>
+                            <input type="text"  id="text2" class="input_motal"  placeholder="输入8-10位数字、英文" onfocus="this.placeholder=''" @blur="checkIn('text2','输入8-10位数字、英文','^[a-zA-Z0-9]{8,10}$',1)" v-model="account" v-bind:class="{warnBorder:this.isActive[1]}">
+                        </p>
 
-                        <div>
-                            <span class="span-motal">密码：</span>
-                            <input type="password"  id="text3" class="input-motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkIn('text3','输入6-16位数字、英文','^[a-zA-Z0-9_]{6,16}$',2)" v-model="pwd" v-bind:class="{warnBorder:this.is_active[2]}">
-                        </div>
+                        <p>
+                            <span class="span_motal_1">密码</span>
+                            <span class="span_motal_2">:</span>
+                            <input type="password"  id="text3" class="input_motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkIn('text3','输入6-16位数字、英文','^[a-zA-Z0-9_]{6,16}$',2)" v-model="pwd" v-bind:class="{warnBorder:this.isActive[2]}">
+                        </p>
 
-                        <div>
-                            <span class="span-motal">重复密码：</span>
-                            <input type="password" id="text4" class="input-motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="checkPwd('text3','text4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.is_active[3]}">
-                        </div>
+                        <p>
+                            <span class="span_motal_1">重复密码</span>
+                            <span class="span_motal_2">:</span>
+                            <input type="password" id="text4" class="input_motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="check_pwd('text3','text4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.isActive[3]}">
+                        </p>
                     </div>
                     <footer class="dialog-footer" >
                         <!--提示信息-->
-                        <p  class="warn-tip" v-model="tip">{{tip}}</p>
+                        <p  class="warn_tip" v-model="tip">{{tip}}</p>
                         <!--按钮-->
                         <div>
-                            <button class="btn-general" style="margin-right: 10%" @click="closeDialog()">取消</button>
-                            <button class="btn-general "  @click="addMsg()">创建</button>
+                            <button class="btn_general" style="margin-right: 10%" @click="close_dialog()">取消</button>
+                            <button class="btn_general "  @click="add_msg()">创建</button>
                         </div>
                     </footer>
                 </div>
@@ -101,65 +107,71 @@
 
                     <header class="dialog-header">
                         <span class="dialog-title">普通用户修改</span>
-                        <span class="close rotate iconfont icon-close" @click="closeCha()">×</span><!--关闭图标-->
+                        <span class="close rotate iconfont icon-close" @click="close_chaDialog()">×</span><!--关闭图标-->
                     </header>
 
                     <div class="dialog-body">
-                        <div>
-                            <span class="span-motal">账号:</span>
+                        <p>
+                            <span class="span_motal_1">账号</span>
+                            <span class="span_motal_2">:</span>
+                            <input type="text" name="user_name" id="chan1" class="input_motal" v-model="back_account" readonly style="color: dimgrey;font-size: 15px;font-weight: 400;border-color: transparent; ">
+                        </p>
 
-                            <input type="text" name="user_name" id="chan1" class="input-motal" v-model="back_account" readonly style="color: dimgrey;font-size: 15px;font-weight: 400;border-color: transparent; ">
-                        </div>
+                        <p >
+                            <span class="span_motal_1">用户名</span>
+                            <span class="span_motal_2">:</span>
+                            <input type="text"  id="chan2" class="input_motal" v-model="back_username" @blur="checkIn('chan2','输入2-10位中文、英文、数字','^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0)" v-bind:class="{warnBorder:this.isActive[0]}">
+                        </p >
 
-                        <div>
-                            <span class="span-motal">用户名:</span>
+                        <p >
+                            <span class="span_motal_1">新密码</span>
+                            <span class="span_motal_2">:</span>
+                            <input type="password"  id="chan3" class="input_motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkIn('chan3','输入6-16位数字、英文','^[a-zA-Z0-9_]{6,16}$',2)" v-model="pwd"  v-bind:class="{warnBorder:this.isActive[2]}" >
+                        </p>
 
-                            <input type="text"  id="chan2" class="input-motal" v-model="back_username" @blur="checkIn('chan2','输入2-10位中文、英文、数字','^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0)" v-bind:class="{warnBorder:this.is_active[0]}">
-                        </div >
-
-                        <div>
-                            <span class="span-motal">新密码:</span>
-                            <input type="password"  id="chan3" class="input-motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkIn('chan3','输入6-16位数字、英文','^[a-zA-Z0-9_]{6,16}$',2)" v-model="pwd"  v-bind:class="{warnBorder:this.is_active[2]}" >
-                        </div>
-
-                        <div>
-                            <span class="span-motal">重复密码:</span>
-                            <input type="password" id="chan4" class="input-motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="checkPwd('chan3','chan4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.is_active[3]}">
-                        </div>
+                        <p>
+                            <span class="span_motal_1">重复密码</span>
+                            <span class="span_motal_2">:</span>
+                            <input type="password" id="chan4" class="input_motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="check_pwd('chan3','chan4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.isActive[3]}">
+                        </p>
                     </div>
 
                     <footer class="dialog-footer" slot="footer">
                         <!--提示信息-->
-                        <span class="warn-tip" v-model="tip">{{tip}}</span>
+                        <span class="warn_tip" v-model="tip">{{tip}}</span>
                         <div>
-                            <button class="btn-general" style="margin-right: 10%" @click="closeCha()">取消</button>
-                            <button class="btn-general" @click="confirmChange()">修改</button>
+                            <button class="btn_general" style="margin-right: 10%" @click="close_chaDialog()">取消</button>
+                            <button class="btn_general" @click="confirm_change()">修改</button>
                         </div>
                     </footer>
                 </div>
             </div>
         </div>
 
-        <page-component  :cur_max=this.max_page v-on:pre_page="preP" v-on:next_page="nextP" v-on:skip_page="skiP"></page-component>
+        <!--翻页键-->
+        <div class="page-box">
+            <span class="warn_tip" style="display: block" v-model="tip">{{tip}}</span>
+            <input class="btn_pages" style="margin-left: 0;" value="上一页" @click="pre_page()">
+            <span class="btn-pages" v-model="page,max_page">{{page}}/{{max_page}}</span>
+            <input class="btn_pages" style="margin-right: 0;" value="下一页" @click="next_page()">
+        </div>
+
     </div>
 </template>
 
 
 <script type="text/javascript">
-    import pageComponent from "./pageComponent.vue"
-
     export default{
-        components:{ pageComponent },
         data(){
             return {
                 show_create: false,
                 show_change: false,
 
                 tip: '',//创建用户的错误提示
-                is_active:[false,false,false,false], //错误提示显示红色框
+                isActive:[false,false,false,false], //错误提示显示红色框
                 add_if:true, //判断是否执行 创建/修改 请求
 
-                user_data: [],
+                userData: [],
                 user_name: '',
                 account: '',
                 pwd: '',
@@ -167,38 +179,35 @@
                 back_index: '',
                 back_username: '',
                 back_account: '',
-                get_url: '/ancient_books/get_user_list.action',//显示用户列表
-                add_url: '/ancient_books/add_user.action',//创建普通用户
+                get_url: '/ancient_books/get_user_list.action;this.get_user.page=1',//显示用户列表
+                post_url: '/ancient_books/add_user.action',//创建普通用户
                 modify_url: '/ancient_books/modify_user.action',//修改用户
                 delete_url: '/ancient_books/delete_user_by_id.action',//删除用户
 
                 page: 1,//当前页面
-                max_page: 3,//总页数
+                max_page: 1,//总页数
 
                 get_user: {},//显示用户数据对象
-                add_user:{},//创建用户数据对象
+                post_user:{},//创建用户数据对象
                 delete_user:{},//删除用户数据对象
-                modify_user:{},//修改数据对象
-                check_name:{}, //检查用户名是否重复
-                check_account:{} //检查账号是否重复
+                modify_user:{}//修改数据对象
             }
         },
         created: function () {
             console.log("super_user 已经created");
             this.getUsers(1);
-            console.log("created时的全局token"+this.Token);
         },
         methods: {
             // get数据显示用户列表 成功地回调函数
-            successGet(response){
+            success_getUsers(response){
                     console.log("success get users ");
                     //将后端数据显示在前端页面里
                     if( response.body.content.length === 0 ){
                         console.log("没有返回数组！");
                     }else {
                         this.max_page = response.body.max_page;
-                        for ( let i = 0; i < response.body.content.length; i++ ){
-                            this.user_data.push({
+                        for (let i = 0; i <= response.body.content.length-1; i++){
+                            this.userData.push({
                                 user_name: response.body.content[i].name,
                                 account: response.body.content[i].account,
                                 user_id: response.body.content[i].user_id
@@ -207,7 +216,7 @@
                     }
             },
 
-            failGet(){
+            fail_getUsers(){
                 console.log("fail get users!");
             },
 
@@ -215,15 +224,16 @@
             getUsers(pages){
                 this.get_user.key="page";
                 this.get_user.value=pages;
-                this.HttpGetForm(this.get_url,this.get_user,this.successGet, this.failGet);
+                this.HttpGetForm(this.get_url,this.get_user,this.success_getUsers, this.fail_getUsers);
             },
 
             //创建用户 post用户数据 success回调函数
-           successAdd(response){
-                if(response.body.result===1) {
+            success_postUsers(response){
+                if(response.body.result===1)
+                {
                     console.log("success create!");
-                    this.cleanData();
-                    this.show_create = false; //关闭创建用户的模态框
+                    this.userData.splice(0,this.userData.length);//清空数组，重新发送数据以便刷新
+                    this.getUsers(1);  //发送get请求刷新用户列表
                     /*this.userData.push({   //数据放进前端数组删除修改可以使用
                         user_name: this.user_name,
                         account: this.account,
@@ -236,44 +246,42 @@
                 }else if (response.body.result===0) {
                     console.log("fail create!");
                 }
+                this.user_name = '';
+                this.account = '';   //添加数据后，添加文本框清空
+                this.pwd = '';
+                this.confirm_pwd = '';
+                this.show_create = false;
             },
 
-            failAdd(){
+            fail_postUsers(){
                 console.log("error create!");
             },
 
-            //添加用户post请求数据的赋值
             createUsers(){
-                //将用户信息放进请求对象里
-                this.add_user.name=this.user_name;
-                this.add_user.account=this.account;
-                this.add_user.pwd=this.pwd;
-                this.HttpPostForm(this.add_url,this.add_user,this.successAdd,this.failAdd);
-                /*this.$http.post(this.add_url,this.add_user,{
-                    emulateJSON: true   //将json形式转换为form-data
-                },{headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}}).then(function (response) { //加请求头确保汉字字符
-                    this.success_add(response);
-                    this.AfterSuccess(response);
-                },function () {
-                    this.fail_add();
-                })*/
+                this.post_user.name=this.user_name;
+                this.post_user.account=this.account;
+                this.post_user.pwd=this.pwd;
+                this.post_user.token=this.Token;
+                this.BeforeHttp(this.post_user);
+                this.post_user.token=this.Token;
+                this.HttpPostForm(this.post_url,this.post_user,this.success_postUsers,this.fail_postUsers);
             },
 
             //创建用户的模态框 系列函数
-            openDialog(){
+            open_dialog(){
                 this.show_create = true;
                 this.user_name="";
                 this.account="";
                 this.pwd="";
                 this.confirm_pwd="";
                 this.tip="";
-                this.is_active[0]=false;
-                this.is_active[1]=false;
-                this.is_active[2]=false;
-                this.is_active[3]=false;
+                this.isActive[0]=false;
+                this.isActive[1]=false;
+                this.isActive[2]=false;
+                this.isActive[3]=false;
             },
 
-            closeDialog() {
+            close_dialog() {
                 this.show_create = false;
             },
 
@@ -285,26 +293,26 @@
                         this.tip="";
                         document.getElementById(tag1).placeholder =placeholder_text;
                         this.add_if=true;
-                        this.is_active[0]=false;
-                        this.is_active[1]=false;
-                        this.is_active[2]=false;
+                        this.isActive[0]=false;
+                        this.isActive[1]=false;
+                        this.isActive[2]=false;
                     }else{
                         this.tip=placeholder_text;
                         document.getElementById(tag1).placeholder = placeholder_text;
                         this.add_if=false;
-                        this.is_active[index]=true;
+                        this.isActive[index]=true;
                     }
                 }else{
                     document.getElementById(tag1).placeholder =placeholder_text;
                     this.add_if=false;
-                    this.is_active[0]=false;
-                    this.is_active[1]=false;
-                    this.is_active[2]=false;
+                    this.isActive[0]=false;
+                    this.isActive[1]=false;
+                    this.isActive[2]=false;
                 }
             },
 
             //重复输入密码确认
-            checkPwd(tag1,tag2){
+            check_pwd(tag1,tag2){
                 let x=document.getElementById(tag1).value;
                 let y=document.getElementById(tag2).value;
                 if(y!==""){
@@ -312,22 +320,22 @@
                         this.tip="输入密码不一致！";
                         document.getElementById(tag2).placeholder = "重复密码";
                         this.add_if=false;
-                        this.is_active[3]=true;
+                        this.isActive[3]=true;
                     }else{
                         this.tip="";
                         document.getElementById(tag2).placeholder = "重复密码";
                         this.add_if=true;
-                        this.is_active[3]=false;
+                        this.isActive[3]=false;
                     }
                 }else{
                     document.getElementById(tag2).placeholder = "重复密码";
                     this.add_if=false;
-                    this.is_active[3]=false;
+                    this.isActive[3]=false;
                 }
             },
 
             //添加用户信息
-            addMsg(){
+            add_msg(){
                 let x = document.getElementById("text1").value;
                 let y = document.getElementById("text2").value;
                 let z = document.getElementById("text3").value;
@@ -336,49 +344,54 @@
                     this.tip = "用户名、账号、密码等不能为空！"
                 } else {
                    this.checkIn('text1','输入2-10位中文、英文、数字','[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0);
-                   this.checkIn('text2','输入8-10位数字、英文','[a-zA-Z0-9]{8,10}$',1);
-                   this.checkIn('text3','输入6-16位数字、英文','[a-zA-Z0-9_]{6,16}$',2);
-                   this.checkPwd('text3','text4');
-                    if ( this.add_if === true ) {
+                    this.checkIn('text2','输入8-10位数字、英文','[a-zA-Z0-9]{8,10}$',1);
+                    this.checkIn('text3','输入6-16位数字、英文','[a-zA-Z0-9_]{6,16}$',2);
+                    this.check_pwd('text3','text4');
+                    if (this.add_if===true) {
+                        //空数组里添加数据用push,注意this的使用
                         this.createUsers();
                     }
                 }
             },
 
             //删除用户信息 success回调函数
-            successDelete(response){
+            success_delete(response){
                 if (response.body.result === 1) {
                     console.log("success delete");
-                    this.cleanData();
+                    this.userData.splice(0, this.userData.length);//删除数组里全部数据用splice
+                    this.getUsers(this.page);//发送请求重新获取当页数据显示
                 } else if (response.body.result === 0) {
                     console.log("fail delete");
                 }
             },
 
-            failDelete(){
+            fail_delete(){
                 console.log("error delete");
             },
 
             deleteUsers(index){
-                this.delete_user.user_id = this.user_data[index].user_id;
-                this.HttpPostForm(this.delete_url,this.delete_user,this.successDelete,this.failDelete);
+                this.delete_user.user_id=this.userData[index].user_id;
+                this.delete_user.token=this.Token;
+                this.BeforeHttp(this.delete_user);
+                this.delete_user.token=this.Token;
+                this.HttpPostForm(this.delete_url,this.delete_user,this.success_delete,this.fail_delete);
             },
 
 
             //修改用户信息 模态框系列
-            openCha(index){
-                this.show_change = true;
+            open_chaDialog(index){
+                this.show_change=true;
                 this.back_index = index;
-                this.back_username = this.user_data[index].user_name;
-                this.back_account = this.user_data[index].account;
-                this.tip='';
-                this.is_active[0]=false;
-                this.is_active[2]=false;
-                this.is_active[3]=false;
+                this.back_username =this.userData[index].user_name;
+                this.back_account = this.userData[index].account;
+                this.tip="";
+                this.isActive[0]=false;
+                this.isActive[2]=false;
+                this.isActive[3]=false;
 
             },
 
-            closeCha(){
+            close_chaDialog(){
                 this.show_change=false;
                 this.back_username='';
                 this.back_account='';
@@ -387,17 +400,24 @@
                 this.back_index='';
             },
 
-            successModify(response){
-                if( response.body.result === 1 ){
+            success_modify(response){
+                if(response.body.result===1){
                     console.log("success modify!");
-                    this.cleanData();
-                    this.show_change= false; //关闭模态框
-                } else if( response.body.result === 0 ){
+                    //this.userData.splice(this.back_index,1,{user_name:this.back_username,account:this.userData[this.back_index].account,pwd:this.pwd});
+                    this.userData.splice(0,this.userData.length);//清空数组，重新发送数据以便刷新
+                    this.getUsers(this.page);
+                } else if(response.body.result===0){
                     console.log("fail modify!");
                 }
+                this.show_change= false;
+                this.back_account='';
+                this.back_index='';
+                this.confirm_pwd='';
+                this.pwd='';
+                this.back_username='';
             },
 
-            failModify(){
+            fail_modify(){
                 console.log("error modify!");
             },
 
@@ -405,23 +425,15 @@
             modifyUsers(){
                 this.modify_user.name=this.back_username;
                 this.modify_user.pwd=this.pwd;
-                this.modify_user.user_id=this.user_data[this.back_index].user_id;
-                this.HttpPostForm(this.modify_url,this.modify_user,this.successModify,this.failModify);
-                /*this.$http.post(
-                    this.modify_url,
-                    this.modify_user,
-                    { emulateJSON: true },
-                    { headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'} }
-                ).then(function (response) { //加请求头确保汉字字符
-                    this.success_modify(response);
-                    this.AfterSuccess(response);
-                },function () {
-                    this.fail_modify();
-                })*/
+                this.modify_user.user_id=this.userData[this.back_index].user_id;
+                this.modify_user.token=this.Token;
+                this.BeforeHttp(this.modify_user);
+                this.modify_user.token=this.Token;
+                this.HttpPostForm(this.modify_url,this.modify_user,this.success_modify,this.fail_modify);
             },
 
             //修改执行的函数
-            confirmChange(){
+            confirm_change(){
                 let x=document.getElementById("chan2").value;
                 let y=document.getElementById("chan3").value;
                 let z=document.getElementById("chan4").value;
@@ -430,36 +442,35 @@
                 } else {
                     this.checkIn('chan2','输入2-10位中文、英文、数字','[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0);
                     this.checkIn('chan3','输入6-16位数字、英文','[a-zA-Z0-9_]{6,16}$',2);
-                    this.checkPwd('chan3','chan4');
-                    if (this.add_if === true) {
+                    this.check_pwd('chan3','chan4');
+                    if (this.add_if===true) {
                         this.modifyUsers();
                     }
                 }
             },
 
-
-            preP(){
-                this.page = --this.page;
-                this.cleanData();
-                console.log("pre:"+this.page);
+            //上一页函数
+            pre_page(){
+              if(this.page===1){
+                  this.tip="已经是第一页了！";
+              }else if(this.page>1){
+                  this.tip="";
+                  this.page=this.page-1;
+                  this.userData.splice(0,this.userData.length);//清空原有数组数据
+                  this.getUsers(this.page);
+                }
             },
 
-            nextP(){
-                this.page= ++this.page;
-                this.cleanData();
-                console.log("next:"+this.page);
-            },
-
-            skiP(p){
-                this.page = p;
-                this.cleanData();
-                console.log("skip:" + this.page);
-            },
-
-            //清空原有数组数据,刷新页面
-            cleanData(){
-                this.user_data.splice(0, this.user_data.length);
-                this.getUsers(this.page);
+            //下一页函数
+            next_page(){
+                if(this.page===this.max_page){
+                    this.tip="已经是最后一页了！";
+                }else if(this.page>=1 && this.page<=this.max_page){
+                    this.tip="";
+                    this.page=this.page+1;
+                    this.userData.splice(0,this.userData.length); //清空原有数组数据
+                    this.getUsers(this.page);
+                }
             }
         }
     }
@@ -469,68 +480,67 @@
 
 
 <style>
-    /*组件整个居中显示*/
-    .table-container{
+    /*组件整个的div样式,整个居中显示*/
+    #table_container{
+        /*position: relative;*/
         padding-top: 60px;
+        bottom: 0;
+        left: 0;
+        right: 0;
         margin:auto;
+        height:10%;
         width: 52%;
     }
-
     /*管理用户表格样式*/
-    .table-box{
-        background-color: #f7e1b5;  /*背景颜色*/
-        border-style: solid;    /*表格整体边框线条样式*/
-        border-color: sienna ;  /*表格边框颜色*/
-        border-collapse: collapse;  /*内外边框重合*/
+    #table_all{
+        background-color: #f7e1b5; /*背景颜色*/
+        border-style: solid;      /*表格整体边框线条样式*/
+        border-color: sienna ;    /*表格边框颜色*/
+        border-collapse: collapse; /*内外边框重合*/
+        vertical-align: middle;   /*表格边框内容居中*/
         width:800px;
-        table-layout: fixed;    /*表格每个宽度确定*/
+        height: 15px;/*表格宽度*/
+        table-layout:fixed ;      /*表格样式、长度固定*/
 
     }
 
     /*表格内部边框样式*/
-    th,td{
-        padding: 5px;   /*内容与边框的距离*/
-        border-style: solid;    /*内边框线式*/
-        border-color: sienna;  /*内边框的颜色*/
-        text-align: center; /*内容居中*/
-
-        /*字体设置*/
+    .table_border{
+        padding: 5px;/*内容与边框的距离*/
+        border-style: solid;/*内边框线式*/
+        border-color: sienna ;/*内边框的颜色*/
+        text-align: center;/*内容居中*/
         font-family: 楷体;
         color: dimgrey;
         font-size: 20px;
-    }
 
-    /*用户管理字与图片*/
-    .user-text{
-        text-align: left;
-
-        /*字体设置*/
-        font-family: 楷体;
-        font-size: 20px;
-        font-weight: bold;
-        color: dimgrey;
     }
 
     /*按钮样式*/
-    .btn-general{
-        background-color:sienna;   /*按钮填充颜色*/
-        color: #F2F2F2; /*按钮边框颜色*/
+    .btn_general{
+        background-color:sienna ;/*按钮填充颜色*/
+        color: #F2F2F2;/*按钮边框颜色*/
         width:70px;
         height: 28px;
         border-radius: 8px;
         border-color: transparent;
     }
 
-    /*创建按钮的位置*/
-    .create-user{
-        margin-top: 1%;
-        margin-bottom: 1%;
+    /*用户管理字与图片*/
+    #user_text{
+        text-align: left;
     }
 
-    .input-pwd{
-        background: transparent;    /*密码输入框背景*/
-        border-color: transparent;  /*密码输入框边框*/
-        text-align: center;
+    .span_user{
+        font-family: 楷体;
+        font-size: 20px;
+        font-weight: bold;
+        color: dimgrey;
+    }
+
+    #create_user{
+        margin-top: 1%;
+        margin-bottom: 1%;
     }
 
     .dialog {
@@ -664,23 +674,32 @@
          -webkit-text-stroke-width: 0.2px;
          -moz-osx-font-smoothing: grayscale;
     }
-    .span-motal{
+    .span_motal_1{
         font-family: 楷体;
         font-size: 20px;
         font-weight: bold;
         color: dimgrey;
 
-        text-align:right;
-        padding-left: 10%;
+        text-align:left;
+        margin-left: 10%;
     }
-
-    .input-motal{
+    .span_motal_2{
+        font-family: 楷体;
+        font-size: 20px;
+        font-weight: bold;
+        color: dimgrey;
+        left:34%;
+        /*position:fixed;*/
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    .input_motal{
         width: 45%;
         right: 15%;
         position:fixed;
         text-align: center;
     }
-    .warn-tip{
+    .warn_tip{
         color: #ff0000;
         font-size: 18px;
         text-align:center;
@@ -691,11 +710,35 @@
         border: 2px solid red;
     }
 
-    .strap{
-
+    .input_pwd{
+        background: transparent;
+        border-top: 0px;
+        border-bottom: 0px;
+        border-right: 0px;
+        border-left: 0px;
+        text-align: center;
     }
-
-
+    .btn_pages{
+        background-color:transparent ;/*按钮填充颜色*/
+        color: darkgrey;/*按钮边框颜色*/
+        width:70px;/*按钮与表格下底的宽度*/
+        height: 28px;
+        border-radius: 8px;
+        border-color: darkgrey;
+        font-family: 楷体;
+        font-size: 15px;
+        border: solid;
+        /* position: absolute;*/
+    }
+    .page-box{
+        text-align: center;
+        padding: 1em 0;
+        padding-top: 3em;
+        padding-right: 0px;
+        padding-bottom: 1em;
+        padding-left: 0px;
+        clear: both;
+    }
 
 
 </style>
