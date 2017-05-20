@@ -120,6 +120,7 @@ import noumenon_mark from  './component/user/myoffer/noumenon_mark/index.vue'
 import  comment from  './component/user/myoffer/comment/index.vue'
 import  revise from  './component/user/myoffer/revise/index.vue'
 import  search_index from  './component/search/index.vue'
+import  picture_word from  './picture_word.vue'
 // 创建一个路由器实例
 // 并且配置路由规则
 const router = new VueRouter({
@@ -186,6 +187,10 @@ const router = new VueRouter({
         {
             path:'/search_index',
             component:search_index
+        },
+        {
+            path:"/picture_word",
+            component:picture_word
         },
         {
             path: '/',
