@@ -1,6 +1,6 @@
 <template>
     <!--顶端固定不变的导航条-->
-    <div id="store" class="store" v-show="show">
+    <div id="store" class="store">
         <div class="search">
             <input placeholder=" 请输入你要搜索的内容" class="search-input" v-model="sort_box" v-on:keydown.enter="enter">
         </div>
@@ -44,13 +44,12 @@
             return{
                 sort_box:'',
                 url: '/ancient_books/logout.action',
-                show: this.$store.getters.GetShow
+//                show:false
             }
         },
         methods:{
             //注销
             Logout:function () {
-                alert(this.$store.getters.GetShow);
                 this.$http.get(this.url).then(function () {
                     alert("注销成功");
                     this.$router.push({path: '/login'});
@@ -65,7 +64,12 @@
                 this.sort_box = '';
                 this.$router.push({path: '/search_index'});
             }
-        }
+        },
+//        watch:{
+//            Show(){
+//                this.show = this.$store.getters.GetShow
+//            }
+//        }
     }
 </script>
 
@@ -80,8 +84,9 @@
         width: 100%;
     }
     .three-link{
-        display: inline;
         padding: 10px;
+        margin-left:1250px;
+        margin-top: -35px;
         width: 300px;
         height: 40px;
 
@@ -117,7 +122,7 @@
     }
     .cancel_word{
         visibility: hidden;
-        margin-left: 1415px;
+        margin-left: 165px;
         margin-top: 0;
         width: 50px;
     }
@@ -125,7 +130,7 @@
         position: absolute;
         background-color: white;
         margin-left: 1050px;
-        margin-top: -48px;
+        margin-top: -7px;
         border-style:solid;
         border-width: 1px;
         border-color: gainsboro;

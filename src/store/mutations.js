@@ -4,5 +4,5 @@
 export default {
    login_show(state){
         state.show=!state.show
-    }
+    },
 }

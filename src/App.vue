@@ -1,7 +1,7 @@
 <template>
-  <div id="app" class="app">
+  <div id="app">
     <home></home>
-    <router-view></router-view>   <!--路由显示的位置-->
+    <router-view ></router-view>   <!--路由显示的位置-->
   </div>
 </template>
 
@@ -17,10 +17,4 @@
 </script>
 
 <style>
-  .app{
-    position: fixed;
-    background-image:url("./assets/img/bg.png");
-    height: 100%;
-    width: 100%;
-  }
 </style>
