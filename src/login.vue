@@ -142,9 +142,9 @@ import store from './store'
                      this.AutoLogin();
                      this.CreateVPicture()
                  }
-             },function () {
+             }.bind(this),function () {
                  alert("error")
-             })
+             }.bind(this))
          },
 
          Auto() {
