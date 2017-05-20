@@ -7,6 +7,7 @@ import VueRouter from "vue-router";
 import VueResource from 'vue-resource'
 import './assets/less/index.less'
 import store from './store'
+import './RegularExpression'
 
 //开启debug模式
 Vue.config.debug = true;
@@ -14,6 +15,7 @@ Vue.config.debug = true;
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(Vuex);
+
 
 //定义的全局变量
 Vue.prototype.Token='';
@@ -23,7 +25,10 @@ Vue.prototype.response={};
 
 //定义的post的vue-router全局函数，以json形式传递数据
 Vue.prototype.HttpPostJson=function (url,object,success,fail) {
-    this.$http.post(url, object,).then(function (response) {
+    this.BeforeHttp(object);
+    this.$http.post(
+        url,
+        object,).then(function (response) {
         this.response=response;
         this.BeforeSuccess();
         success(this.response);
@@ -36,7 +41,6 @@ Vue.prototype.HttpPostJson=function (url,object,success,fail) {
 
 //定义的post的vue-router全局函数，以form-data形式传递数据
 Vue.prototype.HttpPostForm=function (url,object,success,fail) {
-<<<<<<< HEAD
     this.BeforeHttp(object);
     object.token=this.$store.getters.GetToken();
     console.log("你猜猜token有没有 "+object.token);
@@ -45,11 +49,6 @@ Vue.prototype.HttpPostForm=function (url,object,success,fail) {
         object,
         {emulateJSON: true},   //将json形式转换为form-data
         {headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}}).then(function (response) {
-=======
-    this.$http.post(url, object,{
-        emulateJSON: true   //将json形式转换为form-data
-    }).then(function (response) {
->>>>>>> 4974a85eaeb9d26aa5ed3e6651c5661fab0e5324
         this.response=response;
         this.BeforeSuccess();
         success(this.response);
@@ -73,9 +72,9 @@ Vue.prototype.HttpGetJson=function (url,object,success,fail) {
 //定义的get的vue-router全局函数，以form-data形式传递数据
 Vue.prototype.HttpGetForm=function (url,object,success,fail) {
     let new_url=url+'?'+object.key+'='+object.value;
-    this.$http.get(new_url,{
-        emulateJSON: true
-    }).then(function (response) {
+    this.$http.get(
+        new_url,
+        {emulateJSON: true}).then(function (response) {
         this.response=response;
         this.BeforeSuccess();
         success(this.response);
@@ -86,7 +85,6 @@ Vue.prototype.HttpGetForm=function (url,object,success,fail) {
 
 //判断是否有无token
 Vue.prototype.BeforeHttp=function (object) {
-<<<<<<< HEAD
     console.log("检查超级用户是否有token "+this.$store.getters.GetToken());
     object.token=this.$store.getters.GetToken();
     console.log("object"+object.token);
@@ -99,13 +97,7 @@ Vue.prototype.BeforeHttp=function (object) {
         this.$store.state.Token=token;
     }else {
         console.log("不需要更token");
-=======
-    console.log("object"+object.token);
-    if (object.token.length == 0 || this.Token == 0) {
-          this.CheckToken();
->>>>>>> 4974a85eaeb9d26aa5ed3e6651c5661fab0e5324
     }
-    console.log("得到token成功");
 };
 
 //回调success前的函数
@@ -116,23 +108,16 @@ Vue.prototype.BeforeSuccess=function () {
 //回调success后的函数
 Vue.prototype.AfterSuccess=function (response) {
 //更新token
-<<<<<<< HEAD
         this.$store.state.Token=response.body.token;
         console.log("更新token"+this.$store.state.Token);
-=======
-        this.Token=response.body.token;
-        console.log("更新token"+this.token);
-        return this.Token;
->>>>>>> 4974a85eaeb9d26aa5ed3e6651c5661fab0e5324
 };
 
-Vue.prototype.CheckToken=function () {
-    this.$http.get('/ancient_books/getToken.action').then(function (response) {
-        this.Token = response.body.token;
-        console.log("检测token成功"+this.Token );
-        return this.Token;
-    })
-};
+// Vue.prototype.CheckToken=function () {
+//     this.$http.get('/ancient_books/getToken.action').then(function (response) {
+//         this.Token = response.body.token;
+//         console.log("检测token成功"+this.Token );
+//     })
+// };
 
 // 定义组件, 也可以像教程之前教的方法从别的文件引入
 import bookstore from './component/bookstore/index.vue'
@@ -150,7 +135,6 @@ import noumenon_mark from  './component/user/myoffer/noumenon_mark/index.vue'
 import  comment from  './component/user/myoffer/comment/index.vue'
 import  revise from  './component/user/myoffer/revise/index.vue'
 import  search_index from  './component/search/index.vue'
-import  picture_word from  './picture_word.vue'
 // 创建一个路由器实例
 // 并且配置路由规则
 const router = new VueRouter({
@@ -217,10 +201,6 @@ const router = new VueRouter({
         {
             path:'/search_index',
             component:search_index
-        },
-        {
-            path:"/picture_word",
-            component:picture_word
         },
         {
             path: '/',

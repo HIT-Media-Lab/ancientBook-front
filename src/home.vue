@@ -1,6 +1,5 @@
 <template>
     <!--顶端固定不变的导航条-->
-<<<<<<< HEAD
     <div id="store" class="store">
         <div class="search">
             <input placeholder=" 请输入你要搜索的内容" class="search-input" v-model="sort_box" v-on:keydown.enter="enter">
@@ -8,40 +7,42 @@
         <div class="three-link">
             <router-link to="bookstore" class="a">
                 <span class="bookstore">古籍库</span>
-=======
-    <div id="store" class="store" v-show="show">
-        <search></search>
-        <div>
-            <router-link to="bookstore">
-            <p class="bookstore">古籍库</p>
->>>>>>> 4974a85eaeb9d26aa5ed3e6651c5661fab0e5324
             </router-link>
-        </div>
-        <div>
             <router-link to="/noumenon_store">
-            <p class="noumenon_store">本体库</p>
+                <span class="noumenon_store">本体库</span>
             </router-link>
-        </div>
-        <div class="cancel">
             <router-link to="/user">
-                <p class="user_name">用户名</p>
+            <span class="user_name" onmouseover=" document.getElementById('Logout').style.visibility='visible'"
+                  onmouseout=" document.getElementById('Logout').style.visibility='hidden';
+             document.getElementById('Logout').style.transition='all ease 3s'">用户名</span>
             </router-link>
-            <button class="cancel_word" @click="Logout">注销</button>
+            <div class="cancel_word">
+                <button @click="Logout" id="Logout">注销</button>
+            </div>
+        </div>
+        <div class="down-box" @click="hide" v-show="sort_box.length!=0">
+            <ul>
+                <li class="sort_box1">
+                    <router-link to="/search_index" >
+                        搜古籍：{{sort_box}}
+                    </router-link>
+                </li>
+                <li class="sort_box2">
+                    <router-link to="/search_index">
+                        搜本体：{{sort_box}}
+                    </router-link>
+                </li>
+            </ul>
         </div>
     </div>
 </template>
 
 <script type="text/javascript">
     import store from './store/index'
-    import  search from  './component/search/search.vue'
-
     export default{
-        components:{
-            search
-        },
-
         data(){
             return{
+                sort_box:'',
                 url: '/ancient_books/logout.action',
 //                show:false
             }
@@ -55,56 +56,54 @@
                 },function () {
                     alert("error")
                 })
+            },
+            hide:function () {
+                this.sort_box = ''
+            },
+            enter:function () {
+                this.sort_box = '';
+                this.$router.push({path: '/search_index'});
             }
-<<<<<<< HEAD
         },
 //        watch:{
 //            Show(){
 //                this.show = this.$store.getters.GetShow
 //            }
 //        }
-=======
-        }
-
->>>>>>> 4974a85eaeb9d26aa5ed3e6651c5661fab0e5324
     }
 </script>
 
 <style>
     .store{
-        position: absolute;
-        z-index:1;
-        top: 0;
-        left: 0;
-        padding: 10px;
+        /*margin-top: 0;*/
+        /*margin-left: 0;*/
+        padding: 7px;
+        /*display: inline-block;*/
         background-color:#dac8c8;
         height: 40px;
         width: 100%;
     }
-<<<<<<< HEAD
     .three-link{
         padding: 10px;
         margin-left:1250px;
         margin-top: -35px;
         width: 300px;
         height: 40px;
-=======
->>>>>>> 4974a85eaeb9d26aa5ed3e6651c5661fab0e5324
 
+    }
     .bookstore{
-        position:absolute;
-        margin: 0;
-        right: 300px;
-        font-weight:700;
+        padding: 20px;
+        width:100px;
+        height: 13px;
+        font-weight: 700;
         font-style:normal;
         font-size:16px;
         color:#999999;
     }
 
     .noumenon_store{
-        margin: 0;
-        position:absolute;
-        right:180px;
+        width:100px;
+        height: 13px;
         font-weight:700;
         font-style:normal;
         font-size:16px;
@@ -112,9 +111,9 @@
     }
 
     .user_name{
-        margin: 0;
-        position:absolute;
-        right: 70px;
+        padding: 20px;
+        width:100px;
+        height: 13px;
         font-weight:700;
         font-style:normal;
         font-size:16px;
@@ -122,7 +121,6 @@
         text-align:center;
     }
     .cancel_word{
-<<<<<<< HEAD
         visibility: hidden;
         margin-left: 165px;
         margin-top: 0;
@@ -151,17 +149,10 @@
         margin-left: -30px;
         list-style: none;
         width: 178px;
-=======
-        display: none;
-        position: absolute;
-        right: 70px;
-        margin-top: 20px;
-        width: 50px;
->>>>>>> 4974a85eaeb9d26aa5ed3e6651c5661fab0e5324
     }
-    .cancel:hover .cancel_word{
-        display: inline-block;
+    .sort_box2{
+        margin-left: -30px;
+        list-style: none;
+        width: 178px;
     }
-
-
 </style>
