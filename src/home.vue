@@ -16,6 +16,7 @@
                   onmouseout=" document.getElementById('Logout').style.visibility='hidden';
              document.getElementById('Logout').style.transition='all ease 3s'">用户名</span>
             </router-link>
+            <!--<input v-model="token" style="visibility: hidden">-->
             <div class="cancel_word">
                 <button @click="Logout" id="Logout">注销</button>
             </div>
@@ -44,6 +45,7 @@
             return{
                 sort_box:'',
                 url: '/ancient_books/logout.action',
+//                token:'rtgrtg'
 //                show:false
             }
         },

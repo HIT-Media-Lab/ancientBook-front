@@ -18,7 +18,7 @@ Vue.use(Vuex);
 
 
 //定义的全局变量
-Vue.prototype.Token='';
+// Vue.prototype.Token='';
 Vue.prototype.response={};
 
 
@@ -26,9 +26,7 @@ Vue.prototype.response={};
 //定义的post的vue-router全局函数，以json形式传递数据
 Vue.prototype.HttpPostJson=function (url,object,success,fail) {
     this.BeforeHttp(object);
-    this.$http.post(
-        url,
-        object,).then(function (response) {
+    this.$http.post(url, object,).then(function (response) {
         this.response=response;
         this.BeforeSuccess();
         success(this.response);
@@ -44,9 +42,7 @@ Vue.prototype.HttpPostForm=function (url,object,success,fail) {
     this.BeforeHttp(object);
     object.token=this.$store.getters.GetToken();
     console.log("你猜猜token有没有 "+object.token);
-    this.$http.post(
-        url,
-        object,
+    this.$http.post(url, object,
         {emulateJSON: true},   //将json形式转换为form-data
         {headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}}).then(function (response) {
         this.response=response;
@@ -108,8 +104,8 @@ Vue.prototype.BeforeSuccess=function () {
 //回调success后的函数
 Vue.prototype.AfterSuccess=function (response) {
 //更新token
-        this.$store.state.Token=response.body.token;
-        console.log("更新token"+this.$store.state.Token);
+        this.$store.commit("change_token",response.body.token);
+        console.log("更新token"+this.$store.getters.token);
 };
 
 // Vue.prototype.CheckToken=function () {

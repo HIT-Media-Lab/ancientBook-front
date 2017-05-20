@@ -73,8 +73,9 @@ import store from './store'
 
      methods: {
          Test(){
-             this.$store.state.Token="hhhhhh";
-             alert(this.$store.state.Token);
+             alert(this.token);
+//             this.$store.state.Token="hhhhhh";
+//             alert(this.$store.state.Token);
 //            this.$store.commit("login_show");
 //             this.show=this.$store.getters.GetShow;
 //             alert(this.show)
@@ -135,9 +136,9 @@ import store from './store'
          OnloadToken(){
              this.$http.get('/ancient_books/getToken.action').then(function (response) {
                  console.log("成功得到token");
-                 this.$store.state.Token = response.body.token;
-                 console.log(this.$store.state.Token+" 第一次获得token");
-                 if (this.$store.state.Token.length != 0){
+                 this.$store.commit("change_token",response.body.token);
+                 console.log(this.$store.getters.GetToken() + " 第一次获得token");
+                 if (this.$store.getters.GetToken.length != 0){
                      this.AutoLogin();
                      this.CreateVPicture()
                  }
