@@ -1,11 +1,11 @@
 <template>
 <!--翻页键-->
 <div class="page-box">
-    <input type="button" class="btn-pages" style="margin-left: 0;" value="上一页" @click="pre_page()" v-bind:disable="ban_1">
+    <input type="button" class="btn-pages" style="margin-left: 0;" value="上一页" @click="prePage()" v-bind:disable="ban_1">
     <span class="text-pages" v-model="cur_max">
-        <input type="text" id="skip" class="text-input" v-model="cur_page" @blur="skip_page()">/{{cur_max}}
+        <input type="text" id="skip" class="text-input" v-model="cur_page" @blur="skiPage()">/{{cur_max}}
     </span>
-    <input type="button" class="btn-pages" style="margin-right: 0;" value="下一页" @click="next_page()" v-bind:disable="ban_2">
+    <input type="button" class="btn-pages" style="margin-right: 0;" value="下一页" @click="nextPage()" v-bind:disable="ban_2">
 </div>
 </template>
 
@@ -21,7 +21,7 @@
         props:[ 'cur_max' ],//请求传回的总页数
         methods: {
             //上一页函数
-            pre_page(){
+            prePage(){
                 if (this.cur_page === 1) {
                     this.ban_1 = true;
                 } else if (this.cur_page > 1 && this.cur_page <= this.cur_max) {
@@ -32,7 +32,7 @@
             },
 
             //下一页函数
-            next_page(){
+            nextPage(){
                 if (this.cur_page === this.cur_max) {
                     this.ban_2 = true;
                 } else if (this.cur_page >= 1 && this.cur_page < this.cur_max) {
@@ -43,7 +43,7 @@
             },
 
             //跳转页面
-            skip_page(){
+            skiPage(){
                 if(this.cur_page >= 1 && this.cur_page <= this.cur_max ){
                     this.$emit('skip_page',this.cur_page);
                 }
