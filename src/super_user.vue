@@ -321,7 +321,7 @@
                 let x = document.getElementById(tag3).value;
                 let y;
                 if( x.length !== 0){
-                    y = this.checkuser(x);
+                    y = this.checkpwd(x);
                     if( y === true ){
                         this.add_if = false;
                         this.tip = "";
@@ -675,7 +675,7 @@
         margin-top: 1%;
         margin-bottom: 1%;
     }
-    
+
 
     /*模态框输入框之间间距*/
     .strap{
