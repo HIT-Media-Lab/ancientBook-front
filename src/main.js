@@ -105,7 +105,7 @@ Vue.prototype.BeforeSuccess=function () {
 Vue.prototype.AfterSuccess=function (response) {
 //更新token
         this.$store.commit("change_token",response.body.token);
-        console.log("更新token"+this.$store.getters.token);
+        console.log("更新token"+this.$store.getters.GetToken);
 };
 
 // Vue.prototype.CheckToken=function () {
