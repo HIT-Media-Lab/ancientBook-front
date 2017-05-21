@@ -138,7 +138,7 @@ import store from './store'
                  console.log("成功得到token");
                  this.$store.commit("change_token",response.body.token);
                  console.log(this.$store.getters.GetToken + " 第一次获得token");
-                 if (this.$store.getters.GetToken.length != 0){
+                 if (this.$store.getters.GetToken != null){
                      this.AutoLogin();
                      this.CreateVPicture()
                  }
