@@ -40,7 +40,7 @@ Vue.prototype.HttpPostJson=function (url,object,success,fail) {
 //定义的post的vue-router全局函数，以form-data形式传递数据
 Vue.prototype.HttpPostForm=function (url,object,success,fail) {
     this.BeforeHttp(object);
-    object.token=this.$store.getters.GetToken();
+    object.token=this.$store.getters.GetToken;
     console.log("你猜猜token有没有 "+object.token);
     this.$http.post(url, object,
         {emulateJSON: true},   //将json形式转换为form-data
@@ -81,16 +81,16 @@ Vue.prototype.HttpGetForm=function (url,object,success,fail) {
 
 //判断是否有无token
 Vue.prototype.BeforeHttp=function (object) {
-    console.log("检查超级用户是否有token "+this.$store.getters.GetToken());
-    object.token=this.$store.getters.GetToken();
+    console.log("检查超级用户是否有token "+this.$store.getters.GetToken);
+    object.token=this.$store.getters.GetToken;
     console.log("object"+object.token);
-    let token = this.$store.getters.GetToken();
+    let token = this.$store.getters.GetToken;
     if (object.token.length == 0 || token.length == 0) {
         this.$http.get('/ancient_books/getToken.action').then(function (response) {
             token = response.body.token;
             console.log("检测token成功"+token );
         });
-        this.$store.state.Token=token;
+        this.$store.commit("change_token",token);
     }else {
         console.log("不需要更token");
     }
