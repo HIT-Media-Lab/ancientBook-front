@@ -54,6 +54,7 @@
             Logout:function () {
                 this.$http.get(this.url).then(function () {
                     alert("注销成功");
+                    this.$store.commit('CHANGE_IFLOGIN0');
                     this.$router.push({path: '/login'});
                 },function () {
                     alert("error")

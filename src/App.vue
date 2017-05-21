@@ -7,11 +7,9 @@
 
 <script>
     import home from './home.vue'
-    import  login from  './login.vue'
     export default{
         components:{
             home,
-            login
         }
     }
 </script>

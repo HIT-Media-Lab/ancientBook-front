@@ -28,7 +28,7 @@
                 <span class="save-password-word" >自动登录</span>
             </div>
             <button class="login-button" @click="Login()" v-bind:disabled="disabled">登  录</button>
-            <button @click="Test">测试</button>
+            <!--<button @click="Test">测试</button>-->
         </div>
     </div>
 </template>
@@ -72,14 +72,14 @@ import store from './store'
      },
 
      methods: {
-         Test(){
-             alert(this.token);
-//             this.$store.state.Token="hhhhhh";
-//             alert(this.$store.state.Token);
-//            this.$store.commit("login_show");
-//             this.show=this.$store.getters.GetShow;
-//             alert(this.show)
-         },
+//         Test(){
+//             alert(this.token);
+////             this.$store.state.Token="hhhhhh";
+////             alert(this.$store.state.Token);
+////            this.$store.commit("login_show");
+////             this.show=this.$store.getters.GetShow;
+////             alert(this.show)
+//         },
 
          /**
           *  账号 正则判断输入是否规范
@@ -158,10 +158,12 @@ import store from './store'
              }
              if (response.body.result == 1) {
                  if (response.body.su == 1) {
+                     this.$store.commit('CHANGE_IFLOGIN1');
                      this.$router.push({path: '/super_user'});
                      console.log("登录成功后的全局Token"+this.$store.getters.GetToken)
                  }
                  if (response.body.su == 0) {
+                     this.$store.commit('CHANGE_IFLOGIN2');
                      this.$router.push({path: '/user'});
                  }
              }
@@ -191,11 +193,14 @@ import store from './store'
              this.$http.get(this. autologin_url).then(function (response) {
                  if (response.body.result==1) {
                      if (response.body.su == 1)
+                         this.$store.commit('CHANGE_IFLOGIN2');
                          this.$router.push({path: '/user'});
                      if (response.body.su = 0)
+                         this.$store.commit('CHANGE_IFLOGIN1');
                          this.$router.push({path: '/super_user'});
                  }
                  if (response.body.result==0)
+                     this.$store.commit('CHANGE_IFLOGIN0');
                      this.$router.push({path: '/login'});
              },function () {
                  alert("error")

@@ -15,5 +15,6 @@ export default {
 
     GetToken:state => {
         return state.Token
-    }
+    },
+
 }

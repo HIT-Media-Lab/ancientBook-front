@@ -11,7 +11,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state:{
         show:true,
-        ifLogin:'',
+        ifLogin: 0,
         Token:''
     },
     getters,

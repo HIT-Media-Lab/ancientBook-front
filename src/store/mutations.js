@@ -7,5 +7,14 @@ export default {
     },
     change_token(state,token){
        state.Token=token
+    },
+    change_iflogin0(state){
+        state.ifLogin = 0
+    },
+    change_iflogin1(state){
+        state.ifLogin = 1
+    },
+    change_iflogin2(state){
+        state.ifLogin = 2
     }
 }
