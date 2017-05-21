@@ -10,7 +10,7 @@
                     <span class="text1">账 号</span>
                     <input type="text" class="username" v-model="account" id="username" @blur="Check()" v-bind:class="{ warnborder: Active1 }">
                 </div>
-                <div class="input-pwd">
+                <div class="input-password">
                     <span class="text2">密 码</span>
                     <input type="password" class="password" v-model="pwd" id="pwd" @blur="Check()" v-bind:class="{ warnborder: Active2 }">
                 </div>
@@ -159,7 +159,7 @@ import store from './store'
              if (response.body.result == 1) {
                  if (response.body.su == 1) {
                      this.$router.push({path: '/super_user'});
-                     console.log("登录成功后的全局Token"+this.Token)
+                     console.log("登录成功后的全局Token"+this.$store.getters.GetToken)
                  }
                  if (response.body.su == 0) {
                      this.$router.push({path: '/user'});
@@ -237,7 +237,7 @@ import store from './store'
     .input-ac{
          margin-bottom: 10px;
      }
-    .input-pwd{
+    .input-password{
           margin-top: 20px;
       }
 
