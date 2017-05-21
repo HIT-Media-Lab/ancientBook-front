@@ -1,10 +1,7 @@
 
 <!--定义组件-->
 <template >
-    <div>
-        <!--正中间组件-->
-        <div class="table-container">
-
+    <div class="table-container">
             <!--管理用户文字图片-->
             <div class="user-text">
                 <img class="image" src="src/assets/img/毛笔.png" height="25" width="25"/>
@@ -123,8 +120,6 @@
                     </footer>
                 </div>
             </div>
-        </div>
-
         <!--翻页组件-->
         <page-component  :cur_max=this.max_page v-on:pre_page="preP" v-on:next_page="nextP" v-on:skip_page="skiP"></page-component>
     </div>
@@ -132,7 +127,7 @@
 
 
 <script type="text/javascript">
-    import pageComponent from "./pageComponent.vue"
+    /*import pageComponent from "./pageComponent.vue"
     let Mock = require('mockjs');
 
     //显示用户列表
@@ -148,7 +143,7 @@
 
     Mock.mock('/ancient_books/getToken.action','get',{
         'Token|1-100':100
-    });
+    });*/
 
     export default{
         components:{ pageComponent },
