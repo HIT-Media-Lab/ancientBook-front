@@ -4,6 +4,7 @@
     <input type="button" class="btn-pages" style="margin-left: 0;" value="上一页" @click="prePage()" v-bind:disable="ban_1">
     <span class="text-pages" v-model="cur_max">
         <input type="text" id="skip" class="text-input" v-model="cur_page" @blur="skiPage()">/{{cur_max}}
+        <input type="button"  class="text-input" v-model="cur_page" @blur="skiPage()" value="GO">
     </span>
     <input type="button" class="btn-pages" style="margin-right: 0;" value="下一页" @click="nextPage()" v-bind:disable="ban_2">
 </div>
@@ -79,7 +80,6 @@
 
     /*页数显示位置*/
     .text-pages{
-        border-color: dimgrey;
         padding-right: 1em;
         padding-left: 0.5em;
         color: dimgrey;
