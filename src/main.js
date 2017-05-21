@@ -18,8 +18,7 @@ Vue.use(Vuex);
 
 
 //定义的全局变量
-Vue.prototype.ifLogin=true;
-Vue.prototype.Token='';
+// Vue.prototype.Token='';
 Vue.prototype.response={};
 
 
@@ -27,9 +26,7 @@ Vue.prototype.response={};
 //定义的post的vue-router全局函数，以json形式传递数据
 Vue.prototype.HttpPostJson=function (url,object,success,fail) {
     this.BeforeHttp(object);
-    this.$http.post(
-        url,
-        object,).then(function (response) {
+    this.$http.post(url, object,).then(function (response) {
         this.response=response;
         this.BeforeSuccess();
         success(this.response);
@@ -43,11 +40,9 @@ Vue.prototype.HttpPostJson=function (url,object,success,fail) {
 //定义的post的vue-router全局函数，以form-data形式传递数据
 Vue.prototype.HttpPostForm=function (url,object,success,fail) {
     this.BeforeHttp(object);
-    object.token=this.Token;
+    object.token=this.$store.getters.GetToken();
     console.log("你猜猜token有没有 "+object.token);
-    this.$http.post(
-        url,
-        object,
+    this.$http.post(url, object,
         {emulateJSON: true},   //将json形式转换为form-data
         {headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}}).then(function (response) {
         this.response=response;
@@ -86,16 +81,16 @@ Vue.prototype.HttpGetForm=function (url,object,success,fail) {
 
 //判断是否有无token
 Vue.prototype.BeforeHttp=function (object) {
-    console.log("检查超级用户是否有token "+this.Token);
-    object.token=this.Token;
+    console.log("检查超级用户是否有token "+this.$store.getters.GetToken());
+    object.token=this.$store.getters.GetToken();
     console.log("object"+object.token);
-    let token = this.Token;
+    let token = this.$store.getters.GetToken();
     if (object.token.length == 0 || token.length == 0) {
         this.$http.get('/ancient_books/getToken.action').then(function (response) {
             token = response.body.token;
             console.log("检测token成功"+token );
         });
-        this.Token=token;
+        this.$store.state.Token=token;
     }else {
         console.log("不需要更token");
     }
@@ -109,8 +104,8 @@ Vue.prototype.BeforeSuccess=function () {
 //回调success后的函数
 Vue.prototype.AfterSuccess=function (response) {
 //更新token
-        this.Token=response.body.token;
-        console.log("更新token"+this.Token);
+        this.$store.commit("change_token",response.body.token);
+        console.log("更新token"+this.$store.getters.token);
 };
 
 // Vue.prototype.CheckToken=function () {
@@ -215,21 +210,23 @@ const router = new VueRouter({
     ]
 });
 
-// router.beforeEach((to, from, next) => {
-//     // 模拟登陆状态
-//     if(to.path!='/login'){
-//         alert("禁用路由1");
-//         if (!this.ifLogin) {
-//             next('/login');
-//             alert("禁用路由2");
-//             alert(this.ifLogin)
-//         }else{
-//             alert("禁用路由3");
-//             next();
+// router.beforeEach(function (transition) {
+//         // 模拟登陆状态
+//         let iflogin = this.$store.getters.ifLogin;
+//         if (iflogin == 0) {
+//             alert("还没有登录");
+//             transition.next({path: '/login'})
+//         } else if (iflogin == 1) {
+//             alert("超级管理员只能在当前页面");
+//             transition.next({path: '/super_user'})
+//         } else if (iflogin == 2) {
+//             if (transition.to.path == '/login' || transition.to.path == '/super_user') {
+//                 alert("无法跳转");
+//                 transition.abort()
+//             }else {
+//                 transition.next();
+//             }
 //         }
-//     }else {
-//         next()
-//     }
 // });
 // 现在我们可以启动应用了！
 // 路由器会创建一个 App 实例，并且挂载到选择符 #app 匹配的元素上。

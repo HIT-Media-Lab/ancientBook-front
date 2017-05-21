@@ -4,5 +4,8 @@
 export default {
    login_show(state){
         state.show=!state.show
+    },
+    change_token(state,token){
+       state.Token=token
     }
 }

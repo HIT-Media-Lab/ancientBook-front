@@ -18,11 +18,26 @@
                     <img src="../../assets/img/u485.png" class="myoffer_img">
                     <span class="myoffer_word">我的贡献</span>
                 </router-link>
+        <button @click="test">写啥测试</button>
     </div>
 </template>
 
 <script>
+    import store from '../../store'
+    export default{
 
+        data(){
+            return{
+                hhh:''
+            }
+        },
+        methods:{
+            test(){
+                this.hhh=this.$store.state.Token;
+                alert(this.hhh)
+            }
+        }
+    }
 </script>
 
 <style>

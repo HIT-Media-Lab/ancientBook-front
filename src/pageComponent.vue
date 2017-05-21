@@ -3,9 +3,9 @@
 <div class="page-box">
     <input type="button" class="btn-pages" style="margin-left: 0;" value="上一页" @click="prePage()" v-bind:disable="ban_1">
     <span class="text-pages" v-model="cur_max">
-        <input type="text" id="skip" class="text-input" v-model="cur_page" @blur="skiPage()">/{{cur_max}}
-        <input type="button"  class="text-input" v-model="cur_page" @blur="skiPage()" value="GO">
+        <input type="text" id="skip" class="text-input" v-model="cur_page" >/{{cur_max}}
     </span>
+    <input type="button" class=" btn-pages"  style="width:30px; height:25px" value="GO" @blur="skiPage()">
     <input type="button" class="btn-pages" style="margin-right: 0;" value="下一页" @click="nextPage()" v-bind:disable="ban_2">
 </div>
 </template>
@@ -59,7 +59,7 @@
     .page-box{
         margin:auto;
         height:10%;
-        width: 52%;
+        width: 80%;
         padding: 3em 18% 1em 18%;
         clear: both;
         display: block;

@@ -1,4 +1,4 @@
-<template xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<template>
     <!--登录组件-->
     <div>
         <div class="head">
@@ -8,11 +8,11 @@
             <div class="input-ac-pwd">
                 <div class="input-ac">
                     <span class="text1">账 号</span>
-                    <input type="text" class="username" v-model="account" id="username" @blur="CheckUser()" v-bind:class="{ warnborder: Active1 }">
+                    <input type="text" class="username" v-model="account" id="username" @blur="Check()" v-bind:class="{ warnborder: Active1 }">
                 </div>
                 <div class="input-pwd">
                     <span class="text2">密 码</span>
-                    <input type="password" class="password" v-model="pwd" id="pwd" @blur="CheckPwd()" v-bind:class="{ warnborder: Active2 }">
+                    <input type="password" class="password" v-model="pwd" id="pwd" @blur="Check()" v-bind:class="{ warnborder: Active2 }">
                 </div>
                 <div class="warning-login">
                     <span id="warning" v-model="warning">{{warning}}</span>
@@ -28,7 +28,7 @@
                 <span class="save-password-word" >自动登录</span>
             </div>
             <button class="login-button" @click="Login()" v-bind:disabled="disabled">登  录</button>
-            <!--<button @click="test">测试</button>-->
+            <button @click="Test">测试</button>
         </div>
     </div>
 </template>
@@ -61,7 +61,8 @@ import store from './store'
              Active2:false,
              disabled: true,
              auto: false,
-             object: {}
+             object: {},
+             show:''
          }
      },
 
@@ -71,48 +72,62 @@ import store from './store'
      },
 
      methods: {
-//         Test(){
-//            this.$store.commit("login_show")
-//         },
+         Test(){
+             alert(this.token);
+//             this.$store.state.Token="hhhhhh";
+//             alert(this.$store.state.Token);
+//            this.$store.commit("login_show");
+//             this.show=this.$store.getters.GetShow;
+//             alert(this.show)
+         },
 
          /**
           *  账号 正则判断输入是否规范
           */
 
-         CheckUser(){
-             this.disabled=false;
+         Check(){
+             this.disabled=true;
              this.warning = "";
              this.Active1=false;
+             this.Active2=false;
              let success1=this.checkuser(this.account);
-             if (success1){
+             let success2=this.checkpwd(this.pwd);
+             if (success1 && success2){
                  this.warning= "";
                  this.Active1=false;
                  this.disabled=false;
-             }else {
-                 this.warning = "用户名格式错误";
-                 this.Active1=true;
+             } else{
+                 if (!success1) {
+                     this.warning = "用户名格式错误";
+                     this.Active1 = true;
+                     this.disabled = true;
+                 }else if(!success2){
+                     this.warning =  "密码格式错误";
+                     this.Active2=true;
+                     this.disabled=true;
+                 }
              }
          },
 
 
-         /**
-          *  密码 正则判断输入是否规范
-          */
-
-         CheckPwd(){
-             this.disabled=false;
-             this.warning = "";
-             this.Active2=false;
-             let success2=this.checkpwd(this.pwd);
-             if (success2){
-                 this.warning= "";
-                 this.Active2=false;
-                 this.disabled=false;
-             }else {
-                 this.warning = "密码格式错误";
-                 this.Active2=true;
-             }
-         },
+//         /**
+//          *  密码 正则判断输入是否规范
+//          */
+//
+//         CheckPwd(){
+//             this.disabled=true;
+//             this.warning = "";
+//             this.Active2=false;
+//             let success2=this.checkpwd(this.pwd);
+//             if (success2){
+//                 this.warning= "";
+//                 this.Active2=false;
+//                 this.disabled=false;
+//             }else {
+//                 this.warning = "密码格式错误";
+//                 this.Active2=true;
+//             }
+//         },
          CreateVPicture(){
              document.getElementById("v_picture").src='/ancient_books/get_v_picture.action';
          },
@@ -121,15 +136,15 @@ import store from './store'
          OnloadToken(){
              this.$http.get('/ancient_books/getToken.action').then(function (response) {
                  console.log("成功得到token");
-                 this.Token = response.body.token;
-                 console.log(this.Token);
-                 if (this.Token.length != 0){
+                 this.$store.commit("change_token",response.body.token);
+                 console.log(this.$store.getters.GetToken + " 第一次获得token");
+                 if (this.$store.getters.GetToken.length != 0){
                      this.AutoLogin();
                      this.CreateVPicture()
                  }
-             },function () {
+             }.bind(this),function () {
                  alert("error")
-             })
+             }.bind(this))
          },
 
          Auto() {
@@ -232,7 +247,7 @@ import store from './store'
         margin-left: 20px;
     }
     .text2{
-        margin-left: -70px;
+        /*margin-left: -70px;*/
     }
     .password{
         margin-left: 20px;
