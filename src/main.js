@@ -68,8 +68,7 @@ Vue.prototype.HttpGetJson=function (url,object,success,fail) {
 //定义的get的vue-router全局函数，以form-data形式传递数据
 Vue.prototype.HttpGetForm=function (url,object,success,fail) {
     let new_url=url+'?'+object.key+'='+object.value;
-    this.$http.get(
-        new_url,
+    this.$http.get(new_url,
         {emulateJSON: true}).then(function (response) {
         this.response=response;
         this.BeforeSuccess();
@@ -210,24 +209,24 @@ const router = new VueRouter({
     ]
 });
 
-// router.beforeEach(function (transition) {
-//         // 模拟登陆状态
-//         let iflogin = this.$store.getters.ifLogin;
-//         if (iflogin == 0) {
-//             alert("还没有登录");
-//             transition.next({path: '/login'})
-//         } else if (iflogin == 1) {
-//             alert("超级管理员只能在当前页面");
-//             transition.next({path: '/super_user'})
-//         } else if (iflogin == 2) {
-//             if (transition.to.path == '/login' || transition.to.path == '/super_user') {
-//                 alert("无法跳转");
-//                 transition.abort()
-//             }else {
-//                 transition.next();
-//             }
-//         }
-// });
+router.beforeEach(function (transition) {
+        // 模拟登陆状态
+        let iflogin = this.$store.getters.ifLogin;
+        if (iflogin == 0) {
+            alert("还没有登录");
+            transition.next({path: '/login'})
+        } else if (iflogin == 1) {
+            alert("超级管理员只能在当前页面");
+            transition.next({path: '/super_user'})
+        } else if (iflogin == 2) {
+            if (transition.to.path == '/login' || transition.to.path == '/super_user') {
+                alert("无法跳转");
+                transition.abort()
+            }else {
+                transition.next();
+            }
+        }
+});
 // 现在我们可以启动应用了！
 // 路由器会创建一个 App 实例，并且挂载到选择符 #app 匹配的元素上。
 const app = new Vue({
