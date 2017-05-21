@@ -137,7 +137,7 @@ import store from './store'
              this.$http.get('/ancient_books/getToken.action').then(function (response) {
                  console.log("成功得到token");
                  this.$store.commit("change_token",response.body.token);
-                 console.log(this.$store.getters.GetToken() + " 第一次获得token");
+                 console.log(this.$store.getters.GetToken + " 第一次获得token");
                  if (this.$store.getters.GetToken.length != 0){
                      this.AutoLogin();
                      this.CreateVPicture()
