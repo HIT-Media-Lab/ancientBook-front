@@ -1,10 +1,16 @@
 <template>
-    <img src="../../assets/img/本体库背景.png" height="30" width="64"/></template>
+    <img src="../../assets/img/本体库背景.png" class="bar-img"/>
+
+</template>
+
+
+
 <script>
 
 </script>
 
 
 <style>
-
+.bar-img{
+}
 </style>

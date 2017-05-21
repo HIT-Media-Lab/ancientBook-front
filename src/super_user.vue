@@ -192,7 +192,7 @@
         created: function () {
             console.log("super_user 已经created");
             this.getUsers(1);
-            console.log("created时的全局token"+this.Token);
+            console.log("created时的全局token"+this.$store.getters.GetToken);
         },
         methods: {
             // get数据显示用户列表 成功地回调函数
@@ -547,7 +547,7 @@
                 if( response.body.result === 1 ){
                     console.log("success modify!");
                     this.cleanData();
-                    this.closeCha();
+                    this.closeMotal();
                 } else if( response.body.result === 0 ){
                     console.log("fail modify!");
                 }
@@ -675,14 +675,7 @@
         margin-top: 1%;
         margin-bottom: 1%;
     }
-
-    .input-pwd{
-        background: transparent;    /*密码输入框背景*/
-        border-color: transparent;  /*密码输入框边框*/
-        text-align: center;
-        width: 80px;
-        margin-top: 0;
-    }
+    
 
     /*模态框输入框之间间距*/
     .strap{
