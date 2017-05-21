@@ -65,7 +65,7 @@
 
                         <div>
                             <span class="span-motal">重复密码：</span>
-                            <input type="password" id="text4" class="input-motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="dupPwd('text3','text4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.is_active[3]}">
+                            <input type="password" id="text4" class="input-motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="dupPwd('text3','text4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.is_active[3]}" >
                         </div>
                     </div>
                     <footer class="dialog-footer" >
@@ -73,7 +73,7 @@
                         <p  class="warn-tip" v-model="tip">{{tip}}</p>
                         <!--按钮-->
                         <div>
-                            <button class="btn-general" style="margin-right: 10%" @click="closeDialog()">取消</button>
+                            <button class="btn-general" style="margin-right: 10%" @click="closeDialog()" tabindex="-1">取消</button>
                             <button class="btn-general "  @click="addMsg()" :disabled="add_if">创建</button>
                         </div>
                     </footer>
@@ -94,7 +94,7 @@
                     <div class="dialog-body">
                         <div class="strap">
                             <span class="span-motal">账号:</span>
-                            <input type="text" name="user_name" id="chan1" class="input-motal" v-model="back_account" readonly style="color: dimgrey;font-size: 15px;font-weight: 400;border-color: transparent;">
+                            <input type="text" name="user_name" id="chan1" class="input-motal" v-model="back_account" readonly style="color: dimgrey;font-size: 15px;font-weight: 400;border-color: transparent;" tabindex="-1">
                         </div>
 
                         <div class="strap">
@@ -117,7 +117,7 @@
                         <!--提示信息-->
                         <span class="warn-tip" v-model="tip">{{tip}}</span>
                         <div>
-                            <button class="btn-general" style="margin-right: 10%" @click="closeMotal()">取消</button>
+                            <button class="btn-general" style="margin-right: 10%" @click="closeMotal()" tabindex="-1">取消</button>
                             <button class="btn-general" @click="confirmChange()" :disabled="add_if">修改</button>
                         </div>
                     </footer>
@@ -132,8 +132,7 @@
 
 
 <script type="text/javascript">
-    import pageComponent from "./pageComponent.vue"
-   /* let Mock = require('mockjs');
+    /* let Mock = require('mockjs');
 
     //显示用户列表
     Mock.mock('/ancient_books/get_user_list.action?page=1','get',{
@@ -149,7 +148,7 @@
     Mock.mock('/ancient_books/getToken.action','get',{
         'Token|1-100':100
     });*/
-
+    import pageComponent from "./pageComponent.vue"
     export default{
         components:{ pageComponent },
         data(){
@@ -429,6 +428,7 @@
                     this.add_if = false;    //按钮可以使用
                 } else if( response.body.result === 0 ){
                     this.is_active[0]=true;
+                    this.add_if = true;
                     this.tip="用户名已存在!";
                 }
             },
@@ -452,6 +452,7 @@
                 } else if( response.body.result === 0 ){
                     this.is_active[1]=true;
                     this.tip="账号已存在!";
+                    this.add_if = true;
                 }
             },
 
@@ -573,9 +574,9 @@
                 if (x === "" || y === "" || z === "" ) {
                     this.tip = "用户名、账号、密码等不能为空！"
                 } else {
-                    this.checkIn('chan2','输入2-10位中文、英文、数字','[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0);
-                    this.checkIn('chan3','输入6-16位数字、英文','[a-zA-Z0-9_]{6,16}$',2);
-                    this.checkPwd('chan3','chan4');
+                    this.checkName('chan2');
+                    this.checkPwd('chan3');
+                    this.dupPwd('chan3','chan4');
                     if (this.add_if === true) {
                         this.modifyUsers();
                     }

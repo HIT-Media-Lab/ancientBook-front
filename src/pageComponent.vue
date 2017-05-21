@@ -1,12 +1,12 @@
 <template>
 <!--翻页键-->
 <div class="page-box">
-    <input type="button" class="btn-pages" style="margin-left: 0;" value="上一页" @click="prePage()" v-bind:disable="ban_1">
+    <input type="button" class="btn-pages" style="margin-left: 0;" value="上一页" @click="prePage()" v-bind:disable="ban_1" tabindex="-1">
     <span class="text-pages" v-model="cur_max">
-        <input type="text" id="skip" class="text-input" v-model="cur_page" >/{{cur_max}}
+        <input type="text" id="skip" class="text-input" v-model="cur_page"  tabindex="-1">/{{cur_max}}
     </span>
-    <input type="button" class=" btn-pages"  style="width:30px; height:25px" value="GO" @blur="skiPage()">
-    <input type="button" class="btn-pages" style="margin-right: 0;" value="下一页" @click="nextPage()" v-bind:disable="ban_2">
+    <input type="button" class=" btn-pages"  style="width:30px; height:25px" value="GO" @click="skiPage()" tabindex="-1">
+    <input type="button" class="btn-pages" style="margin-right: 0;" value="下一页" @click="nextPage()" v-bind:disable="ban_2" tabindex="-1">
 </div>
 </template>
 
@@ -48,7 +48,6 @@
                 if(this.cur_page >= 1 && this.cur_page <= this.cur_max ){
                     this.$emit('skip_page',this.cur_page);
                 }
-
             }
         }
     }

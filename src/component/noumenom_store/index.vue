@@ -1,5 +1,7 @@
 <template>
+    <div class="noumenom">
    <navigation_bar></navigation_bar>
+    </div>
 </template>
 
 <script>
@@ -10,3 +12,10 @@
         }
     }
 </script>
+
+<style>
+    .noumenom{
+        width:800px;
+        margin: auto;
+    }
+</style>
