@@ -28,8 +28,8 @@
                 } else if (this.cur_page > 1 && this.cur_page <= this.cur_max) {
                     this.ban_1 = false;
                     this.cur_page = --this.cur_page;
+                    this.$emit('pre_page');
                 }
-                this.$emit('pre_page');
             },
 
             //下一页函数
@@ -39,8 +39,8 @@
                 } else if (this.cur_page >= 1 && this.cur_page < this.cur_max) {
                     this.ban_2 = false;
                     this.cur_page = ++this.cur_page;
+                    this.$emit('next_page');
                 }
-                this.$emit('next_page');
             },
 
             //跳转页面
@@ -57,11 +57,7 @@
 <style>
     /*组件位置*/
     .page-box{
-        margin:auto;
-        height:10%;
-        width: 80%;
         padding: 3em 18% 1em 18%;
-        clear: both;
         display: block;
         font-family: 楷体;
         font-size: 15px;
