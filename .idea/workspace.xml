@@ -2,38 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c8a044c4-7b1e-451d-a17a-99c58ee11956" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/vue-router/.npminstall.done" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/build.js" afterPath="$PROJECT_DIR$/dist/build.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/build.js.map" afterPath="$PROJECT_DIR$/dist/build.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/dist/vue-router.common.js" afterPath="$PROJECT_DIR$/node_modules/vue-router/dist/vue-router.common.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/dist/vue-router.esm.js" afterPath="$PROJECT_DIR$/node_modules/vue-router/dist/vue-router.esm.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/dist/vue-router.js" afterPath="$PROJECT_DIR$/node_modules/vue-router/dist/vue-router.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/dist/vue-router.min.js" afterPath="$PROJECT_DIR$/node_modules/vue-router/dist/vue-router.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/package.json" afterPath="$PROJECT_DIR$/node_modules/vue-router/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/src/components/link.js" afterPath="$PROJECT_DIR$/node_modules/vue-router/src/components/link.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/src/components/view.js" afterPath="$PROJECT_DIR$/node_modules/vue-router/src/components/view.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/src/create-matcher.js" afterPath="$PROJECT_DIR$/node_modules/vue-router/src/create-matcher.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/src/create-route-map.js" afterPath="$PROJECT_DIR$/node_modules/vue-router/src/create-route-map.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/src/history/base.js" afterPath="$PROJECT_DIR$/node_modules/vue-router/src/history/base.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/src/index.js" afterPath="$PROJECT_DIR$/node_modules/vue-router/src/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/src/install.js" afterPath="$PROJECT_DIR$/node_modules/vue-router/src/install.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/src/util/location.js" afterPath="$PROJECT_DIR$/node_modules/vue-router/src/util/location.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/src/util/params.js" afterPath="$PROJECT_DIR$/node_modules/vue-router/src/util/params.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/src/util/path.js" afterPath="$PROJECT_DIR$/node_modules/vue-router/src/util/path.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/src/util/query.js" afterPath="$PROJECT_DIR$/node_modules/vue-router/src/util/query.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/src/util/route.js" afterPath="$PROJECT_DIR$/node_modules/vue-router/src/util/route.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/src/util/warn.js" afterPath="$PROJECT_DIR$/node_modules/vue-router/src/util/warn.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/vue-router/types/router.d.ts" afterPath="$PROJECT_DIR$/node_modules/vue-router/types/router.d.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.vue" afterPath="$PROJECT_DIR$/src/App.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/home.vue" afterPath="$PROJECT_DIR$/src/home.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/login.vue" afterPath="$PROJECT_DIR$/src/login.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.js" afterPath="$PROJECT_DIR$/src/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/store/actions.js" afterPath="$PROJECT_DIR$/src/store/actions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/store/getters.js" afterPath="$PROJECT_DIR$/src/store/getters.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/store/index.js" afterPath="$PROJECT_DIR$/src/store/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/store/mutations.js" afterPath="$PROJECT_DIR$/src/store/mutations.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -101,8 +70,8 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="227" column="30" lean-forward="true" selection-start-line="227" selection-start-column="30" selection-end-line="227" selection-end-column="30" />
+            <state relative-caret-position="268">
+              <caret line="218" column="18" lean-forward="false" selection-start-line="218" selection-start-column="18" selection-end-line="218" selection-end-column="18" />
               <folding>
                 <element signature="e#15#36#0" expanded="true" />
                 <element signature="e#3334#3389#0" expanded="true" />
@@ -416,12 +385,12 @@
       <workItem from="1495255104578" duration="635000" />
       <workItem from="1495256075027" duration="8804000" />
       <workItem from="1495281507625" duration="23853000" />
-      <workItem from="1495373075444" duration="638000" />
+      <workItem from="1495373075444" duration="3288000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="111457000" />
+    <option name="totallyTimeSpent" value="114107000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1924" height="1048" extended-state="1" />
@@ -896,8 +865,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="227" column="30" lean-forward="true" selection-start-line="227" selection-start-column="30" selection-end-line="227" selection-end-column="30" />
+        <state relative-caret-position="268">
+          <caret line="218" column="18" lean-forward="false" selection-start-line="218" selection-start-column="18" selection-end-line="218" selection-end-column="18" />
           <folding>
             <element signature="e#15#36#0" expanded="true" />
             <element signature="e#3334#3389#0" expanded="true" />
