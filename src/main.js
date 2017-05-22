@@ -214,7 +214,7 @@ router.beforeEach( (to, from, next) => {
     let iflogin = router.app.$store.getters.IfLogin;
     if (from.path == '/login'){
         if (iflogin == '0') {
-            // alert("还没有登录");
+            alert("还没有登录");
             next(false)
         }else {
             next()
