@@ -15,6 +15,9 @@ Vue.prototype.checkuser = function (account) {
             success = false;
             return success
         }
+    }else {
+        success = true;
+        return success
     }
 };
 
@@ -28,6 +31,9 @@ Vue.prototype.checkpwd = function(pwd) {
             success=false;
             return success
         }
+    }else {
+        success = true;
+        return success
     }
 };
 

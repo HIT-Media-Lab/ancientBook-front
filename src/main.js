@@ -221,13 +221,13 @@ const app = new Vue({
 router.beforeEach( (to, from, next) => {
     // 模拟登陆状态
     let iflogin = router.app.$store.getters.IfLogin;
-    if (iflogin == 0) {
+    if (iflogin == '0') {
         alert("还没有登录");
         next({path:'/login'})
-    } else if (iflogin == 1) {
+    } else if (iflogin == '1') {
         alert("超级管理员只能在当前页面");
         next({path:'/super_user'})
-    } else if (iflogin == 2) {
+    } else if (iflogin == '2') {
         if (to.path == '/super_user') {
             alert("无法跳转,请先注销");
         }else {

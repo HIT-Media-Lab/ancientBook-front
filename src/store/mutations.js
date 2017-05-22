@@ -9,12 +9,12 @@ export default {
        state.Token=token
     },
     change_iflogin0(state){
-        state.ifLogin = 0
+        state.ifLogin = '0'
     },
     change_iflogin1(state){
-        state.ifLogin = 1
+        state.ifLogin = '1'
     },
     change_iflogin2(state){
-        state.ifLogin = 2
+        state.ifLogin = '2'
     }
 }

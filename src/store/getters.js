@@ -6,9 +6,7 @@ export default {
     GetShow:state => {
         return state.show
     },
-    /**
-     * @return {string}
-     */
+
     IfLogin:state =>{
         return state.ifLogin
     },
