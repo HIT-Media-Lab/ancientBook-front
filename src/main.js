@@ -209,6 +209,34 @@ const router = new VueRouter({
     ]
 });
 
+router.beforeEach( (to, from, next) => {
+    // 模拟登陆状态
+    let iflogin = router.app.$store.getters.IfLogin;
+    if (from.path == '/login'){
+        if (iflogin == '0') {
+            // alert("还没有登录");
+            next(false)
+        }else {
+            next()
+        }
+    }
+    if (from.path == '/super_user'){
+        if (iflogin =='1') {
+            console.log("超级管理员只能在当前页面");
+            next(false)
+        }else {
+            next()
+        }
+    }
+    if (to.path == '/login' || to.path == '/super_user'){
+        if (iflogin == '2') {
+            alert("无法跳转,请先注销");
+            next(false);
+        }else {
+            next()
+        }
+    }
+});
 
 // 现在我们可以启动应用了！
 // 路由器会创建一个 App 实例，并且挂载到选择符 #app 匹配的元素上。
@@ -218,25 +246,7 @@ const app = new Vue({
     render: h => h(App)
 }).$mount('#app');
 
-router.beforeEach( (to, from, next) => {
-    // 模拟登陆状态
-    let iflogin = router.app.$store.getters.IfLogin;
-    if (iflogin == '0') {
-        alert("还没有登录");
-        next('/login')
-    }
-    if (iflogin == '1') {
-        console.log("超级管理员只能在当前页面");
-        next('/super_user')
-    }
-    if (iflogin == '2') {
-        if (to.path == '/super_user') {
-            alert("无法跳转,请先注销");
-        }else {
-            next();
-        }
-    }
-});
+
 
 
 
