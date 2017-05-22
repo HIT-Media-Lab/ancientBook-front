@@ -223,11 +223,13 @@ router.beforeEach( (to, from, next) => {
     let iflogin = router.app.$store.getters.IfLogin;
     if (iflogin == '0') {
         alert("还没有登录");
-        next({path:'/login'})
-    } else if (iflogin == '1') {
-        // console.log("超级管理员只能在当前页面");
-        next({path:'/super_user'})
-    } else if (iflogin == '2') {
+        next('/login')
+    }
+    if (iflogin == '1') {
+        console.log("超级管理员只能在当前页面");
+        next('/super_user')
+    }
+    if (iflogin == '2') {
         if (to.path == '/super_user') {
             alert("无法跳转,请先注销");
         }else {
