@@ -219,8 +219,7 @@ router.beforeEach( (to, from, next) => {
         }else {
             next()
         }
-    }
-    if (from.path == '/super_user'){
+    }else if (from.path == '/super_user'){
         if (iflogin =='1') {
             console.log("超级管理员只能在当前页面");
             next('/super_user')
@@ -228,14 +227,14 @@ router.beforeEach( (to, from, next) => {
             next()
         }
     }
-    if (to.path == '/login' || to.path == '/super_user'){
-        if (iflogin == '2') {
-            alert("无法跳转,请先注销");
-            next(false);
-        }else {
-            next()
-        }
-    }
+    // if (to.path == '/login' || to.path == '/super_user'){
+    //     if (iflogin == '2') {
+    //         alert("无法跳转,请先注销");
+    //         next(false);
+    //     }else {
+    //         next()
+    //     }
+    // }
 });
 
 // 现在我们可以启动应用了！
