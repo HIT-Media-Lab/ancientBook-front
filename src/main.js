@@ -227,14 +227,22 @@ router.beforeEach( (to, from, next) => {
             next()
         }
     }
-    // if (to.path == '/login' || to.path == '/super_user'){
-    //     if (iflogin == '2') {
-    //         alert("无法跳转,请先注销");
-    //         next(false);
-    //     }else {
-    //         next()
-    //     }
-    // }
+    if (to.path == '/login'){
+        if (iflogin == '2') {
+            alert("无法跳转,请先注销");
+            next(false);
+        }else {
+            next('/login')
+        }
+    }
+    if (to.path == '/super_user'){
+        if (iflogin == '2') {
+            alert("无法跳转,请先注销");
+            next(false);
+        }else {
+            next('/super_user')
+        }
+    }
 });
 
 // 现在我们可以启动应用了！
