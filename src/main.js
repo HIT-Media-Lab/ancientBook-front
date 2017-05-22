@@ -228,7 +228,7 @@ router.beforeEach( (to, from, next) => {
         alert("超级管理员只能在当前页面");
         next({path:'/super_user'})
     } else if (iflogin == 2) {
-        if (to.path == '/login' || to.path == '/super_user') {
+        if (to.path == '/super_user') {
             alert("无法跳转,请先注销");
         }else {
             next();
