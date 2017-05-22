@@ -225,7 +225,7 @@ router.beforeEach( (to, from, next) => {
         alert("还没有登录");
         next({path:'/login'})
     } else if (iflogin == '1') {
-        alert("超级管理员只能在当前页面");
+        console.log("超级管理员只能在当前页面");
         next({path:'/super_user'})
     } else if (iflogin == '2') {
         if (to.path == '/super_user') {
