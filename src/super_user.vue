@@ -132,7 +132,7 @@
 
 
 <script type="text/javascript">
-    /* let Mock = require('mockjs');
+     let Mock = require('mockjs');
 
     //显示用户列表
     Mock.mock('/ancient_books/get_user_list.action?page=1','get',{
@@ -147,7 +147,7 @@
 
     Mock.mock('/ancient_books/getToken.action','get',{
         'Token|1-100':100
-    });*/
+    });
     import pageComponent from "./pageComponent.vue"
     export default{
         components:{ pageComponent },
@@ -577,7 +577,7 @@
                     this.checkName('chan2');
                     this.checkPwd('chan3');
                     this.dupPwd('chan3','chan4');
-                    if (this.add_if === true) {
+                    if (this.add_if === false) {
                         this.modifyUsers();
                     }
                 }
