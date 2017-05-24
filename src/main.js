@@ -209,44 +209,44 @@ const router = new VueRouter({
     ]
 });
 
-router.beforeEach( (to, from, next) => {
-    // 模拟登陆状态
-    let iflogin = router.app.$store.getters.IfLogin;
-    if (from.path == '/login'){
-        if (iflogin == '0') {
-            alert("还没有登录");
-            next('/login')
-        }else {
-            next()
-        }
-    }else if (from.path == '/super_user'){
-        if (iflogin =='1') {
-            console.log("超级管理员只能在当前页面");
-            next('/super_user')
-        }else {
-            next()
-        }
-    }else {
-        next()
-    }
-        // else {
-    //     if (to.path == '/login'){
-    //         if (iflogin == '2') {
-    //             alert("无法跳转,请先注销");
-    //             next(false);
-    //         }else {
-    //             next('/login')
-    //         }
-    //     }else if (to.path == '/super_user'){
-    //         if (iflogin == '2') {
-    //             alert("无法跳转,请先注销");
-    //             next(false);
-    //         }else {
-    //             next('/super_user')
-    //         }
-    //     }
-    // }
-});
+// router.beforeEach( (to, from, next) => {
+//     // 模拟登陆状态
+//     let iflogin = router.app.$store.getters.IfLogin;
+//     if (from.path == '/login'){
+//         if (iflogin == '0') {
+//             alert("还没有登录");
+//             next('/login')
+//         }else {
+//             next()
+//         }
+//     }else if (from.path == '/super_user'){
+//         if (iflogin =='1') {
+//             console.log("超级管理员只能在当前页面");
+//             next('/super_user')
+//         }else {
+//             next()
+//         }
+//     }else {
+//         next()
+//     }
+//         // else {
+//     //     if (to.path == '/login'){
+//     //         if (iflogin == '2') {
+//     //             alert("无法跳转,请先注销");
+//     //             next(false);
+//     //         }else {
+//     //             next('/login')
+//     //         }
+//     //     }else if (to.path == '/super_user'){
+//     //         if (iflogin == '2') {
+//     //             alert("无法跳转,请先注销");
+//     //             next(false);
+//     //         }else {
+//     //             next('/super_user')
+//     //         }
+//     //     }
+//     // }
+// });
 
 // 现在我们可以启动应用了！
 // 路由器会创建一个 App 实例，并且挂载到选择符 #app 匹配的元素上。
