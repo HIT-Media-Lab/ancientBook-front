@@ -215,7 +215,7 @@ const router = new VueRouter({
 router.beforeEach( (to, from, next) => {
     // 模拟登陆状态
     let iflogin = router.app.$store.getters.IfLogin;
-    if(to.meta){
+    if(to.meta.requiresAuth){
         next()
     }else {
         next('login')
