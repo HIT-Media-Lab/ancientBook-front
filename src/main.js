@@ -37,6 +37,7 @@ Vue.prototype.HttpPostJson=function (url,object,success,fail) {
     })
 };
 
+
 //定义的post的vue-router全局函数，以form-data形式传递数据
 Vue.prototype.HttpPostForm=function (url,object,success,fail) {
     this.BeforeHttp(object);
@@ -44,9 +45,8 @@ Vue.prototype.HttpPostForm=function (url,object,success,fail) {
     console.log("你猜猜token有没有 "+object.token);
     this.$http.post(url, object,
         {emulateJSON: true,
-         headers: {
-             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-         }}   //将json形式转换为form-data
+         headers: this.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8')
+         }   //将json形式转换为form-data
         ).then(function (response) {
         this.response=response;
         this.BeforeSuccess();
