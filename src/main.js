@@ -21,7 +21,7 @@ Vue.use(Vuex);
 // Vue.prototype.Token='';
 Vue.prototype.response={};
 
-
+this.http.headers.common["Content-Type"] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
 //定义的post的vue-router全局函数，以json形式传递数据
 Vue.prototype.HttpPostJson=function (url,object,success,fail) {
@@ -43,8 +43,8 @@ Vue.prototype.HttpPostForm=function (url,object,success,fail) {
     object.token=this.$store.getters.GetToken;
     console.log("你猜猜token有没有 "+object.token);
     this.$http.post(url, object,
-        {emulateJSON: true},   //将json形式转换为form-data
-        {headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}}).then(function (response) {
+        {emulateJSON: true}   //将json形式转换为form-data
+        ).then(function (response) {
         this.response=response;
         this.BeforeSuccess();
         success(this.response);
@@ -127,6 +127,7 @@ import  private_books_index from './component/user/mybook/private_books/index.vu
 import  my_collection_index from  './component/user/mycollection/index.vue'
 import my_offer_index from  './component/user/myoffer/noumenon_edit/index.vue'
 import noumenon_mark from  './component/user/myoffer/noumenon_mark/index.vue'
+import  picture_word from  './picture_word.vue'
 import  comment from  './component/user/myoffer/comment/index.vue'
 import  revise from  './component/user/myoffer/revise/index.vue'
 import  search_index from  './component/search/index.vue'
@@ -225,6 +226,11 @@ const router = new VueRouter({
             path:'/search_index',
             component:search_index
         },
+        {
+            path:'/picture_word',
+            component:picture_word
+        },
+
         {
             path: '/',
             redirect: '/login'  //默认路由
