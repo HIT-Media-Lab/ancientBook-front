@@ -212,14 +212,7 @@ const router = new VueRouter({
 router.beforeEach( (to, from, next) => {
     // 模拟登陆状态
     let iflogin = router.app.$store.getters.IfLogin;
-    if (from.path == '/login'){
-        if (iflogin == '0') {
-            alert("还没有登录");
-            next(false)
-        }else {
-            next()
-        }
-    }else if (from.path == '/super_user'){
+    if (from.path == '/super_user'){
         if (iflogin =='1') {
             console.log("超级管理员只能在当前页面");
             next(false)
@@ -229,6 +222,24 @@ router.beforeEach( (to, from, next) => {
     }else {
         next()
     }
+
+    // if (from.path == '/login'){
+    //     if (iflogin == '0') {
+    //         alert("还没有登录");
+    //         next(false)
+    //     }else {
+    //         next()
+    //     }
+    // }else if (from.path == '/super_user'){
+    //     if (iflogin =='1') {
+    //         console.log("超级管理员只能在当前页面");
+    //         next(false)
+    //     }else {
+    //         next()
+    //     }
+    // }else {
+    //     next()
+    // }
 //         // else {
 //     //     if (to.path == '/login'){
 //     //         if (iflogin == '2') {
