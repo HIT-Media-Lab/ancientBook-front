@@ -44,7 +44,7 @@ Vue.prototype.HttpPostForm=function (url,object,success,fail) {
     console.log("你猜猜token有没有 "+object.token);
     this.$http.post(url, object,
         {emulateJSON: true},   //将json形式转换为form-data
-        {headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}}).then(function (response) {
+        {headers:'Content-Type:application/x-www-form-urlencoded;charset=UTF-8'}).then(function (response) {
         this.response=response;
         this.BeforeSuccess();
         success(this.response);
