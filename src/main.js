@@ -127,6 +127,7 @@ import  private_books_index from './component/user/mybook/private_books/index.vu
 import  my_collection_index from  './component/user/mycollection/index.vue'
 import my_offer_index from  './component/user/myoffer/noumenon_edit/index.vue'
 import noumenon_mark from  './component/user/myoffer/noumenon_mark/index.vue'
+import  picture_word from  './picture_word.vue'
 import  comment from  './component/user/myoffer/comment/index.vue'
 import  revise from  './component/user/myoffer/revise/index.vue'
 import  search_index from  './component/search/index.vue'
@@ -225,6 +226,11 @@ const router = new VueRouter({
             path:'/search_index',
             component:search_index
         },
+        {
+            path:'/picture_word',
+            component:picture_word
+        },
+
         {
             path: '/',
             redirect: '/login'  //默认路由
