@@ -130,6 +130,10 @@ import noumenon_mark from  './component/user/myoffer/noumenon_mark/index.vue'
 import  comment from  './component/user/myoffer/comment/index.vue'
 import  revise from  './component/user/myoffer/revise/index.vue'
 import  search_index from  './component/search/index.vue'
+import  charater_noumenon_check from  './component/noumenom_store/character/index.vue'
+import  build_noumenon from  './component/noumenom_store/new_build/index.vue'
+import  build_character_steptwo from  './component/noumenom_store/new_build/step_two/character.vue'
+import  build_character_stepthree from  './component/noumenom_store/new_build/step_three/character.vue'
 // 创建一个路由器实例
 // 并且配置路由规则
 const router = new VueRouter({
@@ -147,6 +151,26 @@ const router = new VueRouter({
         {
             path:'/noumenon_store',
             component:noumenon_store
+        },
+        {
+            path:'/charater_noumenon_check',
+            component:charater_noumenon_check
+        },
+        {
+            path:'/charater_noumenon',
+            component:charater_noumenon
+        },
+        {
+            path:'/build_noumenon',
+            component:build_noumenon
+        },
+        {
+            path:'/build_character_steptwo',
+            component:build_character_steptwo
+        },
+        {
+            path:'/build_character_stepthree',
+            component:build_character_stepthree
         },
         {
             path:'/bookstore',
