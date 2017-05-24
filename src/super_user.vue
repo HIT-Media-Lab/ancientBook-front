@@ -132,7 +132,7 @@
 
 
 <script type="text/javascript">
-     let Mock = require('mockjs');
+    /* let Mock = require('mockjs');
 
     //显示用户列表
     Mock.mock('/ancient_books/get_user_list.action?page=1','get',{
@@ -147,7 +147,7 @@
 
     Mock.mock('/ancient_books/getToken.action','get',{
         'Token|1-100':100
-    });
+    });*/
     import pageComponent from "./pageComponent.vue"
     export default{
         components:{ pageComponent },
@@ -333,74 +333,6 @@
                 }
             },
 
-            //失去焦点判断输入是否合法
-           /* checkIn(tag1,placeholder_text,index){
-                document.getElementById(tag1).placeholder =placeholder_text;
-                this.add_if = true;    //禁用按钮
-                this.is_active[index]=false;
-
-                let x = document.getElementById(tag1).value;
-                let y;
-                //不为空时判断正则
-                if ( x.length !== 0 ){
-                    if( tag1 === "text1" || tag1 === "chan2" ){
-                        y = this.checkname(x);
-                    } else if( tag1 === "text2" ){
-                        y = this.checkuser(x);
-                    } else if( tag1 === "text3" || tag1 === "chan3" ){
-                        y =this.checkpwd(x);
-                    }
-
-                    //是否匹配正则的返回值
-                    if( y === true){
-                        if(tag1 === "text1" || tag1 === "chan2"){
-                            this.dupName(x);
-                        } else if( tag1 === "text2" ){
-                            this.dupAccount();
-                        } else if( tag1 === "text3"){
-                            this.add_if = false;
-                        }
-                        this.tip="";
-                        this.is_active[index]=false;
-                    } else {
-                        this.tip=placeholder_text;
-                        this.add_if=true;
-                        this.is_active[index]=true;
-                    }
-                }
-            },*/
-
-
-            /*checkIn(tag1,placeholder_text,juge_text,index){
-                let x=document.getElementById(tag1).value;
-                if(x!==""){
-                    if(x.match(juge_text)){
-                        if(tag1 === "text1"){
-                            this.dupName(x);
-                        }else if( tag1 === "text2" ){
-                            this.dupAccount();
-                        }
-                        this.tip="";
-                        document.getElementById(tag1).placeholder =placeholder_text;
-                        this.add_if=true;
-                        this.is_active[index]=false;
-                        //this.is_active[1]=false;
-                        //this.is_active[2]=false;
-                    }else{
-                        this.tip=placeholder_text;
-                        document.getElementById(tag1).placeholder = placeholder_text;
-                        this.add_if=false;
-                        this.is_active[index]=true;
-                    }
-                }else{
-                    document.getElementById(tag1).placeholder =placeholder_text;
-                    this.add_if=false;
-                    this.is_active[index]=false;
-                    //this.is_active[1]=false;
-                    //this.is_active[2]=false;
-                }
-            }, */
-
             //重复输入密码确认
             dupPwd(tag1,tag2){
                 document.getElementById(tag2).placeholder = "重复密码";
@@ -415,7 +347,7 @@
                         this.is_active[3] = true;
                     }else{
                         this.tip = "";
-                        this.add_if =false;
+                        this.add_if = false;
                         this.is_active[3] = false;
                     }
                 }
@@ -485,23 +417,6 @@
                     }
                 }
             },
-           /* addMsg(){
-                let x = document.getElementById("text1").value;
-                let y = document.getElementById("text2").value;
-                let z = document.getElementById("text3").value;
-                let m = document.getElementById("text4").value;
-                if (x === "" || y === "" || z === "" || m === "") {
-                    this.tip = "用户名、账号、密码等不能为空！"
-                } else {
-                   this.checkIn('text1','输入2-10位中文、英文、数字','[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$',0);
-                   this.checkIn('text2','输入8-10位数字、英文','[a-zA-Z0-9]{8,10}$',1);
-                   this.checkIn('text3','输入6-16位数字、英文','[a-zA-Z0-9_]{6,16}$',2);
-                   this.checkPwd('text3','text4');
-                    if ( this.add_if === true ) {
-                        this.createUsers();
-                    }
-                }
-            },*/
 
             //删除用户信息 success回调函数
             successDelete(response){

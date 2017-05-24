@@ -215,14 +215,14 @@ router.beforeEach( (to, from, next) => {
     if (from.path == '/login'){
         if (iflogin == '0') {
             alert("还没有登录");
-            next('/login')
+            next(false)
         }else {
             next()
         }
     }else if (from.path == '/super_user'){
         if (iflogin =='1') {
             console.log("超级管理员只能在当前页面");
-            next('/super_user')
+            next(false)
         }else {
             next()
         }
