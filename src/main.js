@@ -237,14 +237,14 @@ const router = new VueRouter({
     ]
 });
 
-router.beforeEach( (to, from, next) => {
-    // 模拟登陆状态
-    let iflogin = router.app.$store.getters.IfLogin;
-    if(to.meta.requiresAuth){
-        next()
-    }else {
-        next('login')
-    }
+// router.beforeEach( (to, from, next) => {
+//     // 模拟登陆状态
+//     let iflogin = router.app.$store.getters.IfLogin;
+    // if(to.meta.requiresAuth){
+    //     next()
+    // }else {
+    //     next('login')
+    // }
     // if (from.path == '/login'){
     //     if (iflogin == '0') {
     //         alert("还没有登录");
@@ -279,7 +279,7 @@ router.beforeEach( (to, from, next) => {
 //     //         }
 //     //     }
 //     // }
-});
+// });
 
 // 现在我们可以启动应用了！
 // 路由器会创建一个 App 实例，并且挂载到选择符 #app 匹配的元素上。
