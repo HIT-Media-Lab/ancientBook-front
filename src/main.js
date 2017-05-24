@@ -154,7 +154,10 @@ const router = new VueRouter({
         },
         {
             path:'/user',
-            component:user
+            component:user,
+            meta:{
+                requiresAuth:false
+            }
         },
         {
             path:'/upload_step1',
@@ -212,17 +215,11 @@ const router = new VueRouter({
 router.beforeEach( (to, from, next) => {
     // 模拟登陆状态
     let iflogin = router.app.$store.getters.IfLogin;
-    if (from.path == '/super_user'){
-        if (iflogin =='1') {
-            console.log("超级管理员只能在当前页面");
-            next(false)
-        }else {
-            next()
-        }
-    }else {
+    if(to.meta){
         next()
+    }else {
+        next('login')
     }
-
     // if (from.path == '/login'){
     //     if (iflogin == '0') {
     //         alert("还没有登录");
