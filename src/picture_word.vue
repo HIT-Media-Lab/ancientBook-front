@@ -105,7 +105,7 @@
                         <p>添加批註：</p>
                         <textarea id="textarea-addComment"></textarea>
                         <br>
-                        <input type="checkbox" value="選為私密">選為私密
+                        <input id="check-private" type="checkbox" value="選為私密">選為私密
                         <br>
                         <br>
                         <button class="btn btn-warning btn-sm" data-dismiss="modal" id="btn-cancel-add-comment" @click="btnCancelAddComment_onclick()">取消</button>
@@ -181,7 +181,7 @@
                     </div>
                     <div class="modal-body text-tight">
                         <button class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-                        <button id="btn-confirm-cancel" class="btn btn-danger btn-sm" data-dismiss="modal" @click="btnConfirmCancel_onclick()">确认</button>
+                        <button id="btn-confirm-cancel" class="btn btn-danger btn-sm" data-dismiss="modal" @click="btnConfirmDeleteComment_onclick()">确认</button>
                     </div>
                 </div>
             </div>
@@ -192,17 +192,6 @@
 
 
 <script type="text/javascript">
-    // 使用 Mock
-    var Mock = require('mockjs')
-    var data = Mock.mock({
-        // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
-        'list|1-10': [{
-            // 属性 id 是一个自增数，起始值为 1，每次增 1
-            'id|+1': 1
-        }]
-    })
-    // 输出结果
-    console.log(JSON.stringify(data, null, 4));
     export default{
 
         data() {
@@ -237,12 +226,39 @@
                 total_page_editRecord : '',
 
                 edit_text : {},
+                commit : {},
 
                 update_CM : {},
 
                 add_comment : {},
 
                 add_mark : {},
+
+                marks_modify : [],
+                comments_modify : [],
+                marks_delete : [],
+                comments_delete : [],
+
+                target_addC : '',
+                content_addC : '',
+                begin_addC : '',
+                end_addC : '',
+                pri : '',
+
+                target_addM : '',
+                begin_addM : '',
+                end_addM : '',
+                noumenon_type : '',
+                noumenon_id : '',
+                before : '',
+                after : '',
+
+                delete_mark : {},
+                mark_id : '',
+
+                delete_comment : {},
+                comment_id : '',
+
 //                a : 0,  //  选区第一个节点位置
 //                b : 0,  //  选区最后一个节点位置
 //                //后端传回JSON
@@ -250,9 +266,9 @@
 //                //文本内容
 //                content : "蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。";
 //                //标记
-//                mark : [{id:"123123",target:"，白露为",begin:4,end:8},{id:"456456",target:"伊人，在",begin:12,end:16}];
+//                mark : [{id_mark:"123123",target_mark:"，白露为",begin_mark:4,end_mark:8},{id_mark:"456456",target_mark:"伊人，在",begin_mark:12,end_mark:16}];
 //                //批注
-//                comment : [{id:"654654",target:"露为霜。",begin:6,end:10},{id:"321321",target:"，在水一",begin:14,end:18}];
+//                comment : [{id_comment:"654654",target_comment:"露为霜。",begin_comment:6,end_comment:10},{id_comment:"321321",target_comment:"，在水一",begin_comment:14,end_comment:18}];
             }
         },
 
@@ -277,17 +293,17 @@
             getText(pageId) {
                 this.get_content.key = "page_id";
                 this.get_content.value = pageId;
-                this.HttpGetForm ('/ancient_books/get_text.action' , this.get_content , this.success_getText() , this.fail_getText());
+                this.HttpGetJson ('/ancient_books/get_text.action' , this.get_content , this.success_getText , this.fail_getText);
             },
 
             success_getText (response) {
                 console.log ("success get contents");
                 //将后端数据显示在前端页面里
                 if (response.body.content.length === 0) {
-                    console.log("没有返回数组！");
+                    console.log("没有返回文本");
                 }
                 else {
-                    this.content = response.body.content.content;
+                    this.content = response.body.content;
                 }
             },
 
@@ -302,13 +318,13 @@
             getCommentGet(pageId) {
                 this.get_comment.key = "page_id";
                 this.get_comment.value = pageId;
-                this.HttpGetForm ('/ancient_books/get_comment_list_by_page_id.action' , this.get_comment , this.success_getComment() , this.fail_getComment());
+                this.HttpGetJson ('/ancient_books/get_comment_list_by_page_id.action' , this.get_comment , this.success_getComment , this.fail_getComment);
             },
 
             success_getComment(response) {
                 console.log("success get comments ");
                 //将后端数据显示在前端页面里
-                if( response.body.length === 0 ) {
+                if( response.body.length === 0) {
                     console.log("没有返回数组！");
                 }
                 else {
@@ -335,13 +351,13 @@
             getMarkGet(pageId) {
                 this.get_mark.key = "page_id";
                 this.get_mark.value = pageId;
-                this.HttpGetForm ('/ancient_books/get_mark_list_by_page_id.action' , this.get_mark , this.success_getMark() , this.fail_getMark());
+                this.HttpGetJson ('/ancient_books/get_mark_list_by_page_id.action' , this.get_mark , this.success_getMark , this.fail_getMark);
             },
 
             success_getMark(response) {
                 console.log("success get marks ");
                 //将后端数据显示在前端页面里
-                if( response.body.content.length === 0 ) {
+                if( response.body.content.length === 0) {
                     console.log("没有返回数组！");
                 }
                 else {
@@ -369,13 +385,13 @@
             get_editRecord(pageId) {
                 this.get_edit_record.key = "page_id";
                 this.get_edit_record.value = pageId;
-                this.HttpGetForm ('/ancient_books/get_ancient_book_modify_log_by_page.action' , this.get_edit_record , this.success_get_editRecord() , this.fail_get_editRecord());
+                this.HttpGetJson ('/ancient_books/get_ancient_book_modify_log_by_page.action' , this.get_edit_record , this.success_get_editRecord , this.fail_get_editRecord);
             },
 
             success_get_editRecord(response) {
                 console.log ("success get edit records ");
                 //将后端数据显示在前端页面里
-                if( response.body.content.length === 0 ) {
+                if (response.body.content.length === 0) {
                     console.log ("没有返回数组！");
                 }
                 else {
@@ -404,7 +420,7 @@
                 this.edit_text.content = this.content;
                 this.edit_text.commit = this.commit;
                 this.BeforeHttp(this.edit_text);
-                this.HttpPostJson('/ancient_books/modify_page_content.action' , this.edit_text , this.success_post_edit(),this.fail_post_edit());
+                this.HttpPostJson('/ancient_books/modify_page_content.action' , this.edit_text , this.success_post_edit,this.fail_post_edit);
             },
 
             success_post_edit(response) {
@@ -413,12 +429,12 @@
                     window.location.reload();   //  重新加载
                 }
                 else if (response.body.result === 0) {
-                    console.log ("fail edit!");
+                    console.log ("fail edit");
                 }
             },
 
             fail_post_edit() {
-                console.log("fail edit");
+                console.log("fail edit!");
             },
 
 
@@ -428,12 +444,14 @@
             post_update_CM() {
                 this.getMarkChange();
                 this.getCommentChange();
+                this.getMarkDelete();
+                this.getCommentDelete();
                 this.update_CM.comments_delete = this.comments_delete;
                 this.update_CM.comments_modify = this.comments_modify;
                 this.update_CM.marks_delete = this.marks_delete;
                 this.update_CM.marks_modify = this.marks_modify;
                 this.BeforeHttp(this.update_CM);
-                this.HttpPostJson('/ancient_books/update_marks_comment.action' , this.update_CM , this.success_update_CM() , this.fail_update_CM());
+                this.HttpPostJson('/ancient_books/update_marks_comment.action' , this.update_CM , this.success_update_CM , this.fail_update_CM);
             },
 
             success_update_CM(response) {
@@ -441,7 +459,7 @@
                     console.log("success update CM!");
                 }
                 else if (response.body.result === 0) {
-                    console.log("fail update CM!");
+                    console.log("fail update CM");
                 }
             },
 
@@ -455,45 +473,104 @@
              */
             post_add_comment() {
                 this.add_comment.page_id = this.page_id;
-                this.add_comment.target = this.target;
-                this.add_comment.content = this.content;
-                this.add_comment.begin = this.begin;
-                this.add_comment.end = this.end;
+                this.add_comment.target = this.target_addC;
+                this.add_comment.content = this.content_addC;
+                this.add_comment.begin = this.begin_addC;
+                this.add_comment.end = this.end_addC;
                 this.add_comment.pri = this.pri;
-                this.BeforeHttp(this.update_CM);
-                this.HttpPostJson('/ancient_books/add_comment.action' , this.add_comment , this.success_add_comment() , this.fail_add_comment());
+                this.BeforeHttp(this.add_comment);
+                this.HttpPostJson('/ancient_books/add_comment.action' , this.add_comment , this.success_add_comment , this.fail_add_comment);
             },
 
-            success_add_comment() {
-
+            success_add_comment(response) {
+                if (response.body.result === 1) {
+                    console.log("success add comment!");
+                }
+                else if (response.body.result === 0) {
+                    console.log("fail add comment");
+                }
             },
 
             fail_add_comment() {
-
+                console.log("fail add comment!");
             },
 
 
             /**
              * 增加一个标记POST请求
              */
-            post_add_comment() {
-                this.add_comment.page_id = this.page_id;
-                this.add_comment.target = this.target;
-                this.add_comment.content = this.content;
-                this.add_comment.begin = this.begin;
-                this.add_comment.end = this.end;
-                this.add_comment.pri = this.pri;
-                this.BeforeHttp(this.update_CM);
-                this.HttpPostJson('/ancient_books/add_comment.action' , this.add_comment , this.success_add_comment() , this.fail_add_comment());
+            post_add_mark() {
+                this.add_mark.page_id = this.page_id;
+                this.add_mark.target = this.target_addM;
+                this.add_mark.begin = this.begin_addM;
+                this.add_mark.end = this.end_addM;
+                this.add_mark.noumenon_type = this.noumenon_type;
+                this.add_mark.noumenon_id = this.noumenon_id;
+                this.add_mark.before = this.before;
+                this.add_mark.after = this.after;
+                this.BeforeHttp(this.add_mark);
+                this.HttpPostJson('/ancient_books/add_mark.action' , this.add_mark , this.success_add_mark , this.fail_add_mark);
             },
 
-            success_add_comment() {
-
+            success_add_mark(response) {
+                if (response.body.result === 1) {
+                    console.log("success add mark!");
+                }
+                else if (response.body.result === 0) {
+                    console.log("fail add mark");
+                }
             },
 
-            fail_add_comment() {
-
+            fail_add_mark() {
+                console.log("fail add mark!");
             },
+
+
+            /**
+             * 通过标记id删除标记
+             */
+            post_delete_mark() {
+                this.delete_mark.mark_id = this.mark_id;
+                this.BeforeHttp(this.delete_mark);
+                this.HttpPostJson('/ancient_books/delete_mark.action' , this.delete_mark , this.success_delete_mark , this.fail_delete_mark);
+            },
+
+            success_delete_mark(response) {
+                if (response.body.result === 1) {
+                    console.log("success delete mark!");
+                }
+                else if (response.body.result === 0) {
+                    console.log("fail delete mark");
+                }
+            },
+
+            fail_delete_mark() {
+                console.log("fail delete mark!");
+            },
+
+
+            /**
+             * 通过批注id删除批注
+             */
+            post_delete_comment() {
+                this.delete_comment.comment_id = this.comment_id;
+                this.BeforeHttp(this.delete_comment);
+                this.HttpPostJson('/ancient_books/delete_comment.action' , this.delete_comment , this.success_delete_comment , this.fail_delete_comment);
+            },
+
+            success_delete_comment(response) {
+                if (response.body.result === 1) {
+                    console.log("success delete comment!");
+                }
+                else if (response.body.result === 0) {
+                    console.log("fail delete comment");
+                }
+            },
+
+            fail_delete_comment() {
+                console.log("fail delete comment!");
+            },
+
 
             /**
              * 3个模块切换功能，通过赋予被激活模块class属性来控制模块的切换
@@ -588,8 +665,9 @@
                     text.style.visibility = "hidden";   //  修订信息编辑框隐藏
                     label.style.visibility = "hidden";  //  修订信息编辑框标题隐藏
                     textEdit.contentEditable = false;   //  修订文本不可编辑
-                    post_edit();    //  修改古籍文本内容请求
+                    this.commit = text.innerText;
                     post_update_CM();   //  批量更新批注标记
+                    post_edit();    //  修改古籍文本内容请求
                 }
             },
 
@@ -603,15 +681,6 @@
 
 
             /**
-             * 获取选区所在节点字符串
-             */
-            //        rangeData() {
-            //            var data = window.getSelection().anchorNode.data;
-            //            return data;
-            //        },
-
-
-            /**
              * 批注文本选取添加批注操作
              */
             textComment_onclick() {
@@ -619,10 +688,8 @@
                     document.getElementById("btn-add-comment").style.visibility = "visible"; //  添加批注按钮显示
                 }
                 var sel = window.getSelection();
-                this.a = sel.anchorNode.parentNode.attributes.getNamedItem("id");
-                this.b = sel.focusNode.parentNode.attributes.getNamedItem("id");
-                console.log(this.a);
-                console.log(this.b);
+                this.begin_addC = sel.anchorNode.parentNode.id;
+                this.end_addC = sel.focusNode.parentNode.id + 1;
             },
 
 
@@ -632,9 +699,10 @@
             btnAddComment_onclick() {
                 var btnAddComment = document.getElementById("btn-add-comment");
                 btnAddComment.style.visibility = "hidden";  //  添加批注按钮隐藏
-                //            var range = window.getSelection().getRangeAt(0);    //  获得选区
-                //            var span = document.createElement("span");  //  创建span标签
-                //            range.surroundContents(span);   //  为选区添加span标
+                var range = window.getSelection().getRangeAt(0);    //  获得选区
+                var span = document.createElement("span");  //  创建span标签
+                range.surroundContents(span);   //  为选区添加span标
+                this.target_addC = range;
             },
 
 
@@ -642,30 +710,34 @@
              * 确认添加批注按钮事件
              */
             btnConfirmAddComment_onclick() {
-                //            var spans = document.getElementById("text-comment").getElementsByTagName("span");   //  获得批注文本中的span标签
+                var spans = document.getElementById("text-comment").getElementsByTagName("span");   //  获得批注文本中的span标签
                 var textareaAddComment = document.getElementById("textarea-addComment");    //  获得添加批注编辑框
                 if (textareaAddComment.value.length == 0) { //  判断未编辑批注信息
                     alert("您未生成批註內容！");
-                    //                for (var i = 0; i < spans.length; i++) {
-                    //                    var has = spans[i].hasAttribute("class");
-                    //                    //  没有class的span标签转为纯文本
-                    //                    if (has == false) {
-                    //                        var inner = spans[i].innerHTML;
-                    //                        var text = document.createTextNode(inner);
-                    //                        spans[i].parentNode.replaceChild(text, spans[i]);
-                    //                    }
-                    //                }
+                    this.target_addC = '';
+                    this.begin_addC = '';
+                    this.end_addC = '';
+                    for (var i = 0; i < spans.length; i++) {
+                        var has = spans[i].hasAttribute("class");
+                        //  没有class的span标签转为纯文本
+                        if (has == false) {
+                            var inner = spans[i].innerText;
+                            var text = document.createTextNode(inner);
+                            spans[i].parentNode.replaceChild(text, spans[i]);
+                        }
+                    }
                 }
                 //  添加批注后渲染属性并获得位置
                 else {
-                    //                for (var i = 0; i < spans.length; i++) {
-                    //                    var has = spans[i].hasAttribute("class");
-                    //                    if (has == false) {
-                    //                        spans[i].setAttribute("class", "comment");
-                    //                        spans[i].setAttribute("data-toggle", "modal");
-                    //                        spans[i].setAttribute("data-target", "#layer-comment-record");
-                    //                    }
-                    //                }
+                    var checkbox = document.getElementById("check-private");
+                    if (checkbox.checked = true) {
+                        this.pri = 1
+                    }
+                    else {
+                        this.pri = 0
+                    }
+                    this.content_addC = textareaAddComment.innerText;
+                    post_add_comment();
                     window.location.reload()
                 }
             },
@@ -677,6 +749,18 @@
             textMark_onclick() {
                 if (window.getSelection().getRangeAt(0).toString().length != 0) {
                     document.getElementById("btn-mark-noumenon").style.visibility = "visible";
+                }
+                var sel = window.getSelection();
+                this.begin_addM = sel.anchorNode.parentNode.id;
+                this.end_addM = sel.focusNode.parentNode.id + 1;
+                var textMark = document.getElementById("text-mark");
+                for (i = 0; i < 5; i++) {
+                    var b = textMark.innerText.charAt(this.begin_addM-5+k);
+                    this.before += b;
+                }
+                for (j = 0; j < 5; j++) {
+                    var e = textMark.innerText.charAt(this.end_addM+1+m);
+                    this.after += e;
                 }
             },
 
@@ -690,11 +774,15 @@
                 for (var i = 0; i < spans.length; i++) {
                     var has = spans[i].hasAttribute("class");
                     if (has == false) {
-                        var inner = spans[i].innerHTML;
+                        var inner = spans[i].innerText;
                         var text = document.createTextNode(inner);
                         spans[i].parentNode.replaceChild(text, spans[i]);
                     }
                 }
+                this.begin_addM = '';
+                this.end_addM = '';
+                this.before = '';
+                this.after = '';
             },
 
 
@@ -707,14 +795,15 @@
                 var range = window.getSelection().getRangeAt(0);    //  获得选区
                 var span = document.createElement("span");  //  创建span标签
                 range.surroundContents(span);    //  为选区添加span标签
+                this.target_addM = range;
             },
 
 
             /**
              * 确认取消按钮事件
              */
-            btnConfirmCancel_onclick() {
-                var spans = document.getElementsByTagName("span");
+            btnConfirmDeleteComment_onclick() {
+                post_delete_comment();
             },
 
 
@@ -722,14 +811,8 @@
              * 添加标记按钮事件
              */
             btnAddMark_onclick() {
-                var spans = document.getElementById("text-mark").getElementsByTagName("span");  //  标记文本中获得span标签
-                //  遍历，为没有class的span添加mark类
-                for (var i = 0; i < spans.length; i++) {
-                    var has = spans[i].hasAttribute("class");
-                    if (has == false) {
-                        spans[i].setAttribute("class", "mark");
-                    }
-                }
+                post_add_mark();
+                window.location.reload()
             },
 
 
@@ -742,11 +825,15 @@
                 for (var i = 0; i < spans.length; i++) {
                     var has = spans[i].hasAttribute("class");
                     if (has == false) {
-                        var inner = spans[i].innerHTML;
+                        var inner = spans[i].innerText;
                         var text = document.createTextNode(inner);
                         spans[i].parentNode.replaceChild(text, spans[i]);
                     }
                 }
+                this.begin_addM = '';
+                this.end_addM = '';
+                this.before = '';
+                this.after = '';
             },
 
 
@@ -758,36 +845,36 @@
             getEdit() {
                 var a = 0;
                 //文本逐字遍历
-                for (var i = 0; i < content.length; i++) {
+                for (var i = 0; i < this.content.length; i++) {
                     //按顺序依次获得文本中的字
-                    var p = content.charAt(i);
+                    var p = this.content.charAt(i);
                     //标记下标初始化
                     var jtemp = 0;
                     //批注下标初始化
                     var ktemp = 0;
                     //标记数组遍历
-                    for (var j = 0; j < mark.length; j++) {
+                    for (var j = 0; j < this.mark.length; j++) {
                         //该字不在该条标记内
-                        if (i < mark[j].begin || i >= mark[j].end) {
+                        if (i < this.mark[j].begin_mark || i >= this.mark[j].end_mark) {
                             a = 0;
                             jtemp = j;
                             continue;
                         }
                         //该字在该条标记内
-                        if (i >= mark[j].begin && i < mark[j].end) {
+                        if (i >= this.mark[j].begin_mark && i < this.mark[j].end_mark) {
                             a = 1;
                             jtemp = j;
                             break;
                         }
                     }
                     //批注数组遍历
-                    for (var k = 0; k < comment.length; k++) {
+                    for (var k = 0; k < this.comment.length; k++) {
                         //该字不在该条批注内，判断变量a值为0
-                        if (i < comment[k].begin || i >= comment[k].end) {
+                        if (i < this.comment[k].begin_comment || i >= this.comment[k].end_comment) {
                             continue;
                         }
                         //该字在该条批注内
-                        if (i >= comment[k].begin && i < comment[k].end) {
+                        if (i >= this.comment[k].begin_comment && i < this.comment[k].end_comment) {
                             //该字不是标记
                             if (a == 0) {
                                 a = 2;
@@ -812,7 +899,7 @@
                         var span = document.createElement("span");
                         var text = document.createTextNode(p);
                         span.appendChild(text);
-                        span.setAttribute("class", "id=M" + mark[jtemp].id);
+                        span.setAttribute("class", "id=M" + this.mark[jtemp].id_mark);
                         textEdit.appendChild(span);
                     }
                     //该字只是批注
@@ -820,7 +907,7 @@
                         var span = document.createElement("span");
                         var text = document.createTextNode(p);
                         span.appendChild(text);
-                        span.setAttribute("class", "id=C" + comment[ktemp].id);
+                        span.setAttribute("class", "id=C" + this.comment[ktemp].id_comment);
                         textEdit.appendChild(span);
                     }
                     //该字既是标记又是批注
@@ -828,7 +915,7 @@
                         var span = document.createElement("span");
                         var text = document.createTextNode(p);
                         span.appendChild(text);
-                        span.setAttribute("class", "id=M" + mark[jtemp].id + " id=C" + comment[ktemp].id);
+                        span.setAttribute("class", "id=M" + this.mark[jtemp].id_mark + " id=C" + this.comment[ktemp].id_comment);
                         textEdit.appendChild(span);
                     }
                 }
@@ -843,21 +930,21 @@
                 //判断变量赋值
                 var a = 0;
                 //文本逐字遍历
-                for (var i = 0; i < content.length; i++) {
+                for (var i = 0; i < this.content.length; i++) {
                     //按顺序依次获得文本中的字
-                    var p = content.charAt(i);
+                    var p = this.content.charAt(i);
                     //批注下标初始化
                     var jtemp = 0;
                     //批注数组遍历
-                    for (var j = 0; j < comment.length; j++) {
+                    for (var j = 0; j < this.comment.length; j++) {
                         //该字不在该条批注内
-                        if (i < comment[j].begin || i >= comment[j].end) {
+                        if (i < this.comment[j].begin_comment || i >= this.comment[j].end_comment) {
                             a = 0;
                             jtemp = j;
                             continue;
                         }
                         //该字在该条批注内
-                        if (i >= comment[j].begin && i < comment[j].end) {
+                        if (i >= this.comment[j].begin_comment && i < this.comment[j].end_comment) {
                             a = 1;
                             jtemp = j;
                             break;
@@ -874,7 +961,7 @@
                         var span = document.createElement("span");
                         var text = document.createTextNode(p);
                         span.appendChild(text);
-                        span.setAttribute("class", "comment id=C" + comment[jtemp].id);
+                        span.setAttribute("class", "comment id=C" + this.comment[jtemp].id_comment);
                         span.setAttribute("data-toggle", "modal");
                         span.setAttribute("data-target", "#layer-comment-record");
                         textComment.appendChild(span);
@@ -891,21 +978,21 @@
                 //判断变量赋值
                 var a = 0;
                 //文本逐字遍历
-                for (var i = 0; i < content.length; i++) {
+                for (var i = 0; i < this.content.length; i++) {
                     //按顺序依次获得文本中的字
-                    var p = content.charAt(i);
+                    var p = this.content.charAt(i);
                     //标记下标初始化
                     var jtemp = 0;
                     //标记数组遍历
-                    for (var j = 0; j < mark.length; j++) {
+                    for (var j = 0; j < this.mark.length; j++) {
                         //该字不在该条标记内
-                        if (i < mark[j].begin || i >= mark[j].end) {
+                        if (i < this.mark[j].begin_mark || i >= this.mark[j].end_mark) {
                             a = 0;
                             jtemp = j;
                             continue;
                         }
                         //该字在该条标记内
-                        if (i >= mark[j].begin && i < mark[j].end) {
+                        if (i >= this.mark[j].begin_mark && i < this.mark[j].end_mark) {
                             a = 1;
                             jtemp = j;
                             break;
@@ -922,7 +1009,7 @@
                         var span = document.createElement("span");
                         var text = document.createTextNode(p);
                         span.appendChild(text);
-                        span.setAttribute("class", "mark id=M" + mark[jtemp].id);
+                        span.setAttribute("class", "mark id=M" + this.mark[jtemp].id_mark);
                         textMark.appendChild(span);
                     }
                 }
@@ -937,12 +1024,11 @@
              * 将碎片拼接，依次比较对应target，begin，end
              */
             getMarkChange() {
-                //创建标记更新数组
-                var marks_modify = new Array();
+                var textEdit = document.getElementById("text-edit");    //  修订版文本
                 //遍历标记数组
-                for (var i = 0; i < mark.length; i++) {
+                for (var i = 0; i < this.mark.length; i++) {
                     //依次获得每条标记碎片文字
-                    var marks = document.getElementsByClassName("id=M" + mark[i].id);
+                    var marks = document.getElementsByClassName("id=M" + this.mark[i].id_mark);
                     //初始化每条标记内容
                     var text = '';
                     //遍历每条标记中的每个字
@@ -954,12 +1040,28 @@
                     //获取该条新标记的位置
                     var newBegin = (textEdit.innerText).indexOf(text);
                     var newEnd = newBegin + text.length;
+                    var before = '';
+                    for (k = 0; k < 5; k++) {
+                        var b = textEdit.innerText.charAt(newBegin-5+k);
+                        before += b;
+                    }
+                    var after = '';
+                    for (m = 0; m < 5; m++) {
+                        var e = textEdit.innerText.charAt(newEnd+1+m);
+                        after += e;
+                    }
                     //标记被修改创建标记更新数组
-                    if (text != mark[i].target || newBegin != mark[i].begin || newEnd != mark[i].end) {
-                        marks_modify.push("{id:" + mark[i].id + ",target:" + text + ",begin:" / +newBegin + ",end:" + newEnd + ",before:" + ",after:" + "}")
+                    if (text != this.mark[i].target_mark || newBegin != this.mark[i].begin_mark || newEnd != this.mark[i].end_mark) {
+                        marks_modify.push({
+                            id: this.mark[i].id_mark,
+                            target: text,
+                            begin: newBegin,
+                            end: newEnd,
+                            before: before,
+                            after: after,
+                        })
                     }
                 }
-                return marks_modify;
             },
 
 
@@ -968,12 +1070,11 @@
              * 将碎片拼接，依次比较对应target，begin，end
              */
             getCommentChange() {
-                //创建批注更新数组
-                var comments_modify = new Array();
+                var textEdit = document.getElementById("text-edit");    //  修订版文本
                 //遍历批注数组
-                for (var i = 0; i < comment.length; i++) {
+                for (var i = 0; i < this.comment.length; i++) {
                     //依次获得每条批注碎片文字
-                    var comments = document.getElementsByClassName("id=C" + comment[i].id);
+                    var comments = document.getElementsByClassName("id=C" + this.comment[i].id_comment);
                     //初始化每条批注内容
                     var text = '';
                     //遍历每条批注中的每个字
@@ -986,12 +1087,54 @@
                     var newBegin = (textEdit.innerText).indexOf(text);
                     var newEnd = newBegin + text.length;
                     //批注被修改创建批注更新数组
-                    if (text != comment[i].target || newBegin != comment[i].begin || newEnd != comment[i].end) {
-                        comments_modify.push("{id:" + comment[i].id + ",target:" + text + ",begin:" + newBegin + ",end" + newEnd + "}")
+                    if (text != this.comment[i].target_comment || newBegin != this.comment[i].begin_comment || newEnd != this.comment[i].end_comment) {
+                        comments_modify.push({
+                            id: this.comment[i].id_comment,
+                            target: text,
+                            begin: newBegin,
+                            end: newEnd,
+                        })
                     }
                 }
-                return comments_modify;
-            }
+            },
+
+
+            /**
+             * 获得删除批注数组
+             */
+            getCommentDelete() {
+                var textEdit = document.getElementById("text-edit");    //  修订版文本
+                //遍历批注数组
+                for (var i = 0; i < this.comment.length; i++) {
+                    //依次获得每条批注碎片文字
+                    var comments = document.getElementsByClassName("id=C" + this.comment[i].id);
+                    //向删除批注数组中添加元素
+                    if (comments.length == 0) {
+                        comments_delete.push({
+                            id: this.comment[i].id
+                        })
+                    }
+                }
+            },
+
+
+            /**
+             * 获得删除标记数组
+             */
+            getMarkDelete() {
+                var textEdit = document.getElementById("text-edit");    //  修订版文本
+                //遍历标记数组
+                for (var i = 0; i < this.mark.length; i++) {
+                    //依次获得每条标记碎片文字
+                    var marks = document.getElementsByClassName("id=M" + this.mark[i].id);
+                    // 向删除标记数组添加元素
+                    if (marks.length == 0) {
+                        marks_delete.push({
+                            id: this.mark[i].id
+                        })
+                    }
+                }
+            },
         }
     }
 </script>
