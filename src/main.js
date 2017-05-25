@@ -292,11 +292,11 @@ router.beforeEach( (to, from, next) => {
         }
     }else if (user_item == 'user'){
         for (let i=0 ; i<user_router.length ; i++) {
-            if (to.path == user_router[i] || to.path == user_router[i]){
+            if (to.path == user_router[i]){
                 console.log('你只是普通用户');
-                next('/user')
-            }else{
                 next()
+            }else{
+                next('/user')
             }
         }
     }else {
