@@ -18,36 +18,46 @@ Vue.use(Vuex);
 
 
 //定义的全局变量
-// Vue.prototype.Token='';
 Vue.prototype.response={};
 
 
 
 //定义的post的vue-router全局函数，以json形式传递数据
-Vue.prototype.HttpPostJson=function (url,object,success,fail) {
-    // this.BeforeHttp(object);
-    this.$http.post(url, object,).then(function (response) {
-        this.response=response;
-        this.BeforeSuccess();
-        success(this.response);
-        this.AfterSuccess(this.response);
-        // console.log(JSON.stringify(response.body))
-    },function () {
-        fail()
-    })
+Vue.prototype.HttpJson = function (url, type, params, success, fail) {
+    // this.BeforeHttp(params);
+    params.token=this.$store.getters.GetToken;
+    console.log("你猜猜token有没有 "+params.token);
+    if (type.toLocaleLowerCase() == "get") {
+        this.$http.get(url).then(function (response) {
+            this.response=response;
+            this.BeforeSuccess();
+            success(this.response);
+        },function () {
+            fail()
+        })
+    } else if (type.toLocaleLowerCase() == "post") {
+        this.$http.post(url, params,
+            {headers:{'Content-Type':'application/json;charset=UTF-8'}}
+        ).then(function (response) {
+            this.response=response;
+            this.BeforeSuccess();
+            success(this.response);
+            this.AfterSuccess(this.response);
+            // console.log(JSON.stringify(response.body))
+        },function () {
+            fail()
+        })
+    }
 };
 
 
 //定义的post的vue-router全局函数，以form-data形式传递数据
-Vue.prototype.HttpPostForm=function (url,object,success,fail) {
-    // this.BeforeHttp(object);
-    object.token=this.$store.getters.GetToken;
-    console.log("你猜猜token有没有 "+object.token);
-    this.$http.post(url, object,
-        {emulateJSON: true,
-        // {
-        //  headers:{'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'}
-         }   //将json形式转换为form-data
+Vue.prototype.HttpPostForm=function (url,params,success,fail) {
+    // this.BeforeHttp(params);
+    params.token=this.$store.getters.GetToken;
+    console.log("你猜猜token有没有 "+params.token);
+    this.$http.post(url, params,
+        {emulateJSON: true}   //将json形式转换为form-data
         ).then(function (response) {
         this.response=response;
         this.BeforeSuccess();
@@ -59,44 +69,47 @@ Vue.prototype.HttpPostForm=function (url,object,success,fail) {
 };
 
 //定义的get的vue-router全局函数，以json形式传递数据
-Vue.prototype.HttpGetJson=function (url,object,success,fail) {
-    let new_url=url+'?'+object.key+'='+object.value;  //get的数据传递格式
-    this.$http.get(new_url).then(function (response) {
-        this.response=response;
-        this.BeforeSuccess();
-        success(this.response);
-    },function () {
-        fail()
-    })
-};
+// Vue.prototype.HttpGetJson=function (url,params,success,fail) {
+//     //get的数据传递格式
+//     this.$http.get(url).then(function (response) {
+//         this.response=response;
+//         this.BeforeSuccess();
+//         success(this.response);
+//     },function () {
+//         fail()
+//     })
+// };
 //定义的get的vue-router全局函数，以form-data形式传递数据
-Vue.prototype.HttpGetForm=function (url,object,success,fail) {
-    let new_url=url+'?'+object.key+'='+object.value;
-    this.$http.get(new_url,
-        {emulateJSON: true}).then(function (response) {
-        this.response=response;
-        this.BeforeSuccess();
-        success(this.response);
-    },function () {
-        fail()
-    })
-};
+// Vue.prototype.HttpGetForm=function (url,object,success,fail) {
+//     let new_url=url+'?'+object.key+'='+object.value;
+//     this.$http.get(new_url,
+//         {emulateJSON: true}).then(function (response) {
+//         this.response=response;
+//         this.BeforeSuccess();
+//         success(this.response);
+//     },function () {
+//         fail()
+//     })
+// };
 
 //判断是否有无token
 // Vue.prototype.BeforeHttp=function (object) {
-//     console.log("检查超级用户是否有token "+this.$store.getters.GetToken);
-//     object.token=this.$store.getters.GetToken;
-//     console.log("object"+object.token);
-//     let token = this.$store.getters.GetToken;
-//     if (object.token.length == 0 || token.length == 0) {
-//         this.$http.get('/ancient_books/getToken.action').then(function (response) {
-//             token = response.body.token;
-//             console.log("检测token成功"+token );
-//         });
-//         this.$store.commit("change_token",token);
-//     }else {
-//         console.log("不需要更token");
+//     if (object.length != 0){
+//
 //     }
+    // console.log("检查超级用户是否有token "+this.$store.getters.GetToken);
+    // object.token=this.$store.getters.GetToken;
+    // console.log("object"+object.token);
+    // let token = this.$store.getters.GetToken;
+    // if (object.token.length == 0 || token.length == 0) {
+    //     this.$http.get('/ancient_books/getToken.action').then(function (response) {
+    //         token = response.body.token;
+    //         console.log("检测token成功"+token );
+    //     });
+    //     this.$store.commit("change_token",token);
+    // }else {
+    //     console.log("不需要更token");
+    // }
 // };
 
 //回调success前的函数
