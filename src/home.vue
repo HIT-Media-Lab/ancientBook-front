@@ -16,6 +16,9 @@
                   onmouseout=" document.getElementById('Logout').style.visibility='hidden';
              document.getElementById('Logout').style.transition='all ease 3s'">用户名</span>
             </router-link>
+            <button @click="test1()">有用户权限</button>
+            <button @click="test2()">有超级用户权限</button>
+            <button @click="test3()">没用权限</button>
             <!--<input v-model="token" style="visibility: hidden">-->
             <div class="cancel_word">
                 <button @click="Logout" id="Logout">注销</button>
@@ -64,6 +67,15 @@
             enter:function () {
                 this.sort_box = '';
                 this.$router.push({path: '/search_index'});
+            },
+            test1(){
+                localStorage.setItem('user',JSON.stringify("user"));
+            },
+            test2(){
+                localStorage.setItem('user',JSON.stringify("admin"));
+            },
+            test3(){
+                localStorage.setItem('user',JSON.stringify("guest"));
             }
         },
     }

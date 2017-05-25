@@ -81,6 +81,7 @@ import store from './store'
 ////             alert(this.show)
 //         },
 
+
          /**
           *  账号 正则判断输入是否规范
           */

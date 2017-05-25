@@ -30,7 +30,7 @@ Vue.prototype.HttpJson = function (url, type, params, success, fail) {
     if (type.toLocaleLowerCase() == "get") {
         this.$http.get(url).then(function (response) {
             this.response=response;
-            this.BeforeSuccess();
+            this.BeforeSuccess(this.response);
             success(this.response);
         },function () {
             fail()
@@ -40,7 +40,7 @@ Vue.prototype.HttpJson = function (url, type, params, success, fail) {
             {headers:{'Content-Type':'application/json;charset=UTF-8'}}
         ).then(function (response) {
             this.response=response;
-            this.BeforeSuccess();
+            this.BeforeSuccess(this.response);
             success(this.response);
             this.AfterSuccess(this.response);
             // console.log(JSON.stringify(response.body))
@@ -60,7 +60,7 @@ Vue.prototype.HttpPostForm=function (url,params,success,fail) {
         {emulateJSON: true}   //将json形式转换为form-data
         ).then(function (response) {
         this.response=response;
-        this.BeforeSuccess();
+        this.BeforeSuccess(this.response);
         success(this.response);
         this.AfterSuccess( this.response);
     },function () {
