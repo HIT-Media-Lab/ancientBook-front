@@ -219,9 +219,9 @@
 
             //向后端发起请求获取用户数据列表，显示在前端页面
             getUsers(pages){
-                this.get_user.key="page";
-                this.get_user.value=pages;
-                this.HttpGetForm(this.get_url,this.get_user,this.successGet, this.failGet);
+                this.get_user.value="page="+pages;
+                this.get_url = this.get_url+'?'+this.get_user.value;
+                this.HttpJson(this.get_url,'get',this.get_user,this.successGet, this.failGet);
             },
 
             //创建用户 post用户数据 success回调函数
@@ -245,7 +245,7 @@
                 this.add_user.name = this.user_name;
                 this.add_user.account = this.account;
                 this.add_user.pwd = this.pwd;
-                this.HttpPostForm(this.add_url, this.add_user, this.successAdd, this.failAdd);
+                this.HttpJson(this.add_url, 'post', this.add_user, this.successAdd, this.failAdd);
             },
 
             //创建用户的模态框 系列函数
@@ -434,7 +434,7 @@
 
             deleteUsers(index){
                 this.delete_user.user_id = this.user_data[index].user_id;
-                this.HttpPostForm(this.delete_url,this.delete_user,this.successDelete,this.failDelete);
+                this.HttpJson(this.delete_url,'post',this.delete_user,this.successDelete,this.failDelete);
             },
 
 
@@ -478,7 +478,7 @@
                 this.modify_user.name=this.back_username;
                 this.modify_user.pwd=this.pwd;
                 this.modify_user.user_id=this.user_data[this.back_index].user_id;
-                this.HttpPostForm(this.modify_url,this.modify_user,this.successModify,this.failModify);
+                this.HttpJson(this.modify_url,'post',this.modify_user,this.successModify,this.failModify);
             },
 
             //修改执行的函数
@@ -499,14 +499,14 @@
             },
 
 
-            preP(){
-                this.page = --this.page;
+            preP(p){
+                this.page = p;
                 this.cleanData();
                 console.log("pre:"+this.page);
             },
 
-            nextP(){
-                this.page= ++this.page;
+            nextP(p){
+                this.page= p;
                 this.cleanData();
                 console.log("next:"+this.page);
             },
@@ -522,8 +522,6 @@
                 this.user_data.splice(0, this.user_data.length);
                 this.getUsers(this.page);
             }
-
-
         }
     }
 

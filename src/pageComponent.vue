@@ -28,7 +28,7 @@
                 } else if (this.cur_page > 1 && this.cur_page <= this.cur_max) {
                     this.ban_1 = false;
                     this.cur_page = --this.cur_page;
-                    this.$emit('pre_page');
+                    this.$emit('pre_page',this.cur_page);
                 }
             },
 
@@ -39,7 +39,7 @@
                 } else if (this.cur_page >= 1 && this.cur_page < this.cur_max) {
                     this.ban_2 = false;
                     this.cur_page = ++this.cur_page;
-                    this.$emit('next_page');
+                    this.$emit('next_page',this.cur_page);
                 }
             },
 

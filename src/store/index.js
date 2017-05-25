@@ -19,7 +19,7 @@ const store = new Vuex.Store({
             '/picture_word','/comment','/revise','/search_index','/charater_noumenon','/charater_noumenon_check',
             '/build_noumenon','/build_character_steptwo','/build_character_stepthree'],
         acl_admin:['/super_user'],
-        acl_guest:['/login'],
+        acl_guest:['/login']
     },
     getters,
     mutations,

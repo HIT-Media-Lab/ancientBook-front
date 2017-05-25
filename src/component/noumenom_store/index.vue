@@ -1,7 +1,7 @@
 <template>
     <div class="noumenom">
-   <navigation_bar></navigation_bar>
-        <noumenom></noumenom>
+    <navigation_bar></navigation_bar>   <!--本体导航条-->
+        <noumenom></noumenom>   <!--本体库页面内容-->
     </div>
 </template>
 
