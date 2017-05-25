@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-on="http://www.w3.org/1999/xhtml">
     <!--顶端固定不变的导航条-->
     <div id="store" class="store">
         <div class="search">
@@ -45,8 +45,6 @@
             return{
                 sort_box:'',
                 url: '/ancient_books/logout.action',
-//                token:'rtgrtg'
-//                show:false
             }
         },
         methods:{
@@ -54,7 +52,7 @@
             Logout:function () {
                 this.$http.get(this.url).then(function () {
                     alert("注销成功");
-                    this.$store.commit('change_guest');
+                    localStorage.setItem('user',JSON.stringify("guest"));
                     this.$router.push({path: '/login'});
                 },function () {
                     alert("error")
@@ -68,11 +66,6 @@
                 this.$router.push({path: '/search_index'});
             }
         },
-//        watch:{
-//            Show(){
-//                this.show = this.$store.getters.GetShow
-//            }
-//        }
     }
 </script>
 

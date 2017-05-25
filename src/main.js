@@ -252,8 +252,12 @@ router.beforeEach( (to, from, next) => {
     let admin_router = router.app.$store.getters.ACL_admin;
     let user_router = router.app.$store.getters.ACL_user;
     let guest_router = router.app.$store.getters.ACL_guest;
-    let iflogin = router.app.$store.getters.IfLogin;
-    if (iflogin == 'guest'){
+
+    let user_item = JSON.parse(localStorage.getItem('user'));
+    if (user_item == undefined) {
+        localStorage.setItem('user',JSON.stringify("guest"));
+    }
+    if (user_item == 'guest'){
         for (let i=0 ; i<guest_router.length ; i++){
             if (to.path == guest_router[i]){
                 console.log("在登录页面");
@@ -263,7 +267,7 @@ router.beforeEach( (to, from, next) => {
                 next('/login')
             }
         }
-    }else if (iflogin == 'admin'){
+    }else if (user_item == 'admin'){
         for (let i=0 ; i<admin_router.length ; i++){
             if (to.path == admin_router[i]){
                 console.log("超级用户");
@@ -273,7 +277,7 @@ router.beforeEach( (to, from, next) => {
                 console.log('不是超级用户')
             }
         }
-    }else if (iflogin == 'user'){
+    }else if (user_item == 'user'){
         for (let i=0 ; i<user_router.length ; i++) {
             if (to.path == user_router[i] || to.path == user_router[i]){
                 console.log('你只是普通用户');
