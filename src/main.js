@@ -251,17 +251,18 @@ const router = new VueRouter({
         {
             path: '/',
             redirect: '/login'  //默认路由
-        },
-        {
-            path: '*',
-            redirect: '/login' // 输入其他不存在的地址自动跳回首页
         }
+        // {
+        //     path: '*',
+        //     redirect: '/login' // 输入其他不存在的地址自动跳回首页
+        // }
 
     ]
 });
 
 router.beforeEach( (to, from, next) => {
     // 模拟登陆状态
+
     let admin_router = router.app.$store.getters.ACL_admin;
     let user_router = router.app.$store.getters.ACL_user;
     let guest_router = router.app.$store.getters.ACL_guest;
@@ -270,37 +271,39 @@ router.beforeEach( (to, from, next) => {
     if (user_item == undefined) {
         localStorage.setItem('user',JSON.stringify("guest"));
     }
+    let flag = false;
     if (user_item == 'guest'){
-        for (let i=0 ; i<guest_router.length ; i++){
+        for (let i = 0; i < guest_router.length; i++){
             if (to.path == guest_router[i]){
-                console.log("在登录页面");
-                next ()
-            }else {
-                console.log("还没登录");
-                next('/login')
+                console.log("guest");
+                flag = true;
+                next ();
+                continue;
             }
         }
-    }else if (user_item == 'admin'){
-        for (let i=0 ; i<admin_router.length ; i++){
+
+    } else if (user_item == 'admin'){
+        for (let i = 0; i < admin_router.length; i++){
             if (to.path == admin_router[i]){
-                console.log("超级用户");
-                next()
-            }else {
-                next('/super_user');
-                console.log('不是超级用户')
+                console.log("admin");
+                flag = true;
+                next();
+                continue;
             }
         }
-    }else if (user_item == 'user'){
-        for (let i=0 ; i<user_router.length ; i++) {
+    } else if (user_item == 'user'){
+        for (let i = 0; i < user_router.length; i++) {
             if (to.path == user_router[i]){
-                console.log('你只是普通用户');
-                next()
-            }else{
-                next('/user')
+                console.log('user');
+                flag = true;
+                next();
+                continue;
             }
         }
-    }else {
-        next()
+    }
+    if (!flag) {
+        console.log("go to 404");
+        next('/404');
     }
 
 });
