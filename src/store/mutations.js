@@ -8,13 +8,13 @@ export default {
     change_token(state,token){
        state.Token=token
     },
-    change_iflogin0(state){
-        state.ifLogin = '0'
+    change_guest(state){
+        state.ifLogin = 'guest'
     },
-    change_iflogin1(state){
-        state.ifLogin = '1'
+    change_admin(state){
+        state.ifLogin = 'admin'
     },
-    change_iflogin2(state){
-        state.ifLogin = '2'
+    change_user(state){
+        state.ifLogin = 'user'
     }
 }

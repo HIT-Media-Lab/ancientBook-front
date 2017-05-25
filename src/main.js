@@ -44,9 +44,9 @@ Vue.prototype.HttpPostForm=function (url,object,success,fail) {
     object.token=this.$store.getters.GetToken;
     console.log("你猜猜token有没有 "+object.token);
     this.$http.post(url, object,
-        // {emulateJSON: true,
-        {
-         headers:{'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'}
+        {emulateJSON: true,
+        // {
+        //  headers:{'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'}
          }   //将json形式转换为form-data
         ).then(function (response) {
         this.response=response;
@@ -247,54 +247,46 @@ const router = new VueRouter({
     ]
 });
 
-// router.beforeEach( (to, from, next) => {
-//     // 模拟登陆状态
-//     console.log("去啊年控制");
-//     let iflogin = router.app.$store.getters.IfLogin;
-//     if (to.path == '/user'){
-//         next(false);
-//         console.log("kwjefwejkfn")
-//     }else {
-//         next();
-//         console.log("65451")
-//     }
+router.beforeEach( (to, from, next) => {
+    // 模拟登陆状态
+    let admin_router = router.app.$store.getters.ACL_admin;
+    let user_router = router.app.$store.getters.ACL_user;
+    let guest_router = router.app.$store.getters.ACL_guest;
+    let iflogin = router.app.$store.getters.IfLogin;
+    if (iflogin == 'guest'){
+        for (let i=0 ; i<guest_router.length ; i++){
+            if (to.path == guest_router[i]){
+                console.log("在登录页面");
+                next ()
+            }else {
+                console.log("还没登录");
+                next('/login')
+            }
+        }
+    }else if (iflogin == 'admin'){
+        for (let i=0 ; i<admin_router.length ; i++){
+            if (to.path == admin_router[i]){
+                console.log("超级用户");
+                next()
+            }else {
+                next('/super_user');
+                console.log('不是超级用户')
+            }
+        }
+    }else if (iflogin == 'user'){
+        for (let i=0 ; i<user_router.length ; i++) {
+            if (to.path == user_router[i] || to.path == user_router[i]){
+                console.log('你只是普通用户');
+                next('/user')
+            }else{
+                next()
+            }
+        }
+    }else {
+        next()
+    }
 
-    // if (from.path == '/login'){
-    //     if (iflogin == '0') {
-    //         alert("还没有登录");
-    //         next(false)
-    //     }else {
-    //         next()
-    //     }
-    // }else if (from.path == '/super_user'){
-    //     if (iflogin =='1') {
-    //         console.log("超级管理员只能在当前页面");
-    //         next(false)
-    //     }else {
-    //         next()
-    //     }
-    // }else {
-    //     console.log("jhfqw");
-    //     next()
-    // }
-        // else {
-    //     if (to.path == '/login'){
-    //         if (iflogin == '2') {
-    //             alert("无法跳转,请先注销");
-    //             next(false);
-    //         }else {
-    //             next('/login')
-    //         }
-    //     }else if (to.path == '/super_user'){
-    //         if (iflogin == '2') {
-    //             alert("无法跳转,请先注销");
-    //             next(false);
-    //         }else {
-    //             next('/super_user')
-    //         }
-    //     }
-    // }
-// });
+});
 
 // 现在我们可以启动应用了！
 // 路由器会创建一个 App 实例，并且挂载到选择符 #app 匹配的元素上。

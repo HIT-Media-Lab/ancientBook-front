@@ -143,7 +143,7 @@ import store from './store'
                      this.CreateVPicture()
                  }
              },function () {
-                 alert("error")
+//                 alert("error")
              })
          },
 
@@ -158,12 +158,12 @@ import store from './store'
              }
              if (response.body.result == 1) {
                  if (response.body.su == 1) {
-                     this.$store.commit('change_iflogin1');
+                     this.$store.commit('change_admin');
                      this.$router.push({path: '/super_user'});
                      console.log("登录成功后的全局Token"+this.$store.getters.GetToken)
                  }
                  if (response.body.su == 0) {
-                     this.$store.commit('change_iflogin2');
+                     this.$store.commit('change_user');
                      this.$router.push({path: '/user'});
                  }
              }
@@ -193,17 +193,17 @@ import store from './store'
              this.$http.get(this. autologin_url).then(function (response) {
                  if (response.body.result==1) {
                      if (response.body.su == 1)
-                         this.$store.commit('change_iflogin2');
+                         this.$store.commit('change_user');
                          this.$router.push({path: '/user'});
                      if (response.body.su = 0)
-                         this.$store.commit('change_iflogin1');
+                         this.$store.commit('change_admin');
                          this.$router.push({path: '/super_user'});
                  }
                  if (response.body.result==0)
-                     this.$store.commit('change_iflogin0');
+                     this.$store.commit('change_guest');
                      this.$router.push({path: '/login'});
              },function () {
-                 alert("error")
+//                 alert("error")
              })
          }
      }

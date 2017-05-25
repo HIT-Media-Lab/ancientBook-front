@@ -14,5 +14,15 @@ export default {
     GetToken:state => {
         return state.Token
     },
+    ACL_user:state => {
+        return state.acl_user
+    },
+    ACL_admin:state => {
+        return state.acl_admin
+    },
+    ACL_guest:state => {
+        return state.acl_guest
+    }
+
 
 }

@@ -6,15 +6,15 @@ export default {
       return commit('login_show')
     },
 
-    CHANGE_IFLOGIN0({commit}){
-        return commit('change_iflogin0')
+    CHANGE_GUEST({commit}){
+        return commit('change_guest')
     },
 
-    CHANGE_IFLOGIN1({commit}){
-        return commit('change_iflogin1')
+    CHANGE_ADMIN({commit}){
+        return commit('change_admin')
     },
 
-    CHANGE_IFLOGIN2({commit}){
-        return commit('change_iflogin2')
+    CHANGE_user({commit}){
+        return commit('change_user')
     },
 }
