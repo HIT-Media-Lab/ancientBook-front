@@ -247,14 +247,18 @@ const router = new VueRouter({
     ]
 });
 
-// router.beforeEach( (to, from, next) => {
-//     // 模拟登陆状态
-//     let iflogin = router.app.$store.getters.IfLogin;
-    // if(to.meta.requiresAuth){
-    //     next()
-    // }else {
-    //     next('login')
-    // }
+router.beforeEach( (to, from, next) => {
+    // 模拟登陆状态
+    console.log("去啊年控制");
+    let iflogin = router.app.$store.getters.IfLogin;
+    if (to.path == '/user'){
+        next(false);
+        console.log("kwjefwejkfn")
+    }else {
+        next();
+        console.log("65451")
+    }
+
     // if (from.path == '/login'){
     //     if (iflogin == '0') {
     //         alert("还没有登录");
@@ -270,26 +274,27 @@ const router = new VueRouter({
     //         next()
     //     }
     // }else {
+    //     console.log("jhfqw");
     //     next()
     // }
-//         // else {
-//     //     if (to.path == '/login'){
-//     //         if (iflogin == '2') {
-//     //             alert("无法跳转,请先注销");
-//     //             next(false);
-//     //         }else {
-//     //             next('/login')
-//     //         }
-//     //     }else if (to.path == '/super_user'){
-//     //         if (iflogin == '2') {
-//     //             alert("无法跳转,请先注销");
-//     //             next(false);
-//     //         }else {
-//     //             next('/super_user')
-//     //         }
-//     //     }
-//     // }
-// });
+        // else {
+    //     if (to.path == '/login'){
+    //         if (iflogin == '2') {
+    //             alert("无法跳转,请先注销");
+    //             next(false);
+    //         }else {
+    //             next('/login')
+    //         }
+    //     }else if (to.path == '/super_user'){
+    //         if (iflogin == '2') {
+    //             alert("无法跳转,请先注销");
+    //             next(false);
+    //         }else {
+    //             next('/super_user')
+    //         }
+    //     }
+    // }
+});
 
 // 现在我们可以启动应用了！
 // 路由器会创建一个 App 实例，并且挂载到选择符 #app 匹配的元素上。
