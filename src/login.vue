@@ -179,7 +179,7 @@ import store from './store'
              this.object.pwd=this.pwd;
              this.object.v=this.v;
              this.object.auto=this.auto;
-             console.log("全局token"+this.Token);
+             console.log("全局token"+this.$store.getters.GetToken);
              // 与后端对接的vue-resource
              this.HttpPostForm(this.login_url,this.object,this.LoginSuccess,this.LoginFail);
          },
