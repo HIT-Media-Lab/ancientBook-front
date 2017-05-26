@@ -154,6 +154,7 @@ import  charater_noumenon_check from  './component/noumenon_store/character/char
 import  build_noumenon from  './component/noumenon_store/new_build/index.vue'
 import  build_character_steptwo from  './component/noumenon_store/new_build/step_two/character.vue'
 import  build_character_stepthree from  './component/noumenon_store/new_build/step_three/character.vue'
+import  institution_noumenon_check from  './component/noumenon_store/'
 
 // 创建一个路由器实例
 // 并且配置路由规则
@@ -172,22 +173,44 @@ const router = new VueRouter({
         {
             path:'/user',
             component:user,
+            children:[
+                {
+                    path:'/user/upload_step1',
+                    component:upload_step1
+                },
+                {
+                    path:'/user/mybook_index',
+                    component:mybook_index,
+                },
+                {
+                    path:'/user/my_collection_index',
+                    component:my_collection_index
+                },
+                {
+                    path:'/user/my_offer_index',
+                    component:my_offer_index
+                },
+
+            ]
         },
         {
             path:'/noumenon_store',
-            component:noumenon_store
-        },
-        {
-            path:'/charater_noumenon_check',
-            component:charater_noumenon_check
+            component:noumenon_store,
+            children:[
+                {
+                    path:'/charater_noumenon_check',
+                    component:charater_noumenon_check
+                },
+                {
+                    path:'/build_noumenon',
+                    component:build_noumenon
+                },
+
+            ]
         },
         {
             path:'/charater_noumenon',
             component:charater_noumenon
-        },
-        {
-            path:'/build_noumenon',
-            component:build_noumenon
         },
         {
             path:'/build_character_steptwo',
@@ -201,15 +224,7 @@ const router = new VueRouter({
             path:'/bookstore',
             component:bookstore
         },
-        {
-            path:'/upload_step1',
-            component:upload_step1
-        },
-        {
-            path:'/mybook_index',
-            component:mybook_index,
-            name:mybook_index
-        },
+
         {
             path:'/alupload_index',
             component:alupload_index
@@ -217,14 +232,6 @@ const router = new VueRouter({
         {
             path:'/private_books_index',
             component:private_books_index
-        },
-        {
-            path:'/my_collection_index',
-            component:my_collection_index
-        },
-        {
-            path:'/my_offer_index',
-            component:my_offer_index
         },
         {
             path:'/noumenon_mark',
