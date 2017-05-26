@@ -161,6 +161,7 @@ import  place_noumenon from  './component/noumenon_store/place_name/index.vue'
 import  terms_noumenon from  './component/noumenon_store/terms/index.vue'
 import  time_noumenon from  './component/noumenon_store/Time/index.vue'
 
+
 // 创建一个路由器实例
 // 并且配置路由规则
 const router = new VueRouter({
@@ -200,39 +201,66 @@ const router = new VueRouter({
         },
         {
             path:'/noumenon_store',
-            component:noumenon_store,
-            children:[
-                {
-                    path:'/noumenon_store/charater_noumenon',
-                    component:charater_noumenon
+                    component:noumenon_store,
+                    children:[
+                        {
+                            path:'/noumenon_store/charater_noumenon',
+                            component:charater_noumenon,
+                            children:[
+                                {
+                                    path:'/noumenon_store/charater_noumenon/charater_message/:id',
+                                    component:charater_message
+                                },
+                            ]
                 },
                 {
                     path:'/noumenon_store/institution_noumenon',
-                    component:institution_noumenon
+                    component:institution_noumenon,
+                    children:[
+
+                    ]
                 },
                 {
                     path:'/noumenon_store/literature_noumenon',
-                    component:literature_noumenon
+                    component:literature_noumenon,
+                    children:[
+
+                    ]
                 },
                 {
                     path:'/noumenon_store/office_noumenon',
-                    component:office_noumenon
+                    component:office_noumenon,
+                    children:[
+
+                    ]
                 },
                 {
                     path:'/noumenon_store/place_noumenon',
-                    component:place_noumenon
+                    component:place_noumenon,
+                    children:[
+
+                    ]
                 },
                 {
                     path:'/noumenon_store/terms_noumenon',
-                    component:terms_noumenon
+                    component:terms_noumenon,
+                    children:[
+
+                    ]
                 },
                 {
                     path:'/noumenon_store/time_noumenon',
-                    component:time_noumenon
+                    component:time_noumenon,
+                    children:[
+
+                    ]
                 },
                 {
                     path:'/noumenon_store/build_noumenon',
-                    component:build_noumenon
+                    component:build_noumenon,
+                    children:[
+
+                    ]
                 },
 
             ]
