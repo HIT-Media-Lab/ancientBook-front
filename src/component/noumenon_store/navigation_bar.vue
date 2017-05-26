@@ -2,19 +2,25 @@
     <div class="noumenon-bar">
         <div class="bar-img">
             <div class="bar-header">
-                <h4 class="bar-title">人物</h4>
-                <h4 class="bar-title">文献</h4>
-                <h4 class="bar-title">术语</h4>
-                <h4 class="bar-title">时间</h4>
-                <h4 class="bar-title">职官</h4>
-                <h4 class="bar-title">机构</h4>
-                <h4 class="bar-title">地名</h4>
+                <button class="bar-title" @click="characterIndex()">人物</button>
+                <button class="bar-title">文献</button>
+                <button class="bar-title">术语</button>
+                <button class="bar-title">时间</button>
+                <button class="bar-title">职官</button>
+                <button class="bar-title">机构</button>
+                <button class="bar-title">地名</button>
             </div>
         </div>
     </div>
 </template>
 <script>
-
+    export default{
+        methods:{
+            characterIndex(){
+                this.$router.push({path:'/charater_noumenon'});
+            }
+        }
+    }
 </script>
 
 
@@ -30,11 +36,17 @@
     }
 
     .bar-header{
-        padding-left: 7em;
+        padding-left: 50px;
     }
 
     .bar-title{
-        padding-right: 3em;
+        margin-right: 20px;
+        margin-top: 10px;
+        margin-bottom: 10px;
         display:inline-block;
+        background-color: transparent;
+        border-color: transparent;
+        font-size: 15px;
+        width:80px;
     }
 </style>
