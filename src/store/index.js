@@ -20,6 +20,7 @@ const store = new Vuex.Store({
             '/build_noumenon','/build_character_steptwo','/build_character_stepthree'],
         acl_admin:['/login','/404','/super_user'],
         acl_guest:['/login','/404'],
+
     },
     getters,
     mutations,

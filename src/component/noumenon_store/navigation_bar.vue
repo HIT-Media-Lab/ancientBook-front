@@ -1,5 +1,5 @@
 <template>
-    <div class="noumenom-bar">
+    <div class="noumenon-bar">
         <div class="bar-img">
             <div class="bar-header">
                 <h4 class="bar-title">人物</h4>
@@ -19,7 +19,7 @@
 
 
 <style>
-    .noumenom-bar{
+    .noumenon-bar{
         padding-top: 2em;
     }
     .bar-img {
