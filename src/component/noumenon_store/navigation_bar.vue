@@ -22,8 +22,6 @@
         }
     }
 </script>
-
-
 <style>
     .noumenon-bar{
         padding-top: 2em;
@@ -34,11 +32,9 @@
         background-image: url("../../assets/img/本体库背景.png");
         background-size: 800px 65px;
     }
-
     .bar-header{
         padding-left: 50px;
     }
-
     .bar-title{
         margin-right: 20px;
         margin-top: 10px;

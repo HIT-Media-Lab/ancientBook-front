@@ -150,11 +150,16 @@ import  comment from  './component/user/myoffer/comment/index.vue'
 import  revise from  './component/user/myoffer/revise/index.vue'
 import  search_index from  './component/search/index.vue'
 import  charater_noumenon from './component/noumenon_store/character/index.vue'
-import  charater_noumenon_check from  './component/noumenon_store/character/character.vue'
+import  charater_message from  './component/noumenon_store/character/character.vue'
 import  build_noumenon from  './component/noumenon_store/new_build/index.vue'
 import  build_character_steptwo from  './component/noumenon_store/new_build/step_two/character.vue'
 import  build_character_stepthree from  './component/noumenon_store/new_build/step_three/character.vue'
-import  institution_noumenon_check from  './component/noumenon_store/'
+import  institution_noumenon from  './component/noumenon_store/institution/index.vue'
+import  literature_noumenon from './component/noumenon_store/literature/index.vue'
+import  office_noumenon from  './component/noumenon_store/office/index.vue'
+import  place_noumenon from  './component/noumenon_store/place_name/index.vue'
+import  terms_noumenon from  './component/noumenon_store/terms/index.vue'
+import  time_noumenon from  './component/noumenon_store/Time/index.vue'
 
 // 创建一个路由器实例
 // 并且配置路由规则
@@ -198,19 +203,43 @@ const router = new VueRouter({
             component:noumenon_store,
             children:[
                 {
-                    path:'/charater_noumenon_check',
-                    component:charater_noumenon_check
+                    path:'/noumenon_store/charater_noumenon',
+                    component:charater_noumenon
                 },
                 {
-                    path:'/build_noumenon',
+                    path:'/noumenon_store/institution_noumenon',
+                    component:institution_noumenon
+                },
+                {
+                    path:'/noumenon_store/literature_noumenon',
+                    component:literature_noumenon
+                },
+                {
+                    path:'/noumenon_store/office_noumenon',
+                    component:office_noumenon
+                },
+                {
+                    path:'/noumenon_store/place_noumenon',
+                    component:place_noumenon
+                },
+                {
+                    path:'/noumenon_store/terms_noumenon',
+                    component:terms_noumenon
+                },
+                {
+                    path:'/noumenon_store/time_noumenon',
+                    component:time_noumenon
+                },
+                {
+                    path:'/noumenon_store/build_noumenon',
                     component:build_noumenon
                 },
 
             ]
         },
         {
-            path:'/charater_noumenon',
-            component:charater_noumenon
+            path:'/charater_message',
+            component:charater_message
         },
         {
             path:'/build_character_steptwo',
