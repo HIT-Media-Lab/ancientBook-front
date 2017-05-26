@@ -18,16 +18,6 @@
         </div>
     </div>
 
-    <!--4层导航按钮-->
-    <div id="form-head">
-        <ul>
-            <li class="li-now">品种层</li>
-            <li>版本层</li>
-            <li>印次层</li>
-            <li>复本层</li>
-        </ul>
-    </div>
-
     <label><input type="checkbox" name="private"/>私密上傳</label>
 
     <div>
@@ -35,3 +25,20 @@
     </div>
 
 </template>
+
+<script>
+    import book_invoke from './book_invoke.vue';
+    import copy_layer from './copy_layer.vue';
+    import edition_layer from './editon_layer.vue';
+    import impression_layer from './impression_layer.vue';
+    import varieties_layer from './varieties_layer.vue';
+    export default{
+        components:{
+            book_invoke,
+            copy_layer,
+            edition_layer,
+            impression_layer,
+            varieties_layer,
+        }
+    }
+</script>
