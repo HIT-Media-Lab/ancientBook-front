@@ -16,5 +16,10 @@ export default {
     },
     change_user(state){
         state.ifLogin = 'user'
-    }
+    },
+    // character_id(state,num,id){
+    //     for (let i = 0; i<num; i++){
+    //         state.noumenon_character[i]=id[i]
+    //     }
+    // }
 }

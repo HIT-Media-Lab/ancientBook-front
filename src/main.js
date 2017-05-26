@@ -134,11 +134,14 @@ Vue.prototype.AfterSuccess=function (response) {
 
 // 定义组件, 也可以像教程之前教的方法从别的文件引入
 import  bookstore from './component/bookstore/index.vue'
-import  noumenon_store from  './component/noumenon_store/index.vue'
-import  user from  './component/user/index.vue'
 import  login from  './login.vue'
 import  super_user from  './super_user.vue'
+
+//用户
+import  user from  './component/user/index.vue'
 import  upload_step1 from  './component/user/upload/firststep/index.vue'
+import  upload_step2 from  './component/user/upload/secondstep/index.vue'
+import  upload_step3 from  './component/user/upload/thirdstep/index.vue'
 import  mybook_index from  './component/user/mybook/index.vue'
 import  alupload_index from  './component/user/mybook/alupload/index.vue'
 import  private_books_index from './component/user/mybook/private_books/index.vue'
@@ -149,17 +152,29 @@ import  picture_word from  './picture_word.vue'
 import  comment from  './component/user/myoffer/comment/index.vue'
 import  revise from  './component/user/myoffer/revise/index.vue'
 import  search_index from  './component/search/index.vue'
-import  charater_noumenon from './component/noumenon_store/character/index.vue'
-import  charater_message from  './component/noumenon_store/character/character.vue'
+
+//本体
+import  noumenon_store from  './component/noumenon_store/index.vue'
+//新建本体
 import  build_noumenon from  './component/noumenon_store/new_build/index.vue'
 import  build_character_steptwo from  './component/noumenon_store/new_build/step_two/character.vue'
 import  build_character_stepthree from  './component/noumenon_store/new_build/step_three/character.vue'
+//本体查看
 import  institution_noumenon from  './component/noumenon_store/institution/index.vue'
 import  literature_noumenon from './component/noumenon_store/literature/index.vue'
 import  office_noumenon from  './component/noumenon_store/office/index.vue'
 import  place_noumenon from  './component/noumenon_store/place_name/index.vue'
 import  terms_noumenon from  './component/noumenon_store/terms/index.vue'
 import  time_noumenon from  './component/noumenon_store/Time/index.vue'
+import  charater_noumenon from './component/noumenon_store/character/index.vue'
+//本体详情
+import  charater_message from  './component/noumenon_store/character/character.vue'
+import  literature_message from './component/noumenon_store/institution/institution.vue'
+import  office_message from './component/noumenon_store/institution/institution.vue'
+import  place_message from './component/noumenon_store/institution/institution.vue'
+import  institution_message from './component/noumenon_store/institution/institution.vue'
+import  terms_message from  './component/noumenon_store/terms/terms.vue'
+import  time_message from  './component/noumenon_store/Time/Time_check_china.vue'
 
 
 // 创建一个路由器实例
@@ -176,6 +191,22 @@ const router = new VueRouter({
             path:'/super_user',
             component:super_user
         },
+
+
+    // import  user from  './component/user/index.vue'
+    // import  upload_step1 from  './component/user/upload/firststep/index.vue'
+    // import upload_step2 from './component/user/upload/secondstep/index.vue'
+    // import upload_step3 from './component/user/upload/thirdstep/index.vue'
+    // import  mybook_index from  './component/user/mybook/index.vue'
+    // import  alupload_index from  './component/user/mybook/alupload/index.vue'
+    // import  private_books_index from './component/user/mybook/private_books/index.vue'
+    // import  my_collection_index from  './component/user/mycollection/index.vue'
+    // import  my_offer_index from  './component/user/myoffer/noumenon_edit/index.vue'
+    // import  noumenon_mark from  './component/user/myoffer/noumenon_mark/index.vue'
+    // import  picture_word from  './picture_word.vue'
+    // import  comment from  './component/user/myoffer/comment/index.vue'
+    // import  revise from  './component/user/myoffer/revise/index.vue'
+    // import  search_index from  './component/search/index.vue'
         {
             path:'/user',
             component:user,
@@ -184,6 +215,15 @@ const router = new VueRouter({
                     path:'/user/upload_step1',
                     component:upload_step1
                 },
+                {
+                    path:'/user/upload_step2',
+                    component:upload_step2
+                },
+                {
+                    path:'/user/upload_step3',
+                    component:upload_step3
+                },
+
                 {
                     path:'/user/mybook_index',
                     component:mybook_index,
@@ -199,89 +239,6 @@ const router = new VueRouter({
 
             ]
         },
-        {
-            path:'/noumenon_store',
-                    component:noumenon_store,
-                    children:[
-                        {
-                            path:'/noumenon_store/charater_noumenon',
-                            component:charater_noumenon,
-                            children:[
-                                {
-                                    path:'/noumenon_store/charater_noumenon/charater_message/:id',
-                                    component:charater_message
-                                },
-                            ]
-                },
-                {
-                    path:'/noumenon_store/institution_noumenon',
-                    component:institution_noumenon,
-                    children:[
-
-                    ]
-                },
-                {
-                    path:'/noumenon_store/literature_noumenon',
-                    component:literature_noumenon,
-                    children:[
-
-                    ]
-                },
-                {
-                    path:'/noumenon_store/office_noumenon',
-                    component:office_noumenon,
-                    children:[
-
-                    ]
-                },
-                {
-                    path:'/noumenon_store/place_noumenon',
-                    component:place_noumenon,
-                    children:[
-
-                    ]
-                },
-                {
-                    path:'/noumenon_store/terms_noumenon',
-                    component:terms_noumenon,
-                    children:[
-
-                    ]
-                },
-                {
-                    path:'/noumenon_store/time_noumenon',
-                    component:time_noumenon,
-                    children:[
-
-                    ]
-                },
-                {
-                    path:'/noumenon_store/build_noumenon',
-                    component:build_noumenon,
-                    children:[
-
-                    ]
-                },
-
-            ]
-        },
-        {
-            path:'/charater_message',
-            component:charater_message
-        },
-        {
-            path:'/build_character_steptwo',
-            component:build_character_steptwo
-        },
-        {
-            path:'/build_character_stepthree',
-            component:build_character_stepthree
-        },
-        {
-            path:'/bookstore',
-            component:bookstore
-        },
-
         {
             path:'/alupload_index',
             component:alupload_index
@@ -310,6 +267,98 @@ const router = new VueRouter({
             path:'/picture_word',
             component:picture_word
         },
+        {
+            path:'/noumenon_store',
+            component:noumenon_store,
+            children:[
+                {
+                    path:'/noumenon_store/charater_noumenon',
+                    component:charater_noumenon
+                },
+                {
+                    path:'/noumenon_store/charater_message/:id',
+                    component:charater_message
+                },
+                {
+                    path:'/noumenon_store/institution_noumenon',
+                    component:institution_noumenon
+                },
+                {
+                    path:'/noumenon_store//institution_message/:id',
+                    component:institution_message
+                },
+                {
+                    path:'/noumenon_store/literature_noumenon',
+                    component:literature_noumenon
+                },
+                {
+                    path:'/noumenon_store/literature_message/:id',
+                    component:literature_message
+                },
+                {
+                    path:'/noumenon_store/office_noumenon',
+                    component:office_noumenon,
+                },
+                {
+                    path:'/noumenon_store/office_message/:id',
+                    component:office_message
+                },
+                {
+                    path:'/noumenon_store/place_noumenon',
+                    component:place_noumenon
+                },
+                {
+                    path:'/noumenon_store/place_message/:id',
+                    component:place_message
+                },
+                {
+                    path:'/noumenon_store/terms_noumenon',
+                    component:terms_noumenon
+                },
+                {
+                    path:'/noumenon_store/terms_message/:id',
+                    component:terms_message
+                },
+                {
+                    path:'/noumenon_store/time_noumenon',
+                    component:time_noumenon
+                },
+                {
+                    path:'/noumenon_store/time_message/:id',
+                    component:time_message
+                },
+
+
+                {
+                    path:'/noumenon_store/build_noumenon',
+                    component:build_noumenon
+                },
+                {
+                    path:'/noumenon_store/build_character_steptwo',
+                    component:build_character_steptwo
+                },
+                {
+                    path:'/noumenon_store/build_character_stepthree',
+                    component:build_character_stepthree
+                },
+
+            ]
+        },
+
+
+
+
+
+
+        {
+            path:'/bookstore',
+            component:bookstore
+        },
+
+
+
+
+
 
         {
             path: '/',
