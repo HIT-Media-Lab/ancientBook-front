@@ -1,143 +1,73 @@
 <template>
 
-    <!--版本层-->
+    <!--品种层-->
     <div>
 
         <div class="form-center">
 
             <span>
-                <span>版本類型：</span>
+                <span class="star">*</span>
+                <span>書名:</span>
+                <input>
+            </span>
+
+            <span>
+                <span>別名:</span>
+                <input placeholder="多值屬性用逗號隔開">
+            </span>
+
+            <br>
+
+            <span>
+                <span>卷數:</span>
+                <input>
+            </span>
+
+            <span>
+                <span>存佚類型:</span>
                 <select>
                     <option>不詳</option>
-                </select>
-            </span>
-
-            <span>
-                <span>版本時代：</span>
-                <select>
-                    <option>傳說時期</option>
-                </select>
-            </span>
-
-            <br>
-
-            <span>
-                <span>載體形式：</span>
-                <select>
-                    <option>不詳</option>
-                </select>
-            </span>
-
-            <span>
-                <span>裝幀形式：</span>
-                <select>
-                    <option>不詳</option>
-                </select>
-            </span>
-
-            <br>
-
-            <span>
-                <span>板框長度：</span>
-                <input>
-            </span>
-
-            <span>
-                <span>板框寬度：</span>
-                <input>
-            </span>
-
-            <br>
-
-            <span>
-                <span>開本長度：</span>
-                <input>
-            </span>
-
-            <span>
-                <span>開本寬度：</span>
-                <input>
-            </span>
-
-            <br>
-
-            <span>
-                <span>牌記內容：</span>
-                <input>
-            </span>
-
-            <span>
-                <span>牌記位置:</span>
-                <input>
-            </span>
-
-            <br>
-
-            <span>
-                <span>半頁行數：</span>
-                <input>
-            </span>
-
-            <span>
-                <span>每行字數：</span>
-                <input>
-            </span>
-
-            <br>
-
-            <span>
-                <span>雙行小字字數：</span>
-                <input>
-            </span>
-
-            <span>
-                <span>魚尾樣式：</span>
-                <select>
-                    <option>不詳</option>
+                    <option>存</option>
+                    <option>佚</option>
+                    <option>殘</option>
+                    <option>疑</option>
                 </select>
             </span>
 
             <br>
 
             <span>
-                <span>邊欄樣式：</span>
+                <span>品種級別：</span>
                 <select>
                     <option>不詳</option>
+                    <option></option>
                 </select>
             </span>
 
             <span>
-                <span>分欄：</span>
-                <select>
-                    <option>不詳</option>
-                </select>
-            </span>
-
-            <br>
-
-            <span>
-                <span>書口樣式：</span>
-                <select>
-                    <option>不詳</option>
-                </select>
-            </span>
-
-            <span>
-                <span>版心內容：</span>
+                <span>英譯：</span>
                 <input>
             </span>
 
             <br>
 
             <span>
-                <span>有無書耳：</span>
+                <span>提要信息：</span>
                 <input>
             </span>
 
+            <br>
+
             <span>
-                <span>有無夾注：</span>
+                <span>標準分類：</span>
                 <select>
-                    <option>不詳</option>
+                    <option>經部</option>
+                </select>
+                <select>
+                    <option>總類</option>
+                </select>
+                <select>
+                    <option>石經之屬</option>
                 </select>
             </span>
 
@@ -191,7 +121,7 @@
                 <span class="star">*</span>
                 <span>責任行為：</span>
                 <select>
-                    <option>刻</option>
+                    <option>撰</option>
                 </select>
             </span>
 
