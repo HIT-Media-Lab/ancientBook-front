@@ -19,7 +19,7 @@
                ban_2:false, //在最后一页禁用
            }
         },
-        props:[ 'cur_max' ],//请求传回的总页数
+        props:[ 'cur_max','cur_url','cur_object'],//请求传回的总页数
         methods: {
             //上一页函数
             prePage(){
@@ -29,6 +29,7 @@
                     this.ban_1 = false;
                     this.cur_page = --this.cur_page;
                     this.$emit('pre_page',this.cur_page);
+                    this.getPage();
                 }
             },
 
@@ -40,14 +41,27 @@
                     this.ban_2 = false;
                     this.cur_page = ++this.cur_page;
                     this.$emit('next_page',this.cur_page);
+                    this.getPage();
                 }
             },
 
             //跳转页面
             skiPage(){
+
                 if(this.cur_page >= 1 && this.cur_page <= this.cur_max ){
                     this.$emit('skip_page',this.cur_page);
+                    this.getPage();
                 }
+            },
+
+            getPage(){
+                let a = this.$parent.successGet;
+                let b = this.$parent.failGet;
+                let new_url;
+                new_url = this.cur_url+this.cur_object.value;
+                //console.log(new_url);
+                this.$parent.cleanData();
+                this.HttpJson(new_url,'get',this.cur_object,a,b);
             }
         }
     }

@@ -126,7 +126,7 @@
         </div>
 
         <!--翻页组件-->
-        <page-component  :cur_max=this.max_page v-on:pre_page="preP" v-on:next_page="nextP" v-on:skip_page="skiP"></page-component>
+        <page-component  :cur_max=this.max_page :cur_object="this.get_user" :cur_url="this.get_url" v-on:pre_page="preP" v-on:next_page="nextP" v-on:skip_page="skiP"></page-component>
     </div>
 </template>
 
@@ -178,9 +178,9 @@
                 account_url:'/ancient_books/check_account.action',    //账号重复
 
                 page: 1,//当前页面
-                max_page: 1,//总页数
+                max_page: 3,//总页数
 
-                get_user: {},//显示用户数据对象
+                get_user: {value:'?page='},//显示用户数据对象
                 add_user:{},//创建用户数据对象
                 delete_user:{},//删除用户数据对象
                 modify_user:{},//修改数据对象
@@ -219,9 +219,9 @@
 
             //向后端发起请求获取用户数据列表，显示在前端页面
             getUsers(pages){
-                this.get_user.value="page="+pages;
-                this.get_url = this.get_url+'?'+this.get_user.value;
-                this.HttpJson(this.get_url,'get',this.get_user,this.successGet, this.failGet);
+                this.get_user.value='page='+pages;
+                let new_url = this.get_url+'?'+this.get_user.value;
+                this.HttpJson(new_url,'get',this.get_user,this.successGet, this.failGet);
             },
 
             //创建用户 post用户数据 success回调函数
@@ -501,26 +501,25 @@
 
             preP(p){
                 this.page = p;
-                this.cleanData();
                 console.log("pre:"+this.page);
+                this.get_user.value='?page='+this.page;
             },
 
             nextP(p){
                 this.page= p;
-                this.cleanData();
                 console.log("next:"+this.page);
+                this.get_user.value='?page='+this.page;
             },
 
             skiP(p){
                 this.page = p;
-                this.cleanData();
                 console.log("skip:" + this.page);
+                this.get_user.value='?page='+this.page;
             },
 
             //清空原有数组数据,刷新页面
             cleanData(){
                 this.user_data.splice(0, this.user_data.length);
-                this.getUsers(this.page);
             }
         }
     }

@@ -56,12 +56,22 @@
                 </div>
 
             </div>
-            <page-component :cur_max=this.total_page v-on:prePage="prePagecount" v-on:nextPage="nextPagecount" v-on:skiPage="skiPagecount"></page-component>
+            <page-component :cur_max=this.total_page :cur_object="this.get_letter" :cur_url="this.word_url" v-on:pre_page="prePagecount" v-on:next_page="nextPagecount" v-on:skip_page="skiPagecount"></page-component>
         </div>
     </div>
 </template>
 
 <script>
+   /* let Mock = require('mockjs');
+
+    //显示用户列表
+    Mock.mock('/ancient_books/get_person_list_by_word.action?word=a&&page_count=1','get',{
+        "content|30":[{
+            'standard_name|1-100':100,
+            'noumenon_id|1-100':1,
+        }]
+    });*/
+
     import pageComponent from '../../../pageComponent.vue';
     import navigation_bar from '../navigation_bar.vue';
     import build_noumenom from '../../../build_noumenom.vue';
@@ -78,33 +88,35 @@
         data(){
             return{
                 word:'',
-                total_page:1,   //总页数
+                total_page:3,   //总页数
                 page_count:1,   //当前页数
                 letter:['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'],
                 get_letter:{},
                 character_data:[],
+                characterid_data:[],
                 word_url:'/ancient_books/get_person_list_by_word.action'
             }
         },
 
         methods:{
-            successLetter(response){
+            successGet(response){
                 this.word=p;
                 console.log("p="+this.word+"字母显示本体列表成功");
                 this.total_page = response.body.total_page;
                 for(let i = 0; i <response.body.content.length; i++){
                     this.character_data[i]= response.body.content[i].standard_name;
+                    this.characterid_data[i]=response.body.content[i].noumenon_id;
                 }
             },
 
-            failLetter(){
+            failGet(){
                 console.log("字母显示本体列表失败");
             },
 
             letterCharacter(p){
-                this.get_letter.value='word='+p+'&&page_count='+this.page_count;
-                this.word_url = this.word_url+'?'+this.get_letter.value;
-                this.HttpJson(this.word_url,'get',this.get_letter,this.successLetter,this.failLetter);
+                this.get_letter.value='?word='+p+'&&page_count=1';
+                let new_url = this.word_url+this.get_letter.value;
+                this.HttpJson(new_url,'get',this.get_letter,this.successGet,this.failGet);
             },
 
             character(){
@@ -113,24 +125,26 @@
 
             prePagecount(p){
                 this.page_count = p;
-                this.cleanCharacter();
-                this.letterCharacter(this.word);
+                console.log(this.word,this.page_count);
+                this.get_letter.value = '?word='+this.word+'&&page_count='+this.page_count;
             },
 
             nextPagecount(p){
                 this.page_count = p;
-                this.cleanCharacter();
-                this.letterCharacter(this.word);
+                console.log(this.word,this.page_count);
+                this.get_letter.value = '?word='+this.word+'&&page_count='+this.page_count;
             },
 
             skiPagecount(p){
                 this.page_count = p;
-                this.cleanCharacter();
-                this.letterCharacter(this.word)
+                console.log(this.word,this.page_count);
+                this.get_letter.value = '?word='+this.word+'&&page_count='+this.page_count;
             },
 
-            cleanCharacter(){
+            cleanData(){
+                console.log('hhh');
                 this.character_data.splice(0, this.character_data.length);
+                this.characterid_data.splice(0,this.characterid_data.length);
             }
         }
 

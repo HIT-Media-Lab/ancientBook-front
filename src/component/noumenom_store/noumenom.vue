@@ -5,23 +5,23 @@
             <build_noumenom></build_noumenom>
         </div>
 
-        <div v-for="(item,index) in recent_noumenons">
-            <p class="noumenom-row">{{item}}</p>
+       <div v-for="(item,index) in recent_noumenoms">
+            <button class="noumenom-row" @click="goNoumenom(index)">{{item.standard_name}}</button>
         </div>
     </div>
 </template>
 
 <script>
-  /* let Mock = require('mockjs');
+     let Mock = require('mockjs');
 
      //显示用户列表
-     Mock.mock('/ancient_books/get_recent_noumenons.action?undefined=undefined','get',{
+     Mock.mock('/ancient_books/get_recent_noumenons.action','get',{
      "noumenons|10":[{
      'standard_name|1-100':1,
      'id|1-100':1,
-     'type|1-100':1
+     'type|1':1
      }]
-     });*/
+     });
 
   import build_noumenom from '../../build_noumenom.vue';
     export default{
@@ -31,7 +31,7 @@
 
         data(){
             return {
-                recent_noumenons: []
+                recent_noumenoms: []
             }
         },
         created(){
@@ -44,14 +44,33 @@
                     console.log("没有返回数组！");
                 } else {
                     for (let i = 0; i < response.body.noumenons.length; i++) {
-                        this.recent_noumenons[i] = response.body.noumenons[i].standard_name;
-                        console.log(this.recent_noumenons[i]);
+                        this.recent_noumenoms[i]=response.body.noumenons[i];
                     }
                 }
             },
 
             failRecent(){
                 console.log("最近编辑请求失败");
+            },
+
+            goNoumenom(p){
+                console.log(p);
+                let i = this.recent_noumenoms[p].type;
+                if( i === 1){
+                    this.$router.push({path:'/charater_noumenon_check'});
+                }else if(i === 2){
+
+                } else if(i === 3){
+
+                }else if(i === 4){
+
+                }else if(i === 5){
+
+                }else if(i === 6){
+
+                }else if(i === 7){
+
+                }
             }
         }
     }
@@ -77,7 +96,12 @@
 
 
     .noumenom-row{
-        margin-bottom: 25px;
+        margin-bottom: 15px;
+        background-color: transparent;
+        border-color: transparent;
+        font-size: 15px;
+        width:300px;
+        text-align: left;
     }
 
 </style>
