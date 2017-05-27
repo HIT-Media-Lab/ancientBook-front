@@ -7,6 +7,7 @@
         </div>
 
         <div>
+            <p>{{$route.params.id}}</p>
             <div class="row">
                 <h5 class="col-md-2">人名：</h5>
                 <h5>鹿晗</h5>

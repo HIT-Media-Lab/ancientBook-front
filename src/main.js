@@ -135,46 +135,46 @@ Vue.prototype.AfterSuccess=function (response) {
 // 定义组件, 也可以像教程之前教的方法从别的文件引入
 import  bookstore from './component/bookstore/index.vue'
 import  login from  './login.vue'
-import  super_user from  './super_user.vue'
+import  admin from  './super_user.vue'
 
 //用户
 import  user from  './component/user/index.vue'
-import  upload_step1 from  './component/user/upload/firststep/index.vue'
-import  upload_step2 from  './component/user/upload/secondstep/index.vue'
-import  upload_step3 from  './component/user/upload/thirdstep/index.vue'
-import  mybook_index from  './component/user/mybook/index.vue'
-import  alupload_index from  './component/user/mybook/alupload/index.vue'
-import  private_books_index from './component/user/mybook/private_books/index.vue'
-import  my_collection_index from  './component/user/mycollection/index.vue'
-import  my_offer_index from  './component/user/myoffer/noumenon_edit/index.vue'
-import  noumenon_mark from  './component/user/myoffer/noumenon_mark/index.vue'
-import  picture_word from  './picture_word.vue'
+import  upload1 from  './component/user/upload/firststep/index.vue'
+import  upload2 from  './component/user/upload/secondstep/index.vue'
+import  upload3 from  './component/user/upload/thirdstep/index.vue'
+import  mybook from  './component/user/mybook/index.vue'
+import  alupload from  './component/user/mybook/alupload/index.vue'
+import  privatebook from './component/user/mybook/private_books/index.vue'
+import  collection from  './component/user/mycollection/index.vue'
+import  offer from  './component/user/myoffer/noumenon_edit/index.vue'
+import  mark from  './component/user/myoffer/noumenon_mark/index.vue'
+import  ancientbook from  './picture_word.vue'
 import  comment from  './component/user/myoffer/comment/index.vue'
 import  revise from  './component/user/myoffer/revise/index.vue'
-import  search_index from  './component/search/index.vue'
+import  search from  './component/search/index.vue'
 
 //本体
-import  noumenon_store from  './component/noumenon_store/index.vue'
+import  noumenon from  './component/noumenon_store/index.vue'
 //新建本体
-import  build_noumenon from  './component/noumenon_store/new_build/index.vue'
-import  build_character_steptwo from  './component/noumenon_store/new_build/step_two/character.vue'
-import  build_character_stepthree from  './component/noumenon_store/new_build/step_three/character.vue'
+import  build from  './component/noumenon_store/new_build/index.vue'
+import  charactertwo from  './component/noumenon_store/new_build/step_two/character.vue'
+import  characterthree from  './component/noumenon_store/new_build/step_three/character.vue'
 //本体查看
-import  institution_noumenon from  './component/noumenon_store/institution/index.vue'
-import  literature_noumenon from './component/noumenon_store/literature/index.vue'
-import  office_noumenon from  './component/noumenon_store/office/index.vue'
-import  place_noumenon from  './component/noumenon_store/place_name/index.vue'
-import  terms_noumenon from  './component/noumenon_store/terms/index.vue'
-import  time_noumenon from  './component/noumenon_store/Time/index.vue'
-import  charater_noumenon from './component/noumenon_store/character/index.vue'
+import  institution from  './component/noumenon_store/institution/index.vue'
+import  literature from './component/noumenon_store/literature/index.vue'
+import  office from  './component/noumenon_store/office/index.vue'
+import  place from  './component/noumenon_store/place_name/index.vue'
+import  terms from  './component/noumenon_store/terms/index.vue'
+import  time from  './component/noumenon_store/Time/index.vue'
+import  character from './component/noumenon_store/character/index.vue'
 //本体详情
-import  charater_message from  './component/noumenon_store/character/character.vue'
-import  literature_message from './component/noumenon_store/institution/institution.vue'
-import  office_message from './component/noumenon_store/institution/institution.vue'
-import  place_message from './component/noumenon_store/institution/institution.vue'
-import  institution_message from './component/noumenon_store/institution/institution.vue'
-import  terms_message from  './component/noumenon_store/terms/terms.vue'
-import  time_message from  './component/noumenon_store/Time/Time_check_china.vue'
+import  characterM from  './component/noumenon_store/character/character.vue'
+import  literatureM from './component/noumenon_store/institution/institution.vue'
+import  officeM from './component/noumenon_store/institution/institution.vue'
+import  placeM from './component/noumenon_store/institution/institution.vue'
+import  institutionM from './component/noumenon_store/institution/institution.vue'
+import  termsM from  './component/noumenon_store/terms/terms.vue'
+import  timeM from  './component/noumenon_store/Time/Time_check_china.vue'
 
 
 // 创建一个路由器实例
@@ -185,11 +185,13 @@ const router = new VueRouter({
     routes: [
         {
             path:'/login',
-            component:login
+            component:login,
+            name:'login'
         },
         {
-            path:'/super_user',
-            component:super_user
+            path:'/admin',
+            component:admin,
+            name:'admin'
         },
 
 
@@ -210,136 +212,168 @@ const router = new VueRouter({
         {
             path:'/user',
             component:user,
+            name:'user',
             children:[
                 {
-                    path:'/user/upload_step1',
-                    component:upload_step1
+                    path:'/user/upload1',
+                    component:upload1,
+                    name:'upload1'
                 },
                 {
-                    path:'/user/upload_step2',
-                    component:upload_step2
+                    path:'/user/upload2',
+                    component:upload2,
+                    name:'upload2'
                 },
                 {
-                    path:'/user/upload_step3',
-                    component:upload_step3
+                    path:'/user/upload3',
+                    component:upload3,
+                    name:'upload3'
                 },
 
                 {
-                    path:'/user/mybook_index',
-                    component:mybook_index,
+                    path:'/user/mybook',
+                    component:mybook,
+                    name:'mybook'
                 },
                 {
-                    path:'/user/my_collection_index',
-                    component:my_collection_index
+                    path:'/user/collection',
+                    component:collection,
+                    name:'collection'
                 },
                 {
-                    path:'/user/my_offer_index',
-                    component:my_offer_index
+                    path:'/user/offer',
+                    component:offer,
+                    name:'offer'
                 },
 
             ]
         },
         {
-            path:'/alupload_index',
-            component:alupload_index
+            path:'/alupload',
+            component:alupload,
+            name:'alupload'
         },
         {
-            path:'/private_books_index',
-            component:private_books_index
+            path:'/privatebook',
+            component:privatebook,
+            name:'privatebook'
         },
         {
-            path:'/noumenon_mark',
-            component:noumenon_mark
+            path:'/mark',
+            component:mark,
+            name:'mark'
         },
         {
             path:'/comment',
-            component:comment
+            component:comment,
+            name:'comment'
         },
         {
             path:'/revise',
-            component:revise
+            component:revise,
+            name:'revise'
         },
         {
-            path:'/search_index',
-            component:search_index
+            path:'/search',
+            component:search,
+            name:'search'
         },
         {
-            path:'/picture_word',
-            component:picture_word
+            path:'/ancientbook',
+            component:ancientbook,
+            name:'ancientbook'
         },
         {
-            path:'/noumenon_store',
-            component:noumenon_store,
+            path:'/noumenon',
+            component:noumenon,
+            name:'noumenon',
             children:[
                 {
-                    path:'/noumenon_store/charater_noumenon',
-                    component:charater_noumenon
+                    path:'/noumenon/character',
+                    component:character,
+                    name:'character'
                 },
                 {
-                    path:'/noumenon_store/charater_message/:id',
-                    component:charater_message
+                    path:'/noumenon/characterM/:id',
+                    component:characterM,
+                    name:'characterM'
                 },
                 {
-                    path:'/noumenon_store/institution_noumenon',
-                    component:institution_noumenon
+                    path:'/noumenon/institution',
+                    component:institution,
+                    name:'institution'
                 },
                 {
-                    path:'/noumenon_store//institution_message/:id',
-                    component:institution_message
+                    path:'/noumenon//institutionM/:id',
+                    component:institutionM,
+                    name:'institutionM'
                 },
                 {
-                    path:'/noumenon_store/literature_noumenon',
-                    component:literature_noumenon
+                    path:'/noumenon/literature',
+                    component:literature,
+                    name:'literature'
                 },
                 {
-                    path:'/noumenon_store/literature_message/:id',
-                    component:literature_message
+                    path:'/noumenon/literatureM/:id',
+                    component:literatureM,
+                    name:'literatureM'
                 },
                 {
-                    path:'/noumenon_store/office_noumenon',
-                    component:office_noumenon,
+                    path:'/noumenon/office',
+                    component:office,
+                    name:'office'
                 },
                 {
-                    path:'/noumenon_store/office_message/:id',
-                    component:office_message
+                    path:'/noumenon/officeM/:id',
+                    component:officeM,
+                    name:'officeM'
                 },
                 {
-                    path:'/noumenon_store/place_noumenon',
-                    component:place_noumenon
+                    path:'/noumenon/place',
+                    component:place,
+                    name:'place'
                 },
                 {
-                    path:'/noumenon_store/place_message/:id',
-                    component:place_message
+                    path:'/noumenon/placeM/:id',
+                    component:placeM,
+                    name:'placeM'
                 },
                 {
-                    path:'/noumenon_store/terms_noumenon',
-                    component:terms_noumenon
+                    path:'/noumenon/terms',
+                    component:terms,
+                    name:'terms'
                 },
                 {
-                    path:'/noumenon_store/terms_message/:id',
-                    component:terms_message
+                    path:'/noumenon/termsM/:id',
+                    component:termsM,
+                    name:'termsM'
                 },
                 {
-                    path:'/noumenon_store/time_noumenon',
-                    component:time_noumenon
+                    path:'/noumenon/time',
+                    component:time,
+                    name:'time'
                 },
                 {
-                    path:'/noumenon_store/time_message/:id',
-                    component:time_message
+                    path:'/noumenon/timeM/:id',
+                    component:timeM,
+                    name:'timeM'
                 },
 
 
                 {
-                    path:'/noumenon_store/build_noumenon',
-                    component:build_noumenon
+                    path:'/noumenon/build',
+                    component:build,
+                    name:'build'
                 },
                 {
-                    path:'/noumenon_store/build_character_steptwo',
-                    component:build_character_steptwo
+                    path:'/noumenon/buildteptwo',
+                    component:charactertwo,
+                    name:'charactertwo'
                 },
                 {
-                    path:'/noumenon_store/build_character_stepthree',
-                    component:build_character_stepthree
+                    path:'/noumenon/characterstepthree',
+                    component:characterthree,
+                    name:'characterthree'
                 },
 
             ]
@@ -352,7 +386,8 @@ const router = new VueRouter({
 
         {
             path:'/bookstore',
-            component:bookstore
+            component:bookstore,
+            name:'bookstore'
         },
 
 
@@ -388,7 +423,7 @@ router.beforeEach( (to, from, next) => {
     let flag = false;
     if (user_item == 'guest'){
         for (let i = 0; i < guest_router.length; i++){
-            if (to.path == guest_router[i]){
+            if (to.name == guest_router[i]){
                 console.log("guest");
                 flag = true;
                 next ();
@@ -398,7 +433,7 @@ router.beforeEach( (to, from, next) => {
 
     } else if (user_item == 'admin'){
         for (let i = 0; i < admin_router.length; i++){
-            if (to.path == admin_router[i]){
+            if (to.name == admin_router[i]){
                 console.log("admin");
                 flag = true;
                 next();
@@ -407,7 +442,7 @@ router.beforeEach( (to, from, next) => {
         }
     } else if (user_item == 'user'){
         for (let i = 0; i < user_router.length; i++) {
-            if (to.path == user_router[i]){
+            if (to.name == user_router[i]){
                 console.log('user');
                 flag = true;
                 next();

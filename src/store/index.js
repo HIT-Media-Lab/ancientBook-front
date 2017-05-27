@@ -14,15 +14,13 @@ const store = new Vuex.Store({
         ifLogin:'guest',
         Token:'',
         acl_user:
-            ['/login','/404','/bookstore','/noumenon_store','/user','/upload_step1','/mybook_index',
-            '/noumenon_store/charater_noumenon','/noumenon_store/charater_message/:id',
-            '/alupload_index','/private_books_index','/my_collection_index','/my_offer_index','/noumenon_mark',
-            '/picture_word','/comment','/revise','/search_index','/charater_noumenon','/charater_noumenon_check',
-            '/build_noumenon','/build_character_steptwo','/build_character_stepthree'],
-        acl_admin:['/login','/404','/super_user'],
-        acl_guest:['/login','/404'],
-        noumenon_character:[]
-
+            ['login','404','bookstore','noumenon','user','upload1','mybook',
+            'character','characterM',
+            'alupload','privatebooks','collection','offer','mark',
+            'ancientbook','comment','revise','search','chacheck',
+            'build','charactertwo','characterthree'],
+        acl_admin:['login','404','admin'],
+        acl_guest:['login','404'],
     },
     getters,
     mutations,

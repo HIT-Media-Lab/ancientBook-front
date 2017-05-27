@@ -18,13 +18,22 @@
                     <img src="../../assets/img/u485.png" class="myoffer_img">
                     <span class="myoffer_word">我的贡献</span>
                 </router-link>
-        <button @click="test">写啥测试</button>
+        <!--<button @click="test">写啥测试</button>-->
     </div>
+    <!--<hhh :show.sync="show" @cancel="cancel">-->
+        <!--<div slot="header">Modal Header</div>-->
+        <!--<div slot="main">Modal Title</div>-->
+        <!--<div slot="footer">Modal Footer</div>-->
+    <!--</hhh>-->
 </template>
 
 <script>
     import store from '../../store'
+    import hhh from  '../../component/share-component/Modal.vue'
     export default{
+        components:{
+            hhh
+        },
 
         data(){
             return{
@@ -32,10 +41,10 @@
             }
         },
         methods:{
-            test(){
-                this.hhh=this.$store.state.Token;
-                alert(this.hhh)
-            }
+//            test(){
+//                this.hhh=this.$store.state.Token;
+//                alert(this.hhh)
+//            }
         }
     }
 </script>
