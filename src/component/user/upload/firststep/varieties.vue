@@ -5,144 +5,145 @@
 
         <div class="form-center">
 
-            <span>
-                <span class="star">*</span>
-                <span>書名:</span>
-                <input>
-            </span>
+            <div>
+                <span>
+                    <span class="star">*</span>
+                    <span>書名:</span>
+                    <input>
+                </span>
 
-            <span>
-                <span>別名:</span>
-                <input placeholder="多值屬性用逗號隔開">
-            </span>
+                <span>
+                    <span>別名:</span>
+                    <input placeholder="多值屬性用逗號隔開">
+                </span>
 
-            <br>
+                <br>
 
-            <span>
-                <span>卷數:</span>
-                <input>
-            </span>
+                <span>
+                    <span>卷數:</span>
+                    <input>
+                </span>
 
-            <span>
-                <span>存佚類型:</span>
-                <select>
-                    <option>不詳</option>
-                    <option>存</option>
-                    <option>佚</option>
-                    <option>殘</option>
-                    <option>疑</option>
-                </select>
-            </span>
+                <span>
+                    <span>存佚類型:</span>
+                    <select>
+                        <option>不詳</option>
+                        <option>存</option>
+                        <option>佚</option>
+                        <option>殘</option>
+                        <option>疑</option>
+                    </select>
+                </span>
 
-            <br>
+                <br>
 
-            <span>
-                <span>品種級別：</span>
-                <select>
-                    <option>不詳</option>
-                    <option></option>
-                </select>
-            </span>
+                <span>
+                    <span>品種級別：</span>
+                    <select>
+                        <option>不詳</option>
+                        <option></option>
+                    </select>
+                </span>
 
-            <span>
-                <span>英譯：</span>
-                <input>
-            </span>
+                <span>
+                    <span>英譯：</span>
+                    <input>
+                </span>
 
-            <br>
+                <br>
 
-            <span>
-                <span>提要信息：</span>
-                <input>
-            </span>
+                <span>
+                    <span>提要信息：</span>
+                    <input>
+                </span>
 
-            <br>
+                <br>
 
-            <span>
-                <span>標準分類：</span>
-                <select>
-                    <option>經部</option>
-                </select>
-                <select>
-                    <option>總類</option>
-                </select>
-                <select>
-                    <option>石經之屬</option>
-                </select>
-            </span>
+                <span>
+                    <span>標準分類：</span>
+                    <select>
+                        <option>經部</option>
+                    </select>
+                    <select>
+                        <option>總類</option>
+                    </select>
+                    <select>
+                        <option>石經之屬</option>
+                    </select>
+                </span>
+            </div>
 
-            <br>
-            <br>
-            <hr>
+            <div id="form-variety">
+                <span>
+                    <span>責任順序：</span>
+                    <input placeholder="多值屬性用逗號隔開">
+                </span>
 
-            <span>
-                <span>責任順序：</span>
-                <input placeholder="多值屬性用逗號隔開">
-            </span>
+                <br>
 
-            <br>
+                <span>
+                    <span class="star">*</span>
+                    <span>責任開始時間:</span>
+                    <input><button>添加</button>
+                </span>
 
-            <span>
-                <span class="star">*</span>
-                <span>責任開始時間:</span>
-                <input><button>添加</button>
-            </span>
+                <span>
+                    <span class="star">*</span>
+                    <span>責任結束時間:</span>
+                    <input><button>添加</button>
+                </span>
 
-            <span>
-                <span class="star">*</span>
-                <span>責任結束時間:</span>
-                <input><button>添加</button>
-            </span>
+                <br>
 
-            <br>
+                <span>
+                    <span>責任地點：</span>
+                    <input><button>添加</button>
+                </span>
 
-            <span>
-                <span>責任地點：</span>
-                <input><button>添加</button>
-            </span>
+                <span>
+                    <span class="star">*</span>
+                    <span>責任者名稱:</span>
+                    <input><button>添加</button>
+                </span>
 
-            <span>
-                <span class="star">*</span>
-                <span>責任者名稱:</span>
-                <input><button>添加</button>
-            </span>
+                <br>
 
-            <br>
+                <span>
+                    <span class="star">*</span>
+                    <span>責任者類型：</span>
+                    <select>
+                        <option>不詳</option>
+                    </select>
+                </span>
 
-            <span>
-                <span class="star">*</span>
-                <span>責任者類型：</span>
-                <select>
-                    <option>不詳</option>
-                </select>
-            </span>
+                <span>
+                    <span class="star">*</span>
+                    <span>責任行為：</span>
+                    <select>
+                        <option>撰</option>
+                    </select>
+                </span>
 
-            <span>
-                <span class="star">*</span>
-                <span>責任行為：</span>
-                <select>
-                    <option>撰</option>
-                </select>
-            </span>
+                <br>
 
-            <br>
+                <span>
+                    <span class="star">*</span>
+                    <span>確定性：</span>
+                    <select>
+                        <option>不詳</option>
+                    </select>
+                </span>
 
-            <span>
-                <span class="star">*</span>
-                <span>確定性：</span>
-                <select>
-                    <option>不詳</option>
-                </select>
-            </span>
+                <br>
 
-            <br>
+                <span>
+                    <span>責任說明：</span>
+                    <input>
+                </span>
 
-            <span>
-                <span>責任說明：</span>
-                <input>
-            </span>
-
-            <hr>
+                <button id="btn-add-variety">添加</button>
+                <button id="btn-delete-variety">刪除</button>
+            </div>
 
         </div>
     </div>
