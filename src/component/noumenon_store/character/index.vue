@@ -57,6 +57,7 @@
 
             </div>
             <page-component :cur_max=this.total_page :cur_object="this.get_letter" :cur_url="this.word_url" v-on:pre_page="prePagecount" v-on:next_page="nextPagecount" v-on:skip_page="skiPagecount"></page-component>
+            <router-link :to="{name:'characterM',params:{id:'hhhhh'}}">测试</router-link>
         </div>
     </div>
 </template>

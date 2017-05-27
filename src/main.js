@@ -136,6 +136,7 @@ Vue.prototype.AfterSuccess=function (response) {
 import  bookstore from './component/bookstore/index.vue'
 import  login from  './login.vue'
 import  admin from  './super_user.vue'
+import  notfound from './component/share-component/404.vue'
 
 //用户
 import  user from  './component/user/index.vue'
@@ -304,7 +305,7 @@ const router = new VueRouter({
                     name:'institution'
                 },
                 {
-                    path:'/noumenon//institutionM/:id',
+                    path:'/noumenon/institutionM/:id',
                     component:institutionM,
                     name:'institutionM'
                 },
@@ -390,8 +391,11 @@ const router = new VueRouter({
             name:'bookstore'
         },
 
-
-
+        {
+            path:'/404',
+            component:notfound,
+            name:'404'
+        },
 
 
 
@@ -408,11 +412,9 @@ const router = new VueRouter({
 });
 
 router.beforeEach( (to, from, next) => {
-    // 模拟登陆状态
-
-    let admin_router = router.app.$store.getters.ACL_admin;
-    let user_router = router.app.$store.getters.ACL_user;
-    let guest_router = router.app.$store.getters.ACL_guest;
+    let admin_acl = router.app.$store.getters.ACL_admin;
+    let user_acl = router.app.$store.getters.ACL_user;
+    let guest_acl = router.app.$store.getters.ACL_guest;
 
     let user_item = JSON.parse(localStorage.getItem('user'));
     if (user_item == undefined) {
@@ -422,18 +424,20 @@ router.beforeEach( (to, from, next) => {
 
     let flag = false;
     if (user_item == 'guest'){
-        for (let i = 0; i < guest_router.length; i++){
-            if (to.name == guest_router[i]){
-                console.log("guest");
+        for (let i = 0; i < guest_acl.length; i++) {
+            if (to.name == guest_acl[i]) {
                 flag = true;
-                next ();
+                next();
                 continue;
             }
         }
-
+        if (!flag) {
+            flag = true;
+            next('login');
+        }
     } else if (user_item == 'admin'){
-        for (let i = 0; i < admin_router.length; i++){
-            if (to.name == admin_router[i]){
+        for (let i = 0; i < admin_acl.length; i++){
+            if (to.name == admin_acl[i]){
                 console.log("admin");
                 flag = true;
                 next();
@@ -441,8 +445,8 @@ router.beforeEach( (to, from, next) => {
             }
         }
     } else if (user_item == 'user'){
-        for (let i = 0; i < user_router.length; i++) {
-            if (to.name == user_router[i]){
+        for (let i = 0; i < user_acl.length; i++) {
+            if (to.name == user_acl[i]){
                 console.log('user');
                 flag = true;
                 next();
@@ -454,7 +458,6 @@ router.beforeEach( (to, from, next) => {
         console.log("go to 404");
         next('/404');
     }
-
 });
 
 // 现在我们可以启动应用了！

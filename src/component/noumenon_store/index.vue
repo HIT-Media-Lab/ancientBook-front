@@ -1,7 +1,8 @@
 <template>
     <div class="noumenom">
     <navigation_bar></navigation_bar>   <!--本体导航条-->
-        <noumenom></noumenom>   <!--本体库页面内容-->
+        <!--<noumenon></noumenon>   &lt;!&ndash;本体库页面内容&ndash;&gt;-->
+    <router-view></router-view>
     </div>
 </template>
 
