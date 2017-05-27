@@ -117,7 +117,7 @@ Vue.prototype.HttpPostForm=function (url,params,success,fail) {
 // 定义组件, 也可以像教程之前教的方法从别的文件引入
 import  bookstore from './component/bookstore/index.vue'
 import  login from  './login.vue'
-import  admin from  './super_user.vue'
+import  admin from  './admin.vue'
 import  notfound from './component/share-component/404.vue'
 
 //用户
@@ -129,9 +129,9 @@ import  mybook from  './component/user/mybook/index.vue'
 import  alupload from  './component/user/mybook/alupload/index.vue'
 import  privatebook from './component/user/mybook/private_books/index.vue'
 import  collection from  './component/user/mycollection/index.vue'
-import  offer from  './component/user/myoffer/noumenon_edit/index.vue'
-import  mark from  './component/user/myoffer/noumenon_mark/index.vue'
-import  ancientbook from  './picture_word.vue'
+import  offer from  './component/user/myoffer/edit/index.vue'
+import  mark from  './component/user/myoffer/mark/index.vue'
+import  ancientbook from  './ancientbook.vue'
 import  comment from  './component/user/myoffer/comment/index.vue'
 import  revise from  './component/user/myoffer/revise/index.vue'
 import  search from  './component/search/index.vue'
@@ -146,7 +146,7 @@ import  characterthree from  './component/noumenon_store/new_build/step_three/ch
 import  institution from  './component/noumenon_store/institution/index.vue'
 import  literature from './component/noumenon_store/literature/index.vue'
 import  office from  './component/noumenon_store/office/index.vue'
-import  place from  './component/noumenon_store/place_name/index.vue'
+import  place from  './component/noumenon_store/place/index.vue'
 import  terms from  './component/noumenon_store/terms/index.vue'
 import  time from  './component/noumenon_store/Time/index.vue'
 import  character from './component/noumenon_store/character/index.vue'
@@ -157,7 +157,7 @@ import  officeM from './component/noumenon_store/institution/institution.vue'
 import  placeM from './component/noumenon_store/institution/institution.vue'
 import  institutionM from './component/noumenon_store/institution/institution.vue'
 import  termsM from  './component/noumenon_store/terms/terms.vue'
-import  timeM from  './component/noumenon_store/Time/Time_check_china.vue'
+import  timeM from  './component/noumenon_store/Time/check_china.vue'
 
 
 // 创建一个路由器实例

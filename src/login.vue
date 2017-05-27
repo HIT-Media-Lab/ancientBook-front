@@ -111,24 +111,6 @@ import store from './store'
          },
 
 
-//         /**
-//          *  密码 正则判断输入是否规范
-//          */
-//
-//         CheckPwd(){
-//             this.disabled=true;
-//             this.warning = "";
-//             this.Active2=false;
-//             let success2=this.checkpwd(this.pwd);
-//             if (success2){
-//                 this.warning= "";
-//                 this.Active2=false;
-//                 this.disabled=false;
-//             }else {
-//                 this.warning = "密码格式错误";
-//                 this.Active2=true;
-//             }
-//         },
          CreateVPicture(){
              document.getElementById("v_picture").src='/ancient_books/get_v_picture.action';
          },
