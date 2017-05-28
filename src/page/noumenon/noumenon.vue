@@ -1,85 +1,85 @@
 <template>
-    <div class="noumenom-body">
-        <div class="noumenom-header">
-            <h5 class="noumenom-title">最近</h5>
-        </div>
-        <div v-for="(item,index) in recent_noumenoms">
-            <button class="noumenom-row" @click="goNoumenom(index)">{{item.standard_name}}</button>
+    <div class="zxwnoumenom-body">
+        <noumenon-title :title="this.title"></noumenon-title>
+
+        <div v-for="(item,index) in recent_noumenons">
+            <p class="zxwnoumenom-row" @click="goNoumenom(index)">{{item.standard_name}}----{{item.id}}----{{item.type}}</p>
         </div>
     </div>
 </template>
 <script>
-    let Mock = require('mockjs');
-    //显示用户列表
-    Mock.mock('/ancient_books/get_recent_noumenons.action','get',{
-        "noumenons|10":[{
-            'standard_name|1-100':1,
-            'id|1-100':1,
-            'type|1':1
-        }]
-    });
+     /* let Mock = require('mockjs');
+
+     //显示用户列表
+     Mock.mock('/ancient_books/get_recent_noumenons.action','get',{
+         "status":200,
+         "result":1,
+         "noumenons|10":[{
+            'standard_name':'@FIRST',
+            'id|100-1000':1,
+            'type|1-7':1
+         }]
+     });*/
+
+    import noumenonTitle from '../../component/noumenon-title.vue';
+    import buildButton from '../../component/build-button.vue';
     export default{
         components:{
-
+            noumenonTitle,
+            buildButton
         },
         data(){
             return {
-                recent_noumenoms: []
+                title:'最近',
+                recent_noumenons: [],   //本体标题信息
             }
         },
         created(){
-            this.HttpJson('/ancient_books/get_recent_noumenons.action','get',{},this.successRecent,this.failRecent);
+            this.httpJson('/ancient_books/get_recent_noumenons.action','get',{},this.successRecent,this.failRecent);
         },
         methods: {
             successRecent(response){
                 console.log("最近编辑请求成功！");
-                if (response.body.noumenons.length === 0) {
-                    console.log("没有返回数组！");
-                } else {
-                    for (let i = 0; i < response.body.noumenons.length; i++) {
-                        this.recent_noumenoms[i]=response.body.noumenons[i];
-                    }
+                for (let i = 0; i < response.body.noumenons.length; i++) {
+                    this.recent_noumenons[i]=response.body.noumenons[i];
                 }
             },
+
             failRecent(){
-                console.log("最近编辑请求失败");
+                console.log("没有返回数组！");
             },
+
             goNoumenom(p){
                 console.log(p);
-                let i = this.recent_noumenoms[p].type;
+                let i = this.recent_noumenons[p].type;
                 if( i === 1){
-                    this.$router.push({path:'/charater_noumenon_check'});
+                    this.$router.push({name:'char_detail',params:{id:this.recent_noumenons[p].id}});
                 }else if(i === 2){
-                } else if(i === 3){
+                    this.$router.push({name:'lit_detail',params:{id:'literature'}});
+                }else if(i === 3){
+                    this.$router.push({name:'terms_detail',params:{id:'terms'}});
                 }else if(i === 4){
+                    this.$router.push({name:'char_detail',params:{id:'hhhhh'}});
                 }else if(i === 5){
+                    this.$router.push({name:'off_detail',params:{id:'office'}});
                 }else if(i === 6){
+                    this.$router.push({name:'ins_detail',params:{id:'institution'}});
                 }else if(i === 7){
+                    this.$router.push({name:'pla_detail',params:{id:'place'}});
                 }
             }
         }
     }
 </script>
 <style>
-    .noumenom-body{
+    .zxwnoumenom-body{
         padding-left: 20px;
         padding-right: 20px;
     }
-    .noumenom-header{
-        padding: 30px 0 5px 0;
-        margin: 0 0 30px 0;
-        border-bottom: 2px solid black;
-    }
-    .noumenom-title{
-        margin:0;
-        display:inline-block;
-    }
-    .noumenom-row{
+
+    .zxwnoumenom-row{
         margin-bottom: 15px;
-        background-color: transparent;
-        border-color: transparent;
+        margin-left: 15px;
         font-size: 15px;
-        width:300px;
-        text-align: left;
     }
 </style>

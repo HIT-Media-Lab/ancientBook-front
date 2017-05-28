@@ -1,31 +1,32 @@
 <template>
-<!--翻页键-->
-<div class="page-box">
-    <input type="button" class="btn-pages" style="margin-left: 0;" value="上一页" @click="prePage()" v-bind:disable="ban_1" tabindex="-1">
-    <span class="text-pages" v-model="cur_max">
-        <input type="text" id="skip" class="text-input" v-model="cur_page"  tabindex="-1">/{{cur_max}}
+    <!--翻页键-->
+    <div class="page-box">
+        <input type="button" class="btn-pages" style="margin-left: 0;" value="上一页" @click="prePage()" v-bind:disable="ban_1" tabindex="-1">
+        <span class="text-pages" v-model="max">
+        <input type="text" id="skip" class="text-input" v-model="cur_page"  tabindex="-1" v-bind:disable="ban_3">/{{max}}
     </span>
-    <input type="button" class=" btn-pages"  style="width:30px; height:25px" value="GO" @click="skiPage()" tabindex="-1">
-    <input type="button" class="btn-pages" style="margin-right: 0;" value="下一页" @click="nextPage()" v-bind:disable="ban_2" tabindex="-1">
-</div>
+        <input type="button" class=" btn-pages"  style="width:30px; height:25px" value="GO" @click="skiPage()" tabindex="-1">
+        <input type="button" class="btn-pages" style="margin-right: 0;" value="下一页" @click="nextPage()" v-bind:disable="ban_2" tabindex="-1">
+    </div>
 </template>
 
 <script>
     export default{
         data(){
-           return {
-               cur_page:1, //当前页数
-               ban_1:false, //按钮在第一页时禁用
-               ban_2:false, //在最后一页禁用
-           }
+            return {
+                cur_page:1, //当前页数
+                ban_1:false, //按钮在第一页时禁用
+                ban_2:false, //在最后一页禁用
+                ban_3:false
+            }
         },
-        props:[ 'cur_max','cur_url','cur_object'],//请求传回的总页数
+        props:[ 'max','url','object'],//请求传回的总页数
         methods: {
             //上一页函数
             prePage(){
-                if (this.cur_page === 1) {
+                if (this.page === 1) {
                     this.ban_1 = true;
-                } else if (this.cur_page > 1 && this.cur_page <= this.cur_max) {
+                } else if (this.cur_page > 1 && this.cur_page <= this.max) {
                     this.ban_1 = false;
                     this.cur_page = --this.cur_page;
                     this.$emit('pre_page',this.cur_page);
@@ -35,9 +36,9 @@
 
             //下一页函数
             nextPage(){
-                if (this.cur_page === this.cur_max) {
+                if (this.cur_page === this.max) {
                     this.ban_2 = true;
-                } else if (this.cur_page >= 1 && this.cur_page < this.cur_max) {
+                } else if (this.cur_page >= 1 && this.cur_page < this.max) {
                     this.ban_2 = false;
                     this.cur_page = ++this.cur_page;
                     this.$emit('next_page',this.cur_page);
@@ -47,10 +48,11 @@
 
             //跳转页面
             skiPage(){
-
-                if(this.cur_page >= 1 && this.cur_page <= this.cur_max ){
+                if(this.cur_page >= 1 && this.cur_page <= this.max ){
                     this.$emit('skip_page',this.cur_page);
                     this.getPage();
+                }else{
+                    this.ban_3 = true;
                 }
             },
 
@@ -58,10 +60,9 @@
                 let a = this.$parent.successGet;
                 let b = this.$parent.failGet;
                 let new_url;
-                new_url = this.cur_url+this.cur_object.value;
-                //console.log(new_url);
+                new_url = this.url+this.object.value;
                 this.$parent.cleanData();
-                this.HttpJson(new_url,'get',this.cur_object,a,b);
+                this.httpJson(new_url,'get',this.object,a,b);
             }
         }
     }
@@ -102,7 +103,4 @@
         border-color: transparent;
         text-align: right;
     }
-
-
-
 </style>

@@ -1,4 +1,3 @@
-
 <!--定义组件-->
 <template >
     <div  class="table-container">
@@ -7,7 +6,7 @@
 
             <!--管理用户文字图片-->
             <div class="user-text">
-                <img class="image" src="src/assets/img/毛笔.png" height="25" width="25"/>
+                <img class="image" src="../../assets/img/毛笔.png" height="25" width="25"/>
                 <span>管理用户</span>
             </div>
 
@@ -126,13 +125,13 @@
         </div>
 
         <!--翻页组件-->
-        <page-component  :cur_max=this.max_page :cur_object="this.get_user" :cur_url="this.get_url" v-on:pre_page="preP" v-on:next_page="nextP" v-on:skip_page="skiP"></page-component>
+        <paginator  :max=this.max_page :object="this.get_user" :url="this.get_url" v-on:pre_page="prePage" v-on:next_page="nextPage" v-on:skip_page="skiPage"></paginator>
     </div>
 </template>
 
 
 <script type="text/javascript">
-    /* let Mock = require('mockjs');
+   /* let Mock = require('mockjs');
 
     //显示用户列表
     Mock.mock('/ancient_books/get_user_list.action?page=1','get',{
@@ -148,9 +147,9 @@
     Mock.mock('/ancient_books/getToken.action','get',{
         'Token|1-100':100
     });*/
-    import pageComponent from "../../component/paginator.vue"
+    import paginator from "../../component/paginator.vue";
     export default{
-        components:{ pageComponent },
+        components:{ paginator },
         data(){
             return {
                 show_create: false,
@@ -189,54 +188,45 @@
             }
         },
         created: function () {
-            console.log("super_user 已经created");
             this.getUsers(1);
             console.log("created时的全局token"+this.$store.getters.GetToken);
         },
         methods: {
             // get数据显示用户列表 成功地回调函数
             successGet(response){
-                    console.log("success get users ");
-                    //将后端数据显示在前端页面里
-                    if( response.body.content.length === 0 ){
-                        console.log("没有返回数组！");
-                    }else {
-                        this.max_page = response.body.max_page;
-                        for ( let i = 0; i < response.body.content.length; i++ ){
-                            this.user_data.push({
-                                user_name: response.body.content[i].name,
-                                account: response.body.content[i].account,
-                                time:response.body.content[i].time,
-                                user_id: response.body.content[i].user_id
-                            });
-                        }
-                    }
+                console.log("success get users ");
+                this.max_page = response.body.max_page;
+                for ( let i = 0; i < response.body.content.length; i++ ){
+                    this.user_data.push({
+                        user_name: response.body.content[i].name,
+                        account: response.body.content[i].account,
+                        time:response.body.content[i].time,
+                        user_id: response.body.content[i].user_id
+                    });
+                }
             },
 
             failGet(){
-                console.log("fail get users!");
+                console.log("没有返回数组！");
             },
 
             //向后端发起请求获取用户数据列表，显示在前端页面
             getUsers(pages){
-                this.get_user.value='page='+pages;
-                let new_url = this.get_url+'?'+this.get_user.value;
-                this.HttpJson(new_url,'get',this.get_user,this.successGet, this.failGet);
+                this.get_user.value='?page='+pages;
+                let new_url = this.get_url+this.get_user.value;
+                this.httpJson(new_url,'get',this.get_user,this.successGet, this.failGet);
             },
 
             //创建用户 post用户数据 success回调函数
             successAdd(response){
-                if(response.body.result===1) {
-                    console.log("success create!");
-                    this.cleanData();
-                    this.closeDialog(); //关闭创建用户的模态框
-                }else if (response.body.result===0) {
-                    console.log("fail create!");
-                }
+                console.log("success create!");
+                this.cleanData();
+                this.getUsers(this.page);
+                this.closeDialog(); //关闭创建用户的模态框
             },
 
             failAdd(){
-                console.log("error create!");
+                console.log("fail create!");
             },
 
             //添加用户post请求数据的赋值
@@ -245,7 +235,7 @@
                 this.add_user.name = this.user_name;
                 this.add_user.account = this.account;
                 this.add_user.pwd = this.pwd;
-                this.HttpJson(this.add_url, 'post', this.add_user, this.successAdd, this.failAdd);
+                this.httpJson(this.add_url, 'post', this.add_user, this.successAdd, this.failAdd);
             },
 
             //创建用户的模态框 系列函数
@@ -355,47 +345,39 @@
 
             //判断用户名是否重复
             successName(response){
-                if( response.body.result === 1 ){
-                    console.log("用户名不重复！");
-                    this.add_if = false;    //按钮可以使用
-                } else if( response.body.result === 0 ){
-                    this.is_active[0]=true;
-                    this.add_if = true;
-                    this.tip="用户名已存在!";
-                }
+                console.log("用户名不重复！");
+                this.add_if = false;    //按钮可以使用
             },
 
             failName(){
-              console.log("用户名重复请求错误");
+                this.is_active[0]=true;
+                this.add_if = true;
+                this.tip="用户名已存在!";
             },
 
             dupName(n){
-                    this.check_name.key = "name";
-                    this.check_name.value = n;
-                    this.HttpGetForm(this.name_url, this.check_name, this.successName, this.failName);
+                this.check_name.value = "?name="+n;
+                let new_url = this.name_url + this.check_name.value;
+                this.httpJson(new_url,'get',this.check_name, this.successName, this.failName);
             },
 
 
             //判断账号是否重复
             successAccount(response){
-                if( response.body.result === 1 ){
-                    console.log("账号不重复！");
-                    this.add_if = false;
-                } else if( response.body.result === 0 ){
-                    this.is_active[1]=true;
-                    this.tip="账号已存在!";
-                    this.add_if = true;
-                }
+                console.log("账号不重复！");
+                this.add_if = false;
             },
 
             failAccount(){
-                console.log("账号重复请求错误");
+                this.is_active[1]=true;
+                this.tip="账号已存在!";
+                this.add_if = true;
             },
 
             dupAccount(){
-                    this.check_account.key = "account";
-                    this.check_account.value = this.account;
-                    this.HttpGetForm(this.account_url, this.check_account, this.successAccount, this.failAccount);
+                this.check_account.value ="?account="+this.account;
+                let new_url = this.account_url+this.check_account.value;
+                this.httpJson(new_url,'get', this.check_account, this.successAccount, this.failAccount);
             },
 
             //添加用户信息
@@ -420,21 +402,18 @@
 
             //删除用户信息 success回调函数
             successDelete(response){
-                if (response.body.result === 1) {
-                    console.log("success delete");
-                    this.cleanData();   //关闭模态框
-                } else if (response.body.result === 0) {
-                    console.log("fail delete");
-                }
+                console.log("success delete");
+                this.cleanData();   //清空数组
+                this.getUsers(this.page);
             },
 
             failDelete(){
-                console.log("error delete");
+                console.log("fail delete");
             },
 
             deleteUsers(index){
                 this.delete_user.user_id = this.user_data[index].user_id;
-                this.HttpJson(this.delete_url,'post',this.delete_user,this.successDelete,this.failDelete);
+                this.httpJson(this.delete_url,'post',this.delete_user,this.successDelete,this.failDelete);
             },
 
 
@@ -460,17 +439,14 @@
             },
 
             successModify(response){
-                if( response.body.result === 1 ){
-                    console.log("success modify!");
-                    this.cleanData();
-                    this.closeMotal();
-                } else if( response.body.result === 0 ){
-                    console.log("fail modify!");
-                }
+                console.log("success modify!");
+                this.cleanData();
+                this.getUsers(this.page);
+                this.closeMotal();
             },
 
             failModify(){
-                console.log("error modify!");
+                console.log("fail modify!");
             },
 
             //修改的请求函数
@@ -478,7 +454,7 @@
                 this.modify_user.name=this.back_username;
                 this.modify_user.pwd=this.pwd;
                 this.modify_user.user_id=this.user_data[this.back_index].user_id;
-                this.HttpJson(this.modify_url,'post',this.modify_user,this.successModify,this.failModify);
+                this.httpJson(this.modify_url,'post',this.modify_user,this.successModify,this.failModify);
             },
 
             //修改执行的函数
@@ -499,19 +475,19 @@
             },
 
 
-            preP(p){
+            prePage(p){
                 this.page = p;
                 console.log("pre:"+this.page);
                 this.get_user.value='?page='+this.page;
             },
 
-            nextP(p){
+            nextPage(p){
                 this.page= p;
                 console.log("next:"+this.page);
                 this.get_user.value='?page='+this.page;
             },
 
-            skiP(p){
+            skiPage(p){
                 this.page = p;
                 console.log("skip:" + this.page);
                 this.get_user.value='?page='+this.page;
@@ -544,18 +520,18 @@
         border-color: sienna ;  /*表格边框颜色*/
         border-collapse: collapse;  /*内外边框重合*/
         vertical-align: middle;   /*表格边框内容居中*/
-        width:800px;
+        width:900px;
         margin:auto;
         table-layout: fixed;    /*表格每个宽度确定*/
 
     }
 
     /*表格内部边框样式*/
-   th,td{
+    th,td{
         border-style: solid;    /*内边框线式*/
         border-color: sienna;  /*内边框的颜色*/
         text-align: center; /*内容居中*/
-        height: 50px;/*表格宽度*/
+        height: 35px;/*表格宽度*/
         /*字体设置*/
         font-family: 楷体;
         color: dimgrey;
@@ -577,10 +553,11 @@
     .btn-general{
         background-color:sienna;   /*按钮填充颜色*/
         color: #F2F2F2; /*按钮边框颜色*/
-        width:70px;
-        height: 28px;
+        width:65px;
+        height: 25px;
         border-radius: 8px;
         border-color: transparent;
+        margin:5px 0 5px 0;
     }
 
     /*创建按钮的位置*/
@@ -669,20 +646,20 @@
         top: .5rem;
         right: .5rem;
         transition: .8s ease all;
-         -moz-transition: .8s ease all;
-         -webkit-transition: .8s ease all;
+        -moz-transition: .8s ease all;
+        -webkit-transition: .8s ease all;
         border: none;
         border-radius: 3px;
         color: #333;
         text-decoration: none;
         box-sizing: border-box;
-         -webkit-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
     }
 
     .close:hover {
         transition: .8s ease all;
-         -moz-transition: .8s ease all;
-         -webkit-transition: .8s ease all;
+        -moz-transition: .8s ease all;
+        -webkit-transition: .8s ease all;
     }
 
     .close .iconfont {
@@ -696,8 +673,8 @@
 
     .rotate:hover {
         transition: transform 1.0s ease;
-         -moz-transition: -moz-transform 1.0s ease;
-         -webkit-transition: -webkit-transform 1.0s ease ;
+        -moz-transition: -moz-transform 1.0s ease;
+        -webkit-transition: -webkit-transform 1.0s ease ;
     }
 
     .close .iconfont {
@@ -709,9 +686,9 @@
         font-size: 33px;
         font-style: normal;
 
-         -webkit-font-smoothing: antialiased;
-         -webkit-text-stroke-width: 0.2px;
-         -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
     }
     .span-motal{
         font-family: 楷体;
