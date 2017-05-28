@@ -8,11 +8,11 @@
             <div class="input-ac-pwd">
                 <div class="input-ac">
                     <span class="text1">账 号</span>
-                    <input type="text" class="username" v-model="account" id="username" @blur="Check()" v-bind:class="{ warnborder: Active1 }">
+                    <input type="text" class="username" v-model="account" @blur="Check()" id="username" v-bind:class="{ warnborder: Active1 }">
                 </div>
                 <div class="input-password">
                     <span class="text2">密 码</span>
-                    <input type="password" class="password" v-model="pwd" id="pwd" @blur="Check()" v-bind:class="{ warnborder: Active2 }">
+                    <input type="password" class="password" v-model="pwd" @blur="Check()" id="pwd" v-bind:class="{ warnborder: Active2 }">
                 </div>
                 <div class="warning-login">
                     <span id="warning" v-model="warning">{{warning}}</span>
@@ -57,9 +57,9 @@ import store from '../../../store'
              account: '',
              pwd: '',
              v: '',
-             Active1:false,
-             Active2:false,
-             disabled: true,
+             Active1: false,
+             Active2: false,
+             disabled: false,
              auto: false,
              object: {},
              show:''
@@ -87,7 +87,7 @@ import store from '../../../store'
           */
 
          Check(){
-             this.disabled=true;
+             this.disabled=false;
              this.warning = "";
              this.Active1=false;
              this.Active2=false;
@@ -155,13 +155,13 @@ import store from '../../../store'
          //点击登录按钮执行函数
          Login() {
              //给对象object内容赋值
-             this.object.account=this.account;
-             this.object.pwd=this.pwd;
-             this.object.v=this.v;
-             this.object.auto=this.auto;
-             console.log("全局token"+this.$store.getters.GetToken);
-             // 与后端对接的vue-resource
-             this.httpJson(this.login_url,'post',this.object,this.LoginSuccess,this.LoginFail);
+                 this.object.account=this.account;
+                 this.object.pwd=this.pwd;
+                 this.object.v=this.v;
+                 this.object.auto=this.auto;
+                 console.log("全局token"+this.$store.getters.GetToken);
+                 // 与后端对接的vue-resource
+                 this.httpJson(this.login_url,'post',this.object,this.LoginSuccess,this.LoginFail);
          },
          //得到验证码图片
 //         GetCode() {

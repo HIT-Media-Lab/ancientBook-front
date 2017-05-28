@@ -8,15 +8,14 @@ import Vue from 'vue'
 
 Vue.prototype.checkuser = function (account) {
     let success = true;
-    if (account.length != 0) {
-        if (account.match('[a-zA-Z0-9]{8,10}$')) {
+    if (account.length != 0){
+        if (account.match('[A-Za-z0-9]{8,10}$')) {
             return success
         } else {
             success = false;
             return success
         }
     }else {
-        success = true;
         return success
     }
 };
@@ -24,28 +23,26 @@ Vue.prototype.checkuser = function (account) {
 
 Vue.prototype.checkpwd = function(pwd) {
     let success =true;
-    if (pwd.length != 0) {
-        if (pwd.match('[a-zA-Z0-9_]{6,16}$')) {
+    if (pwd.length != 0){
+        if (pwd.match('[A-Za-z0-9]{6,16}$')) {
             return success
         } else {
             success=false;
             return success
         }
     }else {
-        success = true;
         return success
     }
+
 };
 
 Vue.prototype.checkname = function(name) {
     let success =true;
-    if (name.length != 0) {
-        if (name.match('^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$')) {
-            return success
-        } else {
-            success=false;
-            return success
-        }
+    if (name.match('^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$')) {
+        return success
+    } else {
+        success=false;
+        return success
     }
 };
 
