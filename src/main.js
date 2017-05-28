@@ -63,7 +63,7 @@ Vue.prototype.httpJson = function (url, type, params, success, fail) {
     } else if (type.toLocaleLowerCase() == "post") {
         //验证是否有无token
         beforeHttp(params);
-        params.token =store.getters.GetToken();
+        params.token =store.getters.GetToken;
 
         this.$http.post(url, params,
             {headers:{'Content-Type':'application/json;charset=UTF-8'}}
