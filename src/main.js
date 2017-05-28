@@ -68,9 +68,9 @@ Vue.prototype.httpJson = function (url, type, params, success, fail) {
         this.$http.post(url, params,
             {headers:{'Content-Type':'application/json;charset=UTF-8'}}
         ).then(function (response) {
-            response_handle(response);
+            response_handle(response,success,fail);
         },function () {
-            fail()
+            error();
         })
     }
 };
