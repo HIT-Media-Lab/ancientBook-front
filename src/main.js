@@ -51,12 +51,11 @@ function beforeHttp (object) {
 //定义的post的vue-router全局函数，以json形式传递数据
 Vue.prototype.httpJson = function (url, type, params, success, fail) {
     // this.BeforeHttp(params);
-
     params.token=store.getters.GetToken;
     console.log("你猜猜token有没有 "+params.token);
     if (type.toLocaleLowerCase() == "get") {
         this.$http.get(url).then(function (response) {
-            response_handle_get(response, success, fail)
+            response_handle_get(response, success)
         },function () {
             error();
         })
@@ -64,7 +63,6 @@ Vue.prototype.httpJson = function (url, type, params, success, fail) {
         //验证是否有无token
         beforeHttp(params);
         params.token =store.getters.GetToken;
-
         this.$http.post(url, params,
             {headers:{'Content-Type':'application/json;charset=UTF-8'}}
         ).then(function (response) {
@@ -86,7 +84,7 @@ function response_handle_post(response, success, fail) {
     let status = response.status;
     if (status == 200){
         if (response.body.result == 1){
-            beforeSuccess(response);
+            // beforeSuccess(response);
             success(response);
             afterSuccess(response);
         } else if (response.body.result == 0){
@@ -101,12 +99,11 @@ function response_handle_post(response, success, fail) {
     }
 }
 
-function response_handle_get(response, success, fail) {
+function response_handle_get(response, success) {
     let status = response.status;
     if (status == 200){
-            beforeSuccess(response);
+            // beforeSuccess(response);
             success(response);
-            afterSuccess(response);
     } else if (status == 403){
         this.$router.push('/403');
     } else if (status == 404){
