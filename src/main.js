@@ -90,7 +90,7 @@ function response_handle(response, success, fail) {
             success(response);
             afterSuccess(response);
         } else if (response.body.result == 0){
-            fail();
+            fail(response);
         }
     } else if (status == 403){
         this.$router.push('/403');

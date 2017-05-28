@@ -135,27 +135,22 @@ import store from '../../../store'
          },
          //登录的回调函数
          LoginSuccess(response){
-             if (response.body.result == 0) {
-                 document.getElementById("v_picture").src='/ancient_books/get_v_picture.action'+'?'+(new Date()).getTime();
-                 alert(response.body.info);
-             }
-             if (response.body.result == 1) {
-                 if (response.body.su == 1) {
+             if (response.body.su == 1) {
 //                     this.$store.commit('change_admin');
-                     localStorage.setItem('user',JSON.stringify("admin"));
-                     this.$router.push({path: '/super_user'});
-                     console.log("登录成功后的全局Token"+this.$store.getters.GetToken)
-                 }
-                 if (response.body.su == 0) {
+                 localStorage.setItem('user',JSON.stringify("admin"));
+                 this.$router.push({path: '/admin'});
+                 console.log("登录成功后的全局Token"+this.$store.getters.GetToken)
+             }
+             if (response.body.su == 0) {
 //                     this.$store.commit('change_user');
-                     localStorage.setItem('user',JSON.stringify("user"));
-                     this.$router.push({path: '/user'});
-                 }
+                 localStorage.setItem('user',JSON.stringify("user"));
+                 this.$router.push({path: '/user'});
              }
          },
          //登陆失败函数
-         LoginFail(){
-           alert("error")
+         LoginFail(response){
+             document.getElementById("v_picture").src='/ancient_books/get_v_picture.action'+'?'+(new Date()).getTime();
+             alert(response.body.info);
         },
          //点击登录按钮执行函数
          Login() {
@@ -183,7 +178,7 @@ import store from '../../../store'
                          this.$router.push({path: '/user'});
                      if (response.body.su = 0)
                          localStorage.setItem('user',JSON.stringify("admin"));
-                         this.$router.push({path: '/super_user'});
+                         this.$router.push({path: '/admin'});
                  }
                  if (response.body.result==0)
                      localStorage.setItem('user',JSON.stringify("guest"));
