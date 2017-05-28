@@ -166,7 +166,7 @@ import store from '../../../store'
              this.object.auto=this.auto;
              console.log("全局token"+this.$store.getters.GetToken);
              // 与后端对接的vue-resource
-             this.HttpJson(this.login_url,'post',this.object,this.LoginSuccess,this.LoginFail);
+             this.httpJson(this.login_url,'post',this.object,this.LoginSuccess,this.LoginFail);
          },
          //得到验证码图片
 //         GetCode() {
