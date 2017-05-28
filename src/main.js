@@ -6,6 +6,7 @@ import VueResource from 'vue-resource'
 import './assets/less/index.less'
 import './lib/regular'
 import App from './App.vue'
+import store from './store'
 // import './lib/route'
 
 //开启debug模式
@@ -23,23 +24,22 @@ function beforeSuccess() {
 //回调success后的函数
 function afterSuccess (response) {
 //更新token
-    this.$store.commit("change_token",response.body.token);
-    console.log("更新token"+this.$store.getters.GetToken);
+    store.commit("change_token",response.body.token);
+    console.log("更新token"+store.getters.GetToken);
 }
 
 //判断是否有无token
 function beforeHttp (object) {
-    console.log(Vue);
-    // console.log("检查超级用户是否有token " + this.$store.getters.GetToken);
-    object.token = Vue.$store.getters.GetToken;
+    console.log("检查超级用户是否有token " + store.getters.GetToken);
+    object.token = store.getters.GetToken;
     console.log("object"+object.token);
-    let token = this.$store.getters.GetToken;
+    let token = store.getters.GetToken;
     if (object.token.length == 0 || token.length == 0) {
         this.$http.get('/ancient_books/getToken.action').then(function (response) {
             token = response.body.token;
             console.log("检测token成功"+token );
         });
-        this.$store.commit("change_token",token);
+        store.commit("change_token",token);
     }else {
         console.log("不需要更token");
     }
@@ -52,7 +52,7 @@ function beforeHttp (object) {
 Vue.prototype.httpJson = function (url, type, params, success, fail) {
     // this.BeforeHttp(params);
 
-    params.token=this.$store.getters.GetToken;
+    params.token=store.getters.GetToken;
     console.log("你猜猜token有没有 "+params.token);
     if (type.toLocaleLowerCase() == "get") {
         this.$http.get(url).then(function (response) {
@@ -63,7 +63,7 @@ Vue.prototype.httpJson = function (url, type, params, success, fail) {
     } else if (type.toLocaleLowerCase() == "post") {
         //验证是否有无token
         beforeHttp(params);
-        params.token =this.$store.getters.GetToken();
+        params.token =store.getters.GetToken();
 
         this.$http.post(url, params,
             {headers:{'Content-Type':'application/json;charset=UTF-8'}}
@@ -103,7 +103,7 @@ function response_handle(response, success, fail) {
 
 //定义的post的vue-router全局函数，以form-data形式传递数据
 Vue.prototype.httpPostForm=function (url,params,success,fail) {
-    params.token = this.$store.getters.GetToken;
+    params.token = store.getters.GetToken;
     console.log("你猜猜token有没有 "+params.token);
     this.$http.post(url, params,
         {emulateJSON: true}   //将json形式转换为form-data
@@ -113,10 +113,6 @@ Vue.prototype.httpPostForm=function (url,params,success,fail) {
        error();
     })
 };
-
-
-
-import store from './store'
 
 import  bookstore from './page/bookstore/index.vue'
 import  login from  './page/user/login/login.vue'
