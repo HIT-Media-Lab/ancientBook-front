@@ -15,7 +15,8 @@ const store = new Vuex.Store({
         Token:'',
         acl_user:
             ['login','404','bookstore','user','upload1','mybook',
-            'character','recent','char_detail',
+            'character','recent','char_detail','upload1','upload2',
+            'upload3',
             'alupload','privatebooks','collection','offer','mark',
             'ancientbook','comment','revise','search','chacheck',
             'build','charactertwo','characterthree'],

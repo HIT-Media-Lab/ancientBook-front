@@ -56,7 +56,7 @@ Vue.prototype.httpJson = function (url, type, params, success, fail) {
     console.log("你猜猜token有没有 "+params.token);
     if (type.toLocaleLowerCase() == "get") {
         this.$http.get(url).then(function (response) {
-            response_handle(response, success, fail)
+            response_handle_get(response, success, fail)
         },function () {
             error();
         })
@@ -68,7 +68,7 @@ Vue.prototype.httpJson = function (url, type, params, success, fail) {
         this.$http.post(url, params,
             {headers:{'Content-Type':'application/json;charset=UTF-8'}}
         ).then(function (response) {
-            response_handle(response,success,fail);
+            response_handle_post(response,success,fail);
         },function () {
             error();
         })
@@ -82,7 +82,7 @@ function error() {
 
 }
 
-function response_handle(response, success, fail) {
+function response_handle_post(response, success, fail) {
     let status = response.status;
     if (status == 200){
         if (response.body.result == 1){
@@ -92,6 +92,21 @@ function response_handle(response, success, fail) {
         } else if (response.body.result == 0){
             fail(response);
         }
+    } else if (status == 403){
+        this.$router.push('/403');
+    } else if (status == 404){
+        this.$router.push('/404');
+    } else if (status == 500){
+        this.$router.push('/500');
+    }
+}
+
+function response_handle_get(response, success, fail) {
+    let status = response.status;
+    if (status == 200){
+            beforeSuccess(response);
+            success(response);
+            afterSuccess(response);
     } else if (status == 403){
         this.$router.push('/403');
     } else if (status == 404){
@@ -121,9 +136,21 @@ import  notfound from './page/error/404.vue'
 
 //用户
 import  user from  './page/user/index.vue'
+
+/**
+ * 上传
+ */
 import  upload1 from  './page/user/upload/firststep/index.vue'
+import  copy from './page/user/upload/firststep/copy.vue'
+import  edition from './page/user/upload/firststep/edition.vue'
+import  impression from './page/user/upload/firststep/impression.vue'
+import  varieties from  './page/user/upload/firststep/varieties.vue'
+import  synopsis from  './page/user/upload/firststep/synopsis.vue'
 import  upload2 from  './page/user/upload/secondstep/index.vue'
 import  upload3 from  './page/user/upload/thirdstep/index.vue'
+
+
+
 import  mybook from  './page/user/mybook/index.vue'
 import  alupload from  './page/user/mybook/alupload/index.vue'
 import  privatebook from './page/user/mybook/private/index.vue'
@@ -183,7 +210,29 @@ const router = new VueRouter({
         {
             path:'/user/upload1',
             component:upload1,
-            name:'upload1'
+            name:'upload1',
+            children: [
+                {
+                    path:'/',
+                    component:varieties,
+                    name:'varieties',
+                },
+                {
+                    path:'/user/upload1/edition',
+                    component:edition,
+                    name:'edition',
+                },
+                {
+                    path:'/user/upload1/impression',
+                    component:impression,
+                    name:'impression',
+                },
+                {
+                    path:'/user/upload1/copy',
+                    component:copy,
+                    name:'copy',
+                },
+            ]
         },
         {
             path:'/user/upload2',
