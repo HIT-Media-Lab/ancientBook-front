@@ -28,10 +28,10 @@ function afterSuccess (response) {
 
 //判断是否有无token
 function beforeHttp (object) {
-    console.log("检查超级用户是否有token " + Vue.$store.getters.GetToken);
-    object.token = Vue.$store.getters.GetToken;
+    console.log("检查超级用户是否有token " + this.$store.getters.GetToken);
+    object.token = this.$store.getters.GetToken;
     console.log("object"+object.token);
-    let token = Vue.$store.getters.GetToken;
+    let token = this.$store.getters.GetToken;
     if (object.token.length == 0 || token.length == 0) {
         this.$http.get('/ancient_books/getToken.action').then(function (response) {
             token = response.body.token;
@@ -61,7 +61,7 @@ Vue.prototype.httpJson = function (url, type, params, success, fail) {
     } else if (type.toLocaleLowerCase() == "post") {
         //验证是否有无token
         beforeHttp(params);
-        params.token = Vue.$store.getters.GetToken();
+        params.token =this.$store.getters.GetToken();
 
         this.$http.post(url, params,
             {headers:{'Content-Type':'application/json;charset=UTF-8'}}
@@ -91,17 +91,17 @@ function response_handle(response, success, fail) {
             fail();
         }
     } else if (status == 403){
-        Vue.$router.push('/403');
+        this.$router.push('/403');
     } else if (status == 404){
-        Vue.$router.push('/404');
+        this.$router.push('/404');
     } else if (status == 500){
-        Vue.$router.push('/500');
+        this.$router.push('/500');
     }
 }
 
 //定义的post的vue-router全局函数，以form-data形式传递数据
 Vue.prototype.httpPostForm=function (url,params,success,fail) {
-    params.token = Vue.$store.getters.GetToken;
+    params.token = this.$store.getters.GetToken;
     console.log("你猜猜token有没有 "+params.token);
     this.$http.post(url, params,
         {emulateJSON: true}   //将json形式转换为form-data
