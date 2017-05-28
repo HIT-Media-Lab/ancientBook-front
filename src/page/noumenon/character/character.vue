@@ -148,9 +148,8 @@
     export default{
         created(){
             //Vuex得到具体人物ID
-            //this.id = $route.params.id;
+            this.id = $route.params.id;
             console.log('id='+this.id);
-            //this.person_id
             this.personInfo();
         },
 
@@ -161,7 +160,7 @@
 
         data(){
             return{
-                id:111,
+                id:1,
                 title:'',
                 person_url:'/ancient_books/get_person_by_id.action',
                 person_object:{}, //get请求的对象
@@ -184,7 +183,7 @@
             successId(response){
                 console.log("ggggf");
                 //存在前端显示的数组里
-                this.title = response.standard_name+'('+response.birth_time_name+')';
+                this.title = response.body.standard_name+'('+response.body.birth_time_name+')';
 
                 this.person_content.standard_name = response.body.standard_name;
                 this.person_content.english = response.body.english;
