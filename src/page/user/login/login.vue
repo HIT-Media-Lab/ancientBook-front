@@ -87,7 +87,7 @@ import store from '../../../store'
           */
 
          Check(){
-             this.disabled=false;
+             this.disabled = false;
              this.warning = "";
              this.Active1=false;
              this.Active2=false;

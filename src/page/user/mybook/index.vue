@@ -5,7 +5,7 @@
 </template>
 
 <script>
-   import user_navigation_bar from  '../user-bar.vue'
+   import user_navigation_bar from  '../../../component/user-bar.vue'
    export default{
        components:{user_navigation_bar}
    }

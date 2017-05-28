@@ -46,7 +46,7 @@
 </template>
 
 <script>
-    import upload_edit from './upload-edit.vue';
+    import upload_edit from './upload.vue';
     export default{
         components:{
             upload_edit,

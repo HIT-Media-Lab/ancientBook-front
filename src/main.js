@@ -416,14 +416,14 @@ router.beforeEach( (to, from, next) => {
     let user_acl = router.app.$store.getters.ACL_user;
     let guest_acl = router.app.$store.getters.ACL_guest;
 
-    let user_item = JSON.parse(localStorage.getItem('user'));
-    if (user_item == undefined) {
+    let user_id = JSON.parse(localStorage.getItem('user'));
+    if (user_id == undefined) {
         localStorage.setItem('user',JSON.stringify("guest"));
-        user_item = 'guest';
+        user_id = 'guest';
     }
 
     let flag = false;
-    if (user_item == 'guest'){
+    if (user_id == 'guest'){
         for (let i = 0; i < guest_acl.length; i++) {
             if (to.name == guest_acl[i]) {
                 flag = true;
@@ -435,7 +435,7 @@ router.beforeEach( (to, from, next) => {
             flag = true;
             next('login');
         }
-    } else if (user_item == 'user'){
+    } else if (user_id == 'user'){
         for (let i = 0; i < user_acl.length; i++) {
             if (to.name == user_acl[i]){
                 console.log('user');
@@ -444,7 +444,7 @@ router.beforeEach( (to, from, next) => {
                 break;
             }
         }
-    } else if (user_item == 'admin'){
+    } else if (user_id == 'admin'){
         for (let i = 0; i < admin_acl.length; i++){
             if (to.name == admin_acl[i]){
                 console.log("admin");
