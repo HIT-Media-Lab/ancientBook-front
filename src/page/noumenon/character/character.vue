@@ -148,7 +148,7 @@
     export default{
         created(){
             //Vuex得到具体人物ID
-            this.id = $route.params.id;
+            //this.id = this.$route.params.id;
             console.log('id='+this.id);
             this.personInfo();
         },
