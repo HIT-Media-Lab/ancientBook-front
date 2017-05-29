@@ -3,53 +3,44 @@
     <div>
 
         <!--模块名称-->
-        <div>
-            <h2>3編輯</h2>
-            <button>取消上傳</button>
+        <div class="width800 center">
+            <h2 style="display:inline-block">3編輯</h2>
+            <button class="float-right">取消上傳</button>
         </div>
 
-        <upload_edit></upload_edit>
+        <upload_edit class="width600 center"></upload_edit>
 
-        <div>
+        <div class="width600 center">
             <button>添加</button>
         </div>
 
-        <div>
-
-            <div>
-                <span>冊數</span>
-                <button>上一冊</button>
-                <span></span>
-                <button>下一冊</button>
-            </div>
-
-            <div>
-                <span>卷數</span>
-                <button>上一卷</button>
-                <span></span>
-                <button>下一卷</button>
-            </div>
-
+        <div class="width800 center">
+            <paginator style="display: inline-block"></paginator>
+            <paginator style="display: inline-block"></paginator>
         </div>
 
-        <div>
-            <div>
-                <button>上一步</button>
-            </div>
-            <div>
-                <button>發佈</button>
-            </div>
+        <div class="width800 center">
+            <button class="float-right">發佈</button>
+            <button class="float-right" @click="last_page()">上一步</button>
         </div>
-        
+
     </div>
 
 </template>
 
 <script>
-    import upload_edit from './upload.vue';
+    import upload_edit from './upload-edit.vue';
+    import paginator from '../../../../component/paginator.vue';
     export default{
         components:{
             upload_edit,
-        }
+            paginator,
+        },
+
+        methods : {
+            last_page() {
+                this.$router.push({path: '/user/upload2'});
+            },
+        },
     }
 </script>

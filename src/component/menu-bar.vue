@@ -3,11 +3,33 @@
     <!--4层导航按钮-->
     <div>
         <ul id="layer-head">
-            <li id="layer-head-variety">品种层</li>
-            <li id="layer-head-edition">版本层</li>
-            <li id="layer-head-impression">印次层</li>
-            <li id="layer-head-copy">复本层</li>
+            <router-link to="/user/upload1">
+                <li id="layer-head-variety">品种层</li>
+            </router-link>
+            <router-link to="/user/upload1/edition">
+                <li id="layer-head-edition">版本层</li>
+            </router-link>
+            <router-link to="/user/upload1/impression">
+                <li id="layer-head-impression">印次层</li>
+            </router-link>
+            <router-link to="/user/upload1/copy">
+                <li id="layer-head-copy">复本层</li>
+            </router-link>
         </ul>
     </div>
 
 </template>
+
+<style>
+
+    #layer-head li{
+        list-style: none;
+        cursor: pointer;
+        display: inline-block;
+        height: 30px;
+        width: 90px;
+        text-align: center;
+        background-color: lightgray;
+        line-height: 30px;
+    }
+</style>

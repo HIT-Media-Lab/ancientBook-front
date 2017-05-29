@@ -9,7 +9,7 @@
                 <span>
                     <span class="star">*</span>
                     <span>書名:</span>
-                    <input>
+                    <input id="bookName" v-model="bookName" :bookname="bookname" @on-bookname-change="onBooknameChange" onchange="change">
                 </span>
 
                 <span>
@@ -149,6 +149,34 @@
     </div>
 
 </template>
+
+<script>
+    export default{
+        props: ['bookname'],
+
+        data() {
+            return{
+                bookName : this.bookname,
+            }
+        },
+
+        watch: {
+            bookname(val) {
+                this.bookName = val;
+            },
+            bookName(val) {
+                this.$emit("on-bookname-change",val);
+            }
+        },
+
+        methods: {
+            change() {
+                this.bookName = document.getElementById("bookName").value;
+            }
+        }
+
+    }
+</script>
 
 <style>
     *{

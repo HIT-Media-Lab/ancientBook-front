@@ -1158,7 +1158,7 @@
     }
 
     /*图文对照文字工作台li标签（3个版本切换导航栏）*/
-    li{
+    #workspace-text li{
         list-style: none;
         float: right;
         margin: 5px;

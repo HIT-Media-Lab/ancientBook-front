@@ -3,7 +3,7 @@
     <!--版本层-->
     <div>
 
-        <div class="form-center">
+        <div id="edition" class="form-center">
 
             <div>
                 <span>
@@ -219,6 +219,10 @@
     </div>
 
 </template>
+
+<script>
+
+</script>
 
 <style>
     *{
