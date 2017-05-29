@@ -2,117 +2,123 @@
 
     <!--复本层-->
     <div>
-
         <div class="form-center">
-
             <div>
-                <span>
-                    <span>冊數：</span>
-                    <input>
-                </span>
+                <div class="row">
+                    <label class="col-md-2">冊數：</label>
+                    <div class="col-md-4">
+                        <input>
+                    </div>
 
-                <span>
-                    <span>完整性：</span>
-                    <select>
-                        <option>不詳</option>
-                    </select>
-                </span>
+                    <label class="col-md-2">完整性：</label>
+                    <div class="col-md-4">
+                        <select>
+                            <option>不詳</option>
+                        </select>
+                    </div>
+                </div>
 
-                <br>
-
-                <span>
-                    <span>品級：</span>
-                    <select>
-                        <option>不詳</option>
-                    </select>
-                </span>
+                <div class="row">
+                    <label class="col-md-2">品級：</label>
+                    <div class="col-md-4">
+                        <select>
+                            <option>不詳</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
             <div id="form-copy">
-                <span>
-                    <span>責任順序：</span>
-                    <input placeholder="多值屬性用逗號隔開">
-                </span>
+                <div class="row">
+                    <label class="col-md-2">責任順序：</label>
+                    <div class="col-md-6">
+                        <input placeholder="多值屬性用逗號隔開">
+                    </div>
 
-                <br>
+                    <div class="col-md-2">
+                        <button id="btn-add-copy">添加</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button id="btn-delete-copy">刪除</button>
+                    </div>
+                </div>
 
-                <span>
-                    <span class="star">*</span>
-                    <span>責任開始時間:</span>
-                    <input><button>添加</button>
-                </span>
+                <div class="row">
+                    <div class="col-md-2">
+                        <span class="star">*</span>
+                        <label>責任開始時間:</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input><button>添加</button>
+                    </div>
 
-                <span>
-                    <span class="star">*</span>
-                    <span>責任結束時間:</span>
-                    <input><button>添加</button>
-                </span>
+                    <div class="col-md-2">
+                        <span class="star">*</span>
+                        <label>責任結束時間:</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input><button>添加</button>
+                    </div>
+                </div>
 
-                <br>
+                <div class="row">
+                    <label class="col-md-2">責任地點：</label>
+                    <div class="col-md-4">
+                        <input><button>添加</button>
+                    </div>
 
-                <span>
-                    <span>責任地點：</span>
-                    <input><button>添加</button>
-                </span>
+                    <div class="col-md-2">
+                        <span class="star">*</span>
+                        <label>責任者名稱:</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input><button>添加</button>
+                    </div>
+                </div>
 
-                <span>
-                    <span class="star">*</span>
-                    <span>責任者名稱:</span>
-                    <input><button>添加</button>
-                </span>
+                <div class="row">
+                    <div class="col-md-2">
+                        <span class="star">*</span>
+                        <label>責任者類型：</label>
+                    </div>
+                    <div class="col-md-4">
+                        <select>
+                            <option>不詳</option>
+                        </select>
+                    </div>
 
-                <br>
+                    <div class="col-md-2">
+                        <span class="star">*</span>
+                        <label>責任行為：</label>
+                    </div>
+                    <div class="col-md-4">
+                        <select>
+                            <option>重印</option>
+                        </select>
+                    </div>
+                </div>
 
-                <span>
-                    <span class="star">*</span>
-                    <span>責任者類型：</span>
-                    <select>
-                        <option>不詳</option>
-                    </select>
-                </span>
+                <div class="row">
+                    <div class="col-md-2">
+                        <span class="star">*</span>
+                        <label>確定性：</label>
+                    </div>
+                    <div class="col-md-4">
+                        <select>
+                            <option>不詳</option>
+                        </select>
+                    </div>
+                </div>
 
-                <span>
-                    <span class="star">*</span>
-                    <span>責任行為：</span>
-                    <select>
-                        <option>重印</option>
-                    </select>
-                </span>
-
-                <br>
-
-                <span>
-                    <span class="star">*</span>
-                    <span>確定性：</span>
-                    <select>
-                        <option>不詳</option>
-                    </select>
-                </span>
-
-                <br>
-
-                <span>
-                    <span>責任說明：</span>
-                    <input>
-                </span>
-
-                <button id="btn-add-copy">添加</button>
-                <button id="btn-delete-copy">刪除</button>
+                <div class="row">
+                    <label class="col-md-2">責任說明：</label>
+                    <div class="col-md-4">
+                        <input>
+                    </div>
+                </div>
             </div>
-
         </div>
     </div>
 
 </template>
 
-<style>
-    *{
-        margin: 0;
-        padding: 0;
-    }
-
-    /*红色星号*/
-    .star{
-        color: red;
-    }
-</style>

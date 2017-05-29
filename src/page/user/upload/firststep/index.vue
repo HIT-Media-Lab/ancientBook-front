@@ -10,7 +10,7 @@
 
         <div class="width800 center">
             <h3 style="display:inline-block" class="float-left">古籍規範名稱：</h3>
-            <h4 id="bookName" style="display:inline-block" class="float-left" @on-bookname-change="onBooknameChange" :bookname="bookname">{{ bookname }}</h4>
+            <h4 id="bookName" style="display:inline-block" class="float-left">{{ bookname }}</h4>
             <div style="display:inline-block">
                 <p>[品種層]責任結束時間-朝代 + 責任者 + 責任行為</p>
                 <p>[版本層]責任結束時間-朝代 + 責任者 + 責任行為</p>
@@ -78,14 +78,6 @@
 
         methods : {
 
-            change() {
-                    this.bookname = document.getElementById("bookName").innerText
-            },
-
-            onBooknameChange(val) {
-                this.bookname = val;
-            },
-
             /**
              * 获得下拉菜单内容
              */
@@ -126,6 +118,16 @@
 </script>
 
 <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+
+    /*红色星号*/
+    .star{
+        color: red;
+    }
+
     .width600{
         width: 600px;
     }
