@@ -3,10 +3,6 @@
         <noumenon_title :title="this.title">
             <build_button slot="children"></build_button>
         </noumenon_title>
-
-        <div v-for="(item,index) in recent_noumenons">
-            <p class="zxwnoumenom-row" @click="go_noumenom(index)">{{item.standard_name}}</p>
-        </div>
     </div>
 </template>
 <script>

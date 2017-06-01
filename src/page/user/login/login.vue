@@ -8,11 +8,11 @@
             <div class="input-ac-pwd">
                 <div class="input-ac">
                     <span class="text1">账 号</span>
-                    <input type="text" class="username" v-model="account" @blur="Check()" id="username" v-bind:class="{ warnborder: Active1 }">
+                    <input type="text" class="username" v-model="account" @blur="check()" id="username" v-bind:class="{ warnborder: Active1 }">
                 </div>
                 <div class="input-password">
                     <span class="text2">密 码</span>
-                    <input type="password" class="password" v-model="pwd" @blur="Check()" id="pwd" v-bind:class="{ warnborder: Active2 }">
+                    <input type="password" class="password" v-model="pwd" @blur="check()" id="pwd" v-bind:class="{ warnborder: Active2 }">
                 </div>
                 <div class="warning-login">
                     <span id="warning" v-model="warning">{{warning}}</span>
@@ -24,10 +24,10 @@
             </div>
             <div class="auto">
                 <!--验证码获取位置-->
-                <input type="checkbox" id="save-password"  class="save-password-checkbox" @click="Auto()">
+                <input type="checkbox" id="save-password"  class="save-password-checkbox" @click="auto()">
                 <span class="save-password-word" >自动登录</span>
             </div>
-            <button class="login-button" @click="Login()" v-bind:disabled="disabled">登  录</button>
+            <button class="login-button" @click="login()" v-bind:disabled="disabled">登  录</button>
             <!--<button @click="Test">测试</button>-->
         </div>
     </div>
@@ -67,8 +67,8 @@ import store from '../../../store'
      },
 
      //组件刷新执行钩子
-     beforeMount:function () {
-         this.OnloadToken();
+     beforeMount: function () {
+         this.onload_token();
      },
 
      methods: {
@@ -86,13 +86,13 @@ import store from '../../../store'
           *  账号 正则判断输入是否规范
           */
 
-         Check(){
+         check(){
              this.disabled = false;
              this.warning = "";
              this.Active1=false;
              this.Active2=false;
-             let success1=this.checkuser(this.account);
-             let success2=this.checkpwd(this.pwd);
+             let success1=this.check_user(this.account);
+             let success2=this.check_pwd(this.pwd);
              if (success1 && success2){
                  this.warning= "";
                  this.Active1=false;
@@ -111,30 +111,30 @@ import store from '../../../store'
          },
 
 
-         CreateVPicture(){
+         create_v_picture(){
              document.getElementById("v_picture").src='/ancient_books/get_v_picture.action';
          },
 
          // 网页启动得到token
-         OnloadToken(){
+         onload_token(){
              this.$http.get('/ancient_books/getToken.action').then(function (response) {
                  console.log("成功得到token");
                  this.$store.commit("change_token",response.body.token);
                  console.log(this.$store.getters.GetToken + " 第一次获得token");
                  if (this.$store.getters.GetToken != null){
-                     this.AutoLogin();
-                     this.CreateVPicture()
+                     this.auto_login();
+                     this.create_v_picture()
                  }
              },function () {
 //                 alert("error")
              })
          },
 
-         Auto() {
+         auto() {
            this.auto = !this.auto
          },
          //登录的回调函数
-         LoginSuccess(response){
+         login_success(response){
              if (response.body.su == 1) {
 //                     this.$store.commit('change_admin');
                  localStorage.setItem('user',JSON.stringify("admin"));
@@ -148,12 +148,12 @@ import store from '../../../store'
              }
          },
          //登陆失败函数
-         LoginFail(response){
+         login_fail(response){
              document.getElementById("v_picture").src='/ancient_books/get_v_picture.action'+'?'+(new Date()).getTime();
              alert(response.body.info);
         },
          //点击登录按钮执行函数
-         Login() {
+         login() {
              //给对象object内容赋值
                  this.object.account=this.account;
                  this.object.pwd=this.pwd;
@@ -161,7 +161,7 @@ import store from '../../../store'
                  this.object.auto=this.auto;
                  console.log("全局token"+this.$store.getters.GetToken);
                  // 与后端对接的vue-resource
-                 this.httpJson(this.login_url,'post',this.object,this.LoginSuccess,this.LoginFail);
+                 this.httpJson(this.login_url,'post',this.object,this.login_success,this.login_fail);
          },
          //得到验证码图片
 //         GetCode() {
@@ -169,7 +169,7 @@ import store from '../../../store'
 //             })
 //         },
          //自动登录
-         AutoLogin() {
+         auto_login() {
              this.$http.get(this. autologin_url).then(function (response) {
                  if (response.body.result==1) {
                      if (response.body.su == 1)

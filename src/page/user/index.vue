@@ -2,30 +2,47 @@
     <div class="user">
 
         <div class="">
-               <router-link to="/user/upload1">
-                   <img src="../../assets/img/u456.png" class="upload_img">
-                   <span class="upload_word"> 上 传</span>
-               </router-link>
+            <router-link to="/user/upload1">
+                <img src="../../assets/img/u456.png" class="upload_img">
+                <span class="upload_word"> 上 传</span>
+            </router-link>
         </div>
-                <router-link to="/user/mybook" >
-                    <img src="../../assets/img/u463.png" class="mybook_img">
-                    <span class="mybook_word">我的古籍</span>
-                </router-link>
-                <router-link to="/user/collection">
-                    <img src="../../assets/img/u468.png" class="mycollection_img">
-                    <span class="mycollection_word">我的收藏</span>
-                </router-link>
-                <router-link to="/user/offer">
-                    <img src="../../assets/img/u485.png" class="myoffer_img">
-                    <span class="myoffer_word">我的贡献</span>
-                </router-link>
-        <!--<button @click="test">写啥测试</button>-->
+        <div>
+            <router-link to="/user/mybook" >
+                <img src="../../assets/img/u463.png" class="mybook_img">
+                <span class="mybook_word">我的古籍</span>
+            </router-link>
+        </div>
+        <div>
+            <router-link to="/user/collection">
+                <img src="../../assets/img/u468.png" class="mycollection_img">
+                <span class="mycollection_word">我的收藏</span>
+            </router-link>
+        </div>
+        <div>
+            <router-link to="/user/offer">
+                <img src="../../assets/img/u485.png" class="myoffer_img">
+                <span class="myoffer_word">我的贡献</span>
+            </router-link>
+        </div>
+        <!--<div id="modal">-->
+            <!--<modal v-bind:show.sync="show">-->
+                <!--<header class="dialog-header" slot="header">-->
+                    <!--<h1 class="dialog-title">提示信息</h1>-->
+                <!--</header>-->
+
+                <!--<div class="dialog-body" slot="body">-->
+                    <!--<p>你想在对话框中放什么内容都可以！</p>-->
+                    <!--<p>你可以放一段文字，也可以放一些表单，或者是一些图片。</p>-->
+                <!--</div>-->
+
+                <!--<footer class="dialog-footer" slot="footer">-->
+                    <!--<button class="btn" @click="closeDialog">关闭</button>-->
+                <!--</footer>-->
+            <!--</modal>-->
+            <!--<button class="btn btn-open" @click="openDialog">打开对话框</button>-->
+        <!--</div>-->
     </div>
-    <!--<hhh :show.sync="show" @cancel="cancel">-->
-        <!--<div slot="header">Modal Header</div>-->
-        <!--<div slot="main">Modal Title</div>-->
-        <!--<div slot="footer">Modal Footer</div>-->
-    <!--</hhh>-->
 </template>
 
 <script>
@@ -38,7 +55,8 @@
 
         data(){
             return{
-                hhh:''
+                hhh:'',
+                show: true
             }
         },
         methods:{
@@ -52,58 +70,32 @@
 
 <style>
     .user{
-        position: relative;
-        height: 100%;
-        margin-left: 300px;
-        margin-right: 300px;
     }
-    #upload{
-        width: 50px;
-        height: 100px;
+    .upload{
+
     }
     .upload_img{
-        height: auto;
-        width: auto;
-        /*margin-top: 300px;*/
+
     }
     .upload_word{
-        margin-top: 30px;
-        width: 50px;
-        display: block;
+
     }
     .mybook_img{
-        display: inline-block;
-        width: auto;
-        height: auto;
-        margin-top:300px;
-        margin-left: 312px;
+
     }
     .mybook_word{
-        left: 590px;
-        top: 55px;
-        width: 70px;
+
     }
     .mycollection_img{
-        width: auto;
-        height: auto;
-        display: inline-block;
 
-        margin-left: 624px;
     }
     .mycollection_word{
-        left: 890px;
-        top: 55px;
-        width: 70px;
+
     }
     .myoffer_img{
-        display: inline-block;
-        width: auto;
-        height: auto;
-        margin-left: 936px;
+
     }
     .myoffer_word{
-        left: 1195px;
-        top: 55px;
-        width: 70px;
+
     }
 </style>

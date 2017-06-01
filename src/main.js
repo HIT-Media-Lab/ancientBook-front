@@ -8,19 +8,25 @@ import './lib/regular'
 import App from './App.vue'
 import store from './store'
 // import './lib/route'
+
 //开启debug模式
 Vue.config.debug = true;
+
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(Vuex);
+
 //回调success前的函数
 function before_success() {
+
 }
+
 //回调success后的函数
 function after_success (response) {
 //更新token
     store.commit("change_token",response.body.token);
 }
+
 //判断是否有无token
 function before_http (object) {
     object.token = store.getters.GetToken;
@@ -34,6 +40,10 @@ function before_http (object) {
         console.log("不需要更token");
     }
 }
+
+
+
+
 //定义的post的vue-router全局函数，以json形式传递数据
 Vue.prototype.http_json = function (url, type, params, success, fail) {
     // this.before_http(params);
@@ -57,11 +67,14 @@ Vue.prototype.http_json = function (url, type, params, success, fail) {
         })
     }
 };
+
 /**
  * 请求发送失败的函数
  */
 function error() {
+
 }
+
 function response_post(response, success, fail) {
     let status = response.status;
     if (status == 200){
@@ -79,6 +92,7 @@ function response_post(response, success, fail) {
         this.$router.push('/500');
     }
 }
+
 function response_get(response, success) {
     let status = response.status;
     if (status == 200){
@@ -91,6 +105,7 @@ function response_get(response, success) {
         this.$router.push('/500');
     }
 }
+
 //定义的post的vue-router全局函数，以form-data形式传递数据
 Vue.prototype.http_post_form=function (url,params,success,fail) {
     params.token = store.getters.GetToken;
@@ -102,12 +117,15 @@ Vue.prototype.http_post_form=function (url,params,success,fail) {
         error();
     })
 };
+
 import  bookstore from './page/bookstore/index.vue'
 import  login from  './page/user/login/login.vue'
 import  admin from  './page/admin/admin.vue'
 import  notfound from './page/error/404.vue'
+
 //用户
 import  user from  './page/user/index.vue'
+
 /**
  * 上传
  */
@@ -119,6 +137,9 @@ import  varieties from  './page/user/upload/firststep/varieties.vue'
 import  synopsis from  './page/user/upload/firststep/synopsis.vue'
 import  upload2 from  './page/user/upload/secondstep/index.vue'
 import  upload3 from  './page/user/upload/thirdstep/index.vue'
+
+
+
 import  mybook from  './page/user/mybook/index.vue'
 import  alupload from  './page/user/mybook/alupload/index.vue'
 import  privatebook from './page/user/mybook/private/index.vue'
@@ -129,6 +150,7 @@ import  ancientbook from  './component/ancientbook.vue'
 import  comment from  './page/user/myoffer/comment/index.vue'
 import  revise from  './page/user/myoffer/revise/index.vue'
 import  search from  './page/search/index.vue'
+
 //本体
 import  noumenon from  './page/noumenon/index.vue'
 //新建本体
@@ -152,6 +174,7 @@ import  pla_detail from './page/noumenon/place/place.vue'
 import  ins_detail from './page/noumenon/institution/institution.vue'
 import  terms_detail from  './page/noumenon/terms/terms.vue'
 // import  timeM from  './page/noumenon/Time/check_china.vue'
+
 // 创建一个路由器实例
 // 并且配置路由规则
 const router = new VueRouter({
@@ -362,6 +385,7 @@ const router = new VueRouter({
                     component:characterthree,
                     name:'characterthree'
                 },
+
             ]
         },
         {
@@ -382,18 +406,22 @@ const router = new VueRouter({
         //     path: '*',
         //     redirect: '/login' // 输入其他不存在的地址自动跳回首页
         // }
+
     ]
 });
+
 router.beforeEach( (to, from, next) => {
     let admin_acl = router.app.$store.getters.ACL_admin;
     let user_acl = router.app.$store.getters.ACL_user;
     let guest_acl = router.app.$store.getters.ACL_guest;
+
     let user_id = JSON.parse(localStorage.getItem('user'));
     if (user_id == undefined) {
         localStorage.setItem('user',JSON.stringify("guest"));
         user_id = 'guest';
     }
     console.log(to);
+
     let flag = false;
     if (user_id == 'guest'){
         for (let i = 0; i < guest_acl.length; i++) {
@@ -432,6 +460,7 @@ router.beforeEach( (to, from, next) => {
         next('/404');
     }
 });
+
 // 现在我们可以启动应用了！
 // 路由器会创建一个 App 实例，并且挂载到选择符 #app 匹配的元素上。
 const app = new Vue({
