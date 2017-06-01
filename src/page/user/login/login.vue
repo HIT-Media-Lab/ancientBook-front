@@ -67,8 +67,8 @@ import store from '../../../store'
      },
 
      //组件刷新执行钩子
-     beforeMount:function () {
-         this.onloadToken();
+     beforeMount: function () {
+         this.onload_token();
      },
 
      methods: {
@@ -91,8 +91,8 @@ import store from '../../../store'
              this.warning = "";
              this.Active1=false;
              this.Active2=false;
-             let success1=this.checkuser(this.account);
-             let success2=this.checkpwd(this.pwd);
+             let success1=this.check_user(this.account);
+             let success2=this.check_pwd(this.pwd);
              if (success1 && success2){
                  this.warning= "";
                  this.Active1=false;
@@ -111,19 +111,19 @@ import store from '../../../store'
          },
 
 
-         createVPicture(){
+         create_v_picture(){
              document.getElementById("v_picture").src='/ancient_books/get_v_picture.action';
          },
 
          // 网页启动得到token
-         onloadToken(){
+         onload_token(){
              this.$http.get('/ancient_books/getToken.action').then(function (response) {
                  console.log("成功得到token");
                  this.$store.commit("change_token",response.body.token);
                  console.log(this.$store.getters.GetToken + " 第一次获得token");
                  if (this.$store.getters.GetToken != null){
-                     this.autoLogin();
-                     this.createVPicture()
+                     this.auto_login();
+                     this.create_v_picture()
                  }
              },function () {
 //                 alert("error")
@@ -134,7 +134,7 @@ import store from '../../../store'
            this.auto = !this.auto
          },
          //登录的回调函数
-         loginSuccess(response){
+         login_success(response){
              if (response.body.su == 1) {
 //                     this.$store.commit('change_admin');
                  localStorage.setItem('user',JSON.stringify("admin"));
@@ -148,7 +148,7 @@ import store from '../../../store'
              }
          },
          //登陆失败函数
-         loginFail(response){
+         login_fail(response){
              document.getElementById("v_picture").src='/ancient_books/get_v_picture.action'+'?'+(new Date()).getTime();
              alert(response.body.info);
         },
@@ -161,7 +161,7 @@ import store from '../../../store'
                  this.object.auto=this.auto;
                  console.log("全局token"+this.$store.getters.GetToken);
                  // 与后端对接的vue-resource
-                 this.httpJson(this.login_url,'post',this.object,this.loginSuccess,this.loginFail);
+                 this.httpJson(this.login_url,'post',this.object,this.login_success,this.login_fail);
          },
          //得到验证码图片
 //         GetCode() {
@@ -169,7 +169,7 @@ import store from '../../../store'
 //             })
 //         },
          //自动登录
-         autoLogin() {
+         auto_login() {
              this.$http.get(this. autologin_url).then(function (response) {
                  if (response.body.result==1) {
                      if (response.body.su == 1)

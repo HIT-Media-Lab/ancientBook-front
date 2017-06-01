@@ -6,7 +6,7 @@
  */
 import Vue from 'vue'
 
-Vue.prototype.checkuser = function (account) {
+Vue.prototype.check_user = function (account) {
     let success = true;
     if (account.length != 0){
         if (account.match('^[A-Za-z0-9]{8,10}$')) {
@@ -23,7 +23,7 @@ Vue.prototype.checkuser = function (account) {
 };
 
 
-Vue.prototype.checkpwd = function(pwd) {
+Vue.prototype.check_pwd = function(pwd) {
     let success =true;
     if (pwd.length != 0){
         if (pwd.match('^[A-Za-z0-9]{6,16}$')) {
@@ -40,7 +40,7 @@ Vue.prototype.checkpwd = function(pwd) {
 
 };
 
-Vue.prototype.checkname = function(name) {
+Vue.prototype.check_name = function(name) {
     let success =true;
     if (name.match('^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$')) {
         return success;

@@ -17,18 +17,18 @@ Vue.use(VueResource);
 Vue.use(Vuex);
 
 //回调success前的函数
-function beforeSuccess() {
+function before_success() {
 
 }
 
 //回调success后的函数
-function afterSuccess (response) {
+function after_success (response) {
 //更新token
     store.commit("change_token",response.body.token);
 }
 
 //判断是否有无token
-function beforeHttp (object) {
+function before_http (object) {
     object.token = store.getters.GetToken;
     let token = store.getters.GetToken;
     if (object.token.length == 0 || token.length == 0) {
@@ -45,23 +45,23 @@ function beforeHttp (object) {
 
 
 //定义的post的vue-router全局函数，以json形式传递数据
-Vue.prototype.httpJson = function (url, type, params, success, fail) {
-    // this.BeforeHttp(params);
+Vue.prototype.http_json = function (url, type, params, success, fail) {
+    // this.before_http(params);
     params.token=store.getters.GetToken;
     if (type.toLocaleLowerCase() == "get") {
         this.$http.get(url).then(function (response) {
-            responseGet(response, success)
+            response_get(response, success)
         },function () {
             error();
         })
     } else if (type.toLocaleLowerCase() == "post") {
         //验证是否有无token
-        beforeHttp(params);
+        before_http(params);
         params.token =store.getters.GetToken;
         this.$http.post(url, params,
             {headers:{'Content-Type':'application/json;charset=UTF-8'}}
         ).then(function (response) {
-            responsePost(response,success,fail);
+            response_post(response,success,fail);
         },function () {
             error();
         })
@@ -75,12 +75,12 @@ function error() {
 
 }
 
-function responsePost(response, success, fail) {
+function response_post(response, success, fail) {
     let status = response.status;
     if (status == 200){
         if (response.body.result == 1){
             success(response);
-            afterSuccess(response);
+            after_success(response);
         } else if (response.body.result == 0){
             fail(response);
         }
@@ -93,7 +93,7 @@ function responsePost(response, success, fail) {
     }
 }
 
-function responseGet(response, success) {
+function response_get(response, success) {
     let status = response.status;
     if (status == 200){
         success(response);
@@ -107,12 +107,12 @@ function responseGet(response, success) {
 }
 
 //定义的post的vue-router全局函数，以form-data形式传递数据
-Vue.prototype.httpPostForm=function (url,params,success,fail) {
+Vue.prototype.http_post_form=function (url,params,success,fail) {
     params.token = store.getters.GetToken;
     this.$http.post(url, params,
         {emulateJSON: true}   //将json形式转换为form-data
         ).then(function (response) {
-            responsePost(response, success, fail);
+            response_post(response, success, fail);
     },function () {
        error();
     })
