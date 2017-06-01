@@ -1,7 +1,7 @@
 <template>
     <div class="zxwnoumenom-body">
         <noumenon-title :title="this.title"></noumenon-title>
-
+        <router-link :to="{name:'character', params:{pageId:'1', letterId: 'A'}}">测试</router-link>
         <div v-for="(item,index) in recent_noumenons">
             <p class="zxwnoumenom-row" @click="goNoumenom(index)">{{item.standard_name}}----{{item.id}}----{{item.type}}</p>
         </div>

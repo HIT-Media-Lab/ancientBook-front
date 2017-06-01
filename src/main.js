@@ -25,19 +25,15 @@ function beforeSuccess() {
 function afterSuccess (response) {
 //更新token
     store.commit("change_token",response.body.token);
-    console.log("更新token"+store.getters.GetToken);
 }
 
 //判断是否有无token
 function beforeHttp (object) {
-    console.log("检查超级用户是否有token " + store.getters.GetToken);
     object.token = store.getters.GetToken;
-    console.log("object"+object.token);
     let token = store.getters.GetToken;
     if (object.token.length == 0 || token.length == 0) {
         this.$http.get('/ancient_books/getToken.action').then(function (response) {
             token = response.body.token;
-            console.log("检测token成功"+token );
         });
         store.commit("change_token",token);
     }else {
@@ -52,10 +48,9 @@ function beforeHttp (object) {
 Vue.prototype.httpJson = function (url, type, params, success, fail) {
     // this.BeforeHttp(params);
     params.token=store.getters.GetToken;
-    console.log("你猜猜token有没有 "+params.token);
     if (type.toLocaleLowerCase() == "get") {
         this.$http.get(url).then(function (response) {
-            response_handle_get(response, success)
+            responseGet(response, success)
         },function () {
             error();
         })
@@ -66,7 +61,7 @@ Vue.prototype.httpJson = function (url, type, params, success, fail) {
         this.$http.post(url, params,
             {headers:{'Content-Type':'application/json;charset=UTF-8'}}
         ).then(function (response) {
-            response_handle_post(response,success,fail);
+            responsePost(response,success,fail);
         },function () {
             error();
         })
@@ -80,11 +75,10 @@ function error() {
 
 }
 
-function response_handle_post(response, success, fail) {
+function responsePost(response, success, fail) {
     let status = response.status;
     if (status == 200){
         if (response.body.result == 1){
-            // beforeSuccess(response);
             success(response);
             afterSuccess(response);
         } else if (response.body.result == 0){
@@ -99,11 +93,10 @@ function response_handle_post(response, success, fail) {
     }
 }
 
-function response_handle_get(response, success) {
+function responseGet(response, success) {
     let status = response.status;
     if (status == 200){
-            // beforeSuccess(response);
-            success(response);
+        success(response);
     } else if (status == 403){
         this.$router.push('/403');
     } else if (status == 404){
@@ -116,11 +109,10 @@ function response_handle_get(response, success) {
 //定义的post的vue-router全局函数，以form-data形式传递数据
 Vue.prototype.httpPostForm=function (url,params,success,fail) {
     params.token = store.getters.GetToken;
-    console.log("你猜猜token有没有 "+params.token);
     this.$http.post(url, params,
         {emulateJSON: true}   //将json形式转换为form-data
         ).then(function (response) {
-            response_handle(response, success, fail);
+            responsePost(response, success, fail);
     },function () {
        error();
     })
@@ -195,7 +187,13 @@ const router = new VueRouter({
             name:'login'
         },
         {
+            path:'/admin/page/:pageId',
+            component:admin,
+            name:'admin'
+        },
+        {
             path:'/admin',
+            redirect: '/admin/page/1',
             component:admin,
             name:'admin'
         },
@@ -210,22 +208,22 @@ const router = new VueRouter({
             name:'upload1',
             children: [
                 {
-                    path:'/',
+                    path:'',
                     component:varieties,
                     name:'varieties',
                 },
                 {
-                    path:'/user/upload1/edition',
+                    path:'edition',
                     component:edition,
                     name:'edition',
                 },
                 {
-                    path:'/user/upload1/impression',
+                    path:'impression',
                     component:impression,
                     name:'impression',
                 },
                 {
-                    path:'/user/upload1/copy',
+                    path:'copy',
                     component:copy,
                     name:'copy',
                 },
@@ -297,92 +295,93 @@ const router = new VueRouter({
             name:'noumenon',
             children:[
                 {
-                    path:'/',
+                    path:'',
                     component:recent,
                     name:'recent'
                 },
                 {
-                    path:'/noumenon/character',
-                    component:character,
-                    name:'character'
+                    path: 'character/page/:pageId/letter/:letterId',
+                    component: character,
+                    name: 'character'
                 },
                 {
-                    path:'/noumenon/char_detail/:id',
+                    path: 'character',
+                    redirect: 'character/page/1/letter/A',
+                    component: character,
+                    name: 'character'
+                },
+                {
+                    path:'char_detail/:nouId',
                     component:char_detail,
                     name:'char_detail'
                 },
                 {
-                    path:'/noumenon/institution',
+                    path:'institution/page/:pageId/letter/:letterId',
                     component:institution,
                     name:'institution'
                 },
                 {
-                    path:'/noumenon/ins_detail/:id',
+                    path:'ins_detail/:nouId',
                     component:ins_detail,
                     name:'ins_detail'
                 },
                 {
-                    path:'/noumenon/literature',
+                    path:'literature/page/:pageId/letter/:letterId',
                     component:literature,
                     name:'literature'
                 },
                 {
-                    path:'/noumenon/lit_detail/:id',
+                    path:'lit_detail/:nouId',
                     component:lit_detail,
                     name:'lit_detail'
                 },
                 {
-                    path:'/noumenon/office',
+                    path:'office/page/:pageId/letter/:letterId',
                     component:office,
                     name:'office'
                 },
                 {
-                    path:'/noumenon/off_detail/:id',
+                    path:'off_detail/:nouId',
                     component:off_detail,
                     name:'off_detail'
                 },
                 {
-                    path:'/noumenon/place',
+                    path:'place/page/:pageId/letter/:letterId',
                     component:place,
                     name:'place'
                 },
                 {
-                    path:'/noumenon/placeM/:id',
+                    path:'plac_detail/:nouId',
                     component:pla_detail,
                     name:'pla_detail'
                 },
                 {
-                    path:'/noumenon/terms',
+                    path:'terms/page/:pageId/letter/:letterId',
                     component:terms,
                     name:'terms'
                 },
                 {
-                    path:'/noumenon/terms_detail/:id',
+                    path:'terms_detail/:nouId',
                     component:terms_detail,
                     name:'terms_detail'
                 },
                 {
-                    path:'/noumenon/time',
+                    path:'time/page/:pageId/letter/:letterId',
                     component:time,
                     name:'time'
                 },
-                // {
-                //     path:'/noumenon/timeM/:id',
-                //     component:timeM,
-                //     name:'timeM'
-                // },
                 {
-                    path:'/noumenon/build',
+                    path:'build',
                     component:build,
                     name:'build'
                 },
                 {
-                    path:'/noumenon/chartwo',
+                    path:'chartwo',
                     component:charactertwo,
                     name:'charactertwo'
                 },
                 {
-                    path:'/noumenon/charthree',
+                    path:'charthree',
                     component:characterthree,
                     name:'characterthree'
                 },
@@ -421,11 +420,13 @@ router.beforeEach( (to, from, next) => {
         localStorage.setItem('user',JSON.stringify("guest"));
         user_id = 'guest';
     }
+    console.log(to);
 
     let flag = false;
     if (user_id == 'guest'){
         for (let i = 0; i < guest_acl.length; i++) {
             if (to.name == guest_acl[i]) {
+                console.log(to.name);
                 flag = true;
                 next();
                 break;
@@ -438,7 +439,7 @@ router.beforeEach( (to, from, next) => {
     } else if (user_id == 'user'){
         for (let i = 0; i < user_acl.length; i++) {
             if (to.name == user_acl[i]){
-                console.log('user');
+                console.log(to.name);
                 flag = true;
                 next();
                 break;
@@ -447,7 +448,7 @@ router.beforeEach( (to, from, next) => {
     } else if (user_id == 'admin'){
         for (let i = 0; i < admin_acl.length; i++){
             if (to.name == admin_acl[i]){
-                console.log("admin");
+                console.log(to.name);
                 flag = true;
                 next();
                 break;

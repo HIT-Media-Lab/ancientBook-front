@@ -1,6 +1,8 @@
 <template>
     <div class="zxwnoumenom">
         <div class="zxwnoumenom-body">
+            <p>{{$route.params.pageId}}</p>
+            <p>{{$route.params.letterId}}</p>
             <!--人物本体标题-->
             <noumenon-title :title="this.title"></noumenon-title>
 

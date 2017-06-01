@@ -9,14 +9,16 @@ import Vue from 'vue'
 Vue.prototype.checkuser = function (account) {
     let success = true;
     if (account.length != 0){
-        if (account.match('[A-Za-z0-9]{8,10}$')) {
-            return success
+        if (account.match('^[A-Za-z0-9]{8,10}$')) {
+            console.log("正则成功");
+            return success;
         } else {
             success = false;
-            return success
+            console.log("正则失败");
+            return success;
         }
     }else {
-        return success
+        return success;
     }
 };
 
@@ -24,14 +26,16 @@ Vue.prototype.checkuser = function (account) {
 Vue.prototype.checkpwd = function(pwd) {
     let success =true;
     if (pwd.length != 0){
-        if (pwd.match('[A-Za-z0-9]{6,16}$')) {
-            return success
+        if (pwd.match('^[A-Za-z0-9]{6,16}$')) {
+            console.log("正则成功");
+            return success;
         } else {
+            console.log("正则失败");
             success=false;
-            return success
+            return success;
         }
     }else {
-        return success
+        return success;
     }
 
 };
@@ -39,10 +43,10 @@ Vue.prototype.checkpwd = function(pwd) {
 Vue.prototype.checkname = function(name) {
     let success =true;
     if (name.match('^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$')) {
-        return success
+        return success;
     } else {
         success=false;
-        return success
+        return success;
     }
 };
 
