@@ -11,7 +11,7 @@
             </div>
 
             <!--创建用户按钮-->
-            <input type="button" class="btn-general create-user" value="创建用户"  @click="openDialog()">
+            <input type="button" class="btn-general create-user" value="创建用户"  @click="open_dialog()">
 
             <!--用户信息表格-->
             <table class="table-box">
@@ -25,12 +25,12 @@
 
                 <!--显示用户信息-->
                 <tr v-for="(item,index) in user_data"> <!--v-for循环数据里的数组数据-->
-                    <td>{{ item.user_name }}</td>
+                    <td>{{item.user_name }}</td>
                     <td>{{item.account}}</td>
                     <td>{{item.time}}</td>
                     <td>
-                        <input type="button" class="btn-general" value="修改" @click="openMotal(index)">    <!--v-on click 依据index实现删除功能（格式）-->
-                        <input type="button" class="btn-general" value="删除" @click="deleteUsers(index)">
+                        <input type="button" class="btn-general" value="修改" @click="open_motal(index)">    <!--v-on click 依据index实现删除功能（格式）-->
+                        <input type="button" class="btn-general" value="删除" @click="delete_users(index)">
                     </td>
                 </tr>
             </table>
@@ -49,22 +49,22 @@
                     <div class="dialog-body" >
                         <div class="strap">
                             <span class="span-motal">用户名：</span>
-                            <input type="text"  id="text1" class="input-motal" placeholder="输入2-10位中文、英文、数字" onfocus="this.placeholder=''" @blur="checkName('text1')"  v-model="user_name" v-bind:class="{warnBorder:this.is_active[0]}" >
+                            <input type="text"  id="text1" class="input-motal" placeholder="输入2-10位中文、英文、数字" onfocus="this.placeholder=''" @blur="if_name('text1')"  v-model="user_name" v-bind:class="{warnBorder:this.is_active[0]}" >
                         </div>
 
                         <div class="strap">
                             <span class="span-motal">账号：</span>
-                            <input type="text"  id="text2" class="input-motal"  placeholder="输入8-10位数字、英文" onfocus="this.placeholder=''" @blur="checkAccount('text2')" v-model="account" v-bind:class="{warnBorder:this.is_active[1]}">
+                            <input type="text"  id="text2" class="input-motal"  placeholder="输入8-10位数字、英文" onfocus="this.placeholder=''" @blur="if_account('text2')" v-model="account" v-bind:class="{warnBorder:this.is_active[1]}">
                         </div>
 
                         <div class="strap">
                             <span class="span-motal">密码：</span>
-                            <input type="password"  id="text3" class="input-motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkPwd('text3')" v-model="pwd" v-bind:class="{warnBorder:this.is_active[2]}">
+                            <input type="password"  id="text3" class="input-motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="if_pwd('text3')" v-model="pwd" v-bind:class="{warnBorder:this.is_active[2]}">
                         </div>
 
                         <div>
                             <span class="span-motal">重复密码：</span>
-                            <input type="password" id="text4" class="input-motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="dupPwd('text3','text4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.is_active[3]}" >
+                            <input type="password" id="text4" class="input-motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="dup_pwd('text3','text4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.is_active[3]}" >
                         </div>
                     </div>
                     <footer class="dialog-footer" >
@@ -72,8 +72,8 @@
                         <p  class="warn-tip" v-model="tip">{{tip}}</p>
                         <!--按钮-->
                         <div>
-                            <button class="btn-general" style="margin-right: 10%" @click="closeDialog()" tabindex="-1">取消</button>
-                            <button class="btn-general "  @click="addMsg()" :disabled="add_if">创建</button>
+                            <button class="btn-general" style="margin-right: 10%" @click="close_dialog()" tabindex="-1">取消</button>
+                            <button class="btn-general "  @click="add_msg()" :disabled="add_if">创建</button>
                         </div>
                     </footer>
                 </div>
@@ -98,17 +98,17 @@
 
                         <div class="strap">
                             <span class="span-motal">用户名:</span>
-                            <input type="text"  id="chan2" class="input-motal" v-model="back_username"  @change="checkName('chan2')" v-bind:class="{warnBorder:this.is_active[0]}">
+                            <input type="text"  id="chan2" class="input-motal" v-model="back_username"  @change="if_name('chan2')" v-bind:class="{warnBorder:this.is_active[0]}">
                         </div >
 
                         <div class="strap">
                             <span class="span-motal">新密码:</span>
-                            <input type="password"  id="chan3" class="input-motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="checkPwd('chan3')" v-model="pwd"  v-bind:class="{warnBorder:this.is_active[2]}" >
+                            <input type="password"  id="chan3" class="input-motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="if_pwd('chan3')" v-model="pwd"  v-bind:class="{warnBorder:this.is_active[2]}" >
                         </div>
 
                         <div class="strap">
                             <span class="span-motal">重复密码:</span>
-                            <input type="password" id="chan4" class="input-motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="dupPwd('chan3','chan4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.is_active[3]}">
+                            <input type="password" id="chan4" class="input-motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="dup_pwd('chan3','chan4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.is_active[3]}">
                         </div>
                     </div>
 
@@ -116,8 +116,8 @@
                         <!--提示信息-->
                         <span class="warn-tip" v-model="tip">{{tip}}</span>
                         <div>
-                            <button class="btn-general" style="margin-right: 10%" @click="closeMotal()" tabindex="-1">取消</button>
-                            <button class="btn-general" @click="confirmChange()" :disabled="add_if">修改</button>
+                            <button class="btn-general" style="margin-right: 10%" @click="close_motal()" tabindex="-1">取消</button>
+                            <button class="btn-general" @click="confirm_change()" :disabled="add_if">修改</button>
                         </div>
                     </footer>
                 </div>
@@ -125,17 +125,18 @@
         </div>
 
         <!--翻页组件-->
-        <paginator  :max=this.max_page :object="this.get_user" :url="this.get_url" v-on:pre_page="prePage" v-on:next_page="nextPage" v-on:skip_page="skiPage"></paginator>
+        <paginator :max=this.max_page></paginator>
     </div>
 </template>
 
 
 <script type="text/javascript">
-   /* let Mock = require('mockjs');
+    /*let Mock = require('mockjs');
 
     //显示用户列表
     Mock.mock('/ancient_books/get_user_list.action?page=1','get',{
-        "content|20":[{
+        "status|200":200,
+        "content|3":[{
             'user_id|1-100':100,
             'name':'@FIRST',
             'account|10000000-1000000000':100000000,
@@ -144,11 +145,25 @@
         'max_page|1-100':100
     });
 
-    Mock.mock('/ancient_books/getToken.action','get',{
-        'Token|1-100':100
+    Mock.mock('/ancient_books/get_user_list.action?page=2','get',{
+        "status|200":200,
+        "content|3":[{
+            'user_id|1-100':100,
+            'name':'@FIRST',
+            'account|10000000-1000000000':100000000,
+            'time':'@DATETIME("yyyy-MM-dd HH:mm:ss")'
+        }],
+        'max_page|1-100':100
     });*/
+
     import paginator from "../../component/paginator.vue";
     export default{
+        watch:{
+            $route(){
+                this.get_users();
+            }
+        },
+
         components:{ paginator },
         data(){
             return {
@@ -178,8 +193,9 @@
 
                 page: 1,//当前页面
                 max_page: 3,//总页数
+                router_name:'admin',
 
-                get_user: {value:'?page='},//显示用户数据对象
+                get_user: {},//显示用户数据对象
                 add_user:{},//创建用户数据对象
                 delete_user:{},//删除用户数据对象
                 modify_user:{},//修改数据对象
@@ -187,13 +203,14 @@
                 check_account:{} //检查账号是否重复
             }
         },
+
         created: function () {
-            this.getUsers(1);
-            console.log("created时的全局token"+this.$store.getters.GetToken);
+            this.get_users();
         },
+
         methods: {
             // get数据显示用户列表 成功地回调函数
-            successGet(response){
+            success_get(response){
                 console.log("success get users ");
                 this.max_page = response.body.max_page;
                 for ( let i = 0; i < response.body.content.length; i++ ){
@@ -206,44 +223,45 @@
                 }
             },
 
-            failGet(){
+            fail_get(response){
                 console.log("没有返回数组！");
             },
 
             //向后端发起请求获取用户数据列表，显示在前端页面
-            getUsers(pages){
-                this.get_user.value='?page='+pages;
+            get_users(){
+                this.get_user.value='?page='+this.$route.params.page;
                 let new_url = this.get_url+this.get_user.value;
-                this.httpJson(new_url,'get',this.get_user,this.successGet, this.failGet);
+                this.clean_data();
+                this.http_json(new_url,'get',this.get_user,this.success_get, this.fail_get);
             },
 
             //创建用户 post用户数据 success回调函数
-            successAdd(response){
+            success_add(response){
                 console.log("success create!");
-                this.cleanData();
-                this.getUsers(this.page);
-                this.closeDialog(); //关闭创建用户的模态框
+                this.clean_data();
+                this.get_users();
+                this.close_dialog(); //关闭创建用户的模态框
             },
 
-            failAdd(){
+            fail_add(response){
                 console.log("fail create!");
             },
 
             //添加用户post请求数据的赋值
-            createUsers(){
+            create_users(){
                 //将用户信息放进请求对象里
                 this.add_user.name = this.user_name;
                 this.add_user.account = this.account;
                 this.add_user.pwd = this.pwd;
-                this.httpJson(this.add_url, 'post', this.add_user, this.successAdd, this.failAdd);
+                this.http_json(this.add_url, 'post', this.add_user, this.success_add, this.fail_add);
             },
 
             //创建用户的模态框 系列函数
-            openDialog(){
+            open_dialog(){
                 this.show_create = true;
             },
 
-            closeDialog() {
+            close_dialog() {
                 this.show_create = false;
                 this.user_name="";
                 this.account="";
@@ -257,7 +275,7 @@
             },
 
             //用户名判断合法
-            checkName(tag1){
+            if_name(tag1){
                 document.getElementById(tag1).placeholder ="输入2-10位中文、英文、数字";
                 this.add_if = true;    //禁用按钮
                 this.is_active[0]=false;
@@ -269,7 +287,7 @@
                     if( y === true ){
                         this.tip = "";
                         this.is_active[0]=false;
-                        this.dupName(x);
+                        this.dup_name(x);
                     } else {
                         this.tip = "输入2-10位中文、英文、数字";
                         this.add_if=true;
@@ -279,7 +297,7 @@
             },
 
             //账号判断合法
-            checkAccount(tag2){
+            if_account(tag2){
                 document.getElementById(tag2).placeholder = "输入8-10位数字、英文";
                 this.add_if = true;    //禁用按钮
                 this.is_active[1]=false;
@@ -291,7 +309,7 @@
                     if( y === true ){
                         this.tip = "";
                         this.is_active[1]=false;
-                        this.dupAccount();
+                        this.dup_account();
                     } else {
                         this.tip = "输入8-10位数字、英文";
                         this.add_if=true;
@@ -302,7 +320,7 @@
 
 
             //密码判断合法
-            checkPwd(tag3){
+            if_pwd(tag3){
                 document.getElementById(tag3).placeholder = "输入6-16位数字、英文";
                 this.add_if = true;    //禁用按钮
                 this.is_active[2]=false;
@@ -324,7 +342,7 @@
             },
 
             //重复输入密码确认
-            dupPwd(tag1,tag2){
+            dup_pwd(tag1,tag2){
                 document.getElementById(tag2).placeholder = "重复密码";
                 this.add_if = true;
                 this.is_active[3] = false;
@@ -344,44 +362,44 @@
             },
 
             //判断用户名是否重复
-            successName(response){
+            success_name(response){
                 console.log("用户名不重复！");
                 this.add_if = false;    //按钮可以使用
             },
 
-            failName(){
+            fail_name(response){
                 this.is_active[0]=true;
                 this.add_if = true;
                 this.tip="用户名已存在!";
             },
 
-            dupName(n){
+            dup_name(n){
                 this.check_name.value = "?name="+n;
                 let new_url = this.name_url + this.check_name.value;
-                this.httpJson(new_url,'get',this.check_name, this.successName, this.failName);
+                this.http_json(new_url,'get',this.check_name, this.success_name, this.fail_name);
             },
 
 
             //判断账号是否重复
-            successAccount(response){
+            success_account(response){
                 console.log("账号不重复！");
                 this.add_if = false;
             },
 
-            failAccount(){
+            fail_account(response){
                 this.is_active[1]=true;
                 this.tip="账号已存在!";
                 this.add_if = true;
             },
 
-            dupAccount(){
+            dup_account(){
                 this.check_account.value ="?account="+this.account;
                 let new_url = this.account_url+this.check_account.value;
-                this.httpJson(new_url,'get', this.check_account, this.successAccount, this.failAccount);
+                this.http_json(new_url,'get', this.check_account, this.success_account, this.fail_account);
             },
 
             //添加用户信息
-            addMsg(){
+            add_msg(){
                 let x = document.getElementById("text1").value;
                 let y = document.getElementById("text2").value;
                 let z = document.getElementById("text3").value;
@@ -390,42 +408,42 @@
                     //this.tip = "用户名、账号、密码等不能为空！";
                     this.add_if = true;
                 } else {
-                    this.checkName('text1');
-                    this.checkAccount('text2');
-                    this.checkPwd('text3');
-                    this.dupPwd('text3','text4');
+                    this.if_name('text1');
+                    this.if_account('text2');
+                    this.if_pwd('text3');
+                    this.dup_pwd('text3','text4');
                     if ( this.add_if === false ) {
-                        this.createUsers();
+                        this.create_users();
                     }
                 }
             },
 
             //删除用户信息 success回调函数
-            successDelete(response){
+            success_delete(response){
                 console.log("success delete");
-                this.cleanData();   //清空数组
-                this.getUsers(this.page);
+                this.clean_data();   //清空数组
+                this.get_users();
             },
 
-            failDelete(){
+            fail_delete(response){
                 console.log("fail delete");
             },
 
-            deleteUsers(index){
+            delete_users(index){
                 this.delete_user.user_id = this.user_data[index].user_id;
-                this.httpJson(this.delete_url,'post',this.delete_user,this.successDelete,this.failDelete);
+                this.http_json(this.delete_url,'post',this.delete_user,this.success_delete,this.fail_delete);
             },
 
 
             //修改用户信息 模态框系列
-            openMotal(index){
+            open_motal(index){
                 this.show_change = true;
                 this.back_index = index;    //将修改行的索引传入便于后面发送该索引下的用户ID
                 this.back_username = this.user_data[index].user_name;
                 this.back_account = this.user_data[index].account;
             },
 
-            closeMotal(){
+            close_motal(){
                 this.show_change=false;
                 this.back_username='';
                 this.back_account='';
@@ -438,63 +456,43 @@
                 this.is_active[3]=false;
             },
 
-            successModify(response){
+            success_modify(response){
                 console.log("success modify!");
-                this.cleanData();
-                this.getUsers(this.page);
-                this.closeMotal();
+                this.clean_data();
+                this.get_users();
+                this.close_motal();
             },
 
-            failModify(){
+            fail_modify(response){
                 console.log("fail modify!");
             },
 
             //修改的请求函数
-            modifyUsers(){
+            modify_users(){
                 this.modify_user.name=this.back_username;
                 this.modify_user.pwd=this.pwd;
                 this.modify_user.user_id=this.user_data[this.back_index].user_id;
-                this.httpJson(this.modify_url,'post',this.modify_user,this.successModify,this.failModify);
+                this.http_json(this.modify_url,'post',this.modify_user,this.success_modify,this.fail_modify);
             },
 
             //修改执行的函数
-            confirmChange(){
+            confirm_change(){
                 let x=document.getElementById("chan2").value;
                 let y=document.getElementById("chan3").value;
                 let z=document.getElementById("chan4").value;
                 if (x === "" || y === "" || z === "" ) {
                     this.tip = "用户名、账号、密码等不能为空！"
                 } else {
-                    this.checkName('chan2');
-                    this.checkPwd('chan3');
-                    this.dupPwd('chan3','chan4');
+                    this.if_name('chan2');
+                    this.if_pwd('chan3');
+                    this.dup_pwd('chan3','chan4');
                     if (this.add_if === false) {
-                        this.modifyUsers();
+                        this.modify_users();
                     }
                 }
             },
 
-
-            prePage(p){
-                this.page = p;
-                console.log("pre:"+this.page);
-                this.get_user.value='?page='+this.page;
-            },
-
-            nextPage(p){
-                this.page= p;
-                console.log("next:"+this.page);
-                this.get_user.value='?page='+this.page;
-            },
-
-            skiPage(p){
-                this.page = p;
-                console.log("skip:" + this.page);
-                this.get_user.value='?page='+this.page;
-            },
-
-            //清空原有数组数据,刷新页面
-            cleanData(){
+            clean_data(){
                 this.user_data.splice(0, this.user_data.length);
             }
         }

@@ -1,7 +1,7 @@
 <template>
     <!--翻页键-->
     <div class="page-box">
-        <input type="button" class="btn-pages" style="margin-left: 0;" value="上一页" @click="prePage()" v-bind:disable="ban_1" tabindex="-1">
+            <input type="button" class="btn-pages" style="margin-left: 0;" value="上一页" @click="prePage()" v-bind:disable="ban_1" tabindex="-1">
         <span class="text-pages" v-model="max">
         <input type="text" id="skip" class="text-input" v-model="cur_page"  tabindex="-1" v-bind:disable="ban_3">/{{max}}
     </span>
@@ -12,15 +12,21 @@
 
 <script>
     export default{
-        data(){
-            return {
-                cur_page:1, //当前页数
-                ban_1:false, //按钮在第一页时禁用
-                ban_2:false, //在最后一页禁用
-                ban_3:false
+        watch:{
+            $route(){
+                this.cur_page = this.$route.params.page;
             }
         },
-        props:[ 'max','url','object'],//请求传回的总页数
+
+        data(){
+            return {
+                cur_page: 1, //当前页数
+                ban_1: false, //按钮在第一页时禁用
+                ban_2: false, //在最后一页禁用
+                ban_3: false
+            }
+        },
+        props: ['max'],//请求传回的总页数
         methods: {
             //上一页函数
             prePage(){
@@ -29,8 +35,7 @@
                 } else if (this.cur_page > 1 && this.cur_page <= this.max) {
                     this.ban_1 = false;
                     this.cur_page = --this.cur_page;
-                    this.$emit('pre_page',this.cur_page);
-                    this.getPage();
+                    this.gotoPage();
                 }
             },
 
@@ -41,28 +46,22 @@
                 } else if (this.cur_page >= 1 && this.cur_page < this.max) {
                     this.ban_2 = false;
                     this.cur_page = ++this.cur_page;
-                    this.$emit('next_page',this.cur_page);
-                    this.getPage();
+                    this.gotoPage();
                 }
             },
 
             //跳转页面
             skiPage(){
                 if(this.cur_page >= 1 && this.cur_page <= this.max ){
-                    this.$emit('skip_page',this.cur_page);
-                    this.getPage();
-                }else{
+                    this.gotoPage();
+                } else {
                     this.ban_3 = true;
                 }
             },
 
-            getPage(){
-                let a = this.$parent.successGet;
-                let b = this.$parent.failGet;
-                let new_url;
-                new_url = this.url+this.object.value;
-                this.$parent.cleanData();
-                this.httpJson(new_url,'get',this.object,a,b);
+            gotoPage(){
+                this.$route.params.pageId = this.cur_page;
+                this.$router.push({name: this.$route.name, params: this.$route.params});
             }
         }
     }
@@ -73,8 +72,6 @@
     .page-box{
         padding: 3em 18% 1em 18%;
         display: block;
-        font-family: 楷体;
-        font-size: 15px;
         text-align: center;
     }
 

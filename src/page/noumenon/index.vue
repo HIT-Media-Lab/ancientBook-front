@@ -1,5 +1,5 @@
 <template>
-    <div class="zxwnoumenon">
+    <div class="zxw-noumenon">
     <navigation_bar></navigation_bar>   <!--本体导航条-->
     <router-view></router-view>
     </div>
@@ -15,8 +15,8 @@
 </script>
 
 <style>
-    .zxwnoumenon{
-        width:800px;
-        margin: auto;
+    .zxw-noumenon{
+        width:1038px;
+        margin:auto;
     }
 </style>

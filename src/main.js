@@ -8,85 +8,66 @@ import './lib/regular'
 import App from './App.vue'
 import store from './store'
 // import './lib/route'
-
 //开启debug模式
 Vue.config.debug = true;
-
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(Vuex);
-
 //回调success前的函数
-function beforeSuccess() {
-
+function before_success() {
 }
-
 //回调success后的函数
-function afterSuccess (response) {
+function after_success (response) {
 //更新token
     store.commit("change_token",response.body.token);
-    console.log("更新token"+store.getters.GetToken);
 }
-
 //判断是否有无token
-function beforeHttp (object) {
-    console.log("检查超级用户是否有token " + store.getters.GetToken);
+function before_http (object) {
     object.token = store.getters.GetToken;
-    console.log("object"+object.token);
     let token = store.getters.GetToken;
     if (object.token.length == 0 || token.length == 0) {
         this.$http.get('/ancient_books/getToken.action').then(function (response) {
             token = response.body.token;
-            console.log("检测token成功"+token );
         });
         store.commit("change_token",token);
     }else {
         console.log("不需要更token");
     }
 }
-
-
-
-
 //定义的post的vue-router全局函数，以json形式传递数据
-Vue.prototype.httpJson = function (url, type, params, success, fail) {
-    // this.BeforeHttp(params);
+Vue.prototype.http_json = function (url, type, params, success, fail) {
+    // this.before_http(params);
     params.token=store.getters.GetToken;
-    console.log("你猜猜token有没有 "+params.token);
     if (type.toLocaleLowerCase() == "get") {
         this.$http.get(url).then(function (response) {
-            response_handle_get(response, success)
+            response_get(response, success)
         },function () {
             error();
         })
     } else if (type.toLocaleLowerCase() == "post") {
         //验证是否有无token
-        beforeHttp(params);
+        before_http(params);
         params.token =store.getters.GetToken;
         this.$http.post(url, params,
             {headers:{'Content-Type':'application/json;charset=UTF-8'}}
         ).then(function (response) {
-            response_handle_post(response,success,fail);
+            response_post(response,success,fail);
         },function () {
             error();
         })
     }
 };
-
 /**
  * 请求发送失败的函数
  */
 function error() {
-
 }
-
-function response_handle_post(response, success, fail) {
+function response_post(response, success, fail) {
     let status = response.status;
     if (status == 200){
         if (response.body.result == 1){
-            // beforeSuccess(response);
             success(response);
-            afterSuccess(response);
+            after_success(response);
         } else if (response.body.result == 0){
             fail(response);
         }
@@ -98,12 +79,10 @@ function response_handle_post(response, success, fail) {
         this.$router.push('/500');
     }
 }
-
-function response_handle_get(response, success) {
+function response_get(response, success) {
     let status = response.status;
     if (status == 200){
-            // beforeSuccess(response);
-            success(response);
+        success(response);
     } else if (status == 403){
         this.$router.push('/403');
     } else if (status == 404){
@@ -112,28 +91,23 @@ function response_handle_get(response, success) {
         this.$router.push('/500');
     }
 }
-
 //定义的post的vue-router全局函数，以form-data形式传递数据
-Vue.prototype.httpPostForm=function (url,params,success,fail) {
+Vue.prototype.http_post_form=function (url,params,success,fail) {
     params.token = store.getters.GetToken;
-    console.log("你猜猜token有没有 "+params.token);
     this.$http.post(url, params,
         {emulateJSON: true}   //将json形式转换为form-data
-        ).then(function (response) {
-            response_handle(response, success, fail);
+    ).then(function (response) {
+        response_post(response, success, fail);
     },function () {
-       error();
+        error();
     })
 };
-
 import  bookstore from './page/bookstore/index.vue'
 import  login from  './page/user/login/login.vue'
 import  admin from  './page/admin/admin.vue'
 import  notfound from './page/error/404.vue'
-
 //用户
 import  user from  './page/user/index.vue'
-
 /**
  * 上传
  */
@@ -145,9 +119,6 @@ import  varieties from  './page/user/upload/firststep/varieties.vue'
 import  synopsis from  './page/user/upload/firststep/synopsis.vue'
 import  upload2 from  './page/user/upload/secondstep/index.vue'
 import  upload3 from  './page/user/upload/thirdstep/index.vue'
-
-
-
 import  mybook from  './page/user/mybook/index.vue'
 import  alupload from  './page/user/mybook/alupload/index.vue'
 import  privatebook from './page/user/mybook/private/index.vue'
@@ -158,7 +129,6 @@ import  ancientbook from  './component/ancientbook.vue'
 import  comment from  './page/user/myoffer/comment/index.vue'
 import  revise from  './page/user/myoffer/revise/index.vue'
 import  search from  './page/search/index.vue'
-
 //本体
 import  noumenon from  './page/noumenon/index.vue'
 //新建本体
@@ -182,7 +152,6 @@ import  pla_detail from './page/noumenon/place/place.vue'
 import  ins_detail from './page/noumenon/institution/institution.vue'
 import  terms_detail from  './page/noumenon/terms/terms.vue'
 // import  timeM from  './page/noumenon/Time/check_china.vue'
-
 // 创建一个路由器实例
 // 并且配置路由规则
 const router = new VueRouter({
@@ -195,7 +164,13 @@ const router = new VueRouter({
             name:'login'
         },
         {
+            path:'/admin/page/:pageId',
+            component:admin,
+            name:'admin'
+        },
+        {
             path:'/admin',
+            redirect: '/admin/page/1',
             component:admin,
             name:'admin'
         },
@@ -210,22 +185,22 @@ const router = new VueRouter({
             name:'upload1',
             children: [
                 {
-                    path:'/',
+                    path:'',
                     component:varieties,
                     name:'varieties',
                 },
                 {
-                    path:'/user/upload1/edition',
+                    path:'edition',
                     component:edition,
                     name:'edition',
                 },
                 {
-                    path:'/user/upload1/impression',
+                    path:'impression',
                     component:impression,
                     name:'impression',
                 },
                 {
-                    path:'/user/upload1/copy',
+                    path:'copy',
                     component:copy,
                     name:'copy',
                 },
@@ -297,96 +272,96 @@ const router = new VueRouter({
             name:'noumenon',
             children:[
                 {
-                    path:'/',
+                    path:'',
                     component:recent,
                     name:'recent'
                 },
                 {
-                    path:'/noumenon/character',
-                    component:character,
-                    name:'character'
+                    path: 'character/page/:pageId/letter/:letterId',
+                    component: character,
+                    name: 'character'
                 },
                 {
-                    path:'/noumenon/char_detail/:id',
+                    path: 'character',
+                    redirect: 'character/page/1/letter/A',
+                    component: character,
+                    name: 'character'
+                },
+                {
+                    path:'char_detail/:nouId',
                     component:char_detail,
                     name:'char_detail'
                 },
                 {
-                    path:'/noumenon/institution',
+                    path:'institution/page/:pageId/letter/:letterId',
                     component:institution,
                     name:'institution'
                 },
                 {
-                    path:'/noumenon/ins_detail/:id',
+                    path:'ins_detail/:nouId',
                     component:ins_detail,
                     name:'ins_detail'
                 },
                 {
-                    path:'/noumenon/literature',
+                    path:'literature/page/:pageId/letter/:letterId',
                     component:literature,
                     name:'literature'
                 },
                 {
-                    path:'/noumenon/lit_detail/:id',
+                    path:'lit_detail/:nouId',
                     component:lit_detail,
                     name:'lit_detail'
                 },
                 {
-                    path:'/noumenon/office',
+                    path:'office/page/:pageId/letter/:letterId',
                     component:office,
                     name:'office'
                 },
                 {
-                    path:'/noumenon/off_detail/:id',
+                    path:'off_detail/:nouId',
                     component:off_detail,
                     name:'off_detail'
                 },
                 {
-                    path:'/noumenon/place',
+                    path:'place/page/:pageId/letter/:letterId',
                     component:place,
                     name:'place'
                 },
                 {
-                    path:'/noumenon/placeM/:id',
+                    path:'plac_detail/:nouId',
                     component:pla_detail,
                     name:'pla_detail'
                 },
                 {
-                    path:'/noumenon/terms',
+                    path:'terms/page/:pageId/letter/:letterId',
                     component:terms,
                     name:'terms'
                 },
                 {
-                    path:'/noumenon/terms_detail/:id',
+                    path:'terms_detail/:nouId',
                     component:terms_detail,
                     name:'terms_detail'
                 },
                 {
-                    path:'/noumenon/time',
+                    path:'time/page/:pageId/letter/:letterId',
                     component:time,
                     name:'time'
                 },
-                // {
-                //     path:'/noumenon/timeM/:id',
-                //     component:timeM,
-                //     name:'timeM'
-                // },
                 {
-                    path:'/noumenon/build',
+                    path:'build',
                     component:build,
                     name:'build'
                 },
                 {
-                    path:'/noumenon/chartwo',
+                    path:'chartwo',
                     component:charactertwo,
                     name:'charactertwo'
                 },
                 {
-                    path:'/noumenon/charthree',
+                    path:'charthree',
                     component:characterthree,
                     name:'characterthree'
                 },
-
             ]
         },
         {
@@ -407,25 +382,23 @@ const router = new VueRouter({
         //     path: '*',
         //     redirect: '/login' // 输入其他不存在的地址自动跳回首页
         // }
-
     ]
 });
-
 router.beforeEach( (to, from, next) => {
     let admin_acl = router.app.$store.getters.ACL_admin;
     let user_acl = router.app.$store.getters.ACL_user;
     let guest_acl = router.app.$store.getters.ACL_guest;
-
     let user_id = JSON.parse(localStorage.getItem('user'));
     if (user_id == undefined) {
         localStorage.setItem('user',JSON.stringify("guest"));
         user_id = 'guest';
     }
-
+    console.log(to);
     let flag = false;
     if (user_id == 'guest'){
         for (let i = 0; i < guest_acl.length; i++) {
             if (to.name == guest_acl[i]) {
+                console.log(to.name);
                 flag = true;
                 next();
                 break;
@@ -438,7 +411,7 @@ router.beforeEach( (to, from, next) => {
     } else if (user_id == 'user'){
         for (let i = 0; i < user_acl.length; i++) {
             if (to.name == user_acl[i]){
-                console.log('user');
+                console.log(to.name);
                 flag = true;
                 next();
                 break;
@@ -447,7 +420,7 @@ router.beforeEach( (to, from, next) => {
     } else if (user_id == 'admin'){
         for (let i = 0; i < admin_acl.length; i++){
             if (to.name == admin_acl[i]){
-                console.log("admin");
+                console.log(to.name);
                 flag = true;
                 next();
                 break;
@@ -459,7 +432,6 @@ router.beforeEach( (to, from, next) => {
         next('/404');
     }
 });
-
 // 现在我们可以启动应用了！
 // 路由器会创建一个 App 实例，并且挂载到选择符 #app 匹配的元素上。
 const app = new Vue({
@@ -467,4 +439,3 @@ const app = new Vue({
     store,
     render: h => h(App)
 }).$mount('#app');
-

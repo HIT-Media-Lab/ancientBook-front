@@ -1,41 +1,41 @@
 <template>
     <div class="zxwcharacter-title">   <!--加背景-->
         <div class="zxwcharacter-row"> <!--分组padding-->
-            <button class="zxwcharacter-span"  @click="letterCharacter('a')">A</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('b')">B</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('c')">C</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('d')">D</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('e')">E</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('f')">F</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('g')">G</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('a',0)" v-bind:disable="ban[0]">A</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('b',1)" v-bind:disable="ban[1]">B</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('c',2)" v-bind:disable="ban[2]">C</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('d',3)" v-bind:disable="ban[3]">D</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('e',4)" v-bind:disable="ban[4]">E</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('f',5)" v-bind:disable="ban[5]">F</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('g',6)" v-bind:disable="ban[6]">G</button>
         </div>
 
         <div class="zxwcharacter-row"> <!--分组padding-->
-            <button class="zxwcharacter-span"  @click="letterCharacter('h')">H</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('i')">I</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('j')">J</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('k')">K</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('l')">L</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('m')">M</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('n')">N</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('h',7)" v-bind:disable="ban[7]">H</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('i',8)" v-bind:disable="ban[8]">I</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('j',9)" v-bind:disable="ban[9]">J</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('k',10)" v-bind:disable="ban[10]">K</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('l',11)" v-bind:disable="ban[11]">L</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('m',12)" v-bind:disable="ban[12]">M</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('n',13)" v-bind:disable="ban[13]">N</button>
         </div>
 
         <div class="zxwcharacter-row"> <!--分组padding-->
-            <button class="zxwcharacter-span"  @click="letterCharacter('o')">O</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('p')">P</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('q')">Q</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('r')">R</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('s')">S</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('t')">T</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('u')">U</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('o',14)" v-bind:disable="ban[14]">O</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('p',15)" v-bind:disable="ban[15]">P</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('q',16)" v-bind:disable="ban[16]">Q</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('r',17)" v-bind:disable="ban[17]">R</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('s',18)" v-bind:disable="ban[18]">S</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('t',19)" v-bind:disable="ban[19]">T</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('u',20)" v-bind:disable="ban[20]">U</button>
         </div>
 
         <div class="zxwcharacter-row"> <!--分组padding-->
-            <button class="zxwcharacter-span"  @click="letterCharacter('v')">V</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('w')">W</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('x')">X</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('y')">Y</button>
-            <button class="zxwcharacter-span"  @click="letterCharacter('z')">Z</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('v',21)" v-bind:disable="ban[21]">V</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('w',22)" v-bind:disable="ban[22]">W</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('x',23)" v-bind:disable="ban[23]">X</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('y',24)" v-bind:disable="ban[24]">Y</button>
+            <button class="zxwcharacter-span"  @click="gotoLetter('z',25)" v-bind:disable="ban[25]">Z</button>
         </div>
         <h5 class="zxwcharacter-span">#</h5>
     </div>
@@ -43,29 +43,30 @@
 
 <script>
     export default{
-        created(){
+        /*created(){
             this.letterCharacter('a');
-        },
+        },*/
 
-        props:[
-            'url',
-            'object'
-        ],
         data(){
-            return{
-                word:''
+            return {
+                ban:[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
             }
         },
 
         methods:{
-            letterCharacter(p){
-                let a = this.$parent.successGet;
+           gotoLetter(p,q){
+                /*let a = this.$parent.successGet;
                 let b = this.$parent.failGet;
                 this.word = p;
                 this.$emit('letter',this.word);
                 let new_url = this.url+this.object.value;
                 this.$parent.cleanData();
-                this.httpJson(new_url,'get',this.object,a,b);
+                this.httpJson(new_url,'get',this.object,a,b);*/
+                this.ban[q]=true;
+                this.$route.params.letterId = p;
+                this.$route.params.pageId = 1;
+                this.$router.push({name:this.$route.name, params: this.$route.params});
+                //console.log(this.$route.name);
             },
         }
     }

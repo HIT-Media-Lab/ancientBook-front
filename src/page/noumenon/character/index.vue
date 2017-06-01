@@ -5,23 +5,24 @@
             <noumenon-title :title="this.title"></noumenon-title>
 
             <!--字母title-->
-            <letter-title v-on:letter="wordChange" :url="this.word_url" :object="this.get_letter"></letter-title>
+            <letter-title></letter-title>
 
             <!--人物列表-->
             <div class="zxwbottom-container">
                 <div class="row" v-for="(item,index) in character_data">
-                    <span class="col-md-6" @click="character(index)">{{item.standard_name}}----{{item.noumenon_id}}</span>
+                    <span class="col-md-6" @click="gotoCharacter(index)">{{item.standard_name}}----{{item.noumenon_id}}</span>
+                    <span class="col-md-6" @click="gotoCharacter(index+1)" v-model="character_data[index+1]" >{{                    <span class="col-md-6" @click="gotoCharacter(index+1)" v-model="character_data[index+1]" >{{character_data[index+1].standard_name}}----{{character_data[index+1].noumenon_id}}</span>.standard_name}}----{{item.noumenon_id}}</span>
                 </div>
             </div>
 
             <!--翻页组件-->
-            <paginator :max=this.total_page :object="this.get_letter" :url="this.word_url" v-on:pre_page="prePagecount" v-on:next_page="nextPagecount" v-on:skip_page="skiPagecount"></paginator>
+            <paginator :max=this.total_page></paginator>
         </div>
     </div>
 </template>
 
 <script>
-   /* let Mock = require('mockjs');
+    let Mock = require('mockjs');
 
     //显示用户列表
     Mock.mock('/ancient_books/get_person_list_by_word.action?word=a&&page_count=1','get',{
@@ -31,8 +32,38 @@
             'standard_name':'@FIRST',
             'noumenon_id|1-100':1
         }],
-        "total_page|1-10":1
-    });*/
+        "total_page|10-20":1
+    });
+
+    Mock.mock('/ancient_books/get_person_list_by_word.action?word=a&&page_count=2','get',{
+        "status|200":200,
+        "result|1":1,
+        "content|30":[{
+            'standard_name':'@FIRST',
+            'noumenon_id|1-100':1
+        }],
+        "total_page|10-20":1
+    });
+
+    Mock.mock('/ancient_books/get_person_list_by_word.action?word=b&&page_count=1','get',{
+        "status|200":200,
+        "result|1":1,
+        "content|30":[{
+            'standard_name':'@FIRST',
+            'noumenon_id|1-100':1
+        }],
+        "total_page|10-20":1
+    });
+
+    Mock.mock('/ancient_books/get_person_list_by_word.action?word=b&&page_count=2','get',{
+        "status|200":200,
+        "result|1":1,
+        "content|30":[{
+            'standard_name':'@FIRST',
+            'noumenon_id|1-100':1
+        }],
+        "total_page|10-20":1
+    });
 
     import noumenonTitle from '../../../component/noumenon-title.vue';
     import letterTitle from '../../../component/letter-title.vue';
@@ -45,20 +76,31 @@
             letterTitle,
         },
 
+        watch:{
+            $route(){
+                this.getCharacter();
+            }
+        },
+
+        created(){
+            this.getCharacter();
+        },
+
         data(){
             return{
                 title:'人物本体',
-                word:'',
+               // word:'',
                 total_page:3,   //总页数
-                page_count:1,   //当前页数
+                //page_count:1,   //当前页数
                 get_letter:{},
                 character_data:[],
-                characterid_data:[],
                 word_url:'/ancient_books/get_person_list_by_word.action'
             }
         },
 
         methods:{
+
+            //通过头字母显示人物本体列表
             successGet(response){
                 console.log("字母显示本体列表成功");
                 this.total_page = response.body.total_page;
@@ -67,41 +109,26 @@
                 }
             },
 
-            failGet(){
+            failGet(response){
                 console.log("字母显示本体列表失败");
             },
 
+            getCharacter(){
+                this.get_letter.value = '?word='+this.$route.params.word+'&&page_count='+this.$route.params.page;
+                let new_url = this.word_url+this.get_letter.value;
+                this.cleanData();
+                this.httpJson(new_url,'get',this.get_letter,this.successGet,this.failGet);
+            },
 
-            character(p){
-                console.log(this.character_data[p].id);
+            //跳转到人物本体详情
+            gotoCharacter(p){
+                console.log(this.character_data[p].noumenon_id);
                 this.$router.push({name:'char_detail',params:{id:this.character_data[p].noumenon_id}});
             },
 
-            prePagecount(p){
-                this.page_count = p;
-                this.get_letter.value = '?word='+this.word+'&&page_count='+this.page_count;
-            },
-
-            nextPagecount(p){
-                this.page_count = p;
-                this.get_letter.value = '?word='+this.word+'&&page_count='+this.page_count;
-            },
-
-            skiPagecount(p){
-                this.page_count = p;
-                this.get_letter.value = '?word='+this.word+'&&page_count='+this.page_count;
-            },
-
+            //清空前端显示数组
             cleanData(){
-                console.log('hhh');
                 this.character_data.splice(0, this.character_data.length);
-                this.characterid_data.splice(0,this.characterid_data.length);
-            },
-
-            wordChange(p){
-                this.word = p;
-                console.log(this.word);
-                this.get_letter.value = '?word='+this.word+'&&page_count=1';
             }
         }
 

@@ -1,6 +1,6 @@
 <template>
-    <div class="zxwnoumenom-header ">
-        <h4 class="zxwnoumenom-title" v-model="title">{{title}}</h4>
+    <div>
+        <span class="zxwnoumenom-title" v-model="title">{{title}}</span>
         <slot name="children"></slot>
     </div>
 </template>
@@ -18,7 +18,8 @@
         border-bottom: 2px solid black;
     }
     .zxwnoumenom-title{
-        margin:0;
+        font-size: 14px;
+        margin:65px 0 0 0;
         display:inline-block;
     }
 </style>
