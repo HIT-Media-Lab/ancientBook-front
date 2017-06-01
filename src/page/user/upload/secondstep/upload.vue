@@ -21,7 +21,7 @@
         </div>
 
         <div>
-            <button @click="add_newBook()">添加新冊</button>
+            <button @click="add_new_book()">添加新冊</button>
         </div>
     </div>
 
@@ -32,10 +32,10 @@
 <script>
     export default{
         methods :{
-            add_newBook() {
-                var uploadBox = document.getElementById("upload2-box");
-                var uploadFile = uploadBox.firstChild;
-                uploadBox.appendChild(uploadFile);
+            add_new_book() {
+                var upload_box = document.getElementById("upload2-box");
+                var upload_file = upload_box.firstChild;
+                upload_box.appendChild(upload_file);
             }
         },
     }

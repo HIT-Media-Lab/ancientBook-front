@@ -62,14 +62,14 @@
         data() {
             return{
                 bookname : 'hello',
-                get_menu_items : {},
-                menuIndex : 4,
-                menuItems : [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+                get_menu_items_obj : {},
+                menu_index : 4,
+                menu_items : [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
             }
         },
 
         created : function () {
-            this.get_menuItems()
+            this.get_menu_items()
         },
 
         mounted : function () {
@@ -81,16 +81,16 @@
             /**
              * 获得下拉菜单内容
              */
-            get_menuItems() {
+            get_menu_items() {
                 for (i = 4; i <= 23; i++) {
-                    this.get_menu_items.model_id = i;
-                    this.get_menu_items.item_1_id = 0;
-                    this.get_menu_items.item_2_id = 0;
-                    this.HttpJson ('/ancient_books/get_menu_items.action' , 'get' , this.get_menu_items , this.success_get_menuItems(response,i-4) , this.fail_get_menuItems);
+                    this.get_menu_items_obj.model_id = i;
+                    this.get_menu_items_obj.item_1_id = 0;
+                    this.get_menu_items_obj.item_2_id = 0;
+                    this.HttpJson ('/ancient_books/get_menu_items.action' , 'get' , this.get_menu_items_obj , this.success_get_menu_items(response,i-4) , this.fail_get_menu_items);
                 }
             },
 
-            success_get_menuItems(response,k) {
+            success_get_menu_items(response,k) {
                 console.log ("success get menu items ");
                 //将后端数据显示在前端页面里
                 if (response.body.length === 0) {
@@ -98,14 +98,14 @@
                 }
                 else {
                     for (j = 0; j <= response.body.length-1; j++) {
-                        this.menuItems[k].push({
+                        this.menu_items[k].push({
                             chinese_name: response.body[j].chinese_name
                         });
                     }
                 }
             },
 
-            fail_get_menuItems() {
+            fail_get_menu_items() {
                 console.log ("fail get menu items!");
             },
 
