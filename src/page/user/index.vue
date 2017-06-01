@@ -25,45 +25,49 @@
                 <span class="myoffer_word">我的贡献</span>
             </router-link>
         </div>
-        <!--<div id="modal">-->
-            <!--<modal v-bind:show.sync="show">-->
-                <!--<header class="dialog-header" slot="header">-->
-                    <!--<h1 class="dialog-title">提示信息</h1>-->
-                <!--</header>-->
+        <div>
+            <modal :show_modal.sync = "show_modal">
+                <header class="dialog-header" slot="header">
+                    <h1 class="dialog-title">提示信息</h1>
+                </header>
 
-                <!--<div class="dialog-body" slot="body">-->
-                    <!--<p>你想在对话框中放什么内容都可以！</p>-->
-                    <!--<p>你可以放一段文字，也可以放一些表单，或者是一些图片。</p>-->
-                <!--</div>-->
+                <div class="dialog-body" slot="body">
+                    <p>你想在对话框中放什么内容都可以！</p>
+                    <p>你可以放一段文字，也可以放一些表单，或者是一些图片。</p>
+                </div>
 
-                <!--<footer class="dialog-footer" slot="footer">-->
-                    <!--<button class="btn" @click="closeDialog">关闭</button>-->
-                <!--</footer>-->
-            <!--</modal>-->
-            <!--<button class="btn btn-open" @click="openDialog">打开对话框</button>-->
-        <!--</div>-->
+                <footer class="dialog-footer" slot="footer">
+                    <button class="btn" @click="close_dialog">关闭</button>
+                </footer>
+            </modal>
+            <button class="btn btn-open" @click="open_dialog">打开对话框</button>
+        </div>
     </div>
 </template>
 
 <script>
     import store from '../../store'
-    import hhh from  '../../component/modal.vue'
+    import modal from  '../../component/modal.vue'
     export default{
         components:{
-            hhh
+            modal
         },
 
         data(){
             return{
-                hhh:'',
-                show: true
+                show_modal: false
             }
         },
+        props:{
+            show_modal: false
+        },
         methods:{
-//            test(){
-//                this.hhh=this.$store.state.Token;
-//                alert(this.hhh)
-//            }
+            close_dialog () {
+                this.show_modal = false;
+            },
+            open_dialog () {
+                this.show_modal = true;
+            }
         }
     }
 </script>

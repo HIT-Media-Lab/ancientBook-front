@@ -1,42 +1,44 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
     <!--顶端固定不变的导航条-->
     <div id="store" class="store">
+        <button class="bookstore">
+            <router-link to="/bookstore" style="color: white">
+                古籍库
+            </router-link>
+        </button>
+        <button class="noumenon-store">
+            <router-link to="/noumenon" style="color: white">
+                本体库
+            </router-link>
+        </button>
         <div class="search">
             <input placeholder=" 请输入你要搜索的内容" class="search-input" v-model="sort_box" v-on:keydown.enter="enter">
         </div>
-        <div class="three-link">
-            <router-link to="/bookstore" class="a">
-                <span class="bookstore">古籍库</span>
-            </router-link>
-            <router-link to="/noumenon">
-                <span class="noumenon_store">本体库</span>
-            </router-link>
+        <div>
             <router-link to="/user">
-            <span class="user_name" onmouseover=" document.getElementById('Logout').style.visibility='visible'"
+            <span class="user-name" onmouseover=" document.getElementById('Logout').style.visibility='visible'"
                   onmouseout=" document.getElementById('Logout').style.visibility='hidden';
              document.getElementById('Logout').style.transition='all ease 3s'">用户名</span>
             </router-link>
-            <button @click="test1()">有用户权限</button>
-            <button @click="test2()">有超级用户权限</button>
-            <button @click="test3()">没用权限</button>
-            <!--<input v-model="token" style="visibility: hidden">-->
-            <div class="cancel_word">
-                <button @click="Logout" id="Logout">注销</button>
-            </div>
         </div>
         <div class="down-box" @click="hide" v-show="sort_box.length!=0">
             <ul>
-                <li class="sort_box1">
+                <li class="sort-box1">
                     <router-link to="/search_index" >
                         搜古籍：{{sort_box}}
                     </router-link>
                 </li>
-                <li class="sort_box2">
+                <li class="sort-box2">
                     <router-link to="/search_index">
                         搜本体：{{sort_box}}
                     </router-link>
                 </li>
             </ul>
+        </div>
+        <div>
+        <button @click="test1()">有用户权限</button>
+        <button @click="test2()">有超级用户权限</button>
+        <button @click="test3()">没用权限</button>
         </div>
     </div>
 </template>
@@ -83,42 +85,40 @@
 
 <style>
     .store{
-        /*margin-top: 0;*/
-        /*margin-left: 0;*/
-        padding: 7px;
-        /*display: inline-block;*/
-        background-color:#dac8c8;
+        margin-top: 25px;
         height: 40px;
         width: 100%;
     }
-    .three-link{
-        padding: 10px;
-        margin-left:1250px;
-        margin-top: -35px;
-        width: 300px;
-        height: 40px;
-
+    .two-store{
     }
     .bookstore{
-        padding: 20px;
-        width:100px;
-        height: 13px;
-        font-weight: 700;
-        font-style:normal;
-        font-size:16px;
-        color:#999999;
+        margin-left: 550px;
+        background-image: url("../assets/img/墨点按钮.png");
+        /*background-size: 50% ;*/
+        /*background-repeat:no-repeat ;*/
+        /*background-position: center;*/
+        border: none;
+        background-color: transparent;
+        width: 135px;
+        height: 56px;
+        display: inline;
+    }
+    .noumenon-store{
+        margin-left: 47px;
+        background-image: url("../assets/img/墨点按钮.png");
+        border: none;
+        background-color: transparent;
+        width: 135px;
+        height: 56px;
+        display: inline;
+    }
+    .search{
+        display: inline;
+        margin-left: 45px;
+        background-image: url("../assets/img/搜索框小.png");
     }
 
-    .noumenon_store{
-        width:100px;
-        height: 13px;
-        font-weight:700;
-        font-style:normal;
-        font-size:16px;
-        color:#999999;
-    }
-
-    .user_name{
+    .user-name{
         padding: 20px;
         width:100px;
         height: 13px;
@@ -127,12 +127,6 @@
         font-size:16px;
         color:#999999;
         text-align:center;
-    }
-    .cancel_word{
-        visibility: hidden;
-        margin-left: 165px;
-        margin-top: 0;
-        width: 50px;
     }
     .down-box{
         position: absolute;
@@ -144,21 +138,19 @@
         border-color: gainsboro;
         width: 188px;
     }
-    .search{
-        display: inline;
-        width: auto;
-        margin-left: 1050px;
-    }
     .search-input{
         padding-left: 10px;
+
+        width: 280px;
+        height: 50px;
     }
-    .sort_box1{
+    .sort-box1{
         /*display: inline;*/
         margin-left: -30px;
         list-style: none;
         width: 178px;
     }
-    .sort_box2{
+    .sort-box2{
         margin-left: -30px;
         list-style: none;
         width: 178px;
