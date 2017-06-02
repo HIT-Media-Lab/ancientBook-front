@@ -1,159 +1,51 @@
 <template>
-    <!--图文对照文本工作台-->
-    <div id="workspace-text">
+    <div>
 
-        <!--文本工作台3个版本导航按钮-->
-        <div id="workspace-text-head">
-            <ul>
-                <!--class值为空表示未激活板块，class值为li-now表示激活板块-->
-                <li id="mark-head">本體標記</li>
-                <li id="comment-head">批註版</li>
-                <li id="edit-head" class="li-now">修訂版</li>
-            </ul>
+        <!--目录-->
+        <div class="width1000 center">
+            <p>經部/總類/<span style="color: red">石經之屬</span>/<span style="color: red">詩經</span>/冊1冊名/卷1</p>
+            <img src="../assets/img/墨水线上.png" height="7" width="974"/>
         </div>
 
-        <!--文本工作台主体-->
-        <div id="workspace-text-body">
-
-            <!--class值为div表示未激活板块，class值为div-now表示激活板块-->
-
-            <!--本体标记版块-->
-            <div id="mark" class="div">
-                <!--文本标题-->
-                <h4>詩經卷一</h4>
-                <!--文本主体-->
-                <p class="body-text" id="text-mark" @click="text_mark_onclick()"></p>
-                <!--本体种类选择菜单-->
-                <select id="select-markType">
-                    <option>篩選</option>
-                    <option>人物</option>
-                    <option>地點</option>
-                    <option>職官</option>
-                    <option>時間</option>
-                    <option>機構</option>
-                    <option>術語</option>
-                    <option>文獻</option>
-                </select>
-                <!--标记本体按钮，选中文本后激活显示，点击弹出标记本体模态框-->
-                <button class="btn btn-info" data-toggle="modal" data-target="#layer-mark-noumenon" id="btn-mark-noumenon" style="visibility: hidden" @click="btn_mark_noumenon_onclick()">標記本體</button>
-            </div>
-
-            <!--批注版块-->
-            <div id="comment" class="div">
-                <!--文本标题-->
-                <h4>詩經卷一</h4>
-                <!--文本主体-->
-                <div class="body-text" id="text-comment" @click="text_comment_onclick()"></div>
-                <!--添加批注按钮，选中文本后激活显示，点击弹出添加批注模态框-->
-                <button class="btn btn-info" data-toggle="modal" data-target="#layer-add-comment" id="btn-add-comment" style="visibility: hidden" @click="btn_add_comment_onclick()">添加批註</button>
-            </div>
-
-            <!--修订板块-->
-            <div id="edit" class="div div-now">
-                <!--文本标题-->
-                <h4>詩經卷一</h4>
-                <!--文本主体-->
-                <div class="body-text" id="text-edit" contentEditable="false"></div>
-                <br>
-                <br>
-                <br>
-                <!--修订信息编辑框标题-->
-                <h5 id="label" style="visibility: hidden">請填寫修訂信息:</h5>
-                <!--修订信息编辑框-->
-                <textarea id="textarea-editInfo" style="visibility: hidden"></textarea>
-                <!--点击修订后弹出的按钮-->
-                <button id="btn-cancel-edit" class="btn btn-danger" style="visibility: hidden" @click="btn_cancel_edit_onclick()">取消</button>
-                <button id="btn-confirm-edit" class="btn btn-success" style="visibility: hidden" @click="btn_confirm_edit_onclick()">確定</button>
-                <!--查看修订记录-->
-                <button class="btn btn-primary" data-toggle="modal" data-target="#layer-edit-record" id="btn-edit-record" @click="edit_record_onclick()">修訂記錄</button>
-                <button class="btn btn-info" id="btn-edit" @click="btn_edit_onclick()">修訂</button>
-            </div>
+        <!--按鈕欄-->
+        <div class="width1000 center">
+            <button class="float-right next-one">下一處</button>
+            <button class="float-right last-one">上一處</button>
+            <input type="text" class="ry-search" placeholder="請輸入關鍵字">
         </div>
 
-        <!--修订记录模态框-->
-        <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-edit-record">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span>&times;</span>
-                        </button>
-                        <h4 class="modal-title">修訂記錄</h4>
-                    </div>
-                    <div class="modal-body text-tight">
-                        <div v-for="item in edit_record">
-                            <p>修訂者：{{item.username_edit_record}}</p>
-                            <p>修訂時間：{{item.time_edit_record}}</p>
-                            <p>修訂信息：{{item.commit_edit_record}}</p>
-                            <p>修訂版本：{{item.version_edit_record}}</p>
-                            <hr>
-                        </div>
-                        <button class="btn btn-success btn-sm" data-dismiss="modal">確定</button>
-                    </div>
+        <!--图文-->
+        <div class="width1000 center">
+
+            <!--文本工作台-->
+            <div id="workspace-text" class="float-right">
+
+                <!--文本工作台3个版本导航按钮-->
+                <div id="workspace-text-head">
+                    <ul class="ry-module-bar float-right">
+                        <!--class值为空表示未激活板块，class值为li-now表示激活板块-->
+                        <li id="mark-head">本體標記</li>
+                        <img style="display: block" class="float-right" src="../assets/img/本体标记/屏风按钮间隔.png" height="31" width="6"/>
+                        <li id="comment-head">批註版</li>
+                        <img style="display: block" class="float-right" src="../assets/img/本体标记/屏风按钮间隔.png" height="31" width="6"/>
+                        <li id="edit-head" class="li-now">修訂版</li>
+                    </ul>
                 </div>
-            </div>
-        </div>
 
-        <!--添加批注模态框-->
-        <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-add-comment">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">選中內容：示例文本</h4>
-                    </div>
-                    <div class="modal-body text-tight">
-                        <p>添加批註：</p>
-                        <textarea id="textarea-addComment"></textarea>
-                        <br>
-                        <input id="check-private" type="checkbox" value="選為私密">選為私密
-                        <br>
-                        <br>
-                        <button class="btn btn-warning btn-sm" data-dismiss="modal" id="btn-cancel-add-comment" @click="btn_cancel_add_comment_onclick()">取消</button>
-                        <button class="btn btn-success btn-sm" data-dismiss="modal" id="btn-confirm-add-comment" @click="btn_confirm_add_comment_onclick()">確定</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                <!--文本工作台主体-->
+                <div id="workspace-text-body">
 
-        <!--查看批注模态框-->
-        <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-comment-record">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span>&times;</span>
-                        </button>
-                        <h4 class="modal-title">批註內容</h4>
-                    </div>
-                    <div class="modal-body text-tight">
-                        <table class="table table-bordered table-hover">
-                            <tr class="text-left">
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td class="text-right">
-                                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#layer-delete">删除</button>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <!--class值为div表示未激活板块，class值为div-now表示激活板块-->
 
-        <!--标记本体模态框-->
-        <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-mark-noumenon">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button id="btn-cross-cancelAddMark" type="button" class="close" data-dismiss="modal" @click="btn_cross_cancel_add_mark_onclick()">
-                            &times;
-                        </button>
-                    </div>
-                    <div class="modal-body text-tight">
-                        本體類型：
-                        <select>
-                            <option>篩選</option>
+                    <!--本体标记版块-->
+                    <div id="mark" class="div">
+                        <!--文本标题-->
+                        <h4>詩經卷一</h4>
+                        <!--文本主体-->
+                        <p class="body-text" id="text-mark" @click="text_mark_onclick()"></p>
+                        <!--本体种类选择菜单-->
+                        <select id="select-markType" class="ry-select">
+                            <option>全部</option>
                             <option>人物</option>
                             <option>地點</option>
                             <option>職官</option>
@@ -162,30 +54,183 @@
                             <option>術語</option>
                             <option>文獻</option>
                         </select>
-                        <input type="text"><button>搜索</button>
-                        <button class="btn btn-info btn-sm" data-dismiss="modal" id="btn-add-mark" @click="btn_add_mark_onclick() ">添加</button>
+                        <!--标记本体按钮，选中文本后激活显示，点击弹出标记本体模态框-->
+                        <button class="btn btn-info" data-toggle="modal" data-target="#layer-mark-noumenon" id="btn-mark-noumenon" style="visibility: hidden" @click="btn_mark_noumenon_onclick()">標記本體</button>
+                    </div>
+
+                    <!--批注版块-->
+                    <div id="comment" class="div">
+                        <!--文本标题-->
+                        <h4>詩經卷一</h4>
+                        <!--文本主体-->
+                        <div class="body-text" id="text-comment" @click="text_comment_onclick()"></div>
+                        <!--添加批注按钮，选中文本后激活显示，点击弹出添加批注模态框-->
+                        <button class="btn btn-info" data-toggle="modal" data-target="#layer-add-comment" id="btn-add-comment" style="visibility: hidden" @click="btn_add_comment_onclick()">添加批註</button>
+                    </div>
+
+                    <!--修订板块-->
+                    <div id="edit" class="div div-now">
+                        <!--文本标题-->
+                        <h4>詩經卷一</h4>
+                        <!--文本主体-->
+                        <div class="body-text" id="text-edit" contentEditable="false"></div>
+                        <br>
+                        <br>
+                        <br>
+                        <!--修订信息编辑框标题-->
+                        <h5 id="label" style="visibility: hidden">請填寫修訂信息:</h5>
+                        <!--修订信息编辑框-->
+                        <textarea id="textarea-editInfo" style="visibility: hidden"></textarea>
+                        <!--点击修订后弹出的按钮-->
+                        <button id="btn-cancel-edit" class="btn btn-danger" style="visibility: hidden" @click="btn_cancel_edit_onclick()">取消</button>
+                        <button id="btn-confirm-edit" class="btn btn-success" style="visibility: hidden" @click="btn_confirm_edit_onclick()">確定</button>
+                        <!--查看修订记录-->
+                        <button class="ry-btn-edit-record" data-toggle="modal" data-target="#layer-edit-record" id="btn-edit-record" @click="edit_record_onclick()">修訂記錄</button>
+                        <button class="ry-btn-edit" id="btn-edit" @click="btn_edit_onclick()">修訂</button>
                     </div>
                 </div>
+
+                <!--修订记录模态框-->
+                <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-edit-record">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                                <h4 class="modal-title">修訂記錄</h4>
+                            </div>
+                            <div class="modal-body text-tight">
+                                <div v-for="item in edit_record">
+                                    <p>修訂者：{{item.username_edit_record}}</p>
+                                    <p>修訂時間：{{item.time_edit_record}}</p>
+                                    <p>修訂信息：{{item.commit_edit_record}}</p>
+                                    <p>修訂版本：{{item.version_edit_record}}</p>
+                                    <hr>
+                                </div>
+                                <button class="btn btn-success btn-sm" data-dismiss="modal">確定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--添加批注模态框-->
+                <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-add-comment">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">選中內容：示例文本</h4>
+                            </div>
+                            <div class="modal-body text-tight">
+                                <p>添加批註：</p>
+                                <textarea id="textarea-addComment"></textarea>
+                                <br>
+                                <input id="check-private" type="checkbox" value="選為私密">選為私密
+                                <br>
+                                <br>
+                                <button class="btn btn-warning btn-sm" data-dismiss="modal" id="btn-cancel-add-comment" @click="btn_cancel_add_comment_onclick()">取消</button>
+                                <button class="btn btn-success btn-sm" data-dismiss="modal" id="btn-confirm-add-comment" @click="btn_confirm_add_comment_onclick()">確定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--查看批注模态框-->
+                <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-comment-record">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                                <h4 class="modal-title">批註內容</h4>
+                            </div>
+                            <div class="modal-body text-tight">
+                                <table class="table table-bordered table-hover">
+                                    <tr class="text-left">
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right">
+                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#layer-delete">删除</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--标记本体模态框-->
+                <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-mark-noumenon">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button id="btn-cross-cancelAddMark" type="button" class="close" data-dismiss="modal" @click="btn_cross_cancel_add_mark_onclick()">
+                                    &times;
+                                </button>
+                            </div>
+                            <div class="modal-body text-tight">
+                                本體類型：
+                                <select>
+                                    <option>篩選</option>
+                                    <option>人物</option>
+                                    <option>地點</option>
+                                    <option>職官</option>
+                                    <option>時間</option>
+                                    <option>機構</option>
+                                    <option>術語</option>
+                                    <option>文獻</option>
+                                </select>
+                                <input type="text"><button>搜索</button>
+                                <button class="btn btn-info btn-sm" data-dismiss="modal" id="btn-add-mark" @click="btn_add_mark_onclick() ">添加</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--删除确认模态框-->
+                <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-delete">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                                <h4 class="modal-title">确认删除吗</h4>
+                            </div>
+                            <div class="modal-body text-tight">
+                                <button class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+                                <button id="btn-confirm-cancel" class="btn btn-danger btn-sm" data-dismiss="modal" @click="btn_confirm_delete_comment_onclick()">确认</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--图片工作台-->
+            <div>
+                <div class="float-right ry-hide-picture"><img src="../assets/img/本体标记/更多标.png" height="130" width="29"/></div>
+                <img src="../assets/img/u2099.png"/>
             </div>
         </div>
 
-        <!--删除确认模态框-->
-        <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-delete">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span>&times;</span>
-                        </button>
-                        <h4 class="modal-title">确认删除吗</h4>
-                    </div>
-                    <div class="modal-body text-tight">
-                        <button class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-                        <button id="btn-confirm-cancel" class="btn btn-danger btn-sm" data-dismiss="modal" @click="btn_confirm_delete_comment_onclick()">确认</button>
-                    </div>
+        <!--底按鈕欄-->
+        <div class="width1000 center">
+            <img src="../assets/img/本体标记/墨水线 下.png" height="4" width="974"/>
+            <div class="ry-bottom-bar">
+                <button class="float-right ry-btn-next-page">下一</button>
+                <button class="float-right ry-btn-go">GO</button>
+                <div class="float-right ry-page">
+                    <input class="ry-input-page">
+                    <span>/</span>
+                    <span>MPage</span>
                 </div>
+                <button class="float-right ry-btn-last-page">上一</button>
+                <button class="ry-btn-menu">目錄</button>
             </div>
         </div>
+
     </div>
 </template>
 
@@ -197,11 +242,11 @@
         data() {
             return{
                 get_content_obj : {},
-                content : '',
+                content : '蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。',
                 page_id : 1,
 
                 get_comment_obj : {},
-                comment : [],
+                comment : [{id_comment:"654654",target_comment:"露为霜。",begin_comment:6,end_comment:10},{id_comment:"321321",target_comment:"，在水一",begin_comment:14,end_comment:18}],
                 id_comment : '',
                 target_comment : '',
                 begin_comment : '',
@@ -209,7 +254,7 @@
                 content_comment : '',
 
                 get_mark_obj : {},
-                mark : [],
+                mark : [{id_mark:"123123",target_mark:"，白露为",begin_mark:4,end_mark:8},{id_mark:"456456",target_mark:"伊人，在",begin_mark:12,end_mark:16}],
                 id_mark : '',
                 noumenon_type : '',
                 noumennon_id : '',
@@ -1148,12 +1193,131 @@
         margin: 0;
     }
 
+    .width1000{
+        width: 1000px;
+    }
+
+    button{
+        border: transparent;
+    }
+
+    input{
+        border: none;
+    }
+    
+    .next-one{
+        color: white;
+        width: 103px;
+        height: 44px;
+        background-image: url("../assets/img/下一处按钮.png");
+    }
+    
+    .last-one{
+        color: white;
+        width: 103px;
+        height: 44px;
+        background-image: url("../assets/img/上一处按钮.png");
+    }
+    
+    .ry-search{
+        width: 232px;
+        height: 50px;
+        margin-left: 550px;
+        padding-left: 20px;
+        background-image: url("../assets/img/搜索框.png");
+    }
+
+    .ry-select{
+        width: 82px;
+        height: 32px;
+        border: none;
+        text-align: center;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: transparent;
+        background-image: url("../assets/img/本体标记/下拉菜单.png");
+    }
+
+    .ry-btn-menu{
+        color: white;
+        width: 103px;
+        height: 44px;
+        background-image: url("../assets/img/本体标记/目录.png");
+    }
+
+    .ry-btn-go{
+        color: white;
+        width: 45px;
+        height: 44px;
+        background-image: url("../assets/img/本体标记/go.png");
+    }
+
+    .ry-btn-last-page{
+        color: white;
+        width: 103px;
+        height: 44px;
+        background-image: url("../assets/img/本体标记/上一.png");
+    }
+
+    .ry-btn-next-page{
+        color: white;
+        width: 103px;
+        height: 44px;
+        background-image: url("../assets/img/本体标记/下一.png");
+    }
+
+    .ry-btn-edit{
+        color: white;
+        width: 103px;
+        height: 44px;
+        background-image: url("../assets/img/修订/修订按钮.png");
+    }
+
+    .ry-btn-edit-record{
+        color: white;
+        width: 103px;
+        height: 44px;
+        background-image: url("../assets/img/修订/修订记录按钮.png");
+    }
+
+    .ry-input-page{
+        background-color: transparent;
+        width: 33px;
+    }
+
+    .ry-page{
+        padding-top: 12px;
+        padding-left: 8px;
+        color: white;
+        width: 103px;
+        height: 44px;
+        background-image: url("../assets/img/本体标记/卷数.png");
+    }
+
+    .ry-hide-picture{
+        margin-top: 120px;
+        margin-right: 20px;
+    }
+
+    .ry-bottom-bar{
+        margin-top: 10px;
+    }
+
+    .ry-module-bar{
+        padding-right: 8px;
+        padding-top: 5px;
+        width: 299px;
+        height: 47px;
+        background-image: url("../assets/img/本体标记/屏风按钮.png");
+    }
+    
+
     /*图文对照文字工作台div*/
     #workspace-text{
-        width: 500px;
-        height: 500px;
+        width: 450px;
+        height: 470px;
         padding: 10px;
-        border: 2px lightgray solid;
         position: relative;
     }
 
@@ -1165,17 +1329,16 @@
         cursor: pointer;
         display: inline-block;
         height: 30px;
-        width: 90px;
+        width: 82px;
         text-align: center;
-        background-color: lightgray;
         line-height: 30px;
+        font-size: large;
     }
 
     /*3个版本中选定版本li标签导航栏*/
     #workspace-text-head li.li-now{
-        background-color: darkgray;
-        color: black;
-        font-weight: bold;
+        color: red;
+        text-decoration: underline;
     }
 
     /*图文对照工作台主体*/
@@ -1197,15 +1360,15 @@
     /*修订记录按钮*/
     #btn-edit-record{
         position: absolute;
-        left: 50px;
-        bottom: 10px;
+        left: 170px;
+        bottom: 0px;
     }
 
     /*修订按钮*/
     #btn-edit{
         position: absolute;
-        right: 50px;
-        bottom: 10px;
+        right: 20px;
+        bottom: 0px;
     }
 
     /*取消修订按钮*/
