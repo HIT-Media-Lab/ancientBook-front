@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="zxwnoumenom-header">
         <span class="zxwnoumenom-title" v-model="title">{{title}}</span>
         <slot name="children"></slot>
     </div>
@@ -13,14 +13,17 @@
 
 <style>
     .zxwnoumenom-header{
-        padding: 30px 0 5px 0;
-        margin: 0 0 30px 0;
-        border-bottom: 2px solid black;
+        background-image: url("../assets/img/noumenon_title.png");
+        background-repeat:no-repeat;
+        background-position: bottom;
+        padding-bottom: 10px;
     }
     .zxwnoumenom-title{
         font-size: 14px;
-        margin:65px 0 0 0;
+        margin:65px 0 0 37px;
         display:inline-block;
     }
+
+
 </style>
 

@@ -1,25 +1,19 @@
 <template>
-    <div class="zxwnoumenom">
-        <div class="zxwnoumenom-body">
-            <p>{{$route.params.pageId}}</p>
-            <p>{{$route.params.letterId}}</p>
-            <!--人物本体标题-->
-            <noumenon-title :title="this.title"></noumenon-title>
+    <div>
+        <!--人物本体标题-->
+        <noumenon_title :title="this.title">
+            <build_button slot="children"></build_button>
+        </noumenon_title>
 
-            <!--字母title-->
-            <letter-title></letter-title>
+        <!--字母title-->
+        <letter_title></letter_title>
 
-            <!--人物列表-->
-            <div class="zxwbottom-container">
-                <div class="row" v-for="(item,index) in character_data">
-                    <span class="col-md-6" @click="gotoCharacter(index)">{{item.standard_name}}----{{item.noumenon_id}}</span>
-                    <span class="col-md-6" @click="gotoCharacter(index+1)" v-model="character_data[index+1]" >{{                    <span class="col-md-6" @click="gotoCharacter(index+1)" v-model="character_data[index+1]" >{{character_data[index+1].standard_name}}----{{character_data[index+1].noumenon_id}}</span>.standard_name}}----{{item.noumenon_id}}</span>
-                </div>
-            </div>
-
-            <!--翻页组件-->
-            <paginator :max=this.total_page></paginator>
-        </div>
+        <!--人物列表-->
+        <button class="zxw-chadail" @click="go_character(index)" v-for="(item,index) in character_data">
+            {{ item.standard_name }}
+        </button>
+        <!--翻页组件-->
+        <paginator :max=this.total_page></paginator>
     </div>
 </template>
 
@@ -27,8 +21,7 @@
     let Mock = require('mockjs');
 
     //显示用户列表
-    Mock.mock('/ancient_books/get_person_list_by_word.action?word=a&&page_count=1','get',{
-        "status|200":200,
+    Mock.mock('/ancient_books/get_person_list_by_word.action?word=A&&page_count=1','get',{
         "result|1":1,
         "content|30":[{
             'standard_name':'@FIRST',
@@ -37,8 +30,7 @@
         "total_page|10-20":1
     });
 
-    Mock.mock('/ancient_books/get_person_list_by_word.action?word=a&&page_count=2','get',{
-        "status|200":200,
+    Mock.mock('/ancient_books/get_person_list_by_word.action?word=A&&page_count=2','get',{
         "result|1":1,
         "content|30":[{
             'standard_name':'@FIRST',
@@ -47,8 +39,7 @@
         "total_page|10-20":1
     });
 
-    Mock.mock('/ancient_books/get_person_list_by_word.action?word=b&&page_count=1','get',{
-        "status|200":200,
+    Mock.mock('/ancient_books/get_person_list_by_word.action?word=B&&page_count=1','get',{
         "result|1":1,
         "content|30":[{
             'standard_name':'@FIRST',
@@ -58,7 +49,6 @@
     });
 
     Mock.mock('/ancient_books/get_person_list_by_word.action?word=b&&page_count=2','get',{
-        "status|200":200,
         "result|1":1,
         "content|30":[{
             'standard_name':'@FIRST',
@@ -67,69 +57,70 @@
         "total_page|10-20":1
     });
 
-    import noumenonTitle from '../../../component/noumenon-title.vue';
-    import letterTitle from '../../../component/letter-title.vue';
+    import noumenon_title from '../../../component/noumenon-title.vue';
+    import letter_title from '../../../component/letter-title.vue';
     import paginator from '../../../component/paginator.vue';
-
+    import build_button from '../../../component/build-button.vue';
     export default{
         components:{
             paginator,
-            noumenonTitle,
-            letterTitle,
+            noumenon_title,
+            letter_title,
+            build_button
         },
 
         watch:{
             $route(){
-                this.getCharacter();
+                this.get_character();
             }
         },
 
         created(){
-            this.getCharacter();
+            this.get_character();
         },
 
         data(){
             return{
                 title:'人物本体',
-               // word:'',
                 total_page:3,   //总页数
-                //page_count:1,   //当前页数
                 get_letter:{},
                 character_data:[],
-                word_url:'/ancient_books/get_person_list_by_word.action'
+                word_url:'/ancient_books/get_person_list_by_word.action',
+                ban:true
             }
         },
 
         methods:{
 
             //通过头字母显示人物本体列表
-            successGet(response){
+            success_get(response){
                 console.log("字母显示本体列表成功");
                 this.total_page = response.body.total_page;
-                for(let i = 0; i <response.body.content.length; i++){
-                    this.character_data[i]= response.body.content[i];
-                }
+                    for (let i = 0; i < response.body.content.length; i++) {
+                        this.character_data[i] = response.body.content[i];
+                    }
+                    console.log(JSON.stringify(this.character_data));
             },
 
-            failGet(response){
-                console.log("字母显示本体列表失败");
+            fail_get(response){
+                console.log("字母显示本体列表失败"+response.body);
             },
 
-            getCharacter(){
-                this.get_letter.value = '?word='+this.$route.params.word+'&&page_count='+this.$route.params.page;
+            get_character(){
+                this.get_letter.value = '?word='+this.$route.params.letterId+'&&page_count='+this.$route.params.pageId;
                 let new_url = this.word_url+this.get_letter.value;
-                this.cleanData();
-                this.httpJson(new_url,'get',this.get_letter,this.successGet,this.failGet);
+                this.clean_data();
+                this.http_json(new_url,'get',this.get_letter,this.success_get,this.fail_get);
             },
 
             //跳转到人物本体详情
-            gotoCharacter(p){
+            go_character(p){
                 console.log(this.character_data[p].noumenon_id);
-                this.$router.push({name:'char_detail',params:{id:this.character_data[p].noumenon_id}});
+                this.$router.push({name:'char_detail',params:{nouId:this.character_data[p].noumenon_id}});
             },
 
             //清空前端显示数组
-            cleanData(){
+            clean_data(){
                 this.character_data.splice(0, this.character_data.length);
             }
         }
@@ -138,8 +129,15 @@
 </script>
 
 <style>
-    .zxwbottom-container{
-        width:750px;
-        padding-top: 20px;
+
+    .zxw-chadail{
+        font-size: 14px;
+        text-align: left;
+        margin:0 200px 20px 35px;
+        width:200px;
+        background-color: transparent;
+        border-style: none;
     }
+
+
 </style>

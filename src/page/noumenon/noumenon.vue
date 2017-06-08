@@ -1,8 +1,12 @@
 <template>
     <div>
-        <noumenon_title :title="this.title">
+        <noumenon_title class="zxwtitle-bottom" :title="this.title">
             <build_button slot="children"></build_button>
         </noumenon_title>
+
+        <div v-for="(item,index) in recent_noumenons">
+            <p class="zxwnoumenon-row" @click="go_noumenom(index)">{{item.standard_name}}</p>
+        </div>
     </div>
 </template>
 <script>
@@ -84,16 +88,12 @@
     }
 </script>
 <style>
-    .zxwnoumenom-body{
-        padding-left: 20px;
-        padding-right: 20px;
+    .zxwtitle-bottom{
+       margin-bottom: 40px;
     }
 
-    .zxwnoumenom-row{
-        margin-bottom: 15px;
-        margin-left: 15px;
-        font-size: 15px;
-        background-color: transparent;
-        border-style: none;
+    .zxwnoumenon-row{
+        margin:0 0 25px 35px;
+        font-size: 12px;
     }
 </style>

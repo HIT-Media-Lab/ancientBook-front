@@ -1,12 +1,14 @@
 <template>
     <!--翻页键-->
     <div class="page-box">
-            <input type="button" class="btn-pages" style="margin-left: 0;" value="上一页" @click="prePage()" v-bind:disable="ban_1" tabindex="-1">
-        <span class="text-pages" v-model="max">
-        <input type="text" id="skip" class="text-input" v-model="cur_page"  tabindex="-1" v-bind:disable="ban_3">/{{max}}
-    </span>
-        <input type="button" class=" btn-pages"  style="width:30px; height:25px" value="GO" @click="skiPage()" tabindex="-1">
-        <input type="button" class="btn-pages" style="margin-right: 0;" value="下一页" @click="nextPage()" v-bind:disable="ban_2" tabindex="-1">
+        <button  class="btn-pages"  @click="prePage()" v-bind:disable="ban_1" tabindex="-1">上一页</button>
+
+        <div class="btn-pages text-pages">
+            <input  type="text" class="text-input" v-model="cur_page"  tabindex="-1" v-bind:disable="ban_3"><label class="zxw-label" v-model="max">/{{max}}</label>
+        </div>
+
+        <button class="btn-pages btn-go"  @click="skiPage()" tabindex="-1">GO</button>
+        <button class="btn-pages"   @click="nextPage()" v-bind:disable="ban_2" tabindex="-1">下一页</button>
     </div>
 </template>
 
@@ -14,7 +16,7 @@
     export default{
         watch:{
             $route(){
-                this.cur_page = this.$route.params.page;
+                this.cur_page = this.$route.params.pageId;
             }
         },
 
@@ -70,34 +72,46 @@
 <style>
     /*组件位置*/
     .page-box{
-        padding: 3em 18% 1em 18%;
+        margin: 26px 0 10px 0;
         display: block;
         text-align: center;
     }
 
     /*按钮样式*/
     .btn-pages{
-        background-color:transparent ; /*按钮填充颜色*/
-        color:darkgrey; /*按钮边框颜色*/
-        border-radius: 8px;
-        border: 2px solid;
-        width:70px;
-        height: 28px;
+        background-image: url("../assets/img/pre-page.png");
+        background-repeat: no-repeat;
+        background-color: transparent;
+        background-position: center;
+        border-style: none;
+        width: 120px;
+        height: 43px;
+        color: gainsboro;
+    }
+
+    .btn-go{
+        width:45px;
+        height:43px;
+        background-size: 100% 100%;
+        margin:0 11px 0 0;
+        display: inline-block;
     }
 
     /*页数显示位置*/
     .text-pages{
-        padding-right: 1em;
-        padding-left: 0.5em;
-        color: dimgrey;
+        display: inline-block;
+        margin:0 -10px 0 11px;
     }
 
     /*输入页数文本框样式*/
     .text-input{
-        height: 15px;
         width:25px;
         background-color: transparent;
-        border-color: transparent;
+        border-style: none;
         text-align: right;
+    }
+
+    .zxw-label{
+        margin: 10px 5px 0 0;
     }
 </style>

@@ -1,96 +1,89 @@
 <template>
     <div class="zxwcharacter-title">   <!--加背景-->
-        <div class="zxwcharacter-row"> <!--分组padding-->
-            <button class="zxwcharacter-span"  @click="gotoLetter('a',0)" v-bind:disable="ban[0]">A</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('b',1)" v-bind:disable="ban[1]">B</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('c',2)" v-bind:disable="ban[2]">C</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('d',3)" v-bind:disable="ban[3]">D</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('e',4)" v-bind:disable="ban[4]">E</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('f',5)" v-bind:disable="ban[5]">F</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('g',6)" v-bind:disable="ban[6]">G</button>
+        <div  class="zxwcharacter-row">
+            <button  class="zxwcharacter-span" v-for="(item,index) in group_1" v-model=group_1.item  @click="go_letter(item)" v-bind:class="{hover: letter_id===item}">{{item}}</button>
         </div>
 
-        <div class="zxwcharacter-row"> <!--分组padding-->
-            <button class="zxwcharacter-span"  @click="gotoLetter('h',7)" v-bind:disable="ban[7]">H</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('i',8)" v-bind:disable="ban[8]">I</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('j',9)" v-bind:disable="ban[9]">J</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('k',10)" v-bind:disable="ban[10]">K</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('l',11)" v-bind:disable="ban[11]">L</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('m',12)" v-bind:disable="ban[12]">M</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('n',13)" v-bind:disable="ban[13]">N</button>
+        <div  class="zxwcharacter-row">
+            <button class="zxwcharacter-span" v-for="(item,index) in group_2" v-model=group_2.item @click="go_letter(item)" v-bind:class="{hover: letter_id===item}">{{item}}</button>
         </div>
 
-        <div class="zxwcharacter-row"> <!--分组padding-->
-            <button class="zxwcharacter-span"  @click="gotoLetter('o',14)" v-bind:disable="ban[14]">O</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('p',15)" v-bind:disable="ban[15]">P</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('q',16)" v-bind:disable="ban[16]">Q</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('r',17)" v-bind:disable="ban[17]">R</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('s',18)" v-bind:disable="ban[18]">S</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('t',19)" v-bind:disable="ban[19]">T</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('u',20)" v-bind:disable="ban[20]">U</button>
+        <div  class="zxwcharacter-row" >
+            <button class="zxwcharacter-span" v-for="(item,index) in group_3" v-model=group_3.item @click="go_letter(item)" v-bind:class="{hover: letter_id===item}">{{item}}</button>
         </div>
 
-        <div class="zxwcharacter-row"> <!--分组padding-->
-            <button class="zxwcharacter-span"  @click="gotoLetter('v',21)" v-bind:disable="ban[21]">V</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('w',22)" v-bind:disable="ban[22]">W</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('x',23)" v-bind:disable="ban[23]">X</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('y',24)" v-bind:disable="ban[24]">Y</button>
-            <button class="zxwcharacter-span"  @click="gotoLetter('z',25)" v-bind:disable="ban[25]">Z</button>
+        <div  class="zxwcharacter-row" >
+            <button class="zxwcharacter-span" v-for="(item,index) in group_4" v-model=group_4.item @click="go_letter(item)" v-bind:class="{hover: letter_id===item}">{{item}}</button>
         </div>
-        <h5 class="zxwcharacter-span">#</h5>
+
+        <div  class="zxwcharacter-row" >
+            <button class="zxwcharacter-span" v-for="(item,index) in group_5">{{item}}</button>
+        </div>
+
     </div>
 </template>
 
 <script>
     export default{
-        /*created(){
-            this.letterCharacter('a');
-        },*/
+        created(){
+            this.letter_id = 'A';
+        },
+
+        watch:{
+            $route(){
+                this.letter_id = this.$route.params.letterId;
+            }
+        },
 
         data(){
             return {
-                ban:[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
+                letter_id:'',
+                group_1:['A','B','C','D','E','F','G'],
+                group_2:['H','I','J','K','L','M','N'],
+                group_3:['O','P','Q','R','S','T'],
+                group_4:['U','V','W','X','Y','Z'],
+                group_5:['#']
+                //ban_1:['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'],
+                //ban:[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
             }
         },
 
         methods:{
-           gotoLetter(p,q){
-                /*let a = this.$parent.successGet;
-                let b = this.$parent.failGet;
-                this.word = p;
-                this.$emit('letter',this.word);
-                let new_url = this.url+this.object.value;
-                this.$parent.cleanData();
-                this.httpJson(new_url,'get',this.object,a,b);*/
-                this.ban[q]=true;
+           go_letter(p){
                 this.$route.params.letterId = p;
                 this.$route.params.pageId = 1;
                 this.$router.push({name:this.$route.name, params: this.$route.params});
-                //console.log(this.$route.name);
-            },
+            }
+
+
         }
     }
 </script>
 
 <style>
     .zxwcharacter-title{
-        margin-top: 20px;
-        padding:0 20px 0 40px;
-        border: 2px solid darkred;
-        width:750px;
+        margin: 35px 0 47px 30px;
+        padding:15px 0 0 40px;
+        width:968px;
+        height:53px;
+        background-image: url("../assets/img/letter-index.png");
+        background-position: center;
     }
 
     .zxwcharacter-row{
-        width:150px;
-        margin-right: 5px;
+        margin:0 25px 0 0;
         display:inline-block;
     }
 
     .zxwcharacter-span{
-        padding-right: 1px;
-        display:inline-block;
+        font-size: 14px;
+        margin-right: 15px;
         background-color: transparent;
-        border-color:transparent ;
-        width:15px;
+        border-style: none;
+    }
+
+    .hover{
+        font-size: 20px;
+        color:#a50000;
     }
 </style>

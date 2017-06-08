@@ -43,7 +43,7 @@
 
                     <header class="dialog-header">
                         <span class="dialog-title">普通用户创建</span>
-                        <span class="close rotate iconfont icon-close" @click="closeDialog()">×</span><!--关闭图标-->
+                        <span class="close rotate iconfont icon-close" @click="close_dialog()">×</span><!--关闭图标-->
                     </header>
 
                     <div class="dialog-body" >
@@ -87,7 +87,7 @@
 
                     <header class="dialog-header">
                         <span class="dialog-title">普通用户修改</span>
-                        <span class="close rotate iconfont icon-close" @click="closeMotal()">×</span><!--关闭图标-->
+                        <span class="close rotate iconfont icon-close" @click="close_motal()">×</span><!--关闭图标-->
                     </header>
 
                     <div class="dialog-body">
@@ -131,7 +131,7 @@
 
 
 <script type="text/javascript">
-    /*let Mock = require('mockjs');
+    let Mock = require('mockjs');
 
     //显示用户列表
     Mock.mock('/ancient_books/get_user_list.action?page=1','get',{
@@ -154,7 +154,7 @@
             'time':'@DATETIME("yyyy-MM-dd HH:mm:ss")'
         }],
         'max_page|1-100':100
-    });*/
+    });
 
     import paginator from "../../component/paginator.vue";
     export default{
@@ -199,8 +199,8 @@
                 add_user:{},//创建用户数据对象
                 delete_user:{},//删除用户数据对象
                 modify_user:{},//修改数据对象
-                check_name:{}, //检查用户名是否重复
-                check_account:{} //检查账号是否重复
+                cheif_name:{}, //检查用户名是否重复
+                cheif_account:{} //检查账号是否重复
             }
         },
 
@@ -229,7 +229,7 @@
 
             //向后端发起请求获取用户数据列表，显示在前端页面
             get_users(){
-                this.get_user.value='?page='+this.$route.params.page;
+                this.get_user.value='?page='+this.$route.params.pageId;
                 let new_url = this.get_url+this.get_user.value;
                 this.clean_data();
                 this.http_json(new_url,'get',this.get_user,this.success_get, this.fail_get);
@@ -283,7 +283,7 @@
                 let x = document.getElementById(tag1).value;
                 let y;
                 if( x.length !== 0){
-                    y = this.checkname(x);
+                    y = this.check_name(x);
                     if( y === true ){
                         this.tip = "";
                         this.is_active[0]=false;
@@ -305,7 +305,7 @@
                 let x = document.getElementById(tag2).value;
                 let y;
                 if( x.length !== 0){
-                    y = this.checkuser(x);
+                    y = this.check_user(x);
                     if( y === true ){
                         this.tip = "";
                         this.is_active[1]=false;
@@ -328,7 +328,7 @@
                 let x = document.getElementById(tag3).value;
                 let y;
                 if( x.length !== 0){
-                    y = this.checkpwd(x);
+                    y = this.check_pwd(x);
                     if( y === true ){
                         this.add_if = false;
                         this.tip = "";
@@ -374,9 +374,9 @@
             },
 
             dup_name(n){
-                this.check_name.value = "?name="+n;
-                let new_url = this.name_url + this.check_name.value;
-                this.http_json(new_url,'get',this.check_name, this.success_name, this.fail_name);
+                this.cheif_name.value = "?name="+n;
+                let new_url = this.name_url + this.cheif_name.value;
+                this.http_json(new_url,'get',this.cheif_name, this.success_name, this.fail_name);
             },
 
 
@@ -393,9 +393,9 @@
             },
 
             dup_account(){
-                this.check_account.value ="?account="+this.account;
-                let new_url = this.account_url+this.check_account.value;
-                this.http_json(new_url,'get', this.check_account, this.success_account, this.fail_account);
+                this.cheif_account.value ="?account="+this.account;
+                let new_url = this.account_url+this.cheif_account.value;
+                this.http_json(new_url,'get', this.cheif_account, this.success_account, this.fail_account);
             },
 
             //添加用户信息

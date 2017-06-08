@@ -46,7 +46,6 @@ function before_http (object) {
 
 //定义的post的vue-router全局函数，以json形式传递数据
 Vue.prototype.http_json = function (url, type, params, success, fail) {
-    // this.before_http(params);
     params.token=store.getters.GetToken;
     if (type.toLocaleLowerCase() == "get") {
         this.$http.get(url).then(function (response) {
@@ -300,13 +299,13 @@ const router = new VueRouter({
                     name:'recent'
                 },
                 {
-                    path: 'character/page/:pageId/letter/:letterId',
+                    path: 'character/letter/:letterId/page/:pageId',
                     component: character,
                     name: 'character'
                 },
                 {
                     path: 'character',
-                    redirect: 'character/page/1/letter/A',
+                    redirect: 'character/letter/A/page/1',
                     component: character,
                     name: 'character'
                 },

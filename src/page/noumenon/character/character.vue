@@ -4,106 +4,104 @@
             <noumenon_button slot="children"></noumenon_button>
         </noumenon_title>
 
-        <div>
-            <div class="row">
-                <span class="col-md-2">人名：</span>
-                <span v-model="person_content.standard_name">{{person_content.standard_name}}</span>
+            <div class=" zxw-characterbody">
+                <p class="zxwspan-length">人名：</p>
+                <p class="zxwspan-length" v-model="person_content.standard_name">{{person_content.standard_name}}</p>
             </div>
 
-            <div class="row">
-                <span class="col-md-2">英译：</span>
-                <span v-model="person_content.english">{{person_content.english}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length">英译：</p>
+                <p class="zxwspan-length" v-model="person_content.english">{{person_content.english}}</p>
             </div>
 
-            <div class="row">
-                <span class="col-md-2">姓：</span>
-                <span v-model="person_content.xing">{{person_content.xing}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length">姓：</p>
+                <span class="zxwspan-length" v-model="person_content.xing">{{person_content.xing}}</span>
             </div>
 
-            <div class="row">
-                <span class="col-md-2">氏：</span>
-                <span v-model="person_content.shi">{{person_content.shi}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length">氏：</p>
+                <p class="zxwspan-length" v-model="person_content.shi">{{person_content.shi}}</p>
             </div>
 
-            <div class="row">
-                <span class="col-md-2">字：</span>
-                <span v-model="person_content.zi">{{person_content.zi}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length">字：</p>
+                <p class="zxwspan-length" v-model="person_content.zi">{{person_content.zi}}</p>
             </div>
 
-            <div class="row">
-                <span class="col-md-2">别名：</span>
-                <span v-model="person_content.other_name">{{person_content.other_name}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length">别名：</p>
+                <p class="zxwspan-length" v-model="person_content.other_name">{{person_content.other_name}}</p>
             </div>
 
-            <div class="row">
-                <span class="col-md-2">出生时间：</span>
-                <span v-model="person_content.birth_time_name,person_content.birth_time_id">{{person_content.birth_time_name}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length">出生时间：</p>
+                <p class="zxwspan-length" v-model="person_content.birth_time_name,person_content.birth_time_id">{{person_content.birth_time_name}}</p>
             </div>
 
-            <div class="row">
-                <span class="col-md-2">死亡时间：</span>
-                <span v-model="person_content.death_time_name,person_content.death_time_id">{{person_content.death_time_name}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length">死亡时间：</p>
+                <p class="zxwspan-length" v-model="person_content.death_time_name,person_content.death_time_id">{{person_content.death_time_name}}</p>
             </div>
 
-            <div class="row">
-                <span class="col-md-2">籍贯：</span>
-                <span v-model="person_content.jiguan_location_id,person_content.jiguan_location_name">{{person_content.jiguan_location_name}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length">籍贯：</p>
+                <p class="zxwspan-length" v-model="person_content.jiguan_location_id,person_content.jiguan_location_name">{{person_content.jiguan_location_name}}</p>
             </div>
 
-            <div class="row">
-                <span class="col-md-2">父：</span>
-                <span v-model="father[0].person_name">{{father[0].person_name}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length">父：</p>
+                <button class="zxwbtn-info zxwspan-length" v-model=father.item v-for="(item,index) in father" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
-            <div class="row">
-                <span class="col-md-2">母：</span>
-                <span v-model="mother[0].person_name">{{mother[0].person_name}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length">母：</p>
+                <button class="zxwbtn-info zxwspan-length" v-model=mother.item v-for="(item,index) in mother" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
-            <div class="row">
-                <span class="col-md-2">子：</span>
-                <span v-model="son[0].person_name">{{son[0].person_name}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length">子：</p>
+                <button class="zxwbtn-info zxwspan-length" v-model=son.item v-for="(item,index) in son" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
-            <div class="row">
-                <span class="col-md-2">女：</span>
-                <span v-model="daughter[0].person_name">{{daughter[0].person_name}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length">女：</p>
+                <button class="zxwbtn-info zxwspan-length" v-model=daughter.item v-for="(item,index) in daughter" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
-            <div class="row">
-                <span class="col-md-2">兄弟：</span>
-                <span v-model="brother[0].person_name">{{brother[0].person_name}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length">兄弟：</p>
+                <button class="zxwbtn-info zxwspan-length" v-model=brother.item v-for="(item,index) in brother" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
-            <div class="row">
-                <span class="col-md-2">姐妹：</span>
-                <span v-model="sister[0].person_name">{{sister[0].person_name}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length">姐妹：</p>
+                <button class="zxwbtn-info zxwspan-length" v-model=sister.item v-for="(item,index) in sister" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
-            <div class="row">
-                <span class="col-md-2">师：</span>
-                <span v-model="teacher[0].person_name">{{teacher[0].person_name}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length">师：</p>
+                <button class="zxwbtn-info zxwspan-length" v-model=teacher.item v-for="(item,index) in teacher" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
-            <div class="row">
-                <span class="col-md-2">学生：</span>
-                <span v-model="student[0].person_name">{{student[0].person_name}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length">学生：</p>
+                <button class="zxwbtn-info zxwspan-length" v-model=student.item v-for="(item,index) in student" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
-            <div class="row">
-                <span class="col-md-2">友：</span>
-                <span v-model="friend[0].person_name">{{friend[0].person_name}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length">友：</p>
+                <button class="zxwbtn-info zxwspan-length" v-model=friend.item v-for="(item,index) in friend" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
 
-            <div class="row">
-                <span class="col-md-2" v-model="person_content.remark_1_name">{{person_content.remark_1_name}}</span>
-                <span v-model="person_content.remark_1">{{person_content.remark_1}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length" v-model="person_content.remark_1_name">{{person_content.remark_1_name}}</p>
+                <p class="zxwspan-length" v-model="person_content.remark_1">{{person_content.remark_1}}</p>
             </div>
-            <div class="row">
-                <span class="col-md-2" v-model="person_content.remark_2_name">{{person_content.remark_2_name}}</span>
-                <span v-model="person_content.remark_2">{{person_content.remark_2}}</span>
+            <div class="zxw-infospan">
+                <p class="zxwspan-length" v-model="person_content.remark_2_name">{{person_content.remark_2_name}}</p>
+                <p class="zxwspan-length" v-model="person_content.remark_2">{{person_content.remark_2}}</p>
             </div>
-            <button  class="zxwdelete-character">删除本体</button>
+            <button  class="zxwnoumenom-button zxwdelete-character">删除本体</button>
         </div>
-    </div>
 </template>
 
 <script>
      let Mock = require('mockjs');
      //显示用户列表
-     Mock.mock('/ancient_books/get_person_by_id.action?id=37','get',{
+     Mock.mock('/ancient_books/get_person_by_id.action?id=1','get',{
      "status|200":200,
      "standard_name|5":5,
      "english|6": 6,
@@ -174,8 +172,7 @@
     import noumenon_button from '../../../component/noumenon-button.vue';
     export default{
         created(){
-            //Vuex得到具体人物ID
-            this.person_info();
+            this.person_info(this.$route.params.nouId);
         },
         components:{
             noumenon_title,
@@ -218,8 +215,8 @@
                 this.person_content.remark_2_name = response.body.remark_2_name;
                 this.person_content.remark_1 = response.body.remark_1;
                 this.person_content.remark_2 = response.body.remark_2;
-                for(let i = 0; i < response.body.relations.length; i++) {
-                    if (response.body.relations[i].relation_type === 4) {
+                for( let i = 0; i < response.body.relations.length; i++ ) {
+                    if ( response.body.relations[i].relation_type === 4 ) {
                         this.father.push({
                             relation_type: response.body.relations[i].relation_type,
                             relation_id: response.body.relations[i].relation_id,
@@ -228,7 +225,7 @@
                         });
                         console.log(JSON.stringify(this.father));
 
-                    } else if (response.body.relations[i].relation_type === 5) {
+                    } else if ( response.body.relations[i].relation_type === 5 ) {
                         this.mother.push({
                             relation_type: response.body.relations[i].relation_type,
                             relation_id: response.body.relations[i].relation_id,
@@ -237,7 +234,7 @@
                         });
                         console.log(JSON.stringify(this.mother));
 
-                    } else if (response.body.relations[i].relation_type === 6) {
+                    } else if ( response.body.relations[i].relation_type === 6 ) {
                         this.son.push({
                             relation_type: response.body.relations[i].relation_type,
                             relation_id: response.body.relations[i].relation_id,
@@ -246,7 +243,7 @@
                         });
                         console.log(JSON.stringify(this.son));
 
-                   } else if (response.body.relations[i].relation_type === 7) {
+                   } else if ( response.body.relations[i].relation_type === 7 ) {
                         this.daughter.push({
                             relation_type: response.body.relations[i].relation_type,
                             relation_id: response.body.relations[i].relation_id,
@@ -255,7 +252,7 @@
                         });
                         console.log(JSON.stringify(this.daughter));
 
-                    } else if(response.body.relations[i].relation_type === 8) {
+                    } else if( response.body.relations[i].relation_type === 8 ) {
                         this.brother.push({
                             relation_type: response.body.relations[i].relation_type,
                             relation_id: response.body.relations[i].relation_id,
@@ -264,7 +261,7 @@
                         });
                         console.log(JSON.stringify(this.brother));
 
-                    } else if(response.body.relations[i].relation_type === 9) {
+                    } else if( response.body.relations[i].relation_type === 9 ) {
                         this.sister.push({
                             relation_type: response.body.relations[i].relation_type,
                             relation_id: response.body.relations[i].relation_id,
@@ -272,12 +269,8 @@
                             person_name: response.body.relations[i].person_name
                         });
                         console.log(JSON.stringify(this.sister));
-                        /*this.sister.relation_type=response.body.relations[i].relation_type;
-                        this.sister.relation_id=response.body.relations[i].relation_id;
-                        this.sister.person_id=response.body.relations[i].person_id;
-                        this.sister.person_name=response.body.relations[i].person_name;*/
 
-                    } else if(response.body.relations[i].relation_type === 10) {
+                    } else if( response.body.relations[i].relation_type === 10 ) {
                         this.teacher.push({
                             relation_type: response.body.relations[i].relation_type,
                             relation_id: response.body.relations[i].relation_id,
@@ -286,7 +279,7 @@
                         });
                         console.log(JSON.stringify(this.teacher));
 
-                  } else if(response.body.relations[i].relation_type === 11) {
+                  } else if( response.body.relations[i].relation_type === 11 ) {
                         this.student.push({
                             relation_type: response.body.relations[i].relation_type,
                             relation_id: response.body.relations[i].relation_id,
@@ -295,7 +288,7 @@
                         });
                         console.log(JSON.stringify(this.student));
 
-                    } else if(response.body.relations[i].relation_type === 12) {
+                    } else if( response.body.relations[i].relation_type === 12 ) {
                         this.friend.push({
                             relation_type: response.body.relations[i].relation_type,
                             relation_id: response.body.relations[i].relation_id,
@@ -305,60 +298,47 @@
                         console.log(JSON.stringify(this.friend));
                     }
                 }
-                //this.check_info();
             },
 
             fail_id(response){
-                console.log("具体显示人物失败");
+                console.log("具体显示人物失败"+response.body);
             },
 
-            person_info(){
-                this.person_object.value = '?id='+this.$route.params.nouId;
+            person_info(p){
+                this.person_object.value = '?id='+p;
                 let new_url = this.person_url + this.person_object.value;
                 this.http_json(new_url,'get',this.person_object,this.success_id,this.fail_id);
-            },
-
-            /*check_info(){
-                if (this.father.length === 0) {
-                    this.father[0].person_name = '未填写';
-                }
-                if (this.mother.length === 0) {
-                    this.mother[0].person_name = '未填写';
-                }
-                if (this.son.length === 0) {
-                    this.son[0].person_name = '未填写';
-                }
-                if (this.daughter.length === 0) {
-                    this.daughter[0].person_name = '未填写';
-                }
-                if (this.brother.length === 0 ) {
-                    this.brother[0].person_name = '未填写';
-                }
-                if (this.sister.length === 0) {
-                    this.sister[0].person_name = '未填写';
-                }
-                if (this.teacher.length === 0) {
-                    this.teacher[0].person_name = '未填写';
-                }
-                if (this.student.length === 0) {
-                    this.student[0].person_name = '未填写';
-                }
-                if (this.friend.length === 0) {
-                    this.friend[0].person_name = '未填写';
-                }
-            }*/
+            }
         }
     }
 </script>
 
 <style>
-
-
-    .zxwdelete-character{
-        background-color: transparent;
-        border-style: none;
-        color:firebrick;
-        float: right;
+    /*人物本体详情内容与标题距离*/
+    .zxw-characterbody{
+        margin:40px 0 0 37px;
     }
 
+    /*删除本体button距离*/
+    .zxwdelete-character{
+        margin: 37px 0 0 37px;
+    }
+
+    /*详情内的button*/
+    .zxwbtn-info{
+        text-align: left;
+        background-color: transparent;
+        border-style: none;
+    }
+
+    /*各内容之间的间距*/
+    .zxw-infospan{
+        margin:17px 0 0 37px;
+    }
+
+
+    .zxwspan-length{
+        width:100px;
+        display:inline-block;
+    }
 </style>
