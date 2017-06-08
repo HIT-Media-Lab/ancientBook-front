@@ -7,13 +7,13 @@
                 <div class="row">
                     <label class="col-md-2">冊數：</label>
                     <div class="col-md-4">
-                        <input v-model="duplicate_book_count">
+                        <input v-model="copy_item.duplicate_book_count">
                     </div>
 
                     <label class="col-md-2">完整性：</label>
                     <div class="col-md-4">
-                        <select>
-                            <option>不詳</option>
+                        <select v-for="item in menu_items[18]">
+                            <option>{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -21,14 +21,14 @@
                 <div class="row">
                     <label class="col-md-2">品級：</label>
                     <div class="col-md-4">
-                        <select>
-                            <option>不詳</option>
+                        <select v-for="item in menu_items[19]">
+                            <option>{{item.chinese_name}}</option>
                         </select>
                     </div>
 
                     <label class="col-md-2">附件信息：</label>
                     <div class="col-md-4">
-                        <input v-model="duplicate_attachment">
+                        <input v-model="copy_item.duplicate_attachment">
                     </div>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                         <label>責任者名稱:</label>
                     </div>
                     <div class="col-md-4">
-                        <input v-model="person_id">
+                        <input v-model="copy_item.person_id">
                     </div>
                 </div>
 
@@ -96,8 +96,8 @@
                         <label>責任行為：</label>
                     </div>
                     <div class="col-md-4">
-                        <select>
-                            <option>重印</option>
+                        <select v-for="item in menu_items[20]">
+                            <option>{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                 <div class="row">
                     <label class="col-md-2">責任說明：</label>
                     <div class="col-md-4">
-                        <input v-model="explain">
+                        <input v-model="copy_item.copy_responsibility.explain">
                     </div>
                 </div>
             </div>
@@ -132,26 +132,44 @@
 
 <script>
     export default{
+        created : function () {
+            this.get_copy_item();
+        },
+
+        watch:{
+            $route(){
+                this.$store.commit("get_copy_contents",this.copy_item);
+            }
+        },
 
         data() {
             return{
-                duplicate_book_count : '',
-                duplicate_level : '',
-                duplicate_complete : '',
-                duplicate_attachment : '',
-                copy_responsibility : {
-                    location_id : '',
-                    person_id : '',
-                    begin_time : '',
-                    end_time : '',
-                    action : '',
-                    explain : '',
-                    confirm : '',
-                    type : '',
-                    level : 4,
+                menu_items : [],
+                copy_item : {
+                    duplicate_book_count : '',
+                    duplicate_level : '',
+                    duplicate_complete : '',
+                    duplicate_attachment : '',
+                    copy_responsibility : {
+                        location_id : '',
+                        person_id : '',
+                        begin_time : '',
+                        end_time : '',
+                        action : '',
+                        explain : '',
+                        confirm : '',
+                        type : '',
+                        level : 4,
+                    }
                 }
             }
         },
+
+        methods : {
+            get_copy_item() {
+                this.menu_items = this.$store.getters.get_menu_item
+            }
+        }
 
     }
 </script>

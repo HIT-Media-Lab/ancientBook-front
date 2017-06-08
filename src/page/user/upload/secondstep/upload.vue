@@ -5,13 +5,13 @@
             <div>
                 <span>
                     <span>冊號:</span>
-                    <input class="ry-input-upload2" v-model="book_num">
+                    <input class="ry-input-upload2" v-model="upload2.book_num">
                     <button class="ry-btn-add-book" @click="add_new_book()">添加新冊</button>
                 </span>
                 <br>
                 <span>
                     <span>冊名:</span>
-                    <input class="ry-input-upload2" v-model="book_name">
+                    <input class="ry-input-upload2" v-model="upload2.book_name">
                 </span>
 
                 <div class="width800">
@@ -41,12 +41,20 @@
 
 <script>
     export default{
+        watch:{
+            $route(){
+                this.$store.commit("get_upload_file",this.upload2);
+            }
+        },
+
         data() {
             return{
-                book_name : '',
-                book_num : '',
-                images : {},
-                texts : {},
+                upload2 : {
+                    book_name : '',
+                    book_num : '',
+                    images : {},
+                    texts : {},
+                },
             }
         },
 

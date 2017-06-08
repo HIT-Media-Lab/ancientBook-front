@@ -16,10 +16,25 @@
 
 <script>
     export default{
+        watch:{
+            $route(){
+                this.get_book_summary();
+                this.$store.commit("get_book_summary",this.summary);
+            }
+        },
+
         data() {
             return{
                 summary : ''
             }
+        },
+
+        methods : {
+            get_book_summary() {
+                var book_info = document.getElementById("book-info");
+                this.summary = book_info.value;
+            }
         }
+
     }
 </script>

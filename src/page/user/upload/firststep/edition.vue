@@ -7,15 +7,15 @@
                 <div class="row">
                     <label class="col-md-2">版本類型：</label>
                     <div class="col-md-4">
-                        <select>
-                            <option>不詳</option>
+                        <select v-for="item in menu_items[6]">
+                            <option>{{item.chinese_name}}</option>
                         </select>
                     </div>
 
                     <label class="col-md-2">版本時代：</label>
                     <div class="col-md-4">
-                        <select>
-                            <option>傳說時期</option>
+                        <select v-for="item in menu_items[7]">
+                            <option>{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -23,15 +23,15 @@
                 <div class="row">
                     <label class="col-md-2">載體形式：</label>
                     <div class="col-md-4">
-                        <select>
-                            <option>不詳</option>
+                        <select v-for="item in menu_items[8]">
+                            <option>{{item.chinese_name}}</option>
                         </select>
                     </div>
 
                     <label class="col-md-2">裝幀形式：</label>
                     <div class="col-md-4">
-                        <select>
-                            <option>不詳</option>
+                        <select v-for="item in menu_items[9]">
+                            <option>{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -39,61 +39,61 @@
                 <div class="row">
                     <label class="col-md-2">板框長度：</label>
                     <div class="col-md-4">
-                        <input v-model="version_frame_length">
+                        <input v-model="edition_item.version_frame_length">
                     </div>
 
                     <label class="col-md-2">板框寬度：</label>
                     <div class="col-md-4">
-                        <input v-model="version_frame_width">
+                        <input v-model="edition_item.version_frame_width">
                     </div>
                 </div>
 
                 <div class="row">
                     <label class="col-md-2">開本長度：</label>
                     <div class="col-md-4">
-                        <input v-model="version_format_length">
+                        <input v-model="edition_item.version_format_length">
                     </div>
 
                     <label class="col-md-2">開本寬度：</label>
                     <div class="col-md-4">
-                        <input v-model="version_format_width">
+                        <input v-model="edition_item.version_format_width">
                     </div>
                 </div>
 
                 <div class="row">
                     <label class="col-md-2">牌記內容：</label>
                     <div class="col-md-4">
-                        <input v-model="version_paiji_content">
+                        <input v-model="edition_item.version_paiji_content">
                     </div>
 
                     <label class="col-md-2">牌記位置:</label>
                     <div class="col-md-4">
-                        <input v-model="version_paiji_location">
+                        <input v-model="edition_item.version_paiji_location">
                     </div>
                 </div>
 
                 <div class="row">
                     <label class="col-md-2">半頁行數：</label>
                     <div class="col-md-4">
-                        <input v-model="version_half_page_line_number">
+                        <input v-model="edition_item.version_half_page_line_number">
                     </div>
 
                     <label class="col-md-2">每行字數：</label>
                     <div class="col-md-4">
-                        <input v-model="version_page_line_number">
+                        <input v-model="edition_item.version_page_line_number">
                     </div>
                 </div>
 
                 <div class="row">
                     <label class="col-md-2">雙行小字字數：</label>
                     <div class="col-md-4">
-                        <input v-model="version_double_page_number">
+                        <input v-model="edition_item.version_double_page_number">
                     </div>
 
                     <label class="col-md-2">魚尾樣式：</label>
                     <div class="col-md-4">
-                        <select>
-                            <option>不詳</option>
+                        <select v-for="item in menu_items[10]">
+                            <option>{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -101,15 +101,15 @@
                 <div class="row">
                     <label class="col-md-2">邊欄樣式：</label>
                     <div class="col-md-4">
-                        <select>
-                            <option>不詳</option>
+                        <select v-for="item in menu_items[11]">
+                            <option>{{item.chinese_name}}</option>
                         </select>
                     </div>
 
                     <label class="col-md-2">分欄：</label>
                     <div class="col-md-4">
-                        <select>
-                            <option>不詳</option>
+                        <select v-for="item in menu_items[12]">
+                            <option>{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -117,14 +117,14 @@
                 <div class="row">
                     <label class="col-md-2">書口樣式：</label>
                     <div class="col-md-4">
-                        <select>
-                            <option>不詳</option>
+                        <select v-for="item in menu_items[13]">
+                            <option>{{item.chinese_name}}</option>
                         </select>
                     </div>
 
                     <label class="col-md-2">版心內容：</label>
                     <div class="col-md-4">
-                        <input v-model="version_banxin_content">
+                        <input v-model="edition_item.version_banxin_content">
                     </div>
                 </div>
 
@@ -132,13 +132,13 @@
                 <div class="row">
                     <label class="col-md-2">有無書耳：</label>
                     <div class="col-md-4">
-                        <input v-model="version_youshuwuer">
+                        <input v-model="edition_item.version_youshuwuer">
                     </div>
 
                     <label class="col-md-2">有無夾注：</label>
                     <div class="col-md-4">
-                        <select>
-                            <option>不詳</option>
+                        <select v-for="item in menu_items[14]">
+                            <option>{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -146,7 +146,7 @@
                 <div class="row">
                     <label class="col-md-2">卷數:</label>
                     <div class="col-md-4">
-                        <input v-model="version_volume">
+                        <input v-model="edition_item.version_volume">
                     </div>
                 </div>
             </div>
@@ -214,8 +214,8 @@
                         <label>責任行為：</label>
                     </div>
                     <div class="col-md-4">
-                        <select>
-                            <option>刻</option>
+                        <select v-for="item in menu_items[15]">
+                            <option>{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -235,7 +235,7 @@
                 <div class="row">
                     <label class="col-md-2">責任說明：</label>
                     <div class="col-md-4">
-                        <input v-model="explain">
+                        <input v-model="edition_item.edition_responsibility.explain">
                     </div>
                 </div>
 
@@ -251,41 +251,59 @@
 
 <script>
     export default{
+        created : function () {
+            this.get_edition_item();
+        },
+
+        watch:{
+            $route(){
+                this.$store.commit("get_edition_contents",this.edition_item);
+            }
+        },
 
         data() {
             return{
-                version_volume : '',
-                version_type : '',
-                version_age : '',
-                version_support : '',
-                version_binding : '',
-                version_frame_length : '',
-                version_frame_width : '',
-                version_format_length : '',
-                version_format_width : '',
-                version_paiji_content : '',
-                version_paiji_location : '',
-                version_half_page_line_number : '',
-                version_page_line_number : '',
-                version_yuwei : '',
-                version_double_page_number : '',
-                version_bianlan : '',
-                version_fenlan : '',
-                version_shukou : '',
-                version_banxin_content : '',
-                version_youshuwuer : '',
-                version_youwujiazhu  : '',
-                edition_responsibility : {
-                    location_id : '',
-                    person_id : '',
-                    begin_time : '',
-                    end_time : '',
-                    action : '',
-                    explain : '',
-                    confirm : '',
-                    type : '',
-                    level : 2,
-                }
+                menu_items :[],
+                edition_item : {
+                    version_volume : '',
+                    version_type : '',
+                    version_age : '',
+                    version_support : '',
+                    version_binding : '',
+                    version_frame_length : '',
+                    version_frame_width : '',
+                    version_format_length : '',
+                    version_format_width : '',
+                    version_paiji_content : '',
+                    version_paiji_location : '',
+                    version_half_page_line_number : '',
+                    version_page_line_number : '',
+                    version_yuwei : '',
+                    version_double_page_number : '',
+                    version_bianlan : '',
+                    version_fenlan : '',
+                    version_shukou : '',
+                    version_banxin_content : '',
+                    version_youshuwuer : '',
+                    version_youwujiazhu  : '',
+                    edition_responsibility : {
+                        location_id : '',
+                        person_id : '',
+                        begin_time : '',
+                        end_time : '',
+                        action : '',
+                        explain : '',
+                        confirm : '',
+                        type : '',
+                        level : 2,
+                    }
+                },
+            }
+        },
+
+        methods : {
+            get_edition_item() {
+                this.menu_items = this.$store.getters.get_menu_item
             }
         },
 
