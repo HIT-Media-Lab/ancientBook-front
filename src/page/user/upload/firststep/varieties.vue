@@ -10,21 +10,16 @@
                         <label>書名:</label>
                     </div>
                     <div class="col-md-4">
-                        <input id="bookName" v-model="bookName">
+                        <input id="bookName" v-model="type_name">
                     </div>
 
                     <label class="col-md-2">別名:</label>
                     <div class="col-md-4">
-                        <input placeholder="多值屬性用逗號隔開">
+                        <input v-model="type_other_name" placeholder="多值屬性用逗號隔開">
                     </div>
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">卷數:</label>
-                    <div class="col-md-4">
-                        <input>
-                    </div>
-
                     <label class="col-md-2">存佚類型:</label>
                     <div class="col-md-4">
                         <select>
@@ -48,14 +43,14 @@
 
                     <label class="col-md-2">英譯：</label>
                     <div class="col-md-4">
-                        <input>
+                        <input v-model="english">
                     </div>
                 </div>
 
                 <div class="row">
                     <label class="col-md-2">提要信息：</label>
                     <div class="col-md-4">
-                        <input id="ry-input-info">
+                        <input id="ry-input-info" v-model="type_summary">
                     </div>
                 </div>
 
@@ -85,11 +80,6 @@
 
             <div id="form-variety">
                 <div class="row">
-                    <label class="col-md-2">責任順序：</label>
-                    <div class="col-md-6">
-                        <input placeholder="多值屬性用逗號隔開">
-                    </div>
-
                     <div class="col-md-2">
                         <button id="btn-add-copy" class="ry-btn-add">添加</button>
                     </div>
@@ -168,7 +158,7 @@
                 <div class="row">
                     <label class="col-md-2">責任說明：</label>
                     <div class="col-md-4">
-                        <input id="ry-input-responsibility">
+                        <input v-model="explain" id="ry-input-responsibility">
                     </div>
                 </div>
             </div>
@@ -183,7 +173,31 @@
 
 <script>
     export default{
-        props: ['bookname'],
+        data() {
+            return{
+                type_name : '',
+                type_other_name : '',
+                english : '',
+                type_save : '',
+                type_level : '',
+                type_bu : '',
+                type_lei : '',
+                type_shu : '',
+                type_summary : '',
+                literature_standard_name : '',
+                varieties_responsibility : {
+                    location_id : '',
+                    person_id : '',
+                    begin_time : '',
+                    end_time : '',
+                    action : '',
+                    explain : '',
+                    confirm : '',
+                    type : '',
+                    level : 1,
+                }
+            }
+        }
     }
 </script>
 

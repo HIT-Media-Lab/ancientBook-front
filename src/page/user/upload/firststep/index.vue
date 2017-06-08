@@ -37,7 +37,6 @@
 
     </div>
 
-
 </template>
 
 <script>
@@ -62,6 +61,9 @@
         data() {
             return{
                 bookname : '書名',
+                pri : '',
+                standard_name : '',
+                name : '',
                 get_menu_items_obj : {},
                 menu_index : 4,
                 menu_items : [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],

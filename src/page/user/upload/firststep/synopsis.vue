@@ -13,3 +13,13 @@
         height: 100px;
     }
 </style>
+
+<script>
+    export default{
+        data() {
+            return{
+                summary : ''
+            }
+        }
+    }
+</script>

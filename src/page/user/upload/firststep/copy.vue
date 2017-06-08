@@ -7,7 +7,7 @@
                 <div class="row">
                     <label class="col-md-2">冊數：</label>
                     <div class="col-md-4">
-                        <input>
+                        <input v-model="duplicate_book_count">
                     </div>
 
                     <label class="col-md-2">完整性：</label>
@@ -25,6 +25,11 @@
                             <option>不詳</option>
                         </select>
                     </div>
+
+                    <label class="col-md-2">附件信息：</label>
+                    <div class="col-md-4">
+                        <input v-model="duplicate_attachment">
+                    </div>
                 </div>
             </div>
 
@@ -34,11 +39,6 @@
 
             <div id="form-copy">
                 <div class="row">
-                    <label class="col-md-2">責任順序：</label>
-                    <div class="col-md-6">
-                        <input placeholder="多值屬性用逗號隔開">
-                    </div>
-
                     <div class="col-md-2">
                         <button id="btn-add-copy" class="ry-btn-add">添加</button>
                     </div>
@@ -76,7 +76,7 @@
                         <label>責任者名稱:</label>
                     </div>
                     <div class="col-md-4">
-                        <input>
+                        <input v-model="person_id">
                     </div>
                 </div>
 
@@ -117,7 +117,7 @@
                 <div class="row">
                     <label class="col-md-2">責任說明：</label>
                     <div class="col-md-4">
-                        <input>
+                        <input v-model="explain">
                     </div>
                 </div>
             </div>
@@ -129,4 +129,30 @@
     </div>
 
 </template>
+
+<script>
+    export default{
+
+        data() {
+            return{
+                duplicate_book_count : '',
+                duplicate_level : '',
+                duplicate_complete : '',
+                duplicate_attachment : '',
+                copy_responsibility : {
+                    location_id : '',
+                    person_id : '',
+                    begin_time : '',
+                    end_time : '',
+                    action : '',
+                    explain : '',
+                    confirm : '',
+                    type : '',
+                    level : 4,
+                }
+            }
+        },
+
+    }
+</script>
 

@@ -14,7 +14,7 @@
 
                     <label class="col-md-2">印次：</label>
                     <div class="col-md-4">
-                        <input>
+                        <input v-model="printing_number">
                     </div>
                 </div>
             </div>
@@ -25,11 +25,6 @@
 
             <div id="form-impression">
                 <div class="row">
-                    <label class="col-md-2">責任順序：</label>
-                    <div class="col-md-6">
-                        <input placeholder="多值屬性用逗號隔開">
-                    </div>
-
                     <div class="col-md-2">
                         <button id="btn-add-copy" class="ry-btn-add">添加</button>
                     </div>
@@ -108,7 +103,7 @@
                 <div class="row">
                     <label class="col-md-2">責任說明：</label>
                     <div class="col-md-4">
-                        <input>
+                        <input v-model="explain">
                     </div>
                 </div>
             </div>
@@ -120,4 +115,28 @@
     </div>
 
 </template>
+
+<script>
+    export default{
+
+        data() {
+            return{
+                printing_type : '',
+                printing_number : '',
+                impression_responsibility : {
+                    location_id : '',
+                    person_id : '',
+                    begin_time : '',
+                    end_time : '',
+                    action : '',
+                    explain : '',
+                    confirm : '',
+                    type : '',
+                    level : 3,
+                }
+            }
+        },
+
+    }
+</script>
 
