@@ -3,10 +3,10 @@
  */
 export default {
     login_show(state){
-        state.show=!state.show
+        state.show =! state.show
     },
     change_token(state,token){
-       state.Token=token
+       state.Token = token
     },
     change_guest(state){
         state.ifLogin = 'guest'
