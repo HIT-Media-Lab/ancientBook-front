@@ -8,7 +8,7 @@
             <span class="zxw-bar-title">地名</span>
         </router-link>
 
-        <router-link to="/noumenon/character/letter/a/page/1">
+        <router-link to="/noumenon/character/letter/A/page/1">
             <span class="zxw-bar-title">人物</span>
         </router-link>
 

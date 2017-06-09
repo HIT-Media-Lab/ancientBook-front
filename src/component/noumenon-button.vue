@@ -1,7 +1,7 @@
 <template>
     <div class="zxwbtn-margin">
-        <button class="zxwnoumenom-button">编辑本体</button>
-        <button class="zxwnoumenom-button zxwbtn-padding">查看本体标记</button>
+        <button class="zxwnoumenom-button zxwnoumenom-button-margin">编辑本体</button>
+        <button class="zxwnoumenom-button zxwnoumenom-button-margin zxwbtn-padding">查看本体标记</button>
     </div>
 </template>
 
@@ -16,4 +16,5 @@
     .zxwbtn-padding{
         margin-right: 10px;
     }
+
 </style>

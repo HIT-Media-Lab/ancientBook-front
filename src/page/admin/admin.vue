@@ -38,45 +38,45 @@
 
         <!--创建用户的模态框-->
         <div class="dialogs" v-bind:show.sync="show_create">
-            <div class="dialog" v-bind:class="{ 'dialog-active': show_create }">
-                <div class="dialog-content">
+                <div class="dialog" v-bind:class="{ 'dialog-active': show_create }">
+                    <div class="dialog-content">
 
-                    <header class="dialog-header">
-                        <span class="dialog-title">普通用户创建</span>
-                        <span class="close rotate iconfont icon-close" @click="close_dialog()">×</span><!--关闭图标-->
-                    </header>
+                        <header class="dialog-header">
+                            <span class="dialog-title">普通用户创建</span>
+                            <span class="close rotate iconfont icon-close" @click="close_dialog()">×</span><!--关闭图标-->
+                        </header>
 
-                    <div class="dialog-body" >
-                        <div class="strap">
-                            <span class="span-motal">用户名：</span>
-                            <input type="text"  id="text1" class="input-motal" placeholder="输入2-10位中文、英文、数字" onfocus="this.placeholder=''" @blur="if_name('text1')"  v-model="user_name" v-bind:class="{warnBorder:this.is_active[0]}" >
+                        <div class="dialog-body" >
+                            <div class="strap">
+                                <span class="span-motal">用户名：</span>
+                                <input type="text"  id="text1" class="input-motal" placeholder="输入2-10位中文、英文、数字" onfocus="this.placeholder=''" @blur="if_name('text1')"  v-model="user_name" v-bind:class="{warnBorder:this.is_active[0]}" >
+                            </div>
+
+                            <div class="strap">
+                                <span class="span-motal">账号：</span>
+                                <input type="text"  id="text2" class="input-motal"  placeholder="输入8-10位数字、英文" onfocus="this.placeholder=''" @blur="if_account('text2')" v-model="account" v-bind:class="{warnBorder:this.is_active[1]}">
+                            </div>
+
+                            <div class="strap">
+                                <span class="span-motal">密码：</span>
+                                <input type="password"  id="text3" class="input-motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="if_pwd('text3')" v-model="pwd" v-bind:class="{warnBorder:this.is_active[2]}">
+                            </div>
+
+                            <div>
+                                <span class="span-motal">重复密码：</span>
+                                <input type="password" id="text4" class="input-motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="dup_pwd('text3','text4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.is_active[3]}" >
+                            </div>
                         </div>
-
-                        <div class="strap">
-                            <span class="span-motal">账号：</span>
-                            <input type="text"  id="text2" class="input-motal"  placeholder="输入8-10位数字、英文" onfocus="this.placeholder=''" @blur="if_account('text2')" v-model="account" v-bind:class="{warnBorder:this.is_active[1]}">
-                        </div>
-
-                        <div class="strap">
-                            <span class="span-motal">密码：</span>
-                            <input type="password"  id="text3" class="input-motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="if_pwd('text3')" v-model="pwd" v-bind:class="{warnBorder:this.is_active[2]}">
-                        </div>
-
-                        <div>
-                            <span class="span-motal">重复密码：</span>
-                            <input type="password" id="text4" class="input-motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="dup_pwd('text3','text4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.is_active[3]}" >
-                        </div>
+                        <footer class="dialog-footer" >
+                            <!--提示信息-->
+                            <p  class="warn-tip" v-model="tip">{{tip}}</p>
+                            <!--按钮-->
+                            <div>
+                                <button class="btn-general" style="margin-right: 10%" @click="close_dialog()" tabindex="-1">取消</button>
+                                <button class="btn-general "  @click="add_msg()" :disabled="add_if">创建</button>
+                            </div>
+                        </footer>
                     </div>
-                    <footer class="dialog-footer" >
-                        <!--提示信息-->
-                        <p  class="warn-tip" v-model="tip">{{tip}}</p>
-                        <!--按钮-->
-                        <div>
-                            <button class="btn-general" style="margin-right: 10%" @click="close_dialog()" tabindex="-1">取消</button>
-                            <button class="btn-general "  @click="add_msg()" :disabled="add_if">创建</button>
-                        </div>
-                    </footer>
-                </div>
             </div>
         </div>
 
