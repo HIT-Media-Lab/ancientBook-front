@@ -288,7 +288,7 @@
                 content_add_comment : '',
                 begin_add_comment : '',
                 end_add_comment : '',
-                pri : '',
+                pri : 0,
 
                 target_add_mark : '',
                 begin_add_mark : '',

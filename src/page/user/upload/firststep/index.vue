@@ -61,9 +61,11 @@
         data() {
             return{
                 bookname : '書名',
-                pri : '',
-                standard_name : '',
-                name : '',
+                upload_one_info : {
+                    pri : 0,
+                    standard_name : '',
+                    name : '',
+                },
                 get_menu_items_obj : {},
                 menu_index : 4,
                 menu_items : [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
@@ -71,7 +73,8 @@
         },
 
         created : function () {
-            this.get_menu_items()
+            this.get_menu_items();
+            this.put_into_vue();
         },
 
         mounted : function () {
@@ -111,9 +114,15 @@
                 console.log ("fail get menu items!");
             },
 
+            put_into_vue() {
+                this.$store.commit("get_menu_contents",this.menu_items);
+                this.$store.commit("get_upload1_info",this.upload_one_info);
+            },
+
             next_page() {
                 this.$router.push({path: '/user/upload2'});
             },
+
 
         }
     }

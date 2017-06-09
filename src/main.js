@@ -368,25 +368,24 @@ const router = new VueRouter({
                     path:'time/page/:pageId/letter/:letterId',
                     component:time,
                     name:'time'
-                },
-                {
-                    path:'build',
-                    component:build,
-                    name:'build'
-                },
-                {
-                    path:'chartwo',
-                    component:charactertwo,
-                    name:'charactertwo'
-                },
-                {
-                    path:'charthree',
-                    component:characterthree,
-                    name:'characterthree'
-                },
-
-            ]
+                }
+        ]},
+        {
+            path:'/build',
+            component:build,
+            name:'build'
         },
+        {
+            path:'/chartwo',
+            component:charactertwo,
+            name:'charactertwo'
+        },
+        {
+            path:'/charthree',
+            component:characterthree,
+            name:'characterthree'
+        },
+
         {
             path:'/bookstore',
             component:bookstore,

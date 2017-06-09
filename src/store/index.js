@@ -23,7 +23,18 @@ const store = new Vuex.Store({
             'build','charactertwo','characterthree'],
         acl_admin:['login','404','admin'],
         acl_guest:['login', '404'],
+<<<<<<< HEAD
         a:{}
+=======
+        menu_items:[],
+        copy_contents:{},
+        edition_contents:{},
+        impression_contents:{},
+        varieties_contents:{},
+        book_summary:'',
+        upload_file:{},
+        upload1_info:{},
+>>>>>>> a28adb81fbbadb296916015684d470ed03bca9d3
     },
     getters,
     mutations,
