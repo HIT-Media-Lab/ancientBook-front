@@ -35,20 +35,19 @@
                 <div class="dialog-body" slot="body">
                         <div class="input-ac-pwd">
                             <div class="input-ac">
-                                <span class="text1">账 号</span>
-                                <input type="text" class="username" v-model="account" @blur="check()" id="username" v-bind:class="{ warnborder: Active1 }">
+                                <input type="text" placeholder="请输入您的账号" class="user-name-input" v-model="account" @blur="check()" id="username" v-bind:class="{ warnborder: Active1 }">
                             </div>
                             <div class="input-password">
-                                <span class="text2">密 码</span>
-                                <input type="password" class="password" v-model="pwd" @blur="check()" id="pwd" v-bind:class="{ warnborder: Active2 }">
+                                <input type="password" placeholder="请输入您的密码" class="password-input" v-model="pwd" @blur="check()" id="pwd" v-bind:class="{ warnborder: Active2 }">
                             </div>
                             <div class="warning-login">
                                 <span id="warning" v-model="warning">{{warning}}</span>
                             </div>
                         </div>
                         <div class="code">
-                            <input type="text" placeholder="验证码" class="verification-code-input" v-model="v">
-                            <img src="" id="v_picture" class="code-img" onclick="this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
+                            <input type="text" placeholder="请输入验证码" class="verification-code-input" v-model="v">
+                            <img src="" id="v_picture" class="code-img" alt="验证码">
+                            <span class="cover-code" @click="coverCode()" >换一张</span>
                         </div>
                         <div class="auto">
                             <!--验证码获取位置-->
@@ -58,9 +57,9 @@
                         <button class="login-button" @click="login()" v-bind:disabled="disabled">登  录</button>
                 </div>
 
-                <footer class="dialog-footer" slot="footer">
-                    <!--<button class="btn" @click="close_dialog">关闭</button>-->
-                </footer>
+                <!--<footer class="dialog-footer" slot="footer">-->
+                    <!--&lt;!&ndash;<button class="btn" @click="close_dialog">关闭</button>&ndash;&gt;-->
+                <!--</footer>-->
             </login_modal>
         </div>
     </div>
@@ -169,10 +168,12 @@
                     }
                 }
             },
-
+            coverCode(){
+              document.getElementById("v_picture").src = this.src+'?'+(new Date()).getTime()
+            },
 
             create_v_picture(){
-                document.getElementById("v_picture").src='/ancient_books/get_v_picture.action';
+                document.getElementById("v_picture").src = '/ancient_books/get_v_picture.action';
             },
 
             auto() {
@@ -206,7 +207,7 @@
                 this.object.auto=this.auto;
                 console.log("全局token"+this.$store.getters.GetToken);
                 // 与后端对接的vue-resource
-                this.httpJson(this.login_url,'post',this.object,this.login_success,this.login_fail);
+                this.http_json(this.login_url,'post',this.object,this.login_success,this.login_fail);
             },
             //得到验证码图片
 //         GetCode() {
@@ -233,7 +234,7 @@
                 })
             }
 
-        },
+        }
     }
 </script>
 
@@ -325,79 +326,108 @@
         color:red;
         margin-top: 10px;
     }
-    .warnborder{
-        border:2px solid red;
-    }
-    .head{
-        margin-left: 615px;
-        margin-top: 120px;
-        width: 300px;
-        letter-spacing: 20px;
-        font-size: 20px;
-    }
-    .login{
-        background-color: #d9d9d9;
-        width: 300px;
-        height: 320px;
-        margin-left: 590px;
-        margin-top: 20px;
-    }
     .input-ac-pwd{
-        margin: 30px;
+        width: 320px;
+        margin-left: 10px;
         display: inline-block;
     }
     .input-ac{
         margin-bottom: 10px;
+        width: 320px;
     }
     .input-password{
         margin-top: 20px;
+        width: 320px;
     }
 
-    .text1{
+    .user-name-input{
+        /*margin-left: 20px;*/
+        font-size: 20px;
+        padding: 15px;
+        width: 320px;
+        height: 45px;
+        border: 1.5px solid grey;
+        /*border-color: #0f0f0f;*/
+
     }
-    .username{
-        margin-left: 20px;
-    }
-    .text2{
-        /*margin-left: -70px;*/
-    }
-    .password{
-        margin-left: 20px;
+    .password-input{
+        /*margin-left: 20px;*/
+        font-size: 20px;
+        padding: 15px;
+        height: 45px;
+        border: 1.5px solid grey;
+        width: 320px;
     }
     .code{
-        margin-top: -30px;
-        margin-left: 60px;
+        margin-top: -5px;
+        margin-left: 10px;
+
     }
     .verification-code-input{
-        height: 30px;
-        width: 76px;
+        border: 1.5px solid grey;
+        font-size: 20px;
+        height: 45px;
+        width: 160px;
         text-align: center;
+        vertical-align: text-bottom;
     }
     .code-img{
-        margin-left: 30px;
+        margin-left: 10px;
         width: 76px;
-        height: 30px;
-        vertical-align:bottom;
+        height: 45px;
         border: none;
+        vertical-align: text-bottom;
+    }
+    .cover-code{
+        margin-left: 10px;
     }
     .auto{
-        margin-left: 60px;
+        margin-left: 10px;
         margin-top: 10px;
     }
     .save-password-checkbox{
         vertical-align: text-bottom;
+        width: 20px;
+        height: 20px;
     }
     .save-password-word{
-        font-size: 12px;
+        font-size: 15px;
+        color: grey;
     }
     .login-button{
-
-        margin-top: 20px;
-        margin-left: 75px;
-        width: 160px;
-        height: 30px;
-        color: gray;
-        background-color: white;
+        margin-top: 8px;
+        margin-left: 10px;
+        width: 320px;
+        height: 45px;
+        color: white;
+        background-image: url("../assets/img/登录按钮.png");
+        background-repeat: no-repeat;
+        background-size: 100%;
         border: none;
+    }
+    .dialog-header {
+        margin-top: 5%;
+        background-image: url("../assets/img/弹框标题.png");
+        background-size:90%;
+    }
+
+    .dialog-title {
+        color: white;
+        font-size: 30px;
+        font-family: 楷体;
+        text-align: center;
+        width:6em;
+        margin-left: 110px;
+        font-weight: 200;
+        line-height: 1em;
+        display: inline-block;
+    }
+
+    .dialog-body {
+        padding: 2em;
+    }
+    /*错误提示红框*/
+    .warnborder {
+        border: 2px solid red;
     }
 </style>

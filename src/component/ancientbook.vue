@@ -1201,9 +1201,9 @@
         border: transparent;
     }
 
-    input{
-        border: none;
-    }
+    /*input{*/
+        /*border: none;*/
+    /*}*/
     
     .next-one{
         color: white;
