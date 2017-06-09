@@ -21,9 +21,9 @@
 </template>
 
 <style>
-    input{
-        background-color: transparent;
-    }
+    /*input{*/
+        /*background-color: transparent;*/
+    /*}*/
 
 
     #layer-head li{

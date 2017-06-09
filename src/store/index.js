@@ -23,6 +23,7 @@ const store = new Vuex.Store({
             'build','charactertwo','characterthree'],
         acl_admin:['login','404','admin'],
         acl_guest:['login', '404'],
+        a:{},
         menu_items:[],
         copy_contents:{},
         edition_contents:{},

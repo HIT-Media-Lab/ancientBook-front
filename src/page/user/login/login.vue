@@ -1,68 +1,47 @@
 <template>
     <!--登录组件-->
-    <div>
+    <div class="index-page">
         <div class="head">
-            <h3>古籍检索系统</h3>
+            <img src="../../../assets/img/logo.png" class="logo">
+            <h3 class="web-name">兰台古籍研究平台</h3>
         </div>
-        <div class="login">
-            <div class="input-ac-pwd">
-                <div class="input-ac">
-                    <span class="text1">账 号</span>
-                    <input type="text" class="username" v-model="account" @blur="check()" id="username" v-bind:class="{ warnborder: Active1 }">
-                </div>
-                <div class="input-password">
-                    <span class="text2">密 码</span>
-                    <input type="password" class="password" v-model="pwd" @blur="check()" id="pwd" v-bind:class="{ warnborder: Active2 }">
-                </div>
-                <div class="warning-login">
-                    <span id="warning" v-model="warning">{{warning}}</span>
-                </div>
-            </div>
-            <div class="code">
-                <input type="text" placeholder="验证码" class="verification-code-input" v-model="v">
-                <img src="" id="v_picture" class="code-img" onclick="this.src=this.src+'?'+(new Date()).getTime()" alt="验证码">
-            </div>
-            <div class="auto">
-                <!--验证码获取位置-->
-                <input type="checkbox" id="save-password"  class="save-password-checkbox" @click="auto()">
-                <span class="save-password-word" >自动登录</span>
-            </div>
-            <button class="login-button" @click="login()" v-bind:disabled="disabled">登  录</button>
-            <!--<button @click="Test">测试</button>-->
+        <div class="search-login">
+            <input placeholder=" 请输入你要搜索的内容" class="search-input-login" v-model="sort_box" v-on:keydown.enter="enter">
+            <button class="search-btn-login" @click="search">搜索</button>
+        </div>
+        <div class="drop-search-login" @click="hide" v-show="sort_box.length!=0">
+            <ul>
+                <li class="sort-box1-login">
+                    <router-link to="/search_index" >
+                        搜古籍：{{sort_box}}
+                    </router-link>
+                </li>
+                <li class="sort-box2-login">
+                    <router-link to="/search_index">
+                        搜本体：{{sort_box}}
+                    </router-link>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <button @click="test1()">有用户权限</button>
+            <button @click="test2()">有超级用户权限</button>
+            <button @click="test3()">没用权限</button>
         </div>
     </div>
 </template>
 
 <script type="text/javascript">
 import store from '../../../store'
-//mock模拟数据
-//let Mock=require('mockjs');
-//Mock.mock(
-//  '/ancient_books/login.action',{
-//        "name": "姜鸿川",
-//        "su|0-1": 0,
-//        "result|0-1": 1,
-//        "info": "密码错误或者账号不存在"
-//    }
-//);
  export default{
 
      data(){
          return{
+             sort_box:'',
              login_url: '/ancient_books/login.action',
              code_url: '/ancient_books/get_v_picture.action',
              judge_code_url: '/ancient_books/get_v_picture.action',
              autologin_url: '/ancient_books/get_user_info.action',
-             warning:'',
-             account: '',
-             pwd: '',
-             v: '',
-             Active1: false,
-             Active2: false,
-             disabled: false,
-             auto: false,
-             object: {},
-             show:''
          }
      },
 
@@ -80,41 +59,18 @@ import store from '../../../store'
 ////             this.show=this.$store.getters.GetShow;
 ////             alert(this.show)
 //         },
-
-
-         /**
-          *  账号 正则判断输入是否规范
-          */
-
-         check(){
-             this.disabled = false;
-             this.warning = "";
-             this.Active1=false;
-             this.Active2=false;
-             let success1=this.check_user(this.account);
-             let success2=this.check_pwd(this.pwd);
-             if (success1 && success2){
-                 this.warning= "";
-                 this.Active1=false;
-                 this.disabled=false;
-             } else{
-                 if (!success1) {
-                     this.warning = "用户名格式错误";
-                     this.Active1 = true;
-                     this.disabled = true;
-                 }else if(!success2){
-                     this.warning =  "密码格式错误";
-                     this.Active2=true;
-                     this.disabled=true;
-                 }
+         hide:function () {
+             this.sort_box = ''
+         },
+         enter:function () {
+             this.sort_box = '';
+             this.$router.push({path: '/search'});
+         },
+         search:function () {
+             if (this.sort_box != ''){
+                 this.$router.push({path: '/search'});
              }
          },
-
-
-         create_v_picture(){
-             document.getElementById("v_picture").src='/ancient_books/get_v_picture.action';
-         },
-
          // 网页启动得到token
          onload_token(){
              this.$http.get('/ancient_books/getToken.action').then(function (response) {
@@ -130,150 +86,69 @@ import store from '../../../store'
              })
          },
 
-         auto() {
-           this.auto = !this.auto
-         },
-         //登录的回调函数
-         login_success(response){
-             if (response.body.su == 1) {
-//                     this.$store.commit('change_admin');
-                 localStorage.setItem('user',JSON.stringify("admin"));
-                 this.$router.push({path: '/admin'});
-                 console.log("登录成功后的全局Token"+this.$store.getters.GetToken)
-             }
-             if (response.body.su == 0) {
-//                     this.$store.commit('change_user');
-                 localStorage.setItem('user',JSON.stringify("user"));
-                 this.$router.push({path: '/user'});
-             }
-         },
-         //登陆失败函数
-         login_fail(response){
-             document.getElementById("v_picture").src='/ancient_books/get_v_picture.action'+'?'+(new Date()).getTime();
-             alert(response.body.info);
-        },
-         //点击登录按钮执行函数
-         login() {
-             //给对象object内容赋值
-                 this.object.account=this.account;
-                 this.object.pwd=this.pwd;
-                 this.object.v=this.v;
-                 this.object.auto=this.auto;
-                 console.log("全局token"+this.$store.getters.GetToken);
-                 // 与后端对接的vue-resource
-                 this.httpJson(this.login_url,'post',this.object,this.login_success,this.login_fail);
-         },
-         //得到验证码图片
-//         GetCode() {
-//             this.$http.get(this.code_url).then(function () {
-//             })
-//         },
-         //自动登录
-         auto_login() {
-             this.$http.get(this. autologin_url).then(function (response) {
-                 if (response.body.result==1) {
-                     if (response.body.su == 1)
-//                         this.$store.commit('change_user');
-                         localStorage.setItem('user',JSON.stringify("user"));
-                         this.$router.push({path: '/user'});
-                     if (response.body.su = 0)
-                         localStorage.setItem('user',JSON.stringify("admin"));
-                         this.$router.push({path: '/admin'});
-                 }
-                 if (response.body.result==0)
-                     localStorage.setItem('user',JSON.stringify("guest"));
-                     this.$router.push({path: '/login'});
-             },function () {
-//                 alert("error")
-             })
-         }
+
+
      }
  }
 </script>
 
 <style>
-    .warning-login{
-        width: 300px;
-        height: 30px;
-        font-size:12px;
-        color:red;
-        margin-top: 10px;
+
+    .web-name{
+        display: inline;
     }
-    .warnborder{
-        border:2px solid red;
+    .logo{
+        width: 40px;
+        height: 60px;
     }
     .head{
         margin-left: 615px;
-        margin-top: 120px;
-        width: 300px;
-        letter-spacing: 20px;
+        margin-top: 150px;
+        width: 330px;
+        letter-spacing: 10px;
         font-size: 20px;
     }
-    .login{
-        background-color: #d9d9d9;
-        width: 300px;
-        height: 320px;
-        margin-left: 590px;
-        margin-top: 20px;
+    .search-login{
+        margin-left: 500px;
+        width: 600px;
+        height: 50px;
     }
-    .input-ac-pwd{
-        margin: 30px;
-        display: inline-block;
-    }
-    .input-ac{
-         margin-bottom: 10px;
-     }
-    .input-password{
-          margin-top: 20px;
-      }
-
-    .text1{
-    }
-    .username{
-        margin-left: 20px;
-    }
-    .text2{
-        /*margin-left: -70px;*/
-    }
-    .password{
-        margin-left: 20px;
-    }
-    .code{
-        margin-top: -30px;
-        margin-left: 60px;
-    }
-    .verification-code-input{
-        height: 30px;
-        width: 76px;
-        text-align: center;
+    .search-input-login{
+        padding-left: 20px;
+        background-image: url("../../../assets/img/搜索框大.png");
+        background-color: transparent;
+        background-size: 100%;
+        background-repeat: no-repeat;
         border: none;
+        width: 500px;
+        height: 50px;
     }
-    .code-img{
-        margin-left: 30px;
-        width: 76px;
-        height: 30px;
-        vertical-align:bottom;
+    .search-btn-login{
+        margin-left: -15px;
+        background-image: url("../../../assets/img/搜索按钮大.png");
+        background-repeat: no-repeat;
+        background-size: 105%;
+        height: 50px;
+        width: 100px;
         border: none;
+        background-color: transparent;
     }
-    .auto{
-        margin-left: 50px;
-        margin-top: 10px;
+    .drop-search-login{
+        margin-left: 500px;
+        margin-top: -5px;
+        padding-left: 20px;
+        width: 500px;
+        height: 90px;
+        background-repeat: no-repeat;
+        background-image: url("../../../assets/img/下拉框.png");
+        background-size: 100%;
     }
-    .save-password-checkbox{
-        vertical-align: text-bottom;
+    .sort-box1-login{
+        padding-top: 10px;
+        list-style: none;
     }
-    .save-password-word{
-        font-size: 12px;
+    .sort-box2-login{
+        padding-top: 10px;
+        list-style: none;
     }
-    .login-button{
-
-        margin-top: 20px;
-        margin-left: 75px;
-        width: 160px;
-        height: 30px;
-        color: gray;
-        background-color: white;
-        border: none;
-    }
-
 </style>
