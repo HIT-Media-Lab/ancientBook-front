@@ -7,14 +7,14 @@
                 <div class="row">
                     <label class="col-md-2">印刷類型：</label>
                     <div class="col-md-4">
-                        <select>
-                            <option>不詳</option>
+                        <select v-for="item in menu_items[16]">
+                            <option>{{item.chinese_name}}</option>
                         </select>
                     </div>
 
                     <label class="col-md-2">印次：</label>
                     <div class="col-md-4">
-                        <input>
+                        <input v-model="impression_item.printing_number">
                     </div>
                 </div>
             </div>
@@ -25,11 +25,6 @@
 
             <div id="form-impression">
                 <div class="row">
-                    <label class="col-md-2">責任順序：</label>
-                    <div class="col-md-6">
-                        <input placeholder="多值屬性用逗號隔開">
-                    </div>
-
                     <div class="col-md-2">
                         <button id="btn-add-copy" class="ry-btn-add">添加</button>
                     </div>
@@ -87,8 +82,8 @@
                         <label>責任行為：</label>
                     </div>
                     <div class="col-md-4">
-                        <select>
-                            <option>重印</option>
+                        <select v-for="item in menu_items[17]">
+                            <option>{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -108,7 +103,7 @@
                 <div class="row">
                     <label class="col-md-2">責任說明：</label>
                     <div class="col-md-4">
-                        <input>
+                        <input v-model="impression_item.impression_responsibility.explain">
                     </div>
                 </div>
             </div>
@@ -120,4 +115,46 @@
     </div>
 
 </template>
+
+<script>
+    export default{
+        created : function () {
+            this.get_impression_item();
+        },
+
+        watch:{
+            $route(){
+                this.$store.commit("get_impression_contents",this.impression_item);
+            }
+        },
+
+        data() {
+            return{
+                menu_items : [],
+                impression_item :{
+                    printing_type : '',
+                    printing_number : '',
+                    impression_responsibility : {
+                        location_id : '',
+                        person_id : '',
+                        begin_time : '',
+                        end_time : '',
+                        action : '',
+                        explain : '',
+                        confirm : '',
+                        type : '',
+                        level : 3,
+                    }
+                },
+            }
+        },
+
+        methods : {
+            get_impression_item() {
+                this.menu_items = this.$store.getters.get_menu_item
+            }
+        },
+
+    }
+</script>
 

@@ -22,6 +22,9 @@ export default {
     },
     ACL_guest:state => {
         return state.acl_guest
+    },
+    get_menu_item:state => {
+        return state.menu_items
     }
 
 

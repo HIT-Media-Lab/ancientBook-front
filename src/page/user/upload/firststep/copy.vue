@@ -7,13 +7,13 @@
                 <div class="row">
                     <label class="col-md-2">冊數：</label>
                     <div class="col-md-4">
-                        <input>
+                        <input v-model="copy_item.duplicate_book_count">
                     </div>
 
                     <label class="col-md-2">完整性：</label>
                     <div class="col-md-4">
-                        <select>
-                            <option>不詳</option>
+                        <select v-for="item in menu_items[18]">
+                            <option>{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -21,9 +21,14 @@
                 <div class="row">
                     <label class="col-md-2">品級：</label>
                     <div class="col-md-4">
-                        <select>
-                            <option>不詳</option>
+                        <select v-for="item in menu_items[19]">
+                            <option>{{item.chinese_name}}</option>
                         </select>
+                    </div>
+
+                    <label class="col-md-2">附件信息：</label>
+                    <div class="col-md-4">
+                        <input v-model="copy_item.duplicate_attachment">
                     </div>
                 </div>
             </div>
@@ -34,11 +39,6 @@
 
             <div id="form-copy">
                 <div class="row">
-                    <label class="col-md-2">責任順序：</label>
-                    <div class="col-md-6">
-                        <input placeholder="多值屬性用逗號隔開">
-                    </div>
-
                     <div class="col-md-2">
                         <button id="btn-add-copy" class="ry-btn-add">添加</button>
                     </div>
@@ -76,7 +76,7 @@
                         <label>責任者名稱:</label>
                     </div>
                     <div class="col-md-4">
-                        <input>
+                        <input v-model="copy_item.person_id">
                     </div>
                 </div>
 
@@ -96,8 +96,8 @@
                         <label>責任行為：</label>
                     </div>
                     <div class="col-md-4">
-                        <select>
-                            <option>重印</option>
+                        <select v-for="item in menu_items[20]">
+                            <option>{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                 <div class="row">
                     <label class="col-md-2">責任說明：</label>
                     <div class="col-md-4">
-                        <input>
+                        <input v-model="copy_item.copy_responsibility.explain">
                     </div>
                 </div>
             </div>
@@ -129,4 +129,48 @@
     </div>
 
 </template>
+
+<script>
+    export default{
+        created : function () {
+            this.get_copy_item();
+        },
+
+        watch:{
+            $route(){
+                this.$store.commit("get_copy_contents",this.copy_item);
+            }
+        },
+
+        data() {
+            return{
+                menu_items : [],
+                copy_item : {
+                    duplicate_book_count : '',
+                    duplicate_level : '',
+                    duplicate_complete : '',
+                    duplicate_attachment : '',
+                    copy_responsibility : {
+                        location_id : '',
+                        person_id : '',
+                        begin_time : '',
+                        end_time : '',
+                        action : '',
+                        explain : '',
+                        confirm : '',
+                        type : '',
+                        level : 4,
+                    }
+                }
+            }
+        },
+
+        methods : {
+            get_copy_item() {
+                this.menu_items = this.$store.getters.get_menu_item
+            }
+        }
+
+    }
+</script>
 
