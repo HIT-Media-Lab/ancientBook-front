@@ -42,7 +42,7 @@ export default{
 
 <style>
     .zxwcreate{
-        margin:140px 0 0 300px;
+        margin:100px 0 0 300px;
     }
 
     .zxwcreate-title{

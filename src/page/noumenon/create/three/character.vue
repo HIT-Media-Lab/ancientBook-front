@@ -35,21 +35,42 @@
         </div>
 
         <div class="zxw-character-row">
-            <label class="zxw-character-span">父：</label>
+            <label class="zxw-character-span">籍贯：</label>
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly>
-            <label class="zxw-character-span">母：</label>
+            <label class="zxw-character-span">父：</label>
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly>
         </div>
 
         <div class="zxw-character-row">
+            <label class="zxw-character-span">母：</label>
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly>
+            <label class="zxw-character-span">子：</label>
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly>
+        </div>
+
+        <div class="zxw-character-row">
+            <label class="zxw-character-span">女：</label>
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly>
             <label class="zxw-character-span">兄弟：</label>
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly>
+        </div>
+
+        <div class="zxw-character-row">
             <label class="zxw-character-span">姐妹：</label>
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly>
+            <label class="zxw-character-span">师：</label>
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly>
+        </div>
+
+        <div class="zxw-character-row">
+            <label class="zxw-character-span">学生：</label>
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly>
+            <label class="zxw-character-span">友：</label>
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly>
         </div>
 
         <div>
-            <label class="zxw-character-span">备注：</label>
+            <label class="zxw-character-span"></label>
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly>
         </div>
 

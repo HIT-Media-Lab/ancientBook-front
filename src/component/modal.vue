@@ -19,7 +19,7 @@
     export default {
         data(){
             return {
-                show_modal: false
+                //show_modal: false
             }
         },
         props: ['show_modal'],

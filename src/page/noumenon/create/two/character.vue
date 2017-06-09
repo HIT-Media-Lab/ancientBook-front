@@ -28,29 +28,50 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">出生时间：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="text" class="zxw-character-input zxw-character-input-margin" @focus="go()">
             <label class="zxw-character-span">死亡时间：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin">
         </div>
 
         <div class="zxw-character-row">
-            <label class="zxw-character-span">父：</label>
+            <label class="zxw-character-span">籍贯：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin">
-            <label class="zxw-character-span">母：</label>
+            <label class="zxw-character-span">父：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin">
         </div>
 
         <div class="zxw-character-row">
+            <label class="zxw-character-span">母：</label>
+            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <label class="zxw-character-span">子：</label>
+            <input type="text" class="zxw-character-input zxw-character-input-margin">
+        </div>
+
+        <div class="zxw-character-row">
+            <label class="zxw-character-span">女：</label>
+            <input type="text" class="zxw-character-input zxw-character-input-margin">
             <label class="zxw-character-span">兄弟：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin">
+        </div>
+
+        <div class="zxw-character-row">
             <label class="zxw-character-span">姐妹：</label>
+            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <label class="zxw-character-span">师：</label>
+            <input type="text" class="zxw-character-input zxw-character-input-margin">
+        </div>
+
+        <div class="zxw-character-row">
+            <label class="zxw-character-span">学生：</label>
+            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <label class="zxw-character-span">友：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin">
         </div>
 
         <div>
             <input type="text" class="zxw-character-input-head zxw-character-input" >
             <input type="text" class="zxw-character-input">
-            <button class="zxw-add-button">添加</button>
+            <button class="zxw-add-button" @click="go()">添加</button>
         </div>
 
         <router-link to="/chartwo">
@@ -60,23 +81,32 @@
         <router-link to="/charthree">
             <button class="zxw-nextbtn">下一步</button>
         </router-link>
+
+        <modal :show_modal="this.time_modal">
+            <time-modal slot="body"></time-modal>
+        </modal>
     </div>
 </template>
 
 <script>
     import createWord from '../../../../component/create-word.vue';
+    import modal from '../../../../component/modal.vue';
+    import timeModal from '../../../../component/time-modal.vue';
     export default{
         created(){
             this.prams = this.$route.name;
         },
 
         components:{
-            createWord
+            createWord,
+            modal,
+            timeModal
         },
 
         data(){
             return{
                 prams:'',
+                time_modal:false,
                 input_content:{
                     standard_name:'',
                     person_name:'',
@@ -94,6 +124,12 @@
                     location_id:''
                 },
                 person_relations:[]
+            }
+        },
+
+        methods:{
+            go(){
+                this.time_modal=true;
             }
         }
     }
