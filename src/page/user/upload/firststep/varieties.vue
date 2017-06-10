@@ -22,8 +22,8 @@
                 <div class="row">
                     <label class="col-md-2">存佚類型:</label>
                     <div class="col-md-4">
-                        <select v-for="item in menu_items[2]">
-                            <option>{{item.chinese_name}}</option>
+                        <select>
+                            <option v-for="item in menu_items[2]">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -31,8 +31,8 @@
                 <div class="row">
                     <label class="col-md-2">品種級別：</label>
                     <div class="col-md-4">
-                        <select v-for="item in menu_items[3]">
-                            <option>{{item.chinese_name}}</option>
+                        <select>
+                            <option v-for="item in menu_items[3]">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
@@ -53,17 +53,17 @@
                     <label class="col-md-2">標準分類：</label>
                     <div class="col-md-3">
                         <select id="ry-select-b">
-                            <option>經部</option>
+                            <option v-for="item in menu_items[4]">{{item.chinese_name}}</option>
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select id="ry-select-l">
-                            <option>總類</option>
+                        <select id="ry-select-l" @click="get_lei_item()">
+                            <option v-for="item in lei_items">{{item.chinese_name}}</option>
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <select id="ry-select-s">
-                            <option>石經之屬</option>
+                        <select id="ry-select-s" @click="get_shu_item()">
+                            <option v-for="item in shu_items">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -75,10 +75,10 @@
 
             <div id="form-variety">
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-2 float-right">
                         <button id="btn-add-copy" class="ry-btn-add">添加</button>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 float-right">
                         <button id="btn-delete-copy" class="ry-btn-del">刪除</button>
                     </div>
                 </div>
@@ -122,8 +122,8 @@
                         <label>責任者類型：</label>
                     </div>
                     <div class="col-md-4">
-                        <select v-for="item in menu_items[0]">
-                            <option>{{item.chinese_name}}</option>
+                        <select>
+                            <option v-for="item in menu_items[0]">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
@@ -132,8 +132,8 @@
                         <label>責任行為：</label>
                     </div>
                     <div class="col-md-4">
-                        <select v-for="item in menu_items[5]">
-                            <option>{{item.chinese_name}}</option>
+                        <select>
+                            <option v-for="item in menu_items[5]">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -144,8 +144,8 @@
                         <label>確定性：</label>
                     </div>
                     <div class="col-md-4">
-                        <select v-for="item in menu_items[1]">
-                            <option>{{item.chinese_name}}</option>
+                        <select>
+                            <option v-for="item in menu_items[1]">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -180,6 +180,10 @@
 
         data() {
             return{
+                lei_items_obj : {},
+                shu_items_obj : {},
+                lei_items : [],
+                shu_items : [],
                 menu_items : [],
                 varieties_item : {
                     type_name : '',
@@ -210,7 +214,65 @@
         methods : {
             get_varieties_item() {
                 this.menu_items = this.$store.getters.get_menu_item
-            }
+            },
+
+            get_lei_item() {
+                var bu = document.getElementById("ry-select-b");
+                var bu_index = bu.selectedIndex;
+                this.get_lei_items_obj.model_id = 8;
+                this.get_lei_items_obj.item_1_id = bu_index;
+                this.get_lei_items_obj.item_2_id = 0;
+                this.HttpJson ('/ancient_books/get_menu_items.action' , 'get' , this.get_lei_items_obj , this.success_get_lei_items , this.fail_get_lei_items);
+            },
+
+            success_get_lei_items(response) {
+                console.log ("success get lei items ");
+                //将后端数据显示在前端页面里
+                if (response.body.length === 0) {
+                    console.log ("没有返回数组！");
+                }
+                else {
+                    for (j = 0; j <= response.body.length-1; j++) {
+                        this.lei_items.push({
+                            chinese_name: response.body[j].chinese_name
+                        });
+                    }
+                }
+            },
+
+            fail_get_lei_items() {
+                console.log ("fail get lei items!");
+            },
+
+            get_shu_item() {
+                var bu = document.getElementById("ry-select-b");
+                var lei = document.getElementById("ry-select-l");
+                var bu_index = bu.selectedIndex;
+                var lei_index = lei.selectedIndex;
+                this.get_shu_items_obj.model_id = 8;
+                this.get_shu_items_obj.item_1_id = bu_index;
+                this.get_shu_items_obj.item_2_id = lei_index;
+                this.HttpJson ('/ancient_books/get_menu_items.action' , 'get' , this.get_shu_items_obj , this.success_get_shu_items , this.fail_get_shu_items);
+            },
+
+            success_get_shu_items(response) {
+                console.log ("success get shu items ");
+                //将后端数据显示在前端页面里
+                if (response.body.length === 0) {
+                    console.log ("没有返回数组！");
+                }
+                else {
+                    for (j = 0; j <= response.body.length-1; j++) {
+                        this.shu_items.push({
+                            chinese_name: response.body[j].chinese_name
+                        });
+                    }
+                }
+            },
+
+            fail_get_shu_items() {
+                console.log ("fail get shu items!");
+            },
         },
     }
 </script>

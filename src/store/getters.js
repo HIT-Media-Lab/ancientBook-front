@@ -25,7 +25,10 @@ export default {
     },
     get_menu_item:state => {
         return state.menu_items
-    }
+    },
+    get_varieties_item:state => {
+        return state.varieties_contents
+    },
 
 
 }

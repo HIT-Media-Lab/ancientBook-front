@@ -12,8 +12,8 @@
 
                     <label class="col-md-2">完整性：</label>
                     <div class="col-md-4">
-                        <select v-for="item in menu_items[18]">
-                            <option>{{item.chinese_name}}</option>
+                        <select>
+                            <option v-for="item in menu_items[18]">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -21,8 +21,8 @@
                 <div class="row">
                     <label class="col-md-2">品級：</label>
                     <div class="col-md-4">
-                        <select v-for="item in menu_items[19]">
-                            <option>{{item.chinese_name}}</option>
+                        <select>
+                            <option v-for="item in menu_items[19]">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
@@ -39,10 +39,10 @@
 
             <div id="form-copy">
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-2 float-right">
                         <button id="btn-add-copy" class="ry-btn-add">添加</button>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 float-right">
                         <button id="btn-delete-copy" class="ry-btn-del">刪除</button>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                     </div>
                     <div class="col-md-4">
                         <select>
-                            <option>不詳</option>
+                            <option v-for="item in menu_items[0]">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
@@ -96,8 +96,8 @@
                         <label>責任行為：</label>
                     </div>
                     <div class="col-md-4">
-                        <select v-for="item in menu_items[20]">
-                            <option>{{item.chinese_name}}</option>
+                        <select>
+                            <option v-for="item in menu_items[20]">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                     </div>
                     <div class="col-md-4">
                         <select>
-                            <option>不詳</option>
+                            <option v-for="item in menu_items[1]">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>

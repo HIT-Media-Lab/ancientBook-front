@@ -125,6 +125,7 @@
 
     .ry-upload-two input{
         border: none;
+        background-color: transparent;
     }
 
     .ry-upload-two button{
