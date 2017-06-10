@@ -59,18 +59,6 @@ export default{
         margin: 60px 0 120px 350px;
     }
 
-    .zxw-select{
-        font-size: 12px;
-        border: 2px solid black;
-        border-top:none;
-        border-left: none;
-        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-        -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    }
-
     .zxw-nextbtn{
         background-image: url("../../../assets/img/create-next-step.png");
         border-style: none;
@@ -94,10 +82,9 @@ export default{
     }
 
     .zxw-select{
-        background-image: url("../../../assets/img/select-border.png");
+        border:2px solid;
         width:100px;
         height:25px;
-
     }
 
 </style>

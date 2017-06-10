@@ -74,7 +74,7 @@
             <button class="zxw-add-button" @click="go()">添加</button>
         </div>
 
-        <router-link to="/chartwo">
+        <router-link to="/build">
             <button class="zxw-prebtn zxw-prebtn-margin">上一步</button>
         </router-link>
 
@@ -82,9 +82,7 @@
             <button class="zxw-nextbtn">下一步</button>
         </router-link>
 
-        <modal :show_modal="this.time_modal">
-            <time-modal slot="body"></time-modal>
-        </modal>
+        <time-modal :time_modal="this.time_modal1"></time-modal>
     </div>
 </template>
 
@@ -106,7 +104,7 @@
         data(){
             return{
                 prams:'',
-                time_modal:false,
+                time_modal1:false,
                 input_content:{
                     standard_name:'',
                     person_name:'',
@@ -129,7 +127,7 @@
 
         methods:{
             go(){
-                this.time_modal=true;
+                this.time_modal1=true;
             }
         }
     }
@@ -150,6 +148,7 @@
     /*输入框样式*/
     .zxw-character-input{
         border: 2px solid black;
+        background-color: transparent;
         height:30px;
         width:220px;
     }
