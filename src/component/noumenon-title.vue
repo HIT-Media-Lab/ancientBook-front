@@ -17,10 +17,11 @@
         background-repeat:no-repeat;
         background-position: bottom;
         padding-bottom: 10px;
+        width:950px;
     }
     .zxwnoumenom-title{
         font-size: 14px;
-        margin:65px 0 0 37px;
+        margin:65px 0 5px 0;
         display:inline-block;
     }
 

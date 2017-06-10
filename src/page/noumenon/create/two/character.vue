@@ -6,7 +6,7 @@
 
         <p class="zxw-create-character">本体名称：人名（出生时间）</p>
         <div class="zxw-character-row">
-            <label class="zxw-character-span">人名：</label>
+            <label class="zxw-character-span zxw-must-write">人名：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin">
             <label class="zxw-character-span">英译：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin">
@@ -27,9 +27,9 @@
         </div>
 
         <div class="zxw-character-row">
-            <label class="zxw-character-span">出生时间：</label>
+            <label class="zxw-character-span zxw-must-write">出生时间：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin" @focus="go()">
-            <label class="zxw-character-span">死亡时间：</label>
+            <label class="zxw-character-span zxw-must-write">死亡时间：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin">
         </div>
 
@@ -70,16 +70,16 @@
 
         <div>
             <input type="text" class="zxw-character-input-head zxw-character-input" >
-            <input type="text" class="zxw-character-input">
+            <input type="text" class="zxw-character-input" maxlength="20">
             <button class="zxw-add-button" @click="go()">添加</button>
         </div>
 
         <router-link to="/build">
-            <button class="zxw-prebtn zxw-prebtn-margin">上一步</button>
+            <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length">上一步</button>
         </router-link>
 
         <router-link to="/charthree">
-            <button class="zxw-nextbtn">下一步</button>
+            <button class="zxw-nextbtn zxw-nextbtn-length">下一步</button>
         </router-link>
 
         <time-modal :time_modal="this.time_modal1"></time-modal>
@@ -170,9 +170,15 @@
         width:100px;
     }
 
+    .zxw-must-write{
+        color:#a50000;
+    }
+
     /*添加按钮的间距*/
     .zxw-add-button{
         background-image: url("../../../../assets/img/add-button.png");
+        background-color: transparent;
+        border: none;
         width:100px;
         height:43px;
         color:gainsboro;

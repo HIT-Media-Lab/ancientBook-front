@@ -75,10 +75,10 @@
         </div>
 
         <router-link to="/chartwo">
-            <button class="zxw-prebtn zxw-prebtn-margin">上一步</button>
+            <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length">上一步</button>
         </router-link>
 
-        <button class="zxw-nextbtn" @click="open_confirm()">确认</button>
+        <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()">确认</button>
     </div>
 </template>
 

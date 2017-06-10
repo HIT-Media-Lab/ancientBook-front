@@ -15,7 +15,7 @@
             </select>
         </div>
         <router-link to="/chartwo">
-            <button class="zxw-nextbtn zxw-nextbtn-margin">下一步</button>
+            <button class="zxw-nextbtn zxw-nextbtn-margin zxw-nextbtn-length">下一步</button>
         </router-link>
     </div>
 </template>
@@ -61,28 +61,44 @@ export default{
 
     .zxw-nextbtn{
         background-image: url("../../../assets/img/create-next-step.png");
+        background-color: transparent;
         border-style: none;
-        width:125px;
-        height:55px;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
         color:gainsboro;
     }
 
     .zxw-nextbtn-margin{
         margin:0 0 0 400px;
     }
-    .zxw-prebtn{
-        background-image: url("../../../assets/img/create-pre-step.png");
-        border-style: none;
+
+    .zxw-nextbtn-length{
         width:125px;
         height:55px;
+    }
+    .zxw-prebtn{
+        background-image: url("../../../assets/img/create-pre-step.png");
+        background-color: transparent;
+        border-style: none;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
         color:black;
     }
     .zxw-prebtn-margin{
+
         margin:0 15px 0 620px;
+    }
+
+    .zxw-prebtn-length{
+        width:125px;
+        height:55px;
     }
 
     .zxw-select{
         border:2px solid;
+        background-color: transparent;
         width:100px;
         height:25px;
     }

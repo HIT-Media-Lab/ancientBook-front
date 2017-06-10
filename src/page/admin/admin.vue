@@ -1,137 +1,120 @@
 <!--定义组件-->
-<template >
-    <div  class="table-container">
-        <!--正中间组件-->
-        <div>
+<template>
+    <div>
+        <noumenon_title  class="zxw-admin-title" :title="this.title">
+            <button slot="children" class="zxwnoumenom-button zxwnoumenom-button-margin zxw-btn-admin"  @click="open_dialog()">创建用户</button>
+        </noumenon_title>
 
-            <!--管理用户文字图片-->
-            <div class="user-text">
-                <img class="image" src="../../assets/img/毛笔.png" height="25" width="25"/>
-                <span>管理用户</span>
-            </div>
-
-            <!--创建用户按钮-->
-            <input type="button" class="btn-general create-user" value="创建用户"  @click="open_dialog()">
-
-            <!--用户信息表格-->
-            <table class="table-box">
-                <!--表格第一行表头-->
+        <!--用户信息表格-->
+        <table class="table table-bordered zxw-table-box">
+                <thead>
                 <tr>
                     <th>用户名</th>
                     <th >账号</th>
                     <th>创建时间</th>
                     <th></th>
                 </tr>
+                </thead>
 
-                <!--显示用户信息-->
+            <tbody>
                 <tr v-for="(item,index) in user_data"> <!--v-for循环数据里的数组数据-->
                     <td>{{item.user_name }}</td>
                     <td>{{item.account}}</td>
                     <td>{{item.time}}</td>
                     <td>
-                        <input type="button" class="btn-general" value="修改" @click="open_motal(index)">    <!--v-on click 依据index实现删除功能（格式）-->
-                        <input type="button" class="btn-general" value="删除" @click="delete_users(index)">
+                        <img src="../../assets/img/admin-icon/change-icon.png" width="20px" height="20px">
+                        <button class="zxw-btn-general" @click="open_motal(index)">修改</button>
+                        <img src="../../assets/img/admin-icon/delete-icon.png" width="18px" height="18px">
+                        <button class="zxw-btn-general"  @click="delete_users(index)">删除</button>
                     </td>
                 </tr>
-            </table>
-        </div>
+            </tbody>
+        </table>
 
-        <!--创建用户的模态框-->
-        <div class="dialogs" v-bind:show.sync="show_create">
-                <div class="dialog" v-bind:class="{ 'dialog-active': show_create }">
-                    <div class="dialog-content">
-
-                        <header class="dialog-header">
-                            <span class="dialog-title">普通用户创建</span>
-                            <span class="close rotate iconfont icon-close" @click="close_dialog()">×</span><!--关闭图标-->
-                        </header>
-
-                        <div class="dialog-body" >
-                            <div class="strap">
-                                <span class="span-motal">用户名：</span>
-                                <input type="text"  id="text1" class="input-motal" placeholder="输入2-10位中文、英文、数字" onfocus="this.placeholder=''" @blur="if_name('text1')"  v-model="user_name" v-bind:class="{warnBorder:this.is_active[0]}" >
-                            </div>
-
-                            <div class="strap">
-                                <span class="span-motal">账号：</span>
-                                <input type="text"  id="text2" class="input-motal"  placeholder="输入8-10位数字、英文" onfocus="this.placeholder=''" @blur="if_account('text2')" v-model="account" v-bind:class="{warnBorder:this.is_active[1]}">
-                            </div>
-
-                            <div class="strap">
-                                <span class="span-motal">密码：</span>
-                                <input type="password"  id="text3" class="input-motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="if_pwd('text3')" v-model="pwd" v-bind:class="{warnBorder:this.is_active[2]}">
-                            </div>
-
-                            <div>
-                                <span class="span-motal">重复密码：</span>
-                                <input type="password" id="text4" class="input-motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="dup_pwd('text3','text4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.is_active[3]}" >
-                            </div>
-                        </div>
-                        <footer class="dialog-footer" >
-                            <!--提示信息-->
-                            <p  class="warn-tip" v-model="tip">{{tip}}</p>
-                            <!--按钮-->
-                            <div>
-                                <button class="btn-general" style="margin-right: 10%" @click="close_dialog()" tabindex="-1">取消</button>
-                                <button class="btn-general "  @click="add_msg()" :disabled="add_if">创建</button>
-                            </div>
-                        </footer>
-                    </div>
+        <modal :show_modal="this.show_create" v-on:fireclose="close_dialog()">
+            <div slot="header" class="zxw-time-header">
+                <span>创建用户</span>
             </div>
-        </div>
 
-        <!--修改的模态框-->
-        <div class="dialogs" v-bind:show.sync="show_change">
-            <div class="dialog" v-bind:class="{ 'dialog-active': show_change }">
-                <div class="dialog-content">
+            <div slot="body" class="zxw-modal-body">
+                <div class="zxw-modal-margin">
+                    <label class="zxw-modal-label">账号：</label>
+                    <input type="text" id="text2" class="zxw-input-text" placeholder="输入8-10位数字、英文" onfocus="this.placeholder=''" @blur="if_account('text2')" v-model="account" v-bind:class="{warnBorder:this.is_active[1]}">
+                </div>
 
-                    <header class="dialog-header">
-                        <span class="dialog-title">普通用户修改</span>
-                        <span class="close rotate iconfont icon-close" @click="close_motal()">×</span><!--关闭图标-->
-                    </header>
+                <div class="zxw-modal-margin">
+                    <label class="zxw-modal-label">用户名：</label>
+                    <input type="text" id="text1" class="zxw-input-text" placeholder="输入2-10位中文、英文、数字" onfocus="this.placeholder=''" @blur="if_name('text1')"  v-model="user_name" v-bind:class="{warnBorder:this.is_active[0]}" >
+                </div>
 
-                    <div class="dialog-body">
-                        <div class="strap">
-                            <span class="span-motal">账号:</span>
-                            <input type="text" name="user_name" id="chan1" class="input-motal" v-model="back_account" readonly style="color: dimgrey;font-size: 15px;font-weight: 400;border-color: transparent;" tabindex="-1">
-                        </div>
+                <div class="zxw-modal-margin">
+                    <label class="zxw-modal-label">密码：</label>
+                    <input type="password" id="text3" class="zxw-input-text" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="if_pwd('text3')" v-model="pwd" v-bind:class="{warnBorder:this.is_active[2]}">
+                </div>
 
-                        <div class="strap">
-                            <span class="span-motal">用户名:</span>
-                            <input type="text"  id="chan2" class="input-motal" v-model="back_username"  @change="if_name('chan2')" v-bind:class="{warnBorder:this.is_active[0]}">
-                        </div >
-
-                        <div class="strap">
-                            <span class="span-motal">新密码:</span>
-                            <input type="password"  id="chan3" class="input-motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="if_pwd('chan3')" v-model="pwd"  v-bind:class="{warnBorder:this.is_active[2]}" >
-                        </div>
-
-                        <div class="strap">
-                            <span class="span-motal">重复密码:</span>
-                            <input type="password" id="chan4" class="input-motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="dup_pwd('chan3','chan4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.is_active[3]}">
-                        </div>
-                    </div>
-
-                    <footer class="dialog-footer" slot="footer">
-                        <!--提示信息-->
-                        <span class="warn-tip" v-model="tip">{{tip}}</span>
-                        <div>
-                            <button class="btn-general" style="margin-right: 10%" @click="close_motal()" tabindex="-1">取消</button>
-                            <button class="btn-general" @click="confirm_change()" :disabled="add_if">修改</button>
-                        </div>
-                    </footer>
+                <div class="zxw-modal-margin">
+                    <label class="zxw-modal-label">重复密码：</label>
+                    <input type="password" id="text4" class="zxw-input-text" placeholder="重复密码" onfocus="this.placeholder=''" @blur="dup_pwd('text3','text4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.is_active[3]}" >
                 </div>
             </div>
-        </div>
+
+            <div slot="footer" class="zxw-modal-footer">
+                <p  class="warn-tip" v-model="tip">{{tip}}</p>
+                <div class="zxw-admin-modal-footerbtn">
+                    <button class="zxw-prebtn zxw-modal-btn-margin"  @click="close_dialog()" tabindex="-1">取消</button>
+                    <button class="zxw-nextbtn zxw-modal-btn-margin" @click="add_msg()" :disabled="add_if">创建</button>
+                </div>
+
+            </div>
+        </modal>
+
+
+        <modal :show_modal="this.show_change" v-on:fireclose="close_motal()">
+            <div slot="header" class="zxw-time-header">
+                <span>编辑用户</span>
+            </div>
+
+            <div slot="body" class="zxw-modal-body">
+                <div class="zxw-modal-margin">
+                    <label class="zxw-modal-label">账号：</label>
+                    <input type="text" name="user_name" id="chan1" class="zxw-input-account" v-model="back_account" readonly  tabindex="-1">
+                </div>
+
+                <div class="zxw-modal-margin">
+                    <label class="zxw-modal-label">用户名：</label>
+                    <input type="text"  id="chan2" class="zxw-input-text" v-model="back_username"  @change="if_name('chan2')" v-bind:class="{warnBorder:this.is_active[0]}">
+                </div>
+
+                <div class="zxw-modal-margin">
+                    <label class="zxw-modal-label">新密码：</label>
+                    <input type="password"  id="chan3" class="zxw-input-text" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="if_pwd('chan3')" v-model="pwd"  v-bind:class="{warnBorder:this.is_active[2]}" >
+                </div>
+
+                <div class="zxw-modal-margin">
+                    <label class="zxw-modal-label">重复密码：</label>
+                    <input type="password" id="chan4" class="zxw-input-text" placeholder="重复密码" onfocus="this.placeholder=''" @blur="dup_pwd('chan3','chan4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.is_active[3]}">
+                </div>
+            </div>
+
+            <div slot="footer" class="zxw-modal-footer">
+                <p  class="warn-tip" v-model="tip">{{tip}}</p>
+                <div class="zxw-admin-modal-footerbtn">
+                    <button class="zxw-prebtn zxw-modal-btn-margin"  @click="close_motal()" tabindex="-1">取消</button>
+                    <button class="zxw-nextbtn zxw-modal-btn-margin" @click="confirm_change()" :disabled="add_if">修改</button>
+                </div>
+
+            </div>
+        </modal>
 
         <!--翻页组件-->
         <paginator :max=this.max_page></paginator>
+
     </div>
 </template>
 
 
 <script type="text/javascript">
-    let Mock = require('mockjs');
+    /*let Mock = require('mockjs');
 
     //显示用户列表
     Mock.mock('/ancient_books/get_user_list.action?page=1','get',{
@@ -154,9 +137,11 @@
             'time':'@DATETIME("yyyy-MM-dd HH:mm:ss")'
         }],
         'max_page|1-100':100
-    });
+    });*/
 
     import paginator from "../../component/paginator.vue";
+    import noumenon_title from "../../component/noumenon-title.vue";
+    import modal from "../../component/modal.vue";
     export default{
         watch:{
             $route(){
@@ -164,9 +149,14 @@
             }
         },
 
-        components:{ paginator },
+        components:{
+            paginator,
+            noumenon_title,
+            modal
+        },
         data(){
             return {
+                title:'用户管理',
                 show_create: false,
                 show_change: false,
 
@@ -209,6 +199,24 @@
         },
 
         methods: {
+            //创建用户的模态框 系列函数
+            open_dialog(){
+                this.show_create = true;
+            },
+
+            close_dialog() {
+                this.show_create = false;
+                this.user_name="";
+                this.account="";
+                this.pwd="";
+                this.confirm_pwd="";
+                this.tip="";
+                this.is_active[0]=false;
+                this.is_active[1]=false;
+                this.is_active[2]=false;
+                this.is_active[3]=false;
+            },
+
             // get数据显示用户列表 成功地回调函数
             success_get(response){
                 console.log("success get users ");
@@ -256,23 +264,8 @@
                 this.http_json(this.add_url, 'post', this.add_user, this.success_add, this.fail_add);
             },
 
-            //创建用户的模态框 系列函数
-            open_dialog(){
-                this.show_create = true;
-            },
 
-            close_dialog() {
-                this.show_create = false;
-                this.user_name="";
-                this.account="";
-                this.pwd="";
-                this.confirm_pwd="";
-                this.tip="";
-                this.is_active[0]=false;
-                this.is_active[1]=false;
-                this.is_active[2]=false;
-                this.is_active[3]=false;
-            },
+
 
             //用户名判断合法
             if_name(tag1){
@@ -503,72 +496,91 @@
 
 
 <style>
-    /*组件整个居中显示*/
-    .table-container{
-        padding-top: 60px;
-        margin:auto;
-        width: 52%;
-        height:10%;
+    .zxw-admin-title{
+        margin:20px 0 20px 330px;
     }
+
+    .zxw-btn-admin{
+        float:right;
+    }
+
+    thead tr th{
+        background-color: #a50000;
+        color: gainsboro;
+        text-align: center;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f7e8d6;
+    }
+
 
     /*管理用户表格样式*/
-    .table-box{
-        background-color: #f7e1b5;  /*背景颜色*/
-        border-style: solid;    /*表格整体边框线条样式*/
-        border-color: sienna ;  /*表格边框颜色*/
-        border-collapse: collapse;  /*内外边框重合*/
-        vertical-align: middle;   /*表格边框内容居中*/
-        width:900px;
-        margin:auto;
+    .zxw-table-box {
+        width:940px;
         table-layout: fixed;    /*表格每个宽度确定*/
-
+        text-align: center;
+        margin:0 0 0 330px;
     }
 
-    /*表格内部边框样式*/
-    th,td{
-        border-style: solid;    /*内边框线式*/
-        border-color: sienna;  /*内边框的颜色*/
-        text-align: center; /*内容居中*/
-        height: 35px;/*表格宽度*/
-        /*字体设置*/
-        font-family: 楷体;
-        color: dimgrey;
-        font-size: 20px;
+    .zxw-btn-general{
+        background-color: transparent;
+        border: none;
+        color:#a50000;
+        margin:0 20px 0 0;
     }
 
-    /*用户管理字与图片*/
-    .user-text{
-        text-align: left;
-
-        /*字体设置*/
-        font-family: 楷体;
-        font-size: 20px;
-        font-weight: bold;
-        color: dimgrey;
+    .zxw-modal-body{
+        margin:50px 0 0 0;
     }
 
-    /*按钮样式*/
-    .btn-general{
-        background-color:sienna;   /*按钮填充颜色*/
-        color: #F2F2F2; /*按钮边框颜色*/
-        width:65px;
-        height: 25px;
-        border-radius: 8px;
-        border-color: transparent;
-        margin:5px 0 5px 0;
+    .zxw-modal-margin{
+        margin:0 0 20px 0;
     }
 
-    /*创建按钮的位置*/
-    .create-user{
-        margin-top: 1%;
-        margin-bottom: 1%;
+    .zxw-modal-label{
+        margin:0 10px 0 20px;
+        text-align: right;
+        width:100px;
+        font-size: 15px;
     }
 
-
-    /*模态框输入框之间间距*/
-    .strap{
-        padding-bottom: 0.5em;
+    .zxw-input-text{
+        width:220px;
+        height:28px;
+        background-color: transparent;
+        border: 2px solid black;
+        text-align: center;
     }
+
+    .zxw-admin-modal-footerbtn{
+        margin:0 0 0 180px;
+    }
+    .zxw-modal-btn-margin{
+        width:100px;
+        height:40px;
+        margin:0 5px 0 0;
+    }
+
+    .warn-tip{
+        color: #a50000;
+        font-size: 14px;
+        text-align:center;
+        margin:10px 0 10px 0;
+    }
+
+    .warnBorder {
+        border: 2px solid #a50000;
+    }
+
+    .zxw-input-account{
+        width:220px;
+        height:28px;
+        text-align: center;
+        background: transparent;
+        border: none;
+    }
+
 
     /*.dialog {*/
         /*width: 480px;*/
@@ -707,17 +719,10 @@
     /*}*/
 
     /*!*错误提示*!*/
-    /*.warn-tip{*/
-        /*color: #ff0000;*/
-        /*font-size: 18px;*/
-        /*text-align:center;*/
-        /*font-family: 楷体;*/
-    /*}*/
+    /**/
 
     /*!*错误提示红框*!*/
-    /*.warnBorder {*/
-        /*border: 2px solid red;*/
-    /*}*/
+    /**/
 
 
 
