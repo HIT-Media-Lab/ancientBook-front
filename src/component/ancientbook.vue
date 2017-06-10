@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="ry-ancient-book">
 
         <!--目录-->
         <div class="width1000 center">
@@ -1197,13 +1197,13 @@
         width: 1000px;
     }
 
-    button{
+    .ry-ancient-book button{
         border: transparent;
     }
 
-    /*input{*/
-        /*border: none;*/
-    /*}*/
+    .ry-ancient-book input{
+        border: none;
+    }
     
     .next-one{
         color: white;

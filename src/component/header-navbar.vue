@@ -1,4 +1,4 @@
-<template xmlns:v-on="http://www.w3.org/1999/xhtml">
+<template>
     <!--顶端固定不变的导航条-->
     <div id="store" class="store">
         <div class="head-bar">
@@ -8,7 +8,7 @@
             <button class="noumenon-store">
                 <router-link to="/noumenon" style="color: white">本体库</router-link>
             </button>
-            <input placeholder=" 请输入你要搜索的内容" class="search-input" v-model="sort_box" v-on:keydown.enter="enter">
+            <input placeholder=" 请输入关键字搜索" class="search-input" v-model="sort_box" v-on:keydown.enter="enter">
             <button class="search-btn" @click="search">搜索</button>
             <img src="../assets/img/头像.png" class="user-img" @click="show_login">
             <span class="user-name" @click="show_login">{{name}}</span>
@@ -16,12 +16,12 @@
         <div class="down-box" @click="hide" v-show="sort_box.length!=0">
             <ul>
                 <li class="sort-box1">
-                    <router-link to="/search_index" >
+                    <router-link to="/search_index" style="color: #0f0f0f">
                         搜古籍：{{sort_box}}
                     </router-link>
                 </li>
                 <li class="sort-box2">
-                    <router-link to="/search_index">
+                    <router-link to="/search_index" style="color: #0f0f0f">
                         搜本体：{{sort_box}}
                     </router-link>
                 </li>
@@ -130,17 +130,6 @@
                     this.$router.push({path: '/search'});
                 }
             },
-            test1(){
-                localStorage.setItem('user',JSON.stringify("user"));
-            },
-            test2(){
-                localStorage.setItem('user',JSON.stringify("admin"));
-            },
-            test3(){
-                localStorage.setItem('user',JSON.stringify("guest"));
-            },
-
-
             /**
              *  账号 正则判断输入是否规范
              */
@@ -182,13 +171,11 @@
             //登录的回调函数
             login_success(response){
                 if (response.body.su == 1) {
-//                     this.$store.commit('change_admin');
                     localStorage.setItem('user',JSON.stringify("admin"));
                     this.$router.push({path: '/admin'});
                     console.log("登录成功后的全局Token"+this.$store.getters.GetToken)
                 }
                 if (response.body.su == 0) {
-//                     this.$store.commit('change_user');
                     localStorage.setItem('user',JSON.stringify("user"));
                     this.$router.push({path: '/user'});
                 }
