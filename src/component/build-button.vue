@@ -1,17 +1,21 @@
 <template>
-    <button class="zxwnoumenom-button zxwbtn-float">新建本体</button>
+    <div class="zxwbtn-float">
+        <router-link to="/build">
+            <button class="zxwnoumenom-button zxwnoumenom-button-margin">新建本体</button>
+        </router-link>
+    </div>
 </template>
 <style>
     .zxwnoumenom-button{
-        background-repeat:no-repeat;
         background-image: url("../assets/img/build-button.png");
-        border-style: none;
-        background-color: transparent;
         color:white;
+        font-size: 14px;
+    }
+
+    .zxwnoumenom-button-margin{
+        margin:40px 40px 0 0;
         width:140px;
         height:45px;
-        font-size: 14px;
-        margin:40px 40px 0 0;
     }
 
     .zxwbtn-float{

@@ -38,45 +38,45 @@
 
         <!--创建用户的模态框-->
         <div class="dialogs" v-bind:show.sync="show_create">
-            <div class="dialog" v-bind:class="{ 'dialog-active': show_create }">
-                <div class="dialog-content">
+                <div class="dialog" v-bind:class="{ 'dialog-active': show_create }">
+                    <div class="dialog-content">
 
-                    <header class="dialog-header">
-                        <span class="dialog-title">普通用户创建</span>
-                        <span class="close rotate iconfont icon-close" @click="close_dialog()">×</span><!--关闭图标-->
-                    </header>
+                        <header class="dialog-header">
+                            <span class="dialog-title">普通用户创建</span>
+                            <span class="close rotate iconfont icon-close" @click="close_dialog()">×</span><!--关闭图标-->
+                        </header>
 
-                    <div class="dialog-body" >
-                        <div class="strap">
-                            <span class="span-motal">用户名：</span>
-                            <input type="text"  id="text1" class="input-motal" placeholder="输入2-10位中文、英文、数字" onfocus="this.placeholder=''" @blur="if_name('text1')"  v-model="user_name" v-bind:class="{warnBorder:this.is_active[0]}" >
+                        <div class="dialog-body" >
+                            <div class="strap">
+                                <span class="span-motal">用户名：</span>
+                                <input type="text"  id="text1" class="input-motal" placeholder="输入2-10位中文、英文、数字" onfocus="this.placeholder=''" @blur="if_name('text1')"  v-model="user_name" v-bind:class="{warnBorder:this.is_active[0]}" >
+                            </div>
+
+                            <div class="strap">
+                                <span class="span-motal">账号：</span>
+                                <input type="text"  id="text2" class="input-motal"  placeholder="输入8-10位数字、英文" onfocus="this.placeholder=''" @blur="if_account('text2')" v-model="account" v-bind:class="{warnBorder:this.is_active[1]}">
+                            </div>
+
+                            <div class="strap">
+                                <span class="span-motal">密码：</span>
+                                <input type="password"  id="text3" class="input-motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="if_pwd('text3')" v-model="pwd" v-bind:class="{warnBorder:this.is_active[2]}">
+                            </div>
+
+                            <div>
+                                <span class="span-motal">重复密码：</span>
+                                <input type="password" id="text4" class="input-motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="dup_pwd('text3','text4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.is_active[3]}" >
+                            </div>
                         </div>
-
-                        <div class="strap">
-                            <span class="span-motal">账号：</span>
-                            <input type="text"  id="text2" class="input-motal"  placeholder="输入8-10位数字、英文" onfocus="this.placeholder=''" @blur="if_account('text2')" v-model="account" v-bind:class="{warnBorder:this.is_active[1]}">
-                        </div>
-
-                        <div class="strap">
-                            <span class="span-motal">密码：</span>
-                            <input type="password"  id="text3" class="input-motal" placeholder="输入6-16位数字、英文"  onfocus="this.placeholder=''" @blur="if_pwd('text3')" v-model="pwd" v-bind:class="{warnBorder:this.is_active[2]}">
-                        </div>
-
-                        <div>
-                            <span class="span-motal">重复密码：</span>
-                            <input type="password" id="text4" class="input-motal" placeholder="重复密码" onfocus="this.placeholder=''" @blur="dup_pwd('text3','text4')" v-model="confirm_pwd" v-bind:class="{warnBorder:this.is_active[3]}" >
-                        </div>
+                        <footer class="dialog-footer" >
+                            <!--提示信息-->
+                            <p  class="warn-tip" v-model="tip">{{tip}}</p>
+                            <!--按钮-->
+                            <div>
+                                <button class="btn-general" style="margin-right: 10%" @click="close_dialog()" tabindex="-1">取消</button>
+                                <button class="btn-general "  @click="add_msg()" :disabled="add_if">创建</button>
+                            </div>
+                        </footer>
                     </div>
-                    <footer class="dialog-footer" >
-                        <!--提示信息-->
-                        <p  class="warn-tip" v-model="tip">{{tip}}</p>
-                        <!--按钮-->
-                        <div>
-                            <button class="btn-general" style="margin-right: 10%" @click="close_dialog()" tabindex="-1">取消</button>
-                            <button class="btn-general "  @click="add_msg()" :disabled="add_if">创建</button>
-                        </div>
-                    </footer>
-                </div>
             </div>
         </div>
 
@@ -570,154 +570,154 @@
         padding-bottom: 0.5em;
     }
 
-    .dialog {
-        width: 480px;
-        position: fixed;
-        left: 50%;
-        top: 6em;
-        transform: translateX(-50%);
-        z-index: 2000;
-        visibility: hidden;
-        backface-visibility: hidden;
-        perspective: 1300px;
-    }
+    /*.dialog {*/
+        /*width: 480px;*/
+        /*position: fixed;*/
+        /*left: 50%;*/
+        /*top: 6em;*/
+        /*transform: translateX(-50%);*/
+        /*z-index: 2000;*/
+        /*visibility: hidden;*/
+        /*backface-visibility: hidden;*/
+        /*perspective: 1300px;*/
+    /*}*/
 
-    .dialog-active{
-        visibility: visible;
-    }
+    /*.dialog-active{*/
+        /*visibility: visible;*/
+    /*}*/
 
-    .dialog-active .dialog-content {
-        position: relative;
-        opacity: 1;
-        transform: rotateY(0);
-    }
+    /*.dialog-active .dialog-content {*/
+        /*position: relative;*/
+        /*opacity: 1;*/
+        /*transform: rotateY(0);*/
+    /*}*/
 
-    .dialog-active ~ .dialog-overlay {
-        opacity: 1;
-        visibility: visible;
-    }
+    /*.dialog-active ~ .dialog-overlay {*/
+        /*opacity: 1;*/
+        /*visibility: visible;*/
+    /*}*/
 
-    .dialog-content {
-        border-radius: 2px;
-        background: #fff;
-        overflow: hidden;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        transition: .5s ease-in-out;
-        opacity: 0;
-        transform-style: preserve-3d;
-        transform: rotateY(-70deg);
-    }
+    /*.dialog-content {*/
+        /*border-radius: 2px;*/
+        /*background: #fff;*/
+        /*overflow: hidden;*/
+        /*box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);*/
+        /*transition: .5s ease-in-out;*/
+        /*opacity: 0;*/
+        /*transform-style: preserve-3d;*/
+        /*transform: rotateY(-70deg);*/
+    /*}*/
 
-    .dialog-header {
-        background: #fff;
-        margin-top: 5%;
-    }
+    /*.dialog-header {*/
+        /*background: #fff;*/
+        /*margin-top: 5%;*/
+    /*}*/
 
-    .dialog-title {
-        color: dimgrey;
-        font-size: 25px;
-        font-family: 楷体;
-        text-align: center;
-        width:6em;
-        margin-right:35%;
-        margin-left: 34%;
-        font-weight: 200;
-        line-height: 1em;
-        display: inline-block;
-    }
+    /*.dialog-title {*/
+        /*color: dimgrey;*/
+        /*font-size: 25px;*/
+        /*font-family: 楷体;*/
+        /*text-align: center;*/
+        /*width:6em;*/
+        /*margin-right:35%;*/
+        /*margin-left: 34%;*/
+        /*font-weight: 200;*/
+        /*line-height: 1em;*/
+        /*display: inline-block;*/
+    /*}*/
 
-    .dialog-body {
-        padding: 2em;
-    }
+    /*.dialog-body {*/
+        /*padding: 2em;*/
+    /*}*/
 
-    .dialog-footer {
-        padding: 3% 0;
-        text-align: center;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
-    }
+    /*.dialog-footer {*/
+        /*padding: 3% 0;*/
+        /*text-align: center;*/
+        /*border-top: 1px solid rgba(0, 0, 0, 0.1);*/
+    /*}*/
 
-    .close {
-        display: inline-block;
-        width: 2rem;
-        height: 2rem;
-        position: absolute;
-        top: .5rem;
-        right: .5rem;
-        transition: .8s ease all;
-        -moz-transition: .8s ease all;
-        -webkit-transition: .8s ease all;
-        border: none;
-        border-radius: 3px;
-        color: #333;
-        text-decoration: none;
-        box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-    }
+    /*.close {*/
+        /*display: inline-block;*/
+        /*width: 2rem;*/
+        /*height: 2rem;*/
+        /*position: absolute;*/
+        /*top: .5rem;*/
+        /*right: .5rem;*/
+        /*transition: .8s ease all;*/
+          /*-moz-transition: .8s ease all;*/
+          /*-webkit-transition: .8s ease all;*/
+        /*border: none;*/
+        /*border-radius: 3px;*/
+        /*color: #333;*/
+        /*text-decoration: none;*/
+        /*box-sizing: border-box;*/
+          /*-webkit-box-sizing: border-box;*/
+    /*}*/
 
-    .close:hover {
-        transition: .8s ease all;
-        -moz-transition: .8s ease all;
-        -webkit-transition: .8s ease all;
-    }
+    /*.close:hover {*/
+        /*transition: .8s ease all;*/
+          /*-moz-transition: .8s ease all;*/
+          /*-webkit-transition: .8s ease all;*/
+    /*}*/
 
-    .close .iconfont {
-        font-size: 2rem;
-        color: black;
-    }
+    /*.close .iconfont {*/
+        /*font-size: 2rem;*/
+        /*color: black;*/
+    /*}*/
 
-    .rotate {
-        cursor: pointer;
-    }
+    /*.rotate {*/
+        /*cursor: pointer;*/
+    /*}*/
 
-    .rotate:hover {
-        transition: transform 1.0s ease;
-        -moz-transition: -moz-transform 1.0s ease;
-        -webkit-transition: -webkit-transform 1.0s ease ;
-    }
+    /*.rotate:hover {*/
+        /*transition: transform 1.0s ease;*/
+          /*-moz-transition: -moz-transform 1.0s ease;*/
+          /*-webkit-transition: -webkit-transform 1.0s ease ;*/
+    /*}*/
 
-    .close .iconfont {
-        font-size: 2rem;
-        color: black;
-    }
+    /*.close .iconfont {*/
+        /*font-size: 2rem;*/
+        /*color: black;*/
+    /*}*/
 
-    .iconfont {
-        font-size: 33px;
-        font-style: normal;
+    /*.iconfont {*/
+        /*font-size: 33px;*/
+        /*font-style: normal;*/
 
-        -webkit-font-smoothing: antialiased;
-        -webkit-text-stroke-width: 0.2px;
-        -moz-osx-font-smoothing: grayscale;
-    }
-    .span-motal{
-        font-family: 楷体;
-        font-size: 20px;
-        font-weight: bold;
-        color: dimgrey;
-        text-align:right;
-        width: 6em;
-        display: inline-block;
-    }
+          /*-webkit-font-smoothing: antialiased;*/
+          /*-webkit-text-stroke-width: 0.2px;*/
+          /*-moz-osx-font-smoothing: grayscale;*/
+    /*}*/
+    /*.span-motal{*/
+        /*font-family: 楷体;*/
+        /*font-size: 20px;*/
+        /*font-weight: bold;*/
+        /*color: dimgrey;*/
+        /*text-align:right;*/
+        /*width: 6em;*/
+        /*display: inline-block;*/
+    /*}*/
 
-    .input-motal{
-        width:15em;
-        margin-top: 0;
-        text-align: center;
-        display: inline;
-        margin-left: 10%;
-    }
+    /*.input-motal{*/
+        /*width:15em;*/
+        /*margin-top: 0;*/
+        /*text-align: center;*/
+        /*display: inline;*/
+        /*margin-left: 10%;*/
+    /*}*/
 
-    /*错误提示*/
-    .warn-tip{
-        color: #ff0000;
-        font-size: 18px;
-        text-align:center;
-        font-family: 楷体;
-    }
+    /*!*错误提示*!*/
+    /*.warn-tip{*/
+        /*color: #ff0000;*/
+        /*font-size: 18px;*/
+        /*text-align:center;*/
+        /*font-family: 楷体;*/
+    /*}*/
 
-    /*错误提示红框*/
-    .warnBorder {
-        border: 2px solid red;
-    }
+    /*!*错误提示红框*!*/
+    /*.warnBorder {*/
+        /*border: 2px solid red;*/
+    /*}*/
 
 
 

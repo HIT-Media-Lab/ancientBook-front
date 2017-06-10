@@ -101,7 +101,7 @@
 <script>
      let Mock = require('mockjs');
      //显示用户列表
-     Mock.mock('/ancient_books/get_person_by_id.action?id=1','get',{
+     Mock.mock('/ancient_books/get_person_by_id.action?id=47','get',{
      "status|200":200,
      "standard_name|5":5,
      "english|6": 6,

@@ -123,6 +123,10 @@
         text-decoration: none;
     }
 
+    .ry-upload-two input{
+        border: none;
+    }
+
     .ry-upload-two button{
         background-color: transparent;
         border: none;
