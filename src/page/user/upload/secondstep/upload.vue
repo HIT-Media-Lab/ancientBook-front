@@ -1,6 +1,6 @@
 <template>
 
-    <div>
+    <div class="ry-upload-two">
         <div id="upload2-box">
             <div>
                 <span>
@@ -121,6 +121,11 @@
     a:hover, a:visited, a:link, a:active{
         color: white;
         text-decoration: none;
+    }
+
+    .ry-upload-two button{
+        background-color: transparent;
+        border: none;
     }
 
     .ry-btn-upload2-next{

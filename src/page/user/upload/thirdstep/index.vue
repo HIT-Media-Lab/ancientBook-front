@@ -1,6 +1,6 @@
 <template>
 
-    <div>
+    <div class="ry-upload-three">
 
         <!--模块名称-->
         <div class="width950 center">
@@ -61,6 +61,11 @@
 </script>
 
 <style>
+    .ry-upload-three button{
+        background-color: transparent;
+        border: none;
+    }
+
     .ry-btn-submit{
         color: white;
         width: 127px;

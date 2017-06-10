@@ -1,6 +1,6 @@
 <template>
 
-    <div>
+    <div class="ry-upload">
         <!--模块名称-->
         <div class="width950 center">
             <h3 style="display:inline-block">1輸入古籍名稱</h3>
@@ -134,11 +134,16 @@
         padding: 0;
     }
 
-    button{
-        background-color: transparent;
+    .ry-upload input{
+        border: none;
     }
 
-    select{
+    .ry-upload button{
+        background-color: transparent;
+        border: none;
+    }
+
+    .ry-upload select{
         margin: 5px 0px;
         -webkit-appearance: none;
         -moz-appearance: none;

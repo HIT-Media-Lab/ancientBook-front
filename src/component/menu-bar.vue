@@ -1,7 +1,7 @@
 <template>
 
     <!--4层导航按钮-->
-    <div>
+    <div class="ry-menu-bar">
         <ul id="layer-head">
             <router-link to="/user/upload1">
                 <li id="layer-head-variety">品種層</li>
@@ -21,7 +21,7 @@
 </template>
 
 <style>
-    input{
+    .ry-menu-bar input{
         background-color: transparent;
     }
 
