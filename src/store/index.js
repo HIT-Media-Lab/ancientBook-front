@@ -17,7 +17,7 @@ const store = new Vuex.Store({
             ['login','404','bookstore','user','upload1','mybook',
             'character','recent','char_detail','upload1','upload2',
             'upload3','copy','edition','impression','varieties',
-            'char_detail',
+            'char_detail','bookstore','book_recent',
             'alupload','privatebooks','collection','offer','mark',
             'ancientbook','comment','revise','search','chacheck',
             'build','charactertwo','characterthree'],

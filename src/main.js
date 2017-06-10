@@ -118,6 +118,9 @@ Vue.prototype.http_post_form=function (url,params,success,fail) {
 };
 
 import  bookstore from './page/bookstore/index.vue'
+import  book_recent from './page/bookstore/recent.vue'
+
+
 import  login from  './page/user/login/login.vue'
 import  admin from  './page/admin/admin.vue'
 import  notfound from './page/error/404.vue'
@@ -389,7 +392,14 @@ const router = new VueRouter({
         {
             path:'/bookstore',
             component:bookstore,
-            name:'bookstore'
+            name:'bookstore',
+            children:[
+                {
+                    path: '/book_recent',
+                    component: book_recent,
+                    name: 'book_recent'
+                }
+            ]
         },
         {
             path:'/404',
