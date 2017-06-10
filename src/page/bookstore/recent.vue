@@ -14,12 +14,14 @@
             recent_title
         },
         create: function () {
-
+            this.get_id();
         },
         data(){
             return{
                 title: '最近',
                 recent_book: [],
+                book_id: [],
+                book_name: [],
                 id_url:'/ancient_books/get_recient_ancient_book_list.action'
             }
         },
@@ -28,10 +30,12 @@
                 this.http_json(this.id_url, 'get', '', this.success_id, this.fail_id)
             },
             success_id(response){
-                for (let i = 0; i < response.body.length; i++){
-                    this.recent_book
+                for (let i = 0; i < response.body.length; i++) {
+                    this.recent_book[i] = response.body[i];
+                    this.book_id[i] = response.body[i].ancient_book_id;
+                    this.book_name[i] = response.body[i].standard_name;
                 }
-            }
+            },
         }
     }
 </script>

@@ -421,12 +421,12 @@ const router = new VueRouter({
                         {
                             path: 'impression',
                             component: book_impression,
-                            name: 'book_varieties'
+                            name: 'book_impression'
                         },
                         {
-                            path: 'varieties',
+                            path: 'copy',
                             component: book_copy,
-                            name: 'book_varieties'
+                            name: 'book_copy'
                         },
                     ]
                 }
