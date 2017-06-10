@@ -118,6 +118,13 @@ Vue.prototype.http_post_form=function (url,params,success,fail) {
 };
 
 import  bookstore from './page/bookstore/index.vue'
+import  book_recent from './page/bookstore/recent.vue'
+import  book_info from './page/bookstore/ancientbooks/index.vue'
+import  book_varieties from  './page/bookstore/ancientbooks/varieties.vue'
+import  book_impression from './page/bookstore/ancientbooks/impression.vue'
+import  book_copy from './page/bookstore/ancientbooks/copy.vue'
+import  book_edition from './page/bookstore/ancientbooks/edition.vue'
+
 import  login from  './page/user/login/login.vue'
 import  admin from  './page/admin/admin.vue'
 import  notfound from './page/error/404.vue'
@@ -389,7 +396,41 @@ const router = new VueRouter({
         {
             path:'/bookstore',
             component:bookstore,
-            name:'bookstore'
+            name:'bookstore',
+            children:[
+                {
+                    path: '',
+                    component: book_recent,
+                    name: 'book_recent'
+                },
+                {
+                    path: 'book_info',
+                    component: book_info,
+                    name: 'book_info',
+                    children: [
+                        {
+                            path: '',
+                            component: book_varieties,
+                            name: 'book_varieties'
+                        },
+                        {
+                            path: 'edition',
+                            component: book_edition,
+                            name: 'book_edition'
+                        },
+                        {
+                            path: 'impression',
+                            component: book_impression,
+                            name: 'book_varieties'
+                        },
+                        {
+                            path: 'varieties',
+                            component: book_copy,
+                            name: 'book_varieties'
+                        },
+                    ]
+                }
+            ]
         },
         {
             path:'/404',

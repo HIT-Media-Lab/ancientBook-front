@@ -6,28 +6,26 @@
             <h3 class="web-name">兰台古籍研究平台</h3>
         </div>
         <div class="search-login">
-            <input placeholder=" 请输入你要搜索的内容" class="search-input-login" v-model="sort_box" v-on:keydown.enter="enter">
+            <input placeholder=" 请输入关键字搜索" class="search-input-login" v-model="sort_box" v-on:keydown.enter="enter">
             <button class="search-btn-login" @click="search">搜索</button>
         </div>
         <div class="drop-search-login" @click="hide" v-show="sort_box.length!=0">
             <ul>
                 <li class="sort-box1-login">
-                    <router-link to="/search_index" >
+                    <router-link to="/search_index" style="color: #0f0f0f">
                         搜古籍：{{sort_box}}
                     </router-link>
                 </li>
                 <li class="sort-box2-login">
-                    <router-link to="/search_index">
+                    <router-link to="/search_index" style="color: #0f0f0f">
                         搜本体：{{sort_box}}
                     </router-link>
                 </li>
             </ul>
         </div>
-        <div>
-            <button @click="test1()">有用户权限</button>
-            <button @click="test2()">有超级用户权限</button>
-            <button @click="test3()">没用权限</button>
-        </div>
+        <button @click="test1()">有用户权限</button>
+        <button @click="test2()">有超级用户权限</button>
+        <button @click="test3()">没用权限</button>
     </div>
 </template>
 
@@ -84,6 +82,15 @@ import store from '../../../store'
              },function () {
 //                 alert("error")
              })
+         },
+         test1(){
+             localStorage.setItem('user',JSON.stringify("user"));
+         },
+         test2(){
+             localStorage.setItem('user',JSON.stringify("admin"));
+         },
+         test3(){
+             localStorage.setItem('user',JSON.stringify("guest"));
          },
 
 
