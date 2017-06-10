@@ -172,6 +172,11 @@
             this.get_varieties_item();
         },
 
+        beforeRouteLeave (to, from, next) {
+            this.$store.commit("get_varieties_contents",this.varieties_item);
+            next();
+        },
+
         watch:{
             $route(){
                 this.$store.commit("get_varieties_contents",this.varieties_item);
@@ -222,7 +227,7 @@
                 this.get_lei_items_obj.model_id = 8;
                 this.get_lei_items_obj.item_1_id = bu_index;
                 this.get_lei_items_obj.item_2_id = 0;
-                this.HttpJson ('/ancient_books/get_menu_items.action' , 'get' , this.get_lei_items_obj , this.success_get_lei_items , this.fail_get_lei_items);
+                this.http_json ('/ancient_books/get_menu_items.action' , 'get' , this.get_lei_items_obj , this.success_get_lei_items , this.fail_get_lei_items);
             },
 
             success_get_lei_items(response) {
@@ -252,7 +257,7 @@
                 this.get_shu_items_obj.model_id = 8;
                 this.get_shu_items_obj.item_1_id = bu_index;
                 this.get_shu_items_obj.item_2_id = lei_index;
-                this.HttpJson ('/ancient_books/get_menu_items.action' , 'get' , this.get_shu_items_obj , this.success_get_shu_items , this.fail_get_shu_items);
+                this.http_json ('/ancient_books/get_menu_items.action' , 'get' , this.get_shu_items_obj , this.success_get_shu_items , this.fail_get_shu_items);
             },
 
             success_get_shu_items(response) {

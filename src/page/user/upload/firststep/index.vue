@@ -74,9 +74,9 @@
         },
 
         created : function () {
-            this.get_menu_items();
-            this.put_into_vue();
-            this.get_from_vue();
+//            this.get_menu_items();
+//            this.put_into_vue();
+//            this.get_book_name();
         },
 
         mounted : function () {
@@ -84,7 +84,7 @@
         },
 
         methods : {
-            get_from_vue() {
+            get_book_name() {
                 this.varieties_item = this.$store.getters.get_varieties_item
             },
 
@@ -96,7 +96,7 @@
                     this.get_menu_items_obj.model_id = this.i;
                     this.get_menu_items_obj.item_1_id = 0;
                     this.get_menu_items_obj.item_2_id = 0;
-                    this.HttpJson ('/ancient_books/get_menu_items.action' , 'get' , this.get_menu_items_obj , this.success_get_menu_items(response,this.i-4) , this.fail_get_menu_items);
+                    this.http_json ('/ancient_books/get_menu_items.action' , 'get' , this.get_menu_items_obj , this.success_get_menu_items(response,this.i-4) , this.fail_get_menu_items);
                 }
             },
 
