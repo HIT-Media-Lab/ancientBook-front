@@ -1,8 +1,9 @@
 <template>
     <div class="j-recent">
         <recent_title class="j-recent-bar" :title="this.title"></recent_title>
-        <div v-for="(item,message) in recent_book">
-            <!--<img src="this.recent_book">-->
+        <div v-for="(id,index) in recent_book">
+            <img v-bind:id=index src="" class="">
+            <p>{{item.standard_name}}</p>
         </div>
     </div>
 </template>
@@ -22,7 +23,8 @@
                 recent_book: [],
                 book_id: [],
                 book_name: [],
-                id_url:'/ancient_books/get_recient_ancient_book_list.action'
+                id_url:'/ancient_books/get_recient_ancient_book_list.action',
+                picture_url: '/ancient_books/get_picture_by_id.action'
             }
         },
         methods: {
@@ -31,11 +33,18 @@
             },
             success_id(response){
                 for (let i = 0; i < response.body.length; i++) {
+                    let id_url = '';
                     this.recent_book[i] = response.body[i];
-                    this.book_id[i] = response.body[i].ancient_book_id;
-                    this.book_name[i] = response.body[i].standard_name;
+                    id_url = this.picture_url + '?page_id=' + response.body[i].ancient_book_id;
+                    document.getElementById(i).src = id_url;
                 }
             },
+            fail_id(){
+
+            },
+            push_success(){
+
+            }
         }
     }
 </script>

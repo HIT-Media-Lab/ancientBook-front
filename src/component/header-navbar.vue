@@ -56,21 +56,28 @@
                         </div>
                         <button class="login-button" @click="login()" v-bind:disabled="disabled">登  录</button>
                 </div>
-
-                <!--<footer class="dialog-footer" slot="footer">-->
-                    <!--&lt;!&ndash;<button class="btn" @click="close_dialog">关闭</button>&ndash;&gt;-->
-                <!--</footer>-->
             </login_modal>
+        </div>
+        <div id="load">
+            <loading v-show="showloading"></loading>
         </div>
     </div>
 </template>
 
 <script type="text/javascript">
+    import bus from '../lib/bus'
     import login_modal from  '../component/modal.vue'
     import store from '../store/index'
+    import loading from  '../component/loading.vue'
     export default{
         components:{
-            login_modal
+            login_modal,
+            loading
+        },
+        created() {
+          bus.$on('toggleLoading', (show) =>{
+              this.showloading = show;
+          })
         },
         data(){
             return{
@@ -78,6 +85,8 @@
                 url: '/ancient_books/logout.action',
                 name:'登录',
                 show_modal: false,
+
+                showloading: false,
 
                 login_url: '/ancient_books/login.action',
                 code_url: '/ancient_books/get_v_picture.action',
@@ -380,6 +389,9 @@
     .save-password-word{
         font-size: 15px;
         color: grey;
+    }
+    .login-box{
+
     }
     .login-button{
         margin-top: 8px;

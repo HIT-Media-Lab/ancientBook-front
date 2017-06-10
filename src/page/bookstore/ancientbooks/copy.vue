@@ -30,7 +30,7 @@
             </div>
 
             <div>
-                <img src="../../../../assets/img/上传1/中间墨线.png" height="6" width="843"/>
+                <img src="../../../assets/img/上传1/中间墨线.png" height="6" width="843"/>
             </div>
 
             <div id="form-copy">
@@ -104,7 +104,7 @@
             </div>
 
             <div>
-                <img src="../../../../assets/img/上传1/中间墨线.png" height="6" width="843"/>
+                <img src="../../../assets/img/上传1/中间墨线.png" height="6" width="843"/>
             </div>
         </div>
     </div>

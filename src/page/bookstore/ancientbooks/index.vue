@@ -7,7 +7,7 @@
         </div>
 
         <div class="width1000 center">
-            <img src="../../../../assets/img/本体标记/墨水线上.png" height="7" width="974"/>
+            <img src="../../../assets/img/本体标记/墨水线上.png" height="7" width="974"/>
         </div>
 
         <div class="width950 center">

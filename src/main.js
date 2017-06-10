@@ -449,6 +449,19 @@ const router = new VueRouter({
     ]
 });
 
+
+import bus from './lib/bus'
+Vue.http.interceptors.push((request, next) => {
+    // console.log("你好啊");
+    bus.$emit('toggleLoading', true);
+
+    next((response) =>{
+        // console.log("你好啊");
+        bus.$emit('toggleLoading', false);
+        return response
+    })
+});
+
 router.beforeEach( (to, from, next) => {
     let admin_acl = router.app.$store.getters.ACL_admin;
     let user_acl = router.app.$store.getters.ACL_user;
