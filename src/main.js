@@ -78,9 +78,10 @@ function response_post(response, success, fail) {
     let status = response.status;
     if (status == 200){
         if (response.body.result == 1){
-            success(response);
             after_success(response);
+            success(response);
         } else if (response.body.result == 0){
+            after_success(response);
             fail(response);
         }
     } else if (status == 403){
@@ -472,7 +473,13 @@ router.beforeEach( (to, from, next) => {
         localStorage.setItem('user',JSON.stringify("guest"));
         user_id = 'guest';
     }
-    console.log(to);
+    if (user_id == 'guest'){
+        bus.$emit('chang_name', '登录');
+    }else if (user_id == 'user'){
+        bus.$emit('chang_name', '普通用户');
+    }else if (user_id == 'admin'){
+        bus.$emit('chang_name', '超级用户');
+    }
 
     let flag = false;
     if (user_id == 'guest'){
