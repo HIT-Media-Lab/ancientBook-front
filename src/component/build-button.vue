@@ -8,6 +8,8 @@
 <style>
     .zxwnoumenom-button{
         background-image: url("../assets/img/build-button.png");
+        background-color: transparent;
+        border:none;
         color:white;
         font-size: 14px;
     }

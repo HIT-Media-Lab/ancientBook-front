@@ -51,39 +51,39 @@
 
             <div class="zxw-infospan">
                 <p class="zxwspan-length">父：</p>
-                <button class="zxwbtn-info zxwspan-length" v-model=father.item v-for="(item,index) in father" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in father" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">母：</p>
-                <button class="zxwbtn-info zxwspan-length" v-model=mother.item v-for="(item,index) in mother" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in mother" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">子：</p>
-                <button class="zxwbtn-info zxwspan-length" v-model=son.item v-for="(item,index) in son" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in son" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">女：</p>
-                <button class="zxwbtn-info zxwspan-length" v-model=daughter.item v-for="(item,index) in daughter" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in daughter" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">兄弟：</p>
-                <button class="zxwbtn-info zxwspan-length" v-model=brother.item v-for="(item,index) in brother" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in brother" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">姐妹：</p>
-                <button class="zxwbtn-info zxwspan-length" v-model=sister.item v-for="(item,index) in sister" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in sister" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">师：</p>
-                <button class="zxwbtn-info zxwspan-length" v-model=teacher.item v-for="(item,index) in teacher" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in teacher" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">学生：</p>
-                <button class="zxwbtn-info zxwspan-length" v-model=student.item v-for="(item,index) in student" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in student" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">友：</p>
-                <button class="zxwbtn-info zxwspan-length" v-model=friend.item v-for="(item,index) in friend" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in friend" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
 
             <div class="zxw-infospan">
@@ -99,9 +99,9 @@
 </template>
 
 <script>
-     let Mock = require('mockjs');
+     /*let Mock = require('mockjs');
      //显示用户列表
-     Mock.mock('/ancient_books/get_person_by_id.action?id=47','get',{
+     Mock.mock('/ancient_books/get_person_by_id.action?id=3','get',{
      "status|200":200,
      "standard_name|5":5,
      "english|6": 6,
@@ -167,7 +167,7 @@
              "person_id|100-1000": 1,
              "person_name|10000": 1
          }]
-     });
+     });*/
     import noumenon_title from '../../../component/noumenon-title.vue';
     import noumenon_button from '../../../component/noumenon-button.vue';
     export default{

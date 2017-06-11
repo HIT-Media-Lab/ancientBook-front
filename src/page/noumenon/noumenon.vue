@@ -89,7 +89,7 @@
 </script>
 <style>
     .zxwtitle-bottom{
-       margin-bottom: 40px;
+       margin:0 0 40px 20px;
     }
 
     .zxwnoumenon-row{

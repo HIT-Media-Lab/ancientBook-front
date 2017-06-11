@@ -15,7 +15,7 @@
             </select>
         </div>
         <router-link to="/chartwo">
-            <button class="zxw-nextbtn zxw-nextbtn-margin">下一步</button>
+            <button class="zxw-nextbtn zxw-nextbtn-margin zxw-nextbtn-length">下一步</button>
         </router-link>
     </div>
 </template>
@@ -42,7 +42,7 @@ export default{
 
 <style>
     .zxwcreate{
-        margin:140px 0 0 300px;
+        margin:100px 0 0 300px;
     }
 
     .zxwcreate-title{
@@ -59,45 +59,48 @@ export default{
         margin: 60px 0 120px 350px;
     }
 
-    .zxw-select{
-        font-size: 12px;
-        border: 2px solid black;
-        border-top:none;
-        border-left: none;
-        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-        -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    }
-
     .zxw-nextbtn{
         background-image: url("../../../assets/img/create-next-step.png");
+        background-color: transparent;
         border-style: none;
-        width:125px;
-        height:55px;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
         color:gainsboro;
     }
 
     .zxw-nextbtn-margin{
         margin:0 0 0 400px;
     }
-    .zxw-prebtn{
-        background-image: url("../../../assets/img/create-pre-step.png");
-        border-style: none;
+
+    .zxw-nextbtn-length{
         width:125px;
         height:55px;
+    }
+    .zxw-prebtn{
+        background-image: url("../../../assets/img/create-pre-step.png");
+        background-color: transparent;
+        border-style: none;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
         color:black;
     }
     .zxw-prebtn-margin{
+
         margin:0 15px 0 620px;
     }
 
+    .zxw-prebtn-length{
+        width:125px;
+        height:55px;
+    }
+
     .zxw-select{
-        background-image: url("../../../assets/img/select-border.png");
+        border:2px solid;
+        background-color: transparent;
         width:100px;
         height:25px;
-
     }
 
 </style>
