@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    /*let Mock = require('mockjs');
+    let Mock = require('mockjs');
 
     //显示用户列表
     Mock.mock('/ancient_books/get_person_list_by_word.action?word=A&&page_count=1','get',{
@@ -32,9 +32,9 @@
 
     Mock.mock('/ancient_books/get_person_list_by_word.action?word=A&&page_count=2','get',{
         "result|1":1,
-        "content|30":[{
+        "content|2":[{
             'standard_name':'@FIRST',
-            'noumenon_id|1-100':1
+            'noumenon_id|100-1000':1
         }],
         "total_page|10-20":1
     });
@@ -55,7 +55,7 @@
             'noumenon_id|1-100':1
         }],
         "total_page|10-20":1
-    });*/
+    });
 
     import noumenon_title from '../../../component/noumenon-title.vue';
     import letter_title from '../../../component/letter-title.vue';
@@ -72,11 +72,13 @@
         watch:{
             $route(){
                 this.get_character();
+                console.log("$route");
             }
         },
 
         created(){
             this.get_character();
+            console.log("created");
         },
 
         data(){

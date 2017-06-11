@@ -2,7 +2,7 @@
     <div class="zxwcreate">
         <p class="zxwcreate-title">新建本体</p>
         <img src="../../../../assets/img/create-step2.png" class="zxwcreate-img">
-        <create-word :prams="this.prams"></create-word>
+        <create_word :prams="this.prams"></create_word>
 
         <p class="zxw-create-character">本体名称：人名（出生时间）</p>
         <div class="zxw-character-row">
@@ -28,9 +28,9 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span zxw-must-write">出生时间：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin" @focus="go()">
+            <input type="text" class="zxw-character-input zxw-character-input-margin" readonly @focus="open_birth()"  v-model="birth_value">
             <label class="zxw-character-span zxw-must-write">死亡时间：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="text" class="zxw-character-input zxw-character-input-margin" @focus>
         </div>
 
         <div class="zxw-character-row">
@@ -82,29 +82,30 @@
             <button class="zxw-nextbtn zxw-nextbtn-length">下一步</button>
         </router-link>
 
-        <time-modal :time_modal="this.time_modal1"></time-modal>
+        <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time"></time_modal>
     </div>
 </template>
 
 <script>
-    import createWord from '../../../../component/create-word.vue';
+    import create_word from '../../../../component/create-word.vue';
     import modal from '../../../../component/modal.vue';
-    import timeModal from '../../../../component/time-modal.vue';
+    import time_modal from '../../../../component/time-modal.vue';
     export default{
         created(){
             this.prams = this.$route.name;
         },
 
         components:{
-            createWord,
+            create_word,
             modal,
-            timeModal
+            time_modal
         },
 
         data(){
             return{
                 prams:'',
-                time_modal1:false,
+                time_modal_1:false,
+                time_modal_2:false,
                 input_content:{
                     standard_name:'',
                     person_name:'',
@@ -121,13 +122,20 @@
                     english:'',
                     location_id:''
                 },
-                person_relations:[]
+                person_relations:[],
+                birth_value:''
             }
         },
 
         methods:{
-            go(){
-                this.time_modal1=true;
+            open_birth(){
+                this.time_modal_1=true;
+            },
+
+            birth_time(p){
+                this.input_content.birth_time_id = p.time_id;
+                this.birth_value = p.content;
+                this.time_modal_1 = false;
             }
         }
     }

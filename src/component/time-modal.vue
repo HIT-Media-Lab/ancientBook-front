@@ -35,9 +35,9 @@
 </template>
 
 <script>
-   /* let Mock = require('mockjs');
+    let Mock = require('mockjs');
     //显示用户列表
-    Mock.mock('/ancient_books/get_menu_items.action?model_id=1&&item_1_id=0&&item_2_id=0','get', {
+    /*Mock.mock('/ancient_books/get_menu_items.action?model_id=1&&item_1_id=0&&item_2_id=0','get', {
         "relations":[
             {"model_id|1": 1,
              "item_1_id|1": 1,
@@ -52,7 +52,26 @@
                 "chinese_name": "明朝"
             }
         ]
+    });
+
+    Mock.mock('/ancient_books/get_menu_items.action?model_id=1&&item_1_id=1&&item_2_id=0','get', {
+    "hhh":[{"model_id|1": 1,
+                "item_1_id|0": 0,
+                "item_2_id|1": 1,
+                "chinese_name": "宋朝hh"},
+        {"model_id|1": 1,
+            "item_1_id|0": 0,
+            "item_2_id|2": 2,
+            "chinese_name": "宋朝hh"}]
+
     });*/
+
+    Mock.mock('/ancient_books/get_time_by_chinese_name.action','post', {
+        "id|100":100
+    });
+
+
+
 
     import modal from '../component/modal.vue'
     export default{
@@ -88,15 +107,14 @@
         methods:{
             close(){
                 this.time_modal=false;
-
             },
 
             /*朝代下拉框*/
             success_menu(response){
-                for(let i = 0; i < response.body.relations.length; i++){
+                for(let i = 0; i < response.body.length; i++){
                     this.menu_data.push({
-                        item_1_id:response.body.relations[i].item_1_id,
-                        chinese_name:response.body.relations[i].chinese_name
+                        item_1_id:response.body[i].item_1_id,
+                        chinese_name:response.body[i].chinese_name
                     })
                 }
                 console.log(JSON.stringify(this.menu_data));
@@ -114,12 +132,13 @@
 
             /*年号下拉框*/
             success_year(response){
-                for(let i = 0; i < response.body.relations.length; i++){
+                for(let i = 0; i < response.body.length; i++){
                     this.year_data.push({
                         item_2_id:response.body.item_2_id,
                         chinese_name:response.body.chinese_name
                     })
                 }
+                console.log(JSON.stringify(this.year_data));
             },
 
             fail_year(){
@@ -180,7 +199,11 @@
                 this.time_data.push({
                     time_id:response.body.id,
                     content:this.time_object.standard_name
-                })
+                });
+                this.$emit('success_time',this.time_data);
+                this.time_data.splice(0,this.time_data.length);
+                this.year_number='';
+                console.log("time_data:"+this.time_data);
             },
 
             fail_time(){
