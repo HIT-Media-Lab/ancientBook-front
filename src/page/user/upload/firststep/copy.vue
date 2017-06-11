@@ -134,6 +134,7 @@
     export default{
         created : function () {
             this.get_copy_item();
+            this.copy_item = this.$store.getters.get_copy_item
         },
 
         beforeRouteLeave (to, from, next) {

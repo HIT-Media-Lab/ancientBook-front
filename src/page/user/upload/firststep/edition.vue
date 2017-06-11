@@ -253,6 +253,7 @@
     export default{
         created : function () {
             this.get_edition_item();
+            this.edition_item = this.$store.getters.get_edition_item
         },
 
         beforeRouteLeave (to, from, next) {

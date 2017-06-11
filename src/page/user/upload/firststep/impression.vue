@@ -120,6 +120,7 @@
     export default{
         created : function () {
             this.get_impression_item();
+            this.impression_item = this.$store.getters.get_impression_item
         },
 
         beforeRouteLeave (to, from, next) {
