@@ -176,7 +176,7 @@
             },
 
             create_v_picture(){
-                document.getElementById("v_picture").src = this.code_url;
+                document.getElementById("v_picture").src = this.code_url+'?'+(new Date()).getTime();
             },
 
             auto() {
