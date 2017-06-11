@@ -35,40 +35,40 @@
 </template>
 
 <script>
-    let Mock = require('mockjs');
-    //显示用户列表
-    /*Mock.mock('/ancient_books/get_menu_items.action?model_id=1&&item_1_id=0&&item_2_id=0','get', {
-        "relations":[
-            {"model_id|1": 1,
-             "item_1_id|1": 1,
-             "chinese_name": "宋朝"
-            },
-            {"model_id|1": 1,
-                "item_1_id|2": 2,
-                "chinese_name": "元朝"
-            },
-            {"model_id|1": 1,
-                "item_1_id|3": 3,
-                "chinese_name": "明朝"
-            }
-        ]
-    });
-
-    Mock.mock('/ancient_books/get_menu_items.action?model_id=1&&item_1_id=1&&item_2_id=0','get', {
-    "hhh":[{"model_id|1": 1,
-                "item_1_id|0": 0,
-                "item_2_id|1": 1,
-                "chinese_name": "宋朝hh"},
-        {"model_id|1": 1,
-            "item_1_id|0": 0,
-            "item_2_id|2": 2,
-            "chinese_name": "宋朝hh"}]
-
-    });*/
-
-    Mock.mock('/ancient_books/get_time_by_chinese_name.action','post', {
-        "id|100":100
-    });
+//    let Mock = require('mockjs');
+//    //显示用户列表
+//    /*Mock.mock('/ancient_books/get_menu_items.action?model_id=1&&item_1_id=0&&item_2_id=0','get', {
+//        "relations":[
+//            {"model_id|1": 1,
+//             "item_1_id|1": 1,
+//             "chinese_name": "宋朝"
+//            },
+//            {"model_id|1": 1,
+//                "item_1_id|2": 2,
+//                "chinese_name": "元朝"
+//            },
+//            {"model_id|1": 1,
+//                "item_1_id|3": 3,
+//                "chinese_name": "明朝"
+//            }
+//        ]
+//    });
+//
+//    Mock.mock('/ancient_books/get_menu_items.action?model_id=1&&item_1_id=1&&item_2_id=0','get', {
+//    "hhh":[{"model_id|1": 1,
+//                "item_1_id|0": 0,
+//                "item_2_id|1": 1,
+//                "chinese_name": "宋朝hh"},
+//        {"model_id|1": 1,
+//            "item_1_id|0": 0,
+//            "item_2_id|2": 2,
+//            "chinese_name": "宋朝hh"}]
+//
+//    });*/
+//
+//    Mock.mock('/ancient_books/get_time_by_chinese_name.action','post', {
+//        "id|100":100
+//    });
 
 
 
