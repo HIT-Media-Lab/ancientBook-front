@@ -177,12 +177,6 @@
             next();
         },
 
-        watch:{
-            $route(){
-                this.$store.commit("get_varieties_contents",this.varieties_item);
-            }
-        },
-
         data() {
             return{
                 lei_items_obj : {},

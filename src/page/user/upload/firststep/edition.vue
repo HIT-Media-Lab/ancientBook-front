@@ -235,7 +235,7 @@
                 <div class="row">
                     <label class="col-md-2">責任說明：</label>
                     <div class="col-md-4">
-                        <input v-model="edition_item.edition_responsibility.explain">
+                        <input v-model="edition_item.edition_responsibility.explain" id="ry-input-responsibility">
                     </div>
                 </div>
 
@@ -255,10 +255,9 @@
             this.get_edition_item();
         },
 
-        watch:{
-            $route(){
-                this.$store.commit("get_edition_contents",this.edition_item);
-            }
+        beforeRouteLeave (to, from, next) {
+            this.$store.commit("get_edition_contents",this.edition_item);
+            next();
         },
 
         data() {
@@ -309,4 +308,6 @@
 
     }
 </script>
+
+
 

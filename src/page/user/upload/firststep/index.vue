@@ -76,18 +76,19 @@
         created : function () {
 //            this.get_menu_items();
 //            this.put_into_vue();
-//            this.get_book_name();
         },
 
         mounted : function () {
 
         },
 
-        methods : {
-            get_book_name() {
+        watch:{
+            $route(){
                 this.varieties_item = this.$store.getters.get_varieties_item
-            },
+            }
+        },
 
+        methods : {
             /**
              * 获得下拉菜单内容
              */
