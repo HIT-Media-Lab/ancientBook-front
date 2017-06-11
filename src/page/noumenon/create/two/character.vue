@@ -84,13 +84,13 @@
 
         <modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></modal>
         <modal :time_modal="this.time_modal_2" v-on:success_time="dead_time" v-on:close_modal="close_dead()"></modal>
-        
+
     </div>
 </template>
 
 <script>
     import create_word from '../../../../component/create-word.vue';
-    import _modal from '../../../../component/time-modal.vue';
+    import modal from '../../../../component/time-modal.vue';
     export default{
         created(){
             this.prams = this.$route.name;
