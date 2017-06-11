@@ -29,17 +29,17 @@ function after_success (response) {
 
 //判断是否有无token
 Vue.prototype.before_http = function(object) {
-    object.token = store.getters.GetToken;
-    let token = store.getters.GetToken;
+    object.token = this.$store.getters.GetToken;
+    let token = this.$store.getters.GetToken;
     if (object.token.length == 0 || token.length == 0) {
         this.$http.get('/ancient_books/getToken.action').then(function (response) {
             token = response.body.token;
         });
-        store.commit("change_token",token);
+        this.$store.commit("change_token",token);
     }else {
         console.log("不需要更token");
     }
-}
+};
 
 
 
@@ -56,7 +56,7 @@ Vue.prototype.http_json = function (url, type, params, success, fail) {
     } else if (type.toLocaleLowerCase() == "post") {
         //验证是否有无token
         this.before_http(params);
-        params.token =store.getters.GetToken;
+        params.token =this.$store.getters.GetToken;
         this.$http.post(url, params,
             {headers:{'Content-Type':'application/json;charset=UTF-8'}}
         ).then(function (response) {
