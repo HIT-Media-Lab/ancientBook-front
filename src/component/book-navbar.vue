@@ -27,5 +27,8 @@
         font-size: 20px;
         color: gainsboro;
         display: inline-block;
+        background-color: transparent;
+        border: none;
+
     }
 </style>

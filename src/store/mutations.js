@@ -29,7 +29,7 @@ export default {
     get_impression_contents(state,impression){
         state.impression_contents = impression
     },
-    get_copy_varieties(state,varieties){
+    get_varieties_contents(state,varieties){
         state.varieties_contents = varieties
     },
     get_book_summary(state,summary){

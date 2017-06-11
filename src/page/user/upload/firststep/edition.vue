@@ -7,15 +7,15 @@
                 <div class="row">
                     <label class="col-md-2">版本類型：</label>
                     <div class="col-md-4">
-                        <select v-for="item in menu_items[6]">
-                            <option>{{item.chinese_name}}</option>
+                        <select>
+                            <option v-for="item in menu_items[6]">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
                     <label class="col-md-2">版本時代：</label>
                     <div class="col-md-4">
-                        <select v-for="item in menu_items[7]">
-                            <option>{{item.chinese_name}}</option>
+                        <select>
+                            <option v-for="item in menu_items[7]">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -23,15 +23,15 @@
                 <div class="row">
                     <label class="col-md-2">載體形式：</label>
                     <div class="col-md-4">
-                        <select v-for="item in menu_items[8]">
-                            <option>{{item.chinese_name}}</option>
+                        <select>
+                            <option v-for="item in menu_items[8]">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
                     <label class="col-md-2">裝幀形式：</label>
                     <div class="col-md-4">
-                        <select v-for="item in menu_items[9]">
-                            <option>{{item.chinese_name}}</option>
+                        <select>
+                            <option v-for="item in menu_items[9]">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -92,8 +92,8 @@
 
                     <label class="col-md-2">魚尾樣式：</label>
                     <div class="col-md-4">
-                        <select v-for="item in menu_items[10]">
-                            <option>{{item.chinese_name}}</option>
+                        <select>
+                            <option v-for="item in menu_items[10]">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -101,15 +101,15 @@
                 <div class="row">
                     <label class="col-md-2">邊欄樣式：</label>
                     <div class="col-md-4">
-                        <select v-for="item in menu_items[11]">
-                            <option>{{item.chinese_name}}</option>
+                        <select>
+                            <option v-for="item in menu_items[11]">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
                     <label class="col-md-2">分欄：</label>
                     <div class="col-md-4">
-                        <select v-for="item in menu_items[12]">
-                            <option>{{item.chinese_name}}</option>
+                        <select>
+                            <option v-for="item in menu_items[12]">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -117,8 +117,8 @@
                 <div class="row">
                     <label class="col-md-2">書口樣式：</label>
                     <div class="col-md-4">
-                        <select v-for="item in menu_items[13]">
-                            <option>{{item.chinese_name}}</option>
+                        <select>
+                            <option v-for="item in menu_items[13]">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
@@ -137,8 +137,8 @@
 
                     <label class="col-md-2">有無夾注：</label>
                     <div class="col-md-4">
-                        <select v-for="item in menu_items[14]">
-                            <option>{{item.chinese_name}}</option>
+                        <select>
+                            <option v-for="item in menu_items[14]">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -157,10 +157,10 @@
 
             <div id="form-edition">
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-2 float-right">
                         <button id="btn-add-edition" class="ry-btn-add">添加</button>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 float-right">
                         <button id="btn-delete-edition" class="ry-btn-del">刪除</button>
                     </div>
                 </div>
@@ -205,7 +205,7 @@
                     </div>
                     <div class="col-md-4">
                         <select>
-                            <option>不詳</option>
+                            <option v-for="item in menu_items[0]">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
@@ -214,8 +214,8 @@
                         <label>責任行為：</label>
                     </div>
                     <div class="col-md-4">
-                        <select v-for="item in menu_items[15]">
-                            <option>{{item.chinese_name}}</option>
+                        <select>
+                            <option v-for="item in menu_items[15]">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -227,7 +227,7 @@
                     </div>
                     <div class="col-md-4">
                         <select>
-                            <option>不詳</option>
+                            <option v-for="item in menu_items[1]">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -235,7 +235,7 @@
                 <div class="row">
                     <label class="col-md-2">責任說明：</label>
                     <div class="col-md-4">
-                        <input v-model="edition_item.edition_responsibility.explain">
+                        <input v-model="edition_item.edition_responsibility.explain" id="ry-input-responsibility">
                     </div>
                 </div>
 
@@ -253,12 +253,12 @@
     export default{
         created : function () {
             this.get_edition_item();
+            this.edition_item = this.$store.getters.get_edition_item
         },
 
-        watch:{
-            $route(){
-                this.$store.commit("get_edition_contents",this.edition_item);
-            }
+        beforeRouteLeave (to, from, next) {
+            this.$store.commit("get_edition_contents",this.edition_item);
+            next();
         },
 
         data() {
@@ -309,4 +309,6 @@
 
     }
 </script>
+
+
 

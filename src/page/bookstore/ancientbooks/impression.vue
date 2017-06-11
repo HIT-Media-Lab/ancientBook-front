@@ -1,28 +1,16 @@
 <template>
 
-    <!--复本层-->
+    <!--印次层-->
     <div class="layer-input">
         <div class="form-center">
             <div>
                 <div class="row">
-                    <label class="col-md-2">冊數：</label>
+                    <label class="col-md-2">印刷類型：</label>
                     <div class="col-md-4">
 
                     </div>
 
-                    <label class="col-md-2">完整性：</label>
-                    <div class="col-md-4">
-
-                    </div>
-                </div>
-
-                <div class="row">
-                    <label class="col-md-2">品級：</label>
-                    <div class="col-md-4">
-
-                    </div>
-
-                    <label class="col-md-2">附件信息：</label>
+                    <label class="col-md-2">印次：</label>
                     <div class="col-md-4">
 
                     </div>
@@ -33,7 +21,7 @@
                 <img src="../../../assets/img/上传1/中间墨线.png" height="6" width="843"/>
             </div>
 
-            <div id="form-copy">
+            <div id="form-impression">
                 <div class="row">
                     <div class="col-md-2">
                         <label>責任開始時間:</label>

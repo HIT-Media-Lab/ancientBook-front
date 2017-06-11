@@ -1,39 +1,27 @@
 <template>
 
-    <div class="ry-upload-two">
+    <div id="upload2" class="ry-upload-two">
+        <button class="ry-btn-add-book float-right" @click="add_new_book()">添加新冊</button>
+
         <div id="upload2-box">
-            <div>
-                <span>
-                    <span>冊號:</span>
-                    <input class="ry-input-upload2" v-model="upload2.book_num">
-                    <button class="ry-btn-add-book" @click="add_new_book()">添加新冊</button>
-                </span>
-                <br>
-                <span>
-                    <span>冊名:</span>
-                    <input class="ry-input-upload2" v-model="upload2.book_name">
-                </span>
+            <span>
+                <span>冊號:</span>
+                <input class="ry-input-upload2" v-model="upload2.book_num">
+            </span>
+            <br>
+            <span>
+                <span>冊名:</span>
+                <input class="ry-input-upload2" v-model="upload2.book_name">
+            </span>
 
-                <div class="width800">
-                    <a href="javascript:;" class="ry-file-picture">上傳圖片
-                        <input type="file" @change="onFileChange" name="picture">
-                    </a>
-                    <a href="javascript:;" class="ry-file-text">上傳文本
-                        <input type="file" @change="onTextChange" name="text">
-                    </a>
-                </div>
+            <div class="width800">
+                <a href="javascript:;" class="ry-file-picture">上傳圖片
+                    <input type="file" @change="onFileChange" name="picture">
+                </a>
+                <a href="javascript:;" class="ry-file-text">上傳文本
+                    <input type="file" @change="onTextChange" name="text">
+                </a>
             </div>
-        </div>
-
-        <div class="width600 center">
-            <p>请严格遵守命名规范上传文件，并保证对应图文文件的名称一致（可以仅上传图片文件）</p>
-            <p>命名规范：“卷-页”，如“卷1-1.jpg”，“卷1-1.txt”</p>
-            <p>若分AB页：“卷-页-A/B”，如“卷1-1-A.jpg”，“卷1-1-B.jpg”，“卷1-1-A.txt”，“卷1-1-B.txt”</p>
-        </div>
-
-        <div class="width600 center">
-            <button class="ry-btn-upload2-next float-right" @click="next_page()">下一步</button>
-            <button class="ry-btn-upload2-last float-right" @click="last_page()">上一步</button>
         </div>
     </div>
 
@@ -60,16 +48,9 @@
 
         methods :{
             add_new_book() {
-                var upload_box = document.getElementById("upload2-box");
-                var upload_file = upload_box.firstChild;
-                upload_box.appendChild(upload_file);
-            },
-
-            next_page() {
-                this.$router.push({path: '/user/upload3'});
-            },
-            last_page() {
-                this.$router.push({path: '/user/upload1'});
+                var ev = document.getElementById("upload2");
+                var box = ev.lastElementChild;
+                ev.appendChild(box);
             },
 
             onFileChange(e) {
@@ -125,6 +106,7 @@
 
     .ry-upload-two input{
         border: none;
+        background-color: transparent;
     }
 
     .ry-upload-two button{

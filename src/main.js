@@ -28,18 +28,18 @@ function after_success (response) {
 }
 
 //判断是否有无token
-function before_http (object) {
-    object.token = store.getters.GetToken;
-    let token = store.getters.GetToken;
+Vue.prototype.before_http = function(object) {
+    object.token = this.$store.getters.GetToken;
+    let token = this.$store.getters.GetToken;
     if (object.token.length == 0 || token.length == 0) {
         this.$http.get('/ancient_books/getToken.action').then(function (response) {
             token = response.body.token;
         });
-        store.commit("change_token",token);
+        this.$store.commit("change_token",token);
     }else {
         console.log("不需要更token");
     }
-}
+};
 
 
 
@@ -55,8 +55,8 @@ Vue.prototype.http_json = function (url, type, params, success, fail) {
         })
     } else if (type.toLocaleLowerCase() == "post") {
         //验证是否有无token
-        before_http(params);
-        params.token =store.getters.GetToken;
+        this.before_http(params);
+        params.token =this.$store.getters.GetToken;
         this.$http.post(url, params,
             {headers:{'Content-Type':'application/json;charset=UTF-8'}}
         ).then(function (response) {
@@ -119,7 +119,11 @@ Vue.prototype.http_post_form=function (url,params,success,fail) {
 
 import  bookstore from './page/bookstore/index.vue'
 import  book_recent from './page/bookstore/recent.vue'
-
+import  book_info from './page/bookstore/ancientbooks/index.vue'
+import  book_varieties from  './page/bookstore/ancientbooks/varieties.vue'
+import  book_impression from './page/bookstore/ancientbooks/impression.vue'
+import  book_copy from './page/bookstore/ancientbooks/copy.vue'
+import  book_edition from './page/bookstore/ancientbooks/edition.vue'
 
 import  login from  './page/user/login/login.vue'
 import  admin from  './page/admin/admin.vue'
@@ -395,9 +399,36 @@ const router = new VueRouter({
             name:'bookstore',
             children:[
                 {
-                    path: '/book_recent',
+                    path: '',
                     component: book_recent,
                     name: 'book_recent'
+                },
+                {
+                    path: 'book_info',
+                    component: book_info,
+                    name: 'book_info',
+                    children: [
+                        {
+                            path: '',
+                            component: book_varieties,
+                            name: 'book_varieties'
+                        },
+                        {
+                            path: 'edition',
+                            component: book_edition,
+                            name: 'book_edition'
+                        },
+                        {
+                            path: 'impression',
+                            component: book_impression,
+                            name: 'book_impression'
+                        },
+                        {
+                            path: 'copy',
+                            component: book_copy,
+                            name: 'book_copy'
+                        },
+                    ]
                 }
             ]
         },
@@ -416,6 +447,19 @@ const router = new VueRouter({
         // }
 
     ]
+});
+
+
+import bus from './lib/bus'
+Vue.http.interceptors.push((request, next) => {
+    // console.log("你好啊");
+    bus.$emit('toggleLoading', true);
+
+    next((response) =>{
+        // console.log("你好啊");
+        bus.$emit('toggleLoading', false);
+        return response
+    })
 });
 
 router.beforeEach( (to, from, next) => {

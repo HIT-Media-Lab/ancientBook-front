@@ -14,7 +14,7 @@
 
         <div class="width950 center">
             <h3 style="display:inline-block" class="float-left">古籍規範名稱：</h3>
-            <h4 id="bookName" style="display:inline-block" class="float-left ry-book-name">{{ bookname }}</h4>
+            <h4 id="bookName" style="display:inline-block" class="float-left ry-book-name">{{ varieties_item.type_name }}</h4>
             <div class="ry-4layers" style="display:inline-block">
                 <p>[品種層]責任結束時間-朝代 + 責任者 + 責任行為</p>
                 <p>[版本層]責任結束時間-朝代 + 責任者 + 責任行為</p>
@@ -60,7 +60,8 @@
 
         data() {
             return{
-                bookname : '書名',
+                i : 0,
+                varieties_item : {},
                 upload_one_info : {
                     pri : 0,
                     standard_name : '',
@@ -73,25 +74,30 @@
         },
 
         created : function () {
-            this.get_menu_items();
-            this.put_into_vue();
+//            this.get_menu_items();
+//            this.put_into_vue();
         },
 
         mounted : function () {
 
         },
 
-        methods : {
+        watch:{
+            $route(){
+                this.varieties_item = this.$store.getters.get_varieties_item
+            }
+        },
 
+        methods : {
             /**
              * 获得下拉菜单内容
              */
             get_menu_items() {
-                for (i = 4; i <= 23; i++) {
-                    this.get_menu_items_obj.model_id = i;
+                for (this.i = 4; this.i <= 23; this.i++) {
+                    this.get_menu_items_obj.model_id = this.i;
                     this.get_menu_items_obj.item_1_id = 0;
                     this.get_menu_items_obj.item_2_id = 0;
-                    this.HttpJson ('/ancient_books/get_menu_items.action' , 'get' , this.get_menu_items_obj , this.success_get_menu_items(response,i-4) , this.fail_get_menu_items);
+                    this.http_json ('/ancient_books/get_menu_items.action' , 'get' , this.get_menu_items_obj , this.success_get_menu_items(response,this.i-4) , this.fail_get_menu_items);
                 }
             },
 
@@ -136,6 +142,7 @@
 
     .ry-upload input{
         border: none;
+        background-color: transparent;
     }
 
     .ry-upload button{
