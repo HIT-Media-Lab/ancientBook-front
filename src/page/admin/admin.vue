@@ -1,6 +1,7 @@
 <!--定义组件-->
 <template>
     <div>
+        <button class="zxwnoumenom-button zxwnoumenom-button-margin" style="float:left" @click="downback()">注销</button>
         <noumenon_title  class="zxw-admin-title" :title="this.title">
             <button slot="children" class="zxwnoumenom-button zxwnoumenom-button-margin zxw-btn-admin"  @click="open_dialog()">创建用户</button>
         </noumenon_title>
@@ -143,28 +144,28 @@
     import noumenon_title from "../../component/noumenon-title.vue";
     import modal from "../../component/modal.vue";
     export default{
-        watch:{
+        watch: {
             $route(){
                 this.get_users();
             }
         },
 
-        components:{
+        components: {
             paginator,
             noumenon_title,
             modal
         },
         data(){
             return {
-                title:'用户管理',
+                title: '用户管理',
                 show_create: false,
                 show_change: false,
 
                 tip: '',    //创建用户的错误提示
-                is_active:[false,false,false,false],    //错误提示显示红色框
-                add_if:true,    //判断是否执行 创建/修改 请求
-                check_n:true,   //判断用户名是否重复
-                check_a:false,   //判断账号是否重复
+                is_active: [false, false, false, false],    //错误提示显示红色框
+                add_if: true,    //判断是否执行 创建/修改 请求
+                check_n: true,   //判断用户名是否重复
+                check_a: false,   //判断账号是否重复
 
                 user_data: [],
                 user_name: '',
@@ -178,19 +179,19 @@
                 add_url: '/ancient_books/add_user.action',  //创建普通用户
                 modify_url: '/ancient_books/modify_user.action',    //修改用户
                 delete_url: '/ancient_books/delete_user_by_id.action',  //删除用户
-                name_url:'/ancient_books/check_name.action',    //用户名重复
-                account_url:'/ancient_books/check_account.action',    //账号重复
+                name_url: '/ancient_books/check_name.action',    //用户名重复
+                account_url: '/ancient_books/check_account.action',    //账号重复
 
                 page: 1,//当前页面
                 max_page: 3,//总页数
-                router_name:'admin',
+                router_name: 'admin',
 
                 get_user: {},//显示用户数据对象
-                add_user:{},//创建用户数据对象
-                delete_user:{},//删除用户数据对象
-                modify_user:{},//修改数据对象
-                cheif_name:{}, //检查用户名是否重复
-                cheif_account:{} //检查账号是否重复
+                add_user: {},//创建用户数据对象
+                delete_user: {},//删除用户数据对象
+                modify_user: {},//修改数据对象
+                cheif_name: {}, //检查用户名是否重复
+                cheif_account: {} //检查账号是否重复
             }
         },
 
@@ -206,26 +207,26 @@
 
             close_dialog() {
                 this.show_create = false;
-                this.user_name="";
-                this.account="";
-                this.pwd="";
-                this.confirm_pwd="";
-                this.tip="";
-                this.is_active[0]=false;
-                this.is_active[1]=false;
-                this.is_active[2]=false;
-                this.is_active[3]=false;
+                this.user_name = "";
+                this.account = "";
+                this.pwd = "";
+                this.confirm_pwd = "";
+                this.tip = "";
+                this.is_active[0] = false;
+                this.is_active[1] = false;
+                this.is_active[2] = false;
+                this.is_active[3] = false;
             },
 
             // get数据显示用户列表 成功地回调函数
             success_get(response){
                 console.log("success get users ");
                 this.max_page = response.body.max_page;
-                for ( let i = 0; i < response.body.content.length; i++ ){
+                for (let i = 0; i < response.body.content.length; i++) {
                     this.user_data.push({
                         user_name: response.body.content[i].name,
                         account: response.body.content[i].account,
-                        time:response.body.content[i].time,
+                        time: response.body.content[i].time,
                         user_id: response.body.content[i].user_id
                     });
                 }
@@ -237,10 +238,10 @@
 
             //向后端发起请求获取用户数据列表，显示在前端页面
             get_users(){
-                this.get_user.value='?page='+this.$route.params.pageId;
-                let new_url = this.get_url+this.get_user.value;
+                this.get_user.value = '?page=' + this.$route.params.pageId;
+                let new_url = this.get_url + this.get_user.value;
                 this.clean_data();
-                this.http_json(new_url,'get',this.get_user,this.success_get, this.fail_get);
+                this.http_json(new_url, 'get', this.get_user, this.success_get, this.fail_get);
             },
 
             //创建用户 post用户数据 success回调函数
@@ -265,26 +266,24 @@
             },
 
 
-
-
             //用户名判断合法
             if_name(tag1){
-                document.getElementById(tag1).placeholder ="输入2-10位中文、英文、数字";
+                document.getElementById(tag1).placeholder = "输入2-10位中文、英文、数字";
                 this.add_if = true;    //禁用按钮
-                this.is_active[0]=false;
+                this.is_active[0] = false;
 
                 let x = document.getElementById(tag1).value;
                 let y;
-                if( x.length !== 0){
+                if (x.length !== 0) {
                     y = this.check_name(x);
-                    if( y === true ){
+                    if (y === true) {
                         this.tip = "";
-                        this.is_active[0]=false;
+                        this.is_active[0] = false;
                         this.dup_name(x);
                     } else {
                         this.tip = "输入2-10位中文、英文、数字";
-                        this.add_if=true;
-                        this.is_active[0]=true;
+                        this.add_if = true;
+                        this.is_active[0] = true;
                     }
                 }
             },
@@ -293,20 +292,20 @@
             if_account(tag2){
                 document.getElementById(tag2).placeholder = "输入8-10位数字、英文";
                 this.add_if = true;    //禁用按钮
-                this.is_active[1]=false;
+                this.is_active[1] = false;
 
                 let x = document.getElementById(tag2).value;
                 let y;
-                if( x.length !== 0){
+                if (x.length !== 0) {
                     y = this.check_user(x);
-                    if( y === true ){
+                    if (y === true) {
                         this.tip = "";
-                        this.is_active[1]=false;
+                        this.is_active[1] = false;
                         this.dup_account();
                     } else {
                         this.tip = "输入8-10位数字、英文";
-                        this.add_if=true;
-                        this.is_active[1]=true;
+                        this.add_if = true;
+                        this.is_active[1] = true;
                     }
                 }
             },
@@ -316,37 +315,37 @@
             if_pwd(tag3){
                 document.getElementById(tag3).placeholder = "输入6-16位数字、英文";
                 this.add_if = true;    //禁用按钮
-                this.is_active[2]=false;
+                this.is_active[2] = false;
 
                 let x = document.getElementById(tag3).value;
                 let y;
-                if( x.length !== 0){
+                if (x.length !== 0) {
                     y = this.check_pwd(x);
-                    if( y === true ){
+                    if (y === true) {
                         this.add_if = false;
                         this.tip = "";
-                        this.is_active[2]=false;
+                        this.is_active[2] = false;
                     } else {
                         this.tip = "输入6-16位数字、英文";
-                        this.add_if=true;
-                        this.is_active[2]=true;
+                        this.add_if = true;
+                        this.is_active[2] = true;
                     }
                 }
             },
 
             //重复输入密码确认
-            dup_pwd(tag1,tag2){
+            dup_pwd(tag1, tag2){
                 document.getElementById(tag2).placeholder = "重复密码";
                 this.add_if = true;
                 this.is_active[3] = false;
                 let x = document.getElementById(tag1).value;
                 let y = document.getElementById(tag2).value;
-                if(y.length !== 0){
-                    if(y !== x){
-                        this.tip="输入密码不一致！";
+                if (y.length !== 0) {
+                    if (y !== x) {
+                        this.tip = "输入密码不一致！";
                         this.add_if = true;
                         this.is_active[3] = true;
-                    }else{
+                    } else {
                         this.tip = "";
                         this.add_if = false;
                         this.is_active[3] = false;
@@ -361,15 +360,15 @@
             },
 
             fail_name(response){
-                this.is_active[0]=true;
+                this.is_active[0] = true;
                 this.add_if = true;
-                this.tip="用户名已存在!";
+                this.tip = "用户名已存在!";
             },
 
             dup_name(n){
-                this.cheif_name.value = "?name="+n;
+                this.cheif_name.value = "?name=" + n;
                 let new_url = this.name_url + this.cheif_name.value;
-                this.http_json(new_url,'get',this.cheif_name, this.success_name, this.fail_name);
+                this.http_json(new_url, 'get', this.cheif_name, this.success_name, this.fail_name);
             },
 
 
@@ -380,15 +379,15 @@
             },
 
             fail_account(response){
-                this.is_active[1]=true;
-                this.tip="账号已存在!";
+                this.is_active[1] = true;
+                this.tip = "账号已存在!";
                 this.add_if = true;
             },
 
             dup_account(){
-                this.cheif_account.value ="?account="+this.account;
-                let new_url = this.account_url+this.cheif_account.value;
-                this.http_json(new_url,'get', this.cheif_account, this.success_account, this.fail_account);
+                this.cheif_account.value = "?account=" + this.account;
+                let new_url = this.account_url + this.cheif_account.value;
+                this.http_json(new_url, 'get', this.cheif_account, this.success_account, this.fail_account);
             },
 
             //添加用户信息
@@ -404,8 +403,8 @@
                     this.if_name('text1');
                     this.if_account('text2');
                     this.if_pwd('text3');
-                    this.dup_pwd('text3','text4');
-                    if ( this.add_if === false ) {
+                    this.dup_pwd('text3', 'text4');
+                    if (this.add_if === false) {
                         this.create_users();
                     }
                 }
@@ -424,7 +423,7 @@
 
             delete_users(index){
                 this.delete_user.user_id = this.user_data[index].user_id;
-                this.http_json(this.delete_url,'post',this.delete_user,this.success_delete,this.fail_delete);
+                this.http_json(this.delete_url, 'post', this.delete_user, this.success_delete, this.fail_delete);
             },
 
 
@@ -437,16 +436,16 @@
             },
 
             close_motal(){
-                this.show_change=false;
-                this.back_username='';
-                this.back_account='';
-                this.pwd='';
+                this.show_change = false;
+                this.back_username = '';
+                this.back_account = '';
+                this.pwd = '';
                 this.confirm_pwd = '';
-                this.back_index='';
-                this.tip='';
-                this.is_active[0]=false;
-                this.is_active[2]=false;
-                this.is_active[3]=false;
+                this.back_index = '';
+                this.tip = '';
+                this.is_active[0] = false;
+                this.is_active[2] = false;
+                this.is_active[3] = false;
             },
 
             success_modify(response){
@@ -462,23 +461,23 @@
 
             //修改的请求函数
             modify_users(){
-                this.modify_user.name=this.back_username;
-                this.modify_user.pwd=this.pwd;
-                this.modify_user.user_id=this.user_data[this.back_index].user_id;
-                this.http_json(this.modify_url,'post',this.modify_user,this.success_modify,this.fail_modify);
+                this.modify_user.name = this.back_username;
+                this.modify_user.pwd = this.pwd;
+                this.modify_user.user_id = this.user_data[this.back_index].user_id;
+                this.http_json(this.modify_url, 'post', this.modify_user, this.success_modify, this.fail_modify);
             },
 
             //修改执行的函数
             confirm_change(){
-                let x=document.getElementById("chan2").value;
-                let y=document.getElementById("chan3").value;
-                let z=document.getElementById("chan4").value;
-                if (x === "" || y === "" || z === "" ) {
+                let x = document.getElementById("chan2").value;
+                let y = document.getElementById("chan3").value;
+                let z = document.getElementById("chan4").value;
+                if (x === "" || y === "" || z === "") {
                     this.tip = "用户名、账号、密码等不能为空！"
                 } else {
                     this.if_name('chan2');
                     this.if_pwd('chan3');
-                    this.dup_pwd('chan3','chan4');
+                    this.dup_pwd('chan3', 'chan4');
                     if (this.add_if === false) {
                         this.modify_users();
                     }
@@ -487,6 +486,16 @@
 
             clean_data(){
                 this.user_data.splice(0, this.user_data.length);
+            },
+
+            downback(){
+                this.$http.get(this.url).then(function () {
+                    alert("注销成功");
+                    localStorage.setItem('user', JSON.stringify("guest"));
+                    this.$router.push({path: '/login'});
+                }, function () {
+                    alert("error")
+                })
             }
         }
     }
