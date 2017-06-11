@@ -190,8 +190,11 @@
                 if (response.body.su == 0) {
                     localStorage.setItem('user',JSON.stringify("user"));
                     this.$router.push({path: '/user'});
-                    this.name = '超级用户';
+                    this.name = '普通用户';
                 }
+                this.account = '';
+                this.pwd = '';
+                this.v = '';
             },
             //登陆失败函数
             login_fail(response){
@@ -221,7 +224,7 @@
     }
     .head-bar{
         margin: 0 auto;
-        width: 860px;
+        width: 880px;
     }
     .bookstore{
         background-image: url("../assets/img/墨点按钮.png");
