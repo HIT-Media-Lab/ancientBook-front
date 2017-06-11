@@ -67,7 +67,7 @@
     Mock.mock('/ancient_books/get_time_by_chinese_name.action','post', {
         "id|100":100
     });*/
-    
+
     import modal from '../component/modal.vue'
     export default{
         created(){
