@@ -82,8 +82,10 @@
           });
         },
         //组件刷新执行钩子
-        mounted(){
+        beforeMount: function () {
             this.onload_token();
+        },
+        mounted(){
             this.create_v_picture();
         },
         data(){
