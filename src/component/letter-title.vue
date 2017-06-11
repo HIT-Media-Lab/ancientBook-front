@@ -1,19 +1,19 @@
 <template>
     <div class="zxwcharacter-title">   <!--加背景-->
         <div  class="zxwcharacter-row">
-            <button  class="zxwcharacter-span" v-for="(item,index) in group_1" v-model=group_1.item  @click="go_letter(item)" v-bind:class="{hover: letter_id===item}">{{item}}</button>
+            <button  class="zxwcharacter-span" v-for="(item,index) in group_1" v-model=group_1.item  @click="go_letter(item)" v-bind:class="{hover: $route.params.letterId===item}">{{item}}</button>
         </div>
 
         <div  class="zxwcharacter-row">
-            <button class="zxwcharacter-span" v-for="(item,index) in group_2" v-model=group_2.item @click="go_letter(item)" v-bind:class="{hover: letter_id===item}">{{item}}</button>
+            <button class="zxwcharacter-span" v-for="(item,index) in group_2" v-model=group_2.item @click="go_letter(item)" v-bind:class="{hover: $route.params.letterId===item}">{{item}}</button>
         </div>
 
         <div  class="zxwcharacter-row" >
-            <button class="zxwcharacter-span" v-for="(item,index) in group_3" v-model=group_3.item @click="go_letter(item)" v-bind:class="{hover: letter_id===item}">{{item}}</button>
+            <button class="zxwcharacter-span" v-for="(item,index) in group_3" v-model=group_3.item @click="go_letter(item)" v-bind:class="{hover: $route.params.letterId===item}">{{item}}</button>
         </div>
 
         <div  class="zxwcharacter-row" >
-            <button class="zxwcharacter-span" v-for="(item,index) in group_4" v-model=group_4.item @click="go_letter(item)" v-bind:class="{hover: letter_id===item}">{{item}}</button>
+            <button class="zxwcharacter-span" v-for="(item,index) in group_4" v-model=group_4.item @click="go_letter(item)" v-bind:class="{hover: $route.params.letterId===item}">{{item}}</button>
         </div>
 
         <div  class="zxwcharacter-row" >
@@ -27,11 +27,13 @@
     export default{
         created(){
             this.letter_id = 'A';
+            console.log("created A");
         },
 
         watch:{
             $route(){
-                this.letter_id = this.$route.params.letterId;
+                //this.letter_id = this.$route.params.letterId;
+                console.log("$route letter");
             }
         },
 
