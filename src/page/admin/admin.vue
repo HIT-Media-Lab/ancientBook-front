@@ -489,7 +489,7 @@
             },
 
             downback(){
-                this.$http.get(this.url).then(function () {
+                this.$http.get('/ancient_books/logout.action').then(function () {
                     alert("注销成功");
                     localStorage.setItem('user', JSON.stringify("guest"));
                     this.$router.push({path: '/login'});
