@@ -170,6 +170,7 @@
     export default{
         created : function () {
             this.get_varieties_item();
+            this.varieties_item = this.$store.getters.get_varieties_item
         },
 
         beforeRouteLeave (to, from, next) {
