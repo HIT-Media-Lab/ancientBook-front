@@ -1,40 +1,31 @@
 <template>
 
-    <div id="upload2" class="ry-upload-two">
-        <button class="ry-btn-add-book float-right" @click="add_new_book()">添加新冊</button>
+    <div id="upload2-box" class="ry-upload-two">
+        <span>
+            <span>冊號:</span>
+            <input class="ry-input-upload2" v-model="upload2.book_num">
+        </span>
+        <br>
+        <span>
+            <span>冊名:</span>
+            <input class="ry-input-upload2" v-model="upload2.book_name">
+        </span>
 
-        <div id="upload2-box">
-            <span>
-                <span>冊號:</span>
-                <input class="ry-input-upload2" v-model="upload2.book_num">
-            </span>
-            <br>
-            <span>
-                <span>冊名:</span>
-                <input class="ry-input-upload2" v-model="upload2.book_name">
-            </span>
-
-            <div class="width800">
-                <a href="javascript:;" class="ry-file-picture">上傳圖片
-                    <input type="file" @change="onFileChange" name="picture">
-                </a>
-                <a href="javascript:;" class="ry-file-text">上傳文本
-                    <input type="file" @change="onTextChange" name="text">
-                </a>
-            </div>
+        <div class="width800">
+            <a href="javascript:;" class="ry-file-picture">上傳圖片
+                <input type="file" @change="onFileChange" name="picture">
+            </a>
+            <a href="javascript:;" class="ry-file-text">上傳文本
+                <input type="file" @change="onTextChange" name="text">
+            </a>
         </div>
     </div>
+
 
 </template>
 
 <script>
     export default{
-        watch:{
-            $route(){
-                this.$store.commit("get_upload_file",this.upload2);
-            }
-        },
-
         data() {
             return{
                 upload2 : {
@@ -46,13 +37,16 @@
             }
         },
 
-        methods :{
-            add_new_book() {
-                var ev = document.getElementById("upload2");
-                var box = ev.lastElementChild;
-                ev.appendChild(box);
-            },
+        created : function () {
+            this.upload2 = this.$store.getters.get_upload_file
+        },
 
+        beforeRouteLeave (to, from, next) {
+            this.$store.commit("get_upload_file",this.upload2);
+            next();
+        },
+
+        methods :{
             onFileChange(e) {
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)return;
