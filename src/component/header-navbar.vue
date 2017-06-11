@@ -122,7 +122,12 @@
 //                })
 //            },
             show_login(){
-                this.show_modal = true;
+                let user_id = JSON.parse(localStorage.getItem('user'));
+                if (user_id == 'guest'){
+                    this.show_modal = true;
+                }else if(user_id == 'user'){
+                    this.$router.push({path: '/user'});
+                }
             },
             hide:function () {
                 this.sort_box = ''
@@ -179,11 +184,13 @@
                 if (response.body.su == 1) {
                     localStorage.setItem('user',JSON.stringify("admin"));
                     this.$router.push({path: '/admin'});
-                    console.log("登录成功后的全局Token"+this.$store.getters.GetToken)
+                    console.log("登录成功后的全局Token"+this.$store.getters.GetToken);
+                    this.name = '超级用户';
                 }
                 if (response.body.su == 0) {
                     localStorage.setItem('user',JSON.stringify("user"));
                     this.$router.push({path: '/user'});
+                    this.name = '超级用户';
                 }
             },
             //登陆失败函数
