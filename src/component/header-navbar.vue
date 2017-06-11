@@ -81,7 +81,9 @@
               this.name = name;
           });
         },
+        //组件刷新执行钩子
         mounted(){
+            this.onload_token();
             this.create_v_picture();
         },
         data(){
@@ -124,6 +126,42 @@
 //                    alert("error")
 //                })
 //            },
+            // 网页启动得到token
+            onload_token(){
+                this.$http.get('/ancient_books/getToken.action').then(function (response) {
+                    console.log("成功得到token");
+                    this.$store.commit("change_token",response.body.token);
+                    console.log(this.$store.getters.GetToken + " 第一次获得token");
+                    if (this.$store.getters.GetToken != null){
+                        this.auto_login();
+                    }
+                },function () {
+//                 alert("error")
+                })
+            },
+
+            //自动登录
+            auto_login() {
+                this.$http.get(this. autologin_url).then(function (response) {
+                    if (response.body.result==1) {
+                        if (response.body.su == 0){
+                            localStorage.setItem('user',JSON.stringify("user"));
+                            this.$router.push({path: '/user'});
+                        }
+                        if (response.body.su = 1){
+                            localStorage.setItem('user',JSON.stringify("admin"));
+                            this.$router.push({path: '/admin'});
+                        }
+                    }
+                    if (response.body.result==0){
+                        localStorage.setItem('user',JSON.stringify("guest"));
+                        this.$router.push({path: '/login'});
+                    }
+                },function () {
+//                 alert("error")
+                })
+            },
+
             show_login(){
                 let user_id = JSON.parse(localStorage.getItem('user'));
                 if (user_id == 'guest'){
