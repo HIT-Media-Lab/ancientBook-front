@@ -79,7 +79,7 @@
           });
         },
         mounted(){
-            this.create_v_picture()
+            this.create_v_picture();
         },
         data(){
             return{
@@ -169,11 +169,11 @@
                 }
             },
             coverCode(){
-              document.getElementById("v_picture").src = '/ancient_books/get_v_picture.action'+'?'+(new Date()).getTime()
+              document.getElementById("v_picture").src = this.code_url+'?'+(new Date()).getTime()
             },
 
             create_v_picture(){
-                document.getElementById("v_picture").src = '/ancient_books/get_v_picture.action';
+                document.getElementById("v_picture").src = this.code_url;
             },
 
             auto() {
@@ -186,19 +186,24 @@
                     this.$router.push({path: '/admin'});
                     console.log("登录成功后的全局Token"+this.$store.getters.GetToken);
                     this.name = '超级用户';
+                    this.account = '';
+                    this.pwd = '';
+                    this.v = '';
+                    document.getElementById("v_picture").src = this.code_url+'?'+(new Date()).getTime();
                 }
                 if (response.body.su == 0) {
                     localStorage.setItem('user',JSON.stringify("user"));
                     this.$router.push({path: '/user'});
                     this.name = '普通用户';
+                    this.account = '';
+                    this.pwd = '';
+                    this.v = '';
+                    document.getElementById("v_picture").src = this.code_url + '?' + (new Date()).getTime()
                 }
-                this.account = '';
-                this.pwd = '';
-                this.v = '';
             },
             //登陆失败函数
             login_fail(response){
-                document.getElementById("v_picture").src='/ancient_books/get_v_picture.action'+'?'+(new Date()).getTime();
+                document.getElementById("v_picture").src = this.code_url + '?' + (new Date()).getTime();
                 alert(response.body.info);
             },
             //点击登录按钮执行函数
@@ -224,7 +229,7 @@
     }
     .head-bar{
         margin: 0 auto;
-        width: 880px;
+        width: 890px;
     }
     .bookstore{
         background-image: url("../assets/img/墨点按钮.png");
@@ -249,6 +254,7 @@
         height: 52px;
         border: none;
         margin-left: -15px;
+        color: white;
         background-color: transparent;
         /*display: inline-block;*/
     }

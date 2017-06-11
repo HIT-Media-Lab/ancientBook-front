@@ -158,6 +158,7 @@ import store from '../../../store'
         background-image: url("../../../assets/img/搜索按钮大.png");
         background-repeat: no-repeat;
         background-size: 105%;
+        color: white;
         height: 50px;
         width: 100px;
         border: none;
