@@ -2,12 +2,12 @@
     <!--顶端固定不变的导航条-->
     <div id="store" class="store">
         <div class="head-bar">
-            <button class="bookstore">
-                <router-link to="/bookstore" style="color: white">古籍库</router-link>
-            </button>
-            <button class="noumenon-store">
-                <router-link to="/noumenon" style="color: white">本体库</router-link>
-            </button>
+            <router-link to="/bookstore" style="color: white">
+                <button class="bookstore">古籍库 </button>
+            </router-link>
+            <router-link to="/noumenon" style="color: white">
+                <button class="noumenon-store">本体库</button>
+            </router-link>
             <input placeholder=" 请输入关键字搜索" class="search-input" v-model="sort_box" v-on:keydown.enter="enter">
             <button class="search-btn" @click="search">搜索</button>
             <img src="../assets/img/头像.png" class="user-img" @click="show_login">
@@ -33,28 +33,27 @@
                     <h3 class="dialog-title">登 录</h3>
                 </header>
                 <div class="dialog-body" slot="body">
-                        <div class="input-ac-pwd">
-                            <div class="input-ac">
-                                <input type="text" placeholder="请输入您的账号" class="user-name-input" v-model="account" @blur="check()" id="username" v-bind:class="{ warnborder: Active1 }">
-                            </div>
-                            <div class="input-password">
-                                <input type="password" placeholder="请输入您的密码" class="password-input" v-model="pwd" @blur="check()" id="pwd" v-bind:class="{ warnborder: Active2 }">
-                            </div>
-                            <div class="warning-login">
-                                <span id="warning" v-model="warning">{{warning}}</span>
-                            </div>
+                    <div class="input-ac-pwd">
+                        <div class="input-ac">
+                            <input type="text" placeholder="请输入您的账号" class="user-name-input" v-model="account" @blur="check()" id="username" v-bind:class="{ warnborder: Active1 }">
                         </div>
-                        <div class="code">
-                            <input type="text" placeholder="请输入验证码" class="verification-code-input" v-model="v">
-                            <img src="" id="v_picture" class="code-img" alt="验证码">
-                            <span class="cover-code" @click="coverCode()" >换一张</span>
+                        <div class="input-password">
+                            <input type="password" placeholder="请输入您的密码" class="password-input" v-model="pwd" @blur="check()" id="pwd" v-bind:class="{ warnborder: Active2 }">
                         </div>
-                        <div class="auto">
-                            <!--验证码获取位置-->
-                            <input type="checkbox" id="save-password"  class="save-password-checkbox" @click="auto()">
-                            <span class="save-password-word" >自动登录</span>
+                        <div class="warning-login">
+                            <span id="warning" v-model="warning">{{warning}}</span>
                         </div>
-                        <button class="login-button" @click="login()" v-bind:disabled="disabled">登  录</button>
+                    </div>
+                    <div class="code">
+                        <input type="text" placeholder="请输入验证码" class="verification-code-input" v-model="v">
+                        <img src="" id="v_picture" class="code-img" alt="验证码">
+                        <span class="cover-code" @click="coverCode()" >换一张</span>
+                    </div>
+                    <div class="auto">
+                        <input type="checkbox" id="save-password"  class="save-password-checkbox" @click="auto()">
+                        <span class="save-password-word" >自动登录</span>
+                    </div>
+                    <button class="login-button" @click="login()" v-bind:disabled="disabled">登  录</button>
                 </div>
             </login_modal>
         </div>
@@ -77,10 +76,14 @@
         created() {
           bus.$on('toggleLoading', (show) =>{
               this.showloading = show;
-          })
+          });
+        },
+        mounted(){
+            this.create_v_picture()
         },
         data(){
             return{
+
                 sort_box:'',
                 url: '/ancient_books/logout.action',
                 name:'登录',
@@ -119,12 +122,6 @@
 //                })
 //            },
             show_login(){
-                this.show_modal = true;
-            },
-            close_dialog () {
-                this.show_modal = false;
-            },
-            open_dialog () {
                 this.show_modal = true;
             },
             hide:function () {
@@ -167,7 +164,7 @@
                 }
             },
             coverCode(){
-              document.getElementById("v_picture").src = this.src+'?'+(new Date()).getTime()
+              document.getElementById("v_picture").src = '/ancient_books/get_v_picture.action'+'?'+(new Date()).getTime()
             },
 
             create_v_picture(){
@@ -205,31 +202,6 @@
                 // 与后端对接的vue-resource
                 this.http_json(this.login_url,'post',this.object,this.login_success,this.login_fail);
             },
-            //得到验证码图片
-//         GetCode() {
-//             this.$http.get(this.code_url).then(function () {
-//             })
-//         },
-            //自动登录
-            auto_login() {
-                this.$http.get(this. autologin_url).then(function (response) {
-                    if (response.body.result==1) {
-                        if (response.body.su == 1)
-//                         this.$store.commit('change_user');
-                            localStorage.setItem('user',JSON.stringify("user"));
-                        this.$router.push({path: '/user'});
-                        if (response.body.su = 0)
-                            localStorage.setItem('user',JSON.stringify("admin"));
-                        this.$router.push({path: '/admin'});
-                    }
-                    if (response.body.result==0)
-                        localStorage.setItem('user',JSON.stringify("guest"));
-                    this.$router.push({path: '/login'});
-                },function () {
-//                 alert("error")
-                })
-            }
-
         }
     }
 </script>
@@ -390,9 +362,7 @@
         font-size: 15px;
         color: grey;
     }
-    .login-box{
 
-    }
     .login-button{
         margin-top: 8px;
         margin-left: 10px;

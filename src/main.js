@@ -28,7 +28,7 @@ function after_success (response) {
 }
 
 //判断是否有无token
-function before_http (object) {
+Vue.prototype.before_http = function(object) {
     object.token = store.getters.GetToken;
     let token = store.getters.GetToken;
     if (object.token.length == 0 || token.length == 0) {
@@ -55,7 +55,7 @@ Vue.prototype.http_json = function (url, type, params, success, fail) {
         })
     } else if (type.toLocaleLowerCase() == "post") {
         //验证是否有无token
-        before_http(params);
+        this.before_http(params);
         params.token =store.getters.GetToken;
         this.$http.post(url, params,
             {headers:{'Content-Type':'application/json;charset=UTF-8'}}

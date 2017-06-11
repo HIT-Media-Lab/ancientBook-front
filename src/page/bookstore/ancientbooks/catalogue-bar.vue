@@ -3,16 +3,16 @@
     <!--4层导航按钮-->
     <div class="ry-menu-bar">
         <ul id="layer-head">
-            <router-link to="/bookstore/upload1">
+            <router-link to="/bookstore/book_info">
                 <li id="layer-head-variety">品種層</li>
             </router-link>
-            <router-link to="/bookstore/upload1/edition">
+            <router-link to="/bookstore/book_info/edition">
                 <li id="layer-head-edition">版本層</li>
             </router-link>
-            <router-link to="/bookstore/upload1/impression">
+            <router-link to="/bookstore/book_info/impression">
                 <li id="layer-head-impression">印次層</li>
             </router-link>
-            <router-link to="/bookstore/upload1/copy">
+            <router-link to="/bookstore/book_info/copy">
                 <li id="layer-head-copy">複本層</li>
             </router-link>
         </ul>

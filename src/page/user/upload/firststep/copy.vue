@@ -117,7 +117,7 @@
                 <div class="row">
                     <label class="col-md-2">責任說明：</label>
                     <div class="col-md-4">
-                        <input v-model="copy_item.copy_responsibility.explain">
+                        <input v-model="copy_item.copy_responsibility.explain" id="ry-input-responsibility">
                     </div>
                 </div>
             </div>
@@ -136,10 +136,9 @@
             this.get_copy_item();
         },
 
-        watch:{
-            $route(){
-                this.$store.commit("get_copy_contents",this.copy_item);
-            }
+        beforeRouteLeave (to, from, next) {
+            this.$store.commit("get_copy_contents",this.copy_item);
+            next();
         },
 
         data() {
@@ -173,4 +172,6 @@
 
     }
 </script>
+
+
 

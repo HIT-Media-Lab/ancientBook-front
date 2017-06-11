@@ -1,7 +1,7 @@
 <template id="modal">
     <div class="dialogs">
-        <div class="modal-dialog" :class="{ 'dialog-active': show_modal }">
-            <div class="dialog-content">
+        <div class="modal-dialog" :class="{ 'dialog-active': show_modal }" v-bind:width="width" v-bind:height="height">
+            <div class="dialog-content" v-bind:width="width" v-bind:height="height">
                 <div class="close rotate">
                     <span class="iconfont icon-close" @click="$emit('fireclose')">×</span>
                 </div>
@@ -21,7 +21,7 @@
 //                show_modal: false
             }
         },
-        props: ['show_modal'],
+        props: ['show_modal','width','height'],
         methods: {
 //            close () {
 //                this.show_modal = false
@@ -35,8 +35,6 @@
         }
 
         .dialogs {
-            width: 400px;
-            height: 380px;
             position: fixed;
             left: 40%;
             top: 6em;
@@ -45,8 +43,8 @@
             backface-visibility: hidden;
         }
         .modal-dialog{
-            width: 400px;
-            height: 380px;
+            /*width: 400px;*/
+            /*height: 380px;*/
             /*background: #fff;*/
             background-image: url("../assets/img/modal.png");
             background-size: 100%;
@@ -69,8 +67,8 @@
         }
 
         .dialog-content {
-            width: 400px;
-            height: 380px;
+            /*width: 400px;*/
+            /*height: 375px;*/
             border-radius: 2px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }

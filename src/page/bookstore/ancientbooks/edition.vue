@@ -140,7 +140,6 @@
             <div id="form-edition">
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star">*</span>
                         <label>責任開始時間:</label>
                     </div>
                     <div class="col-md-4">
@@ -148,7 +147,6 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star">*</span>
                         <label>責任結束時間:</label>
                     </div>
                     <div class="col-md-4">
@@ -163,7 +161,6 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star">*</span>
                         <label>責任者名稱:</label>
                     </div>
                     <div class="col-md-4">
@@ -173,7 +170,6 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star">*</span>
                         <label>責任者類型：</label>
                     </div>
                     <div class="col-md-4">
@@ -181,7 +177,6 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star">*</span>
                         <label>責任行為：</label>
                     </div>
                     <div class="col-md-4">
@@ -191,7 +186,6 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star">*</span>
                         <label>確定性：</label>
                     </div>
                     <div class="col-md-4">
