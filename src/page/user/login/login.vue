@@ -7,7 +7,7 @@
         </div>
         <div class="search-login">
             <input placeholder=" 请输入关键字搜索" class="search-input-login" v-model="sort_box" v-on:keydown.enter="enter">
-            <button class="search-btn-login" @click="search">搜索</button>
+            <button class="search-btn-login" @click="search">搜 索</button>
         </div>
         <div class="drop-search-login" @click="hide" v-show="sort_box.length!=0">
             <ul>

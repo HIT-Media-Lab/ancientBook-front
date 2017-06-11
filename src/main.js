@@ -472,7 +472,13 @@ router.beforeEach( (to, from, next) => {
         localStorage.setItem('user',JSON.stringify("guest"));
         user_id = 'guest';
     }
-    console.log(to);
+    if (user_id == 'guest'){
+        bus.$emit('chang_name', '登录');
+    }else if (user_id == 'user'){
+        bus.$emit('chang_name', '普通用户');
+    }else if (user_id == 'admin'){
+        bus.$emit('chang_name', '超级用户');
+    }
 
     let flag = false;
     if (user_id == 'guest'){

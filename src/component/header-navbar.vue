@@ -9,7 +9,7 @@
                 <button class="noumenon-store">本体库</button>
             </router-link>
             <input placeholder=" 请输入关键字搜索" class="search-input" v-model="sort_box" v-on:keydown.enter="enter">
-            <button class="search-btn" @click="search">搜索</button>
+            <button class="search-btn" @click="search">搜 索</button>
             <img src="../assets/img/头像.png" class="user-img" @click="show_login">
             <span class="user-name" @click="show_login">{{name}}</span>
             <div class="down-box" @click="hide" v-show="sort_box.length!=0">
@@ -76,6 +76,9 @@
         created() {
           bus.$on('toggleLoading', (show) =>{
               this.showloading = show;
+          });
+          bus.$on('chang_name',(name) =>{
+              this.name = name;
           });
         },
         mounted(){
