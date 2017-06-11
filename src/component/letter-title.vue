@@ -43,8 +43,6 @@
                 group_3:['O','P','Q','R','S','T'],
                 group_4:['U','V','W','X','Y','Z'],
                 group_5:['#']
-                //ban_1:['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'],
-                //ban:[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
             }
         },
 

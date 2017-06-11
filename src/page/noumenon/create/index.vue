@@ -6,12 +6,7 @@
         <div class="zxw-noumenon-select">
             <span>选择本体类型：</span>
             <select class="zxw-select">
-                <option>人物</option>
-                <option>文献</option>
-                <option>术语</option>
-                <option>时间</option>
-                <option>机构</option>
-                <option>地名</option>
+                <option v-for="item in noumenon_option">{{item}}</option>
             </select>
         </div>
         <router-link to="/chartwo">
@@ -33,7 +28,8 @@ export default{
 
     data(){
         return{
-            prams:''
+            prams:'',
+            noumenon_option:['时间','地名','人物','机构','职官','文献','术语']
         }
     }
 

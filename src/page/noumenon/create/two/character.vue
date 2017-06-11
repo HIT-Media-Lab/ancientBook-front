@@ -28,9 +28,9 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span zxw-must-write">出生时间：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin" readonly @focus="open_birth()"  v-model="birth_value">
+            <button  class="zxw-character-input zxw-character-input-margin" readonly @click="open_birth()"  v-model="birth_value"></button>
             <label class="zxw-character-span zxw-must-write">死亡时间：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin" @focus>
+            <button class="zxw-character-input zxw-character-input-margin" readonly @click="open_dead()" v-model="dead_value"></button>
         </div>
 
         <div class="zxw-character-row">
@@ -82,14 +82,16 @@
             <button class="zxw-nextbtn zxw-nextbtn-length">下一步</button>
         </router-link>
 
-        <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time"></time_modal>
+        <modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></modal>
+        <modal :time_modal="this.time_modal_2" v-on:success_time="dead_time" v-on:close_modal="close_dead()"></modal>
+        <modal></modal>
     </div>
 </template>
 
 <script>
     import create_word from '../../../../component/create-word.vue';
     import modal from '../../../../component/modal.vue';
-    import time_modal from '../../../../component/time-modal.vue';
+    import modal from '../../../../component/time-modal.vue';
     export default{
         created(){
             this.prams = this.$route.name;
@@ -98,7 +100,7 @@
         components:{
             create_word,
             modal,
-            time_modal
+            modal
         },
 
         data(){
@@ -123,19 +125,36 @@
                     location_id:''
                 },
                 person_relations:[],
-                birth_value:''
+                birth_value:'',
+                dead_value:''
             }
         },
 
         methods:{
             open_birth(){
-                this.time_modal_1=true;
+                this.time_modal_1 = true;
             },
 
             birth_time(p){
                 this.input_content.birth_time_id = p.time_id;
                 this.birth_value = p.content;
+            },
+
+            close_birth(){
                 this.time_modal_1 = false;
+            },
+
+            open_dead(){
+                this.time_modal_2 = true;
+            },
+
+            dead_time(q){
+                this.input_content.birth_time_id = q.time_id;
+                this.dead_value = q.content;
+            },
+
+            close_dead(){
+                this.time_modal_2 = false;
             }
         }
     }

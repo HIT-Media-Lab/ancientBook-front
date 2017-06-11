@@ -35,10 +35,9 @@
 </template>
 
 <script>
-    let Mock = require('mockjs');
-    //显示用户列表
-    /*Mock.mock('/ancient_books/get_menu_items.action?model_id=1&&item_1_id=0&&item_2_id=0','get', {
-        "relations":[
+    /*let Mock = require('mockjs');
+    Mock.mock('/ancient_books/get_menu_items.action?model_id=1&&item_1_id=0&&item_2_id=0','get', {
+        "g":[
             {"model_id|1": 1,
              "item_1_id|1": 1,
              "chinese_name": "宋朝"
@@ -55,7 +54,7 @@
     });
 
     Mock.mock('/ancient_books/get_menu_items.action?model_id=1&&item_1_id=1&&item_2_id=0','get', {
-    "hhh":[{"model_id|1": 1,
+    "":[{"model_id|1": 1,
                 "item_1_id|0": 0,
                 "item_2_id|1": 1,
                 "chinese_name": "宋朝hh"},
@@ -63,12 +62,11 @@
             "item_1_id|0": 0,
             "item_2_id|2": 2,
             "chinese_name": "宋朝hh"}]
-
-    });*/
+    });
 
     Mock.mock('/ancient_books/get_time_by_chinese_name.action','post', {
         "id|100":100
-    });
+    });*/
 
 
 
@@ -88,6 +86,7 @@
 
         data(){
           return{
+              //ban:true,
               selected_1:null,
               selected_2:null,
               selected_3:null,
@@ -106,15 +105,18 @@
 
         methods:{
             close(){
-                this.time_modal=false;
+                this.$emit('close_modal',close);
+                this.time_data.splice(0,this.time_data.length);
+                this.year_number='';
+                console.log("time_data:"+this.time_data);
             },
 
             /*朝代下拉框*/
             success_menu(response){
-                for(let i = 0; i < response.body.length; i++){
+                for(let i = 0; i < response.body.g.length; i++){
                     this.menu_data.push({
-                        item_1_id:response.body[i].item_1_id,
-                        chinese_name:response.body[i].chinese_name
+                        item_1_id:response.body.g[i].item_1_id,
+                        chinese_name:response.body.g[i].chinese_name
                     })
                 }
                 console.log(JSON.stringify(this.menu_data));
@@ -211,13 +213,17 @@
             },
 
             add_time(){
-                this.time_object.standard_name = this.selected_1+'-'+this.selected_2+'-'+this.year_number+'-'+this.selected_3+'-'+this.selected_4;
-                this.time_object.chaodai = this.selected_1;
-                this.time_object.nianhao = this.selected_2;
-                this.time_object.nianfen = this.year_number;
-                this.time_object.yue = this.selected_3;
-                this.time_object.ri = this.selected_4;
-                this.http_json(this.time_url,'post',this.time_object,this.success_time,this.fail_time);
+                if(this.selected_1 !== 0){
+                    //this.ban = true;
+                    this.time_object.standard_name = this.selected_1+this.selected_2+this.year_number+this.selected_3+this.selected_4;
+                    this.time_object.chaodai = this.selected_1;
+                    this.time_object.nianhao = this.selected_2;
+                    this.time_object.nianfen = this.year_number;
+                    this.time_object.yue = this.selected_3;
+                    this.time_object.ri = this.selected_4;
+                    console.log(JSON.stringify(this.time_object));
+                    this.http_json(this.time_url,'post',this.time_object,this.success_time,this.fail_time);
+                }
             }
         },
 
@@ -266,4 +272,5 @@
     .zxw-time-body{
         margin:24px 0 0 0;
     }
+
 </style>
