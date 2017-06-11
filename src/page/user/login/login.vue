@@ -121,7 +121,10 @@ import store from '../../../store'
 </script>
 
 <style>
-
+    .index-page{
+        width: 600px;
+        margin: 150px auto;
+    }
     .web-name{
         display: inline;
     }
@@ -130,14 +133,13 @@ import store from '../../../store'
         height: 60px;
     }
     .head{
-        margin-left: 615px;
-        margin-top: 150px;
+        margin: 0 auto;
         width: 330px;
         letter-spacing: 10px;
         font-size: 20px;
     }
     .search-login{
-        margin-left: 500px;
+        margin: 0 auto;
         width: 600px;
         height: 50px;
     }
@@ -162,7 +164,7 @@ import store from '../../../store'
         background-color: transparent;
     }
     .drop-search-login{
-        margin-left: 500px;
+        margin: 0 0;
         margin-top: -5px;
         padding-left: 20px;
         width: 500px;

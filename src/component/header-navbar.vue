@@ -5,27 +5,27 @@
             <router-link to="/bookstore" style="color: white">
                 <button class="bookstore">古籍库 </button>
             </router-link>
-            <router-link to="/noumenon" style="color: white">
+            <router-link to="/noumenon" style="color: white; margin-left: 47px">
                 <button class="noumenon-store">本体库</button>
             </router-link>
             <input placeholder=" 请输入关键字搜索" class="search-input" v-model="sort_box" v-on:keydown.enter="enter">
             <button class="search-btn" @click="search">搜索</button>
             <img src="../assets/img/头像.png" class="user-img" @click="show_login">
             <span class="user-name" @click="show_login">{{name}}</span>
-        </div>
-        <div class="down-box" @click="hide" v-show="sort_box.length!=0">
-            <ul>
-                <li class="sort-box1">
-                    <router-link to="/search_index" style="color: #0f0f0f">
-                        搜古籍：{{sort_box}}
-                    </router-link>
-                </li>
-                <li class="sort-box2">
-                    <router-link to="/search_index" style="color: #0f0f0f">
-                        搜本体：{{sort_box}}
-                    </router-link>
-                </li>
-            </ul>
+            <div class="down-box" @click="hide" v-show="sort_box.length!=0">
+                <ul>
+                    <li class="sort-box1">
+                        <router-link to="/search_index" style="color: #0f0f0f">
+                            搜古籍：{{sort_box}}
+                        </router-link>
+                    </li>
+                    <li class="sort-box2">
+                        <router-link to="/search_index" style="color: #0f0f0f">
+                            搜本体：{{sort_box}}
+                        </router-link>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="login-box">
             <login_modal :show_modal.sync = "show_modal" @fireclose = "show_modal = false">
@@ -220,8 +220,8 @@
         width: 100%;
     }
     .head-bar{
-        margin-left: 400px;
-        width: 850px;
+        margin: 0 auto;
+        width: 860px;
     }
     .bookstore{
         background-image: url("../assets/img/墨点按钮.png");
@@ -231,7 +231,7 @@
         height: 56px;
     }
     .noumenon-store{
-        margin-left: 47px;
+        /*margin-left: 47px;*/
         background-image: url("../assets/img/墨点按钮.png");
         border: none;
         background-color: transparent;
@@ -251,7 +251,7 @@
     }
     .user-name{
         padding: 5px;
-        width:100px;
+        width:50px;
         height: 13px;
         font-weight:700;
         font-style:normal;
@@ -268,7 +268,7 @@
         background-image: url("../assets/img/下拉框.png");
         background-size:100%;
         background-repeat: no-repeat;
-        margin-left: 760px;
+        margin-left: 360px;
         margin-top: -9px;
         height: 43px;
         width: 290px;

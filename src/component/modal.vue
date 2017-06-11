@@ -35,7 +35,7 @@
 
         .dialogs {
             position: fixed;
-            left: 40%;
+            left: 37%;
             top: 6em;
             z-index: 2000;
             visibility: hidden;
@@ -127,4 +127,3 @@
         }
 
 </style>
-   
