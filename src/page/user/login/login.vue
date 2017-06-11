@@ -42,8 +42,10 @@ import store from '../../../store'
              autologin_url: '/ancient_books/get_user_info.action'
          }
      },
-
-
+     //组件刷新执行钩子
+     beforeMount: function () {
+         this.onload_token();
+     },
      methods: {
 //         Test(){
 //             alert(this.token);
@@ -74,6 +76,19 @@ import store from '../../../store'
          test3(){
              localStorage.setItem('user',JSON.stringify("guest"));
          },
+         // 网页启动得到token
+         onload_token(){
+             this.$http.get('/ancient_books/getToken.action').then(function (response) {
+                 console.log("成功得到token");
+                 this.$store.commit("change_token",response.body.token);
+                 console.log(this.$store.getters.GetToken + " 第一次获得token");
+                 if (this.$store.getters.GetToken != null){
+                     this.auto_login();
+                 }
+             },function () {
+//                 alert("error")
+             })
+         },
 
          //自动登录
          auto_login() {
@@ -95,10 +110,7 @@ import store from '../../../store'
              },function () {
 //                 alert("error")
              })
-         }
-
-
-
+         },
      }
  }
 </script>

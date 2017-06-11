@@ -81,10 +81,6 @@
               this.name = name;
           });
         },
-        //组件刷新执行钩子
-        beforeMount: function () {
-            this.onload_token();
-        },
         mounted(){
             this.create_v_picture();
         },
@@ -128,20 +124,6 @@
 //                    alert("error")
 //                })
 //            },
-            // 网页启动得到token
-            onload_token(){
-                this.$http.get('/ancient_books/getToken.action').then(function (response) {
-                    console.log("成功得到token");
-                    this.$store.commit("change_token",response.body.token);
-                    console.log(this.$store.getters.GetToken + " 第一次获得token");
-                    if (this.$store.getters.GetToken != null){
-                        this.auto_login();
-                    }
-                },function () {
-//                 alert("error")
-                })
-            },
-
             show_login(){
                 let user_id = JSON.parse(localStorage.getItem('user'));
                 if (user_id == 'guest'){
