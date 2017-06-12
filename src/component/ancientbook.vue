@@ -65,7 +65,7 @@
                         <!--文本主体-->
                         <div class="body-text" id="text-comment" @click="text_comment_onclick()"></div>
                         <!--添加批注按钮，选中文本后激活显示，点击弹出添加批注模态框-->
-                        <button class="btn btn-info" data-toggle="modal" data-target="#layer-add-comment" id="btn-add-comment" style="visibility: hidden" @click="btn_add_comment_onclick()">添加批註</button>
+                        <button class="btn btn-info" id="btn-add-comment" style="visibility: hidden" @click="btn_add_comment_onclick()">添加批註</button>
                     </div>
 
                     <!--修订板块-->
@@ -115,24 +115,22 @@
                 </div>
 
                 <!--添加批注模态框-->
-                <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-add-comment">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">選中內容：示例文本</h4>
-                            </div>
-                            <div class="modal-body text-tight">
-                                <p>添加批註：</p>
-                                <textarea id="textarea-addComment"></textarea>
-                                <br>
-                                <input id="check-private" type="checkbox" value="選為私密">選為私密
-                                <br>
-                                <br>
-                                <button class="btn btn-warning btn-sm" data-dismiss="modal" id="btn-cancel-add-comment" @click="btn_cancel_add_comment_onclick()">取消</button>
-                                <button class="btn btn-success btn-sm" data-dismiss="modal" id="btn-confirm-add-comment" @click="btn_confirm_add_comment_onclick()">確定</button>
-                            </div>
+                <div>
+                    <add_comment_modal :show_modal.sync = "add_comment_modal" @fireclose = "add_comment_modal = false">
+                        <header class="dialog-header" slot="header">
+                            <h3 class="dialog-title">選中內容：示例文本</h3>
+                        </header>
+                        <div class="dialog-body" slot="body">
+                            <p>添加批註：</p>
+                            <textarea id="textarea-addComment"></textarea>
+                            <br>
+                            <input id="check-private" type="checkbox" value="選為私密">選為私密
+                            <br>
+                            <br>
+                            <button class="btn btn-warning btn-sm" data-dismiss="modal" id="btn-cancel-add-comment" @click="btn_cancel_add_comment_onclick()">取消</button>
+                            <button class="btn btn-success btn-sm" data-dismiss="modal" id="btn-confirm-add-comment" @click="btn_confirm_add_comment_onclick()">確定</button>
                         </div>
-                    </div>
+                    </add_comment_modal>
                 </div>
 
                 <!--查看批注模态框-->
@@ -237,10 +235,16 @@
 
 
 <script type="text/javascript">
+    import add_comment_modal from  '../component/modal.vue'
     export default{
+        components:{
+            add_comment_modal,
+        },
 
         data() {
             return{
+                add_comment_modal : false,
+
                 get_content_obj : {},
                 content : '蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。',
                 page_id : 1,
@@ -734,7 +738,8 @@
                 }
                 var sel = window.getSelection();
                 this.begin_add_comment = sel.anchorNode.parentNode.id;
-                this.end_add_comment = sel.focusNode.parentNode.id + 1;
+                var end = sel.focusNode.parentNode.id;
+                this.end_add_comment = parseInt(end)+1;
             },
 
 
@@ -742,6 +747,7 @@
              * 添加批注按钮事件
              */
             btn_add_comment_onclick() {
+                this.add_comment_modal = true;
                 var btn_add_comment = document.getElementById("btn-add-comment");
                 btn_add_comment.style.visibility = "hidden";  //  添加批注按钮隐藏
                 var range = window.getSelection().getRangeAt(0);    //  获得选区
@@ -781,12 +787,32 @@
                     else {
                         this.pri = 0
                     }
-                    this.content_add_comment = textarea_add_comment.innerText;
-                    post_add_comment();
-                    window.location.reload()
+                    this.content_add_comment = textarea_add_comment.value;
+                    this.post_add_comment();
+                    window.location.reload();
                 }
             },
 
+            /**
+             * 取消添加批注事件
+             */
+            btn_cancel_add_comment_onclick() {
+                var spans = document.getElementById("text-comment").getElementsByTagName("span");   //  获取批注文本中span标签
+                //  遍历将没有class属性的span复原为纯文本
+                for (var i = 0; i < spans.length; i++) {
+                    var has = spans[i].hasAttribute("class");
+                    if (has == false) {
+                        var inner = spans[i].innerText;
+                        var text = document.createTextNode(inner);
+                        spans[i].parentNode.replaceChild(text, spans[i]);
+                    }
+                }
+                this.begin_add_mark = '';
+                this.end_add_mark = '';
+                this.before = '';
+                this.after = '';
+                this.add_comment_modal = false;
+            },
 
             /**
              * 选中标记文本事件
@@ -807,27 +833,6 @@
                     var e = text_mark.innerText.charAt(this.end_add_mark+1+m);
                     this.after += e;
                 }
-            },
-
-
-            /**
-             * 取消添加批注事件
-             */
-            btn_cancel_add_comment_onclick() {
-                var spans = document.getElementById("text-comment").getElementsByTagName("span");   //  获取批注文本中span标签
-                //  遍历将没有class属性的span复原为纯文本
-                for (var i = 0; i < spans.length; i++) {
-                    var has = spans[i].hasAttribute("class");
-                    if (has == false) {
-                        var inner = spans[i].innerText;
-                        var text = document.createTextNode(inner);
-                        spans[i].parentNode.replaceChild(text, spans[i]);
-                    }
-                }
-                this.begin_add_mark = '';
-                this.end_add_mark = '';
-                this.before = '';
-                this.after = '';
             },
 
 
@@ -998,15 +1003,18 @@
                     var text_comment = document.getElementById("text-comment");
                     //该字不是批注
                     if (a == 0) {
+                        var span = document.createElement("span");
                         var text = document.createTextNode(p);
-                        text_comment.appendChild(text)
+                        span.appendChild(text);
+                        span.setAttribute("id", i);
+                        text_comment.appendChild(span);
                     }
                     //该字是批注
                     else if (a == 1) {
                         var span = document.createElement("span");
                         var text = document.createTextNode(p);
                         span.appendChild(text);
-                        span.setAttribute("class", "comment id=C" + this.comment[jtemp].id_comment);
+                        span.setAttribute("class", "ry-comment id=C" + this.comment[jtemp].id_comment);
                         span.setAttribute("data-toggle", "modal");
                         span.setAttribute("data-target", "#layer-comment-record");
                         text_comment.appendChild(span);
@@ -1054,7 +1062,7 @@
                         var span = document.createElement("span");
                         var text = document.createTextNode(p);
                         span.appendChild(text);
-                        span.setAttribute("class", "mark id=M" + this.mark[jtemp].id_mark);
+                        span.setAttribute("class", "ry-mark id=M" + this.mark[jtemp].id_mark);
                         text_mark.appendChild(span);
                     }
                 }
@@ -1432,14 +1440,16 @@
     }
 
     /*批注字体样式*/
-    .comment{
+    .ry-comment{
         cursor: pointer;
-        text-decoration: underline;
+        font-weight: bold;
+        color: red;
     }
 
     /*标记字体样式*/
-    .mark{
+    .ry-mark{
         cursor: pointer;
-        font-weight: bold;
+        text-decoration: underline;
+        color: red;
     }
 </style>
