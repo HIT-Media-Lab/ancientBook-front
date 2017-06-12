@@ -464,7 +464,7 @@
                 this.edit_text_obj.page_id = this.page_id;
                 this.edit_text_obj.content = this.content;
                 this.edit_text_obj.commit = this.commit;
-                this.BeforeHttp(this.edit_text);
+                this.before_http(this.edit_text);
                 this.http_json('/ancient_books/modify_page_content.action' , 'post' , this.edit_text_obj , this.success_post_edit,this.fail_post_edit);
             },
 
@@ -495,7 +495,7 @@
                 this.update_cm.comments_modify = this.comments_modify;
                 this.update_cm.marks_delete = this.marks_delete;
                 this.update_cm.marks_modify = this.marks_modify;
-                this.BeforeHttp(this.update_cm);
+                this.before_http(this.update_cm);
                 this.http_json('/ancient_books/update_marks_comment.action' , 'post' , this.update_cm , this.success_update_cm , this.fail_update_cm);
             },
 
@@ -523,7 +523,7 @@
                 this.add_comment_obj.begin = this.begin_add_comment;
                 this.add_comment_obj.end = this.end_add_comment;
                 this.add_comment_obj.pri = this.pri;
-                this.BeforeHttp(this.add_comment_obj);
+                this.before_http(this.add_comment_obj);
                 this.http_json('/ancient_books/add_comment.action' , 'post' , this.add_comment_obj , this.success_add_comment , this.fail_add_comment);
             },
 
@@ -553,7 +553,7 @@
                 this.add_mark_obj.noumenon_id = this.noumenon_id;
                 this.add_mark_obj.before = this.before;
                 this.add_mark_obj.after = this.after;
-                this.BeforeHttp(this.add_mark_obj);
+                this.before_http(this.add_mark_obj);
                 this.http_json('/ancient_books/add_mark.action' , 'post' , this.add_mark_obj , this.success_add_mark , this.fail_add_mark);
             },
 
@@ -576,7 +576,7 @@
              */
             post_delete_mark() {
                 this.delete_mark_obj.mark_id = this.mark_id;
-                this.BeforeHttp(this.delete_mark);
+                this.before_http(this.delete_mark);
                 this.http_json('/ancient_books/delete_mark.action' , 'post' , this.delete_mark_obj , this.success_delete_mark , this.fail_delete_mark);
             },
 
@@ -599,7 +599,7 @@
              */
             post_delete_comment() {
                 this.delete_comment_obj.comment_id = this.comment_id;
-                this.BeforeHttp(this.delete_comment_obj);
+                this.before_http(this.delete_comment_obj);
                 this.http_json('/ancient_books/delete_comment.action' , 'post' , this.delete_comment_obj , this.success_delete_comment , this.fail_delete_comment);
             },
 

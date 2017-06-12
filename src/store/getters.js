@@ -38,6 +38,14 @@ export default {
     get_copy_item:state => {
         return state.copy_contents
     },
-
+    get_upload_file:state => {
+        return state.upload_file
+    },
+    get_book_summary:state => {
+        return state.book_summary
+    },
+    get_upload1_info:state => {
+        return state.upload1_info
+    }
 
 }
