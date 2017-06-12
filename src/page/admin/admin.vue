@@ -492,6 +492,13 @@
                 this.$http.get('/ancient_books/logout.action').then(function () {
                     alert("注销成功");
                     localStorage.setItem('user', JSON.stringify("guest"));
+                    this.$http.get('/ancient_books/getToken.action').then(function (response) {
+                        console.log("注销后得到token");
+                        this.$store.commit("change_token",response.body.token);
+                        console.log(this.$store.getters.GetToken + " 注销后获得token");
+                    },function () {
+//                 alert("error")
+                    });
                     this.$router.push({path: '/login'});
                 }, function () {
                     alert("error")
