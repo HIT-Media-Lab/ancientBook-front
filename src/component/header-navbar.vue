@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="login-box">
-            <login_modal :show_modal.sync = "show_m" @fireclose = "show_m = false">
+            <login_modal v-bind:show_modal.sync = show_m @fireclose = "show_m = false" class="j-login-bag">
                 <header class="dialog-header" slot="header">
                     <h3 class="dialog-title">登 录</h3>
                 </header>
@@ -430,8 +430,13 @@
         background-size: 100%;
         border: none;
     }
+    .j-login-bag{
+        width: 400px;
+        height: 375px;
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
     .dialog-header {
-        margin-top: 5%;
         background-image: url("../assets/img/弹框标题.png");
         background-size:90%;
     }
