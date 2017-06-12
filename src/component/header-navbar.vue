@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="login-box">
-            <login_modal :show_modal.sync = "show_modal" @fireclose = "show_modal = false">
+            <login_modal :show_modal.sync = "show_m" @fireclose = "show_m = false">
                 <header class="dialog-header" slot="header">
                     <h3 class="dialog-title">登 录</h3>
                 </header>
@@ -94,7 +94,7 @@
                 sort_box:'',
                 url: '/ancient_books/logout.action',
                 name:'登录',
-                show_modal: false,
+                show_m: false,
 
                 showloading: false,
 
@@ -164,7 +164,7 @@
             show_login(){
                 let user_id = JSON.parse(localStorage.getItem('user'));
                 if (user_id == 'guest'){
-                    this.show_modal = true;
+                    this.show_m = true;
                 }else if(user_id == 'user'){
                     this.$router.push({path: '/user'});
                 }
