@@ -43,14 +43,6 @@ import store from '../../../store'
          }
      },
      methods: {
-//         Test(){
-//             alert(this.token);
-////             this.$store.state.Token="hhhhhh";
-////             alert(this.$store.state.Token);
-////            this.$store.commit("login_show");
-////             this.show=this.$store.getters.GetShow;
-////             alert(this.show)
-//         },
          hide:function () {
              this.sort_box = ''
          },

@@ -114,9 +114,6 @@
                 show:''
             }
         },
-        props:{
-            show_modal: false
-        },
         methods:{
             //注销
 //            Logout:function () {
