@@ -10,9 +10,16 @@
 
         <div class="width1000 center">
             <img src="../../../../assets/img/本体标记/墨水线上.png" height="7" width="974"/>
+            <button class="ry-btn-add-book float-right" @click="add_new_book()">添加新冊</button>
         </div>
 
-        <upload id="upload2" class="width600 center"></upload>
+        <ul class="width600 center">
+            <upload></upload>
+            <li v-for="item in upload_box">
+                <upload></upload>
+                <button type="button" class="btn btn-danger btn-xs" @click="remove(item)">remove</button>
+            </li>
+        </ul>
 
         <div class="width600 center">
             <p>请严格遵守命名规范上传文件，并保证对应图文文件的名称一致（可以仅上传图片文件）</p>
@@ -36,6 +43,18 @@
             upload,
         },
 
+        data() {
+            return{
+                upload2 : {
+                    book_name : '',
+                    book_num : '',
+                    images : {},
+                    texts : {},
+                },
+                upload_box : [],
+            }
+        },
+
         methods : {
             next_page() {
                 this.$router.push({path: '/user/upload3'});
@@ -43,6 +62,17 @@
             last_page() {
                 this.$router.push({path: '/user/upload1'});
             },
+
+            add_new_book() {
+                this.upload_box.push({
+                    value: null
+                })
+            },
+
+            remove(item) {
+                var i = this.upload_box.indexOf(item)
+                this.upload_box.splice(i, 1)
+            }
         }
     }
 </script>
