@@ -117,8 +117,8 @@
                 <!--添加批注模态框-->
                 <div>
                     <add_comment_modal :show_modal.sync = "add_comment_modal" @fireclose = "add_comment_modal = false">
-                        <header class="dialog-header" slot="header">
-                            <h3 class="dialog-title">選中內容：示例文本</h3>
+                        <header slot="header">
+                            <h3>選中內容：示例文本</h3>
                         </header>
                         <div class="dialog-body" slot="body">
                             <p>添加批註：</p>
@@ -784,7 +784,7 @@
                     if (checkbox.checked = true) {
                         this.pri = 1
                     }
-                    else {
+                    else if (checkbox.checked = false) {
                         this.pri = 0
                     }
                     this.content_add_comment = textarea_add_comment.value;
@@ -1423,7 +1423,7 @@
     textarea{
         position: relative;
         top: 30px;
-        width: 320px;
+        width: 250px;
     }
 
     /*修订信息编辑框*/
@@ -1434,7 +1434,7 @@
 
     /*批注内容编辑框*/
     #textarea-addComment{
-        width: 500px;
+        width: 400px;
         height: 200px;
         position: static;
     }
