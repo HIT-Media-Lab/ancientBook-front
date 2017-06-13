@@ -5,7 +5,7 @@
         <create-word :prams="this.prams"></create-word>
         <div class="zxw-noumenon-select">
             <span>选择本体类型：</span>
-            <select class="zxw-select">
+            <select class="zxw-select" v-model="selection">
                 <option v-for="item in noumenon_option">{{item}}</option>
             </select>
         </div>
@@ -20,6 +20,7 @@ import createWord from '../../../component/create-word.vue'
 export default{
     created(){
         this.prams = this.$route.name;
+
     },
 
     components:{
@@ -29,8 +30,13 @@ export default{
     data(){
         return{
             prams:'',
-            noumenon_option:['时间','地名','人物','机构','职官','文献','术语']
+            noumenon_option:['时间','地名','人物','机构','职官','文献','术语'],
+            selection:''
         }
+    },
+
+    methods:{
+
     }
 
 }
@@ -82,10 +88,7 @@ export default{
         background-position: center;
         color:black;
     }
-    .zxw-prebtn-margin{
 
-        margin:0 15px 0 620px;
-    }
 
     .zxw-prebtn-length{
         width:125px;

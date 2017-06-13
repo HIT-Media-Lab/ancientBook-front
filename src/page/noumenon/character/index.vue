@@ -18,7 +18,7 @@
 </template>
 
 <script>
-   /* let Mock = require('mockjs');
+   /*let Mock = require('mockjs');
 
     //显示用户列表
     Mock.mock('/ancient_books/get_person_list_by_word.action?word=A&&page_count=1','get',{
@@ -41,16 +41,16 @@
 
     Mock.mock('/ancient_books/get_person_list_by_word.action?word=B&&page_count=1','get',{
         "result|1":1,
-        "content|30":[{
+        "content|10":[{
             'standard_name':'@FIRST',
             'noumenon_id|1-100':1
         }],
         "total_page|10-20":1
     });
 
-    Mock.mock('/ancient_books/get_person_list_by_word.action?word=b&&page_count=2','get',{
+    Mock.mock('/ancient_books/get_person_list_by_word.action?word=Q&&page_count=1','get',{
         "result|1":1,
-        "content|30":[{
+        "content":[{
             'standard_name':'@FIRST',
             'noumenon_id|1-100':1
         }],
@@ -101,6 +101,7 @@
                     for (let i = 0; i < response.body.content.length; i++) {
                         this.character_data[i] = response.body.content[i];
                     }
+                    console.log(response.body.content.length);
                     console.log(JSON.stringify(this.character_data));
             },
 

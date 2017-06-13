@@ -16,7 +16,7 @@
     export default{
         watch:{
             $route(){
-                //this.cur_page = this.$route.params.pageId;
+                this.cur_page = this.$route.params.pageId;
             }
         },
 

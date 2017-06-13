@@ -37,7 +37,7 @@
             <label class="zxw-character-span">籍贯：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin">
             <label class="zxw-character-span">父：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="button" class="zxw-character-input zxw-character-input-margin" @click="open_character()">
         </div>
 
         <div class="zxw-character-row">
@@ -68,29 +68,34 @@
             <input type="text" class="zxw-character-input zxw-character-input-margin">
         </div>
 
-        <div>
-            <input type="text" class="zxw-character-input-head zxw-character-input" >
-            <input type="text" class="zxw-character-input" maxlength="20">
-            <button class="zxw-add-button" @click="go()">添加</button>
+        <div v-for="(item ,index) in add_data">
+            <input type="text" class="zxw-character-input-head zxw-character-input" v-model="add_data[index].remark_name">
+            <input type="text" class="zxw-character-input" maxlength="20" name="index" v-model="add_data[index].remark">
+            <button class="zxw-add-button" @click="add_tip(index)" v-show="add_data[index].value">添加</button>
         </div>
 
-        <router-link to="/build">
-            <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length">上一步</button>
-        </router-link>
 
-        <router-link to="/charthree">
-            <button class="zxw-nextbtn zxw-nextbtn-length">下一步</button>
-        </router-link>
+        <div class="zxw-build-step2-btn">
+            <router-link to="/build">
+                <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length">上一步</button>
+            </router-link>
 
-        <modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></modal>
-        <modal :time_modal="this.time_modal_2" v-on:success_time="dead_time" v-on:close_modal="close_dead()"></modal>
+            <router-link to="/charthree">
+                <button class="zxw-nextbtn zxw-nextbtn-length">下一步</button>
+            </router-link>
+        </div>
+
+        <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></time_modal>
+        <time_modal :time_modal="this.time_modal_2" v-on:success_time="dead_time" v-on:close_modal="close_dead()"></time_modal>
+        <character_modal :character_modal="this.character_modal" v-on:close_modal="close_character()"></character_modal>
 
     </div>
 </template>
 
 <script>
     import create_word from '../../../../component/create-word.vue';
-    import modal from '../../../../component/time-modal.vue';
+    import time_modal from '../../../../component/time-modal.vue';
+    import character_modal from '../../../../component/search_character.vue';
     export default{
         created(){
             this.prams = this.$route.name;
@@ -98,7 +103,8 @@
 
         components:{
             create_word,
-            modal
+            time_modal,
+            character_modal
         },
 
         data(){
@@ -106,6 +112,7 @@
                 prams:'',
                 time_modal_1:false,
                 time_modal_2:false,
+                character_modal:false,
                 input_content:{
                     standard_name:'',
                     person_name:'',
@@ -115,16 +122,19 @@
                     other_name:'',
                     birth_time_id:'',
                     death_time_id:'',
-                    remark_1_name:'',
-                    remark_2_name:'',
-                    remark_1:'',
-                    remark_2:'',
+                    //remark_1_name:'',
+                    //remark_2_name:'',
+                    //remark_1:'',
+                    //remark_2:'',
                     english:'',
                     location_id:''
                 },
                 person_relations:[],
                 birth_value:'',
-                dead_value:''
+                dead_value:'',
+                add_data:[{value:true}],
+                remark_name:[],
+                remark:[]
             }
         },
 
@@ -147,12 +157,32 @@
             },
 
             dead_time(q){
-                this.input_content.birth_time_id = q.time_id;
+                this.input_content.dead_time_id = q.time_id;
                 this.dead_value = q.content;
             },
 
             close_dead(){
                 this.time_modal_2 = false;
+            },
+
+            add_tip(p){
+                console.log(p);
+                this.add_data[p].value = false;
+                this.remark_name.push(this.add_data[p].remark_name);
+                this.remark.push(this.add_data[p].remark);
+                console.log(JSON.stringify(this.remark_name+"----"+this.remark));
+                this.add_data.push({
+                    value:true
+                });
+                console.log(this.add_data.length+JSON.stringify(this.add_data));
+            },
+
+            open_character(){
+                this.character_modal = true;
+            },
+
+            close_character(){
+                this.character_modal = false;
             }
         }
     }
@@ -186,7 +216,7 @@
 
     /*备注输入头的样式*/
     .zxw-character-input-head{
-        margin:0 30px 0 0;
+        margin:0 30px 10px 0;
         width:70px;
     }
 
@@ -208,5 +238,11 @@
         height:43px;
         color:gainsboro;
         margin:0 0 0 35px;
+    }
+
+    .zxw-build-step2-btn{
+        float:right;
+        margin:0 300px 0 0;
+        position:relative;
     }
 </style>

@@ -1,5 +1,5 @@
 <template>
-        <modal :show_modal="this.time_modal" v-on:fireclose="this.close" v-model="this.add">
+        <modal :show_modal="this.time_modal" v-on:fireclose="this.close">
             <div slot="header" class="zxw-time-header">
                 <span>时间本体</span>
             </div>
@@ -221,12 +221,6 @@
                     console.log(JSON.stringify(this.time_object));
                     this.http_json(this.time_url,'post',this.time_object,this.success_time,this.fail_time);
                 }
-            }
-        },
-
-        computed:{
-            add(){
-                return this.time_modal;
             }
         }
     }
