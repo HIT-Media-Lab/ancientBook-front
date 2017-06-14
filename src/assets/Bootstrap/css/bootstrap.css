@@ -1103,7 +1103,7 @@ h6,
   font-size: 12px;
 }
 p {
-  margin: 0 0 10px;
+  margin: 0 0 4px;
 }
 .lead {
   margin-bottom: 20px;
@@ -3728,6 +3728,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   line-height: 1.42857143;
   border: 1px solid transparent;
   border-radius: 4px 4px 0 0;
+  color: black;
 }
 .nav-tabs > li > a:hover {
   border-color: #eee #eee #ddd;
@@ -3735,9 +3736,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
-  color: #555;
+  color: brown;
+  font-weight: 900;
   cursor: default;
-  background-color: #fff;
+  background-color: #fef7e5;
   border: 1px solid #ddd;
   border-bottom-color: transparent;
 }

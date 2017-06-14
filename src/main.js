@@ -125,6 +125,7 @@ import  book_varieties from  './page/bookstore/ancientbooks/varieties.vue'
 import  book_impression from './page/bookstore/ancientbooks/impression.vue'
 import  book_copy from './page/bookstore/ancientbooks/copy.vue'
 import  book_edition from './page/bookstore/ancientbooks/edition.vue'
+import  sort_book from './page/bookstore/ancientbooks.vue'
 
 import  login from  './page/user/login/login.vue'
 import  admin from  './page/admin/admin.vue'
@@ -156,7 +157,9 @@ import  mark from  './page/user/myoffer/mark/index.vue'
 import  ancientbook from  './component/ancientbook.vue'
 import  comment from  './page/user/myoffer/comment/index.vue'
 import  revise from  './page/user/myoffer/revise/index.vue'
-import  search from  './page/search/index.vue'
+import  search_index from  './page/search/index.vue'
+import  search_book from './page/search/book.vue'
+import  search_noumenon from './page/search/noumenom.vue'
 
 //本体
 import  noumenon from  './page/noumenon/index.vue'
@@ -287,9 +290,21 @@ const router = new VueRouter({
             name:'revise'
         },
         {
-            path:'/search',
-            component:search,
-            name:'search'
+            path:'/search_index',
+            component:search_index,
+            name:'search_index',
+            children:[
+                {
+                    path:'',
+                    component:search_book,
+                    name:'search_book',
+                },
+                {
+                    path:'search_noumenon',
+                    component:search_noumenon,
+                    name:'search_noumenon',
+                },
+            ]
         },
         {
             path:'/ancientbook',
@@ -403,6 +418,11 @@ const router = new VueRouter({
                     path: '',
                     component: book_recent,
                     name: 'book_recent'
+                },
+                {
+                    path: 'sort_book',
+                    component: sort_book,
+                    name: 'sort_book'
                 },
                 {
                     path: 'book_info',
