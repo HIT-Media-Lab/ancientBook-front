@@ -28,9 +28,9 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span zxw-must-write">出生时间：</label>
-            <button  class="zxw-character-input zxw-character-input-margin" readonly @click="open_birth()"  v-model="input_content.birth_value"></button>
+            <button  class="zxw-character-input zxw-character-input-margin" readonly @click="open_birth()"  v-model="input_content.birth_value">{{input_content.birth_value}}</button>
             <label class="zxw-character-span zxw-must-write">死亡时间：</label>
-            <button class="zxw-character-input zxw-character-input-margin" readonly @click="open_dead()" v-model="input_content.dead_value"></button>
+            <button class="zxw-character-input zxw-character-input-margin" readonly @click="open_dead()" v-model="input_content.dead_value">{{input_content.dead_value}}</button>
         </div>
 
         <div class="zxw-character-row">
@@ -151,8 +151,10 @@
             },
 
             birth_time(p){
-                this.input_content.birth_time_id = p.time_id;
-                this.birth_value = p.content;
+                //this.input_content.birth_time_id = p.time_id;
+                //this.birth_value = p.content;
+                this.input_content.birth_value=p;
+                this.close_birth();
             },
 
             close_birth(){
@@ -164,8 +166,10 @@
             },
 
             dead_time(q){
-                this.input_content.dead_time_id = q.time_id;
-                this.dead_value = q.content;
+                //this.input_content.dead_time_id = q.time_id;
+                //this.dead_value = q.content;
+                this.input_content.dead_value=q;
+                this.close_dead();
             },
 
             close_dead(){
@@ -225,6 +229,8 @@
         background-color: transparent;
         height:30px;
         width:220px;
+        text-align: left;
+        padding-left: 0.5%;
     }
 
     /*输入框间距*/
