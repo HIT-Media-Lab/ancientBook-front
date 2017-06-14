@@ -116,47 +116,33 @@
 
                 <!--添加批注模态框-->
                 <div>
-                    <add_comment_modal :show_modal.sync = "add_comment_modal" @fireclose = "add_comment_modal = false">
+                    <modal :show_modal.sync = "add_comment_modal" @fireclose = "add_comment_modal = false">
                         <header slot="header">
                             <h3>選中內容：示例文本</h3>
                         </header>
                         <div class="dialog-body" slot="body">
                             <p>添加批註：</p>
                             <textarea id="textarea-addComment"></textarea>
-                            <br>
-                            <input id="check-private" type="checkbox" value="選為私密">選為私密
-                            <br>
-                            <br>
-                            <button class="btn btn-warning btn-sm" data-dismiss="modal" id="btn-cancel-add-comment" @click="btn_cancel_add_comment_onclick()">取消</button>
-                            <button class="btn btn-success btn-sm" data-dismiss="modal" id="btn-confirm-add-comment" @click="btn_confirm_add_comment_onclick()">確定</button>
+                            <div class="ry-modal-add-comment-box">
+                                <input id="check-private" type="checkbox" value="選為私密">選為私密
+                                <button class="ry-btn-cancel-add-comment" data-dismiss="modal" @click="btn_cancel_add_comment_onclick()">取消</button>
+                                <button class="ry-btn-confirm-add-comment" data-dismiss="modal" @click="btn_confirm_add_comment_onclick()">確定</button>
+                            </div>
                         </div>
-                    </add_comment_modal>
+                    </modal>
                 </div>
 
                 <!--查看批注模态框-->
-                <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-comment-record">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                    <span>&times;</span>
-                                </button>
-                                <h4 class="modal-title">批註內容</h4>
-                            </div>
-                            <div class="modal-body text-tight">
-                                <table class="table table-bordered table-hover">
-                                    <tr class="text-left">
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-right">
-                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#layer-delete">删除</button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+                <div>
+                    <modal :show_modal.sync = "get_comment_modal" @fireclose = "get_comment_modal = false">
+                        <header slot="header">
+                            <h4 class="modal-title">批註內容</h4>
+                        </header>
+                        <div class="dialog-body" slot="body">
+                            <span>{{now_target}}</span><span>{{now_comment}}</span>
+                            <button class="btn btn-danger btn-sm">删除</button>
                         </div>
-                    </div>
+                    </modal>
                 </div>
 
                 <!--标记本体模态框-->
@@ -213,6 +199,64 @@
             </div>
         </div>
 
+        <!--目录模态框-->
+        <div>
+            <modal :show_modal.sync = "catalogue_modal" @fireclose = "catalogue_modal = false">
+                <div class="dialog-body" slot="body">
+                    <div>册1册名</div>
+                    <div class="row">
+                        <a class="col-md-2">
+                            卷1
+                        </a>
+                        <a class="col-md-2">
+                            卷2
+                        </a>
+                        <a class="col-md-2">
+                            卷3
+                        </a>
+                        <a class="col-md-2">
+                            卷4
+                        </a>
+                        <a class="col-md-2">
+                            卷5
+                        </a>
+                        <a class="col-md-2">
+                            卷6
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a class="col-md-2">
+                            卷7
+                        </a>
+                        <a class="col-md-2">
+                            卷8
+                        </a>
+                    </div>
+                    <div>册2册名</div>
+                    <div class="row">
+                        <a class="col-md-2">
+                            卷1
+                        </a>
+                        <a class="col-md-2">
+                            卷2
+                        </a>
+                        <a class="col-md-2">
+                            卷3
+                        </a>
+                        <a class="col-md-2">
+                            卷4
+                        </a>
+                        <a class="col-md-2">
+                            卷5
+                        </a>
+                        <a class="col-md-2">
+                            卷6
+                        </a>
+                    </div>
+                </div>
+            </modal>
+        </div>
+
         <!--底按鈕欄-->
         <div class="width1000 center">
             <img src="../assets/img/本体标记/墨水线 下.png" height="4" width="974"/>
@@ -225,7 +269,7 @@
                     <span>MPage</span>
                 </div>
                 <button class="float-right ry-btn-last-page">上一</button>
-                <button class="ry-btn-menu">目錄</button>
+                <button class="ry-btn-menu" @click="catalogue_onclick()">目錄</button>
             </div>
         </div>
 
@@ -235,15 +279,19 @@
 
 
 <script type="text/javascript">
-    import add_comment_modal from  '../component/modal.vue'
+    import modal from  '../component/modal.vue'
     export default{
         components:{
-            add_comment_modal,
+            modal,
         },
 
         data() {
             return{
                 add_comment_modal : false,
+                get_comment_modal : false,
+                catalogue_modal : false,
+                now_target : '',
+                now_comment : '',
 
                 get_content_obj : {},
                 content : '蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。',
@@ -815,6 +863,23 @@
             },
 
             /**
+             * 查看批注
+             */
+            check_comment() {
+                this.now_target = 1;
+                this.now_comment = 1;
+                alert("ewoifw");
+                this.get_comment_modal = true;
+            },
+
+            /**
+             * 目录按钮
+             */
+            catalogue_onclick() {
+                this.catalogue_modal = true;
+            },
+
+            /**
              * 选中标记文本事件
              */
             text_mark_onclick() {
@@ -1015,8 +1080,8 @@
                         var text = document.createTextNode(p);
                         span.appendChild(text);
                         span.setAttribute("class", "ry-comment id=C" + this.comment[jtemp].id_comment);
-                        span.setAttribute("data-toggle", "modal");
-                        span.setAttribute("data-target", "#layer-comment-record");
+//                        span.setAttribute("v-on:click",function(){return function(){check_comment();}}());
+                        span.attachEvent("v-on:click",this.check_comment());
                         text_comment.appendChild(span);
                     }
                 }
@@ -1318,6 +1383,22 @@
         width: 299px;
         height: 47px;
         background-image: url("../assets/img/本体标记/屏风按钮.png");
+    }
+
+    .ry-btn-cancel-add-comment{
+        width: 80px;
+        height: 35px;
+        background-image: url("../assets/img/批注交互/删除按钮.png");
+    }
+
+    .ry-btn-confirm-add-comment{
+        width: 80px;
+        height: 35px;
+        background-image: url("../assets/img/批注交互/删除按钮.png");
+    }
+
+    .ry-modal-add-comment-box{
+        padding-left: 160px;
     }
     
 
