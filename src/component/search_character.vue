@@ -159,7 +159,7 @@
         background-size: contain;
         background-color: transparent;
         width:400px;
-        height:40px;
+        height:50px;
         padding:10px 0 0 0;
     }
 

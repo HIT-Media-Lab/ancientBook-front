@@ -11,14 +11,14 @@
 
         <!--用户信息表格-->
         <table class="table table-bordered zxw-table-box">
-                <thead>
+            <thead>
                 <tr>
                     <th>用户名</th>
                     <th >账号</th>
                     <th>创建时间</th>
                     <th></th>
                 </tr>
-                </thead>
+            </thead>
 
             <tbody>
                 <tr v-for="(item,index) in user_data"> <!--v-for循环数据里的数组数据-->
@@ -35,8 +35,8 @@
             </tbody>
         </table>
 
-        <modal :show_modal="this.show_create" v-on:fireclose="close_dialog()">
-            <div slot="header" class="zxw-time-header">
+        <modal :show_modal="this.show_create" v-on:fireclose="close_dialog()" class="zxw-modal-character">
+            <div slot="header" class="zxw-character-header">
                 <span>创建用户</span>
             </div>
 
@@ -73,8 +73,8 @@
         </modal>
 
 
-        <modal :show_modal="this.show_change" v-on:fireclose="close_motal()">
-            <div slot="header" class="zxw-time-header">
+        <modal :show_modal="this.show_change" v-on:fireclose="close_motal()" class="zxw-modal-character">
+            <div slot="header" class="zxw-character-header">
                 <span>编辑用户</span>
             </div>
 
@@ -118,12 +118,12 @@
 
 
 <script type="text/javascript">
-    /*let Mock = require('mockjs');
+    let Mock = require('mockjs');
 
     //显示用户列表
     Mock.mock('/ancient_books/get_user_list.action?page=1','get',{
         "status|200":200,
-        "content|3":[{
+        "content|20":[{
             'user_id|1-100':100,
             'name':'@FIRST',
             'account|10000000-1000000000':100000000,
@@ -134,14 +134,14 @@
 
     Mock.mock('/ancient_books/get_user_list.action?page=2','get',{
         "status|200":200,
-        "content|3":[{
+        "content|20":[{
             'user_id|1-100':100,
             'name':'@FIRST',
             'account|10000000-1000000000':100000000,
             'time':'@DATETIME("yyyy-MM-dd HH:mm:ss")'
         }],
         'max_page|1-100':100
-    });*/
+    });
 
     import paginator from "../../component/paginator.vue";
     import noumenon_title from "../../component/noumenon-title.vue";

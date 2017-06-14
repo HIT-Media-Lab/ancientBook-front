@@ -50,7 +50,11 @@
             success_recent(response){
                 console.log("最近编辑请求成功！");
                 for (let i = 0; i < response.body.noumenons.length; i++) {
-                    this.recent_noumenons[i]=response.body.noumenons[i];
+                    this.recent_noumenons.push({
+                        standard_name:response.body.noumenons[i].standard_name,
+                        id:response.body.noumenons[i].id,
+                        type:response.body.noumenons[i].type
+                    })
                 }
             },
 
