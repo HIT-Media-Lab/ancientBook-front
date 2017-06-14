@@ -118,7 +118,7 @@
 
 
 <script type="text/javascript">
-    let Mock = require('mockjs');
+    /*let Mock = require('mockjs');
 
     //显示用户列表
     Mock.mock('/ancient_books/get_user_list.action?page=1','get',{
@@ -141,7 +141,7 @@
             'time':'@DATETIME("yyyy-MM-dd HH:mm:ss")'
         }],
         'max_page|1-100':100
-    });
+    });*/
 
     import paginator from "../../component/paginator.vue";
     import noumenon_title from "../../component/noumenon-title.vue";
