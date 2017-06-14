@@ -23,9 +23,9 @@
                 </li>
             </ul>
         </div>
-        <button @click="test1()">有用户权限</button>
-        <button @click="test2()">有超级用户权限</button>
-        <button @click="test3()">没用权限</button>
+        <!--<button @click="test1()">有用户权限</button>-->
+        <!--<button @click="test2()">有超级用户权限</button>-->
+        <!--<button @click="test3()">没用权限</button>-->
     </div>
 </template>
 
@@ -48,11 +48,11 @@ import store from '../../../store'
          },
          enter:function () {
              this.sort_box = '';
-             this.$router.push({path: '/search'});
+             this.$router.push({path: '/search_inex'});
          },
          search:function () {
              if (this.sort_box != ''){
-                 this.$router.push({path: '/search'});
+                 this.$router.push({path: '/search_index'});
              }
          },
          test1(){
