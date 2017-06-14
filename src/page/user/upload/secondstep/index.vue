@@ -17,7 +17,7 @@
             <upload></upload>
             <li v-for="item in upload_box">
                 <upload></upload>
-                <button type="button" class="btn btn-danger btn-xs" @click="remove(item)">remove</button>
+                <button type="button" class="ry-btn-add-book" @click="remove(item)">刪除本冊</button>
             </li>
         </ul>
 

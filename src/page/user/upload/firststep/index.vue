@@ -143,6 +143,7 @@
     .ry-upload input{
         border: none;
         background-color: transparent;
+        padding-left: 4px;
     }
 
     .ry-upload button{
