@@ -4,26 +4,16 @@
             <build_button slot="children"></build_button>
         </noumenon_title>
 
-        <div v-for="(item,index) in recent_noumenons">
-            <p class="zxwnoumenon-row" @click="go_noumenom(index)">{{item.standard_name}}</p>
-        </div>
+        <p class="zxwnoumenon-row" v-for="(item,index) in recent_noumenons" @click="go_noumenom(index)">{{item.standard_name}}</p>
     </div>
 </template>
 <script>
-     /* let Mock = require('mockjs');
+      /*let Mock = require('mockjs');
 
      //显示用户列表
      Mock.mock('/ancient_books/get_recent_noumenons.action','get', {
          "status": 200,
-         "noumenons": [{
-             'standard_name': '@FIRST',
-             'id|1': 1,
-             'type|1': 1
-         }, {
-             'standard_name': '@FIRST',
-             'id|1': 1,
-             'type|1': 1
-         }, {
+         "noumenons|10": [{
              'standard_name': '@FIRST',
              'id|1': 1,
              'type|1': 1
@@ -49,8 +39,13 @@
         methods: {
             success_recent(response){
                 console.log("最近编辑请求成功！");
+                console.log(response.body.noumenons.length);
                 for (let i = 0; i < response.body.noumenons.length; i++) {
-                    this.recent_noumenons[i]=response.body.noumenons[i];
+                    this.recent_noumenons.push({
+                        standard_name:response.body.noumenons[i].standard_name,
+                        id:response.body.noumenons[i].id,
+                        type:response.body.noumenons[i].type
+                    })
                 }
             },
 
@@ -90,7 +85,8 @@
 <style>
 
     .zxwnoumenon-row{
-        margin:0 0 25px 35px;
-        font-size: 12px;
+        margin:20px 0 25px 5%;
+        font-size: 14px;
+        font-weight: bold;
     }
 </style>
