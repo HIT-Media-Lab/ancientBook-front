@@ -90,7 +90,7 @@
 
                         </header>
                         <div class="width600" slot="body">
-                            <h4 style="text-align: center">修訂記錄</h4>
+                            <h4 style="text-align: center;display: inline-block;margin-top: 30px;">修訂記錄</h4>
                             <div v-for="item in commit_edit_record">
                                 <p>修訂者：{{item.username_edit_record}}</p>
                                 <p>修訂時間：{{item.time_edit_record}}</p>
