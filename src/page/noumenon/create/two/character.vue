@@ -4,7 +4,11 @@
         <img src="../../../../assets/img/create-step2.png" class="zxwcreate-img">
         <create_word :prams="this.prams"></create_word>
 
-        <p class="zxw-create-character">本体名称：{{input_content.person_name}}{{input_content.birth_value}}</p>
+        <p class="zxw-create-character">本体名称：{{input_content.person_name}}
+            <span v-show="input_content.birth_value !==''">(</span>
+                {{input_content.birth_value}}
+            <span v-show="input_content.birth_value !==''">)</span>
+        </p>
         <div class="zxw-character-row">
             <label class="zxw-character-span zxw-must-write">人名：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_content.person_name">
