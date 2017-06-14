@@ -8,7 +8,7 @@
                     <span>冊名</span>
                 </div>
                 <div>
-                    <a>卷1</a>
+                    <a @click="go_to()">卷1</a>
                 </div>
 
                 <div>
@@ -30,3 +30,13 @@
         </div>
     </div>
 </template>
+
+<script>
+    export default{
+        methods : {
+            go_to() {
+                this.$router.push({path: '/ancientbook'});
+            }
+        }
+    }
+</script>

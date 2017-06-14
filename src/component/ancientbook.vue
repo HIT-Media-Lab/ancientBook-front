@@ -823,7 +823,7 @@
                     }
                     this.content_add_comment = textarea_add_comment.value;
                     this.now_comment = this.content_add_comment;
-                    this.post_add_comment();
+//                    this.post_add_comment();
                     this.now_target = this.target_add_comment;
                     this.add_comment_modal = false;
 //                    window.location.reload();
@@ -873,12 +873,12 @@
                     var range = window.getSelection().getRangeAt(0);    //  获得选区
                     this.target_add_mark = range.toString();
                     var text_mark = document.getElementById("text-mark");
-                    for (i = 0; i < 5; i++) {
-                        var b = text_mark.innerText.charAt(this.begin_add_mark-5+k);
+                    for (var i = 0; i < 5; i++) {
+                        var b = text_mark.innerText.charAt(this.begin_add_mark-5+i);
                         this.before += b;
                     }
-                    for (j = 0; j < 5; j++) {
-                        var e = text_mark.innerText.charAt(this.end_add_mark+1+m);
+                    for (var j = 0; j < 5; j++) {
+                        var e = text_mark.innerText.charAt(this.end_add_mark+1+j);
                         this.after += e;
                     }
                 }
@@ -906,7 +906,7 @@
              * 添加标记按钮事件
              */
             btn_add_mark_onclick() {
-                this.post_add_mark();
+//                this.post_add_mark();
                 this.add_mark_modal = false;
             },
 
