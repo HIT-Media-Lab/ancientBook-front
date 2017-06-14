@@ -197,7 +197,7 @@
             },
 
             /*关联时间本体*/
-            success_time(response){
+           /* success_time(response){
                 this.time_data.push({
                     time_id:response.body.id,
                     content:this.time_object.standard_name
@@ -210,19 +210,19 @@
 
             fail_time(){
                 console.log("添加时间本体成功");
-            },
+            },*/
 
             add_time(){
                 if(this.selected_1 !== 0){
-                    //this.ban = true;
-                    this.time_object.standard_name = this.selected_1+this.selected_2+this.year_number+this.selected_3+this.selected_4;
+                    this.$emit('success_time',this.selected_1);
+                   /* this.time_object.standard_name = this.selected_1+this.selected_2+this.year_number+this.selected_3+this.selected_4;
                     this.time_object.chaodai = this.selected_1;
                     this.time_object.nianhao = this.selected_2;
                     this.time_object.nianfen = this.year_number;
                     this.time_object.yue = this.selected_3;
                     this.time_object.ri = this.selected_4;
                     console.log(JSON.stringify(this.time_object));
-                    this.http_json(this.time_url,'post',this.time_object,this.success_time,this.fail_time);
+                    this.http_json(this.time_url,'post',this.time_object,this.success_time,this.fail_time);*/
                 }
             }
         }

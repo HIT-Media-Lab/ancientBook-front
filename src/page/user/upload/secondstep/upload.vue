@@ -3,19 +3,19 @@
     <div id="upload2-box" class="ry-upload-two">
         <span>
             <span>冊號:</span>
-            <input class="ry-input-upload2" v-model="upload2.book_num">
+            <input class="ry-input-upload2">
         </span>
         <br>
         <span>
             <span>冊名:</span>
-            <input class="ry-input-upload2" v-model="upload2.book_name">
+            <input class="ry-input-upload2">
         </span>
 
         <div class="width800">
-            <a href="javascript:;" class="ry-file-picture">上傳圖片
+            <a href="javascript:;" class="ry-file-picture ry-white">上傳圖片
                 <input type="file" @change="onFileChange" name="picture">
             </a>
-            <a href="javascript:;" class="ry-file-text">上傳文本
+            <a href="javascript:;" class="ry-file-text ry-white">上傳文本
                 <input type="file" @change="onTextChange" name="text">
             </a>
         </div>
@@ -93,14 +93,16 @@
 </script>
 
 <style>
-    a:hover, a:visited, a:link, a:active{
-        color: white;
+    #upload2-box a:hover, a:visited, a:link, a:active{
         text-decoration: none;
+        color: white;
+        cursor: pointer;
     }
 
     .ry-upload-two input{
         border: none;
         background-color: transparent;
+        padding-left: 4px;
     }
 
     .ry-upload-two button{

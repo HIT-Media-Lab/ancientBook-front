@@ -55,7 +55,7 @@
                             <option>文獻</option>
                         </select>
                         <!--标记本体按钮，选中文本后激活显示，点击弹出标记本体模态框-->
-                        <button class="btn btn-info" data-toggle="modal" data-target="#layer-mark-noumenon" id="btn-mark-noumenon" style="visibility: hidden" @click="btn_mark_noumenon_onclick()">標記本體</button>
+                        <button class="ry-btn-cancel-add-comment" data-toggle="modal" data-target="#layer-mark-noumenon" id="btn-mark-noumenon" style="visibility: hidden" @click="btn_mark_noumenon_onclick()">標記本體</button>
                     </div>
 
                     <!--批注版块-->
@@ -65,7 +65,7 @@
                         <!--文本主体-->
                         <div class="body-text" id="text-comment" @click="text_comment_onclick()"></div>
                         <!--添加批注按钮，选中文本后激活显示，点击弹出添加批注模态框-->
-                        <button class="btn btn-info" data-toggle="modal" data-target="#layer-add-comment" id="btn-add-comment" style="visibility: hidden" @click="btn_add_comment_onclick()">添加批註</button>
+                        <button class="ry-btn-cancel-add-comment" id="btn-add-comment" style="visibility: hidden" @click="btn_add_comment_onclick()">添加批註</button>
                     </div>
 
                     <!--修订板块-->
@@ -73,17 +73,10 @@
                         <!--文本标题-->
                         <h4>詩經卷一</h4>
                         <!--文本主体-->
-                        <div class="body-text" id="text-edit" contentEditable="false"></div>
+                        <div class="body-text" id="text-edit"></div>
                         <br>
                         <br>
                         <br>
-                        <!--修订信息编辑框标题-->
-                        <h5 id="label" style="visibility: hidden">請填寫修訂信息:</h5>
-                        <!--修订信息编辑框-->
-                        <textarea id="textarea-editInfo" style="visibility: hidden"></textarea>
-                        <!--点击修订后弹出的按钮-->
-                        <button id="btn-cancel-edit" class="btn btn-danger" style="visibility: hidden" @click="btn_cancel_edit_onclick()">取消</button>
-                        <button id="btn-confirm-edit" class="btn btn-success" style="visibility: hidden" @click="btn_confirm_edit_onclick()">確定</button>
                         <!--查看修订记录-->
                         <button class="ry-btn-edit-record" data-toggle="modal" data-target="#layer-edit-record" id="btn-edit-record" @click="edit_record_onclick()">修訂記錄</button>
                         <button class="ry-btn-edit" id="btn-edit" @click="btn_edit_onclick()">修訂</button>
@@ -91,121 +84,105 @@
                 </div>
 
                 <!--修订记录模态框-->
-                <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-edit-record">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                    <span>&times;</span>
-                                </button>
-                                <h4 class="modal-title">修訂記錄</h4>
+                <div>
+                    <modal :show_modal.sync = "edit_record_modal" @fireclose = "edit_record_modal = false" class="ry-modal-border ry-modal-padding">
+                        <header slot="header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                            <h4 class="modal-title" style="text-align: center">修訂記錄</h4>
+                        </header>
+                        <div class="width600" slot="body">
+                            <div v-for="item in edit_record">
+                                <p>修訂者：{{item.username_edit_record}}</p>
+                                <p>修訂時間：{{item.time_edit_record}}</p>
+                                <p>修訂信息：{{item.commit_edit_record}}</p>
+                                <p>修訂版本：{{item.version_edit_record}}</p>
+                                <hr>
                             </div>
-                            <div class="modal-body text-tight">
-                                <div v-for="item in edit_record">
-                                    <p>修訂者：{{item.username_edit_record}}</p>
-                                    <p>修訂時間：{{item.time_edit_record}}</p>
-                                    <p>修訂信息：{{item.commit_edit_record}}</p>
-                                    <p>修訂版本：{{item.version_edit_record}}</p>
-                                    <hr>
-                                </div>
-                                <button class="btn btn-success btn-sm" data-dismiss="modal">確定</button>
-                            </div>
+                            <button class="ry-btn-confirm-edit-record-modal" data-dismiss="modal" @click="close_edit_record_modal()">確定</button>
                         </div>
-                    </div>
+                    </modal>
+                </div>
+
+                <!--修订模态框-->
+                <div>
+                    <modal :show_modal.sync = "edit_modal" @fireclose = "edit_modal = false" class="ry-modal-border ry-modal-padding">
+                        <header slot="header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                            <h4 class="modal-title" style="text-align: center">修訂</h4>
+                        </header>
+                        <div class="width600" slot="body">
+                            <div class="body-text" contentEditable="true">蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。</div>
+                            <br>
+                            <br>
+                            <br>
+                            <img src="../assets/img/上传1/中间墨线.png" height="6" width="600"/>
+                            <!--修订信息编辑框标题-->
+                            <h5>修訂信息:</h5>
+                            <!--修订信息编辑框-->
+                            <div id="textarea-editInfo" contentEditable="true" style="height: 100px"></div>
+                            <button class="ry-btn-confirm-edit-record-modal" data-dismiss="modal" @click="btn_confirm_edit_onclick()">確定</button>
+                        </div>
+                    </modal>
                 </div>
 
                 <!--添加批注模态框-->
-                <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-add-comment">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">選中內容：示例文本</h4>
-                            </div>
-                            <div class="modal-body text-tight">
-                                <p>添加批註：</p>
-                                <textarea id="textarea-addComment"></textarea>
-                                <br>
+                <div>
+                    <modal :show_modal.sync = "add_comment_modal" @fireclose = "add_comment_modal = false" class="ry-modal-border ry-modal-padding">
+                        <header slot="header">
+                            <h3>選中內容：示例文本</h3>
+                        </header>
+                        <div class="dialog-body" slot="body">
+                            <p>添加批註：</p>
+                            <textarea id="textarea-addComment"></textarea>
+                            <div class="ry-modal-add-comment-box">
                                 <input id="check-private" type="checkbox" value="選為私密">選為私密
-                                <br>
-                                <br>
-                                <button class="btn btn-warning btn-sm" data-dismiss="modal" id="btn-cancel-add-comment" @click="btn_cancel_add_comment_onclick()">取消</button>
-                                <button class="btn btn-success btn-sm" data-dismiss="modal" id="btn-confirm-add-comment" @click="btn_confirm_add_comment_onclick()">確定</button>
+                                <button class="ry-btn-cancel-add-comment" data-dismiss="modal" @click="btn_cancel_add_comment_onclick()">取消</button>
+                                <button class="ry-btn-confirm-add-comment" data-dismiss="modal" @click="btn_confirm_add_comment_onclick()">確定</button>
                             </div>
                         </div>
-                    </div>
+                    </modal>
                 </div>
 
                 <!--查看批注模态框-->
-                <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-comment-record">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                    <span>&times;</span>
-                                </button>
-                                <h4 class="modal-title">批註內容</h4>
-                            </div>
-                            <div class="modal-body text-tight">
-                                <table class="table table-bordered table-hover">
-                                    <tr class="text-left">
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-right">
-                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#layer-delete">删除</button>
-                                        </td>
-                                    </tr>
-                                </table>
+                <div>
+                    <modal :show_modal.sync = "get_comment_modal" @fireclose = "get_comment_modal = false" class="ry-modal-border ry-modal-padding">
+                        <div class="width400" slot="body">
+                            <span>【{{now_target}}】</span><span>{{now_comment}}</span>
+                            <div>
+                                <button class="ry-btn-cancel-add-comment float-right">删除</button>
                             </div>
                         </div>
-                    </div>
+                    </modal>
                 </div>
 
                 <!--标记本体模态框-->
-                <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-mark-noumenon">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button id="btn-cross-cancelAddMark" type="button" class="close" data-dismiss="modal" @click="btn_cross_cancel_add_mark_onclick()">
-                                    &times;
-                                </button>
-                            </div>
-                            <div class="modal-body text-tight">
-                                本體類型：
-                                <select>
-                                    <option>篩選</option>
-                                    <option>人物</option>
-                                    <option>地點</option>
-                                    <option>職官</option>
-                                    <option>時間</option>
-                                    <option>機構</option>
-                                    <option>術語</option>
-                                    <option>文獻</option>
-                                </select>
-                                <input type="text"><button>搜索</button>
-                                <button class="btn btn-info btn-sm" data-dismiss="modal" id="btn-add-mark" @click="btn_add_mark_onclick() ">添加</button>
-                            </div>
+                <div>
+                    <modal :show_modal.sync = "add_mark_modal" @fireclose = "add_mark_modal = false" class="ry-modal-border ry-modal-padding">
+                        <div class="" slot="body">
+                            本體類型：
+                            <select class="ry-type-select">
+                                <option>篩選</option>
+                                <option>人物</option>
+                                <option>地點</option>
+                                <option>職官</option>
+                                <option>時間</option>
+                                <option>機構</option>
+                                <option>術語</option>
+                                <option>文獻</option>
+                            </select>
+                            <input type="text" class="ry-input-search" placeholder="請輸入本體名查找"><button class="ry-btn-search-pic"></button>
+                            <div class="ry-add-mark-modal-box"><h3 style="margin-top: 80px">請在搜索框中輸入本體規範名稱進行搜索</h3></div>
+                            <button class="ry-btn-cancel-add-comment" style="margin-left: 330px;" @click="btn_add_mark_onclick()">創建本體</button>
+                            <button class="ry-btn-cancel-add-comment" @click="close_add_mark_modal()">取消</button>
                         </div>
-                    </div>
+                    </modal>
                 </div>
 
-                <!--删除确认模态框-->
-                <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-delete">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                    <span>&times;</span>
-                                </button>
-                                <h4 class="modal-title">确认删除吗</h4>
-                            </div>
-                            <div class="modal-body text-tight">
-                                <button class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-                                <button id="btn-confirm-cancel" class="btn btn-danger btn-sm" data-dismiss="modal" @click="btn_confirm_delete_comment_onclick()">确认</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
 
             <!--图片工作台-->
@@ -213,6 +190,64 @@
                 <div class="float-right ry-hide-picture"><img src="../assets/img/本体标记/更多标.png" height="130" width="29"/></div>
                 <img src="../assets/img/u2099.png"/>
             </div>
+        </div>
+
+        <!--目录模态框-->
+        <div>
+            <modal :show_modal.sync = "catalogue_modal" @fireclose = "catalogue_modal = false">
+                <div class="dialog-body" slot="body">
+                    <div>册1册名</div>
+                    <div class="row">
+                        <a class="col-md-2">
+                            卷1
+                        </a>
+                        <a class="col-md-2">
+                            卷2
+                        </a>
+                        <a class="col-md-2">
+                            卷3
+                        </a>
+                        <a class="col-md-2">
+                            卷4
+                        </a>
+                        <a class="col-md-2">
+                            卷5
+                        </a>
+                        <a class="col-md-2">
+                            卷6
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a class="col-md-2">
+                            卷7
+                        </a>
+                        <a class="col-md-2">
+                            卷8
+                        </a>
+                    </div>
+                    <div>册2册名</div>
+                    <div class="row">
+                        <a class="col-md-2">
+                            卷1
+                        </a>
+                        <a class="col-md-2">
+                            卷2
+                        </a>
+                        <a class="col-md-2">
+                            卷3
+                        </a>
+                        <a class="col-md-2">
+                            卷4
+                        </a>
+                        <a class="col-md-2">
+                            卷5
+                        </a>
+                        <a class="col-md-2">
+                            卷6
+                        </a>
+                    </div>
+                </div>
+            </modal>
         </div>
 
         <!--底按鈕欄-->
@@ -224,10 +259,10 @@
                 <div class="float-right ry-page">
                     <input class="ry-input-page">
                     <span>/</span>
-                    <span>MPage</span>
+                    <span>12</span>
                 </div>
                 <button class="float-right ry-btn-last-page">上一</button>
-                <button class="ry-btn-menu">目錄</button>
+                <button class="ry-btn-menu" @click="catalogue_onclick()">目錄</button>
             </div>
         </div>
 
@@ -237,10 +272,23 @@
 
 
 <script type="text/javascript">
+    import modal from  '../component/modal.vue'
     export default{
+        components:{
+            modal,
+        },
 
         data() {
             return{
+                add_comment_modal : false,
+                get_comment_modal : false,
+                add_mark_modal : false,
+                catalogue_modal : false,
+                edit_record_modal : false,
+                edit_modal : false,
+                now_target : '',
+                now_comment : '',
+
                 get_content_obj : {},
                 content : '蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。',
                 page_id : 1,
@@ -318,9 +366,9 @@
         },
 
         created : function () {
-            this.get_text(pageId);
-            this.get_comment(pageId);
-            this.get_mark(pageId);
+//            this.get_text(pageId);
+//            this.get_comment(pageId);
+//            this.get_mark(pageId);
         },
 
         mounted : function () {
@@ -658,16 +706,7 @@
              * 修订按钮点击事件
              */
             btn_edit_onclick() {
-                var text_edit = document.getElementById("text-edit");    //  修订版文本
-                var btn_cancel_edit = document.getElementById("btn-cancel-edit");  //  取消修订按钮
-                var btn_confirm_edit = document.getElementById("btn-confirm-edit");    //  确认修订按钮
-                var text = document.getElementById("textarea-editInfo");    //  修订信息编辑框
-                var label = document.getElementById("label");   //  修订信息编辑框标题
-                btn_cancel_edit.style.visibility = "visible";    //   取消修订按钮显示
-                btn_confirm_edit.style.visibility = "visible";    //  确认修订按钮显示
-                text.style.visibility = "visible";  //  修订信息编辑框显示
-                label.style.visibility = "visible";    //   修订信息编辑框标题显示
-                text_edit.contentEditable = true;    //  修订文本可编辑
+                this.edit_modal = true;
             },
 
 
@@ -697,7 +736,7 @@
                 var btn_confirm_edit = document.getElementById("btn-confirm-edit");    //  确认修订按钮
                 var label = document.getElementById("label");   //  修订信息编辑框标题
                 //  未做修改判断
-                if (content == text_edit.innerText) {
+                if (this.content == text_edit.innerText) {
                     alert("您未做任何修改！")
                 }
                 //  未填写修订信息判断
@@ -713,6 +752,7 @@
                     this.commit = text.innerText;
                     post_update_cm();   //  批量更新批注标记
                     post_edit();    //  修改古籍文本内容请求
+                    this.edit_modal = false;
                 }
             },
 
@@ -721,9 +761,16 @@
              * 修订记录按钮事件
              */
             edit_record_onclick() {
-                this.get_edit_record(pageId);
+//                this.get_edit_record(pageId);
+                this.edit_record_modal = true;
             },
 
+            /**
+             * 修订记录按钮事件
+             */
+            close_edit_record_modal() {
+                this.edit_record_modal = false;
+            },
 
             /**
              * 批注文本选取添加批注操作
@@ -731,10 +778,18 @@
             text_comment_onclick() {
                 if (window.getSelection().getRangeAt(0).toString().length != 0) {
                     document.getElementById("btn-add-comment").style.visibility = "visible"; //  添加批注按钮显示
+                    var sel = window.getSelection();
+                    this.begin_add_comment = sel.anchorNode.parentNode.id;
+                    var end = sel.focusNode.parentNode.id;
+                    this.end_add_comment = parseInt(end)+1;
+                    sel.anchorNode.parentNode.setAttribute("class","ry-comment");
+                    sel.focusNode.parentNode.setAttribute("class","ry-comment");
+                    var range = window.getSelection().getRangeAt(0);    //  获得选区
+                    this.target_add_comment = range.toString();
                 }
-                var sel = window.getSelection();
-                this.begin_add_comment = sel.anchorNode.parentNode.id;
-                this.end_add_comment = sel.focusNode.parentNode.id + 1;
+                else if (window.getSelection().getRangeAt(0).toString().length == 0) {
+                    this.get_comment_modal = true;
+                }
             },
 
 
@@ -742,12 +797,10 @@
              * 添加批注按钮事件
              */
             btn_add_comment_onclick() {
+                this.add_comment_modal = true;
                 var btn_add_comment = document.getElementById("btn-add-comment");
                 btn_add_comment.style.visibility = "hidden";  //  添加批注按钮隐藏
-                var range = window.getSelection().getRangeAt(0);    //  获得选区
-                var span = document.createElement("span");  //  创建span标签
-                range.surroundContents(span);   //  为选区添加span标
-                this.target_add_comment = range;
+
             },
 
 
@@ -762,15 +815,6 @@
                     this.target_add_comment = '';
                     this.begin_add_comment = '';
                     this.end_add_comment = '';
-                    for (var i = 0; i < spans.length; i++) {
-                        var has = spans[i].hasAttribute("class");
-                        //  没有class的span标签转为纯文本
-                        if (has == false) {
-                            var inner = spans[i].innerText;
-                            var text = document.createTextNode(inner);
-                            spans[i].parentNode.replaceChild(text, spans[i]);
-                        }
-                    }
                 }
                 //  添加批注后渲染属性并获得位置
                 else {
@@ -778,37 +822,17 @@
                     if (checkbox.checked = true) {
                         this.pri = 1
                     }
-                    else {
+                    else if (checkbox.checked = false) {
                         this.pri = 0
                     }
-                    this.content_add_comment = textarea_add_comment.innerText;
-                    post_add_comment();
-                    window.location.reload()
+                    this.content_add_comment = textarea_add_comment.value;
+                    this.now_comment = this.content_add_comment;
+                    this.post_add_comment();
+                    this.now_target = this.target_add_comment;
+                    this.add_comment_modal = false;
+//                    window.location.reload();
                 }
             },
-
-
-            /**
-             * 选中标记文本事件
-             */
-            text_mark_onclick() {
-                if (window.getSelection().getRangeAt(0).toString().length != 0) {
-                    document.getElementById("btn-mark-noumenon").style.visibility = "visible";
-                }
-                var sel = window.getSelection();
-                this.begin_add_mark = sel.anchorNode.parentNode.id;
-                this.end_add_mark = sel.focusNode.parentNode.id + 1;
-                var text_mark = document.getElementById("text-mark");
-                for (i = 0; i < 5; i++) {
-                    var b = text_mark.innerText.charAt(this.begin_add_mark-5+k);
-                    this.before += b;
-                }
-                for (j = 0; j < 5; j++) {
-                    var e = text_mark.innerText.charAt(this.end_add_mark+1+m);
-                    this.after += e;
-                }
-            },
-
 
             /**
              * 取消添加批注事件
@@ -828,19 +852,49 @@
                 this.end_add_mark = '';
                 this.before = '';
                 this.after = '';
+                this.add_comment_modal = false;
             },
 
+            /**
+             * 目录按钮
+             */
+            catalogue_onclick() {
+                this.catalogue_modal = true;
+            },
+
+            /**
+             * 选中标记文本事件
+             */
+            text_mark_onclick() {
+                if (window.getSelection().getRangeAt(0).toString().length != 0) {
+                    document.getElementById("btn-mark-noumenon").style.visibility = "visible";
+                    var sel = window.getSelection();
+                    this.begin_add_mark = sel.anchorNode.parentNode.id;
+                    var end = sel.focusNode.parentNode.id;
+                    this.end_add_mark = parseInt(end)+1;
+                    sel.anchorNode.parentNode.setAttribute("class","ry-mark");
+                    sel.focusNode.parentNode.setAttribute("class","ry-mark");
+                    var range = window.getSelection().getRangeAt(0);    //  获得选区
+                    this.target_add_mark = range.toString();
+                    var text_mark = document.getElementById("text-mark");
+                    for (i = 0; i < 5; i++) {
+                        var b = text_mark.innerText.charAt(this.begin_add_mark-5+k);
+                        this.before += b;
+                    }
+                    for (j = 0; j < 5; j++) {
+                        var e = text_mark.innerText.charAt(this.end_add_mark+1+m);
+                        this.after += e;
+                    }
+                }
+            },
 
             /**
              * 标记本体按钮点击事件
              */
             btn_mark_noumenon_onclick() {
+                this.add_mark_modal = true;
                 var btn_mark_noumenon = document.getElementById("btn-mark-noumenon");
                 btn_mark_noumenon.style.visibility = "hidden";    //  标记本体按钮隐藏
-                var range = window.getSelection().getRangeAt(0);    //  获得选区
-                var span = document.createElement("span");  //  创建span标签
-                range.surroundContents(span);    //  为选区添加span标签
-                this.target_add_mark = range;
             },
 
 
@@ -856,29 +910,16 @@
              * 添加标记按钮事件
              */
             btn_add_mark_onclick() {
-                post_add_mark();
-                window.location.reload()
+                this.post_add_mark();
+                this.add_mark_modal = false;
             },
 
 
             /**
              * 添加本体标记模态框的x按钮事件
              */
-            btn_cross_cancel_add_mark_onclick() {
-                var spans = document.getElementById("text-mark").getElementsByTagName("span");  //  标记文本中获取span标签
-                //  遍历将没有class属性的span复原为纯文本
-                for (var i = 0; i < spans.length; i++) {
-                    var has = spans[i].hasAttribute("class");
-                    if (has == false) {
-                        var inner = spans[i].innerText;
-                        var text = document.createTextNode(inner);
-                        spans[i].parentNode.replaceChild(text, spans[i]);
-                    }
-                }
-                this.begin_add_mark = '';
-                this.end_add_mark = '';
-                this.before = '';
-                this.after = '';
+            close_add_mark_modal() {
+                this.add_mark_modal = false;
             },
 
 
@@ -998,17 +1039,18 @@
                     var text_comment = document.getElementById("text-comment");
                     //该字不是批注
                     if (a == 0) {
+                        var span = document.createElement("span");
                         var text = document.createTextNode(p);
-                        text_comment.appendChild(text)
+                        span.appendChild(text);
+                        span.setAttribute("id", i);
+                        text_comment.appendChild(span);
                     }
                     //该字是批注
                     else if (a == 1) {
                         var span = document.createElement("span");
                         var text = document.createTextNode(p);
                         span.appendChild(text);
-                        span.setAttribute("class", "comment id=C" + this.comment[jtemp].id_comment);
-                        span.setAttribute("data-toggle", "modal");
-                        span.setAttribute("data-target", "#layer-comment-record");
+                        span.setAttribute("class", "ry-comment id=C" + this.comment[jtemp].id_comment);
                         text_comment.appendChild(span);
                     }
                 }
@@ -1046,15 +1088,18 @@
                     var text_mark = document.getElementById("text-mark");
                     //该字不是标记
                     if (a == 0) {
+                        var span = document.createElement("span");
                         var text = document.createTextNode(p);
-                        text_mark.appendChild(text)
+                        span.appendChild(text);
+                        span.setAttribute("id", i);
+                        text_mark.appendChild(span);
                     }
                     //该字是标记
                     else if (a == 1) {
                         var span = document.createElement("span");
                         var text = document.createTextNode(p);
                         span.appendChild(text);
-                        span.setAttribute("class", "mark id=M" + this.mark[jtemp].id_mark);
+                        span.setAttribute("class", "ry-mark id=M" + this.mark[jtemp].id_mark);
                         text_mark.appendChild(span);
                     }
                 }
@@ -1193,6 +1238,10 @@
         margin: 0;
     }
 
+    .width400{
+        width: 400px;
+    }
+
     .width1000{
         width: 1000px;
     }
@@ -1203,6 +1252,7 @@
 
     .ry-ancient-book input{
         border: none;
+
     }
     
     .next-one{
@@ -1224,7 +1274,7 @@
         height: 50px;
         margin-left: 550px;
         padding-left: 20px;
-        background-image: url("../assets/img/搜索框.png");
+        background-image: url("../assets/img/search-input.png");
     }
 
     .ry-select{
@@ -1310,6 +1360,71 @@
         width: 299px;
         height: 47px;
         background-image: url("../assets/img/本体标记/屏风按钮.png");
+    }
+
+    .ry-btn-cancel-add-comment{
+        width: 80px;
+        height: 35px;
+        background-image: url("../assets/img/批注交互/删除按钮.png");
+    }
+
+    .ry-btn-confirm-add-comment{
+        width: 80px;
+        height: 35px;
+        background-image: url("../assets/img/批注交互/删除按钮.png");
+    }
+
+    .ry-modal-add-comment-box{
+        padding-left: 160px;
+    }
+
+    .ry-modal-border{
+        border:solid red 2px;
+    }
+
+    .ry-modal-padding{
+        padding-top : 40px;
+        padding-bottom: 10px;
+        padding-right :15px;
+        padding-left: 10px;
+    }
+
+    .ry-input-search{
+        width: 300px;
+        height: 36px;
+        padding-left: 4px;
+        margin-left: 20px;
+        background-image: url("../assets/img/本体标记交互/搜索框.png");
+    }
+
+    .ry-type-select{
+        width: 82px;
+        height: 36px;
+        border: none;
+        padding-left: 4px;
+        background-image: url("../assets/img/本体标记交互/本体筛选.png");
+    }
+
+    .ry-btn-search-pic{
+        width: 20px;
+        height: 20px;
+        margin-left: 10px;
+        background-size: 100%;
+        background-image: url("../assets/img/本体标记交互/搜索放大镜.png");
+    }
+
+    .ry-add-mark-modal-box{
+        height: 100px;
+        text-align: center;
+    }
+
+    .ry-btn-confirm-edit-record-modal{
+        color: white;
+        width: 103px;
+        height: 44px;
+        margin-left: 480px;
+        background-size: 100%;
+        background-image: url("../assets/img/上传1/下一步按钮.png");
     }
     
 
@@ -1415,7 +1530,7 @@
     textarea{
         position: relative;
         top: 30px;
-        width: 320px;
+        width: 250px;
     }
 
     /*修订信息编辑框*/
@@ -1426,20 +1541,22 @@
 
     /*批注内容编辑框*/
     #textarea-addComment{
-        width: 500px;
+        width: 400px;
         height: 200px;
         position: static;
     }
 
     /*批注字体样式*/
-    .comment{
+    .ry-comment{
         cursor: pointer;
-        text-decoration: underline;
+        font-weight: bold;
+        color: red;
     }
 
     /*标记字体样式*/
-    .mark{
+    .ry-mark{
         cursor: pointer;
-        font-weight: bold;
+        text-decoration: underline;
+        color: red;
     }
 </style>

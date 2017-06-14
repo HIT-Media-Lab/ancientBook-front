@@ -138,8 +138,13 @@
                 this.create_character.location_id=this.$store.getters.build_character.location_id;
                 this.create_character.person_relations=this.$store.getters.build_character.person_relations;
                 this.http_json()*/
+<<<<<<< HEAD
                 this.show_info=true;
                 //this.$router.push({name:'char_detail',params:{nouId:478066772}})
+=======
+                //this.show_info=true;
+                this.$router.push({name:'char_detail',params:{nouId:478066772}})
+>>>>>>> 64280ff421a1f1c3587733aac6158c10ae043ce2
 
             }
         }

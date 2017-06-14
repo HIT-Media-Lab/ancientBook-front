@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="login-box">
-            <login_modal v-bind:show_modal.sync = show_m @fireclose = "show_m = false" class="j-login-bag">
+            <login_modal v-bind:show_modal.sync = show_m @fireclose = "shut_box" class="j-login-bag">
                 <header class="dialog-header" slot="header">
                     <h3 class="dialog-title">登 录</h3>
                 </header>
@@ -229,15 +229,18 @@
                     this.account = '';
                     this.pwd = '';
                     this.v = '';
+                    this.show_m = false;
                     document.getElementById("v_picture").src = this.code_url+'?'+(new Date()).getTime();
                 }
                 if (response.body.su == 0) {
+
                     localStorage.setItem('user',JSON.stringify("user"));
                     this.$router.push({path: '/user'});
                     this.name = '普通用户';
                     this.account = '';
                     this.pwd = '';
                     this.v = '';
+                    this.show_m = false;
                     document.getElementById("v_picture").src = this.code_url + '?' + (new Date()).getTime();
                 }
             },
@@ -257,6 +260,17 @@
                 // 与后端对接的vue-resource
                 this.http_json(this.login_url,'post',this.object,this.login_success,this.login_fail);
             },
+            shut_box(){
+                this.show_m = false;
+                this.account = '';
+                this.pwd = '';
+                this.v = '';
+                this.warning = "";
+                this.Active1=false;
+                this.Active2=false;
+                document.getElementById("v_picture").src = this.code_url + '?' + (new Date()).getTime();
+
+            }
         }
     }
 </script>
@@ -316,28 +330,33 @@
     .down-box{
         background-image: url("../assets/img/下拉框.png");
         background-size:100%;
+        padding: 2px;
         background-repeat: no-repeat;
         margin-left: 360px;
-        margin-top: -9px;
-        height: 43px;
+        margin-top: -8px;
+        height: 50px;
         width: 290px;
     }
     .search-input{
         margin-left: 30px;
-        padding-left: 20px;
+        vertical-align:middle;
+        padding: 0 20px;
         background-image: url("../assets/img/搜索框小.png");
         background-color: transparent;
+        background-repeat: no-repeat;
         border: none;
         width: 280px;
-        height: 50px;
+        height: 49px;
     }
     .sort-box1{
         /*display: inline;*/
+        font-size: 12px;
         margin-left: 10px;
         list-style: none;
         width: 178px;
     }
     .sort-box2{
+        font-size: 12px;
         margin-left: 10px;
         list-style: none;
         width: 178px;
@@ -431,14 +450,15 @@
         border: none;
     }
     .j-login-bag{
-        width: 400px;
-        height: 375px;
-        background-size: 100%;
-        background-repeat: no-repeat;
+        /*background-size: 100%;*/
+        /*background-repeat: no-repeat;*/
+        /*border-right: solid red 2px;*/
+        /*border-bottom: solid red 2px;*/
+        /*border-left:solid red 2px ;*/
     }
     .dialog-header {
         background-image: url("../assets/img/弹框标题.png");
-        background-size:90%;
+        background-size:100%;
     }
 
     .dialog-title {

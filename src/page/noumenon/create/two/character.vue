@@ -28,9 +28,15 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span zxw-must-write">出生时间：</label>
+<<<<<<< HEAD
             <button  class="zxw-character-input zxw-character-input-margin" readonly @click="open_birth()"  v-model="input_content.birth_value"></button>
             <label class="zxw-character-span zxw-must-write">死亡时间：</label>
             <button class="zxw-character-input zxw-character-input-margin" readonly @click="open_dead()" v-model="input_content.dead_value"></button>
+=======
+            <button  class="zxw-character-input zxw-character-input-margin" readonly @click="open_birth()"  v-model="input_content.birth_value">{{input_content.birth_value}}</button>
+            <label class="zxw-character-span zxw-must-write">死亡时间：</label>
+            <button class="zxw-character-input zxw-character-input-margin" readonly @click="open_dead()" v-model="input_content.dead_value">{{input_content.dead_value}}</button>
+>>>>>>> 64280ff421a1f1c3587733aac6158c10ae043ce2
         </div>
 
         <div class="zxw-character-row">
@@ -102,9 +108,15 @@
             this.input_content = this.$store.getters.get_build_character;
             this.add_data[0].remark_name = this.input_content.remark_1_name;
             this.add_data[0].remark = this.input_content.remark_1;
+<<<<<<< HEAD
             this.add_tip(0);
             this.add_data[1].remark_name = this.input_content.remark_2_name;
             this.add_data[1].remark = this.input_content.remark_2;
+=======
+             this.add_tip(0);
+             this.add_data[1].remark_name = this.input_content.remark_2_name;
+             this.add_data[1].remark = this.input_content.remark_2;
+>>>>>>> 64280ff421a1f1c3587733aac6158c10ae043ce2
         },
 
         components:{
@@ -151,8 +163,10 @@
             },
 
             birth_time(p){
-                this.input_content.birth_time_id = p.time_id;
-                this.birth_value = p.content;
+                //this.input_content.birth_time_id = p.time_id;
+                //this.birth_value = p.content;
+                this.input_content.birth_value=p;
+                this.close_birth();
             },
 
             close_birth(){
@@ -164,8 +178,10 @@
             },
 
             dead_time(q){
-                this.input_content.dead_time_id = q.time_id;
-                this.dead_value = q.content;
+                //this.input_content.dead_time_id = q.time_id;
+                //this.dead_value = q.content;
+                this.input_content.dead_value=q;
+                this.close_dead();
             },
 
             close_dead(){
@@ -225,6 +241,8 @@
         background-color: transparent;
         height:30px;
         width:220px;
+        text-align: left;
+        padding-left: 0.5%;
     }
 
     /*输入框间距*/

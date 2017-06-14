@@ -9,9 +9,7 @@
                 <option v-for="item in noumenon_option">{{item}}</option>
             </select>
         </div>
-        <router-link to="/chartwo">
-            <button class="zxw-nextbtn zxw-nextbtn-margin zxw-nextbtn-length">下一步</button>
-        </router-link>
+        <button class="zxw-nextbtn zxw-nextbtn-margin zxw-nextbtn-length" @click="go_step2()">下一步</button>
     </div>
 </template>
 
@@ -31,12 +29,16 @@ export default{
         return{
             prams:'',
             noumenon_option:['时间','地名','人物','机构','职官','文献','术语'],
-            selection:''
+            selection:'时间'
         }
     },
 
     methods:{
-
+        go_step2(){
+            if(this.selection === '人物'){
+                this.$router.push({name:'charactertwo'});
+            }
+        }
     }
 
 }
@@ -44,16 +46,17 @@ export default{
 
 <style>
     .zxwcreate{
-        margin:100px 0 0 300px;
+        margin:50px 0  0 20%;
     }
 
     .zxwcreate-title{
-        font-size: 14px;
+        font-weight: bold;
+        font-size: 18px;
     }
 
     .zxwcreate-img{
-        height:180px;
-        width:800px;
+        height:150px;
+        width:810px;
         margin:0 0 0 80px;
     }
 
