@@ -159,7 +159,11 @@
         background-size: contain;
         background-color: transparent;
         width:400px;
+<<<<<<< HEAD
+        height:40px;
+=======
         height:50px;
+>>>>>>> 64280ff421a1f1c3587733aac6158c10ae043ce2
         padding:10px 0 0 0;
     }
 
