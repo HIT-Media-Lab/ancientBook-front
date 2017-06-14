@@ -102,9 +102,9 @@
             this.input_content = this.$store.getters.get_build_character;
             this.add_data[0].remark_name = this.input_content.remark_1_name;
             this.add_data[0].remark = this.input_content.remark_1;
-            this.add_tip(0);
-            this.add_data[1].remark_name = this.input_content.remark_2_name;
-            this.add_data[1].remark = this.input_content.remark_2;
+             this.add_tip(0);
+             this.add_data[1].remark_name = this.input_content.remark_2_name;
+             this.add_data[1].remark = this.input_content.remark_2;
         },
 
         components:{

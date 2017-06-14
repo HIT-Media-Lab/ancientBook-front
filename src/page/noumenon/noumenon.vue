@@ -1,6 +1,6 @@
 <template>
     <div>
-        <noumenon_title class="zxwtitle-bottom" :title="this.title">
+        <noumenon_title  :title="this.title">
             <build_button slot="children"></build_button>
         </noumenon_title>
 
@@ -88,9 +88,6 @@
     }
 </script>
 <style>
-    .zxwtitle-bottom{
-       margin:0 0 40px 20px;
-    }
 
     .zxwnoumenon-row{
         margin:0 0 25px 35px;
