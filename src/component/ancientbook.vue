@@ -73,7 +73,7 @@
                         <!--文本标题-->
                         <h4>詩經卷一</h4>
                         <!--文本主体-->
-                        <div class="body-text" id="text-edit"></div>
+                        <div class="body-text">蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。</div>
                         <br>
                         <br>
                         <br>
@@ -93,7 +93,7 @@
                             <h4 class="modal-title" style="text-align: center">修訂記錄</h4>
                         </header>
                         <div class="width600" slot="body">
-                            <div v-for="item in edit_record">
+                            <div v-for="item in commit_edit_record">
                                 <p>修訂者：{{item.username_edit_record}}</p>
                                 <p>修訂時間：{{item.time_edit_record}}</p>
                                 <p>修訂信息：{{item.commit_edit_record}}</p>
@@ -115,7 +115,7 @@
                             <h4 class="modal-title" style="text-align: center">修訂</h4>
                         </header>
                         <div class="width600" slot="body">
-                            <div class="body-text" contentEditable="true">蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。</div>
+                            <div id="text-edit" class="body-text" contentEditable="true"></div>
                             <br>
                             <br>
                             <br>
@@ -315,7 +315,7 @@
                 username_edit_record : '',
                 time_edit_record : '',
                 version_edit_record : '',
-                commit_edit_record : '',
+                commit_edit_record : [],
                 total_page_edit_record : '',
 
                 edit_text_obj : {},
@@ -379,291 +379,290 @@
         },
 
         methods: {
-
-            /**
-             * 获取文本内容请求
-             */
-            get_text(pageId) {
-                this.get_content_obj.key = "page_id";
-                this.get_content_obj.value = pageId;
-                this.http_json ('/ancient_books/get_text.action' , 'get' , this.get_content_obj , this.success_get_text , this.fail_get_text);
-            },
-
-            success_get_text (response) {
-                console.log ("success get contents");
-                //将后端数据显示在前端页面里
-                if (response.body.content.length === 0) {
-                    console.log("没有返回文本");
-                }
-                else {
-                    this.content = response.body.content;
-                }
-            },
-
-            fail_get_text() {
-                console.log("fail get contents!");
-            },
-
-
-            /**
-             * 获取一页批注信息请求
-             */
-            get_comment(pageId) {
-                this.get_comment_obj.key = "page_id";
-                this.get_comment_obj.value = pageId;
-                this.http_json ('/ancient_books/get_comment_list_by_page_id.action' , 'get' , this.get_comment_obj , this.success_get_comment , this.fail_get_comment);
-            },
-
-            success_get_comment(response) {
-                console.log("success get comments ");
-                //将后端数据显示在前端页面里
-                if( response.body.length === 0) {
-                    console.log("没有返回数组！");
-                }
-                else {
-                    for (let i = 0; i <= response.body.length-1; i++) {
-                        this.comment.push({
-                            id_comment: response.body[i].id,
-                            target_comment: response.body[i].target,
-                            begin_comment: response.body[i].begin,
-                            end_comment: response.body[i].end,
-                            content_comment: response.body[i].content,
-                        });
-                    }
-                }
-            },
-
-            fail_get_comment() {
-                console.log("fail get comments!");
-            },
-
-
-            /**
-             * 获取一页标记信息请求
-             */
-            get_mark(pageId) {
-                this.get_mark_obj.key = "page_id";
-                this.get_mark_obj.value = pageId;
-                this.http_json ('/ancient_books/get_mark_list_by_page_id.action' , 'get' , this.get_mark_obj , this.success_get_mark , this.fail_get_mark);
-            },
-
-            success_get_mark(response) {
-                console.log("success get marks ");
-                //将后端数据显示在前端页面里
-                if( response.body.content.length === 0) {
-                    console.log("没有返回数组！");
-                }
-                else {
-                    for (let i = 0; i <= response.body.length-1; i++) {
-                        this.mark.push({
-                            id_mark: response.body[i].id,
-                            noumenon_type: response.body[i].noumenon_type,
-                            noumenon_id: response.body[i].noumenon_id,
-                            begin_mark: response.body[i].begin,
-                            end_mark: response.body[i].end,
-                            target_mark: response.body[i].target,
-                        });
-                    }
-                }
-            },
-
-            fail_get_mark() {
-                console.log("fail get marks!");
-            },
-
-
-            /**
-             * 获得每页的修订记录列表
-             */
-            get_edit_record(pageId) {
-                this.get_edit_record_obj.key = "page_id";
-                this.get_edit_record_obj.value = pageId;
-                this.http_json ('/ancient_books/get_ancient_book_modify_log_by_page.action' , 'get' , this.get_edit_record_obj , this.success_get_edit_record , this.fail_get_edit_record);
-            },
-
-            success_get_edit_record(response) {
-                console.log ("success get edit records ");
-                //将后端数据显示在前端页面里
-                if (response.body.content.length === 0) {
-                    console.log ("没有返回数组！");
-                }
-                else {
-                    this.total_page_editRecord = response.body.total_page;
-                    for (let i = 0; i <= response.body.content.length-1; i++) {
-                        this.edit_record.push({
-                            username_edit_record: response.body.content[i].user_name,
-                            time_edit_record: response.body.content[i].time,
-                            version_edit_record: response.body.content[i].version,
-                            commit_edit_record: response.body.content[i].commit,
-                        });
-                    }
-                }
-            },
-
-            fail_get_edit_record() {
-                console.log ("fail get edit records!");
-            },
-
-
-            /**
-             * 修改古籍文本内容POST请求
-             */
-            post_edit() {
-                this.edit_text_obj.page_id = this.page_id;
-                this.edit_text_obj.content = this.content;
-                this.edit_text_obj.commit = this.commit;
-                this.before_http(this.edit_text);
-                this.http_json('/ancient_books/modify_page_content.action' , 'post' , this.edit_text_obj , this.success_post_edit,this.fail_post_edit);
-            },
-
-            success_post_edit(response) {
-                if (response.body.result === 1) {
-                    console.log ("success edit!");
-                    window.location.reload();   //  重新加载
-                }
-                else if (response.body.result === 0) {
-                    console.log ("fail edit");
-                }
-            },
-
-            fail_post_edit() {
-                console.log("fail edit!");
-            },
-
-
-            /**
-             * 批量更新标记批注POST请求
-             */
-            post_update_cm() {
-                this.get_mark_change();
-                this.get_comment_change();
-                this.get_mark_delete();
-                this.get_comment_delete();
-                this.update_cm.comments_delete = this.comments_delete;
-                this.update_cm.comments_modify = this.comments_modify;
-                this.update_cm.marks_delete = this.marks_delete;
-                this.update_cm.marks_modify = this.marks_modify;
-                this.before_http(this.update_cm);
-                this.http_json('/ancient_books/update_marks_comment.action' , 'post' , this.update_cm , this.success_update_cm , this.fail_update_cm);
-            },
-
-            success_update_cm(response) {
-                if (response.body.result === 1) {
-                    console.log("success update CM!");
-                }
-                else if (response.body.result === 0) {
-                    console.log("fail update CM");
-                }
-            },
-
-            fail_update_cm() {
-                console.log("fail update CM!");
-            },
-
-
-            /**
-             * 增加一个批注POST请求
-             */
-            post_add_comment() {
-                this.add_comment_obj.page_id = this.page_id;
-                this.add_comment_obj.target = this.target_add_comment;
-                this.add_comment_obj.content = this.content_add_comment;
-                this.add_comment_obj.begin = this.begin_add_comment;
-                this.add_comment_obj.end = this.end_add_comment;
-                this.add_comment_obj.pri = this.pri;
-                this.before_http(this.add_comment_obj);
-                this.http_json('/ancient_books/add_comment.action' , 'post' , this.add_comment_obj , this.success_add_comment , this.fail_add_comment);
-            },
-
-            success_add_comment(response) {
-                if (response.body.result === 1) {
-                    console.log("success add comment!");
-                }
-                else if (response.body.result === 0) {
-                    console.log("fail add comment");
-                }
-            },
-
-            fail_add_comment() {
-                console.log("fail add comment!");
-            },
-
-
-            /**
-             * 增加一个标记POST请求
-             */
-            post_add_mark() {
-                this.add_mark_obj.page_id = this.page_id;
-                this.add_mark_obj.target = this.target_add_mark;
-                this.add_mark_obj.begin = this.begin_add_mark;
-                this.add_mark_obj.end = this.end_add_mark;
-                this.add_mark_obj.noumenon_type = this.noumenon_type;
-                this.add_mark_obj.noumenon_id = this.noumenon_id;
-                this.add_mark_obj.before = this.before;
-                this.add_mark_obj.after = this.after;
-                this.before_http(this.add_mark_obj);
-                this.http_json('/ancient_books/add_mark.action' , 'post' , this.add_mark_obj , this.success_add_mark , this.fail_add_mark);
-            },
-
-            success_add_mark(response) {
-                if (response.body.result === 1) {
-                    console.log("success add mark!");
-                }
-                else if (response.body.result === 0) {
-                    console.log("fail add mark");
-                }
-            },
-
-            fail_add_mark() {
-                console.log("fail add mark!");
-            },
-
-
-            /**
-             * 通过标记id删除标记
-             */
-            post_delete_mark() {
-                this.delete_mark_obj.mark_id = this.mark_id;
-                this.before_http(this.delete_mark);
-                this.http_json('/ancient_books/delete_mark.action' , 'post' , this.delete_mark_obj , this.success_delete_mark , this.fail_delete_mark);
-            },
-
-            success_delete_mark(response) {
-                if (response.body.result === 1) {
-                    console.log("success delete mark!");
-                }
-                else if (response.body.result === 0) {
-                    console.log("fail delete mark");
-                }
-            },
-
-            fail_delete_mark() {
-                console.log("fail delete mark!");
-            },
-
-
-            /**
-             * 通过批注id删除批注
-             */
-            post_delete_comment() {
-                this.delete_comment_obj.comment_id = this.comment_id;
-                this.before_http(this.delete_comment_obj);
-                this.http_json('/ancient_books/delete_comment.action' , 'post' , this.delete_comment_obj , this.success_delete_comment , this.fail_delete_comment);
-            },
-
-            success_delete_comment(response) {
-                if (response.body.result === 1) {
-                    console.log("success delete comment!");
-                }
-                else if (response.body.result === 0) {
-                    console.log("fail delete comment");
-                }
-            },
-
-            fail_delete_comment() {
-                console.log("fail delete comment!");
-            },
-
+//            /**
+//             * 获取文本内容请求
+//             */
+//            get_text(pageId) {
+//                this.get_content_obj.key = "page_id";
+//                this.get_content_obj.value = pageId;
+//                this.http_json ('/ancient_books/get_text.action' , 'get' , this.get_content_obj , this.success_get_text , this.fail_get_text);
+//            },
+//
+//            success_get_text (response) {
+//                console.log ("success get contents");
+//                //将后端数据显示在前端页面里
+//                if (response.body.content.length === 0) {
+//                    console.log("没有返回文本");
+//                }
+//                else {
+//                    this.content = response.body.content;
+//                }
+//            },
+//
+//            fail_get_text() {
+//                console.log("fail get contents!");
+//            },
+//
+//
+//            /**
+//             * 获取一页批注信息请求
+//             */
+//            get_comment(pageId) {
+//                this.get_comment_obj.key = "page_id";
+//                this.get_comment_obj.value = pageId;
+//                this.http_json ('/ancient_books/get_comment_list_by_page_id.action' , 'get' , this.get_comment_obj , this.success_get_comment , this.fail_get_comment);
+//            },
+//
+//            success_get_comment(response) {
+//                console.log("success get comments ");
+//                //将后端数据显示在前端页面里
+//                if( response.body.length === 0) {
+//                    console.log("没有返回数组！");
+//                }
+//                else {
+//                    for (let i = 0; i <= response.body.length-1; i++) {
+//                        this.comment.push({
+//                            id_comment: response.body[i].id,
+//                            target_comment: response.body[i].target,
+//                            begin_comment: response.body[i].begin,
+//                            end_comment: response.body[i].end,
+//                            content_comment: response.body[i].content,
+//                        });
+//                    }
+//                }
+//            },
+//
+//            fail_get_comment() {
+//                console.log("fail get comments!");
+//            },
+//
+//
+//            /**
+//             * 获取一页标记信息请求
+//             */
+//            get_mark(pageId) {
+//                this.get_mark_obj.key = "page_id";
+//                this.get_mark_obj.value = pageId;
+//                this.http_json ('/ancient_books/get_mark_list_by_page_id.action' , 'get' , this.get_mark_obj , this.success_get_mark , this.fail_get_mark);
+//            },
+//
+//            success_get_mark(response) {
+//                console.log("success get marks ");
+//                //将后端数据显示在前端页面里
+//                if( response.body.content.length === 0) {
+//                    console.log("没有返回数组！");
+//                }
+//                else {
+//                    for (let i = 0; i <= response.body.length-1; i++) {
+//                        this.mark.push({
+//                            id_mark: response.body[i].id,
+//                            noumenon_type: response.body[i].noumenon_type,
+//                            noumenon_id: response.body[i].noumenon_id,
+//                            begin_mark: response.body[i].begin,
+//                            end_mark: response.body[i].end,
+//                            target_mark: response.body[i].target,
+//                        });
+//                    }
+//                }
+//            },
+//
+//            fail_get_mark() {
+//                console.log("fail get marks!");
+//            },
+//
+//
+//            /**
+//             * 获得每页的修订记录列表
+//             */
+//            get_edit_record(pageId) {
+//                this.get_edit_record_obj.key = "page_id";
+//                this.get_edit_record_obj.value = pageId;
+//                this.http_json ('/ancient_books/get_ancient_book_modify_log_by_page.action' , 'get' , this.get_edit_record_obj , this.success_get_edit_record , this.fail_get_edit_record);
+//            },
+//
+//            success_get_edit_record(response) {
+//                console.log ("success get edit records ");
+//                //将后端数据显示在前端页面里
+//                if (response.body.content.length === 0) {
+//                    console.log ("没有返回数组！");
+//                }
+//                else {
+//                    this.total_page_editRecord = response.body.total_page;
+//                    for (let i = 0; i <= response.body.content.length-1; i++) {
+//                        this.edit_record.push({
+//                            username_edit_record: response.body.content[i].user_name,
+//                            time_edit_record: response.body.content[i].time,
+//                            version_edit_record: response.body.content[i].version,
+//                            commit_edit_record: response.body.content[i].commit,
+//                        });
+//                    }
+//                }
+//            },
+//
+//            fail_get_edit_record() {
+//                console.log ("fail get edit records!");
+//            },
+//
+//
+//            /**
+//             * 修改古籍文本内容POST请求
+//             */
+//            post_edit() {
+//                this.edit_text_obj.page_id = this.page_id;
+//                this.edit_text_obj.content = this.content;
+//                this.edit_text_obj.commit = this.commit;
+//                this.before_http(this.edit_text);
+//                this.http_json('/ancient_books/modify_page_content.action' , 'post' , this.edit_text_obj , this.success_post_edit,this.fail_post_edit);
+//            },
+//
+//            success_post_edit(response) {
+//                if (response.body.result === 1) {
+//                    console.log ("success edit!");
+//                    window.location.reload();   //  重新加载
+//                }
+//                else if (response.body.result === 0) {
+//                    console.log ("fail edit");
+//                }
+//            },
+//
+//            fail_post_edit() {
+//                console.log("fail edit!");
+//            },
+//
+//
+//            /**
+//             * 批量更新标记批注POST请求
+//             */
+//            post_update_cm() {
+//                this.get_mark_change();
+//                this.get_comment_change();
+//                this.get_mark_delete();
+//                this.get_comment_delete();
+//                this.update_cm.comments_delete = this.comments_delete;
+//                this.update_cm.comments_modify = this.comments_modify;
+//                this.update_cm.marks_delete = this.marks_delete;
+//                this.update_cm.marks_modify = this.marks_modify;
+//                this.before_http(this.update_cm);
+//                this.http_json('/ancient_books/update_marks_comment.action' , 'post' , this.update_cm , this.success_update_cm , this.fail_update_cm);
+//            },
+//
+//            success_update_cm(response) {
+//                if (response.body.result === 1) {
+//                    console.log("success update CM!");
+//                }
+//                else if (response.body.result === 0) {
+//                    console.log("fail update CM");
+//                }
+//            },
+//
+//            fail_update_cm() {
+//                console.log("fail update CM!");
+//            },
+//
+//
+//            /**
+//             * 增加一个批注POST请求
+//             */
+//            post_add_comment() {
+//                this.add_comment_obj.page_id = this.page_id;
+//                this.add_comment_obj.target = this.target_add_comment;
+//                this.add_comment_obj.content = this.content_add_comment;
+//                this.add_comment_obj.begin = this.begin_add_comment;
+//                this.add_comment_obj.end = this.end_add_comment;
+//                this.add_comment_obj.pri = this.pri;
+//                this.before_http(this.add_comment_obj);
+//                this.http_json('/ancient_books/add_comment.action' , 'post' , this.add_comment_obj , this.success_add_comment , this.fail_add_comment);
+//            },
+//
+//            success_add_comment(response) {
+//                if (response.body.result === 1) {
+//                    console.log("success add comment!");
+//                }
+//                else if (response.body.result === 0) {
+//                    console.log("fail add comment");
+//                }
+//            },
+//
+//            fail_add_comment() {
+//                console.log("fail add comment!");
+//            },
+//
+//
+//            /**
+//             * 增加一个标记POST请求
+//             */
+//            post_add_mark() {
+//                this.add_mark_obj.page_id = this.page_id;
+//                this.add_mark_obj.target = this.target_add_mark;
+//                this.add_mark_obj.begin = this.begin_add_mark;
+//                this.add_mark_obj.end = this.end_add_mark;
+//                this.add_mark_obj.noumenon_type = this.noumenon_type;
+//                this.add_mark_obj.noumenon_id = this.noumenon_id;
+//                this.add_mark_obj.before = this.before;
+//                this.add_mark_obj.after = this.after;
+//                this.before_http(this.add_mark_obj);
+//                this.http_json('/ancient_books/add_mark.action' , 'post' , this.add_mark_obj , this.success_add_mark , this.fail_add_mark);
+//            },
+//
+//            success_add_mark(response) {
+//                if (response.body.result === 1) {
+//                    console.log("success add mark!");
+//                }
+//                else if (response.body.result === 0) {
+//                    console.log("fail add mark");
+//                }
+//            },
+//
+//            fail_add_mark() {
+//                console.log("fail add mark!");
+//            },
+//
+//
+//            /**
+//             * 通过标记id删除标记
+//             */
+//            post_delete_mark() {
+//                this.delete_mark_obj.mark_id = this.mark_id;
+//                this.before_http(this.delete_mark);
+//                this.http_json('/ancient_books/delete_mark.action' , 'post' , this.delete_mark_obj , this.success_delete_mark , this.fail_delete_mark);
+//            },
+//
+//            success_delete_mark(response) {
+//                if (response.body.result === 1) {
+//                    console.log("success delete mark!");
+//                }
+//                else if (response.body.result === 0) {
+//                    console.log("fail delete mark");
+//                }
+//            },
+//
+//            fail_delete_mark() {
+//                console.log("fail delete mark!");
+//            },
+//
+//
+//            /**
+//             * 通过批注id删除批注
+//             */
+//            post_delete_comment() {
+//                this.delete_comment_obj.comment_id = this.comment_id;
+//                this.before_http(this.delete_comment_obj);
+//                this.http_json('/ancient_books/delete_comment.action' , 'post' , this.delete_comment_obj , this.success_delete_comment , this.fail_delete_comment);
+//            },
+//
+//            success_delete_comment(response) {
+//                if (response.body.result === 1) {
+//                    console.log("success delete comment!");
+//                }
+//                else if (response.body.result === 0) {
+//                    console.log("fail delete comment");
+//                }
+//            },
+//
+//            fail_delete_comment() {
+//                console.log("fail delete comment!");
+//            },
+//
 
             /**
              * 3个模块切换功能，通过赋予被激活模块class属性来控制模块的切换
@@ -740,18 +739,15 @@
                     alert("您未做任何修改！")
                 }
                 //  未填写修订信息判断
-                else if (text.value == "") {
+                else if (text.innerText == "") {
                     alert("請填寫修訂信息！")
                 }
                 else {
-                    btn_cancel_edit.style.visibility = "hidden";  //  取消修订按钮隐藏
-                    btn_confirm_edit.style.visibility = "hidden";  // 确认修订按钮隐藏
-                    text.style.visibility = "hidden";   //  修订信息编辑框隐藏
-                    label.style.visibility = "hidden";  //  修订信息编辑框标题隐藏
-                    text_edit.contentEditable = false;   //  修订文本不可编辑
-                    this.commit = text.innerText;
-                    post_update_cm();   //  批量更新批注标记
-                    post_edit();    //  修改古籍文本内容请求
+                    this.commit_edit_record.push({
+                        commit_edit_record: text.innerText
+                    });
+//                    this.post_update_cm();   //  批量更新批注标记
+//                    this.post_edit();    //  修改古籍文本内容请求
                     this.edit_modal = false;
                 }
             },
@@ -1122,7 +1118,7 @@
                     //初始化每条标记内容
                     var text = '';
                     //遍历每条标记中的每个字
-                    for (j = 0; j < marks.length; j++) {
+                    for (var j = 0; j < marks.length; j++) {
                         var mark_piece = marks[j].innerText;
                         //拼凑所有字为一条标记
                         text += mark_piece;
@@ -1131,18 +1127,18 @@
                     var new_begin = (text_edit.innerText).indexOf(text);
                     var new_end = new_begin + text.length;
                     var before = '';
-                    for (k = 0; k < 5; k++) {
+                    for (var k = 0; k < 5; k++) {
                         var b = text_edit.innerText.charAt(new_begin-5+k);
                         before += b;
                     }
                     var after = '';
-                    for (m = 0; m < 5; m++) {
+                    for (var m = 0; m < 5; m++) {
                         var e = text_edit.innerText.charAt(new_end+1+m);
                         after += e;
                     }
                     //标记被修改创建标记更新数组
                     if (text != this.mark[i].target_mark || new_begin != this.mark[i].begin_mark || new_end != this.mark[i].end_mark) {
-                        marks_modify.push({
+                        this.marks_modify.push({
                             id: this.mark[i].id_mark,
                             target: text,
                             begin: new_begin,
@@ -1168,7 +1164,7 @@
                     //初始化每条批注内容
                     var text = '';
                     //遍历每条批注中的每个字
-                    for (j = 0; j < comments.length; j++) {
+                    for (var j = 0; j < comments.length; j++) {
                         var comment_piece = comments[j].innerText;
                         //拼凑所有字为一条批注
                         text += comment_piece;
@@ -1178,7 +1174,7 @@
                     var new_end = new_begin + text.length;
                     //批注被修改创建批注更新数组
                     if (text != this.comment[i].target_comment || new_begin != this.comment[i].begin_comment || new_end != this.comment[i].end_comment) {
-                        comments_modify.push({
+                        this.comments_modify.push({
                             id: this.comment[i].id_comment,
                             target: text,
                             begin: new_begin,
@@ -1200,7 +1196,7 @@
                     var comments = document.getElementsByClassName("id=C" + this.comment[i].id);
                     //向删除批注数组中添加元素
                     if (comments.length == 0) {
-                        comments_delete.push({
+                        this.comments_delete.push({
                             id: this.comment[i].id
                         })
                     }
@@ -1219,7 +1215,7 @@
                     var marks = document.getElementsByClassName("id=M" + this.mark[i].id);
                     // 向删除标记数组添加元素
                     if (marks.length == 0) {
-                        marks_delete.push({
+                        this.marks_delete.push({
                             id: this.mark[i].id
                         })
                     }
