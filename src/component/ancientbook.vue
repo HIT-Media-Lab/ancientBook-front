@@ -65,7 +65,7 @@
                         <!--文本主体-->
                         <div class="body-text" id="text-comment" @click="text_comment_onclick()"></div>
                         <!--添加批注按钮，选中文本后激活显示，点击弹出添加批注模态框-->
-                        <button class="btn btn-info" data-toggle="modal" data-target="#layer-add-comment" id="btn-add-comment" style="visibility: hidden" @click="btn_add_comment_onclick()">添加批註</button>
+                        <button class="btn btn-info" id="btn-add-comment" style="visibility: hidden" @click="btn_add_comment_onclick()">添加批註</button>
                     </div>
 
                     <!--修订板块-->
@@ -115,50 +115,34 @@
                 </div>
 
                 <!--添加批注模态框-->
-                <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-add-comment">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">選中內容：示例文本</h4>
-                            </div>
-                            <div class="modal-body text-tight">
-                                <p>添加批註：</p>
-                                <textarea id="textarea-addComment"></textarea>
-                                <br>
+                <div>
+                    <modal :show_modal.sync = "add_comment_modal" @fireclose = "add_comment_modal = false">
+                        <header slot="header">
+                            <h3>選中內容：示例文本</h3>
+                        </header>
+                        <div class="dialog-body" slot="body">
+                            <p>添加批註：</p>
+                            <textarea id="textarea-addComment"></textarea>
+                            <div class="ry-modal-add-comment-box">
                                 <input id="check-private" type="checkbox" value="選為私密">選為私密
-                                <br>
-                                <br>
-                                <button class="btn btn-warning btn-sm" data-dismiss="modal" id="btn-cancel-add-comment" @click="btn_cancel_add_comment_onclick()">取消</button>
-                                <button class="btn btn-success btn-sm" data-dismiss="modal" id="btn-confirm-add-comment" @click="btn_confirm_add_comment_onclick()">確定</button>
+                                <button class="ry-btn-cancel-add-comment" data-dismiss="modal" @click="btn_cancel_add_comment_onclick()">取消</button>
+                                <button class="ry-btn-confirm-add-comment" data-dismiss="modal" @click="btn_confirm_add_comment_onclick()">確定</button>
                             </div>
                         </div>
-                    </div>
+                    </modal>
                 </div>
 
                 <!--查看批注模态框-->
-                <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-comment-record">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                    <span>&times;</span>
-                                </button>
-                                <h4 class="modal-title">批註內容</h4>
-                            </div>
-                            <div class="modal-body text-tight">
-                                <table class="table table-bordered table-hover">
-                                    <tr class="text-left">
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-right">
-                                            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#layer-delete">删除</button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+                <div>
+                    <modal :show_modal.sync = "get_comment_modal" @fireclose = "get_comment_modal = false">
+                        <header slot="header">
+                            <h4 class="modal-title">批註內容</h4>
+                        </header>
+                        <div class="dialog-body" slot="body">
+                            <span>{{now_target}}</span><span>{{now_comment}}</span>
+                            <button class="btn btn-danger btn-sm">删除</button>
                         </div>
-                    </div>
+                    </modal>
                 </div>
 
                 <!--标记本体模态框-->
@@ -215,6 +199,64 @@
             </div>
         </div>
 
+        <!--目录模态框-->
+        <div>
+            <modal :show_modal.sync = "catalogue_modal" @fireclose = "catalogue_modal = false">
+                <div class="dialog-body" slot="body">
+                    <div>册1册名</div>
+                    <div class="row">
+                        <a class="col-md-2">
+                            卷1
+                        </a>
+                        <a class="col-md-2">
+                            卷2
+                        </a>
+                        <a class="col-md-2">
+                            卷3
+                        </a>
+                        <a class="col-md-2">
+                            卷4
+                        </a>
+                        <a class="col-md-2">
+                            卷5
+                        </a>
+                        <a class="col-md-2">
+                            卷6
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a class="col-md-2">
+                            卷7
+                        </a>
+                        <a class="col-md-2">
+                            卷8
+                        </a>
+                    </div>
+                    <div>册2册名</div>
+                    <div class="row">
+                        <a class="col-md-2">
+                            卷1
+                        </a>
+                        <a class="col-md-2">
+                            卷2
+                        </a>
+                        <a class="col-md-2">
+                            卷3
+                        </a>
+                        <a class="col-md-2">
+                            卷4
+                        </a>
+                        <a class="col-md-2">
+                            卷5
+                        </a>
+                        <a class="col-md-2">
+                            卷6
+                        </a>
+                    </div>
+                </div>
+            </modal>
+        </div>
+
         <!--底按鈕欄-->
         <div class="width1000 center">
             <img src="../assets/img/本体标记/墨水线 下.png" height="4" width="974"/>
@@ -227,7 +269,7 @@
                     <span>MPage</span>
                 </div>
                 <button class="float-right ry-btn-last-page">上一</button>
-                <button class="ry-btn-menu">目錄</button>
+                <button class="ry-btn-menu" @click="catalogue_onclick()">目錄</button>
             </div>
         </div>
 
@@ -237,10 +279,20 @@
 
 
 <script type="text/javascript">
+    import modal from  '../component/modal.vue'
     export default{
+        components:{
+            modal,
+        },
 
         data() {
             return{
+                add_comment_modal : false,
+                get_comment_modal : false,
+                catalogue_modal : false,
+                now_target : '',
+                now_comment : '',
+
                 get_content_obj : {},
                 content : '蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。',
                 page_id : 1,
@@ -734,7 +786,8 @@
                 }
                 var sel = window.getSelection();
                 this.begin_add_comment = sel.anchorNode.parentNode.id;
-                this.end_add_comment = sel.focusNode.parentNode.id + 1;
+                var end = sel.focusNode.parentNode.id;
+                this.end_add_comment = parseInt(end)+1;
             },
 
 
@@ -742,6 +795,7 @@
              * 添加批注按钮事件
              */
             btn_add_comment_onclick() {
+                this.add_comment_modal = true;
                 var btn_add_comment = document.getElementById("btn-add-comment");
                 btn_add_comment.style.visibility = "hidden";  //  添加批注按钮隐藏
                 var range = window.getSelection().getRangeAt(0);    //  获得选区
@@ -778,15 +832,52 @@
                     if (checkbox.checked = true) {
                         this.pri = 1
                     }
-                    else {
+                    else if (checkbox.checked = false) {
                         this.pri = 0
                     }
-                    this.content_add_comment = textarea_add_comment.innerText;
-                    post_add_comment();
-                    window.location.reload()
+                    this.content_add_comment = textarea_add_comment.value;
+                    this.post_add_comment();
+                    window.location.reload();
                 }
             },
 
+            /**
+             * 取消添加批注事件
+             */
+            btn_cancel_add_comment_onclick() {
+                var spans = document.getElementById("text-comment").getElementsByTagName("span");   //  获取批注文本中span标签
+                //  遍历将没有class属性的span复原为纯文本
+                for (var i = 0; i < spans.length; i++) {
+                    var has = spans[i].hasAttribute("class");
+                    if (has == false) {
+                        var inner = spans[i].innerText;
+                        var text = document.createTextNode(inner);
+                        spans[i].parentNode.replaceChild(text, spans[i]);
+                    }
+                }
+                this.begin_add_mark = '';
+                this.end_add_mark = '';
+                this.before = '';
+                this.after = '';
+                this.add_comment_modal = false;
+            },
+
+            /**
+             * 查看批注
+             */
+            check_comment() {
+                this.now_target = 1;
+                this.now_comment = 1;
+                alert("ewoifw");
+                this.get_comment_modal = true;
+            },
+
+            /**
+             * 目录按钮
+             */
+            catalogue_onclick() {
+                this.catalogue_modal = true;
+            },
 
             /**
              * 选中标记文本事件
@@ -807,27 +898,6 @@
                     var e = text_mark.innerText.charAt(this.end_add_mark+1+m);
                     this.after += e;
                 }
-            },
-
-
-            /**
-             * 取消添加批注事件
-             */
-            btn_cancel_add_comment_onclick() {
-                var spans = document.getElementById("text-comment").getElementsByTagName("span");   //  获取批注文本中span标签
-                //  遍历将没有class属性的span复原为纯文本
-                for (var i = 0; i < spans.length; i++) {
-                    var has = spans[i].hasAttribute("class");
-                    if (has == false) {
-                        var inner = spans[i].innerText;
-                        var text = document.createTextNode(inner);
-                        spans[i].parentNode.replaceChild(text, spans[i]);
-                    }
-                }
-                this.begin_add_mark = '';
-                this.end_add_mark = '';
-                this.before = '';
-                this.after = '';
             },
 
 
@@ -998,17 +1068,20 @@
                     var text_comment = document.getElementById("text-comment");
                     //该字不是批注
                     if (a == 0) {
+                        var span = document.createElement("span");
                         var text = document.createTextNode(p);
-                        text_comment.appendChild(text)
+                        span.appendChild(text);
+                        span.setAttribute("id", i);
+                        text_comment.appendChild(span);
                     }
                     //该字是批注
                     else if (a == 1) {
                         var span = document.createElement("span");
                         var text = document.createTextNode(p);
                         span.appendChild(text);
-                        span.setAttribute("class", "comment id=C" + this.comment[jtemp].id_comment);
-                        span.setAttribute("data-toggle", "modal");
-                        span.setAttribute("data-target", "#layer-comment-record");
+                        span.setAttribute("class", "ry-comment id=C" + this.comment[jtemp].id_comment);
+//                        span.setAttribute("v-on:click",function(){return function(){check_comment();}}());
+                        span.attachEvent("v-on:click",this.check_comment());
                         text_comment.appendChild(span);
                     }
                 }
@@ -1054,7 +1127,7 @@
                         var span = document.createElement("span");
                         var text = document.createTextNode(p);
                         span.appendChild(text);
-                        span.setAttribute("class", "mark id=M" + this.mark[jtemp].id_mark);
+                        span.setAttribute("class", "ry-mark id=M" + this.mark[jtemp].id_mark);
                         text_mark.appendChild(span);
                     }
                 }
@@ -1311,6 +1384,22 @@
         height: 47px;
         background-image: url("../assets/img/本体标记/屏风按钮.png");
     }
+
+    .ry-btn-cancel-add-comment{
+        width: 80px;
+        height: 35px;
+        background-image: url("../assets/img/批注交互/删除按钮.png");
+    }
+
+    .ry-btn-confirm-add-comment{
+        width: 80px;
+        height: 35px;
+        background-image: url("../assets/img/批注交互/删除按钮.png");
+    }
+
+    .ry-modal-add-comment-box{
+        padding-left: 160px;
+    }
     
 
     /*图文对照文字工作台div*/
@@ -1415,7 +1504,7 @@
     textarea{
         position: relative;
         top: 30px;
-        width: 320px;
+        width: 250px;
     }
 
     /*修订信息编辑框*/
@@ -1426,20 +1515,22 @@
 
     /*批注内容编辑框*/
     #textarea-addComment{
-        width: 500px;
+        width: 400px;
         height: 200px;
         position: static;
     }
 
     /*批注字体样式*/
-    .comment{
+    .ry-comment{
         cursor: pointer;
-        text-decoration: underline;
+        font-weight: bold;
+        color: red;
     }
 
     /*标记字体样式*/
-    .mark{
+    .ry-mark{
         cursor: pointer;
-        font-weight: bold;
+        text-decoration: underline;
+        color: red;
     }
 </style>

@@ -1,13 +1,13 @@
 <template id="modal">
-    <div class="dialogs" :class="{ 'dialog-active': show_modal }">
-            <div class="dialog-content">
-                <div class="j-close j-rotate">
-                    <img src="../assets/img/叉.png" @click="$emit('fireclose')">
-                </div>
-                <slot name="header"></slot>
-                <slot name="body"></slot>
-                <slot name="footer"></slot>
+    <div class="dialogs " :class="{ 'dialog-active': show_modal }">
+        <div class="dialog-content">
+            <div class="j-close j-rotate">
+                <img src="../assets/img/叉.png" @click="$emit('fireclose')">
             </div>
+            <slot name="header"></slot>
+            <slot name="body"></slot>
+            <slot name="footer"></slot>
+        </div>
     </div>
 </template>
 
@@ -32,6 +32,8 @@
         }
 
         .dialogs {
+            width: auto;
+            height: auto;
             position: fixed;
             left: 37%;
             top: 100px;
@@ -40,8 +42,7 @@
             backface-visibility: hidden;
             border-radius: 2px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            background-image: url("../assets/img/modal.png");
-
+            background-color: white;
         }
         .dialog-active{
             visibility: visible;
@@ -58,28 +59,17 @@
             visibility: visible;
         }
 
-        /*.dialog-content {*/
-            /*width: 400px;*/
-            /*height: 375px;*/
-            /*border-radius: 2px;*/
-            /*box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);*/
-        /*}*/
 
 
         .j-close {
-            display: inline-block;
-            width: 2rem;
-            height: 2rem;
+            width:auto;
+            height: auto;
             position: absolute;
             top: .5rem;
             right: .5rem;
-            /*transition: .8s ease all;*/
-            /*-moz-transition: .8s ease all;*/
-            /*-webkit-transition: .8s ease all;*/
             border: none;
             border-radius: 3px;
             color: #333;
-            text-decoration: none;
             box-sizing: border-box;
             -webkit-box-sizing: border-box;
         }
