@@ -1,9 +1,12 @@
 <!--定义组件-->
 <template>
     <div>
-        <button class="zxwnoumenom-button zxwnoumenom-button-margin" style="float:left" @click="downback()">注销</button>
-        <noumenon_title  class="zxw-admin-title" :title="this.title">
-            <button slot="children" class="zxwnoumenom-button zxwnoumenom-button-margin zxw-btn-admin"  @click="open_dialog()">创建用户</button>
+
+        <noumenon_title class="zxw-admin-title" :title="this.title">
+            <div slot="children" class="zxwbtn-margin">
+                <button slot="children" class="zxwnoumenom-button zxwnoumenom-button-margin"  @click="downback()">注销</button>
+                <button slot="children" class="zxwnoumenom-button zxwnoumenom-button-margin"  @click="open_dialog()">创建用户</button>
+            </div>
         </noumenon_title>
 
         <!--用户信息表格-->
@@ -597,7 +600,10 @@
         border: none;
     }
 
-
+    .zxw-admin-btn-length{
+        width:140px;
+        height:45px;
+    }
     /*.dialog {*/
         /*width: 480px;*/
         /*position: fixed;*/

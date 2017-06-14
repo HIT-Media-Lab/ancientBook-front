@@ -5,13 +5,11 @@
         <create-word :prams="this.prams"></create-word>
         <div class="zxw-noumenon-select">
             <span>选择本体类型：</span>
-            <select class="zxw-select">
+            <select class="zxw-select" v-model="selection">
                 <option v-for="item in noumenon_option">{{item}}</option>
             </select>
         </div>
-        <router-link to="/chartwo">
-            <button class="zxw-nextbtn zxw-nextbtn-margin zxw-nextbtn-length">下一步</button>
-        </router-link>
+        <button class="zxw-nextbtn zxw-nextbtn-margin zxw-nextbtn-length" @click="go_step2()">下一步</button>
     </div>
 </template>
 
@@ -20,6 +18,7 @@ import createWord from '../../../component/create-word.vue'
 export default{
     created(){
         this.prams = this.$route.name;
+
     },
 
     components:{
@@ -29,7 +28,16 @@ export default{
     data(){
         return{
             prams:'',
-            noumenon_option:['时间','地名','人物','机构','职官','文献','术语']
+            noumenon_option:['时间','地名','人物','机构','职官','文献','术语'],
+            selection:'时间'
+        }
+    },
+
+    methods:{
+        go_step2(){
+            if(this.selection === '人物'){
+                this.$router.push({name:'charactertwo'});
+            }
         }
     }
 
@@ -38,16 +46,17 @@ export default{
 
 <style>
     .zxwcreate{
-        margin:100px 0 0 300px;
+        margin:50px 0  0 20%;
     }
 
     .zxwcreate-title{
-        font-size: 14px;
+        font-weight: bold;
+        font-size: 18px;
     }
 
     .zxwcreate-img{
-        height:180px;
-        width:800px;
+        height:150px;
+        width:810px;
         margin:0 0 0 80px;
     }
 
@@ -82,10 +91,7 @@ export default{
         background-position: center;
         color:black;
     }
-    .zxw-prebtn-margin{
 
-        margin:0 15px 0 620px;
-    }
 
     .zxw-prebtn-length{
         width:125px;

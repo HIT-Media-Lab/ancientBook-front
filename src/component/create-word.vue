@@ -20,6 +20,8 @@
         margin:0 230px 0 210px;
     }
     .zxwwordhover{
+        font-weight: bold;
         color:#a50000;
+        font-size: 15px;
     }
 </style>
