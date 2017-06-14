@@ -73,17 +73,10 @@
                         <!--文本标题-->
                         <h4>詩經卷一</h4>
                         <!--文本主体-->
-                        <div class="body-text" id="text-edit" contentEditable="false"></div>
+                        <div class="body-text" id="text-edit"></div>
                         <br>
                         <br>
                         <br>
-                        <!--修订信息编辑框标题-->
-                        <h5 id="label" style="visibility: hidden">請填寫修訂信息:</h5>
-                        <!--修订信息编辑框-->
-                        <textarea id="textarea-editInfo" style="visibility: hidden"></textarea>
-                        <!--点击修订后弹出的按钮-->
-                        <button id="btn-cancel-edit" class="btn btn-danger" style="visibility: hidden" @click="btn_cancel_edit_onclick()">取消</button>
-                        <button id="btn-confirm-edit" class="btn btn-success" style="visibility: hidden" @click="btn_confirm_edit_onclick()">確定</button>
                         <!--查看修订记录-->
                         <button class="ry-btn-edit-record" data-toggle="modal" data-target="#layer-edit-record" id="btn-edit-record" @click="edit_record_onclick()">修訂記錄</button>
                         <button class="ry-btn-edit" id="btn-edit" @click="btn_edit_onclick()">修訂</button>
@@ -91,27 +84,49 @@
                 </div>
 
                 <!--修订记录模态框-->
-                <div role="dialog" class="modal fade bs-example-modal-sm" id="layer-edit-record">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                    <span>&times;</span>
-                                </button>
-                                <h4 class="modal-title">修訂記錄</h4>
+                <div>
+                    <modal :show_modal.sync = "edit_record_modal" @fireclose = "edit_record_modal = false" class="ry-modal-border ry-modal-padding">
+                        <header slot="header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                            <h4 class="modal-title" style="text-align: center">修訂記錄</h4>
+                        </header>
+                        <div class="width600" slot="body">
+                            <div v-for="item in edit_record">
+                                <p>修訂者：{{item.username_edit_record}}</p>
+                                <p>修訂時間：{{item.time_edit_record}}</p>
+                                <p>修訂信息：{{item.commit_edit_record}}</p>
+                                <p>修訂版本：{{item.version_edit_record}}</p>
+                                <hr>
                             </div>
-                            <div class="modal-body text-tight">
-                                <div v-for="item in edit_record">
-                                    <p>修訂者：{{item.username_edit_record}}</p>
-                                    <p>修訂時間：{{item.time_edit_record}}</p>
-                                    <p>修訂信息：{{item.commit_edit_record}}</p>
-                                    <p>修訂版本：{{item.version_edit_record}}</p>
-                                    <hr>
-                                </div>
-                                <button class="btn btn-success btn-sm" data-dismiss="modal">確定</button>
-                            </div>
+                            <button class="ry-btn-confirm-edit-record-modal" data-dismiss="modal" @click="close_edit_record_modal()">確定</button>
                         </div>
-                    </div>
+                    </modal>
+                </div>
+
+                <!--修订模态框-->
+                <div>
+                    <modal :show_modal.sync = "edit_modal" @fireclose = "edit_modal = false" class="ry-modal-border ry-modal-padding">
+                        <header slot="header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                            <h4 class="modal-title" style="text-align: center">修訂</h4>
+                        </header>
+                        <div class="width600" slot="body">
+                            <div class="body-text" contentEditable="true">蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。</div>
+                            <br>
+                            <br>
+                            <br>
+                            <img src="../assets/img/上传1/中间墨线.png" height="6" width="600"/>
+                            <!--修订信息编辑框标题-->
+                            <h5>修訂信息:</h5>
+                            <!--修订信息编辑框-->
+                            <div id="textarea-editInfo" contentEditable="true" style="height: 100px"></div>
+                            <button class="ry-btn-confirm-edit-record-modal" data-dismiss="modal" @click="btn_confirm_edit_onclick()">確定</button>
+                        </div>
+                    </modal>
                 </div>
 
                 <!--添加批注模态框-->
@@ -269,6 +284,8 @@
                 get_comment_modal : false,
                 add_mark_modal : false,
                 catalogue_modal : false,
+                edit_record_modal : false,
+                edit_modal : false,
                 now_target : '',
                 now_comment : '',
 
@@ -689,16 +706,7 @@
              * 修订按钮点击事件
              */
             btn_edit_onclick() {
-                var text_edit = document.getElementById("text-edit");    //  修订版文本
-                var btn_cancel_edit = document.getElementById("btn-cancel-edit");  //  取消修订按钮
-                var btn_confirm_edit = document.getElementById("btn-confirm-edit");    //  确认修订按钮
-                var text = document.getElementById("textarea-editInfo");    //  修订信息编辑框
-                var label = document.getElementById("label");   //  修订信息编辑框标题
-                btn_cancel_edit.style.visibility = "visible";    //   取消修订按钮显示
-                btn_confirm_edit.style.visibility = "visible";    //  确认修订按钮显示
-                text.style.visibility = "visible";  //  修订信息编辑框显示
-                label.style.visibility = "visible";    //   修订信息编辑框标题显示
-                text_edit.contentEditable = true;    //  修订文本可编辑
+                this.edit_modal = true;
             },
 
 
@@ -728,7 +736,7 @@
                 var btn_confirm_edit = document.getElementById("btn-confirm-edit");    //  确认修订按钮
                 var label = document.getElementById("label");   //  修订信息编辑框标题
                 //  未做修改判断
-                if (content == text_edit.innerText) {
+                if (this.content == text_edit.innerText) {
                     alert("您未做任何修改！")
                 }
                 //  未填写修订信息判断
@@ -744,6 +752,7 @@
                     this.commit = text.innerText;
                     post_update_cm();   //  批量更新批注标记
                     post_edit();    //  修改古籍文本内容请求
+                    this.edit_modal = false;
                 }
             },
 
@@ -752,9 +761,16 @@
              * 修订记录按钮事件
              */
             edit_record_onclick() {
-                this.get_edit_record(pageId);
+//                this.get_edit_record(pageId);
+                this.edit_record_modal = true;
             },
 
+            /**
+             * 修订记录按钮事件
+             */
+            close_edit_record_modal() {
+                this.edit_record_modal = false;
+            },
 
             /**
              * 批注文本选取添加批注操作
@@ -1400,6 +1416,15 @@
     .ry-add-mark-modal-box{
         height: 100px;
         text-align: center;
+    }
+
+    .ry-btn-confirm-edit-record-modal{
+        color: white;
+        width: 103px;
+        height: 44px;
+        margin-left: 480px;
+        background-size: 100%;
+        background-image: url("../assets/img/上传1/下一步按钮.png");
     }
     
 
