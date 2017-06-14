@@ -85,14 +85,12 @@
 
                 <!--修订记录模态框-->
                 <div>
-                    <modal :show_modal.sync = "edit_record_modal" @fireclose = "edit_record_modal = false" class="ry-modal-border ry-modal-padding">
+                    <modal :show_modal.sync = "edit_record_modal" @fireclose = "edit_record_modal = false" class="ry-modal-border">
                         <header slot="header">
-                            <button type="button" class="close" data-dismiss="modal">
-                                <span>&times;</span>
-                            </button>
-                            <h4 class="modal-title" style="text-align: center">修訂記錄</h4>
+
                         </header>
                         <div class="width600" slot="body">
+                            <h4 style="text-align: center">修訂記錄</h4>
                             <div v-for="item in commit_edit_record">
                                 <p>修訂者：{{item.username_edit_record}}</p>
                                 <p>修訂時間：{{item.time_edit_record}}</p>
@@ -109,9 +107,6 @@
                 <div>
                     <modal :show_modal.sync = "edit_modal" @fireclose = "edit_modal = false" class="ry-modal-border ry-modal-padding">
                         <header slot="header">
-                            <button type="button" class="close" data-dismiss="modal">
-                                <span>&times;</span>
-                            </button>
                             <h4 class="modal-title" style="text-align: center">修訂</h4>
                         </header>
                         <div class="width600" slot="body">
@@ -194,7 +189,7 @@
 
         <!--目录模态框-->
         <div>
-            <modal :show_modal.sync = "catalogue_modal" @fireclose = "catalogue_modal = false">
+            <modal :show_modal.sync = "catalogue_modal" @fireclose = "catalogue_modal = false" class="ry-modal-border">
                 <div class="dialog-body" slot="body">
                     <div>册1册名</div>
                     <div class="row">
