@@ -1,4 +1,5 @@
 <template>
+
     <modal :show_modal="show_info" class="zxw-modal-character">
         <div slot="header" class="zxw-character-header">
         </div>
@@ -26,6 +27,7 @@
 </script>
 
 <style>
+
     .zxw-success-create{
         width: 100px;
         margin:0 10% 0 25%;

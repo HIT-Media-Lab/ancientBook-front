@@ -94,6 +94,7 @@
             <p class="zxwspan-length" v-model="this.$store.getters.get_build_character.remark_2_name">{{this.$store.getters.get_build_character.remark_2_name}}:</p>
             <p class="zxwspan-length" v-model="this.$store.getters.get_build_character.remark_2">{{this.$store.getters.get_build_character.remark_2}}</p>
         </div>
+
         <router-link to="/noumenon/character">
             <button  class="zxwnoumenom-button zxwdelete-character">删除本体</button>
         </router-link>
@@ -271,6 +272,7 @@
     import noumenon_button from '../../../component/noumenon-button.vue';
     export default{
         created(){
+
             //console.log(this.$store.getters.get_build_character);
             this.title = this.$store.getters.get_build_character.standard_name;
             //this.person_info(this.$route.params.nouId);
