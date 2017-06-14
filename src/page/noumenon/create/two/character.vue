@@ -4,40 +4,40 @@
         <img src="../../../../assets/img/create-step2.png" class="zxwcreate-img">
         <create_word :prams="this.prams"></create_word>
 
-        <p class="zxw-create-character">本体名称：人名（出生时间）</p>
+        <p class="zxw-create-character">本体名称：{{input_content.person_name}}{{input_content.birth_value}}</p>
         <div class="zxw-character-row">
             <label class="zxw-character-span zxw-must-write">人名：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_content.person_name">
             <label class="zxw-character-span">英译：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_content.english">
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">姓：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_content.xing">
             <label class="zxw-character-span">氏：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_content.shi">
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">字：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_content.zi">
             <label class="zxw-character-span">别名：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_content.other_name">
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span zxw-must-write">出生时间：</label>
-            <button  class="zxw-character-input zxw-character-input-margin" readonly @click="open_birth()"  v-model="birth_value"></button>
+            <button  class="zxw-character-input zxw-character-input-margin" readonly @click="open_birth()"  v-model="input_content.birth_value">{{input_content.birth_value}}</button>
             <label class="zxw-character-span zxw-must-write">死亡时间：</label>
-            <button class="zxw-character-input zxw-character-input-margin" readonly @click="open_dead()" v-model="dead_value"></button>
+            <button class="zxw-character-input zxw-character-input-margin" readonly @click="open_dead()" v-model="input_content.dead_value">{{input_content.dead_value}}</button>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">籍贯：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_content.location">
             <label class="zxw-character-span">父：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="button" class="zxw-character-input zxw-character-input-margin" @click="open_character()">
         </div>
 
         <div class="zxw-character-row">
@@ -68,37 +68,49 @@
             <input type="text" class="zxw-character-input zxw-character-input-margin">
         </div>
 
-        <div>
-            <input type="text" class="zxw-character-input-head zxw-character-input" >
-            <input type="text" class="zxw-character-input" maxlength="20">
-            <button class="zxw-add-button" @click="go()">添加</button>
+        <div v-for="(item ,index) in add_data">
+            <input type="text" class="zxw-character-input-head zxw-character-input" v-model="add_data[index].remark_name">
+            <input type="text" class="zxw-character-input" maxlength="20" name="index" v-model="add_data[index].remark">
+            <button class="zxw-add-button" @click="add_tip(index)" v-show="add_data[index].value">添加</button>
         </div>
 
-        <router-link to="/build">
-            <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length">上一步</button>
-        </router-link>
 
-        <router-link to="/charthree">
-            <button class="zxw-nextbtn zxw-nextbtn-length">下一步</button>
-        </router-link>
+        <div class="zxw-build-step2-btn">
+            <router-link to="/build">
+                <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length">上一步</button>
+            </router-link>
 
-        <modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></modal>
-        <modal :time_modal="this.time_modal_2" v-on:success_time="dead_time" v-on:close_modal="close_dead()"></modal>
+            <router-link to="/charthree">
+                <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()">下一步</button>
+            </router-link>
+        </div>
+
+        <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></time_modal>
+        <time_modal :time_modal="this.time_modal_2" v-on:success_time="dead_time" v-on:close_modal="close_dead()"></time_modal>
+        <character_modal :character_modal="this.character_modal" v-on:close_modal="close_character()"></character_modal>
 
     </div>
 </template>
 
 <script>
     import create_word from '../../../../component/create-word.vue';
-    import modal from '../../../../component/time-modal.vue';
+    import time_modal from '../../../../component/time-modal.vue';
+    import character_modal from '../../../../component/search_character.vue';
     export default{
-        created(){
+        mounted(){
             this.prams = this.$route.name;
+            this.input_content = this.$store.getters.get_build_character;
+            this.add_data[0].remark_name = this.input_content.remark_1_name;
+            this.add_data[0].remark = this.input_content.remark_1;
+             this.add_tip(0);
+             this.add_data[1].remark_name = this.input_content.remark_2_name;
+             this.add_data[1].remark = this.input_content.remark_2;
         },
 
         components:{
             create_word,
-            modal
+            time_modal,
+            character_modal
         },
 
         data(){
@@ -106,6 +118,7 @@
                 prams:'',
                 time_modal_1:false,
                 time_modal_2:false,
+                character_modal:false,
                 input_content:{
                     standard_name:'',
                     person_name:'',
@@ -114,17 +127,21 @@
                     zi:'',
                     other_name:'',
                     birth_time_id:'',
+                    birth_value:'',
                     death_time_id:'',
+                    dead_value:'',
                     remark_1_name:'',
                     remark_2_name:'',
                     remark_1:'',
                     remark_2:'',
                     english:'',
-                    location_id:''
+                    location_id:'',
+                    location:'',
+                    person_relations:[],
                 },
-                person_relations:[],
-                birth_value:'',
-                dead_value:''
+                add_data:[{value:true}],
+                remark_name:[],
+                remark:[]
             }
         },
 
@@ -134,8 +151,10 @@
             },
 
             birth_time(p){
-                this.input_content.birth_time_id = p.time_id;
-                this.birth_value = p.content;
+                //this.input_content.birth_time_id = p.time_id;
+                //this.birth_value = p.content;
+                this.input_content.birth_value=p;
+                this.close_birth();
             },
 
             close_birth(){
@@ -147,12 +166,44 @@
             },
 
             dead_time(q){
-                this.input_content.birth_time_id = q.time_id;
-                this.dead_value = q.content;
+                //this.input_content.dead_time_id = q.time_id;
+                //this.dead_value = q.content;
+                this.input_content.dead_value=q;
+                this.close_dead();
             },
 
             close_dead(){
                 this.time_modal_2 = false;
+            },
+
+            add_tip(p){
+                console.log(p);
+                this.add_data[p].value = false;
+                console.log(JSON.stringify('add_data数组：'+JSON.stringify(this.add_data)));
+                //this.remark_name.push(this.add_data[p].remark_name);
+                //this.remark.push(this.add_data[p].remark);
+                //console.log(JSON.stringify(this.remark_name+"----"+this.remark));
+                this.add_data.push({
+                    value:true
+                });
+                console.log(this.add_data.length+JSON.stringify(this.add_data));
+            },
+
+            open_character(){
+                this.character_modal = true;
+            },
+
+            close_character(){
+                this.character_modal = false;
+            },
+
+            next_step(){
+                this.input_content.standard_name = this.input_content.person_name+this.input_content.birth_value;
+                this.input_content.remark_1_name = this.add_data[0].remark_name;
+                this.input_content.remark_1 = this.add_data[0].remark;
+                this.input_content.remark_2_name = this.add_data[1].remark_name;
+                this.input_content.remark_2 = this.add_data[1].remark;
+                this.$store.commit("get_create_character",this.input_content);
             }
         }
     }
@@ -166,8 +217,10 @@
 
     /*新建第二部的题目*/
     .zxw-create-character{
+        font-size: 18px;
         margin:42px 0 34px 0;
         color:#a50000;
+        font-weight: bold ;
     }
 
     /*输入框样式*/
@@ -176,6 +229,8 @@
         background-color: transparent;
         height:30px;
         width:220px;
+        text-align: left;
+        padding-left: 0.5%;
     }
 
     /*输入框间距*/
@@ -186,7 +241,7 @@
 
     /*备注输入头的样式*/
     .zxw-character-input-head{
-        margin:0 30px 0 0;
+        margin:0 30px 10px 0;
         width:70px;
     }
 
@@ -208,5 +263,11 @@
         height:43px;
         color:gainsboro;
         margin:0 0 0 35px;
+    }
+
+    .zxw-build-step2-btn{
+        float:right;
+        margin:0 300px 0 0;
+        position:relative;
     }
 </style>

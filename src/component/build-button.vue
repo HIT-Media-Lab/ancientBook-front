@@ -8,10 +8,10 @@
 <style>
     .zxwnoumenom-button{
         background-image: url("../assets/img/build-button.png");
-        background-color: transparent;
+        background-repeat: no-repeat;
+        background-position: center;
         border:none;
         color:white;
-        font-size: 14px;
     }
 
     .zxwnoumenom-button-margin{

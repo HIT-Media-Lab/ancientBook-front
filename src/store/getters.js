@@ -46,6 +46,10 @@ export default {
     },
     get_upload1_info:state => {
         return state.upload1_info
-    }
+    },
+    get_build_character:state => {
+        return state.create_character
+    },
+
 
 }
