@@ -40,10 +40,14 @@ export default {
     },
     get_upload1_info(state,info){
         state.upload1_info = info
-    }
+    },
     // character_id(state,num,id){
     //     for (let i = 0; i<num; i++){
     //         state.noumenon_character[i]=id[i]
     //     }
     // }
+    get_create_character(state,data){
+        state.create_character = data;
+        console.log('state.create_character:'+JSON.stringify(state.create_character));
+    }
 }
