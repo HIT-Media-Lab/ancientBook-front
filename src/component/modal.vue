@@ -2,7 +2,8 @@
     <div class="dialogs " :class="{ 'dialog-active': show_modal }">
         <div class="dialog-content">
             <div class="j-close j-rotate">
-                <img src="../assets/img/叉.png" @click="$emit('fireclose')">
+                <!--<img src="../assets/img/叉.png" @click="$emit('fireclose')">-->
+                <span @click="$emit('fireclose')" style="font-size: 30px; height: 5px">×</span>
             </div>
             <slot name="header"></slot>
             <slot name="body"></slot>
@@ -27,10 +28,6 @@
     }
 </script>
 <style>
-        .strap{
-            padding-bottom: 0.5em;
-        }
-
         .dialogs {
             width: auto;
             height: auto;
@@ -48,18 +45,11 @@
             visibility: visible;
         }
 
-        .dialog-active .dialog-con4tent {
+        .dialog-active .dialog-content {
             position: relative;
             opacity: 1;
             transform: rotateY(0);
         }
-
-        .dialog-active ~ .dialog-overlay {
-            opacity: 1;
-            visibility: visible;
-        }
-
-
 
         .j-close {
             width:auto;
