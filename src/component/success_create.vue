@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <div>
         <modal :show_modal="show_info" class="zxw-modal-character">
             <div slot="header" class="zxw-character-header">

@@ -37,7 +37,7 @@
         </div>
 
         <div class="width1000 center">
-            <button class="ry-btn-submit float-right">發佈</button>
+            <button class="ry-btn-submit float-right" @click="complete_upload1()">發佈</button>
             <button class="ry-btn-last-step3 float-right" @click="last_page()">上一步</button>
         </div>
 
@@ -73,6 +73,10 @@
         methods : {
             last_page() {
                 this.$router.push({path: '/user/upload2'});
+            },
+
+            complete_upload1() {
+                this.$router.push({path:'/bookstore/book_info'});
             },
 
             complete_upload() {

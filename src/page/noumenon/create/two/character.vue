@@ -4,7 +4,11 @@
         <img src="../../../../assets/img/create-step2.png" class="zxwcreate-img">
         <create_word :prams="this.prams"></create_word>
 
-        <p class="zxw-create-character">本体名称：{{input_content.person_name}}{{input_content.birth_value}}</p>
+        <p class="zxw-create-character">本体名称：{{input_content.person_name}}
+            <span v-show="input_content.birth_value !==''">(</span>
+                {{input_content.birth_value}}
+            <span v-show="input_content.birth_value !==''">)</span>
+        </p>
         <div class="zxw-character-row">
             <label class="zxw-character-span zxw-must-write">人名：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_content.person_name">
@@ -28,9 +32,6 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span zxw-must-write">出生时间：</label>
-            <button  class="zxw-character-input zxw-character-input-margin" readonly @click="open_birth()"  v-model="input_content.birth_value"></button>
-            <label class="zxw-character-span zxw-must-write">死亡时间：</label>
-            <button class="zxw-character-input zxw-character-input-margin" readonly @click="open_dead()" v-model="input_content.dead_value"></button>
             <button  class="zxw-character-input zxw-character-input-margin" readonly @click="open_birth()"  v-model="input_content.birth_value">{{input_content.birth_value}}</button>
             <label class="zxw-character-span zxw-must-write">死亡时间：</label>
             <button class="zxw-character-input zxw-character-input-margin" readonly @click="open_dead()" v-model="input_content.dead_value">{{input_content.dead_value}}</button>
@@ -108,9 +109,6 @@
             this.add_tip(0);
             this.add_data[1].remark_name = this.input_content.remark_2_name;
             this.add_data[1].remark = this.input_content.remark_2;
-             this.add_tip(0);
-             this.add_data[1].remark_name = this.input_content.remark_2_name;
-             this.add_data[1].remark = this.input_content.remark_2;
         },
 
         components:{
