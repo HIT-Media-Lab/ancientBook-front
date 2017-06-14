@@ -18,11 +18,13 @@
         background-position: bottom;
         padding-bottom: 10px;
         width:950px;
+        margin:auto;
     }
     .zxwnoumenom-title{
-        font-size: 14px;
+        font-size: 18px;
         margin:65px 0 5px 0;
         display:inline-block;
+        font-weight: bold;
     }
 
 

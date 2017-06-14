@@ -1,15 +1,18 @@
 <template>
-        <modal :show_modal="this.time_modal" v-on:fireclose="this.close">
+        <modal :show_modal="this.time_modal" v-on:fireclose="this.close" class="zxw-time-modal">
             <div slot="header" class="zxw-time-header">
                 <span>时间本体</span>
             </div>
 
             <div slot="body" class="zxw-time-body">
-
                 <label class="zxw-time-label">朝代：</label>
+                <select id="chaodai" class="zxw-select zxw-time-select" v-model="selected_1">
+                    <option v-for="item in menu_data">{{item}}</option>
+                </select>
+               <!-- <label class="zxw-time-label">朝代：</label>
                 <select id="chaodai" class="zxw-select zxw-time-select" v-model="selected_1" @change="get_year()">
                     <option v-for="item in menu_data" v-bind:value="item.item_1_id"> {{item.chinese_name}}</option>
-                </select>
+                </select>-->
 
                 <label>年号：</label>
                 <select id="nianhao" class="zxw-select zxw-time-select" v-model="selected_2">
@@ -71,7 +74,7 @@
     import modal from '../component/modal.vue'
     export default{
         created(){
-            this.get_menu();
+            //this.get_menu();
             this.get_month();
             this.get_day();
         },
@@ -91,7 +94,7 @@
               year_number:'',
               menu_url:'/ancient_books/get_menu_items.action',
               time_url:'/ancient_books/get_time_by_chinese_name.action',
-              menu_data:[],
+              menu_data:['东汉','西汉','唐'],
               year_data:[],
               month_data:[],
               day_data:[],
@@ -242,10 +245,10 @@
         font-size: 18px;
         text-align: center;
         background-image: url("../assets/img/弹框标题.png");
-        background-size: 100%;
+        background-size: contain;
         background-color: transparent;
-        width:400px;
-        height:50px;
+        width:750px;
+        height:40px;
         padding:10px 0 0 0;
     }
 
@@ -261,7 +264,14 @@
     }
 
     .zxw-time-body{
-        margin:24px 0 0 0;
+        margin:24px auto;
+        width:700px;
     }
 
+    .zxw-time-modal{
+        width:750px;
+        height:150px;
+        background-repeat: no-repeat;
+        background-size: 750px 150px;
+    }
 </style>

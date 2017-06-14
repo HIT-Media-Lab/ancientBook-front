@@ -1,5 +1,102 @@
 <template>
-    <div class="zxwnoumenom-body">
+    <div>
+        <noumenon_title :title="this.title">
+            <noumenon_button slot="children"></noumenon_button>
+        </noumenon_title>
+
+        <div class=" zxw-characterbody">
+            <p class="zxwspan-length">人名：</p>
+            <p class="zxwspan-length" v-model="this.$store.getters.get_build_character.standard_name">{{this.$store.getters.get_build_character.standard_name}}</p>
+        </div>
+
+        <div class="zxw-infospan">
+            <p class="zxwspan-length">英译：</p>
+            <p class="zxwspan-length" v-model="this.$store.getters.get_build_character.english">{{this.$store.getters.get_build_character.english}}</p>
+        </div>
+
+        <div class="zxw-infospan">
+            <p class="zxwspan-length">姓：</p>
+            <span class="zxwspan-length" v-model="this.$store.getters.get_build_character.xing">{{this.$store.getters.get_build_character.xing}}</span>
+        </div>
+
+        <div class="zxw-infospan">
+            <p class="zxwspan-length">氏：</p>
+            <p class="zxwspan-length" v-model="this.$store.getters.get_build_character.shi">{{this.$store.getters.get_build_character.shi}}</p>
+        </div>
+
+        <div class="zxw-infospan">
+            <p class="zxwspan-length">字：</p>
+            <p class="zxwspan-length" v-model="this.$store.getters.get_build_character.zi">{{this.$store.getters.get_build_character.zi}}</p>
+        </div>
+
+        <div class="zxw-infospan">
+            <p class="zxwspan-length">别名：</p>
+            <p class="zxwspan-length" v-model="this.$store.getters.get_build_character.other_name">{{this.$store.getters.get_build_character.other_name}}</p>
+        </div>
+
+        <div class="zxw-infospan">
+            <p class="zxwspan-length">出生时间：</p>
+            <p class="zxwspan-length" v-model="this.$store.getters.get_build_character.birth_value">{{this.$store.getters.get_build_character.birth_value}}</p>
+        </div>
+
+        <div class="zxw-infospan">
+            <p class="zxwspan-length">死亡时间：</p>
+            <p class="zxwspan-length" v-model="this.$store.getters.get_build_character.dead_value">{{this.$store.getters.get_build_character.dead_value}}</p>
+        </div>
+
+        <div class="zxw-infospan">
+            <p class="zxwspan-length">籍贯：</p>
+            <p class="zxwspan-length" v-model="this.$store.getters.get_build_character.location">{{this.$store.getters.get_build_character.location}}</p>
+        </div>
+
+        <div class="zxw-infospan">
+            <p class="zxwspan-length">父：</p>
+            <button class="zxwbtn-info zxwspan-length"></button>
+        </div>
+        <div class="zxw-infospan">
+            <p class="zxwspan-length">母：</p>
+            <button class="zxwbtn-info zxwspan-length"></button>
+        </div>
+        <div class="zxw-infospan">
+            <p class="zxwspan-length">子：</p>
+            <button class="zxwbtn-info zxwspan-length"></button>
+        </div>
+        <div class="zxw-infospan">
+            <p class="zxwspan-length">女：</p>
+            <button class="zxwbtn-info zxwspan-length"></button>
+        </div>
+        <div class="zxw-infospan">
+            <p class="zxwspan-length">兄弟：</p>
+            <button class="zxwbtn-info zxwspan-length"></button>
+        </div>
+        <div class="zxw-infospan">
+            <p class="zxwspan-length">姐妹：</p>
+            <button class="zxwbtn-info zxwspan-length"></button>
+        </div>
+        <div class="zxw-infospan">
+            <p class="zxwspan-length">师：</p>
+            <button class="zxwbtn-info zxwspan-length"></button>
+        </div>
+        <div class="zxw-infospan">
+            <p class="zxwspan-length">学生：</p>
+            <button class="zxwbtn-info zxwspan-length"></button>
+        </div>
+        <div class="zxw-infospan">
+            <p class="zxwspan-length">友：</p>
+            <button class="zxwbtn-info zxwspan-length"></button>
+        </div>
+
+        <div class="zxw-infospan">
+            <p class="zxwspan-length" v-model="this.$store.getters.get_build_character.remark_1_name">{{this.$store.getters.get_build_character.remark_1_name}}:</p>
+            <p class="zxwspan-length" v-model="this.$store.getters.get_build_character.remark_1">{{this.$store.getters.get_build_character.remark_1}}</p>
+        </div>
+        <div class="zxw-infospan">
+            <p class="zxwspan-length" v-model="this.$store.getters.get_build_character.remark_2_name">{{this.$store.getters.get_build_character.remark_2_name}}:</p>
+            <p class="zxwspan-length" v-model="this.$store.getters.get_build_character.remark_2">{{this.$store.getters.get_build_character.remark_2}}</p>
+        </div>
+        <button  class="zxwnoumenom-button zxwdelete-character">删除本体</button>
+    </div>
+    <!--<div class="zxwnoumenom-body">
         <noumenon_title :title="this.title">
             <noumenon_button slot="children"></noumenon_button>
         </noumenon_title>
@@ -95,7 +192,7 @@
                 <p class="zxwspan-length" v-model="person_content.remark_2">{{person_content.remark_2}}</p>
             </div>
             <button  class="zxwnoumenom-button zxwdelete-character">删除本体</button>
-        </div>
+        </div>-->
 </template>
 
 <script>
@@ -172,7 +269,8 @@
     import noumenon_button from '../../../component/noumenon-button.vue';
     export default{
         created(){
-            this.person_info(this.$route.params.nouId);
+            this.title = this.$store.getters.get_build_character.standard_name;
+            //this.person_info(this.$route.params.nouId);
         },
         components:{
             noumenon_title,
@@ -180,7 +278,7 @@
         },
         data(){
             return{
-                title:'',
+                title:'李世民',
                 person_url:'/ancient_books/get_person_by_id.action',
                 person_object:{}, //get请求的对象
                 person_content:{},  //成功回调后的对象
@@ -196,7 +294,7 @@
             }
         },
         methods:{
-            success_id(response){
+           /* success_id(response){
                 //存在前端显示的数组里
                 this.title = response.body.standard_name+'('+response.body.birth_time_name+')';
                 this.person_content.standard_name = response.body.standard_name;
@@ -308,7 +406,7 @@
                 this.person_object.value = '?id='+p;
                 let new_url = this.person_url + this.person_object.value;
                 this.http_json(new_url,'get',this.person_object,this.success_id,this.fail_id);
-            }
+            }*/
         }
     }
 </script>
@@ -321,6 +419,8 @@
 
     /*删除本体button距离*/
     .zxwdelete-character{
+        width:140px;
+        height:45px;
         margin: 37px 0 0 37px;
     }
 
@@ -338,6 +438,7 @@
 
 
     .zxwspan-length{
+        font-weight: bold;
         width:100px;
         display:inline-block;
     }
