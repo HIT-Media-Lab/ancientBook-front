@@ -49,5 +49,9 @@ export default {
     get_create_character(state,data){
         state.create_character = data;
         console.log('state.create_character:'+JSON.stringify(state.create_character));
+    },
+    get_create_one_selection(state,number){
+        state.create_one_selection = number;
+        console.log('selection:'+state.create_one_selection);
     }
 }

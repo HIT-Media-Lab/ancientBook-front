@@ -80,9 +80,8 @@
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length">上一步</button>
             </router-link>
 
-            <router-link to="/charthree">
-                <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()">下一步</button>
-            </router-link>
+            <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="input_content.birth_standard_name === ''|| input_content.birth_standard_name === ''||input_content.person_name === ''">下一步</button>
+
         </div>
 
         <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></time_modal>
@@ -436,6 +435,7 @@
                     this.input_content.remark_2 = this.add_data[1].remark;
                 }
                 this.$store.commit("get_create_character",this.input_content);
+                this.$router.push({path:'/charthree'});
             },
 
             /*第三步的“上一步”*/

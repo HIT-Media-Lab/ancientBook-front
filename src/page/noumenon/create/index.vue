@@ -4,8 +4,8 @@
         <img src="../../../assets/img/create-step1.png" class="zxwcreate-img">
         <create-word :prams="this.prams"></create-word>
         <div class="zxw-noumenon-select">
-            <span>选择本体类型：</span>
-            <select class="zxw-select" v-model="selection">
+            <label>选择本体类型：</label>
+            <select class="zxw-select" v-model="noumenon_option[number]">
                 <option v-for="item in noumenon_option">{{item}}</option>
             </select>
         </div>
@@ -18,7 +18,7 @@ import createWord from '../../../component/create-word.vue'
 export default{
     created(){
         this.prams = this.$route.name;
-
+        this.number = this.$store.getters.get_create_one_selection;
     },
 
     components:{
@@ -28,8 +28,8 @@ export default{
     data(){
         return{
             prams:'',
+            number:0,
             noumenon_option:['时间','地名','人物','机构','职官','文献','术语'],
-            selection:'时间'
         }
     },
 

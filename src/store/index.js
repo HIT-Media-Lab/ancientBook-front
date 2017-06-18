@@ -162,7 +162,8 @@ const store = new Vuex.Store({
             student:[],
             friend:[]
         },
-        create_add_data:[{value:true}]
+
+        create_one_selection:0
     },
     getters,
     mutations,

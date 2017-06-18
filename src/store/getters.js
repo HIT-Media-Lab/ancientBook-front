@@ -50,6 +50,9 @@ export default {
     get_build_character:state => {
         return state.create_character
     },
+    get_create_one_selection:state => {
+        return state.create_one_selection
+    }
 
 
 }
