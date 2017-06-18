@@ -3,7 +3,7 @@
         <div class="dialog-content">
             <div class="j-close j-rotate">
                 <!--<img src="../assets/img/叉.png" @click="$emit('fireclose')">-->
-                <span @click="$emit('fireclose')" style="font-size: 30px; height: 5px">×</span>
+                <span @click="$emit('fireclose')" style="font-size: 30px;">×</span>
             </div>
             <slot name="header"></slot>
             <slot name="body"></slot>
@@ -32,7 +32,8 @@
             width: auto;
             height: auto;
             position: fixed;
-            left: 37%;
+            left: 50%;
+            margin: 0 0 0 -201px;
             top: 100px;
             z-index: 2000;
             visibility: hidden;
@@ -44,18 +45,10 @@
         .dialog-active{
             visibility: visible;
         }
-
-        .dialog-active .dialog-content {
-            position: relative;
-            opacity: 1;
-            transform: rotateY(0);
-        }
-
         .j-close {
             width:auto;
             height: auto;
             position: absolute;
-            top: .5rem;
             right: .5rem;
             border: none;
             border-radius: 3px;

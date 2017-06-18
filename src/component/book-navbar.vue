@@ -1,30 +1,18 @@
 <template>
     <div class="j-book-navbar">
         <select class="j-book-select">
-            <option class="j-option">
-                经部
+            <option v-for="(item,index) in item_1" @click="go_item_2(index)" class="j-option">
+                {{item}}
             </option>
         </select>
         <select class="j-book-select">
-            <option class="j-option">
-                总类
+            <option v-for="(item,index) in item_2" @click="go_item_3(index)" class="j-option">
+                {{item}}
             </option>
         </select>
         <select class="j-book-select" @change="go_to_sortbook()">
-            <option class="j-option">
-                石经之属
-            </option>
-            <option class="j-option">
-                正文之属
-            </option>
-            <option class="j-option">
-                古注之属
-            </option>
-            <option class="j-option">
-                注疏之属
-            </option>
-            <option class="j-option">
-                传说之属
+            <option v-for="(item,index) in item_3" @click="go_item_search(index)" class="j-option">
+                {{item}}
             </option>
         </select>
     </div>
@@ -34,6 +22,12 @@
         data(){
             return{
                 model_id: 8,
+                item: {
+                    'bu': 0,
+                    'lei': 0,
+                    'shu': 0
+                },
+                get_item_url: '/ancient_books/get_menu_items.action',
                 item_1: [],
                 item_2: [],
                 item_3: [],
@@ -46,23 +40,47 @@
         created(){
             this.id={
                 'model': 8,
-                'item_1_id': 0,
-                'item_2_id': 0,
-                'item_3_id': 0,
             };
-          this.http_json('/ancient_books/get_menu_item.action','get',this.id,this.success1, this.fail1)
+          this.http_json(this.get_item_url,'get',this.id,this.success1, this.fail1)
         },
         methods:{
             success1(response){
-                for (let i = 0; i<response.body.length; i++){
+                for (let i = 0; i < response.body.length; i++){
                     this.item_1[i] = response.body[i].chinese_name;
                 }
             },
             fail1(){
-                console.log("获取部类属失败");
+                console.log("获取部失败");
             },
             go_item_2(num){
                 this.item_1_id = num;
+                this.id = {
+                    'model': 8,
+                    'item_1_id': this.item_1_id
+                };
+                this.http_json(this.get_item_url,'get',this.id,this.success2, this.fail2)
+            },
+            success2(response){
+                for (let i = 0; i < response.body.length; i++){
+                    this.item_2[i] = response.body[i].chinese_name;
+                }
+            },
+            fail2(){
+                console.log("获取类失败");
+            },
+            go_item_3(num){
+                this.item_2_id = num;
+                this.id = {
+                    'model': 8,
+                    'item_1_id': this.item_1_id,
+                    'item_2_id': this.item_2_id
+                };
+                this.http_json(this.get_item_url,'get',this.id,this.success3, this.fail3)
+            },
+            success3(response){
+                for (let i = 0; i < response.body.length; i++){
+                    this.item_3[i] = response.body[i].chinese_name;
+                }
             },
             go_to_sortbook(){
                 this.$router.push({path: "/bookstore/sort_book"});
@@ -90,27 +108,10 @@
 
     }
     .j-option{
-        background-color: black;
-        border: none;
+        background-color: #a50000;
+        border: transparent;
+    }
+    .j-option :hover{
+        background-color: grey;
     }
 </style>
-
-
-<!--<div class="j-book-navbar">-->
-    <!--<select class="j-book-select">-->
-        <!--<option v-for="(item,index) in item_1" @click="go_item_2(index)">-->
-            <!--{{item}}-->
-        <!--</option>-->
-    <!--</select>-->
-    <!--<select class="j-book-select">-->
-        <!--<option v-for="(item,index) in sort">-->
-
-        <!--</option>-->
-    <!--</select>-->
-    <!--<select class="j-book-select">-->
-        <!--<option v-for="(item,index) in kind">-->
-
-        <!--</option>-->
-    <!--</select>-->
-
-<!--</div>-->

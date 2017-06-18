@@ -1,12 +1,14 @@
 <template>
-    <modal :show_modal="show_info" class="zxw-modal-character">
-        <div slot="header" class="zxw-character-header">
-        </div>
-        <div slot="body" class="zxw-time-body">
+    <div>
+        <modal :show_modal="show_info" class="zxw-modal-character">
+            <div slot="header" class="zxw-character-header">
+            </div>
+            <div slot="body" class="zxw-time-body">
 
-           <p class="zxw-success-create">创建成功</p>
-        </div>
-    </modal>
+                <p class="zxw-success-create">创建成功</p>
+            </div>
+        </modal>
+    </div>
 </template>
 
 <script>

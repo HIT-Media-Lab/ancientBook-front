@@ -1,19 +1,22 @@
 <template>
     <div class="j-recent">
         <recent_title class="j-recent-bar" :title="this.title"></recent_title>
-
-        <div class="j-p-1">
-            <router-link to="/bookstore/book_info">
-                <img src="../../assets/img/古籍封面1.jpg" class="j-shi">
-                <p style="color: #0f0f0f">诗经（不详）</p>
-            </router-link>
+        <div v-for="(item,index) in recent_book" class="j-picture-name">
+            <img v-bind:id=index src="" class="j-picture">
+            <p style="color: #0f0f0f; text-align: center">{{item.standard_name}}</p>
         </div>
-        <div class="j-p-2">
-            <router-link to="/bookstore/book_info">
-                <img src="../../assets/img/古籍封面2.jpg" class="j-shan">
-                <p style="color: #0f0f0f">山海经（不详）</p>
-            </router-link>
-        </div>
+        <!--<div class="j-p-1">-->
+            <!--<router-link to="/bookstore/book_info">-->
+                <!--<img src="../../assets/img/古籍封面1.jpg" class="j-shi">-->
+                <!--<p style="color: #0f0f0f; text-align: center">诗经（不详）</p>-->
+            <!--</router-link>-->
+        <!--</div>-->
+        <!--<div class="j-p-2">-->
+            <!--<router-link to="/bookstore/book_info">-->
+                <!--<img src="../../assets/img/古籍封面2.jpg" class="j-shan">-->
+                <!--<p style="color: #0f0f0f; text-align: center">山海经（不详）</p>-->
+            <!--</router-link>-->
+        <!--</div>-->
     </div>
 </template>
 
@@ -65,32 +68,38 @@
     .j-recent-bar{
         margin: 0 auto;
     }
+    .j-picture-name{
+        margin-top: 20px;
+        margin-left: 60px;
+        width: 200px;
+        display: inline-block;
+    }
+    .j-picture{
+        width: 200px;
+        height: 200px;
+    }
+
+
+
+
+
     .j-shi{
-        width: 100px;
-        height: 100px;
+        width: 200px;
+        height: 200px;
     }
     .j-shan{
-        width: 100px;
-        height: 100px;
+        width: 200px;
+        height: 200px;
     }
     .j-p-1{
         margin-top: 20px;
         margin-left: 60px;
-        width: 100px;
+        width: 200px;
         display: inline-block;
-        /*height: 100px;*/
     }
     .j-p-2{
         display: inline-block;
-        width: 100px;
+        width: 200px;
         margin-left: 60px;
     }
 </style>
-
-<!--<div class="j-recent">-->
-    <!--<recent_title class="j-recent-bar" :title="this.title"></recent_title>-->
-    <!--<div v-for="(id,index) in recent_book">-->
-        <!--<img v-bind:id=index src="" class="">-->
-        <!--<p>{{item.standard_name}}</p>-->
-    <!--</div>-->
-<!--</div>-->

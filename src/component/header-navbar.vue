@@ -11,7 +11,7 @@
             <input placeholder=" 请输入关键字搜索" class="search-input" v-model="sort_box" v-on:keydown.enter="enter">
             <button class="search-btn" @click="search">搜 索</button>
             <img src="../assets/img/头像.png" class="user-img" @click="show_login">
-            <span class="user-name" @click="show_login">{{name}}</span>
+            <span class="user-name" @click="show_login" v-model="name">{{name}}</span>
             <div class="down-box" @click="hide" v-show="sort_box.length!=0">
                 <ul>
                     <li class="sort-box1">
@@ -225,7 +225,7 @@
                     localStorage.setItem('user',JSON.stringify("admin"));
                     this.$router.push({path: '/admin'});
                     console.log("登录成功后的全局Token"+this.$store.getters.GetToken);
-                    this.name = '超级用户';
+                    this.name = response.body.name;
                     this.account = '';
                     this.pwd = '';
                     this.v = '';
@@ -236,7 +236,7 @@
 
                     localStorage.setItem('user',JSON.stringify("user"));
                     this.$router.push({path: '/user'});
-                    this.name = '普通用户';
+                    this.name = response.body.name;
                     this.account = '';
                     this.pwd = '';
                     this.v = '';
@@ -448,13 +448,6 @@
         background-repeat: no-repeat;
         background-size: 100%;
         border: none;
-    }
-    .j-login-bag{
-        /*background-size: 100%;*/
-        /*background-repeat: no-repeat;*/
-        /*border-right: solid red 2px;*/
-        /*border-bottom: solid red 2px;*/
-        /*border-left:solid red 2px ;*/
     }
     .dialog-header {
         background-image: url("../assets/img/弹框标题.png");
