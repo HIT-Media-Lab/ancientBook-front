@@ -5,7 +5,7 @@
         <create-word :prams="this.prams"></create-word>
         <div class="zxw-noumenon-select">
             <label>选择本体类型：</label>
-            <select class="zxw-select" v-model="noumenon_option[number]">
+            <select id="create_selection" class="zxw-select" v-model="noumenon_option[number]">
                 <option v-for="item in noumenon_option">{{item}}</option>
             </select>
         </div>
@@ -35,7 +35,7 @@ export default{
 
     methods:{
         go_step2(){
-            if(this.selection === '人物'){
+            if(this.noumenon_option[this.number] === '人物'){
                 this.$router.push({name:'charactertwo'});
             }
         }
