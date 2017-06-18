@@ -449,13 +449,6 @@
         background-size: 100%;
         border: none;
     }
-    .j-login-bag{
-        /*background-size: 100%;*/
-        /*background-repeat: no-repeat;*/
-        /*border-right: solid red 2px;*/
-        /*border-bottom: solid red 2px;*/
-        /*border-left:solid red 2px ;*/
-    }
     .dialog-header {
         background-image: url("../assets/img/弹框标题.png");
         background-size:100%;

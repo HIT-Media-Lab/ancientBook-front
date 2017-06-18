@@ -23,8 +23,7 @@
 
 <style>
     .spinner {
-        margin-top: 200px;
-        margin-left: 750px;
+        margin: 200px 0 0 50%;
         width: 100px;
         height: 100px;
         position: fixed;

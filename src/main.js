@@ -513,7 +513,7 @@ router.beforeEach( (to, from, next) => {
         }
         if (!flag) {
             flag = true;
-            next('login');
+            next('/login');
         }
     } else if (user_id == 'user'){
         for (let i = 0; i < user_acl.length; i++) {
