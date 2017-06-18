@@ -5,18 +5,6 @@
             <img v-bind:id=index src="" class="j-picture">
             <p style="color: #0f0f0f; text-align: center">{{item.standard_name}}</p>
         </div>
-        <!--<div class="j-p-1">-->
-            <!--<router-link to="/bookstore/book_info">-->
-                <!--<img src="../../assets/img/古籍封面1.jpg" class="j-shi">-->
-                <!--<p style="color: #0f0f0f; text-align: center">诗经（不详）</p>-->
-            <!--</router-link>-->
-        <!--</div>-->
-        <!--<div class="j-p-2">-->
-            <!--<router-link to="/bookstore/book_info">-->
-                <!--<img src="../../assets/img/古籍封面2.jpg" class="j-shan">-->
-                <!--<p style="color: #0f0f0f; text-align: center">山海经（不详）</p>-->
-            <!--</router-link>-->
-        <!--</div>-->
     </div>
 </template>
 
@@ -77,29 +65,5 @@
     .j-picture{
         width: 200px;
         height: 200px;
-    }
-
-
-
-
-
-    .j-shi{
-        width: 200px;
-        height: 200px;
-    }
-    .j-shan{
-        width: 200px;
-        height: 200px;
-    }
-    .j-p-1{
-        margin-top: 20px;
-        margin-left: 60px;
-        width: 200px;
-        display: inline-block;
-    }
-    .j-p-2{
-        display: inline-block;
-        width: 200px;
-        margin-left: 60px;
     }
 </style>

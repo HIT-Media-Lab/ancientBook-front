@@ -10,8 +10,8 @@
                 {{item}}
             </option>
         </select>
-        <select class="j-book-select" @change="go_to_sortbook()">
-            <option v-for="(item,index) in item_3" @click="go_item_search(index)" class="j-option">
+        <select class="j-book-select">
+            <option v-for="(item,index) in item_3" @click="go_to_sortbook(index)" class="j-option">
                 {{item}}
             </option>
         </select>
@@ -21,7 +21,7 @@
     export default{
         data(){
             return{
-                model_id: 8,
+                model_id: 25,
                 item: {
                     'bu': 0,
                     'lei': 0,
@@ -38,10 +38,21 @@
             }
         },
         created(){
-            this.id={
-                'model': 8,
+            this.id = {
+                'model': 25,
             };
-          this.http_json(this.get_item_url,'get',this.id,this.success1, this.fail1)
+          this.http_json(this.get_item_url,'get',this.id,this.success1, this.fail1);
+          this.id = {
+              'model': 25,
+              'item_1_id': 1
+          };
+          this.http_json(this.get_item_url,'get',this.id, this.success2, this.fail2);
+          this.id = {
+              'model': 25,
+              'item_1_id': 1,
+              'item_2_id': 1
+          };
+            this.http_json(this.get_item_url,'get',this.id, this.success3, this.fail3);
         },
         methods:{
             success1(response){
@@ -53,12 +64,13 @@
                 console.log("获取部失败");
             },
             go_item_2(num){
-                this.item_1_id = num;
+                this.item_1_id = num+1;
                 this.id = {
-                    'model': 8,
+                    'model': 25,
                     'item_1_id': this.item_1_id
                 };
-                this.http_json(this.get_item_url,'get',this.id,this.success2, this.fail2)
+                this.http_json(this.get_item_url,'get',this.id,this.success2, this.fail2);
+                this.item.bu = this.item_1_id;
             },
             success2(response){
                 for (let i = 0; i < response.body.length; i++){
@@ -69,20 +81,25 @@
                 console.log("获取类失败");
             },
             go_item_3(num){
-                this.item_2_id = num;
+                this.item_2_id = num+1;
                 this.id = {
-                    'model': 8,
+                    'model': 25,
                     'item_1_id': this.item_1_id,
                     'item_2_id': this.item_2_id
                 };
-                this.http_json(this.get_item_url,'get',this.id,this.success3, this.fail3)
+                this.http_json(this.get_item_url,'get',this.id,this.success3, this.fail3);
+                this.item.lei = this.item_2_id;
             },
             success3(response){
                 for (let i = 0; i < response.body.length; i++){
                     this.item_3[i] = response.body[i].chinese_name;
                 }
             },
-            go_to_sortbook(){
+            fail3(){
+                console.log("获取属失败");
+            },
+            go_to_sortbook(num){
+                this.item_3_id = num+1;
                 this.$router.push({path: "/bookstore/sort_book"});
             }
         }
