@@ -109,7 +109,7 @@
         created(){
             this.prams = this.$route.name;
             this.show_character_info();
-            console.log(JSON.stringify(this.add_data));
+            //console.log(JSON.stringify(this.add_data));
         },
 
         components:{
