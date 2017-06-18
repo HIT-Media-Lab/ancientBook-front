@@ -48,7 +48,7 @@ import store from '../../../store'
          },
          enter:function () {
              this.sort_box = '';
-             this.$router.push({path: '/search_inex'});
+             this.$router.push({path: '/search_index'});
          },
          search:function () {
              if (this.sort_box != ''){

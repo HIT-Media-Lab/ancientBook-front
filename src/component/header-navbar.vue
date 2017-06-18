@@ -142,17 +142,18 @@
             //自动登录
             auto_login() {
                 this.$http.get(this. autologin_url).then(function (response) {
-                    if (response.body.result==1) {
+                    if (response.body.result == 1) {
                         if (response.body.su == 0){
                             localStorage.setItem('user',JSON.stringify("user"));
                             this.$router.push({path: '/user'});
                         }
-                        if (response.body.su = 1){
+                        if (response.body.su == 1){
+                            console.log("跳到了admin");
                             localStorage.setItem('user',JSON.stringify("admin"));
                             this.$router.push({path: '/admin'});
                         }
                     }
-                    if (response.body.result==0){
+                    if (response.body.result == 0){
                         localStorage.setItem('user',JSON.stringify("guest"));
                         this.$router.push({path: '/login'});
                     }
