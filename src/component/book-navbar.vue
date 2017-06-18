@@ -39,16 +39,16 @@
         },
         created(){
             this.id = {
-                'model': 25,
+                'model_id': 25,
             };
           this.http_json(this.get_item_url,'get',this.id,this.success1, this.fail1);
           this.id = {
-              'model': 25,
+              'model_id': 25,
               'item_1_id': 1
           };
           this.http_json(this.get_item_url,'get',this.id, this.success2, this.fail2);
           this.id = {
-              'model': 25,
+              'model_id': 25,
               'item_1_id': 1,
               'item_2_id': 1
           };
@@ -66,7 +66,7 @@
             go_item_2(num){
                 this.item_1_id = num+1;
                 this.id = {
-                    'model': 25,
+                    'model_id': 25,
                     'item_1_id': this.item_1_id
                 };
                 this.http_json(this.get_item_url,'get',this.id,this.success2, this.fail2);
@@ -83,7 +83,7 @@
             go_item_3(num){
                 this.item_2_id = num+1;
                 this.id = {
-                    'model': 25,
+                    'model_id': 25,
                     'item_1_id': this.item_1_id,
                     'item_2_id': this.item_2_id
                 };
