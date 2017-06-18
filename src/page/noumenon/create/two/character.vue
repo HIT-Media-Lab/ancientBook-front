@@ -4,11 +4,7 @@
         <img src="../../../../assets/img/create-step2.png" class="zxwcreate-img">
         <create_word :prams="this.prams"></create_word>
 
-        <p class="zxw-create-character">本体名称：{{input_content.person_name}}
-            <span v-show="input_content.birth_value !==''">(</span>
-                {{input_content.birth_value}}
-            <span v-show="input_content.birth_value !==''">)</span>
-        </p>
+        <p class="zxw-create-character" v-bind="standard_title" v-model="input_content.standard_name">本体名称：{{input_content.standard_name}}</p>
         <div class="zxw-character-row">
             <label class="zxw-character-span zxw-must-write">人名：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_content.person_name">
@@ -32,49 +28,49 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span zxw-must-write">出生时间：</label>
-            <button  class="zxw-character-input zxw-character-input-margin" readonly @click="open_birth()"  v-model="input_content.birth_value">{{input_content.birth_value}}</button>
+            <input type="text" class="zxw-character-input zxw-character-input-margin" readonly @click="open_birth()"  v-model="input_content.birth_standard_name">
             <label class="zxw-character-span zxw-must-write">死亡时间：</label>
-            <button class="zxw-character-input zxw-character-input-margin" readonly @click="open_dead()" v-model="input_content.dead_value">{{input_content.dead_value}}</button>
+            <input type="text" class="zxw-character-input zxw-character-input-margin" readonly @click="open_dead()" v-model="input_content.dead_standard_name">
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">籍贯：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_content.location">
             <label class="zxw-character-span">父：</label>
-            <input type="button" class="zxw-character-input zxw-character-input-margin" @click="open_character()">
+            <input type="text" readonly class="zxw-character-input zxw-character-input-margin" @click="open_father()"  v-model="input_content.father_standard_name">
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">母：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="text" readonly class="zxw-character-input zxw-character-input-margin" @click="open_mother()" v-model="input_content.mother_standard_name">
             <label class="zxw-character-span">子：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="text" readonly class="zxw-character-input zxw-character-input-margin" @click="open_son()" v-model="input_content.son_standard_name" v-bind:disabled="input_content.son.length > 9">
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">女：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="text"readonly class="zxw-character-input zxw-character-input-margin" @click="open_daughter()" v-model="input_content.daughter_standard_name" v-bind:disabled="input_content.daughter.length > 9">
             <label class="zxw-character-span">兄弟：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="text" readonly class="zxw-character-input zxw-character-input-margin" @click="open_brother()" v-model="input_content.brother_standard_name" v-bind:disabled="input_content.brother.length > 9">
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">姐妹：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="text" readonly class="zxw-character-input zxw-character-input-margin" @click="open_sister()" v-model="input_content.sister_standard_name" v-bind:disabled="input_content.sister.length > 9">
             <label class="zxw-character-span">师：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="text" readonly class="zxw-character-input zxw-character-input-margin" @click="open_teacher()" v-model="input_content.teacher_standard_name" v-bind:disabled="input_content.teacher.length > 9">
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">学生：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="text" readonly class="zxw-character-input zxw-character-input-margin" @click="open_student()" v-model="input_content.student_standard_name" v-bind:disabled="input_content.student.length > 9">
             <label class="zxw-character-span">友：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin">
+            <input type="text" readonly class="zxw-character-input zxw-character-input-margin" @click="open_friend()" v-model="input_content.friend_standard_name" v-bind:disabled="input_content.friend.length > 9">
         </div>
 
         <div v-for="(item ,index) in add_data">
-            <input type="text" class="zxw-character-input-head zxw-character-input" v-model="add_data[index].remark_name">
-            <input type="text" class="zxw-character-input" maxlength="20" name="index" v-model="add_data[index].remark">
+            <input type="text" class="zxw-character-input-head zxw-character-input" v-model="item.remark_name">
+            <input type="text" class="zxw-character-input" maxlength="20"  v-model="item.remark">
             <button class="zxw-add-button" @click="add_tip(index)" v-show="add_data[index].value">添加</button>
         </div>
 
@@ -91,7 +87,16 @@
 
         <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></time_modal>
         <time_modal :time_modal="this.time_modal_2" v-on:success_time="dead_time" v-on:close_modal="close_dead()"></time_modal>
-        <character_modal :character_modal="this.character_modal" v-on:close_modal="close_character()"></character_modal>
+
+        <character_modal :character_modal="this.father_modal"  v-on:close_modal="close_father" v-on:add_person_relations="add_father"></character_modal>
+        <character_modal :character_modal="this.mother_modal" v-on:close_modal="close_mother" v-on:add_person_relations="add_mother"></character_modal>
+        <character_modal :character_modal="this.son_modal" v-on:close_modal="close_son" v-on:add_person_relations="add_son"></character_modal>
+        <character_modal :character_modal="this.daughter_modal" v-on:close_modal="close_daughter" v-on:add_person_relations="add_daughter"></character_modal>
+        <character_modal :character_modal="this.brother_modal" v-on:close_modal="close_brother" v-on:add_person_relations="add_brother"></character_modal>
+        <character_modal :character_modal="this.sister_modal" v-on:close_modal="close_sister" v-on:add_person_relations="add_sister"></character_modal>
+        <character_modal :character_modal="this.teacher_modal" v-on:close_modal="close_teacher" v-on:add_person_relations="add_teacher"></character_modal>
+        <character_modal :character_modal="this.student_modal" v-on:close_modal="close_student" v-on:add_person_relations="add_student"></character_modal>
+        <character_modal :character_modal="this.friend_modal" v-on:close_modal="close_friend" v-on:add_person_relations="add_friend"></character_modal>
 
     </div>
 </template>
@@ -101,14 +106,10 @@
     import time_modal from '../../../../component/time-modal.vue';
     import character_modal from '../../../../component/search_character.vue';
     export default{
-        mounted(){
+        created(){
             this.prams = this.$route.name;
-            this.input_content = this.$store.getters.get_build_character;
-            this.add_data[0].remark_name = this.input_content.remark_1_name;
-            this.add_data[0].remark = this.input_content.remark_1;
-            this.add_tip(0);
-            this.add_data[1].remark_name = this.input_content.remark_2_name;
-            this.add_data[1].remark = this.input_content.remark_2;
+            this.show_character_info();
+            console.log(JSON.stringify(this.add_data));
         },
 
         components:{
@@ -117,12 +118,30 @@
             character_modal
         },
 
+        computed:{
+            standard_title(){
+                if( this.input_content.birth_standard_name !== '' ){
+                    this.input_content.standard_name = this.input_content.person_name +'('+this.input_content.birth_value+')';
+                } else {
+                    this.input_content.standard_name = this.input_content.person_name;
+                }
+            }
+        },
+
         data(){
             return{
                 prams:'',
                 time_modal_1:false,
                 time_modal_2:false,
-                character_modal:false,
+                father_modal:false,
+                mother_modal:false,
+                son_modal:false,
+                daughter_modal:false,
+                brother_modal:false,
+                sister_modal:false,
+                teacher_modal:false,
+                student_modal:false,
+                friend_modal:false,
                 input_content:{
                     standard_name:'',
                     person_name:'',
@@ -131,9 +150,9 @@
                     zi:'',
                     other_name:'',
                     birth_time_id:'',
-                    birth_value:'',
+                    birth_standard_name:'',
                     death_time_id:'',
-                    dead_value:'',
+                    dead_standard_name:'',
                     remark_1_name:'',
                     remark_2_name:'',
                     remark_1:'',
@@ -141,23 +160,42 @@
                     english:'',
                     location_id:'',
                     location:'',
-                    person_relations:[],
+                    father_standard_name:'',
+                    mother_standard_name:'',
+                    son_standard_name:'',
+                    daughter_standard_name:'',
+                    brother_standard_name:'',
+                    sister_standard_name:'',
+                    teacher_standard_name:'',
+                    student_standard_name:'',
+                    friend_standard_name:'',
+                    father:{},
+                    mother:{},
+                    son:[],
+                    daughter:[],
+                    brother:[],
+                    sister:[],
+                    teacher:[],
+                    student:[],
+                    friend:[]
                 },
-                add_data:[{value:true}],
-                remark_name:[],
-                remark:[]
+                add_data:[{
+                    value:true,
+                    remark_name:'',
+                    remark:''
+                    }],
             }
         },
 
         methods:{
+            /*出生时间*/
             open_birth(){
                 this.time_modal_1 = true;
             },
 
             birth_time(p){
-                //this.input_content.birth_time_id = p.time_id;
-                //this.birth_value = p.content;
-                this.input_content.birth_value=p;
+                this.input_content.birth_time_id = p.time_id;
+                this.input_content.birth_standard_name = p.standard_name;
                 this.close_birth();
             },
 
@@ -165,14 +203,14 @@
                 this.time_modal_1 = false;
             },
 
+            /*死亡时间*/
             open_dead(){
                 this.time_modal_2 = true;
             },
 
             dead_time(q){
-                //this.input_content.dead_time_id = q.time_id;
-                //this.dead_value = q.content;
-                this.input_content.dead_value=q;
+                this.input_content.dead_time_id = q.time_id;
+                this.input_content.dead_standard_name=q.standard_name;
                 this.close_dead();
             },
 
@@ -180,34 +218,236 @@
                 this.time_modal_2 = false;
             },
 
+            /*添加备注信息*/
             add_tip(p){
-                console.log(p);
                 this.add_data[p].value = false;
-                console.log(JSON.stringify('add_data数组：'+JSON.stringify(this.add_data)));
-                //this.remark_name.push(this.add_data[p].remark_name);
-                //this.remark.push(this.add_data[p].remark);
-                //console.log(JSON.stringify(this.remark_name+"----"+this.remark));
+                //console.log(JSON.stringify('add_data数组：'+JSON.stringify(this.add_data)));
                 this.add_data.push({
-                    value:true
+                    value:true,
+                    remark_name:'',
+                    remark:''
                 });
                 console.log(this.add_data.length+JSON.stringify(this.add_data));
             },
 
-            open_character(){
-                this.character_modal = true;
+            /*关联父亲*/
+            open_father(){
+                this.father_modal = true;
             },
 
-            close_character(){
-                this.character_modal = false;
+            add_father(p){
+                this.input_content.father.relation_type=4;
+                this.input_content.father.person_id = p.noumenon_id;
+                this.input_content.father_standard_name = p.standard_name;
+                console.log(' this.input_content.father_standard_name:'+JSON.stringify( this.input_content.father_standard_name));
+                console.log('this.input_content.father:'+JSON.stringify(this.input_content.father));
             },
 
+            close_father(){
+                this.father_modal = false;
+            },
+
+            /*关联母亲*/
+            open_mother(){
+                this.mother_modal = true;
+            },
+
+            add_mother(p){
+                this.input_content.mother.relation_type = 5;
+                this.input_content.mother.person_id = p.noumenon_id;
+                this.input_content.mother_standard_name = p.standard_name;
+                console.log(' this.input_content.mother_standard_name:'+JSON.stringify( this.input_content.mother_standard_name));
+                console.log('this.input_content.mother:'+JSON.stringify(this.input_content.mother));
+            },
+
+            close_mother(){
+                this.mother_modal = false;
+            },
+
+            /*关联儿子*/
+            open_son(){
+                this.son_modal = true;
+            },
+
+            add_son(p){
+                this.input_content.son.push({
+                    relation_type:6,
+                    person_id:p.noumenon_id
+                });
+                if(this.input_content.son_standard_name !== ''){
+                    this.input_content.son_standard_name = this.input_content.son_standard_name+'; '+p.standard_name;
+                } else {
+                    this.input_content.son_standard_name = p.standard_name;
+                }
+                console.log('this.input_content.son_standard_name:'+JSON.stringify( this.input_content.son_standard_name));
+                console.log('this.input_content.son:'+JSON.stringify(this.input_content.son));
+            },
+
+            close_son(){
+                this.son_modal = false;
+            },
+
+            /*关联女儿*/
+            open_daughter(){
+                this.daughter_modal = true;
+            },
+
+            add_daughter(p){
+                this.input_content.daughter.push({
+                    relation_type:7,
+                    person_id:p.noumenon_id
+                });
+                if(this.input_content.daughter_standard_name !== ''){
+                    this.input_content.daughter_standard_name = this.input_content.daughter_standard_name+'; '+p.standard_name;
+                } else {
+                    this.input_content.daughter_standard_name = p.standard_name;
+                }
+                console.log(' this.input_content.daughter_standard_name:'+JSON.stringify( this.input_content.daughter_standard_name));
+                console.log('this.input_content.daughter:'+JSON.stringify(this.input_content.daughter));
+            },
+
+            close_daughter(){
+                this.daughter_modal = false;
+            },
+
+
+            /*关联兄弟*/
+            open_brother(){
+                this.brother_modal = true;
+            },
+
+            add_brother(p){
+                this.input_content.brother.push({
+                    relation_type:8,
+                    person_id:p.noumenon_id
+                });
+                if(this.input_content.brother_standard_name !== ''){
+                    this.input_content.brother_standard_name = this.input_content.brother_standard_name+'; '+p.standard_name;
+                } else {
+                    this.input_content.brother_standard_name = p.standard_name;
+                }
+                console.log(' this.input_content.brother_standard_name:'+JSON.stringify( this.input_content.brother_standard_name));
+                console.log('this.input_content.brother:'+JSON.stringify(this.input_content.brother));
+            },
+
+            close_brother(){
+                this.brother_modal = false;
+            },
+
+            /*关联姐妹*/
+            open_sister(){
+                this.sister_modal = true;
+            },
+
+            add_sister(p){
+                this.input_content.sister.push({
+                    relation_type:9,
+                    person_id:p.noumenon_id
+                });
+                if(this.input_content.sister_standard_name !== ''){
+                    this.input_content.sister_standard_name = this.input_content.sister_standard_name+'; '+p.standard_name;
+                } else {
+                    this.input_content.sister_standard_name = p.standard_name;
+                }
+                console.log(' this.input_content.sister_standard_name:'+JSON.stringify( this.input_content.sister_standard_name));
+                console.log('this.input_content.sister:'+JSON.stringify(this.input_content.sister));
+            },
+
+            close_sister(){
+                this.sister_modal = false;
+            },
+
+            /*关联师*/
+            open_teacher(){
+                this.teacher_modal = true;
+            },
+
+            add_teacher(p){
+                this.input_content.teacher.push({
+                    relation_type:10,
+                    person_id:p.noumenon_id
+                });
+                if(this.input_content.teacher_standard_name !== ''){
+                    this.input_content.teacher_standard_name = this.input_content.teacher_standard_name+'; '+p.standard_name;
+                } else {
+                    this.input_content.teacher_standard_name = p.standard_name;
+                }
+                console.log(' this.input_content.teacher_standard_name:'+JSON.stringify( this.input_content.teacher_standard_name));
+                console.log('this.input_content.teacher:'+JSON.stringify(this.input_content.teacher));
+            },
+
+            close_teacher(){
+                this.teacher_modal = false;
+            },
+
+            /*关联学生*/
+            open_student(){
+                this.student_modal = true;
+            },
+
+            add_student(p){
+                this.input_content.student.push({
+                    relation_type:11,
+                    person_id:p.noumenon_id
+                });
+                if(this.input_content.student_standard_name !== ''){
+                    this.input_content.student_standard_name = this.input_content.student_standard_name+'; '+p.standard_name;
+                } else {
+                    this.input_content.student_standard_name = p.standard_name;
+                }
+                console.log(' this.input_content.student_standard_name:'+JSON.stringify( this.input_content.student_standard_name));
+                console.log('this.input_content.student:'+JSON.stringify(this.input_content.student));
+            },
+
+            close_student(){
+                this.student_modal = false;
+            },
+
+            /*关联友*/
+            open_friend(){
+                this.friend_modal = true;
+            },
+
+            add_friend(p){
+                this.input_content.friend.push({
+                    relation_type:12,
+                    person_id:p.noumenon_id
+                });
+                if(this.input_content.friend_standard_name !== ''){
+                    this.input_content.friend_standard_name = this.input_content.friend_standard_name+'; '+p.standard_name;
+                } else {
+                    this.input_content.friend_standard_name = p.standard_name;
+                }
+                console.log(' this.input_content.friend_standard_name:'+JSON.stringify( this.input_content.friend_standard_name));
+                console.log('this.input_content.friend:'+JSON.stringify(this.input_content.friend));
+            },
+
+            close_friend(){
+                this.friend_modal = false;
+            },
+
+            /*下一步*/
             next_step(){
-                this.input_content.standard_name = this.input_content.person_name+this.input_content.birth_value;
+                console.log('add_data:'+JSON.stringify(this.add_data));
                 this.input_content.remark_1_name = this.add_data[0].remark_name;
                 this.input_content.remark_1 = this.add_data[0].remark;
-                this.input_content.remark_2_name = this.add_data[1].remark_name;
-                this.input_content.remark_2 = this.add_data[1].remark;
+                if(typeof this.add_data[1] !== 'undefined'){
+                    this.input_content.remark_2_name = this.add_data[1].remark_name;
+                    this.input_content.remark_2 = this.add_data[1].remark;
+                }
                 this.$store.commit("get_create_character",this.input_content);
+            },
+
+            /*第三步的“上一步”*/
+            show_character_info(){
+                this.input_content = this.$store.getters.get_build_character;
+                this.add_data[0].remark_name = this.input_content.remark_1_name;
+                this.add_data[0].remark = this.input_content.remark_1;
+                if( this.input_content.remark_2_name !== ''|| this.input_content.remark_2 !== '') {
+                    this.add_tip(0);
+                    this.add_data[1].remark_name = this.input_content.remark_2_name;
+                    this.add_data[1].remark = this.input_content.remark_2;
+                }
             }
         }
     }

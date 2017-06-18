@@ -25,7 +25,7 @@
         "result|1":1,
         "content|30":[{
             'standard_name':'@FIRST',
-            'noumenon_id|1-100':1
+            'noumenon_id|1':1
         }],
         "total_page|10-20":1
     });

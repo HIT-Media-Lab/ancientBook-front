@@ -6,30 +6,26 @@
 
             <div slot="body" class="zxw-time-body">
                 <label class="zxw-time-label">朝代：</label>
-                <select id="chaodai" class="zxw-select zxw-time-select" v-model="selected_1">
-                    <option v-for="item in menu_data">{{item}}</option>
+                <select  class="zxw-select zxw-time-select" v-model="selected_1" @change="get_year()">
+                    <option v-for="item in menu_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}"> {{item.chinese_name}}</option>
                 </select>
-               <!-- <label class="zxw-time-label">朝代：</label>
-                <select id="chaodai" class="zxw-select zxw-time-select" v-model="selected_1" @change="get_year()">
-                    <option v-for="item in menu_data" v-bind:value="item.item_1_id"> {{item.chinese_name}}</option>
-                </select>-->
 
                 <label>年号：</label>
-                <select id="nianhao" class="zxw-select zxw-time-select" v-model="selected_2">
-                    <option v-for="item in year_data" v-bind:value="item.item_2_id">{{item.chinese_name}}</option>
+                <select class="zxw-select zxw-time-select" v-model="selected_2">
+                    <option v-for="item in year_data" v-bind:value="{id:item.item_2_id,option:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
 
                 <label>年份：</label>
                 <input type="text" class="zxw-time-select zxw-character-input" v-model="year_number">
 
                 <label>月：</label>
-                <select id="yue" class="zxw-select zxw-time-select" v-model="selected_3">
-                    <option v-for="item in month_data" v-bind:value="item.item_1_id">{{item.chinese_name}}</option>
+                <select  class="zxw-select zxw-time-select" v-model="selected_3">
+                    <option v-for="item in month_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
 
                 <label>日：</label>
-                <select id="ri" class="zxw-select zxw-time-select" v-model="selected_4">
-                    <option v-for="item in day_data" v-bind:value="item.item_1_id">{{item.chinese_name}}</option>
+                <select  class="zxw-select zxw-time-select" v-model="selected_4">
+                    <option v-for="item in day_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
 
                 <button class="zxw-time-add" @click="add_time()">添加</button>
@@ -39,7 +35,7 @@
 
 <script>
     /*let Mock = require('mockjs');
-    Mock.mock('/ancient_books/get_menu_items.action?model_id=1&&item_1_id=0&&item_2_id=0','get', {
+    Mock.mock('/ancient_books/get_menu_items.action?model_id=25&&item_1_id=0&&item_2_id=0','get', {
         "g":[
             {"model_id|1": 1,
              "item_1_id|1": 1,
@@ -56,7 +52,7 @@
         ]
     });
 
-    Mock.mock('/ancient_books/get_menu_items.action?model_id=1&&item_1_id=1&&item_2_id=0','get', {
+    Mock.mock('/ancient_books/get_menu_items.action?model_id=26&&item_1_id=1&&item_2_id=0','get', {
     "":[{"model_id|1": 1,
                 "item_1_id|0": 0,
                 "item_2_id|1": 1,
@@ -67,14 +63,21 @@
             "chinese_name": "宋朝hh"}]
     });
 
+
+
     Mock.mock('/ancient_books/get_time_by_chinese_name.action','post', {
-        "id|100":100
+        "status|200":200,
+        "id|100":100,
+    });
+
+    Mock.mock('/ancient_books/getToken.action','get', {
+        "token|100":100,
     });*/
 
     import modal from '../component/modal.vue'
     export default{
         created(){
-            //this.get_menu();
+            this.get_menu();
             this.get_month();
             this.get_day();
         },
@@ -86,29 +89,37 @@
 
         data(){
           return{
-              //ban:true,
-              selected_1:null,
-              selected_2:null,
-              selected_3:null,
-              selected_4:null,
+              selected_1:{
+                  id:0,
+                  option:''
+              },
+              selected_2:{
+                  id:0,
+                  option:''
+              },
+              selected_3:{
+                  id:0,
+                  option:''
+              },
+              selected_4:{
+                  id:0,
+                  option:''
+              },
               year_number:'',
               menu_url:'/ancient_books/get_menu_items.action',
               time_url:'/ancient_books/get_time_by_chinese_name.action',
-              menu_data:['东汉','西汉','唐'],
+              menu_data:[],
               year_data:[],
               month_data:[],
               day_data:[],
               time_object:{},
-              time_data:[]
+              time_data:{}
           }
         },
 
         methods:{
             close(){
                 this.$emit('close_modal',close);
-                this.time_data.splice(0,this.time_data.length);
-                this.year_number='';
-                console.log("time_data:"+this.time_data);
             },
 
             /*朝代下拉框*/
@@ -116,10 +127,10 @@
                 for(let i = 0; i < response.body.g.length; i++){
                     this.menu_data.push({
                         item_1_id:response.body.g[i].item_1_id,
-                        chinese_name:response.body.g[i].chinese_name
+                        chinese_name:response.body.g[i].chinese_name,
                     })
                 }
-                console.log(JSON.stringify(this.menu_data));
+                console.log('this.menu_data:'+JSON.stringify(this.menu_data));
             },
 
             fail_menu(){
@@ -127,7 +138,7 @@
             },
 
             get_menu(){
-                let new_menu_url = this.menu_url+'?model_id=1&&item_1_id=0&&item_2_id=0';//朝代总的model_id
+                let new_menu_url = this.menu_url+'?model_id=25&&item_1_id=0&&item_2_id=0';
                 let menu_object = {};
                 this.http_json(new_menu_url,'get',menu_object,this.success_menu,this.fail_menu);
             },
@@ -140,7 +151,7 @@
                         chinese_name:response.body.chinese_name
                     })
                 }
-                console.log(JSON.stringify(this.year_data));
+                console.log('this.year_data:'+JSON.stringify(this.year_data));
             },
 
             fail_year(){
@@ -148,20 +159,21 @@
             },
 
             get_year(){
-                //朝代的ID
-                let new_year_url = this.menu_url+'?model_id=1'+'&&item_1_id='+this.selected_1+'&&item_2_id=0';
+                let new_year_url = this.menu_url+'?model_id=25'+'&&item_1_id='+this.selected_1.id+'&&item_2_id=0';
                 let year_object = {};
                 this.http_json(new_year_url,'get',year_object,this.success_year,this.fail_year)
             },
 
             /*月份下拉框*/
             success_month(response){
+                alert(response.body.id);
                 for(let i = 0; i <response.body.length; i++){
                     this.month_data.push({
                         item_1_id:response.body[i].item_1_id,
                         chinese_name:response.body[i].chinese_name
                     })
                 }
+                console.log('this.month_data:'+JSON.stringify(this.month_data));
             },
 
             fail_month(response){
@@ -169,8 +181,7 @@
             },
 
             get_month(){
-                //月份ID
-                let new_month_url = this.menu_url+'?model_id=2&&item_1_id=0&&item_2_id=0';
+                let new_month_url = this.menu_url+'?model_id=26&&item_1_id=0&&item_2_id=0';
                 let month_object = {};
                 this.http_json(new_month_url,'get',month_object,this.success_month,this.fail_month);
             },
@@ -183,6 +194,7 @@
                         chinese_name:response.body[i].chinese_name
                     })
                 }
+                console.log('this.day_data:'+JSON.stringify(this.day_data));
             },
 
             fail_day(response){
@@ -191,38 +203,33 @@
 
             get_day(){
                 //日期ID
-                let new_day_url = this.menu_url+'?model_id=3&&item_1_id=0&&item_2_id=0';
+                let new_day_url = this.menu_url+'?model_id=27&&item_1_id=0&&item_2_id=0';
                 let day_object = {};
                 this.http_json(new_day_url,'get',day_object,this.success_day,this.fail_day);
             },
 
             /*关联时间本体*/
-           /* success_time(response){
-                this.time_data.push({
-                    time_id:response.body.id,
-                    content:this.time_object.standard_name
-                });
+            success_time(response){
+                this.time_data.time_id = response.body.id;
+                this.time_data.standard_name = this.time_object.standard_name;
                 this.$emit('success_time',this.time_data);
-                this.time_data.splice(0,this.time_data.length);
-                this.year_number='';
-                console.log("time_data:"+this.time_data);
-            },
+                console.log('lh'+JSON.stringify(this.time_data)+this.year_number);
+             },
 
             fail_time(){
-                console.log("添加时间本体成功");
-            },*/
+                console.log("关联时间本体失败");
+            },
 
             add_time(){
-                if(this.selected_1 !== 0){
-                    this.$emit('success_time',this.selected_1);
-                   /* this.time_object.standard_name = this.selected_1+this.selected_2+this.year_number+this.selected_3+this.selected_4;
-                    this.time_object.chaodai = this.selected_1;
-                    this.time_object.nianhao = this.selected_2;
+                if(this.selected_1.option !== ''){
+                    this.time_object.standard_name = this.selected_1.option+this.selected_2.option+this.year_number+this.selected_3.option+this.selected_4.option;
+                    this.time_object.chaodai = this.selected_1.id;
+                    this.time_object.nianhao = this.selected_2.id;
                     this.time_object.nianfen = this.year_number;
-                    this.time_object.yue = this.selected_3;
-                    this.time_object.ri = this.selected_4;
-                    console.log(JSON.stringify(this.time_object));
-                    this.http_json(this.time_url,'post',this.time_object,this.success_time,this.fail_time);*/
+                    this.time_object.yue = this.selected_3.id;
+                    this.time_object.ri = this.selected_4.id;
+                    console.log(JSON.stringify( this.time_object));
+                    this.http_json(this.time_url,'post',this.time_object,this.success_time,this.fail_time);
                 }
             }
         }
@@ -273,5 +280,6 @@
         height:150px;
         background-repeat: no-repeat;
         background-size: 750px 150px;
+        margin:auto;
     }
 </style>

@@ -1,24 +1,37 @@
 <template>
-    <modal :show_modal="this.character_modal" v-on:fireclose="this.close" class="zxw-modal-character">
+    <modal :show_modal="this.character_modal" v-on:fireclose="this.close_modal" class="zxw-modal-character">
         <div slot="header" class="zxw-character-header">
             <span>添加关系属性</span>
         </div>
         <div slot="body" class="zxw-time-body">
             <div class="zxw-search-header">
-                <input class="zxw-search-input" type="text" v-model="search_content">
-                <button class="zxw-search-icon" @click="search_character()"></button>
+                <input class="zxw-search-input" type="search" v-model="search_content">
+                <button class="zxw-search-icon" @click="search_character()" v-bind:disabled="search_content === ''"></button>
             </div>
             <p class="zxw-search-tip" v-show="show_tip">请在输入框中输入本体规范名称进行搜索</p>
 
-            <div class="zxw-search-success" v-for="(item,index) in search_result">
-                <p class="zxw-search-result">{{item}}</p>
-                <button class="zxw-prebtn zxw-character-add">添加</button>
+            <!--显示搜索成功的结果-->
+            <div class="zxw-search-success" v-for="(result,index) in search_result">
+                <p class="zxw-search-result">{{result.standard_name}}</p>
+                <button class="zxw-prebtn zxw-character-add"  @click="add_person_relations(index)" v-model="index">添加</button>
+            </div>
+
+            <!--显示搜索失败的结果-->
+            <div class="zxw-fail-tip" v-show="fail_tip">
+                <p>很抱歉，未搜索到本体：{{search_content}}</p>
+                <p>您可以
+                    <router-link to="/build">
+                        <button class="zxw-prebtn zxw-search-create">创建本体</button>
+                    </router-link>
+                </p>
             </div>
         </div>
 
         <div slot="footer" class="zxw-search-footer">
-            <button class="zxw-prebtn zxw-search-create">创建本体</button>
-            <button class="zxwnoumenom-button zxw-search-cancel">取消</button>
+            <router-link to="/build">
+                <button class="zxw-prebtn zxw-search-create" v-show="create_btn">创建本体</button>
+            </router-link>
+            <button class="zxwnoumenom-button zxw-search-cancel" @click="close_modal">取消</button>
         </div>
 
     </modal>
@@ -26,23 +39,87 @@
 
 <script>
     /*let Mock = require('mockjs');
-    Mock.mock('http://localhost:8080/ancient_books/get_person_list_by_name.action?name=lsm&&page_count=1','get', {
+    Mock.mock('/ancient_books/get_person_list_by_name.action?name=lsm&&page_count=1','get', {
         "content":[
-            {"standard_name": "李世民",
-                "noumenon_id|100-1000":1
+            {
+                "standard_name":"李世民",
+                "noumenon_id|100":100
             },
-            {"standard_name": "李世民",
-                "noumenon_id|100-1000":1
+            {
+                "standard_name":"李世民",
+                "noumenon_id|100":100
             },
-            {"standard_name": "李世民",
-                "noumenon_id|100-1000":1
+            {
+                "standard_name":"李世民",
+                "noumenon_id|100":100
             },
-            {"standard_name": "李世民",
-                "noumenon_id|100-1000":1
+            {
+                "standard_name":"李世民",
+                "noumenon_id|100":100
             },
-            {"standard_name": "李世民",
-                "noumenon_id|100-1000":1
+            {
+                "standard_name":"李世民",
+                "noumenon_id|100":100
+            },
+            {
+                "standard_name":"李世民",
+                "noumenon_id|100":100
+            },
+            {
+                "standard_name":"李世民",
+                "noumenon_id|100":100
             }
+        ]
+    });
+
+    Mock.mock('/ancient_books/get_person_list_by_name.action?name=lh&&page_count=1','get', {
+        "content":[
+            {
+                "standard_name":"鹿晗",
+                "noumenon_id|100":50
+            },
+            {
+                "standard_name":"鹿晗",
+                "noumenon_id|100":50
+            },
+            {
+                "standard_name":"鹿晗",
+                "noumenon_id|100":50
+            },
+        ]
+    });
+
+    Mock.mock('/ancient_books/get_person_list_by_name.action?name=dc&&page_count=1','get', {
+        "content":[
+            {
+                "standard_name":"邓超",
+                "noumenon_id|100":50
+            },
+            {
+                "standard_name":"邓超",
+                "noumenon_id|100":50
+            },
+            {
+                "standard_name":"邓超",
+                "noumenon_id|100":50
+            },
+        ]
+    });
+
+    Mock.mock('/ancient_books/get_person_list_by_name.action?name=ch&&page_count=1','get', {
+        "content":[
+            {
+                "standard_name":"陈赫",
+                "noumenon_id|100":50
+            },
+            {
+                "standard_name":"陈赫",
+                "noumenon_id|100":50
+            },
+            {
+                "standard_name":"陈赫",
+                "noumenon_id|100":50
+            },
         ]
     });*/
 
@@ -56,6 +133,8 @@
         data(){
             return {
                 show_tip:true,
+                fail_tip:false,
+                create_btn:true,
                 search_content:'',
                 search_url:'/ancient_books/get_person_list_by_name.action',
                 search_result:[]
@@ -63,27 +142,45 @@
         },
 
         methods:{
-            close(){
-                this.$emit('close_modal',close);
+
+            /*关闭模态框*/
+            close_modal(){
+                this.$emit('close_modal');
+                this.search_content = '';
+                this.search_result.splice(0,this.search_result.length);
             },
 
+            /*搜索本体*/
             success_search(response){
+                this.show_tip = false;
+                this.search_result.splice(0,this.search_result.length);
                 if(response.body.content.length !== 0) {
-                    this.show_tip = false;
-                    for (let i = 0; i < response.body.content.length; i++) {
-                        this.search_result.push({
-                            standrad_name: response.body.content.standrad_name,
-                            noumenon_id: response.body.content.noumenon_id
-                        })
+                    if(response.body.content.length <= 5) {
+                        for (let i = 0; i < response.body.content.length; i++) {
+                            this.search_result.push({
+                                standard_name: response.body.content[i].standard_name,
+                                noumenon_id: response.body.content[i].noumenon_id
+                            })
+                        }
+                        console.log(JSON.stringify(this.search_result));
+                    } else {
+                        for (let i = 0; i < 5; i++) {
+                            this.search_result.push({
+                                standard_name: response.body.content[i].standard_name,
+                                noumenon_id: response.body.content[i].noumenon_id
+                            })
+                        }
+                        console.log(JSON.stringify(this.search_result));
                     }
                 } else {
-
+                    this.fail_tip = true;
+                    this.create_btn = false;
                 }
 
             },
 
             fail_search(){
-
+                console.log("根据人名获取人物列表失败");
             },
 
             search_character(){
@@ -91,6 +188,13 @@
                 let search_object = {};
                 new_url = this.search_url+'?name='+this.search_content+'&&page_count=1';
                 this.http_json(new_url,'get',search_object,this.success_search,this.fail_search);
+            },
+
+            /*添加搜索的本体*/
+            add_person_relations(q){
+                console.log(q+':this.search_result:'+JSON.stringify(this.search_result[q]));
+                this.$emit('add_person_relations',this.search_result[q]);
+                this.close_modal();
             }
         }
     }
@@ -110,6 +214,7 @@
         width:260px;
         height:35px;
         float:left;
+        margin:0 0 0 5px;
     }
 
     .zxw-search-icon{
@@ -159,11 +264,7 @@
         background-size: contain;
         background-color: transparent;
         width:400px;
-<<<<<<< HEAD
-        height:40px;
-=======
         height:50px;
->>>>>>> 64280ff421a1f1c3587733aac6158c10ae043ce2
         padding:10px 0 0 0;
     }
 
@@ -180,5 +281,11 @@
         display: inline-block;
         width:100px;
         margin:0 50% 0 3%;
+    }
+
+    .zxw-fail-tip{
+        font-size: 12px;
+        width:160px;
+        margin:50px 50px 0 120px;
     }
 </style>
