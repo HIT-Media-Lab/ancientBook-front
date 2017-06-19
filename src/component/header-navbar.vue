@@ -110,16 +110,6 @@
             }
         },
         methods:{
-            //注销
-//            Logout:function () {
-//                this.$http.get(this.url).then(function () {
-//                    alert("注销成功");
-//                    localStorage.setItem('user',JSON.stringify("guest"));
-//                    this.$router.push({path: '/login'});
-//                },function () {
-//                    alert("error")
-//                })
-//            },
             show_login(){
                 let user_id = JSON.parse(localStorage.getItem('user'));
                 if (user_id == 'guest'){
