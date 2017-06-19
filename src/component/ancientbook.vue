@@ -44,7 +44,7 @@
                         <!--文本主体-->
                         <p class="body-text" id="text-mark" @click="text_mark_onclick()"></p>
                         <!--本体种类选择菜单-->
-                        <select id="select-markType" class="ry-select">
+                        <select id="ry-select-mark-type" class="ry-select" @click="select_noumenon_type()">
                             <option>全部</option>
                             <option>人物</option>
                             <option>地點</option>
@@ -152,8 +152,7 @@
                     <modal :show_modal.sync = "add_mark_modal" @fireclose = "add_mark_modal = false" class="ry-modal-border">
                         <div class="dialog-body" slot="body">
                             本體類型：
-                            <select class="ry-type-select">
-                                <option>篩選</option>
+                            <select id="ry-noumenon-type-select" class="ry-type-select">
                                 <option>人物</option>
                                 <option>地點</option>
                                 <option>職官</option>
@@ -162,7 +161,7 @@
                                 <option>術語</option>
                                 <option>文獻</option>
                             </select>
-                            <input type="text" class="ry-input-search" placeholder="請輸入本體名查找"><button class="ry-btn-search-pic"></button>
+                            <input id="ry-noumenon-input" type="text" class="ry-input-search" placeholder="請輸入本體名查找"><button class="ry-btn-search-pic" @click="btn_search_noumenon_onclick()"></button>
                             <div class="ry-add-mark-modal-box"><h3 style="margin-top: 80px">請在搜索框中輸入本體規範名稱進行搜索</h3></div>
                             <button class="ry-btn-cancel-add-comment" style="margin-left: 330px;" @click="btn_add_mark_onclick()">創建本體</button>
                             <button class="ry-btn-cancel-add-comment" @click="close_add_mark_modal()">取消</button>
@@ -290,7 +289,7 @@
                 content_comment : '',
 
                 get_mark_obj : {},
-                mark : [{id_mark:"123123",target_mark:"，白露为",begin_mark:4,end_mark:8},{id_mark:"456456",target_mark:"伊人，在",begin_mark:12,end_mark:16}],
+                mark : [{id_mark:"123123",target_mark:"，白露为",begin_mark:4,end_mark:8,noumenon_type:1},{id_mark:"456456",target_mark:"伊人，在",begin_mark:12,end_mark:16,noumenon_type:2}],
                 id_mark : '',
                 noumenon_type : '',
                 noumennon_id : '',
@@ -339,6 +338,13 @@
 
                 delete_comment_obj : {},
                 comment_id : '',
+
+                noumenon_search_obj : {},
+                noumenon_search_content : '',
+                noumenon_search_url : '',
+                total_page_search_noumenon : 0,
+                search_noumenon_content : [],
+
 
 //                a : 0,  //  选区第一个节点位置
 //                b : 0,  //  选区最后一个节点位置
@@ -408,7 +414,7 @@
                     console.log("没有返回数组！");
                 }
                 else {
-                    for (let i = 0; i <= response.body.length-1; i++) {
+                    for (var i = 0; i <= response.body.length-1; i++) {
                         this.comment.push({
                             id_comment: response.body[i].id,
                             target_comment: response.body[i].target,
@@ -441,7 +447,7 @@
                     console.log("没有返回数组！");
                 }
                 else {
-                    for (let i = 0; i <= response.body.length-1; i++) {
+                    for (var i = 0; i <= response.body.length-1; i++) {
                         this.mark.push({
                             id_mark: response.body[i].id,
                             noumenon_type: response.body[i].noumenon_type,
@@ -469,14 +475,14 @@
             },
 
             success_get_edit_record(response) {
-                console.log ("success get edit records ");
+                console.log ("success get edit records");
                 //将后端数据显示在前端页面里
                 if (response.body.content.length === 0) {
                     console.log ("没有返回数组！");
                 }
                 else {
                     this.total_page_edit_record = response.body.total_page;
-                    for (let i = 0; i <= response.body.content.length-1; i++) {
+                    for (var i = 0; i <= response.body.content.length-1; i++) {
                         this.edit_record.push({
                             username_edit_record: response.body.content[i].user_name,
                             time_edit_record: response.body.content[i].time,
@@ -491,6 +497,37 @@
                 console.log ("fail get edit records!");
             },
 
+
+            /**
+             * 修改古籍文本内容POST请求
+             */
+            get_noumenon_search() {
+                this.noumenon_search_obj.name = this.noumenon_search_content;
+                this.noumenon_search_obj.page_count = 1;
+                this.http_json (this.noumenon_search_url , 'get' , this.noumenon_search_obj , this.success_get_noumenon_search , this.fail_get_noumenon_search);
+            },
+
+            success_get_noumenon_search() {
+                console.log ("success get noumenon search ");
+                //将后端数据显示在前端页面里
+                if (response.body.content.length === 0) {
+                    console.log ("没有返回数组！");
+                }
+                else {
+                    this.total_page_search_noumenon = response.body.total_page;
+                    for (var i = 0; i <= response.body.content.length-1; i++) {
+                        this.search_noumenon_content.push({
+                            standard_name: response.body.content[i].standard_name,
+                            type_id: response.body.content[i].type_id,
+                            noumenon_id: response.body.content[i].noumenon_id,
+                        });
+                    }
+                }
+            },
+
+            fail_get_noumenon_search() {
+                console.log ("fail get noumenon search!");
+            },
 
             /**
              * 修改古籍文本内容POST请求
@@ -698,22 +735,6 @@
 
 
             /**
-             * 取消修订按钮点击事件
-             */
-            btn_cancel_edit_onclick() {
-                var btn_cancel_edit = document.getElementById("btn-cancel-edit");  //  取消修订按钮
-                var btn_confirm_edit = document.getElementById("btn-confirm-edit");    //  确认修订按钮
-                var text = document.getElementById("textarea-editInfo");    //  修订信息编辑框
-                var label = document.getElementById("label");   //  修订信息编辑框标题
-                window.location.reload();   //  重新加载
-                btn_cancel_edit.style.visibility = "hidden";  //  取消修订按钮隐藏
-                btn_confirm_edit.style.visibility = "hidden"; //  确认修订按钮隐藏
-                text.style.visibility = "hidden";   //  修订信息编辑框隐藏
-                label.style.visibility = "hidden";  //  修订信息编辑框标题隐藏
-            },
-
-
-            /**
              * 确认修订按钮点击事件
              */
             btn_confirm_edit_onclick() {
@@ -779,6 +800,7 @@
                             this.get_comment_modal = true;
                             this.now_target = this.comment[j].target_comment;
                             this.now_content = this.comment[j].content_comment;
+                            this.comment_id = this.comment[j].id_comment;
                             break;
                         }
                     }
@@ -835,6 +857,16 @@
                 post_delete_comment();
             },
 
+
+            /**
+             * 选择本体类别
+             */
+            select_noumenon_type() {
+                var text = document.getElementById("text-mark");
+                text.innerHTML = "";
+                this.renew_mark()
+            },
+
             /**
              * 选中标记文本事件
              */
@@ -867,6 +899,38 @@
                 this.add_mark_modal = true;
                 var btn_mark_noumenon = document.getElementById("btn-mark-noumenon");
                 btn_mark_noumenon.style.visibility = "hidden";    //  标记本体按钮隐藏
+            },
+
+            /**
+             * 搜索本体
+             */
+            btn_search_noumenon_onclick() {
+                var select = document.getElementById("ry-noumenon-type-select");
+                var index = select.selectedIndex;
+                if (index ==0) {
+                    this.noumenon_search_url = "/ancient_books/get_person_list_by_name.action";
+                }
+                else if (index == 1) {
+                    this.noumenon_search_url = "/ancient_books/get_location_list_by_name.action";
+                }
+                else if (index == 2) {
+                    this.noumenon_search_url = "/ancient_books/get_office_list_by_name.action";
+                }
+                else if (index == 3) {
+                    this.noumenon_search_url = "";
+                }
+                else if (index == 4) {
+                    this.noumenon_search_url = "/ancient_books/get_institution_list_by_name.action";
+                }
+                else if (index == 5) {
+                    this.noumenon_search_url = "/ancient_books/get_technical_list_by_name.action";
+                }
+                else if (index == 6) {
+                    this.noumenon_search_url = "/ancient_books/get_literature_list_by_name.action";
+                }
+                var name = document.getElementById("ry-noumenon-input");
+                this.noumenon_search_content = name.value;
+                this.post_delete_comment();
             },
 
             /**
@@ -1028,6 +1092,8 @@
             renew_mark() {
                 //判断变量赋值
                 var a = 0;
+                var type = document.getElementById("ry-select-mark-type");
+                var index = type.selectedIndex;
                 //文本逐字遍历
                 for (var i = 0; i < this.content.length; i++) {
                     //按顺序依次获得文本中的字
@@ -1050,28 +1116,30 @@
                         }
                     }
                     var text_mark = document.getElementById("text-mark");
+                    var span = document.createElement("span");
+                    var text = document.createTextNode(p);
                     //该字不是标记
                     if (a == 0) {
-                        var span = document.createElement("span");
-                        var text = document.createTextNode(p);
                         span.appendChild(text);
                         span.setAttribute("id", i);
                         text_mark.appendChild(span);
                     }
                     //该字是标记
                     else if (a == 1) {
-                        var span = document.createElement("span");
-                        var text = document.createTextNode(p);
                         span.appendChild(text);
                         span.setAttribute("id", i);
-                        span.setAttribute("class", "ry-mark id=M" + this.mark[jtemp].id_mark);
+                        span.setAttribute("class", "id=M" + this.mark[jtemp].id_mark + " " + this.mark[jtemp].noumenon_type);
                         text_mark.appendChild(span);
+                    }
+                    var has = span.hasAttribute("class");
+                    if (index == 0 && has == true) {
+                        span.setAttribute("class", "ry-mark id=M" + this.mark[jtemp].id_mark + " " + this.mark[jtemp].noumenon_type);
+                    }
+                    if (index == this.mark[jtemp].noumenon_type && has == true) {
+                        span.setAttribute("class", "ry-mark id=M" + this.mark[jtemp].id_mark + " " + this.mark[jtemp].noumenon_type);
                     }
                 }
             },
-
-
-
 
 
             /**
@@ -1480,7 +1548,7 @@
     }
 
     /*本体标记板块筛选标记种类下拉菜单*/
-    #select-markType {
+    #ry-select-mark-type {
         position: absolute;
         right: 20px;
         top: 80px;
