@@ -481,62 +481,62 @@ Vue.http.interceptors.push((request, next) => {
     })
 });
 
-// router.beforeEach( (to, from, next) => {
-//     let admin_acl = router.app.$store.getters.ACL_admin;
-//     let user_acl = router.app.$store.getters.ACL_user;
-//     let guest_acl = router.app.$store.getters.ACL_guest;
-//
-//     let user_id = JSON.parse(localStorage.getItem('user'));
-//     if (user_id == undefined) {
-//         localStorage.setItem('user',JSON.stringify("guest"));
-//         user_id = 'guest';
-//     }
-//     if (user_id == 'guest'){
-//         bus.$emit('chang_name', '登录');
-//     }else if (user_id == 'user'){
-//         bus.$emit('chang_name', '普通用户');
-//     }else if (user_id == 'admin'){
-//         bus.$emit('chang_name', '超级用户');
-//     }
-//
-//     let flag = false;
-//     if (user_id == 'guest'){
-//         for (let i = 0; i < guest_acl.length; i++) {
-//             if (to.name == guest_acl[i]) {
-//                 console.log(to.name);
-//                 flag = true;
-//                 next();
-//                 break;
-//             }
-//         }
-//         if (!flag) {
-//             flag = true;
-//             next('/login');
-//         }
-//     } else if (user_id == 'user'){
-//         for (let i = 0; i < user_acl.length; i++) {
-//             if (to.name == user_acl[i]){
-//                 console.log(to.name);
-//                 flag = true;
-//                 next();
-//                 break;
-//             }
-//         }
-//     } else if (user_id == 'admin'){
-//         for (let i = 0; i < admin_acl.length; i++){
-//             if (to.name == admin_acl[i]){
-//                 console.log(to.name);
-//                 flag = true;
-//                 next();
-//                 break;
-//             }
-//         }
-//     }
-//     if (!flag) {
-//         console.log("go to 404");
-//         next('/404');
-//     }
-// });
+router.beforeEach( (to, from, next) => {
+    let admin_acl = router.app.$store.getters.ACL_admin;
+    let user_acl = router.app.$store.getters.ACL_user;
+    let guest_acl = router.app.$store.getters.ACL_guest;
+
+    let user_id = JSON.parse(localStorage.getItem('user'));
+    if (user_id == undefined) {
+        localStorage.setItem('user',JSON.stringify("guest"));
+        user_id = 'guest';
+    }
+    if (user_id == 'guest'){
+        bus.$emit('chang_name', '登录');
+    }else if (user_id == 'user'){
+        bus.$emit('chang_name', '普通用户');
+    }else if (user_id == 'admin'){
+        bus.$emit('chang_name', '超级用户');
+    }
+
+    let flag = false;
+    if (user_id == 'guest'){
+        for (let i = 0; i < guest_acl.length; i++) {
+            if (to.name == guest_acl[i]) {
+                console.log(to.name);
+                flag = true;
+                next();
+                break;
+            }
+        }
+        if (!flag) {
+            flag = true;
+            next('/login');
+        }
+    } else if (user_id == 'user'){
+        for (let i = 0; i < user_acl.length; i++) {
+            if (to.name == user_acl[i]){
+                console.log(to.name);
+                flag = true;
+                next();
+                break;
+            }
+        }
+    } else if (user_id == 'admin'){
+        for (let i = 0; i < admin_acl.length; i++){
+            if (to.name == admin_acl[i]){
+                console.log(to.name);
+                flag = true;
+                next();
+                break;
+            }
+        }
+    }
+    if (!flag) {
+        console.log("go to 404");
+        next('/404');
+    }
+});
 
 // 现在我们可以启动应用了！
 // 路由器会创建一个 App 实例，并且挂载到选择符 #app 匹配的元素上。
