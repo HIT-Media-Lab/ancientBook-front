@@ -97,7 +97,6 @@
                 login_url: '/ancient_books/login.action',
                 code_url: '/ancient_books/get_v_picture.action',
                 judge_code_url: '/ancient_books/get_v_picture.action',
-                autologin_url: '/ancient_books/get_user_info.action',
                 warning:'',
                 account: '',
                 pwd: '',

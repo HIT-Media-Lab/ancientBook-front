@@ -84,7 +84,7 @@ import store from '../../../store'
 
          //自动登录
          auto_login() {
-             this.$http.get(this. autologin_url).then(function (response) {
+             this.$http.get(this.autologin_url).then(function (response) {
                  if (response.body.result == 1) {
                      if (response.body.su == 0){
                          localStorage.setItem('user',JSON.stringify("user"));
