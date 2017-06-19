@@ -298,6 +298,7 @@
                 target_mark : '',
 
                 get_edit_record_obj : {},
+                page_count_edit_record : 1,
                 edit_record : [],
                 username_edit_record : '',
                 time_edit_record : '',
@@ -341,6 +342,7 @@
 
                 noumenon_search_obj : {},
                 noumenon_search_content : '',
+                page_count_search_noumenon : 1,
                 noumenon_search_url : '',
                 total_page_search_noumenon : 0,
                 search_noumenon_content : [],
@@ -377,9 +379,8 @@
              * 获取文本内容请求
              */
             get_text() {
-                this.get_content_obj.key = "page_id";
-                this.get_content_obj.value = this.page_id;
-                this.http_json ('/ancient_books/get_text.action' , 'get' , this.get_content_obj , this.success_get_text , this.fail_get_text);
+                var url = '/ancient_books/get_text.action?page_id=' + this.page_id;
+                this.http_json (url , 'get' , this.get_content_obj , this.success_get_text , this.fail_get_text);
             },
 
             success_get_text (response) {
@@ -402,9 +403,8 @@
              * 获取一页批注信息请求
              */
             get_comment() {
-                this.get_comment_obj.key = "page_id";
-                this.get_comment_obj.value = this.page_id;
-                this.http_json ('/ancient_books/get_comment_list_by_page_id.action' , 'get' , this.get_comment_obj , this.success_get_comment , this.fail_get_comment);
+                var url = '/ancient_books/get_comment_list_by_page_id.action?page_id=' + this.page_id;
+                this.http_json (url , 'get' , this.get_comment_obj , this.success_get_comment , this.fail_get_comment);
             },
 
             success_get_comment(response) {
@@ -435,9 +435,8 @@
              * 获取一页标记信息请求
              */
             get_mark() {
-                this.get_mark_obj.key = "page_id";
-                this.get_mark_obj.value = this.page_id;
-                this.http_json ('/ancient_books/get_mark_list_by_page_id.action' , 'get' , this.get_mark_obj , this.success_get_mark , this.fail_get_mark);
+                var url = '/ancient_books/get_mark_list_by_page_id.action?page_id=' + this.page_id;
+                this.http_json (url , 'get' , this.get_mark_obj , this.success_get_mark , this.fail_get_mark);
             },
 
             success_get_mark(response) {
@@ -469,9 +468,8 @@
              * 获得每页的修订记录列表
              */
             get_edit_record() {
-                this.get_edit_record_obj.key = "page_id";
-                this.get_edit_record_obj.value = this.page_id;
-                this.http_json ('/ancient_books/get_ancient_book_modify_log_by_page.action' , 'get' , this.get_edit_record_obj , this.success_get_edit_record , this.fail_get_edit_record);
+                var url = '/ancient_books/get_ancient_book_modify_log_by_page.action?page_id=' + this.page_id + '&&page_count=' +this.page_count_edit_record;
+                this.http_json (url , 'get' , this.get_edit_record_obj , this.success_get_edit_record , this.fail_get_edit_record);
             },
 
             success_get_edit_record(response) {
@@ -499,12 +497,11 @@
 
 
             /**
-             * 修改古籍文本内容POST请求
+             * 添加本体标记搜索本体
              */
             get_noumenon_search() {
-                this.noumenon_search_obj.name = this.noumenon_search_content;
-                this.noumenon_search_obj.page_count = 1;
-                this.http_json (this.noumenon_search_url , 'get' , this.noumenon_search_obj , this.success_get_noumenon_search , this.fail_get_noumenon_search);
+                var url = this.noumenon_search_url + '?name=' + this.noumenon_search_content + '&&page_count=' + this.page_count_search_noumenon;
+                this.http_json (url , 'get' , this.noumenon_search_obj , this.success_get_noumenon_search , this.fail_get_noumenon_search);
             },
 
             success_get_noumenon_search() {
@@ -930,7 +927,7 @@
                 }
                 var name = document.getElementById("ry-noumenon-input");
                 this.noumenon_search_content = name.value;
-                this.post_delete_comment();
+                this.get_noumenon_search();
             },
 
             /**
