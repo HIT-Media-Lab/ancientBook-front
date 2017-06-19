@@ -94,10 +94,8 @@
              */
             get_menu_items() {
                 for (this.i = 4; this.i <= 23; this.i++) {
-                    this.get_menu_items_obj.model_id = this.i;
-                    this.get_menu_items_obj.item_1_id = 0;
-                    this.get_menu_items_obj.item_2_id = 0;
-                    this.http_json ('/ancient_books/get_menu_items.action' , 'get' , this.get_menu_items_obj , this.success_get_menu_items(response,this.i-4) , this.fail_get_menu_items);
+                    let url = '/ancient_books/get_menu_items.action' + '?model_id=' + this.i + '&&' +'item_1_id=0&&item_2_id=0';
+                    this.http_json (url , 'get' , this.get_menu_items_obj , this.success_get_menu_items(response,this.i-4) , this.fail_get_menu_items);
                 }
             },
 
