@@ -94,7 +94,18 @@
                 <p class="zxwspan-length" v-model="person_content.remark_2_name">{{person_content.remark_2_name}}</p>
                 <p class="zxwspan-length" v-model="person_content.remark_2">{{person_content.remark_2}}</p>
             </div>
-            <button  class="zxwnoumenom-button zxwdelete-character">删除本体</button>
+            <button  class="zxwnoumenom-button zxwdelete-character" @click="delete_character()">删除本体</button>
+
+        <!--删除失败模态框-->
+        <div>
+            <modal :show_modal="show_info" class="zxw-modal-character">
+                <div slot="header" class="zxw-character-header">
+                </div>
+                <div slot="body" class="zxw-time-body">
+                    <p class="zxw-success-create" v-model="delete_info">{{delete_info}}</p>
+                </div>
+            </modal>
+        </div>
         </div>
 </template>
 
@@ -186,6 +197,7 @@
             return{
                 title:'李世民',
                 person_url:'/ancient_books/get_person_by_id.action',
+                delete_character:'/ancient_books/delete_person_by_id.action',
                 person_object:{}, //get请求的对象
                 person_content:{},  //成功回调后的对象
                 father:[],
@@ -196,7 +208,9 @@
                 sister:[],
                 teacher:[],
                 student:[],
-                friend:[]
+                friend:[],
+                show_info:false,
+                delete_info:''
             }
         },
         methods:{
@@ -312,6 +326,25 @@
                 this.person_object.value = '?id='+p;
                 let new_url = this.person_url + this.person_object.value;
                 this.http_json(new_url,'get',this.person_object,this.success_id,this.fail_id);
+            },
+
+            success_delete(response){
+                if(response.body.result === 1){
+                    this.$router.push({path:'/noumenon'});
+                } else {
+                    //this.show_info =true;
+                    //this.delete_info = response.body.info;
+                }
+            },
+
+            fail_delete(response){
+                console.log("")
+            },
+
+            delete_character(){
+                let delete_object = {};
+                delete_object.id = this.$route.params.nouId;
+                this.http_json(this.delete_character,'post',this.success_delete,this.fail_delete);
             }
         }
     }
