@@ -147,8 +147,8 @@
             success_year(response){
                 for(let i = 0; i < response.body.length; i++){
                     this.year_data.push({
-                        item_2_id:response.body.item_2_id,
-                        chinese_name:response.body.chinese_name
+                        item_2_id:response.body[i].item_2_id,
+                        chinese_name:response.body[i].chinese_name
                     })
                 }
                 console.log('this.year_data:'+JSON.stringify(this.year_data));
@@ -166,7 +166,6 @@
 
             /*月份下拉框*/
             success_month(response){
-                alert(response.body.id);
                 for(let i = 0; i <response.body.length; i++){
                     this.month_data.push({
                         item_1_id:response.body[i].item_1_id,
