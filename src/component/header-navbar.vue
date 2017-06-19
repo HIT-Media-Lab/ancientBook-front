@@ -234,7 +234,6 @@
                     document.getElementById("v_picture").src = this.code_url+'?'+(new Date()).getTime();
                 }
                 if (response.body.su == 0) {
-
                     localStorage.setItem('user',JSON.stringify("user"));
                     this.$router.push({path: '/user'});
                     this.name = response.body.name;
