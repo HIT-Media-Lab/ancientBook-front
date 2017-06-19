@@ -31,7 +31,7 @@ function after_success (response) {
 Vue.prototype.before_http = function(object) {
     object.token = this.$store.getters.GetToken;
     let token = this.$store.getters.GetToken;
-    if (object.token.length == 0 || token.length == 0) {
+    if (object.token == null || token == null) {
         this.$http.get('/ancient_books/getToken.action').then(function (response) {
             token = response.body.token;
         });
@@ -42,11 +42,8 @@ Vue.prototype.before_http = function(object) {
 };
 
 
-
-
 //定义的post的vue-router全局函数，以json形式传递数据
 Vue.prototype.http_json = function (url, type, params, success, fail) {
-    params.token=store.getters.GetToken;
     if (type.toLocaleLowerCase() == "get") {
         this.$http.get(url).then(function (response) {
             response_get(response, success)
@@ -55,6 +52,7 @@ Vue.prototype.http_json = function (url, type, params, success, fail) {
         })
     } else if (type.toLocaleLowerCase() == "post") {
         //验证是否有无token
+        params.token=store.getters.GetToken;
         this.before_http(params);
         params.token =this.$store.getters.GetToken;
         this.$http.post(url, params,

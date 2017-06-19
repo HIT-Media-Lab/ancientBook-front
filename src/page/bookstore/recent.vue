@@ -29,14 +29,15 @@
         },
         methods: {
             get_id(){
-                this.http_json(this.id_url, 'get', '', this.success_id, this.fail_id)
+                this.http_json(this.id_url, 'get',{}, this.success_id, this.fail_id)
             },
             success_id(response){
                 for (let i = 0; i < response.body.length; i++) {
                     let id_url = '';
+                    console.log("获得最近古籍没问题");
                     this.recent_book[i] = response.body[i];
                     id_url = this.picture_url + '?page_id=' + response.body[i].ancient_book_id;
-                    document.getElementById(i).src = id_url;
+                    document.getElementById( i ).src = id_url;
                 }
             },
             fail_id(){
