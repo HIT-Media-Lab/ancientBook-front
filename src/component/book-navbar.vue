@@ -40,9 +40,9 @@
         created(){
             this.id = this.get_item_url + '?model_id=' + 25 + '&&item_1_id=' + 0 + '&&item_2_id=' + 0;
             this.http_json(this.id,'get',{}, this.success1, this.fail1);
-            this.id = this.get_item_url + '?model_id=' + 25 + '&&item_1_id=' + 0 + '&&item_2_id=' + 0;
+            this.id = this.get_item_url + '?model_id=' + 25 + '&&item_1_id=' + 1 + '&&item_2_id=' + 0;
             this.http_json(this.id,'get',{}, this.success2, this.fail2);
-            this.id = this.get_item_url + '?model_id=' + 25 + '&&item_1_id=' + 0 + '&&item_2_id=' + 0;
+            this.id = this.get_item_url + '?model_id=' + 25 + '&&item_1_id=' + 1 + '&&item_2_id=' + 1;
             this.http_json(this.id,'get',{}, this.success3, this.fail3);
         },
         methods:{
