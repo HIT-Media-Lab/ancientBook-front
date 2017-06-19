@@ -332,6 +332,7 @@
                 if(response.body.result === 1){
                     this.$router.push({path:'/noumenon'});
                 } else {
+                    this.$router.match()
                     //this.show_info =true;
                     //this.delete_info = response.body.info;
                 }

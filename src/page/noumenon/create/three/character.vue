@@ -100,6 +100,10 @@
             success_create
         },
 
+        watch:{
+
+        },
+
         created(){
             this.prams = this.$route.name;
         },
@@ -135,8 +139,8 @@
 
         methods:{
             success_create(response){
-                //this.show_info=true;
-                this.$router.push({name:'char_detail',params:{nouId:response.body.id}});
+                this.show_info=true;
+                //this.$router.push({name:'char_detail',params:{nouId:response.body.id}});
             },
 
             fail_create(){

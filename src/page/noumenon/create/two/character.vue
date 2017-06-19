@@ -120,7 +120,7 @@
         computed:{
             standard_title(){
                 if( this.input_content.birth_standard_name !== '' ){
-                    this.input_content.standard_name = this.input_content.person_name +'('+this.input_content.birth_value+')';
+                    this.input_content.standard_name = this.input_content.person_name +'('+this.input_content.birth_standard_name+')';
                 } else {
                     this.input_content.standard_name = this.input_content.person_name;
                 }
@@ -220,7 +220,6 @@
             /*添加备注信息*/
             add_tip(p){
                 this.add_data[p].value = false;
-                //console.log(JSON.stringify('add_data数组：'+JSON.stringify(this.add_data)));
                 this.add_data.push({
                     value:true,
                     remark_name:'',

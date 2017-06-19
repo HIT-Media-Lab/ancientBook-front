@@ -16,16 +16,16 @@
                 </select>
 
                 <label>年份：</label>
-                <input type="text" class="zxw-time-select zxw-character-input" v-model="year_number">
+                <input type="text" class="zxw-time-select zxw-character-input" v-model="year_number" v-bind:disabled="selected_2.option === ''">
 
                 <label>月：</label>
                 <select  class="zxw-select zxw-time-select" v-model="selected_3">
-                    <option v-for="item in month_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}">{{item.chinese_name}}</option>
+                    <option v-for="item in month_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}" v-bind:disabled="year_number === ''">{{item.chinese_name}}</option>
                 </select>
 
                 <label>日：</label>
                 <select  class="zxw-select zxw-time-select" v-model="selected_4">
-                    <option v-for="item in day_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}">{{item.chinese_name}}</option>
+                    <option v-for="item in day_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}" v-bind:disabled="selected_3.option === ''">{{item.chinese_name}}</option>
                 </select>
 
                 <button class="zxw-time-add" @click="add_time()">添加</button>
@@ -91,7 +91,7 @@
           return{
               selected_1:{
                   id:0,
-                  option:''
+                  option:'ggg'
               },
               selected_2:{
                   id:0,
@@ -212,7 +212,7 @@
                 this.time_data.time_id = response.body.id;
                 this.time_data.standard_name = this.time_object.standard_name;
                 this.$emit('success_time',this.time_data);
-                console.log('lh'+JSON.stringify(this.time_data)+this.year_number);
+                console.log('this.year_number:'+JSON.stringify(this.time_data)+this.year_number);
              },
 
             fail_time(){
@@ -230,6 +230,7 @@
                     console.log(JSON.stringify( this.time_object));
                     this.http_json(this.time_url,'post',this.time_object,this.success_time,this.fail_time);
                 }
+
             }
         }
     }
