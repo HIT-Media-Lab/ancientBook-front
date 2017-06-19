@@ -108,7 +108,7 @@
                     console.log ("没有返回数组！");
                 }
                 else {
-                    for (j = 0; j <= response.body.length-1; j++) {
+                    for (var j = 0; j <= response.body.length-1; j++) {
                         this.menu_items[k].push({
                             chinese_name: response.body[j].chinese_name
                         });
@@ -135,11 +135,6 @@
 </script>
 
 <style>
-    *{
-        margin: 0;
-        padding: 0;
-    }
-
     .ry-upload input{
         border: none;
         background-color: transparent;

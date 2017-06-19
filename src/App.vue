@@ -15,4 +15,26 @@
 </script>
 
 <style>
+  #app{
+    margin: 0 auto;
+  }
+  @media screen and (min-width: 1201px) {
+    #app {width: 1200px}
+  }
+
+
+  @media screen and (max-width: 1200px) {
+    #app {width: 1000px}
+  }
+
+
+  @media screen and (max-width: 901px) {
+    #app {width: 700px;}
+  }
+
+
+  @media screen and (max-width: 500px) {
+    #app {width: 300px;}
+  }
+
 </style>

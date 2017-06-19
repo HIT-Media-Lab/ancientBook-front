@@ -132,15 +132,6 @@
 
 <script>
     export default{
-        created : function () {
-            this.get_copy_item();
-            this.copy_item = this.$store.getters.get_copy_item
-        },
-
-        beforeRouteLeave (to, from, next) {
-            this.$store.commit("get_copy_contents",this.copy_item);
-            next();
-        },
 
         data() {
             return{
@@ -164,6 +155,18 @@
                 }
             }
         },
+
+        created : function () {
+            this.get_copy_item();
+            this.copy_item = this.$store.getters.get_copy_item
+        },
+
+        beforeRouteLeave (to, from, next) {
+            this.$store.commit("get_copy_contents",this.copy_item);
+            next();
+        },
+
+
 
         methods : {
             get_copy_item() {

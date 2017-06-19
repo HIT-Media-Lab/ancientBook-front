@@ -168,16 +168,6 @@
 
 <script>
     export default{
-        created : function () {
-            this.get_varieties_item();
-            this.varieties_item = this.$store.getters.get_varieties_item
-        },
-
-        beforeRouteLeave (to, from, next) {
-            this.$store.commit("get_varieties_contents",this.varieties_item);
-            next();
-        },
-
         data() {
             return{
                 lei_items_obj : {},
@@ -209,6 +199,16 @@
                     }
                 },
             }
+        },
+
+        created : function () {
+            this.get_varieties_item();
+            this.varieties_item = this.$store.getters.get_varieties_item
+        },
+
+        beforeRouteLeave (to, from, next) {
+            this.$store.commit("get_varieties_contents",this.varieties_item);
+            next();
         },
 
         methods : {
