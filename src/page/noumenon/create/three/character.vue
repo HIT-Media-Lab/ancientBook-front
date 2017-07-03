@@ -158,13 +158,13 @@
                 this.create_character.remark_2 = this.$store.getters.get_build_character.remark_2;
                 this.create_character.english = this.$store.getters.get_build_character.english;
                 this.create_character.location_id = this.$store.getters.get_build_character.location_id;
-                if(this.$store.getters.get_build_character.father !== {}){
+                if(this.$store.getters.get_build_character.father !== null){
                     this.create_character.person_relations.push(
                         this.$store.getters.get_build_character.father
                     );
                 }
 
-                if(this.$store.getters.get_build_character.father !== {}){
+                if(this.$store.getters.get_build_character.mother !== null){
                     this.create_character.person_relations.push(
                         this.$store.getters.get_build_character.mother
                     );
