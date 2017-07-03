@@ -70,7 +70,7 @@
         },
 
         watch:{
-            $route(){
+            '$route'(){
                 this.get_character();
                 console.log("$route");
             }
@@ -102,7 +102,7 @@
                         this.character_data[i] = response.body.content[i];
                     }
                     console.log(response.body.content.length);
-                    console.log(JSON.stringify(this.character_data));
+                    console.log('this.character_data:'+JSON.stringify(this.character_data));
             },
 
             fail_get(response){

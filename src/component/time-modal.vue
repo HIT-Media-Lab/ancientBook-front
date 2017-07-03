@@ -52,6 +52,28 @@
         ]
     });
 
+    Mock.mock('/ancient_books/get_menu_items.action?model_id=25&&item_1_id=1&&item_2_id=0','get', {
+        "g":[
+            {"model_id|1": 1,
+                "item_1_id|1": 1,
+                "item_2_id|2":2,
+                "chinese_name": "gy"
+            },
+            {
+                "model_id|1": 1,
+                "item_1_id|1": 1,
+                "item_2_id|3": 3,
+                "chinese_name": "-"
+            },
+            {
+                "model_id|1": 1,
+                "item_1_id|1": 1,
+                "item_2_id|4": 4,
+                "chinese_name": "xy"
+            }
+        ]
+    });
+
     Mock.mock('/ancient_books/get_menu_items.action?model_id=26&&item_1_id=1&&item_2_id=0','get', {
     "":[{"model_id|1": 1,
                 "item_1_id|0": 0,
@@ -91,7 +113,7 @@
           return{
               selected_1:{
                   id:0,
-                  option:'ggg'
+                  option:''
               },
               selected_2:{
                   id:0,
@@ -145,10 +167,10 @@
 
             /*年号下拉框*/
             success_year(response){
-                for(let i = 0; i < response.body.length; i++){
+                for(let i = 0; i < response.body.g.length; i++){
                     this.year_data.push({
-                        item_2_id:response.body[i].item_2_id,
-                        chinese_name:response.body[i].chinese_name
+                        item_2_id:response.body.g[i].item_2_id,
+                        chinese_name:response.body.g[i].chinese_name
                     })
                 }
                 console.log('this.year_data:'+JSON.stringify(this.year_data));
@@ -212,7 +234,7 @@
                 this.time_data.time_id = response.body.id;
                 this.time_data.standard_name = this.time_object.standard_name;
                 this.$emit('success_time',this.time_data);
-                console.log('this.year_number:'+JSON.stringify(this.time_data)+this.year_number);
+                console.log('this.time_data:'+JSON.stringify(this.time_data));
              },
 
             fail_time(){
@@ -221,16 +243,19 @@
 
             add_time(){
                 if(this.selected_1.option !== ''){
-                    this.time_object.standard_name = this.selected_1.option+this.selected_2.option+this.year_number+this.selected_3.option+this.selected_4.option;
+                    if(this.selected_2.option === '-'){
+                        this.time_object.standard_name = this.selected_1.option+this.year_number+this.selected_3.option+this.selected_4.option;
+                    } else {
+                        this.time_object.standard_name = this.selected_1.option+this.selected_2.option+this.year_number+this.selected_3.option+this.selected_4.option;
+                    }
                     this.time_object.chaodai = this.selected_1.id;
                     this.time_object.nianhao = this.selected_2.id;
                     this.time_object.nianfen = this.year_number;
                     this.time_object.yue = this.selected_3.id;
                     this.time_object.ri = this.selected_4.id;
-                    console.log(JSON.stringify( this.time_object));
+                    console.log('this.time_object:'+JSON.stringify( this.time_object));
                     this.http_json(this.time_url,'post',this.time_object,this.success_time,this.fail_time);
                 }
-
             }
         }
     }

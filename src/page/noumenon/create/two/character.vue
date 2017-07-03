@@ -478,7 +478,7 @@
 
     /*输入框间距*/
     .zxw-character-input-margin{
-        margin:0 250px 0 0;
+        margin:0 200px 0 0;
     }
 
 
@@ -490,7 +490,7 @@
 
     /*label与输入框之间的距离*/
     .zxw-character-span{
-        width:100px;
+        width:80px;
     }
 
     .zxw-must-write{
