@@ -167,7 +167,7 @@
 
             /*年号下拉框*/
             success_year(response){
-                for(let i = 0; i < response.body.g.length; i++){
+                for(let i = 0; i < response.body.length; i++){
                     this.year_data.push({
                         item_2_id:response.body.g[i].item_2_id,
                         chinese_name:response.body.g[i].chinese_name
