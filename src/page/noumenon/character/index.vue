@@ -71,6 +71,7 @@
 
         watch:{
             '$route'(){
+                this.clean_data();
                 this.get_character();
                 console.log("$route");
             }
@@ -101,7 +102,7 @@
                     for (let i = 0; i < response.body.content.length; i++) {
                         this.character_data[i] = response.body.content[i];
                     }
-                    console.log(response.body.content.length);
+                    console.log('response.body.content.length:'+response.body.content.length);
                     console.log('this.character_data:'+JSON.stringify(this.character_data));
             },
 
@@ -112,7 +113,7 @@
             get_character(){
                 this.get_letter.value = '?word='+this.$route.params.letterId+'&&page_count='+this.$route.params.pageId;
                 let new_url = this.word_url+this.get_letter.value;
-                this.clean_data();
+                //this.clean_data();
                 this.http_json(new_url,'get',this.get_letter,this.success_get,this.fail_get);
             },
 

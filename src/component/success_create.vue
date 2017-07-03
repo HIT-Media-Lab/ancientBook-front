@@ -1,14 +1,11 @@
 <template>
-    <div>
-        <modal :show_modal="show_info" class="zxw-modal-character">
-            <div slot="header" class="zxw-character-header">
-            </div>
-            <div slot="body" class="zxw-time-body">
-
-                <p class="zxw-success-create">创建成功</p>
-            </div>
-        </modal>
-    </div>
+    <modal :show_modal="this.show_info" class="zxw-modal-character">
+        <div slot="header" class="zxw-character-header">
+        </div>
+        <div slot="body" class="zxw-time-body">
+            <p class="zxw-success-create">创建成功</p>
+        </div>
+    </modal>
 </template>
 
 <script>
@@ -17,13 +14,7 @@
         components:{
             modal
         },
-        props:['show_info'],
-
-        data(){
-            return {
-
-            }
-        }
+        props:['show_info']
     }
 </script>
 

@@ -100,10 +100,6 @@
             success_create
         },
 
-        watch:{
-
-        },
-
         created(){
             this.prams = this.$route.name;
         },
@@ -139,8 +135,8 @@
 
         methods:{
             success_create(response){
-                this.show_info=true;
-                //this.$router.push({name:'char_detail',params:{nouId:response.body.id}});
+                //this.show_info=true;
+                this.$router.push({name:'char_detail',params:{nouId:response.body.id}});
             },
 
             fail_create(){
@@ -162,10 +158,17 @@
                 this.create_character.remark_2 = this.$store.getters.get_build_character.remark_2;
                 this.create_character.english = this.$store.getters.get_build_character.english;
                 this.create_character.location_id = this.$store.getters.get_build_character.location_id;
-                this.create_character.person_relations.push(
-                    this.$store.getters.get_build_character.father,
-                    this.$store.getters.get_build_character.mother
-                );
+                if(this.$store.getters.get_build_character.father !== {}){
+                    this.create_character.person_relations.push(
+                        this.$store.getters.get_build_character.father
+                    );
+                }
+
+                if(this.$store.getters.get_build_character.father !== {}){
+                    this.create_character.person_relations.push(
+                        this.$store.getters.get_build_character.mother
+                    );
+                }
 
                 for (let f = 0;f < this.$store.getters.get_build_character.son.length; f++){
                     this.create_character.person_relations.push(this.$store.getters.get_build_character.son[f]);

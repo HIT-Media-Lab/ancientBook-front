@@ -4,11 +4,11 @@
             <build_button slot="children"></build_button>
         </noumenon_title>
 
-        <p class="zxwnoumenon-row" v-for="(item,index) in recent_noumenons" @click="go_noumenom(index)">{{item.standard_name}}</p>
+        <button class="zxwnoumenon-row" v-for="(item,index) in recent_noumenons" @click="go_noumenom(index)">{{item.standard_name}}</button>
     </div>
 </template>
 <script>
-      /*let Mock = require('mockjs');
+      let Mock = require('mockjs');
 
      //显示用户列表
      Mock.mock('/ancient_books/get_recent_noumenons.action','get', {
@@ -18,7 +18,7 @@
              'id|1': 1,
              'type|1': 1
          }]
-     });*/
+     });
 
     import noumenon_title from '../../component/noumenon-title.vue';
     import build_button from '../../component/build-button.vue'
@@ -39,7 +39,6 @@
         methods: {
             success_recent(response){
                 console.log("最近编辑请求成功！");
-                console.log(response.body.noumenons.length);
                 for (let i = 0; i < response.body.noumenons.length; i++) {
                     this.recent_noumenons.push({
                         standard_name:response.body.noumenons[i].standard_name,
@@ -85,6 +84,7 @@
 <style>
 
     .zxwnoumenon-row{
+        display:block;
         margin:20px 0 25px 5%;
         font-size: 14px;
         font-weight: bold;

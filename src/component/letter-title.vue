@@ -26,8 +26,8 @@
 <script>
     export default{
         created(){
-            this.letter_id = 'A';
-            console.log("created A");
+            //this.letter_id = 'A';
+            //console.log("created A");
         },
 
         watch:{

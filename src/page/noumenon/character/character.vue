@@ -185,7 +185,7 @@
         created(){
 
             //console.log(this.$store.getters.get_build_character);
-            this.title = this.$store.getters.get_build_character.standard_name;
+            //this.title = this.$store.getters.get_build_character.standard_name;
             //this.person_info(this.$route.params.nouId);
             //console.log(this.title);
         },
@@ -195,7 +195,7 @@
         },
         data(){
             return{
-                title:'李世民',
+                title:'',
                 person_url:'/ancient_books/get_person_by_id.action',
                 delete_character:'/ancient_books/delete_person_by_id.action',
                 person_object:{}, //get请求的对象
