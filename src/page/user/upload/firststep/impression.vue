@@ -8,7 +8,16 @@
                     <label class="col-md-2">印刷類型：</label>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[16]">{{item.chinese_name}}</option>
+                            <option>不详</option>
+                            <option>墨印</option>
+                            <option>朱印</option>
+                            <option>藍印</option>
+                            <option>綠印</option>
+                            <option>套印</option>
+                            <option>雙色套印</option>
+                            <option>三色套印</option>
+                            <option>四色套印</option>
+                            <option>四色以上套印</option>
                         </select>
                     </div>
 
@@ -83,7 +92,8 @@
                     </div>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[17]">{{item.chinese_name}}</option>
+                            <option>初印</option>
+                            <option>重印</option>
                         </select>
                     </div>
                 </div>

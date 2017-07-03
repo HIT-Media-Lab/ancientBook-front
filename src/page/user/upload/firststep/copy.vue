@@ -13,7 +13,9 @@
                     <label class="col-md-2">完整性：</label>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[18]">{{item.chinese_name}}</option>
+                            <option>不详</option>
+                            <option>全</option>
+                            <option>残</option>
                         </select>
                     </div>
                 </div>
@@ -22,7 +24,17 @@
                     <label class="col-md-2">品級：</label>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[19]">{{item.chinese_name}}</option>
+                            <option>不详</option>
+                            <option>一級甲等</option>
+                            <option>一級乙等</option>
+                            <option>一級丙等</option>
+                            <option>二級甲等</option>
+                            <option>二級乙等</option>
+                            <option>二級丙等</option>
+                            <option>三級甲等</option>
+                            <option>三級乙等</option>
+                            <option>三級丙等</option>
+                            <option>四級</option>
                         </select>
                     </div>
 
@@ -97,7 +109,16 @@
                     </div>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[20]">{{item.chinese_name}}</option>
+                            <option>贈</option>
+                            <option>藏</option>
+                            <option>裝</option>
+                            <option>購</option>
+                            <option>題籤</option>
+                            <option>題跋</option>
+                            <option>過錄</option>
+                            <option>批注</option>
+                            <option>批校</option>
+                            <option>補目</option>
                         </select>
                     </div>
                 </div>

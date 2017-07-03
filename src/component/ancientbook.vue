@@ -3,7 +3,7 @@
 
         <!--目录-->
         <div class="width1000 center">
-            <p>經部/總類/<span style="color: red">石經之屬</span>/<span style="color: red">詩經</span>/冊1冊名/卷1</p>
+            <p>经部/總類/<span style="color: red">石經之屬</span>/<span style="color: red">詩經</span>/冊1冊名/卷1</p>
             <img src="../assets/img/墨水线上.png" height="7" width="974"/>
         </div>
 

@@ -138,7 +138,9 @@
                     <label class="col-md-2">有無夾注：</label>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[14]">{{item.chinese_name}}</option>
+                            <option>不详</option>
+                            <option>有</option>
+                            <option>无</option>
                         </select>
                     </div>
                 </div>

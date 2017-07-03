@@ -23,7 +23,11 @@
                     <label class="col-md-2">存佚類型:</label>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[2]">{{item.chinese_name}}</option>
+                            <option>不详</option>
+                            <option>存</option>
+                            <option>佚</option>
+                            <option>残</option>
+                            <option>疑</option>
                         </select>
                     </div>
                 </div>
@@ -32,7 +36,12 @@
                     <label class="col-md-2">品種級別：</label>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[3]">{{item.chinese_name}}</option>
+                            <option>不详</option>
+                            <option>叢書總目</option>
+                            <option>叢書子目</option>
+                            <option>單行本</option>
+                            <option>合訂本總目</option>
+                            <option>合訂本子目</option>
                         </select>
                     </div>
 
@@ -123,7 +132,9 @@
                     </div>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[0]">{{item.chinese_name}}</option>
+                            <option>不详</option>
+                            <option>责任人</option>
+                            <option>责任机构</option>
                         </select>
                     </div>
 
@@ -145,7 +156,9 @@
                     </div>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[1]">{{item.chinese_name}}</option>
+                            <option>不详</option>
+                            <option>确定</option>
+                            <option>題</option>
                         </select>
                     </div>
                 </div>
