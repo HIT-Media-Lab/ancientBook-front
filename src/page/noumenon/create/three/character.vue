@@ -31,7 +31,7 @@
             <label class="zxw-character-span">出生时间：</label>
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.birth_standard_name">
             <label class="zxw-character-span">死亡时间：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.dead_standard_name">
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.death_standard_name">
         </div>
 
         <div class="zxw-character-row">
@@ -84,7 +84,7 @@
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length">上一步</button>
             </router-link>
 
-            <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()">确认</button>
+            <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()" v-bind:disabled="this.$store.getters.get_build_character.length === 0">确认</button>
         </div>
 
         <success_create :show_info="show_info"></success_create>
@@ -155,7 +155,7 @@
                 this.create_character.zi = this.$store.getters.get_build_character.zi;
                 this.create_character.other_name = this.$store.getters.get_build_character.other_name;
                 this.create_character.birth_time_id = this.$store.getters.get_build_character.birth_time_id;
-                this.create_character.dead_time_id = this.$store.getters.get_build_character.dead_time_id;
+                this.create_character.death_time_id = this.$store.getters.get_build_character.death_time_id;
                 this.create_character.remark_1_name = this.$store.getters.get_build_character.remark_1_name;
                 this.create_character.remark_1 = this.$store.getters.get_build_character.remark_1;
                 this.create_character.remark_2_name = this.$store.getters.get_build_character.remark_2_name;

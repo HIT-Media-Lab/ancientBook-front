@@ -30,7 +30,7 @@
             <label class="zxw-character-span zxw-must-write">出生时间：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin" readonly @click="open_birth()"  v-model="input_content.birth_standard_name">
             <label class="zxw-character-span zxw-must-write">死亡时间：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin" readonly @click="open_dead()" v-model="input_content.dead_standard_name">
+            <input type="text" class="zxw-character-input zxw-character-input-margin" readonly @click="open_dead()" v-model="input_content.death_standard_name">
         </div>
 
         <div class="zxw-character-row">
@@ -80,7 +80,7 @@
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length">上一步</button>
             </router-link>
 
-            <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="input_content.birth_standard_name === ''|| input_content.dead_standard_name === ''||input_content.person_name === ''">下一步</button>
+            <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="input_content.birth_standard_name === ''|| input_content.death_standard_name === ''||input_content.person_name === ''">下一步</button>
 
         </div>
 
@@ -150,8 +150,8 @@
                     other_name:'',
                     birth_time_id:'',
                     birth_standard_name:'',
-                    dead_time_id:'',
-                    dead_standard_name:'',
+                    death_time_id:'',
+                    death_standard_name:'',
                     remark_1_name:'',
                     remark_2_name:'',
                     remark_1:'',
@@ -208,8 +208,8 @@
             },
 
             dead_time(q){
-                this.input_content.dead_time_id = q.time_id;
-                this.input_content.dead_standard_name=q.standard_name;
+                this.input_content.death_time_id = q.time_id;
+                this.input_content.death_standard_name=q.standard_name;
                 this.close_dead();
             },
 
