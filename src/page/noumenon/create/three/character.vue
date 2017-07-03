@@ -155,7 +155,7 @@
                 this.create_character.zi = this.$store.getters.get_build_character.zi;
                 this.create_character.other_name = this.$store.getters.get_build_character.other_name;
                 this.create_character.birth_time_id = this.$store.getters.get_build_character.birth_time_id;
-                this.create_character.death_time_id = this.$store.getters.get_build_character.death_time_id;
+                this.create_character.dead_time_id = this.$store.getters.get_build_character.dead_time_id;
                 this.create_character.remark_1_name = this.$store.getters.get_build_character.remark_1_name;
                 this.create_character.remark_1 = this.$store.getters.get_build_character.remark_1;
                 this.create_character.remark_2_name = this.$store.getters.get_build_character.remark_2_name;
