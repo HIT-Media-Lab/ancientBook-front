@@ -80,7 +80,7 @@
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length">上一步</button>
             </router-link>
 
-            <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="input_content.birth_standard_name === ''|| input_content.birth_standard_name === ''||input_content.person_name === ''">下一步</button>
+            <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="input_content.birth_standard_name === ''|| input_content.dead_standard_name === ''||input_content.person_name === ''">下一步</button>
 
         </div>
 
@@ -150,7 +150,7 @@
                     other_name:'',
                     birth_time_id:'',
                     birth_standard_name:'',
-                    death_time_id:'',
+                    dead_time_id:'',
                     dead_standard_name:'',
                     remark_1_name:'',
                     remark_2_name:'',
@@ -237,7 +237,7 @@
                 this.input_content.father.relation_type=4;
                 this.input_content.father.person_id = p.noumenon_id;
                 this.input_content.father_standard_name = p.standard_name;
-                console.log(' this.input_content.father_standard_name:'+JSON.stringify( this.input_content.father_standard_name));
+                console.log('this.input_content.father_standard_name:'+JSON.stringify( this.input_content.father_standard_name));
                 console.log('this.input_content.father:'+JSON.stringify(this.input_content.father));
             },
 
@@ -254,7 +254,7 @@
                 this.input_content.mother.relation_type = 5;
                 this.input_content.mother.person_id = p.noumenon_id;
                 this.input_content.mother_standard_name = p.standard_name;
-                console.log(' this.input_content.mother_standard_name:'+JSON.stringify( this.input_content.mother_standard_name));
+                console.log('this.input_content.mother_standard_name:'+JSON.stringify( this.input_content.mother_standard_name));
                 console.log('this.input_content.mother:'+JSON.stringify(this.input_content.mother));
             },
 
@@ -300,7 +300,7 @@
                 } else {
                     this.input_content.daughter_standard_name = p.standard_name;
                 }
-                console.log(' this.input_content.daughter_standard_name:'+JSON.stringify( this.input_content.daughter_standard_name));
+                console.log(' this.input_content.daughter_standard_name:'+JSON.stringify(this.input_content.daughter_standard_name));
                 console.log('this.input_content.daughter:'+JSON.stringify(this.input_content.daughter));
             },
 
@@ -324,7 +324,7 @@
                 } else {
                     this.input_content.brother_standard_name = p.standard_name;
                 }
-                console.log(' this.input_content.brother_standard_name:'+JSON.stringify( this.input_content.brother_standard_name));
+                console.log('this.input_content.brother_standard_name:'+JSON.stringify(this.input_content.brother_standard_name));
                 console.log('this.input_content.brother:'+JSON.stringify(this.input_content.brother));
             },
 
@@ -347,7 +347,7 @@
                 } else {
                     this.input_content.sister_standard_name = p.standard_name;
                 }
-                console.log(' this.input_content.sister_standard_name:'+JSON.stringify( this.input_content.sister_standard_name));
+                console.log('this.input_content.sister_standard_name:'+JSON.stringify(this.input_content.sister_standard_name));
                 console.log('this.input_content.sister:'+JSON.stringify(this.input_content.sister));
             },
 
@@ -370,7 +370,7 @@
                 } else {
                     this.input_content.teacher_standard_name = p.standard_name;
                 }
-                console.log(' this.input_content.teacher_standard_name:'+JSON.stringify( this.input_content.teacher_standard_name));
+                console.log('this.input_content.teacher_standard_name:'+JSON.stringify( this.input_content.teacher_standard_name));
                 console.log('this.input_content.teacher:'+JSON.stringify(this.input_content.teacher));
             },
 
@@ -416,7 +416,7 @@
                 } else {
                     this.input_content.friend_standard_name = p.standard_name;
                 }
-                console.log(' this.input_content.friend_standard_name:'+JSON.stringify( this.input_content.friend_standard_name));
+                console.log(' this.input_content.friend_standard_name:'+JSON.stringify(this.input_content.friend_standard_name));
                 console.log('this.input_content.friend:'+JSON.stringify(this.input_content.friend));
             },
 
@@ -484,8 +484,8 @@
 
     /*备注输入头的样式*/
     .zxw-character-input-head{
-        margin:0 30px 10px 0;
-        width:70px;
+        margin:0 15px 10px 0;
+        width:65px;
     }
 
     /*label与输入框之间的距离*/

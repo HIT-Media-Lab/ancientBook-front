@@ -21,7 +21,7 @@
                 <p>很抱歉，未搜索到本体：{{search_content}}</p>
                 <p>您可以
                     <router-link to="/build">
-                        <button class="zxw-prebtn zxw-search-create">创建本体</button>
+                        <button class="zxw-prebtn zxw-search-create" @click="new_character()">创建本体</button>
                     </router-link>
                 </p>
             </div>
@@ -29,7 +29,7 @@
 
         <div slot="footer" class="zxw-search-footer">
             <router-link to="/build">
-                <button class="zxw-prebtn zxw-search-create" v-show="create_btn">创建本体</button>
+                <button class="zxw-prebtn zxw-search-create" v-show="create_btn" @click="new_character()">创建本体</button>
             </router-link>
             <button class="zxwnoumenom-button zxw-search-cancel" @click="close_modal">取消</button>
         </div>
@@ -195,6 +195,10 @@
                 console.log(q+':this.search_result:'+JSON.stringify(this.search_result[q]));
                 this.$emit('add_person_relations',this.search_result[q]);
                 this.close_modal();
+            },
+
+            new_character(){
+                this.$store.commit('get_create_one_selection',2);
             }
         }
     }

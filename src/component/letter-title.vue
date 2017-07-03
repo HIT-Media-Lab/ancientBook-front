@@ -33,7 +33,7 @@
         watch:{
             $route(){
                 //this.letter_id = this.$route.params.letterId;
-                console.log("$route letter");
+                //console.log("$route letter");
             }
         },
 

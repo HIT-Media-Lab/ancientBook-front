@@ -253,7 +253,7 @@
                     this.time_object.nianfen = this.year_number;
                     this.time_object.yue = this.selected_3.id;
                     this.time_object.ri = this.selected_4.id;
-                    console.log('this.time_object:'+JSON.stringify( this.time_object));
+                    console.log('this.time_object:'+JSON.stringify(this.time_object));
                     this.http_json(this.time_url,'post',this.time_object,this.success_time,this.fail_time);
                 }
             }
