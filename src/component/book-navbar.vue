@@ -1,25 +1,25 @@
 <template>
     <div class="j-book-navbar">
-        <select class="j-book-select"  v-model="bu" @change="go_item_2()">
+        <select class="j-book-select" id="bu" @change="go_item_2()">
             <option v-for="item in item_1" class="j-option" v-bind:value="item_1.chinese_name">
                 {{item.chinese_name}}
             </option>
         </select>
-        <select class="j-book-select" v-model="lei" @change="go_item_3()">
+        <select class="j-book-select" id="lei" @change="go_item_3()">
             <option v-for="item in item_2" class="j-option">
-                {{item}}
+                {{item.chinese_name}}
             </option>
         </select>
-        <select class="j-book-select" v-model="shu" @change="go_to_sortbook()">
+        <select class="j-book-select" id="shu" @change="go_to_sortbook()">
             <option v-for="item in item_3" class="j-option">
-                {{item}}
+                {{item.chinese_name}}
             </option>
         </select>
-        <select v-model="id">
-            <option>A</option>
-            <option>B</option>
-            <option>C</option>
-        </select>
+        <!--<select v-model="id">-->
+            <!--<option>A</option>-->
+            <!--<option>B</option>-->
+            <!--<option>C</option>-->
+        <!--</select>-->
     </div>
 </template>
 <script>
@@ -46,6 +46,9 @@
             }
         },
         created(){
+            document.getElementById("bu").value = "部";
+            document.getElementById("lei").value = "类";
+            document.getElementById("shu").value = "属";
             this.id = this.get_item_url + '?model_id=' + 25 + '&&item_1_id=' + 0 + '&&item_2_id=' + 0;
             this.http_json(this.id,'get',{}, this.success1, this.fail1);
             this.id = this.get_item_url + '?model_id=' + 25 + '&&item_1_id=' + 1 + '&&item_2_id=' + 0;
