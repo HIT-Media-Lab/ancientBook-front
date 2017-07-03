@@ -1,8 +1,8 @@
 <template>
     <div class="j-book-navbar">
-        <select class="j-book-select" v-model="bu" @change="go_item_2()">
-            <option v-for="item in item_1" class="j-option">
-                {{item}}
+        <select class="j-book-select"  v-model="bu" @change="go_item_2()">
+            <option v-for="item in item_1" class="j-option" v-bind:value="item_1.chinese_name">
+                {{item.chinese_name}}
             </option>
         </select>
         <select class="j-book-select" v-model="lei" @change="go_item_3()">
@@ -14,6 +14,11 @@
             <option v-for="item in item_3" class="j-option">
                 {{item}}
             </option>
+        </select>
+        <select v-model="id">
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
         </select>
     </div>
 </template>
@@ -27,9 +32,9 @@
                     'lei': 0,
                     'shu': 0
                 },
-                bu: 'bu',
-                lei: 'lei',
-                shu: 'shu',
+                bu: '部',
+                lei: '类',
+                shu: '属',
                 get_item_url: '/ancient_books/get_menu_items.action',
                 item_1: [],
                 item_2: [],
@@ -37,7 +42,7 @@
                 item_1_id: 0,
                 item_2_id: 0,
                 item_3_id: 0,
-                id: ''
+                id: 'dffddfg'
             }
         },
         created(){
@@ -50,9 +55,7 @@
         },
         methods:{
             success1(response){
-                for (let i = 0; i < response.body.length; i++){
-                    this.item_1[i] = response.body[i].chinese_name;
-                }
+               this.item_1 = response.body
             },
             fail1(){
                 console.log("获取部失败");

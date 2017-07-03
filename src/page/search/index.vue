@@ -17,10 +17,24 @@
 </template>
 <script>
     export default{
+        beforeRouteUpdate (to, from, next) {
+            if (to.name == "search_book"){
+                this.remove_noumenon();
+                next();
+            }else if(to.name == "search_noumenon") {
+                this.remove_book();
+                next();
+            }else {
+                next();
+            }
+        },
         data() {
             return{
 
             }
+        },
+        mounted: function () {
+          this.change_button()
         },
         methods : {
             remove_book() {
@@ -34,6 +48,14 @@
                 let noumenon_button = document.getElementById("j-noumenon-button");
                 book_button.className = "active";
                 noumenon_button.className = "";
+            },
+            change_button(){
+                alert(this.$route.name);
+                if(this.$route.name == "search_book"){
+                    this.remove_noumenon()
+                }else if(this.$route.name == "search_noumenon"){
+                    this.remove_book()
+                }
             }
         }
     }

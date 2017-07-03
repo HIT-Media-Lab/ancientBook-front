@@ -17,7 +17,7 @@
                     </router-link>
                 </li>
                 <li class="sort-box2-login">
-                    <router-link to="/search_index" style="color: #0f0f0f">
+                    <router-link to="/search_index/search_noumenon" style="color: #0f0f0f">
                         搜本体：{{sort_box}}
                     </router-link>
                 </li>
@@ -42,7 +42,7 @@ import store from '../../../store'
              autologin_url: '/ancient_books/get_user_info.action'
          }
      },
-     beforeMount: function () {
+    created: function () {
          this.onload_token();
      },
      methods: {

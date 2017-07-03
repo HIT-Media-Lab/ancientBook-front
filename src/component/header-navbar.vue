@@ -20,7 +20,7 @@
                         </router-link>
                     </li>
                     <li class="sort-box2">
-                        <router-link to="/search_index" style="color: #0f0f0f">
+                        <router-link to="/search_index/search_noumenon" style="color: #0f0f0f">
                             搜本体：{{sort_box}}
                         </router-link>
                     </li>
@@ -81,9 +81,6 @@
               this.name = name;
           });
         },
-        mounted(){
-            this.create_v_picture();
-        },
         data(){
             return{
 
@@ -114,6 +111,7 @@
                 let user_id = JSON.parse(localStorage.getItem('user'));
                 if (user_id == 'guest'){
                     this.show_m = true;
+                    this.create_v_picture();
                 }else if(user_id == 'user'){
                     this.$router.push({path: '/user'});
                 }
@@ -130,6 +128,7 @@
                     this.$router.push({path: '/search_index'});
                 }
             },
+
             /**
              *  账号 正则判断输入是否规范
              */
