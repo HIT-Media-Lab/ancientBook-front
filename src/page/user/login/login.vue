@@ -69,7 +69,7 @@ import store from '../../../store'
          },
          // 网页启动得到token
          onload_token(){
-             if (this.$store.getters.GetToken === null){
+             if (this.$store.getters.GetToken == ''){
                  this.$http.get('/ancient_books/getToken.action').then(function (response) {
                      console.log("成功得到token");
                      console.log(response.body.token);

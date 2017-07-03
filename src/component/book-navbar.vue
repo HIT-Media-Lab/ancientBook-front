@@ -1,16 +1,16 @@
 <template>
     <div class="j-book-navbar">
-        <select class="j-book-select" id="bu" @change="go_item_2()">
+        <select class="j-book-select" id="bu" value="" @change="go_item_2()">
             <option v-for="item in item_1" class="j-option" v-bind:value="item_1.chinese_name">
                 {{item.chinese_name}}
             </option>
         </select>
-        <select class="j-book-select" id="lei" @change="go_item_3()">
+        <select class="j-book-select" id="lei" value="" @change="go_item_3()">
             <option v-for="item in item_2" class="j-option">
                 {{item.chinese_name}}
             </option>
         </select>
-        <select class="j-book-select" id="shu" @change="go_to_sortbook()">
+        <select class="j-book-select" id="shu" value="" @change="go_to_sortbook()">
             <option v-for="item in item_3" class="j-option">
                 {{item.chinese_name}}
             </option>
