@@ -59,31 +59,46 @@
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">子：</p>
-                <button class="zxwbtn-info zxwspan-length" v-if="son.length !== 0" v-for="(item,index) in son" @click="person_info(item.person_id)">{{item.person_name}}</button><span v-if="son.length > 1">;</span>
+                <template v-if="son.length > 0">
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in son" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                    <span v-if="son.length > 1">;</span>
+                </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">女：</p>
-                <button class="zxwbtn-info zxwspan-length" v-if="daughter.length !== 0" v-for="(item,index) in daughter" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <template v-if="daughter.length > 0">
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in daughter" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">兄弟：</p>
-                <button class="zxwbtn-info zxwspan-length" v-if="brother.length !== 0" v-for="(item,index) in brother" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <template v-if="brother.length > 0">
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in brother" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">姐妹：</p>
-                <button class="zxwbtn-info zxwspan-length" v-if="sister.length !== 0" v-for="(item,index) in sister" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <template v-if="sister.length > 0">
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in sister" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">师：</p>
-                <button class="zxwbtn-info zxwspan-length" v-if="teacher.length !== 0" v-for="(item,index) in teacher" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <template v-if="teacher.length > 0">
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in teacher" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">学生：</p>
-                <button class="zxwbtn-info zxwspan-length" v-if="student.length !== 0" v-for="(item,index) in student" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <template v-if="student.length !== 0">
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in student" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">友：</p>
-                <button class="zxwbtn-info zxwspan-length" v-if="friend.length !== 0" v-for="(item,index) in friend" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <template v-if="friend.length > 0">
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in friend" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                </template>
             </div>
 
             <div class="zxw-infospan">
