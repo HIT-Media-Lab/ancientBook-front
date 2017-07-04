@@ -60,8 +60,7 @@
             <div class="zxw-infospan">
                 <p class="zxwspan-length">子：</p>
                 <template v-if="son.length > 0">
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in son" @click="person_info(item.person_id)">{{item.person_name}}</button>
-                    <span v-if="son.length > 1">;</span>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in son" @click="person_info(item.person_id)">{{item.person_name}} <span v-if="son.length > 1">;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
@@ -90,7 +89,7 @@
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">学生：</p>
-                <template v-if="student.length !== 0">
+                <template v-if="student.length > 0">
                     <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in student" @click="person_info(item.person_id)">{{item.person_name}}</button>
                 </template>
             </div>
@@ -114,7 +113,7 @@
 </template>
 
 <script>
-     /*let Mock = require('mockjs');
+     let Mock = require('mockjs');
      //显示用户列表
      Mock.mock('/ancient_books/get_person_by_id.action?id=1','get',{
      "status|200":200,
@@ -150,7 +149,19 @@
              "relation_type|6": 1,
              "relation_id|1-100": 1,
              "person_id|100-1000": 1,
-             "person_name|10000": 1
+             "person_name": '鹿晗'
+         },
+         {
+             "relation_type|6": 1,
+             "relation_id|1-100": 1,
+             "person_id|100-1000": 1,
+             "person_name": '迪丽热巴'
+         },
+         {
+             "relation_type|6": 1,
+             "relation_id|1-100": 1,
+             "person_id|100-1000": 1,
+             "person_name": '陈赫'
          },
          {
              "relation_type|7": 1,
@@ -182,7 +193,7 @@
              "person_id|100-1000": 1,
              "person_name|10000": 1
          }]
-     });*/
+     });
     import noumenon_title from '../../../component/noumenon-title.vue';
     import noumenon_button from '../../../component/noumenon-button.vue';
     export default{
@@ -233,7 +244,7 @@
                 this.person_content.remark_2_name = response.body.remark_2_name;
                 this.person_content.remark_1 = response.body.remark_1;
                 this.person_content.remark_2 = response.body.remark_2;
-                if(response.body.relations.length !== 0) {
+                if(response.body.relations.length > 0) {
                     for (let i = 0; i < response.body.relations.length; i++) {
                         if (response.body.relations[i].relation_type === 4) {
                             this.father.push({

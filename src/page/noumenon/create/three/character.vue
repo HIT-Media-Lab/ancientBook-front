@@ -162,14 +162,12 @@
                     this.create_character.person_relations.push(
                         this.$store.getters.get_build_character.father
                     );
-                    alert('this.$store.getters.get_build_character.father !== {}');
                 }
 
                 if(JSON.stringify(this.$store.getters.get_build_character.mother) !== "{}"){
                     this.create_character.person_relations.push(
                         this.$store.getters.get_build_character.mother
                     );
-                    alert('this.$store.getters.get_build_character.father !== {}');
                 }
 
                 for (let f = 0;f < this.$store.getters.get_build_character.son.length; f++){
