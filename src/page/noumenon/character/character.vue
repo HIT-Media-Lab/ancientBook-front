@@ -59,31 +59,31 @@
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">子：</p>
-                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in son" @click="person_info(item.person_id)">{{item.person_name}}</button><span v-if="son.length > 1">;</span>
+                <button class="zxwbtn-info zxwspan-length" v-if="son.length !== 0" v-for="(item,index) in son" @click="person_info(item.person_id)">{{item.person_name}}</button><span v-if="son.length > 1">;</span>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">女：</p>
-                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in daughter" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <button class="zxwbtn-info zxwspan-length" v-if="daughter.length !== 0" v-for="(item,index) in daughter" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">兄弟：</p>
-                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in brother" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <button class="zxwbtn-info zxwspan-length" v-if="brother.length !== 0" v-for="(item,index) in brother" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">姐妹：</p>
-                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in sister" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <button class="zxwbtn-info zxwspan-length" v-if="sister.length !== 0" v-for="(item,index) in sister" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">师：</p>
-                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in teacher" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <button class="zxwbtn-info zxwspan-length" v-if="teacher.length !== 0" v-for="(item,index) in teacher" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">学生：</p>
-                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in student" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <button class="zxwbtn-info zxwspan-length" v-if="student.length !== 0" v-for="(item,index) in student" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">友：</p>
-                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in friend" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <button class="zxwbtn-info zxwspan-length" v-if="friend.length !== 0" v-for="(item,index) in friend" @click="person_info(item.person_id)">{{item.person_name}}</button>
             </div>
 
             <div class="zxw-infospan">
@@ -218,87 +218,89 @@
                 this.person_content.remark_2_name = response.body.remark_2_name;
                 this.person_content.remark_1 = response.body.remark_1;
                 this.person_content.remark_2 = response.body.remark_2;
-                for( let i = 0; i < response.body.relations.length; i++ ) {
-                    if ( response.body.relations[i].relation_type === 4 ) {
-                        this.father.push({
-                            relation_type: response.body.relations[i].relation_type,
-                            relation_id: response.body.relations[i].relation_id,
-                            person_id: response.body.relations[i].person_id,
-                            person_name: response.body.relations[i].person_name
-                        });
-                        console.log(JSON.stringify(this.father));
+                if(response.body.relations.length !== 0) {
+                    for (let i = 0; i < response.body.relations.length; i++) {
+                        if (response.body.relations[i].relation_type === 4) {
+                            this.father.push({
+                                relation_type: response.body.relations[i].relation_type,
+                                relation_id: response.body.relations[i].relation_id,
+                                person_id: response.body.relations[i].person_id,
+                                person_name: response.body.relations[i].person_name
+                            });
+                            console.log(JSON.stringify(this.father));
 
-                    } else if ( response.body.relations[i].relation_type === 5 ) {
-                        this.mother.push({
-                            relation_type: response.body.relations[i].relation_type,
-                            relation_id: response.body.relations[i].relation_id,
-                            person_id: response.body.relations[i].person_id,
-                            person_name: response.body.relations[i].person_name
-                        });
-                        console.log(JSON.stringify(this.mother));
+                        } else if (response.body.relations[i].relation_type === 5) {
+                            this.mother.push({
+                                relation_type: response.body.relations[i].relation_type,
+                                relation_id: response.body.relations[i].relation_id,
+                                person_id: response.body.relations[i].person_id,
+                                person_name: response.body.relations[i].person_name
+                            });
+                            console.log(JSON.stringify(this.mother));
 
-                    } else if ( response.body.relations[i].relation_type === 6 ) {
-                        this.son.push({
-                            relation_type: response.body.relations[i].relation_type,
-                            relation_id: response.body.relations[i].relation_id,
-                            person_id: response.body.relations[i].person_id,
-                            person_name: response.body.relations[i].person_name
-                        });
-                        console.log(JSON.stringify(this.son));
+                        } else if (response.body.relations[i].relation_type === 6) {
+                            this.son.push({
+                                relation_type: response.body.relations[i].relation_type,
+                                relation_id: response.body.relations[i].relation_id,
+                                person_id: response.body.relations[i].person_id,
+                                person_name: response.body.relations[i].person_name
+                            });
+                            console.log(JSON.stringify(this.son));
 
-                   } else if ( response.body.relations[i].relation_type === 7 ) {
-                        this.daughter.push({
-                            relation_type: response.body.relations[i].relation_type,
-                            relation_id: response.body.relations[i].relation_id,
-                            person_id: response.body.relations[i].person_id,
-                            person_name: response.body.relations[i].person_name
-                        });
-                        console.log(JSON.stringify(this.daughter));
+                        } else if (response.body.relations[i].relation_type === 7) {
+                            this.daughter.push({
+                                relation_type: response.body.relations[i].relation_type,
+                                relation_id: response.body.relations[i].relation_id,
+                                person_id: response.body.relations[i].person_id,
+                                person_name: response.body.relations[i].person_name
+                            });
+                            console.log(JSON.stringify(this.daughter));
 
-                    } else if( response.body.relations[i].relation_type === 8 ) {
-                        this.brother.push({
-                            relation_type: response.body.relations[i].relation_type,
-                            relation_id: response.body.relations[i].relation_id,
-                            person_id: response.body.relations[i].person_id,
-                            person_name: response.body.relations[i].person_name
-                        });
-                        console.log(JSON.stringify(this.brother));
+                        } else if (response.body.relations[i].relation_type === 8) {
+                            this.brother.push({
+                                relation_type: response.body.relations[i].relation_type,
+                                relation_id: response.body.relations[i].relation_id,
+                                person_id: response.body.relations[i].person_id,
+                                person_name: response.body.relations[i].person_name
+                            });
+                            console.log(JSON.stringify(this.brother));
 
-                    } else if( response.body.relations[i].relation_type === 9 ) {
-                        this.sister.push({
-                            relation_type: response.body.relations[i].relation_type,
-                            relation_id: response.body.relations[i].relation_id,
-                            person_id: response.body.relations[i].person_id,
-                            person_name: response.body.relations[i].person_name
-                        });
-                        console.log(JSON.stringify(this.sister));
+                        } else if (response.body.relations[i].relation_type === 9) {
+                            this.sister.push({
+                                relation_type: response.body.relations[i].relation_type,
+                                relation_id: response.body.relations[i].relation_id,
+                                person_id: response.body.relations[i].person_id,
+                                person_name: response.body.relations[i].person_name
+                            });
+                            console.log(JSON.stringify(this.sister));
 
-                    } else if( response.body.relations[i].relation_type === 10 ) {
-                        this.teacher.push({
-                            relation_type: response.body.relations[i].relation_type,
-                            relation_id: response.body.relations[i].relation_id,
-                            person_id: response.body.relations[i].person_id,
-                            person_name: response.body.relations[i].person_name
-                        });
-                        console.log(JSON.stringify(this.teacher));
+                        } else if (response.body.relations[i].relation_type === 10) {
+                            this.teacher.push({
+                                relation_type: response.body.relations[i].relation_type,
+                                relation_id: response.body.relations[i].relation_id,
+                                person_id: response.body.relations[i].person_id,
+                                person_name: response.body.relations[i].person_name
+                            });
+                            console.log(JSON.stringify(this.teacher));
 
-                  } else if( response.body.relations[i].relation_type === 11 ) {
-                        this.student.push({
-                            relation_type: response.body.relations[i].relation_type,
-                            relation_id: response.body.relations[i].relation_id,
-                            person_id: response.body.relations[i].person_id,
-                            person_name: response.body.relations[i].person_name
-                        });
-                        console.log(JSON.stringify(this.student));
+                        } else if (response.body.relations[i].relation_type === 11) {
+                            this.student.push({
+                                relation_type: response.body.relations[i].relation_type,
+                                relation_id: response.body.relations[i].relation_id,
+                                person_id: response.body.relations[i].person_id,
+                                person_name: response.body.relations[i].person_name
+                            });
+                            console.log(JSON.stringify(this.student));
 
-                    } else if( response.body.relations[i].relation_type === 12 ) {
-                        this.friend.push({
-                            relation_type: response.body.relations[i].relation_type,
-                            relation_id: response.body.relations[i].relation_id,
-                            person_id: response.body.relations[i].person_id,
-                            person_name: response.body.relations[i].person_name
-                        });
-                        console.log(JSON.stringify(this.friend));
+                        } else if (response.body.relations[i].relation_type === 12) {
+                            this.friend.push({
+                                relation_type: response.body.relations[i].relation_type,
+                                relation_id: response.body.relations[i].relation_id,
+                                person_id: response.body.relations[i].person_id,
+                                person_name: response.body.relations[i].person_name
+                            });
+                            console.log(JSON.stringify(this.friend));
+                        }
                     }
                 }
             },
