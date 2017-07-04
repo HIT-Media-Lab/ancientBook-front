@@ -2,8 +2,7 @@
     <div class="j-recent">
         <recent_title class="j-recent-bar" :title="this.title"></recent_title>
         <div v-for="item in recent_book" class="j-picture-name">
-            <img  src="../../assets/img/古籍封面1.jpg" class="j-picture" alt="最近古籍">
-            <!--v-bind:id=item.id-->
+            <img v-bind:id=item.id src="../../assets/img/古籍封面1.jpg" class="j-picture" alt="最近古籍">
             <p style="color: #0f0f0f; text-align: center">{{item.standardName}}</p>
         </div>
     </div>
@@ -37,10 +36,10 @@
                 console.log("最近");
             },
             success_id(response){
+                this.recent_book = response.body;
                 for (let i = 0; i < response.body.length; i++) {
-                    let id_url = '';
+//                    let id_url = '';
                     console.log("获得最近古籍没问题");
-                    this.recent_book[i] = response.body[i];
                     this.book_cover = {
                         'book': '1',
                         'volume': '1',
