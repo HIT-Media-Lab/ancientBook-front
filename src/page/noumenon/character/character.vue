@@ -6,7 +6,7 @@
 
             <div class=" zxw-characterbody">
                 <p class="zxwspan-length">人名：</p>
-                <p class="zxwspan-length" v-model="person_content.standard_name">{{person_content.standard_name}}</p>
+                <p class="zxwspan-length" v-model="person_content.name">{{person_content.name}}</p>
             </div>
 
             <div class="zxw-infospan">
@@ -59,7 +59,7 @@
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">子：</p>
-                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in son" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in son" @click="person_info(item.person_id)">{{item.person_name}}</button><span v-if="son.length > 1">;</span>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">女：</p>
@@ -87,34 +87,24 @@
             </div>
 
             <div class="zxw-infospan">
-                <p class="zxwspan-length" v-model="person_content.remark_1_name">{{person_content.remark_1_name}}</p>
+                <p class="zxwspan-length" v-model="person_content.remark_1_name">{{person_content.remark_1_name}}<span v-if="person_content.remark_1_name !== undefined">:</span></p>
                 <p class="zxwspan-length" v-model="person_content.remark_1">{{person_content.remark_1}}</p>
             </div>
             <div class="zxw-infospan">
-                <p class="zxwspan-length" v-model="person_content.remark_2_name">{{person_content.remark_2_name}}</p>
+                <p class="zxwspan-length" v-model="person_content.remark_2_name">{{person_content.remark_2_name}}<span v-if="person_content.remark_2_name !== undefined">:</span></p>
                 <p class="zxwspan-length" v-model="person_content.remark_2">{{person_content.remark_2}}</p>
             </div>
             <button  class="zxwnoumenom-button zxwdelete-character" @click="delete_character()">删除本体</button>
-
-        <!--删除失败模态框-->
-        <div>
-            <modal :show_modal="show_info" class="zxw-modal-character">
-                <div slot="header" class="zxw-character-header">
-                </div>
-                <div slot="body" class="zxw-time-body">
-                    <p class="zxw-success-create" v-model="delete_info">{{delete_info}}</p>
-                </div>
-            </modal>
-        </div>
         </div>
 </template>
 
 <script>
      /*let Mock = require('mockjs');
      //显示用户列表
-     Mock.mock('/ancient_books/get_person_by_id.action?id=3','get',{
+     Mock.mock('/ancient_books/get_person_by_id.action?id=1','get',{
      "status|200":200,
-     "standard_name|5":5,
+     "standard_name":'鹿晗（西周）',
+         "name":'鹿晗',
      "english|6": 6,
      "xing|5": 5,
      "shi|5": 5,
@@ -127,7 +117,6 @@
      "jiguan_location_id|555":1,
      "jiguan_location_name|555":1,
      "remark_1_name|1": 2,
-     "remark_2_name|2": 2,
      "remark_1|111":1,
      "remark_2|222": 1,
      "relations": [{
@@ -183,7 +172,6 @@
     import noumenon_button from '../../../component/noumenon-button.vue';
     export default{
         created(){
-            //this.title = this.$store.getters.get_build_character.standard_name;
             this.person_info();
         },
         components:{
@@ -193,8 +181,8 @@
         data(){
             return{
                 title:'',
-                person_url:'/ancient_books/get_person_by_id.action',
-                delete_character:'/ancient_books/delete_person_by_id.action',
+                get_person_url:'/ancient_books/get_person_by_id.action',
+                delete_character_url:'/ancient_books/delete_person_by_id.action',
                 person_content:{},  //成功回调后的对象
                 father:[],
                 mother:[],
@@ -214,6 +202,7 @@
                 //存在前端显示的数组里
                 this.title = response.body.standard_name;
                 this.person_content.standard_name = response.body.standard_name;
+                this.person_content.name = response.body.name;
                 this.person_content.english = response.body.english;
                 this.person_content.xing = response.body.xing;
                 this.person_content.shi = response.body.shi;
@@ -320,7 +309,7 @@
 
             person_info(){
                 let person_object={};
-                let new_url = this.person_url +'?id='+this.$route.params.nouId;
+                let new_url = this.get_person_url +'?id='+this.$route.params.nouId;
                 this.http_json(new_url,'get',person_object,this.success_id,this.fail_id);
             },
 
@@ -328,7 +317,7 @@
                 if(response.body.result === 1){
                     this.$router.push({path:'/noumenon'});
                 } else {
-                    this.$router.match()
+                    //this.$router.match()
                     //this.show_info =true;
                     //this.delete_info = response.body.info;
                 }
@@ -341,7 +330,7 @@
             delete_character(){
                 let delete_object = {};
                 delete_object.id = this.$route.params.nouId;
-                this.http_json(this.delete_character,'post',this.success_delete,this.fail_delete);
+                this.http_json(this.delete_character_url,'post',this.success_delete,this.fail_delete);
             }
         }
     }
@@ -350,14 +339,14 @@
 <style>
     /*人物本体详情内容与标题距离*/
     .zxw-characterbody{
-        margin:40px 0 0 37px;
+        margin:40px 0 0 40px;
     }
 
     /*删除本体button距离*/
     .zxwdelete-character{
         width:140px;
         height:45px;
-        margin: 37px 0 0 37px;
+        margin: 37px 0 0 30px;
     }
 
     /*详情内的button*/
@@ -368,8 +357,8 @@
     }
 
     /*各内容之间的间距*/
-    .zxw-infospan{
-        margin:17px 0 0 37px;
+    .zxw-infospan {
+        margin: 17px 0 0 40px;
     }
 
 
