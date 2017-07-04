@@ -1,8 +1,8 @@
 <template>
     <div class="j-recent">
         <recent_title class="j-recent-bar" :title="this.title"></recent_title>
-        <div v-for="(item,index) in recent_book" class="j-picture-name">
-            <img v-bind:id=index class="j-picture" >
+        <div v-for="item in recent_book" class="j-picture-name">
+            <img v-bind:id=item.ancient_book_id src="" class="j-picture" >
             <p style="color: #0f0f0f; text-align: center">{{item.standard_name}}</p>
         </div>
     </div>
@@ -38,7 +38,7 @@
                     console.log("获得最近古籍没问题");
                     this.recent_book[i] = response.body[i];
                     id_url = this.picture_url + '?page_id=' + response.body[i].ancient_book_id;
-                    document.getElementById( i ).src = id_url;
+                    document.getElementById(response.body[i].ancient_book_id).src = id_url;
                     console.log("得到最近成功")
                 }
             },
