@@ -62,7 +62,7 @@
                     <label class="col-md-2">標準分類：</label>
                     <div class="col-md-3">
                         <select id="ry-select-b">
-                            <option v-for="item in menu_items[4]">{{item.chinese_name}}</option>
+                            <option v-for="item in menu_eight">{{item.chinese_name}}</option>
                         </select>
                     </div>
                     <div class="col-md-3">
@@ -144,7 +144,7 @@
                     </div>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[5]">{{item.chinese_name}}</option>
+                            <option v-for="item in menu_nine">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -187,7 +187,10 @@
                 shu_items_obj : {},
                 lei_items : [],
                 shu_items : [],
-                menu_items : [],
+                get_menu_eight_obj : {},
+                menu_eight : [],
+                get_menu_nine_obj : {},
+                menu_nine : [],
                 varieties_item : {
                     type_name : '',
                     type_other_name : '',
@@ -215,8 +218,9 @@
         },
 
         created : function () {
-            this.get_varieties_item();
-            this.varieties_item = this.$store.getters.get_varieties_item
+            this.get_menu_eight();
+            this.get_menu_nine();
+            this.varieties_item = this.$store.getters.get_varieties_item;
         },
 
         beforeRouteLeave (to, from, next) {
@@ -225,9 +229,54 @@
         },
 
         methods : {
-            get_varieties_item() {
-                this.menu_items = this.$store.getters.get_menu_item
+            get_menu_nine() {
+                let url = '/ancient_books/get_menu_items.action?model_id=9&&item_1_id=0&&item_2_id=0';
+                this.http_json (url , 'get' , this.get_menu_nine_obj , this.success_get_menu_nine , this.fail_get_menu_nine);
             },
+
+            success_get_menu_nine(response) {
+                console.log ("success get menu nine");
+                //将后端数据显示在前端页面里
+                if (response.body.length === 0) {
+                    console.log ("没有返回数组！");
+                }
+                else {
+                    for (var j = 0; j <= response.body.length-1; j++) {
+                        this.menu_nine.push({
+                            chinese_name: response.body[j].chinese_name
+                        });
+                    }
+                }
+            },
+
+            fail_get_menu_nine() {
+                console.log ("fail get menu nine!");
+            },
+
+            get_menu_eight() {
+                let url = '/ancient_books/get_menu_items.action?model_id=8&&item_1_id=0&&item_2_id=0';
+                this.http_json (url , 'get' , this.get_menu_eight_obj , this.success_get_menu_eight , this.fail_get_menu_eight);
+            },
+
+            success_get_menu_eight(response) {
+                console.log ("success get menu eight");
+                //将后端数据显示在前端页面里
+                if (response.body.length === 0) {
+                    console.log ("没有返回数组！");
+                }
+                else {
+                    for (var j = 0; j <= response.body.length-1; j++) {
+                        this.menu_eight.push({
+                            chinese_name: response.body[j].chinese_name
+                        });
+                    }
+                }
+            },
+
+            fail_get_menu_eight() {
+                console.log ("fail get menu eight!");
+            },
+
 
             get_lei_item() {
                 var bu = document.getElementById("ry-select-b");
@@ -245,7 +294,7 @@
                     console.log ("没有返回数组！");
                 }
                 else {
-                    for (j = 0; j <= response.body.length-1; j++) {
+                    for (var j = 0; j <= response.body.length-1; j++) {
                         this.lei_items.push({
                             chinese_name: response.body[j].chinese_name
                         });
@@ -275,7 +324,7 @@
                     console.log ("没有返回数组！");
                 }
                 else {
-                    for (j = 0; j <= response.body.length-1; j++) {
+                    for (var j = 0; j <= response.body.length-1; j++) {
                         this.shu_items.push({
                             chinese_name: response.body[j].chinese_name
                         });
