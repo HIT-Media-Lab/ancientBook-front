@@ -51,11 +51,11 @@
 
             <div class="zxw-infospan">
                 <p class="zxwspan-length">父：</p>
-                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in father" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <button class="zxwbtn-info zxwspan-length" v-model="father[0]"  @click="person_info(father[0].person_id)">{{father[0].person_name}}</button>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">母：</p>
-                <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in mother" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                <button class="zxwbtn-info zxwspan-length" v-model="mother[0]" @click="person_info(mother[0].person_id)">{{mother[0].person_name}}</button>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">子：</p>
@@ -183,11 +183,8 @@
     import noumenon_button from '../../../component/noumenon-button.vue';
     export default{
         created(){
-
-            //console.log(this.$store.getters.get_build_character);
             //this.title = this.$store.getters.get_build_character.standard_name;
-            //this.person_info(this.$route.params.nouId);
-            //console.log(this.title);
+            this.person_info();
         },
         components:{
             noumenon_title,
@@ -198,7 +195,6 @@
                 title:'',
                 person_url:'/ancient_books/get_person_by_id.action',
                 delete_character:'/ancient_books/delete_person_by_id.action',
-                person_object:{}, //get请求的对象
                 person_content:{},  //成功回调后的对象
                 father:[],
                 mother:[],
@@ -216,7 +212,7 @@
         methods:{
             success_id(response){
                 //存在前端显示的数组里
-                this.title = response.body.standard_name+'('+response.body.birth_time_name+')';
+                this.title = response.body.standard_name;
                 this.person_content.standard_name = response.body.standard_name;
                 this.person_content.english = response.body.english;
                 this.person_content.xing = response.body.xing;
@@ -319,13 +315,13 @@
             },
 
             fail_id(response){
-                console.log("具体显示人物失败"+response.body);
+                console.log("具体显示人物失败");
             },
 
-            person_info(p){
-                this.person_object.value = '?id='+p;
-                let new_url = this.person_url + this.person_object.value;
-                this.http_json(new_url,'get',this.person_object,this.success_id,this.fail_id);
+            person_info(){
+                let person_object={};
+                let new_url = this.person_url +'?id='+this.$route.params.nouId;
+                this.http_json(new_url,'get',person_object,this.success_id,this.fail_id);
             },
 
             success_delete(response){

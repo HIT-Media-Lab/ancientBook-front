@@ -44,7 +44,30 @@
                         standard_name:response.body.noumenons[i].standard_name,
                         id:response.body.noumenons[i].id,
                         type:response.body.noumenons[i].type
-                    })
+                    });
+
+                    if(response.body.noumenons[i].type === 1){
+
+                        this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【人物】';
+                    } else if (response.body.noumenons[i].type === 2){
+
+                        this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【文献】';
+                    } else if (response.body.noumenons[i].type === 3){
+
+                        this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【术语】';
+                    } else if (response.body.noumenons[i].type === 4){
+
+                        this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【时间】';
+                    } else if (response.body.noumenons[i].type === 5){
+
+                        this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【职官】';
+                    } else if (response.body.noumenons[i].type === 6){
+
+                        this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【机构】';
+                    } else if (response.body.noumenons[i].type === 7){
+
+                        this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【地名】';
+                    }
                 }
             },
 
@@ -65,7 +88,8 @@
                     this.$router.push({name:'terms_detail',params:{id:this.recent_noumenons[p].id}});
 
                 } else if (i === 4){
-                    this.$router.push({name:'char_detail',params:{id:this.recent_noumenons[p].id}});
+                    //没有分好路由
+                    this.$router.push({name:'time',params:{id:this.recent_noumenons[p].id}});
 
                 } else if (i === 5){
                     this.$router.push({name:'off_detail',params:{id:this.recent_noumenons[p].id}});

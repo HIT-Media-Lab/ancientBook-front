@@ -86,7 +86,6 @@
             return{
                 title:'人物本体',
                 total_page:3,   //总页数
-                get_letter:{},
                 character_data:[],
                 word_url:'/ancient_books/get_person_list_by_word.action',
                 ban:true
@@ -99,11 +98,13 @@
             success_get(response){
                 console.log("字母显示本体列表成功");
                 this.total_page = response.body.total_page;
-                    for (let i = 0; i < response.body.content.length; i++) {
-                        this.character_data[i] = response.body.content[i];
-                    }
-                    console.log('response.body.content.length:'+response.body.content.length);
-                    console.log('this.character_data:'+JSON.stringify(this.character_data));
+                for (let i = 0; i < response.body.content.length; i++) {
+                    this.character_data.push(
+                        response.body.content[i]
+                    );
+                }
+                console.log('response.body.content.length:'+response.body.content.length);
+                console.log('this.character_data:'+JSON.stringify(this.character_data));
             },
 
             fail_get(response){
@@ -111,10 +112,9 @@
             },
 
             get_character(){
-                this.get_letter.value = '?word='+this.$route.params.letterId+'&&page_count='+this.$route.params.pageId;
-                let new_url = this.word_url+this.get_letter.value;
-                //this.clean_data();
-                this.http_json(new_url,'get',this.get_letter,this.success_get,this.fail_get);
+                let get_letter={};
+                let new_url = this.word_url+'?word='+this.$route.params.letterId+'&&page_count='+this.$route.params.pageId;
+                this.http_json(new_url,'get',get_letter,this.success_get,this.fail_get);
             },
 
             //跳转到人物本体详情

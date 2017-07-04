@@ -19,7 +19,7 @@
             <!--显示搜索失败的结果-->
             <div class="zxw-fail-tip" v-show="fail_tip">
                 <p>很抱歉，未搜索到本体：{{search_content}}</p>
-                <p>您可以
+                <p><span class="zxw-search-p-tip">您可以</span>
                     <router-link to="/build">
                         <button class="zxw-prebtn zxw-search-create" @click="new_character()">创建本体</button>
                     </router-link>
@@ -291,5 +291,9 @@
         font-size: 12px;
         width:160px;
         margin:50px 50px 0 120px;
+    }
+
+    .zxw-search-p-tip{
+        color:grey;
     }
 </style>
