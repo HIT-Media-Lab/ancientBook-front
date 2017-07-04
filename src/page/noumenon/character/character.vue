@@ -51,11 +51,15 @@
 
             <div class="zxw-infospan">
                 <p class="zxwspan-length">父：</p>
-                <button class="zxwbtn-info zxwspan-length" v-model="father[0]"  @click="person_info(father[0].person_id)">{{father[0].person_name}}</button>
+                <template v-if="father.length > 0">
+                    <button class="zxwbtn-info zxwspan-length" v-model="father[0]"  @click="person_info(father[0].person_id)">{{father[0].person_name}}</button>
+                </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">母：</p>
-                <button class="zxwbtn-info zxwspan-length" v-model="mother[0]" @click="person_info(mother[0].person_id)">{{mother[0].person_name}}</button>
+                <template v-if="mother.length > 0">
+                    <button class="zxwbtn-info zxwspan-length" v-model="mother[0]" @click="person_info(mother[0].person_id)">{{mother[0].person_name}}</button>
+                </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">子：</p>
