@@ -1,19 +1,19 @@
 <template>
     <div class="j-book-navbar">
         <select class="j-book-select" v-model="select_1" id="bu" @change="go_item_2()">
-            <option selected v-bind:value="{id: 0}">部</option>
+            <option selected v-bind:value="{id: 'bu'}">部</option>
             <option v-for="item in item_1" class="j-option" v-bind:value="{id: item.item_1_id}">
                 {{item.chinese_name}}
             </option>
         </select>
         <select class="j-book-select" v-model="select_2" id="lei" @change="go_item_3()">
-            <option selected v-bind:value="{id: 0}">类</option>
+            <option selected v-bind:value="{id: 'lei'}">类</option>
             <option v-for="item in item_2" class="j-option" v-bind:value="{id: item.item_2_id}">
                 {{item.chinese_name}}
             </option>
         </select>
         <select class="j-book-select" v-model="select_3" id="shu" @change="go_to_sortbook()">
-            <option selected v-bind:value="{id: 0}">属</option>
+            <option selected v-bind:value="{id: 'shu'}">属</option>
             <option v-for="item in item_3" class="j-option" v-bind:value="{id: item.item_3_id}">
                 {{item.chinese_name}}
             </option>
@@ -25,13 +25,13 @@
         data(){
             return{
                 select_1:{
-                    id: 0,
+                    id: 'bu',
                 },
                 select_2:{
-                    id: 0
+                    id: 'lei',
                 },
                 select_3:{
-                    id: 0
+                    id: 'shu',
                 },
                 model_id: 8,
                 item: {
@@ -39,9 +39,6 @@
                     'lei': 0,
                     'shu': 0
                 },
-                bu: '部',
-                lei: '类',
-                shu: '属',
                 get_item_url: '/ancient_books/get_menu_items.action',
                 item_1: [],
                 item_2: [],
@@ -73,7 +70,7 @@
                 this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + this.item_1_id + '&&item_2_id=' + 1;
                 this.http_json(this.id,'get',{}, this.success3, this.fail3);
                 this.item.bu = this.item_1_id;
-                document.getElementById("lei").value = "{id: 0}";
+                document.getElementById("lei").value = "{id: 'lei'}";
                 console.log(this.select_1.id);
             },
             success2(response){
@@ -88,7 +85,7 @@
                 this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + this.item_1_id + '&&item_2_id=' + this.item_2_id;
                 this.http_json(this.id,'get',this.id,this.success3, this.fail3);
                 this.item.lei = this.item_2_id;
-                document.getElementById("shu").value = "{id: 0}";
+                document.getElementById("shu").value = "{id: 'shu'}";
                 console.log(this.select_2.id);
             },
             success3(response){
