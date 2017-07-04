@@ -2,7 +2,7 @@
     <div class="j-recent">
         <recent_title class="j-recent-bar" :title="this.title"></recent_title>
         <div v-for="(item,index) in recent_book" class="j-picture-name">
-            <img v-bind:id=index src="" class="j-picture">
+            <img v-bind:id=index src="" class="j-picture" >
             <p style="color: #0f0f0f; text-align: center">{{item.standard_name}}</p>
         </div>
     </div>
@@ -29,7 +29,8 @@
         },
         methods: {
             get_id(){
-                this.http_json(this.id_url, 'get',{}, this.success_id, this.fail_id)
+                this.http_json(this.id_url, 'get',{}, this.success_id, this.fail_id);
+                console.log("最近");
             },
             success_id(response){
                 for (let i = 0; i < response.body.length; i++) {
@@ -38,6 +39,7 @@
                     this.recent_book[i] = response.body[i];
                     id_url = this.picture_url + '?page_id=' + response.body[i].ancient_book_id;
                     document.getElementById( i ).src = id_url;
+                    console.log("得到最近成功")
                 }
             },
             fail_id(){
