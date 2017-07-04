@@ -8,14 +8,14 @@
                     <label class="col-md-2">版本類型：</label>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[6]">{{item.chinese_name}}</option>
+                            <option v-for="item in menu_ten">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
                     <label class="col-md-2">版本時代：</label>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[7]">{{item.chinese_name}}</option>
+                            <option v-for="item in menu_eleven">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -24,14 +24,14 @@
                     <label class="col-md-2">載體形式：</label>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[8]">{{item.chinese_name}}</option>
+                            <option v-for="item in menu_twelve">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
                     <label class="col-md-2">裝幀形式：</label>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[9]">{{item.chinese_name}}</option>
+                            <option v-for="item in menu_thirteen">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                     <label class="col-md-2">魚尾樣式：</label>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[10]">{{item.chinese_name}}</option>
+                            <option v-for="item in menu_fourteen">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -102,14 +102,14 @@
                     <label class="col-md-2">邊欄樣式：</label>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[11]">{{item.chinese_name}}</option>
+                            <option v-for="item in menu_fifteen">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
                     <label class="col-md-2">分欄：</label>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[12]">{{item.chinese_name}}</option>
+                            <option v-for="item in menu_sixteen">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                     <label class="col-md-2">書口樣式：</label>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[13]">{{item.chinese_name}}</option>
+                            <option v-for="item in menu_seventeen">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
@@ -207,7 +207,9 @@
                     </div>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[0]">{{item.chinese_name}}</option>
+                            <option>不详</option>
+                            <option>责任人</option>
+                            <option>责任机构</option>
                         </select>
                     </div>
 
@@ -217,7 +219,7 @@
                     </div>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[15]">{{item.chinese_name}}</option>
+                            <option v-for="item in menu_nineteen">{{item.chinese_name}}</option>
                         </select>
                     </div>
                 </div>
@@ -229,7 +231,9 @@
                     </div>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[1]">{{item.chinese_name}}</option>
+                            <option>不详</option>
+                            <option>确定</option>
+                            <option>題</option>
                         </select>
                     </div>
                 </div>
@@ -253,18 +257,26 @@
 
 <script>
     export default{
-        created : function () {
-            this.get_edition_item();
-            this.edition_item = this.$store.getters.get_edition_item
-        },
-
-        beforeRouteLeave (to, from, next) {
-            this.$store.commit("get_edition_contents",this.edition_item);
-            next();
-        },
-
         data() {
             return{
+                get_menu_ten_obj : {},
+                menu_ten : [],
+                get_menu_eleven_obj : {},
+                menu_eleven : [],
+                get_menu_twelve_obj : {},
+                menu_twelve : [],
+                get_menu_thirteen_obj : {},
+                menu_thirteen : [],
+                get_menu_fourteen_obj : {},
+                menu_fourteen : [],
+                get_menu_fifteen_obj : {},
+                menu_fifteen : [],
+                get_menu_sixteen_obj : {},
+                menu_sixteen : [],
+                get_menu_seventeen_obj : {},
+                menu_seventeen : [],
+                get_menu_nineteen_obj : {},
+                menu_nineteen : [],
                 menu_items :[],
                 edition_item : {
                     version_volume : '',
@@ -303,10 +315,135 @@
             }
         },
 
+        created : function () {
+            this.edition_item = this.$store.getters.get_edition_item
+        },
+
+        beforeRouteLeave (to, from, next) {
+            this.$store.commit("get_edition_contents",this.edition_item);
+            next();
+        },
+
         methods : {
-            get_edition_item() {
-                this.menu_items = this.$store.getters.get_menu_item
-            }
+            get_menu_ten() {
+                let url = '/ancient_books/get_menu_items.action?model_id=10&&item_1_id=0&&item_2_id=0';
+                this.http_json (url , 'get' , this.get_menu_ten_obj , this.success_get_menu_ten , this.fail_get_menu_ten);
+            },
+
+            success_get_menu_ten(response) {
+                console.log ("success get menu ten");
+                //将后端数据显示在前端页面里
+                if (response.body.length === 0) {
+                    console.log ("没有返回数组！");
+                }
+                else {
+                    for (var j = 0; j <= response.body.length-1; j++) {
+                        this.menu_ten.push({
+                            chinese_name: response.body[j].chinese_name
+                        });
+                    }
+                }
+            },
+
+            fail_get_menu_ten() {
+                console.log ("fail get menu ten!");
+            },
+
+            get_menu_eleven() {
+                let url = '/ancient_books/get_menu_items.action?model_id=11&&item_1_id=0&&item_2_id=0';
+                this.http_json (url , 'get' , this.get_menu_eleven_obj , this.success_get_menu_eleven , this.fail_get_menu_eleven);
+            },
+
+            success_get_menu_eleven(response) {
+                console.log ("success get menu eleven");
+                //将后端数据显示在前端页面里
+                if (response.body.length === 0) {
+                    console.log ("没有返回数组！");
+                }
+                else {
+                    for (var j = 0; j <= response.body.length-1; j++) {
+                        this.menu_eleven.push({
+                            chinese_name: response.body[j].chinese_name
+                        });
+                    }
+                }
+            },
+
+            fail_get_menu_eleven() {
+                console.log ("fail get menu eleven!");
+            },
+
+            get_menu_twelve() {
+                let url = '/ancient_books/get_menu_items.action?model_id=12&&item_1_id=0&&item_2_id=0';
+                this.http_json (url , 'get' , this.get_menu_twelve_obj , this.success_get_menu_twelve , this.fail_get_menu_twelve);
+            },
+
+            success_get_menu_twelve(response) {
+                console.log ("success get menu twelve");
+                //将后端数据显示在前端页面里
+                if (response.body.length === 0) {
+                    console.log ("没有返回数组！");
+                }
+                else {
+                    for (var j = 0; j <= response.body.length-1; j++) {
+                        this.menu_twelve.push({
+                            chinese_name: response.body[j].chinese_name
+                        });
+                    }
+                }
+            },
+
+            fail_get_menu_twelve() {
+                console.log ("fail get menu twelve!");
+            },
+
+            get_menu_thirteen() {
+                let url = '/ancient_books/get_menu_items.action?model_id=13&&item_1_id=0&&item_2_id=0';
+                this.http_json (url , 'get' , this.get_menu_thirteen_obj , this.success_get_menu_thirteen , this.fail_get_menu_thirteen);
+            },
+
+            success_get_menu_thirteen(response) {
+                console.log ("success get menu thirteen");
+                //将后端数据显示在前端页面里
+                if (response.body.length === 0) {
+                    console.log ("没有返回数组！");
+                }
+                else {
+                    for (var j = 0; j <= response.body.length-1; j++) {
+                        this.menu_thirteen.push({
+                            chinese_name: response.body[j].chinese_name
+                        });
+                    }
+                }
+            },
+
+            fail_get_menu_thirteen() {
+                console.log ("fail get menu thirteen!");
+            },
+
+            get_menu_fourteen() {
+                let url = '/ancient_books/get_menu_items.action?model_id=14&&item_1_id=0&&item_2_id=0';
+                this.http_json (url , 'get' , this.get_menu_fourteen_obj , this.success_get_menu_fourteen , this.fail_get_menu_fourteen);
+            },
+
+            success_get_menu_fourteen(response) {
+                console.log ("success get menu fourteen");
+                //将后端数据显示在前端页面里
+                if (response.body.length === 0) {
+                    console.log ("没有返回数组！");
+                }
+                else {
+                    for (var j = 0; j <= response.body.length-1; j++) {
+                        this.menu_fourteen.push({
+                            chinese_name: response.body[j].chinese_name
+                        });
+                    }
+                }
+            },
+
+            fail_get_menu_fourteen() {
+                console.log ("fail get menu fourteen!");
+            },
         },
 
     }

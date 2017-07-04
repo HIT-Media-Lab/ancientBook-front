@@ -61,12 +61,12 @@
                 <div class="row">
                     <label class="col-md-2">標準分類：</label>
                     <div class="col-md-3">
-                        <select id="ry-select-b">
+                        <select id="ry-select-b" @change="">
                             <option v-for="item in menu_eight">{{item.chinese_name}}</option>
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select id="ry-select-l" @click="get_lei_item()">
+                        <select id="ry-select-l" @click="get_lei_item()" @change="">
                             <option v-for="item in lei_items">{{item.chinese_name}}</option>
                         </select>
                     </div>

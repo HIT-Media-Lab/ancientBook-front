@@ -99,7 +99,9 @@
                     </div>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[0]">{{item.chinese_name}}</option>
+                            <option>不详</option>
+                            <option>责任人</option>
+                            <option>责任机构</option>
                         </select>
                     </div>
 
@@ -130,7 +132,9 @@
                     </div>
                     <div class="col-md-4">
                         <select>
-                            <option v-for="item in menu_items[1]">{{item.chinese_name}}</option>
+                            <option>不详</option>
+                            <option>确定</option>
+                            <option>題</option>
                         </select>
                     </div>
                 </div>
