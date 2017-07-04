@@ -335,6 +335,8 @@
             fail_get_shu_items() {
                 console.log ("fail get shu items!");
             },
+
+
         },
     }
 </script>
