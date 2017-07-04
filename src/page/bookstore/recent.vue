@@ -2,7 +2,7 @@
     <div class="j-recent">
         <recent_title class="j-recent-bar" :title="this.title"></recent_title>
         <div v-for="(item,index) in recent_book" class="j-picture-name">
-            <img v-bind:id=index src="" class="j-picture" >
+            <img v-bind:id=index class="j-picture" >
             <p style="color: #0f0f0f; text-align: center">{{item.standard_name}}</p>
         </div>
     </div>
