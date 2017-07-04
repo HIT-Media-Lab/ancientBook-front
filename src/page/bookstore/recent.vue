@@ -14,7 +14,7 @@
         components:{
             recent_title
         },
-        create: function () {
+        created: function () {
             this.get_id();
         },
         data(){
