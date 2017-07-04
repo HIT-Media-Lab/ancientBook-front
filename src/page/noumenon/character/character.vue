@@ -70,46 +70,46 @@
             <div class="zxw-infospan">
                 <p class="zxwspan-length">女：</p>
                 <template v-if="daughter.length > 0">
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in daughter" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in daughter" @click="person_info(item.person_id)">{{item.person_name}} <span v-if="daughter.length > 1">;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">兄弟：</p>
                 <template v-if="brother.length > 0">
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in brother" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in brother" @click="person_info(item.person_id)">{{item.person_name}} <span v-if="brother.length > 1">;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">姐妹：</p>
                 <template v-if="sister.length > 0">
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in sister" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in sister" @click="person_info(item.person_id)">{{item.person_name}} <span v-if="sister.length > 1">;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">师：</p>
                 <template v-if="teacher.length > 0">
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in teacher" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in teacher" @click="person_info(item.person_id)">{{item.person_name}} <span v-if="teacher.length > 1">;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">学生：</p>
                 <template v-if="student.length > 0">
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in student" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in student" @click="person_info(item.person_id)">{{item.person_name}} <span v-if="student.length > 1">;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">友：</p>
                 <template v-if="friend.length > 0">
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in friend" @click="person_info(item.person_id)">{{item.person_name}}</button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in friend" @click="person_info(item.person_id)">{{item.person_name}} <span v-if="friend.length > 1">;</span></button>
                 </template>
             </div>
 
             <div class="zxw-infospan">
-                <p class="zxwspan-length" v-model="person_content.remark_1_name">{{person_content.remark_1_name}}<span v-if="person_content.remark_1_name !== undefined">:</span></p>
+                <p class="zxwspan-length" v-model="person_content.remark_1_name">{{person_content.remark_1_name}}<span v-if="person_content.remark_1_name !=='' ">:</span></p>
                 <p class="zxwspan-length" v-model="person_content.remark_1">{{person_content.remark_1}}</p>
             </div>
             <div class="zxw-infospan">
-                <p class="zxwspan-length" v-model="person_content.remark_2_name">{{person_content.remark_2_name}}<span v-if="person_content.remark_2_name !== undefined">:</span></p>
+                <p class="zxwspan-length" v-model="person_content.remark_2_name">{{person_content.remark_2_name}}<span v-if="person_content.remark_2_name !=='' ">:</span></p>
                 <p class="zxwspan-length" v-model="person_content.remark_2">{{person_content.remark_2}}</p>
             </div>
             <button  class="zxwnoumenom-button zxwdelete-character" @click="delete_character()">删除本体</button>
@@ -117,7 +117,7 @@
 </template>
 
 <script>
-     let Mock = require('mockjs');
+    let Mock = require('mockjs');
      //显示用户列表
      Mock.mock('/ancient_books/get_person_by_id.action?id=1','get',{
      "status|200":200,
@@ -134,7 +134,8 @@
      "death_time_name|0": 0,
      "jiguan_location_id|555":1,
      "jiguan_location_name|555":1,
-     "remark_1_name|1": 2,
+     "remark_1_name|1": 1,
+     "remark_2_name": "",
      "remark_1|111":1,
      "remark_2|222": 1,
      "relations": [{

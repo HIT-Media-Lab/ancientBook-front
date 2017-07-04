@@ -70,7 +70,7 @@
 
         <div v-for="(item ,index) in add_data">
             <input type="text" class="zxw-character-input-head zxw-character-input" v-model="item.remark_name">
-            <input type="text" class="zxw-character-input" maxlength="20"  v-model="item.remark">
+            <input type="text" class="zxw-character-input" v-bind:disabled="item.remark_name === ''" v-model="item.remark">
             <button class="zxw-add-button" @click="add_tip(index)" v-show="add_data[index].value">添加</button>
         </div>
 
