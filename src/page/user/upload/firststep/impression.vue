@@ -7,7 +7,7 @@
                 <div class="row">
                     <label class="col-md-2">印刷類型：</label>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-i-print">
                             <option>不详</option>
                             <option>墨印</option>
                             <option>朱印</option>
@@ -81,7 +81,7 @@
                         <label>責任者類型：</label>
                     </div>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-i-type">
                             <option>不详</option>
                             <option>责任人</option>
                             <option>责任机构</option>
@@ -93,7 +93,7 @@
                         <label>責任行為：</label>
                     </div>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-i-action">
                             <option>初印</option>
                             <option>重印</option>
                         </select>
@@ -106,7 +106,7 @@
                         <label>確定性：</label>
                     </div>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-i-confirm">
                             <option>不详</option>
                             <option>确定</option>
                             <option>題</option>
@@ -132,19 +132,8 @@
 
 <script>
     export default{
-        created : function () {
-            this.get_impression_item();
-            this.impression_item = this.$store.getters.get_impression_item
-        },
-
-        beforeRouteLeave (to, from, next) {
-            this.$store.commit("get_impression_contents",this.impression_item);
-            next();
-        },
-
         data() {
             return{
-                menu_items : [],
                 impression_item :{
                     printing_type : '',
                     printing_number : '',
@@ -163,10 +152,52 @@
             }
         },
 
+        created : function () {
+            this.impression_item = this.$store.getters.get_impression_item
+        },
+
+        mounted : function () {
+            this.default_selections_impression()
+        },
+
+        beforeRouteLeave (to, from, next) {
+            this.$store.commit("get_impression_contents",this.impression_item);
+            this.selections_impression();
+            next();
+        },
+
         methods : {
-            get_impression_item() {
-                this.menu_items = this.$store.getters.get_menu_item
-            }
+            /**
+             * 获得用户选择的option并存储
+             */
+            selections_impression() {
+                var print = document.getElementById("ry-i-print");
+                var print_index = print.selectedIndex;
+                this.impression_item.printing_type = print_index + 1;
+                var type = document.getElementById("ry-i-type");
+                var type_index = type.selectedIndex;
+                this.impression_item.impression_responsibility.type = type_index + 1;
+                var action = document.getElementById("ry-i-action");
+                var action_index = action.selectedIndex;
+                this.impression_item.impression_responsibility.action = action_index + 1;
+                var confirm = document.getElementById("ry-i-confirm");
+                var confirm_index = confirm.selectedIndex;
+                this.impression_item.impression_responsibility.confirm = confirm_index + 1;
+            },
+
+            /**
+             * 设置默认首选项
+             */
+            default_selections_impression() {
+                var print = document.getElementById("ry-i-print");
+                print.selectedIndex =this.impression_item.printing_type - 1;
+                var type = document.getElementById("ry-i-type");
+                type.selectedIndex = this.impression_item.impression_responsibility.type - 1;
+                var action = document.getElementById("ry-i-action");
+                action.selectedIndex = this.impression_item.impression_responsibility.action - 1;
+                var confirm = document.getElementById("ry-i-confirm");
+                confirm.selectedIndex = this.impression_item.impression_responsibility.confirm - 1;
+            },
         },
 
     }
