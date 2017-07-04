@@ -74,7 +74,6 @@
         },
 
         created : function () {
-            this.get_menu_items();
             this.put_into_vue();
         },
 
@@ -89,35 +88,6 @@
         },
 
         methods : {
-            /**
-             * 获得下拉菜单内容
-             */
-            get_menu_items() {
-                for (this.i = 4; this.i <= 23; this.i++) {
-                    let url = '/ancient_books/get_menu_items.action?model_id=' + this.i + '&&item_1_id=0&&item_2_id=0';
-                    this.http_json (url , 'get' , this.get_menu_items_obj , this.success_get_menu_items(response,this.i-4) , this.fail_get_menu_items);
-                }
-            },
-
-            success_get_menu_items(response,k) {
-                console.log ("success get menu items ");
-                //将后端数据显示在前端页面里
-                if (response.body.length === 0) {
-                    console.log ("没有返回数组！");
-                }
-                else {
-                    for (var j = 0; j <= response.body.length-1; j++) {
-                        this.menu_items[k].push({
-                            chinese_name: response.body[j].chinese_name
-                        });
-                    }
-                }
-            },
-
-            fail_get_menu_items() {
-                console.log ("fail get menu items!");
-            },
-
             put_into_vue() {
                 this.$store.commit("get_menu_contents",this.menu_items);
                 this.$store.commit("get_upload1_info",this.upload_one_info);
