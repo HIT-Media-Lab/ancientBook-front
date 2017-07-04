@@ -146,6 +146,7 @@
     import paginator from "../../component/paginator.vue";
     import noumenon_title from "../../component/noumenon-title.vue";
     import modal from "../../component/modal.vue";
+    import bus from '../../lib/bus';
     export default{
         watch: {
             $route(){
@@ -503,6 +504,7 @@
 //                 alert("error")
                     });
                     this.$router.push({path: '/login'});
+                    bus.$emit('change_name','登录')
                 }, function () {
                     alert("error")
                 })

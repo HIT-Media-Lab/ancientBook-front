@@ -1,20 +1,20 @@
 <template>
     <div class="j-book-navbar">
-        <select class="j-book-select" @change="go_item_2()">
+        <select class="j-book-select" v-model="select_1" @change="go_item_2()">
             <option selected value="">部</option>
-            <option v-for="item in item_1" class="j-option" v-bind:value="item_1.chinese_name">
+            <option v-for="item in item_1" class="j-option" v-bind:value="id: item.item_1_id">
                 {{item.chinese_name}}
             </option>
         </select>
-        <select class="j-book-select"  @change="go_item_3()">
+        <select class="j-book-select" v-model="select_2" @change="go_item_3()">
             <option selected value="">类</option>
-            <option v-for="item in item_2" class="j-option">
+            <option v-for="item in item_2" class="j-option" v-bind:value="id: item.item_2_id">
                 {{item.chinese_name}}
             </option>
         </select>
-        <select class="j-book-select" @change="go_to_sortbook()">
+        <select class="j-book-select" v-model="select_3" @change="go_to_sortbook()">
             <option selected value="">属</option>
-            <option v-for="item in item_3" class="j-option">
+            <option v-for="item in item_3" class="j-option" v-bind:value="id: item.item_3_id">
                 {{item.chinese_name}}
             </option>
         </select>
@@ -24,6 +24,15 @@
     export default{
         data(){
             return{
+                select_1:{
+                    id: 0
+                },
+                select_2:{
+                    id: 0
+                },
+                select_3:{
+                    id: 0
+                },
                 model_id: 25,
                 item: {
                     'bu': 0,
@@ -40,7 +49,6 @@
                 item_1_id: 0,
                 item_2_id: 0,
                 item_3_id: 0,
-                id: 'dffddfg'
             }
         },
         created(){
@@ -51,51 +59,47 @@
             this.id = this.get_item_url + '?model_id=' + 25 + '&&item_1_id=' + 1 + '&&item_2_id=' + 1;
             this.http_json(this.id,'get',{}, this.success3, this.fail3);
         },
-        mounted(){
-            document.getElementById("bu").value = "部";
-            document.getElementById("lei").value = "类";
-            document.getElementById("shu").value = "属";
-        },
         methods:{
             success1(response){
-               this.item_1 = response.body
+                 this.item_1 = response.body
             },
             fail1(){
                 console.log("获取部失败");
             },
-            go_item_2(num){
-                this.item_1_id = num+1;
+            go_item_2(){
+                this.item_1_id = this.select_1.id;
                 this.id = this.get_item_url + '?model_id=' + 25 + '&&item_1_id=' + this.item_1_id + '&&item_2_id=' + 0;
                 this.http_json(this.id,'get',this.id,this.success2, this.fail2);
                 this.id = this.get_item_url + '?model_id=' + 25 + '&&item_1_id=' + this.item_1_id + '&&item_2_id=' + 1;
                 this.http_json(this.id,'get',{}, this.success3, this.fail3);
                 this.item.bu = this.item_1_id;
+                console.log(this.select_1.id);
             },
             success2(response){
-                for (let i = 0; i < response.body.length; i++){
-                    this.item_2[i] = response.body[i].chinese_name;
-                }
+                this.item_2 = response.body;
+
             },
             fail2(){
                 console.log("获取类失败");
             },
-            go_item_3(num){
-                this.item_2_id = num+1;
+            go_item_3(){
+                this.item_2_id = this.select_2.id;
                 this.id = this.get_item_url + '?model_id=' + 25 + '&&item_1_id=' + this.item_1_id + '&&item_2_id=' + this.item_2_id;
                 this.http_json(this.id,'get',this.id,this.success3, this.fail3);
                 this.item.lei = this.item_2_id;
+                console.log(this.select_2.id);
             },
             success3(response){
-                for (let i = 0; i < response.body.length; i++){
-                    this.item_3[i] = response.body[i].chinese_name;
-                }
+                this.item_3 = response.body;
+
             },
             fail3(){
                 console.log("获取属失败");
             },
             go_to_sortbook(num){
-                this.item_3_id = num+1;
+                this.item_3_id = this.select_3.id;
                 this.item.shu = this.item_3_id;
+                console.log(this.select_3.id);
                 this.$router.push({path: "/bookstore/sort_book"});
             }
         }

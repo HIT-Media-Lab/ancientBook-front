@@ -25,6 +25,7 @@
 
 <script>
     import store from '../../store'
+    import bus from '../../lib/bus'
     export default{
         data(){
             return{
@@ -44,6 +45,7 @@
 //                 alert("error")
                     });
                     this.$router.push({path: '/login'});
+                    bus.$emit('change_name','登录')
                 }, function () {
 //                    alert("error")
                 })
