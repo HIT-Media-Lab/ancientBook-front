@@ -2,19 +2,19 @@
     <div class="j-book-navbar">
         <select class="j-book-select" v-model="select_1" @change="go_item_2()">
             <option selected value="">部</option>
-            <option v-for="item in item_1" class="j-option" v-bind:value="id: item.item_1_id">
+            <option v-for="item in item_1" class="j-option" v-bind:value="{id: item.item_1_id}">
                 {{item.chinese_name}}
             </option>
         </select>
         <select class="j-book-select" v-model="select_2" @change="go_item_3()">
             <option selected value="">类</option>
-            <option v-for="item in item_2" class="j-option" v-bind:value="id: item.item_2_id">
+            <option v-for="item in item_2" class="j-option" v-bind:value="{id: item.item_2_id}">
                 {{item.chinese_name}}
             </option>
         </select>
         <select class="j-book-select" v-model="select_3" @change="go_to_sortbook()">
             <option selected value="">属</option>
-            <option v-for="item in item_3" class="j-option" v-bind:value="id: item.item_3_id">
+            <option v-for="item in item_3" class="j-option" v-bind:value="{id: item.item_3_id}">
                 {{item.chinese_name}}
             </option>
         </select>
