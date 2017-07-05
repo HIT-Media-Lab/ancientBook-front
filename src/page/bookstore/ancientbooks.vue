@@ -29,6 +29,7 @@
         data(){
             return{
                 bls: {},
+                bls_name: {},
                 bu: 0,
                 lei:0,
                 shu:0,
@@ -44,10 +45,11 @@
         methods: {
             get_bls(){
                 this.bls = this.$store.getters.get_bls;
+                this.bls_name = this.$store.getters.get_bls_name;
                 let item = this.book_url + "?bu=" + this.bls.bu +"&&lei=" + this.bls.lei + "&&shu=" + this.bls.shu + "&&page_conut=" + "1";
-                this.bu = this.bls.bu;
-                this.lei = this.bls.lei;
-                this.shu = this .bls.shu;
+                this.bu = this.bls_name.bu;
+                this.lei = this.bls_name.lei;
+                this.shu = this .bls_name.shu;
                 this.http_json(this.book_url, 'get', item, this.success1, this.fail1)
             },
             success1(response){

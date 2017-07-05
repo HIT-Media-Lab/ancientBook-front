@@ -56,5 +56,8 @@ export default {
     },
     put_bls(state,item){
         state.sort_item = item;
+    },
+    put_bls_name(state,item){
+        state.sort_item_name = item;
     }
 }

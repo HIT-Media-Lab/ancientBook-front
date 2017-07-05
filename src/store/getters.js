@@ -55,6 +55,9 @@ export default {
     },
     get_bls:state => {
         return state.sort_item
+    },
+    get_bls_name:state => {
+        return state.sort_item_name
     }
 
 
