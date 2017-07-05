@@ -1,11 +1,9 @@
 <template>
-
     <!--古籍简介-->
     <div>
         <h4>古籍簡介</h4>
-        <div id="book-info" class="height100" contenteditable="true">{{summary}}</div>
+        <input id="book-info" class="height100" v-model="summary">
     </div>
-
 </template>
 
 <style>
@@ -16,18 +14,18 @@
 
 <script>
     export default{
+        data() {
+            return{
+                summary : ''
+            }
+        },
+
         created : function () {
             this.summary = this.$store.getters.get_book_summary;
         },
 
         beforeDestroy : function() {
-            this.$store.commit("get_book_summary",this.summary)
-        },
-
-        data() {
-            return{
-                summary : ''
-            }
+            this.$store.commit("get_book_summary",this.summary);
         },
 
         methods : {

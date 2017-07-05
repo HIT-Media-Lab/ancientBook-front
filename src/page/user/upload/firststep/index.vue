@@ -4,7 +4,7 @@
         <!--模块名称-->
         <div class="width950 center">
             <h3 style="display:inline-block">1輸入古籍名稱</h3>
-            <button class="float-right ry-btn-cancel-upload">取消上傳</button>
+            <button class="float-right ry-btn-cancel-upload" @click="cancel_upload">取消上傳</button>
             <button class="float-right ry-btn-use-other">調用其他信息</button>
         </div>
 
@@ -31,7 +31,7 @@
             <synopsis></synopsis>
             <div>
                 <button class="float-right ry-btn-next-step" @click="next_page">下一步</button>
-                <label class="float-right"><input type="checkbox" name="private" class="ry-check-pri">私密上傳</label>
+                <label class="float-right"><input id="ry-one-pri" type="checkbox" name="private" class="ry-check-pri">私密上傳</label>
             </div>
         </div>
 
@@ -47,8 +47,6 @@
     import varieties from './varieties.vue';
     import menuBar from '../../../../component/menu-bar.vue';
     export default{
-
-
         components:{
             synopsis,
             copy,
@@ -60,44 +58,55 @@
 
         data() {
             return{
-                i : 0,
                 varieties_item : {},
                 upload_one_info : {
                     pri : 0,
                     standard_name : '',
                     name : '',
                 },
-                get_menu_items_obj : {},
-                menu_index : 4,
-                menu_items : [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
             }
         },
 
         created : function () {
-            this.put_into_vue();
+            this.varieties_item = this.$store.getters.get_varieties_item
         },
 
         mounted : function () {
 
         },
 
+        beforeRouteLeave (to, from, next) {
+            this.get_upload_one_info();
+            this.$store.commit("get_upload1_info",this.upload_one_info);
+            next();
+        },
+
         watch:{
             $route(){
-                this.varieties_item = this.$store.getters.get_varieties_item
+
             }
         },
 
         methods : {
-            put_into_vue() {
-                this.$store.commit("get_menu_contents",this.menu_items);
-                this.$store.commit("get_upload1_info",this.upload_one_info);
+            get_upload_one_info() {
+                var pri_check = document.getElementById("ry-one-pri");
+                if (pri_check.checked ==true) {
+                    this.upload_one_info.pri = 1;
+                }
+                else {
+                    this.upload_one_info.pri = 0;
+                }
+                this.upload_one_info.name = this.varieties_item.type_name;
+//                this.upload_one_info.standard_name =
             },
 
             next_page() {
                 this.$router.push({path: '/user/upload2'});
             },
 
-
+            cancel_upload() {
+                this.$router.push({path: '/user'});
+            }
         }
     }
 </script>
