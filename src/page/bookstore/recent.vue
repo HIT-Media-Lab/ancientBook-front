@@ -1,9 +1,9 @@
 <template>
     <div class="j-recent">
         <recent_title class="j-recent-bar" :title="this.title"></recent_title>
-        <div v-for="item in recent_book" class="j-picture-name">
-            <img v-bind:id=item.id src="../../assets/img/古籍封面1.jpg" class="j-picture" alt="最近古籍">
-            <p style="color: #0f0f0f; text-align: center">{{item.standardName}}</p>
+        <div v-for="item in recent_book" class="j-picture-name" >
+            <img v-bind:id=item.id src="../../assets/img/古籍封面1.jpg" class="j-picture" alt="最近古籍" @click="push_success()">
+            <p style="color: #0f0f0f; text-align: center" @click="push_success()">{{item.standardName}}</p>
         </div>
     </div>
 </template>
@@ -60,7 +60,7 @@
 //            },
 
             push_success(){
-
+                this.$router.push({path: '/bookstore/book_info'});
             }
         }
     }

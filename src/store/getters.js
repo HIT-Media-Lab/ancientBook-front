@@ -52,6 +52,9 @@ export default {
     },
     get_create_one_selection:state => {
         return state.create_one_selection
+    },
+    get_bls:state => {
+        return state.sort_item
     }
 
 

@@ -53,5 +53,8 @@ export default {
     get_create_one_selection(state,number){
         state.create_one_selection = number;
         console.log('selection:'+state.create_one_selection);
+    },
+    put_bls(state,item){
+        state.sort_item = item;
     }
 }

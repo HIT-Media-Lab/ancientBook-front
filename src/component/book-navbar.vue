@@ -70,7 +70,7 @@
                 this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + this.item_1_id + '&&item_2_id=' + 1;
                 this.http_json(this.id,'get',{}, this.success3, this.fail3);
                 this.item.bu = this.item_1_id;
-                document.getElementById("lei").value = "{id: 'lei'}";
+                this.select_2 = {id: 'lei'};
                 console.log(this.select_1.id);
             },
             success2(response){
@@ -85,7 +85,7 @@
                 this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + this.item_1_id + '&&item_2_id=' + this.item_2_id;
                 this.http_json(this.id,'get',this.id,this.success3, this.fail3);
                 this.item.lei = this.item_2_id;
-                document.getElementById("shu").value = "{id: 'shu'}";
+                this.select_3 = {id: 'shu'};
                 console.log(this.select_2.id);
             },
             success3(response){
@@ -95,10 +95,11 @@
             fail3(){
                 console.log("获取属失败");
             },
-            go_to_sortbook(num){
+            go_to_sortbook(){
                 this.item_3_id = this.select_3.id;
                 this.item.shu = this.item_3_id;
                 console.log(this.select_3.id);
+                this.$store.commit("put_bls",this.item);
                 this.$router.push({path: "/bookstore/sort_book"});
             }
         }
