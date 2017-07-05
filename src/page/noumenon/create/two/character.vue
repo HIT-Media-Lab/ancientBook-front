@@ -37,35 +37,62 @@
             <label class="zxw-character-span">籍贯：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_content.location">
             <label class="zxw-character-span">父：</label>
-            <input type="text" readonly class="zxw-character-input zxw-character-input-margin" @click="open_father()"  v-model="input_content.father_standard_name">
+            <div class="zxw-character-input zxw-character-input-margin">
+                <p class="zxw-person-relation-span" v-model="input_content.father_standard_name" @mouseover="show_father = true" @mouseout="show_father = false">{{input_content.father_standard_name}}<button class="zxw-add-hover-img" v-show="show_father===true" @click="delete_father()"></button></p>
+                <button class="zxw-input-add-character" @click="open_father()"></button>
+            </div>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">母：</label>
-            <input type="text" readonly class="zxw-character-input zxw-character-input-margin" @click="open_mother()" v-model="input_content.mother_standard_name">
+            <div class="zxw-character-input zxw-character-input-margin">
+                <p class="zxw-person-relation-span" v-for="(item,index) in input_content.mother_standard_name"  @mouseover="show_mother=index" @mouseout="show_mother =-1">{{item}}<button class="zxw-add-hover-img" v-show="show_mother === index" @click="delete_mother(index)"></button></p>
+                <button class="zxw-input-add-character" @click="open_mother()"></button>
+            </div>
             <label class="zxw-character-span">子：</label>
-            <input type="text" readonly class="zxw-character-input zxw-character-input-margin" @click="open_son()" v-model="input_content.son_standard_name" v-bind:disabled="input_content.son.length > 9">
+            <div class="zxw-character-input zxw-character-input-margin">
+                <p class="zxw-person-relation-span" v-for="(item,index) in input_content.son_standard_name"  @mouseover="show_son=index" @mouseout="show_son =-1">{{item}}<button class="zxw-add-hover-img" v-show="show_son === index" @click="delete_son(index)"></button></p>
+                <button class="zxw-input-add-character" @click="open_son()"></button>
+            </div>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">女：</label>
-            <input type="text"readonly class="zxw-character-input zxw-character-input-margin" @click="open_daughter()" v-model="input_content.daughter_standard_name" v-bind:disabled="input_content.daughter.length > 9">
+            <div class="zxw-character-input zxw-character-input-margin">
+                <p class="zxw-person-relation-span" v-for="(item,index) in input_content.daughter_standard_name"  @mouseover="show_daughter=index" @mouseout="show_daughter=-1">{{item}}<button class="zxw-add-hover-img" v-show="show_daughter === index" @click="delete_daughter(index)"></button></p>
+                <button class="zxw-input-add-character" @click="open_daughter()"></button>
+            </div>
             <label class="zxw-character-span">兄弟：</label>
-            <input type="text" readonly class="zxw-character-input zxw-character-input-margin" @click="open_brother()" v-model="input_content.brother_standard_name" v-bind:disabled="input_content.brother.length > 9">
+            <div class="zxw-character-input zxw-character-input-margin">
+                <p class="zxw-person-relation-span" v-for="(item,index) in input_content.brother_standard_name"  @mouseover="show_brother=index" @mouseout="show_brother=-1">{{item}}<button class="zxw-add-hover-img" v-show="show_brother === index" @click="delete_brother(index)"></button></p>
+                <button class="zxw-input-add-character" @click="open_brother()"></button>
+            </div>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">姐妹：</label>
-            <input type="text" readonly class="zxw-character-input zxw-character-input-margin" @click="open_sister()" v-model="input_content.sister_standard_name" v-bind:disabled="input_content.sister.length > 9">
+            <div class="zxw-character-input zxw-character-input-margin">
+                <p class="zxw-person-relation-span" v-for="(item,index) in input_content.sister_standard_name"  @mouseover="show_sister=index" @mouseout="show_sister=-1">{{item}}<button class="zxw-add-hover-img" v-show="show_sister === index" @click="delete_sister(index)"></button></p>
+                <button class="zxw-input-add-character" @click="open_sister()"></button>
+            </div>
             <label class="zxw-character-span">师：</label>
-            <input type="text" readonly class="zxw-character-input zxw-character-input-margin" @click="open_teacher()" v-model="input_content.teacher_standard_name" v-bind:disabled="input_content.teacher.length > 9">
+            <div class="zxw-character-input zxw-character-input-margin">
+                <p class="zxw-person-relation-span" v-for="(item,index) in input_content.teacher_standard_name"  @mouseover="show_teacher=index" @mouseout="show_teacher=-1">{{item}}<button class="zxw-add-hover-img" v-show="show_teacher === index" @click="delete_teacher(index)"></button></p>
+                <button class="zxw-input-add-character" @click="open_teacher()"></button>
+            </div>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">学生：</label>
-            <input type="text" readonly class="zxw-character-input zxw-character-input-margin" @click="open_student()" v-model="input_content.student_standard_name" v-bind:disabled="input_content.student.length > 9">
+            <div class="zxw-character-input zxw-character-input-margin">
+                <p class="zxw-person-relation-span" v-for="(item,index) in input_content.student_standard_name"  @mouseover="show_student=index" @mouseout="show_student=-1">{{item}}<button class="zxw-add-hover-img" v-show="show_student === index" @click="delete_student(index)"></button></p>
+                <button class="zxw-input-add-character" @click="open_student()"></button>
+            </div>
             <label class="zxw-character-span">友：</label>
-            <input type="text" readonly class="zxw-character-input zxw-character-input-margin" @click="open_friend()" v-model="input_content.friend_standard_name" v-bind:disabled="input_content.friend.length > 9">
+            <div class="zxw-character-input zxw-character-input-margin">
+                <p class="zxw-person-relation-span" v-for="(item,index) in input_content.friend_standard_name"  @mouseover="show_friend=index" @mouseout="show_friend=-1">{{item}}<button class="zxw-add-hover-img" v-show="show_friend === index" @click="delete_friend(index)"></button></p>
+                <button class="zxw-input-add-character" @click="open_friend()"></button>
+            </div>
         </div>
 
         <div v-for="(item ,index) in add_data">
@@ -108,7 +135,6 @@
         created(){
             this.prams = this.$route.name;
             this.show_character_info();
-            //console.log(JSON.stringify(this.add_data));
         },
 
         components:{
@@ -129,6 +155,15 @@
 
         data(){
             return{
+                show_father:false,
+                show_mother:false,
+                show_son:0,
+                show_daughter:0,
+                show_brother:0,
+                show_sister:0,
+                show_teacher:0,
+                show_student:0,
+                show_friend:0,
                 prams:'',
                 time_modal_1:false,
                 time_modal_2:false,
@@ -159,15 +194,6 @@
                     english:'',
                     location_id:'',
                     location:'',
-                    father_standard_name:'',
-                    mother_standard_name:'',
-                    son_standard_name:'',
-                    daughter_standard_name:'',
-                    brother_standard_name:'',
-                    sister_standard_name:'',
-                    teacher_standard_name:'',
-                    student_standard_name:'',
-                    friend_standard_name:'',
                     father:{},
                     mother:{},
                     son:[],
@@ -176,13 +202,22 @@
                     sister:[],
                     teacher:[],
                     student:[],
-                    friend:[]
+                    friend:[],
+                    father_standard_name:'',
+                    mother_standard_name:'',
+                    son_standard_name:[],
+                    daughter_standard_name:[],
+                    brother_standard_name:[],
+                    sister_standard_name:[],
+                    teacher_standard_name:[],
+                    student_standard_name:[],
+                    friend_standard_name:[],
                 },
                 add_data:[{
                     value:true,
                     remark_name:'',
                     remark:''
-                    }],
+                    }]
             }
         },
 
@@ -241,6 +276,12 @@
                 console.log('this.input_content.father:'+JSON.stringify(this.input_content.father));
             },
 
+            delete_father(){
+                this.input_content.father.person_id = undefined;
+                this.input_content.father_standard_name = '';
+                console.log(JSON.stringify(this.input_content));
+            },
+
             close_father(){
                 this.father_modal = false;
             },
@@ -258,6 +299,12 @@
                 console.log('this.input_content.mother:'+JSON.stringify(this.input_content.mother));
             },
 
+            delete_mother(){
+                this.input_content.mother.person_id = undefined;
+                this.input_content.mother_standard_name = '';
+                console.log(''+JSON.stringify(this.input_content));
+            },
+
             close_mother(){
                 this.mother_modal = false;
             },
@@ -272,13 +319,15 @@
                     relation_type:6,
                     person_id:p.noumenon_id
                 });
-                if(this.input_content.son_standard_name !== ''){
-                    this.input_content.son_standard_name = this.input_content.son_standard_name+'; '+p.standard_name;
-                } else {
-                    this.input_content.son_standard_name = p.standard_name;
-                }
+                this.input_content.son_standard_name.push(p.standard_name);
                 console.log('this.input_content.son_standard_name:'+JSON.stringify( this.input_content.son_standard_name));
                 console.log('this.input_content.son:'+JSON.stringify(this.input_content.son));
+            },
+
+            delete_son(p){
+                this.input_content.son_standard_name.splice(p,1);
+                this.input_content.son.splice(p,1);
+                console.log('splice son:'+JSON.stringify(this.input_content.son));
             },
 
             close_son(){
@@ -295,13 +344,15 @@
                     relation_type:7,
                     person_id:p.noumenon_id
                 });
-                if(this.input_content.daughter_standard_name !== ''){
-                    this.input_content.daughter_standard_name = this.input_content.daughter_standard_name+'; '+p.standard_name;
-                } else {
-                    this.input_content.daughter_standard_name = p.standard_name;
-                }
+                this.input_content.daughter_standard_name.push(p.standard_name);
                 console.log(' this.input_content.daughter_standard_name:'+JSON.stringify(this.input_content.daughter_standard_name));
                 console.log('this.input_content.daughter:'+JSON.stringify(this.input_content.daughter));
+            },
+
+            delete_daughter(p){
+                this.input_content.daughter_standard_name.splice(p,1);
+                this.input_content.daughter.splice(p,1);
+                console.log('splice daughter:'+JSON.stringify(this.input_content.daughter));
             },
 
             close_daughter(){
@@ -319,13 +370,15 @@
                     relation_type:8,
                     person_id:p.noumenon_id
                 });
-                if(this.input_content.brother_standard_name !== ''){
-                    this.input_content.brother_standard_name = this.input_content.brother_standard_name+'; '+p.standard_name;
-                } else {
-                    this.input_content.brother_standard_name = p.standard_name;
-                }
+                this.input_content.brother_standard_name.push(p.standard_name);
                 console.log('this.input_content.brother_standard_name:'+JSON.stringify(this.input_content.brother_standard_name));
                 console.log('this.input_content.brother:'+JSON.stringify(this.input_content.brother));
+            },
+
+            delete_brother(p){
+                this.input_content.brother_standard_name.splice(p,1);
+                this.input_content.brother.splice(p,1);
+                console.log('splice brother:'+JSON.stringify(this.input_content.brother));
             },
 
             close_brother(){
@@ -342,13 +395,15 @@
                     relation_type:9,
                     person_id:p.noumenon_id
                 });
-                if(this.input_content.sister_standard_name !== ''){
-                    this.input_content.sister_standard_name = this.input_content.sister_standard_name+'; '+p.standard_name;
-                } else {
-                    this.input_content.sister_standard_name = p.standard_name;
-                }
+                this.input_content.sister_standard_name.push(p.standard_name);
                 console.log('this.input_content.sister_standard_name:'+JSON.stringify(this.input_content.sister_standard_name));
                 console.log('this.input_content.sister:'+JSON.stringify(this.input_content.sister));
+            },
+
+            delete_sister(p){
+                this.input_content.sister_standard_name.splice(p,1);
+                this.input_content.sister.splice(p,1);
+                console.log('splice sister:'+JSON.stringify(this.input_content.sister));
             },
 
             close_sister(){
@@ -365,13 +420,15 @@
                     relation_type:10,
                     person_id:p.noumenon_id
                 });
-                if(this.input_content.teacher_standard_name !== ''){
-                    this.input_content.teacher_standard_name = this.input_content.teacher_standard_name+'; '+p.standard_name;
-                } else {
-                    this.input_content.teacher_standard_name = p.standard_name;
-                }
+                this.input_content.teacher_standard_name.push(p.standard_name);
                 console.log('this.input_content.teacher_standard_name:'+JSON.stringify( this.input_content.teacher_standard_name));
                 console.log('this.input_content.teacher:'+JSON.stringify(this.input_content.teacher));
+            },
+
+            delete_teacher(p){
+                this.input_content.teacher_standard_name.splice(p,1);
+                this.input_content.teacher.splice(p,1);
+                console.log('splice teacher:'+JSON.stringify(this.input_content.teacher));
             },
 
             close_teacher(){
@@ -388,13 +445,15 @@
                     relation_type:11,
                     person_id:p.noumenon_id
                 });
-                if(this.input_content.student_standard_name !== ''){
-                    this.input_content.student_standard_name = this.input_content.student_standard_name+'; '+p.standard_name;
-                } else {
-                    this.input_content.student_standard_name = p.standard_name;
-                }
+                this.input_content.student_standard_name.push(p.standard_name);
                 console.log(' this.input_content.student_standard_name:'+JSON.stringify( this.input_content.student_standard_name));
                 console.log('this.input_content.student:'+JSON.stringify(this.input_content.student));
+            },
+
+            delete_student(p){
+                this.input_content.student_standard_name.splice(p,1);
+                this.input_content.student.splice(p,1);
+                console.log('splice student:'+JSON.stringify(this.input_content.student));
             },
 
             close_student(){
@@ -411,13 +470,15 @@
                     relation_type:12,
                     person_id:p.noumenon_id
                 });
-                if(this.input_content.friend_standard_name !== ''){
-                    this.input_content.friend_standard_name = this.input_content.friend_standard_name+'; '+p.standard_name;
-                } else {
-                    this.input_content.friend_standard_name = p.standard_name;
-                }
+                this.input_content.friend_standard_name.push(p.standard_name);
                 console.log(' this.input_content.friend_standard_name:'+JSON.stringify(this.input_content.friend_standard_name));
                 console.log('this.input_content.friend:'+JSON.stringify(this.input_content.friend));
+            },
+
+            delete_friend(p){
+                this.input_content.friend_standard_name.splice(p,1);
+                this.input_content.friend.splice(p,1);
+                console.log('splice friend:'+JSON.stringify(this.input_content.friend));
             },
 
             close_friend(){
@@ -448,6 +509,8 @@
                     this.add_data[1].remark = this.input_content.remark_2;
                 }
             }
+
+
         }
     }
 </script>
@@ -468,12 +531,13 @@
 
     /*输入框样式*/
     .zxw-character-input{
+        display:inline-block;
         border: 2px solid black;
         background-color: transparent;
         height:30px;
         width:220px;
         text-align: left;
-        padding-left: 0.5%;
+        padding-left:10px;
     }
 
     /*输入框间距*/
@@ -513,4 +577,33 @@
         margin:0 300px 0 0;
         position:relative;
     }
+
+    .zxw-input-add-character{
+        background-image: url("../../../../assets/img/add-character.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+        width:20px;
+        height:20px;
+        float:right;
+        margin:3px 3px 0 0;
+    }
+
+    .zxw-person-relation-span{
+        display:inline-block;
+        margin:3px 5px 0 0;
+        width:auto;
+        background-color: #f5dece;
+    }
+
+    .zxw-add-hover-img{
+        background-image: url("../../../../assets/img/add-character-hover.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+        width:10px;
+        height:10px;
+        float:right;
+    }
+
 </style>

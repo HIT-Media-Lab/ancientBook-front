@@ -3,6 +3,7 @@
         <div slot="header" class="zxw-character-header">
             <span>添加关系属性</span>
         </div>
+
         <div slot="body" class="zxw-time-body">
             <div class="zxw-search-header">
                 <input class="zxw-search-input" type="search" v-model="search_content">
@@ -20,17 +21,13 @@
             <div class="zxw-fail-tip" v-show="fail_tip">
                 <p>很抱歉，未搜索到本体：{{search_content}}</p>
                 <p><span class="zxw-search-p-tip">您可以</span>
-                    <router-link to="/build">
-                        <button class="zxw-prebtn zxw-search-create" @click="new_character()">创建本体</button>
-                    </router-link>
+                    <button class="zxw-prebtn zxw-search-create" @click="new_character()">创建本体</button>
                 </p>
             </div>
         </div>
 
         <div slot="footer" class="zxw-search-footer">
-            <router-link to="/build">
-                <button class="zxw-prebtn zxw-search-create" v-show="create_btn" @click="new_character()">创建本体</button>
-            </router-link>
+            <button class="zxw-prebtn zxw-search-create" v-show="create_btn" @click="new_character()">创建本体</button>
             <button class="zxwnoumenom-button zxw-search-cancel" @click="close_modal">取消</button>
         </div>
 
@@ -38,7 +35,7 @@
 </template>
 
 <script>
-    /*let Mock = require('mockjs');
+    let Mock = require('mockjs');
     Mock.mock('/ancient_books/get_person_list_by_name.action?name=lsm&&page_count=1','get', {
         "content":[
             {
@@ -121,7 +118,7 @@
                 "noumenon_id|100":50
             },
         ]
-    });*/
+    });
 
     import modal from "../component/modal.vue";
     export default{
@@ -198,7 +195,7 @@
             },
 
             new_character(){
-                this.$store.commit('get_create_one_selection',2);
+                window.open("/chartwo");
             }
         }
     }

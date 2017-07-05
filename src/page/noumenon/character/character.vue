@@ -105,12 +105,12 @@
             </div>
 
             <div class="zxw-infospan">
-                <p class="zxwspan-length" v-model="person_content.remark_1_name">{{person_content.remark_1_name}}<span v-if="person_content.remark_1_name !=='' ">:</span></p>
-                <p class="zxwspan-length" v-model="person_content.remark_1">{{person_content.remark_1}}</p>
+                <p class="zxwspan-length" v-model="person_content.remark_1_name">{{person_content.remark_1_name}}<span v-if="person_content.remark_1_name !=='' "> :</span></p>
+                <p class="zxwspan-length-content" v-model="person_content.remark_1">{{person_content.remark_1}}</p>
             </div>
             <div class="zxw-infospan">
-                <p class="zxwspan-length" v-model="person_content.remark_2_name">{{person_content.remark_2_name}}<span v-if="person_content.remark_2_name !=='' ">:</span></p>
-                <p class="zxwspan-length" v-model="person_content.remark_2">{{person_content.remark_2}}</p>
+                <p class="zxwspan-length" v-model="person_content.remark_2_name">{{person_content.remark_2_name}}<span v-if="person_content.remark_2_name !=='' "> :</span></p>
+                <p class="zxwspan-length-content" v-model="person_content.remark_2">{{person_content.remark_2}}</p>
             </div>
             <button  class="zxwnoumenom-button zxwdelete-character" @click="delete_character()">删除本体</button>
         </div>
@@ -364,7 +364,7 @@
             delete_character(){
                 let delete_object = {};
                 delete_object.id = this.$route.params.nouId;
-                this.http_json(this.delete_character_url,'post',this.success_delete,this.fail_delete);
+                this.http_json(this.delete_character_url,'post',delete_object,this.success_delete,this.fail_delete);
             }
         }
     }
@@ -399,6 +399,11 @@
     .zxwspan-length{
         font-weight: bold;
         width:100px;
+        display:inline-block;
+    }
+
+    .zxwspan-length-content{
+        font-weight: bold;
         display:inline-block;
     }
 </style>
