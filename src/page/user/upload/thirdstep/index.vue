@@ -5,7 +5,7 @@
         <!--模块名称-->
         <div class="width950 center">
             <h3 style="display:inline-block">3編輯</h3>
-            <button class="float-right ry-btn-cancel-upload">取消上傳</button>
+            <button class="float-right ry-btn-cancel-upload" @click="cancel_upload">取消上傳</button>
         </div>
 
         <div class="width1000 center">
@@ -71,6 +71,10 @@
         },
 
         methods : {
+            cancel_upload() {
+                this.$router.push({path: '/user'});
+            },
+
             last_page() {
                 this.$router.push({path: '/user/upload2'});
             },
