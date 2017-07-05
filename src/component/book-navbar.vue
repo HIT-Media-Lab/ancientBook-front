@@ -115,8 +115,11 @@
                 console.log(this.item.bu);
                 console.log(this.item.lei);
                 console.log(this.item.shu);
+                this.$route.params.bu = this.item_name.bu;
+                this.$route.params.lei = this.item_name.lei;
+                this.$route.params.shu = this.item_name.shu;
                 if (this.item.bu != 0 && this.item.lei != 0){
-                    this.$router.push({path: "/bookstore/sort_book/page/1"});
+                    this.$router.push({name: "sort_book", params: this.$route.params});
                 }
             }
         }

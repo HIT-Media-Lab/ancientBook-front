@@ -6,12 +6,7 @@
             <span v-model="shu">{{shu}}</span>
         </p>
         <div class="j-bls-book1">
-            <router-link to="/bookstore/book_info" style="color: #8a6d3b;" v-for="item in books1">
-                <p class="j-bls-bookname">{{item}}</p>
-            </router-link>
-        </div>
-        <div class="j-bls-book2">
-            <router-link to="/bookstore/book_info" style="color: #8a6d3b;" v-for="item in books2">
+            <router-link to="/bookstore/book_info" style="color: #8a6d3b;" v-for="item in books">
                 <p class="j-bls-bookname">{{item}}</p>
             </router-link>
         </div>
@@ -31,15 +26,14 @@
             return{
                 bls: {},
                 bls_name: {},
-                bu: 0,
-                lei:0,
-                shu:0,
+                bu: '',
+                lei:'',
+                shu:'',
                 book_url:'/ancient_books/search_ancient_book_by_bls.action',
                 total_page: 0,
                 content_name:[],
                 content_id:[],
-                books1:[],
-                books2:[],
+                books:[],
             }
         },
         created: function () {
@@ -61,10 +55,10 @@
                     this.content_name[i] = response.body.content[i].standard_name;
                     this.content_id[i] = response.body.content[i].ancient_book_id;
                 }
-                for (let i = 0; i < 10; i++){
-                    this.books1[i] = this.content_name[i];
-                    this.books2[i] =this.content_name[i+10];
+                for (let i = 0; i < 20; i++){
+                    this.books[i] = this.content_name[i];
                 }
+                console.log(this.books);
             },
             fail1(){
 

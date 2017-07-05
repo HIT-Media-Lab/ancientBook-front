@@ -418,16 +418,16 @@ const router = new VueRouter({
                     name: 'book_recent'
                 },
                 {
-                    path: 'sort_book/page/:pageId',
+                    path: 'sort_book/:bu/:lei/:shu/page/:pageId',
                     component: sort_book,
                     name: 'sort_book'
                 },
-                {
-                    path: 'sort_book',
-                    redirect: '/sort_book/page/1',
-                    component: sort_book,
-                    name: 'sort_book'
-                },
+                // {
+                //     path: 'sort_book',
+                //     redirect: '/sort_book/page/1',
+                //     component: sort_book,
+                //     name: 'sort_book'
+                // },
                 {
                     path: 'book_info',
                     component: book_info,
