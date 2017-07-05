@@ -39,6 +39,11 @@
         created: function () {
             this.get_bls();
         },
+        watch:{
+            $route(){
+                this.get_bls();
+            }
+        },
         methods: {
             get_bls(){
                 this.bls = this.$store.getters.get_bls;
