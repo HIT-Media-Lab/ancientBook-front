@@ -98,7 +98,7 @@
                         <label>責任開始時間:</label>
                     </div>
                     <div class="col-md-4">
-                        <input>
+                        <input readonly @click="open_birth()" v-model="varieties_item.varieties_responsibility.begin_time">
                     </div>
 
                     <div class="col-md-2">
@@ -106,7 +106,7 @@
                         <label>責任結束時間:</label>
                     </div>
                     <div class="col-md-4">
-                        <input>
+                        <input readonly @click="open_dead()" v-model="varieties_item.varieties_responsibility.end_time">
                     </div>
                 </div>
 
@@ -174,15 +174,25 @@
             <div>
                 <img src="../../../../assets/img/上传1/中间墨线.png" height="6" width="843"/>
             </div>
+
+            <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></time_modal>
+            <time_modal :time_modal="this.time_modal_2" v-on:success_time="dead_time" v-on:close_modal="close_dead()"></time_modal>
         </div>
     </div>
 
 </template>
 
 <script>
+    import time_modal from '../../../../component/time-modal.vue';
     export default{
+        components:{
+            time_modal,
+        },
+
         data() {
             return{
+                time_modal_1:false,
+                time_modal_2:false,
                 lei_items_obj : {},
                 shu_items_obj : {},
                 lei_items : [],
@@ -206,7 +216,9 @@
                         location_id : '',
                         person_id : '',
                         begin_time : '',
+                        begin_time_id : '',
                         end_time : '',
+                        end_time_id :'',
                         action : '',
                         explain : '',
                         confirm : '',
@@ -234,6 +246,40 @@
         },
 
         methods : {
+            /**
+             * 责任开始时间
+             */
+            open_birth() {
+                this.time_modal_1 = true;
+            },
+
+            birth_time(p) {
+                this.varieties_item.varieties_responsibility.begin_time_id = p.time_id;
+                this.varieties_item.varieties_responsibility.begin_time = p.standard_name;
+                this.close_birth();
+            },
+
+            close_birth() {
+                this.time_modal_1 = false;
+            },
+
+            /**
+             * 责任结束时间
+             */
+            open_dead() {
+                this.time_modal_2 = true;
+            },
+
+            dead_time(q) {
+                this.varieties_item.varieties_responsibility.end_time_id = q.time_id;
+                this.varieties_item.varieties_responsibility.end_time = q.standard_name;
+                this.close_dead();
+            },
+
+            close_dead() {
+                this.time_modal_2 = false;
+            },
+
             get_menu_nine() {
                 let url = '/ancient_books/get_menu_items.action?model_id=9&&item_1_id=0&&item_2_id=0';
                 this.http_json (url , 'get' , this.get_menu_nine_obj , this.success_get_menu_nine , this.fail_get_menu_nine);
