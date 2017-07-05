@@ -46,7 +46,7 @@
         <div class="zxw-character-row">
             <label class="zxw-character-span">母：</label>
             <div class="zxw-character-input zxw-character-input-margin">
-                <p class="zxw-person-relation-span" v-for="(item,index) in input_content.mother_standard_name"  @mouseover="show_mother=index" @mouseout="show_mother =-1">{{item}}<button class="zxw-add-hover-img" v-show="show_mother === index" @click="delete_mother(index)"></button></p>
+                <p class="zxw-person-relation-span" v-model="input_content.father_standard_name" @mouseover="show_mother = true" @mouseout="show_mother = false">{{input_content.mother_standard_name}}<button class="zxw-add-hover-img" v-show="show_mother===true" @click="delete_mother()"></button></p>
                 <button class="zxw-input-add-character" @click="open_mother()"></button>
             </div>
             <label class="zxw-character-span">子：</label>
@@ -59,7 +59,7 @@
         <div class="zxw-character-row">
             <label class="zxw-character-span">女：</label>
             <div class="zxw-character-input zxw-character-input-margin">
-                <p class="zxw-person-relation-span" v-for="(item,index) in input_content.daughter_standard_name"  @mouseover="show_daughter=index" @mouseout="show_daughter=-1">{{item}}<button class="zxw-add-hover-img" v-show="show_daughter === index" @click="delete_daughter(index)"></button></p>
+                <p class="zxw-person-relation-span" v-for="(item,index) in input_content.daughter_standard_name"  @mouseover="show_daughter=index" @mouseout="show_daughter =-1">{{item}}<button class="zxw-add-hover-img" v-show="show_daughter === index" @click="delete_daughter(index)"></button></p>
                 <button class="zxw-input-add-character" @click="open_daughter()"></button>
             </div>
             <label class="zxw-character-span">兄弟：</label>
