@@ -53,7 +53,7 @@
                 this.bu = this.bls_name.bu;
                 this.lei = this.bls_name.lei;
                 this.shu = this .bls_name.shu;
-                this.http_json(this.book_url, 'get', item, this.success1, this.fail1)
+                this.http_json(item, 'get', item, this.success1, this.fail1)
             },
             success1(response){
                 this.total_page = response.body.total_page;
@@ -65,6 +65,9 @@
                     this.books1[i] = this.content_name[i];
                     this.books2[i] =this.content_name[i+10];
                 }
+            },
+            fail1(){
+
             }
         }
     }
