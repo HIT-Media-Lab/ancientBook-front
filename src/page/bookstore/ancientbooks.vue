@@ -1,21 +1,22 @@
 <template>
     <div class="j-sortbook">
         <p class="j-bls">
-            <!--经部/总类/正文之属-->
             <span v-model="bu">{{bu}}/</span>
             <span v-model="lei">{{lei}}/</span>
             <span v-model="shu">{{shu}}</span>
         </p>
-        <div class="j-bls-book">
-            <router-link to="/bookstore/book_info" style="color: #8a6d3b;">
-                <p class="j-bls-bookname">1. 诗经(品种层责任者)</p>
+        <div class="j-bls-book1">
+            <router-link to="/bookstore/book_info" style="color: #8a6d3b;" v-for="item in books1">
+                <p class="j-bls-bookname">{{item}}</p>
             </router-link>
-            <router-link to="/bookstore/book_info" style="color: #8a6d3b">
-                <p class="j-bls-bookname">2. 山海经(品种层责任者)</p>
+        </div>
+        <div class="j-bls-book2">
+            <router-link to="/bookstore/book_info" style="color: #8a6d3b;" v-for="item in books2">
+                <p class="j-bls-bookname">{{item}}</p>
             </router-link>
         </div>
         <div class="j-bls-page">
-            <page_button :max="total_page"></page_button>
+            <page_button :max=this.total_page></page_button>
         </div>
     </div>
 </template>
@@ -36,7 +37,9 @@
                 book_url:'/ancient_books/search_ancient_book_by_bls.action',
                 total_page: 0,
                 content_name:[],
-                content_id:[]
+                content_id:[],
+                books1:[],
+                books2:[],
             }
         },
         created: function () {
@@ -46,7 +49,7 @@
             get_bls(){
                 this.bls = this.$store.getters.get_bls;
                 this.bls_name = this.$store.getters.get_bls_name;
-                let item = this.book_url + "?bu=" + this.bls.bu +"&&lei=" + this.bls.lei + "&&shu=" + this.bls.shu + "&&page_conut=" + "1";
+                let item = this.book_url + "?bu=" + this.bls.bu +"&&lei=" + this.bls.lei + "&&shu=" + this.bls.shu + "&&page_conut=" + this.$route.params.pageId;
                 this.bu = this.bls_name.bu;
                 this.lei = this.bls_name.lei;
                 this.shu = this .bls_name.shu;
@@ -58,7 +61,10 @@
                     this.content_name[i] = response.body.content[i].standard_name;
                     this.content_id[i] = response.body.content[i].ancient_book_id;
                 }
-
+                for (let i = 0; i < 10; i++){
+                    this.books1[i] = this.content_name[i];
+                    this.books2[i] =this.content_name[i+10];
+                }
             }
         }
     }
@@ -74,16 +80,21 @@
         margin-top: 20px;
         font-size: 20px;
     }
-    .j-bls-book{
+    .j-bls-book1{
         display: inline-block;
-        margin-left: 45px;
+        margin-left: 180px;
+        margin-top: 35px;
+    }
+    .j-bls-book2{
+        display: inline-block;
+        margin-left: 180px;
         margin-top: 35px;
     }
     .j-bls-bookname{
         margin-bottom: 20px;
     }
     .j-bls-page{
-        margin-top: 200px;
+        margin-top: 50px;
         margin-left: auto;
     }
 </style>

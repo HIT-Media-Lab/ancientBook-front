@@ -18,7 +18,7 @@
                 {{item.chinese_name}}
             </option>
         </select>
-        <button @click="go_to_sortbook()">sdfsdf</button>
+        <!--<button @click="go_to_sortbook()">sdfsdf</button>-->
     </div>
 </template>
 <script>
@@ -54,7 +54,7 @@
                 item_3: [],
                 item_1_id: 0,
                 item_2_id: 0,
-                item_3_id: 0,
+                item_3_id: 0
             }
         },
         created(){
@@ -114,7 +114,7 @@
                 this.$store.commit("put_bls_name", this.item_name);
                 this.$store.commit("put_bls", this.item);
                 if (this.item.bu != 0 && this.item.lei != 0){
-                    this.$router.push({name: "sort_book", params: 1});
+                    this.$router.push({path: "/bookstore/sort_book/page/1"});
                 }
             }
         }
