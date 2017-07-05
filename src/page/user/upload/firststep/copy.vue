@@ -12,7 +12,7 @@
 
                     <label class="col-md-2">完整性：</label>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-c-complete">
                             <option>不详</option>
                             <option>全</option>
                             <option>残</option>
@@ -23,7 +23,7 @@
                 <div class="row">
                     <label class="col-md-2">品級：</label>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-c-level">
                             <option>不详</option>
                             <option>一級甲等</option>
                             <option>一級乙等</option>
@@ -98,7 +98,7 @@
                         <label>責任者類型：</label>
                     </div>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-c-type">
                             <option>不详</option>
                             <option>责任人</option>
                             <option>责任机构</option>
@@ -110,7 +110,7 @@
                         <label>責任行為：</label>
                     </div>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-c-action">
                             <option>贈</option>
                             <option>藏</option>
                             <option>裝</option>
@@ -131,7 +131,7 @@
                         <label>確定性：</label>
                     </div>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-c-confirm">
                             <option>不详</option>
                             <option>确定</option>
                             <option>題</option>
@@ -160,7 +160,6 @@
 
         data() {
             return{
-                menu_items : [],
                 copy_item : {
                     duplicate_book_count : '',
                     duplicate_level : '',
@@ -182,21 +181,58 @@
         },
 
         created : function () {
-            this.get_copy_item();
             this.copy_item = this.$store.getters.get_copy_item
+        },
+
+        mounted : function () {
+            this.default_selections_copy()
         },
 
         beforeRouteLeave (to, from, next) {
             this.$store.commit("get_copy_contents",this.copy_item);
+            this.selections_copy();
             next();
         },
 
 
 
         methods : {
-            get_copy_item() {
-                this.menu_items = this.$store.getters.get_menu_item
-            }
+            /**
+             * 获得用户选择的option并存储
+             */
+            selections_copy() {
+                var complete = document.getElementById("ry-c-complete");
+                var complete_index = complete.selectedIndex;
+                this.copy_item.duplicate_complete = complete_index + 1;
+                var level = document.getElementById("ry-c-level");
+                var level_index = level.selectedIndex;
+                this.copy_item.duplicate_level = level_index + 1;
+                var type = document.getElementById("ry-c-type");
+                var type_index = type.selectedIndex;
+                this.copy_item.copy_responsibility.type = type_index + 1;
+                var action = document.getElementById("ry-c-action");
+                var action_index = action.selectedIndex;
+                this.copy_item.copy_responsibility.action = action_index + 1;
+                var confirm = document.getElementById("ry-c-confirm");
+                var confirm_index = confirm.selectedIndex;
+                this.copy_item.copy_responsibility.confirm = confirm_index + 1;
+            },
+
+            /**
+             * 设置默认首选项
+             */
+            default_selections_copy() {
+                var complete = document.getElementById("ry-c-complete");
+                complete.selectedIndex = this.copy_item.duplicate_complete - 1;
+                var level = document.getElementById("ry-c-level");
+                level.selectedIndex = this.copy_item.duplicate_level - 1;
+                var type = document.getElementById("ry-c-type");
+                type.selectedIndex = this.copy_item.copy_responsibility.type - 1;
+                var action = document.getElementById("ry-c-action");
+                action.selectedIndex = this.copy_item.copy_responsibility.action - 1;
+                var confirm = document.getElementById("ry-c-confirm");
+                confirm.selectedIndex = this.copy_item.copy_responsibility.confirm - 1;
+            },
         }
 
     }

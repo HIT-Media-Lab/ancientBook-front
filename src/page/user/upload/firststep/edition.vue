@@ -7,14 +7,14 @@
                 <div class="row">
                     <label class="col-md-2">版本類型：</label>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-e-edition-type">
                             <option v-for="item in menu_ten">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
                     <label class="col-md-2">版本時代：</label>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-e-age">
                             <option v-for="item in menu_eleven">{{item.chinese_name}}</option>
                         </select>
                     </div>
@@ -23,14 +23,14 @@
                 <div class="row">
                     <label class="col-md-2">載體形式：</label>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-e-support">
                             <option v-for="item in menu_twelve">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
                     <label class="col-md-2">裝幀形式：</label>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-e-binding">
                             <option v-for="item in menu_thirteen">{{item.chinese_name}}</option>
                         </select>
                     </div>
@@ -92,7 +92,7 @@
 
                     <label class="col-md-2">魚尾樣式：</label>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-e-fish">
                             <option v-for="item in menu_fourteen">{{item.chinese_name}}</option>
                         </select>
                     </div>
@@ -101,14 +101,14 @@
                 <div class="row">
                     <label class="col-md-2">邊欄樣式：</label>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-e-side">
                             <option v-for="item in menu_fifteen">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
                     <label class="col-md-2">分欄：</label>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-e-divide">
                             <option v-for="item in menu_sixteen">{{item.chinese_name}}</option>
                         </select>
                     </div>
@@ -117,7 +117,7 @@
                 <div class="row">
                     <label class="col-md-2">書口樣式：</label>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-e-book">
                             <option v-for="item in menu_seventeen">{{item.chinese_name}}</option>
                         </select>
                     </div>
@@ -137,7 +137,7 @@
 
                     <label class="col-md-2">有無夾注：</label>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-e-comment">
                             <option>不详</option>
                             <option>有</option>
                             <option>无</option>
@@ -206,7 +206,7 @@
                         <label>責任者類型：</label>
                     </div>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-e-type">
                             <option>不详</option>
                             <option>责任人</option>
                             <option>责任机构</option>
@@ -218,7 +218,7 @@
                         <label>責任行為：</label>
                     </div>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-e-action">
                             <option v-for="item in menu_nineteen">{{item.chinese_name}}</option>
                         </select>
                     </div>
@@ -230,7 +230,7 @@
                         <label>確定性：</label>
                     </div>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-e-confirm">
                             <option>不详</option>
                             <option>确定</option>
                             <option>題</option>
@@ -316,11 +316,25 @@
         },
 
         created : function () {
-            this.edition_item = this.$store.getters.get_edition_item
+            this.edition_item = this.$store.getters.get_edition_item;
+            this. get_menu_ten();
+            this. get_menu_eleven();
+            this. get_menu_twelve();
+            this. get_menu_thirteen();
+            this. get_menu_fourteen();
+            this. get_menu_fifteen();
+            this. get_menu_sixteen();
+            this. get_menu_seventeen();
+            this. get_menu_nineteen();
+        },
+
+        mounted : function () {
+            this.default_selections_edition()
         },
 
         beforeRouteLeave (to, from, next) {
             this.$store.commit("get_edition_contents",this.edition_item);
+//            this.selections_edition();
             next();
         },
 
@@ -443,6 +457,174 @@
 
             fail_get_menu_fourteen() {
                 console.log ("fail get menu fourteen!");
+            },
+
+            get_menu_fifteen() {
+                let url = '/ancient_books/get_menu_items.action?model_id=15&&item_1_id=0&&item_2_id=0';
+                this.http_json (url , 'get' , this.get_menu_fifteen_obj , this.success_get_menu_fifteen , this.fail_get_menu_fifteen);
+            },
+
+            success_get_menu_fifteen(response) {
+                console.log ("success get menu fifteen");
+                //将后端数据显示在前端页面里
+                if (response.body.length === 0) {
+                    console.log ("没有返回数组！");
+                }
+                else {
+                    for (var j = 0; j <= response.body.length-1; j++) {
+                        this.menu_fifteen.push({
+                            chinese_name: response.body[j].chinese_name
+                        });
+                    }
+                }
+            },
+
+            fail_get_menu_fifteen() {
+                console.log ("fail get menu fifteen!");
+            },
+
+            get_menu_sixteen() {
+                let url = '/ancient_books/get_menu_items.action?model_id=16&&item_1_id=0&&item_2_id=0';
+                this.http_json (url , 'get' , this.get_menu_sixteen_obj , this.success_get_menu_sixteen , this.fail_get_menu_sixteen);
+            },
+
+            success_get_menu_sixteen(response) {
+                console.log ("success get menu sixteen");
+                //将后端数据显示在前端页面里
+                if (response.body.length === 0) {
+                    console.log ("没有返回数组！");
+                }
+                else {
+                    for (var j = 0; j <= response.body.length-1; j++) {
+                        this.menu_sixteen.push({
+                            chinese_name: response.body[j].chinese_name
+                        });
+                    }
+                }
+            },
+
+            fail_get_menu_sixteen() {
+                console.log ("fail get menu sixteen!");
+            },
+
+            get_menu_seventeen() {
+                let url = '/ancient_books/get_menu_items.action?model_id=17&&item_1_id=0&&item_2_id=0';
+                this.http_json (url , 'get' , this.get_menu_seventeen_obj , this.success_get_menu_seventeen , this.fail_get_menu_seventeen);
+            },
+
+            success_get_menu_seventeen(response) {
+                console.log ("success get menu seventeen");
+                //将后端数据显示在前端页面里
+                if (response.body.length === 0) {
+                    console.log ("没有返回数组！");
+                }
+                else {
+                    for (var j = 0; j <= response.body.length-1; j++) {
+                        this.menu_seventeen.push({
+                            chinese_name: response.body[j].chinese_name
+                        });
+                    }
+                }
+            },
+
+            fail_get_menu_seventeen() {
+                console.log ("fail get menu seventeen!");
+            },
+
+            get_menu_nineteen() {
+                let url = '/ancient_books/get_menu_items.action?model_id=19&&item_1_id=0&&item_2_id=0';
+                this.http_json (url , 'get' , this.get_menu_nineteen_obj , this.success_get_menu_nineteen , this.fail_get_menu_nineteen);
+            },
+
+            success_get_menu_nineteen(response) {
+                console.log ("success get menu nineteen");
+                //将后端数据显示在前端页面里
+                if (response.body.length === 0) {
+                    console.log ("没有返回数组！");
+                }
+                else {
+                    for (var j = 0; j <= response.body.length-1; j++) {
+                        this.menu_nineteen.push({
+                            chinese_name: response.body[j].chinese_name
+                        });
+                    }
+                }
+            },
+
+            fail_get_menu_nineteen() {
+                console.log ("fail get menu nineteen!");
+            },
+
+            /**
+             * 获得用户选择的option并存储
+             */
+            selections_edition() {
+                var e_type = document.getElementById("ry-e-edition-type");
+                var e_type_index = e_type.selectedIndex;
+                this.edition_item.version_type = e_type_index + 1;
+                var age = document.getElementById("ry-e-age");
+                var age_index = age.selectedIndex;
+                this.edition_item.version_age = age_index + 1;
+                var support = document.getElementById("ry-e-support");
+                var support_index = support.selectedIndex;
+                this.edition_item.version_support = support_index + 1;
+                var binding = document.getElementById("ry-e-binding");
+                var binding_index = binding.selectedIndex;
+                this.edition_item.version_binding = binding_index + 1;
+                var fish = document.getElementById("ry-e-fish");
+                var fish_index = fish.selectedIndex;
+                this.edition_item.version_yuwei = fish_index + 1;
+                var side = document.getElementById("ry-e-side");
+                var side_index = side.selectedIndex;
+                this.edition_item.version_bianlan = side_index + 1;
+                var divide = document.getElementById("ry-e-divide");
+                var divide_index = divide.selectedIndex;
+                this.edition_item.version_fenlan = divide_index + 1;
+                var book = document.getElementById("ry-e-book");
+                var book_index = book.selectedIndex;
+                this.edition_item.version_shukou = book_index + 1;
+                var comment = document.getElementById("ry-e-comment");
+                var comment_index = comment.selectedIndex;
+                this.edition_item.version_youwujiazhu = comment_index + 1;
+                var type = document.getElementById("ry-e-type");
+                var type_index = type.selectedIndex;
+                this.edition_item.edition_responsibility.type = type_index + 1;
+                var action = document.getElementById("ry-e-action");
+                var action_index = action.selectedIndex;
+                this.edition_item.edition_responsibility.action = action_index + 1;
+                var confirm = document.getElementById("ry-e-confirm");
+                var confirm_index = confirm.selectedIndex;
+                this.edition_item.edition_responsibility.confirm = confirm_index + 1;
+            },
+
+            /**
+             * 设置默认首选项
+             */
+            default_selections_edition() {
+                var e_type = document.getElementById("ry-e-edition-type");
+                e_type.selectedIndex = this.edition_item.version_type - 1;
+                var age = document.getElementById("ry-e-age");
+                age.selectedIndex = this.edition_item.version_age - 1;
+                var support = document.getElementById("ry-e-support");
+                support.selectedIndex = this.edition_item.version_support - 1;
+                var binding = document.getElementById("ry-e-binding");
+                binding.selectedIndex = this.edition_item.version_binding - 1;
+                var fish = document.getElementById("ry-e-fish");
+                fish.selectedIndex = this.edition_item.version_yuwei - 1;
+                var side = document.getElementById("ry-e-side");
+                side.selectedIndex = this.edition_item.version_bianlan - 1;
+                var divide = document.getElementById("ry-e-divide");
+                divide.selectedIndex = this.edition_item.version_fenlan - 1;
+                var book = document.getElementById("ry-e-book");
+                book.selectedIndex = this.edition_item.version_shukou - 1;
+                var comment = document.getElementById("ry-e-comment");
+                comment.selectedIndex = this.edition_item.version_youwujiazhu - 1;
+                var type = document.getElementById("ry-e-type");
+                type.selectedIndex = this.edition_item.edition_responsibility.type - 1;
+                var action = document.getElementById("ry-e-action");
+                action.selectedIndex = this.edition_item.edition_responsibility.action - 1;
+                var confirm = document.getElementById("ry-e-confirm");
+                confirm.selectedIndex = this.edition_item.edition_responsibility.confirm - 1;
             },
         },
 

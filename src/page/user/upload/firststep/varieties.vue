@@ -22,7 +22,7 @@
                 <div class="row">
                     <label class="col-md-2">存佚類型:</label>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-type-save">
                             <option>不详</option>
                             <option>存</option>
                             <option>佚</option>
@@ -35,7 +35,7 @@
                 <div class="row">
                     <label class="col-md-2">品種級別：</label>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-type-level">
                             <option>不详</option>
                             <option>叢書總目</option>
                             <option>叢書子目</option>
@@ -131,7 +131,7 @@
                         <label>責任者類型：</label>
                     </div>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-v-type">
                             <option>不详</option>
                             <option>责任人</option>
                             <option>责任机构</option>
@@ -143,7 +143,7 @@
                         <label>責任行為：</label>
                     </div>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-v-action">
                             <option v-for="item in menu_nine">{{item.chinese_name}}</option>
                         </select>
                     </div>
@@ -155,7 +155,7 @@
                         <label>確定性：</label>
                     </div>
                     <div class="col-md-4">
-                        <select>
+                        <select id="ry-v-confirm">
                             <option>不详</option>
                             <option>确定</option>
                             <option>題</option>
@@ -223,8 +223,13 @@
             this.varieties_item = this.$store.getters.get_varieties_item;
         },
 
+        mounted : function () {
+            this.default_selections_variety();
+        },
+
         beforeRouteLeave (to, from, next) {
             this.$store.commit("get_varieties_contents",this.varieties_item);
+//            this.selections_variety();
             next();
         },
 
@@ -336,7 +341,57 @@
                 console.log ("fail get shu items!");
             },
 
+            /**
+             * 获得用户选择的option并存储
+             */
+            selections_variety() {
+                var type_save = document.getElementById("ry-type-save");
+                var type_save_index = type_save.selectedIndex;
+                this.varieties_item.type_save = type_save_index + 1;
+                var type_level = document.getElementById("ry-type-level");
+                var type_level_index = type_level.selectedIndex;
+                this.varieties_item.type_level = type_level_index + 1;
+                var bu = document.getElementById("ry-select-b");
+                var bu_index = bu.selectedIndex;
+                this.varieties_item.type_bu = bu_index + 1;
+                var lei = document.getElementById("ry-select-l");
+                var lei_index = lei.selectedIndex;
+                this.varieties_item.type_lei = lei_index + 1;
+                var shu = document.getElementById("ry-select-s");
+                var shu_index = shu.selectedIndex;
+                this.varieties_item.type_shu = shu_index + 1;
+                var type = document.getElementById("ry-v-type");
+                var type_index = type.selectedIndex;
+                this.varieties_item.varieties_responsibility.type = type_index + 1;
+                var action = document.getElementById("ry-v-action");
+                var action_index = action.selectedIndex;
+                this.varieties_item.varieties_responsibility.action = action_index + 1;
+                var confirm = document.getElementById("ry-v-confirrm");
+                var confirm_index = confirm.selectedIndex;
+                this.varieties_item.varieties_responsibility.confirm = confirm_index + 1;
+            },
 
+            /**
+             * 设置默认首选项
+             */
+            default_selections_variety() {
+                var type_save = document.getElementById("ry-type-save");
+                type_save.selectedIndex = this.varieties_item.type_save - 1;
+                var type_level = document.getElementById("ry-type-level");
+                type_level.selectedIndex = this.varieties_item.type_level - 1;
+                var bu = document.getElementById("ry-select-b");
+                bu.selectedIndex = this.varieties_item.type_bu - 1;
+                var lei = document.getElementById("ry-select-l");
+                lei.selectedIndex = this.varieties_item.type_lei - 1;
+                var shu = document.getElementById("ry-select-s");
+                shu.selectedIndex = this.varieties_item.type_shu - 1;
+                var type = document.getElementById("ry-v-type");
+                type.selectedIndex = this.varieties_item.varieties_responsibility.type - 1;
+                var action = document.getElementById("ry-v-action");
+                action.selectedIndex = this.varieties_item.varieties_responsibility.action - 1;
+                var confirm = document.getElementById("ry-v-confirm");
+                confirm.selectedIndex = this.varieties_item.varieties_responsibility.confirm - 1;
+            },
         },
     }
 </script>
