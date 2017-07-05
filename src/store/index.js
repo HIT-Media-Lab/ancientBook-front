@@ -163,7 +163,10 @@ const store = new Vuex.Store({
             friend:[]
         },
 
-        create_one_selection:0
+        create_one_selection:0,
+
+        sort_item:{},
+        sort_item_name:{}
     },
     getters,
     mutations,
