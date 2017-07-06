@@ -55,6 +55,7 @@
                 this.http_json(item, 'get', item, this.success1, this.fail1)
             },
             success1(response){
+                this.books = [];
                 this.total_page = response.body.total_page;
                 for (let i = 0; i < response.body.content.length; i++){
                     this.content_name[i] = response.body.content[i].standard_name;
