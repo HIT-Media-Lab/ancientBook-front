@@ -45,13 +45,19 @@
             }
         },
         methods: {
+
+//            this.$route.params.bu = this.item_name.bu;
+//    this.$route.params.lei = this.item_name.lei;
+//    this.$route.params.shu = this.item_name.shu;
+
+
             get_bls(){
                 this.bls = this.$store.getters.get_bls;
                 this.bls_name = this.$store.getters.get_bls_name;
                 let item = this.book_url + "?bu=" + this.bls.bu +"&&lei=" + this.bls.lei + "&&shu=" + this.bls.shu + "&&page_conut=" + this.$route.params.pageId;
-                this.bu = this.bls_name.bu;
-                this.lei = this.bls_name.lei;
-                this.shu = this .bls_name.shu;
+                this.bu = this.$route.params.bu;
+                this.lei = this.$route.params.lei;
+                this.shu = this.$route.params.shu;
                 this.http_json(item, 'get', item, this.success1, this.fail1)
             },
             success1(response){
