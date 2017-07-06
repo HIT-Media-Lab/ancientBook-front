@@ -59,6 +59,7 @@
                 this.total_page = response.body.total_page;
                 for (let i = 0; i < response.body.content.length; i++){
                     this.content_name[i] = response.body.content[i].standard_name;
+                    console.log( this.content_name[i]);
                     this.content_id[i] = response.body.content[i].ancient_book_id;
                 }
                 for (let i = 0; i < 20; i++){
