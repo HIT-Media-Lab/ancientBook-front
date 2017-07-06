@@ -56,6 +56,9 @@
             },
             success1(response){
                 this.books = [];
+                this.content_name = [];
+                this.content_id = [];
+                this.total_page = 0;
                 this.total_page = response.body.total_page;
                 for (let i = 0; i < response.body.content.length; i++){
                     this.content_name[i] = response.body.content[i].standard_name;
