@@ -123,6 +123,9 @@
                 this.$route.params.shu_id = this.item.shu;
                 this.$route.params.pageId = 1;
                 if (this.item.bu != 0 && this.item.lei != 0){
+                    this.select_1 = {id: 'bu', name: ''};
+                    this.select_2 = {id: 'lei', name: ''};
+                    this.select_3 = {id: 'shu', name: ''};
                     this.$router.push({name: 'sort_book', params: this.$route.params});
                 }
             }

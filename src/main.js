@@ -508,11 +508,13 @@ router.beforeEach( (to, from, next) => {
         user_id = 'guest';
     }
     if (user_id == 'guest'){
-        bus.$emit('chang_name', '登录');
-    }else if (user_id == 'user'){
-        bus.$emit('chang_name', '普通用户');
-    }else if (user_id == 'admin'){
-        bus.$emit('chang_name', '超级用户');
+        bus.$emit('change_name', '登录');
+    }else {
+        router.app.$http.get('/ancient_books/get_user_info.action').then(function (response) {
+            bus.$emit('change_name', response.body.name);
+        },function () {
+
+        })
     }
 
     let flag = false;

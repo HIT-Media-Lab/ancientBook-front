@@ -59,5 +59,8 @@ export default {
     },
     put_bls_name(state,item){
         state.sort_item_name = item;
+    },
+    push_search_content(state,item){
+        state.search_content = item;
     }
 }

@@ -30,7 +30,7 @@
                 lei:'',
                 shu:'',
                 book_url:'/ancient_books/search_ancient_book_by_bls.action',
-                total_page: 0,
+                total_page: 9,
                 content_name:[],
                 content_id:[],
                 books:[],

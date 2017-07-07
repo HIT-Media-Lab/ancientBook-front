@@ -166,7 +166,8 @@ const store = new Vuex.Store({
         create_one_selection:0,
 
         sort_item:{},
-        sort_item_name:{}
+        sort_item_name:{},
+        search_content: ''
     },
     getters,
     mutations,

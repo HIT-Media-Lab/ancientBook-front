@@ -15,12 +15,12 @@
             <div class="down-box" @click="hide" v-show="sort_box.length!=0">
                 <ul>
                     <li class="sort-box1">
-                        <router-link to="/search_index" style="color: #0f0f0f">
+                        <router-link to="/search_index" style="color: #0f0f0f" @click="push_search()">
                             搜古籍：{{sort_box}}
                         </router-link>
                     </li>
                     <li class="sort-box2">
-                        <router-link to="/search_index/search_noumenon" style="color: #0f0f0f">
+                        <router-link to="/search_index/search_noumenon" style="color: #0f0f0f" @click="push_search()">
                             搜本体：{{sort_box}}
                         </router-link>
                     </li>
@@ -77,7 +77,7 @@
           bus.$on('toggleLoading', (show) =>{
               this.showloading = show;
           });
-          bus.$on('chang_name',(name) =>{
+          bus.$on('change_name',(name) =>{
               this.name = name;
           });
         },
@@ -121,12 +121,18 @@
             },
             enter:function () {
                 this.sort_box = '';
+                this.$store.commit('push_search_content', this.sort_box);
                 this.$router.push({path: '/search_index'});
             },
             search:function () {
                 if (this.sort_box != ''){
+                    this.$store.commit('push_search_content', this.sort_box);
                     this.$router.push({path: '/search_index'});
                 }
+            },
+
+            push_search(){
+                this.$store.commit('push_search_content', this.sort_box);
             },
 
             /**
