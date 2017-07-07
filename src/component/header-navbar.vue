@@ -252,7 +252,7 @@
         background-image: url("../assets/img/搜索按钮小.png");
         background-repeat: no-repeat;
         width: 100px;
-        height: 52px;
+        height: 50px;
         border: none;
         margin-left: -15px;
         color: white;

@@ -110,14 +110,17 @@
                 this.item_3_id = this.select_3.id;
                 this.item.shu = this.item_3_id;
                 this.item_name.shu = this.select_3.name;
-                this.$store.commit("put_bls_name", this.item_name);
-                this.$store.commit("put_bls", this.item);
+//                this.$store.commit("put_bls_name", this.item_name);
+//                this.$store.commit("put_bls", this.item);
                 console.log(this.item.bu);
                 console.log(this.item.lei);
                 console.log(this.item.shu);
                 this.$route.params.bu = this.item_name.bu;
                 this.$route.params.lei = this.item_name.lei;
                 this.$route.params.shu = this.item_name.shu;
+                this.$route.params.bu_id = this.item.bu;
+                this.$route.params.lei_id = this.item.lei;
+                this.$route.params.shu_id = this.item.shu;
                 this.$route.params.pageId = 1;
                 if (this.item.bu != 0 && this.item.lei != 0){
                     this.$router.push({name: 'sort_book', params: this.$route.params});

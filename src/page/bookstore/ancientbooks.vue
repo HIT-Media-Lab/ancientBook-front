@@ -52,9 +52,9 @@
 
 
             get_bls(){
-                this.bls = this.$store.getters.get_bls;
-                this.bls_name = this.$store.getters.get_bls_name;
-                let item = this.book_url + "?bu=" + this.bls.bu +"&&lei=" + this.bls.lei + "&&shu=" + this.bls.shu + "&&page_conut=" + this.$route.params.pageId;
+//                this.bls = this.$store.getters.get_bls;
+//                this.bls_name = this.$store.getters.get_bls_name;
+                let item = this.book_url + "?bu=" + this.$route.params.bu +"&&lei=" + this.$route.params.lei + "&&shu=" + this.$route.params.shu + "&&page_conut=" + this.$route.params.pageId;
                 this.bu = this.$route.params.bu;
                 this.lei = this.$route.params.lei;
                 this.shu = this.$route.params.shu;
@@ -105,7 +105,10 @@
         margin-top: 35px;
     }
     .j-bls-bookname{
-        margin-bottom: 20px;
+        margin-bottom: 5px;
+    }
+    .j-bls-bookname:hover{
+        color: #a50000;
     }
     .j-bls-page{
         margin-top: 50px;

@@ -32,8 +32,8 @@
             width: auto;
             height: auto;
             position: fixed;
-            left: 50%;
-            margin: 0 0 0 -201px;
+            left: 35%;
+            /*margin: 0 0 0 -201px;*/
             top: 100px;
             z-index: 2000;
             visibility: hidden;

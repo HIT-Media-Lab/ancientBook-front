@@ -74,8 +74,8 @@
         margin: 0 auto;
     }
     .j-picture-name{
-        margin-top: 20px;
-        margin-left: 60px;
+        margin-top: 40px;
+        margin-left: 90px;
         width: 200px;
         display: inline-block;
     }
