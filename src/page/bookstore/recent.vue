@@ -46,7 +46,7 @@
 //                        'page': '1',
 //                        'ancient_book_id': response.body[i].id
 //                    };
-                    let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + 'ancient_book_id' + response.body[i].id;
+                    let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + response.body[i].id;
                     this.http_json(item, 'get', item, this.success_page, this.fail_id);
                     id_url = this.picture_url + '?page_id=' + this.page_id;
                     document.getElementById(response.body[i].id).src = id_url;
