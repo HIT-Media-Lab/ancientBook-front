@@ -2,7 +2,7 @@
     <div class="j-recent">
         <recent_title class="j-recent-bar" :title="this.title"></recent_title>
         <div v-for="item in recent_book" class="j-picture-name" >
-            <img v-bind:id=item.ancient_book_id src="" class="j-picture" alt="最近古籍" @click="push_success()">
+            <img v-bind:id=item.id src="" class="j-picture" alt="最近古籍" @click="push_success()">
             <p style="color: #0f0f0f; text-align: center" @click="push_success()">{{item.standardName}}</p>
         </div>
     </div>
@@ -49,7 +49,7 @@
                     let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + response.body[i].id;
                     this.http_json(item, 'get', item, this.success_page, this.fail_id);
                     id_url = this.picture_url + '?page_id=' + this.page_id;
-                    document.getElementById(response.body[i].ancient_book_id).src = id_url;
+                    document.getElementById(response.body[i].id).src = id_url;
                     console.log("得到最近成功")
                 }
             },
