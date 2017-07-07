@@ -87,7 +87,7 @@
             <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()" v-bind:disabled="this.$store.getters.get_build_character.length === 0">确认</button>
         </div>
 
-        <success_create :show_info="show_info"></success_create>
+        <success_create id="op" :show_info="show_info"></success_create>
 
         <!--子的具体信息显示-->
         <modal :show_modal="show_tooltip_son" v-on:fireclose="close_tooltip_son" class="zxw-modal-character">
@@ -150,12 +150,15 @@
 </template>
 
 <script>
-    /*let Mock = require('mockjs');
+    let Mock = require('mockjs');
     Mock.mock('/ancient_books/add_person.action','post', {
         "status|200":200,
-        "result|0":0,
         "id|123":123
-    });*/
+    });
+
+    Mock.mock('/ancient_books/getToken.action','get', {
+        "token|200":100,
+    });
 
     import create_word from '../../../../component/create-word.vue';
     import success_create from '../../../../component/success_create.vue';
@@ -207,21 +210,17 @@
             }
         },
 
-        watch:{
-            '$route'(){
-                setTimeout("modal_fadeout()",4000);
-                console.log("$route modal fadeout");
-            }
-        },
         methods:{
-            modal_fadeout(){
-                this.show_info=true;
+            modal_fadeout(response){
+               this.show_info=false;
+               this.$router.push({name:'char_detail',params:{nouId:response.body.id}});
             },
             success_create(response){
-                //this.show_info=true;
+                this.show_info=true;
                 //路由跳转
-                this.$router.push({name:'char_detail',params:{nouId:response.body.id}});
                 //清空Vuex
+                setTimeout(this.modal_fadeout(response),20000);
+                console.log("hh");
                 this.$store.getters.get_build_character.standard_name = '';
                 this.$store.getters.get_build_character.person_name='';
                 this.$store.getters.get_build_character.xing='';
