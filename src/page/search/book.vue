@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p class="j-book-word">为您找到2条相关的古籍信息</p>
+        <p class="j-book-word" v-model="search_number">为您找到{{search_number}}条相关的古籍信息</p>
         <div class="j-searched-book" v-for="">
             <div class="j-shi1">
                 <router-link to="/bookstore/book_info">
@@ -32,6 +32,7 @@
         },
         data(){
             return{
+                search_number: 0,
                 search_content: '',
                 total_page: 9,
                 search_url: '/ancient_books/get_ancient_books_list_by_name.action',
@@ -40,8 +41,14 @@
         methods:{
             get_search(){
                 this.search_content = this.$store.getters.get_search_content;
-//                let url = this.search_url + '?'
-                this.http_json(this.search_url, 'get', )
+                let url = this.search_url + '?name=' + this.search_url + '&&page_conut=' + this.$route.params.pageId;
+                this.http_json( url, 'get', url, this.success1(), this.fail1())
+            },
+            success1(response){
+
+            },
+            fail1(){
+
             }
         }
     }

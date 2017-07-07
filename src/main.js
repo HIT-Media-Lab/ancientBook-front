@@ -295,10 +295,16 @@ const router = new VueRouter({
                 {
                     path:'',
                     component:search_book,
+                    redirect: 'search_book/page/1',
                     name:'search_book',
                 },
                 {
-                    path:'search_noumenon',
+                    path:'search_book/page/:pageId',
+                    component:search_book,
+                    name:'search_book',
+                },
+                {
+                    path:'search_noumenon/page/:pageId',
                     component:search_noumenon,
                     name:'search_noumenon',
                 },

@@ -8,11 +8,11 @@
             <router-link to="/noumenon" style="color: white; margin-left: 47px">
                 <button class="noumenon-store">本体库</button>
             </router-link>
-            <input placeholder=" 请输入关键字搜索" class="search-input" v-model="sort_box" v-on:keydown.enter="enter">
+            <input placeholder=" 请输入关键字搜索" class="search-input" v-model="sort_box" v-on:keydown.enter="search">
             <button class="search-btn" @click="search">搜 索</button>
             <img src="../assets/img/头像.png" class="user-img" @click="show_login">
             <span class="user-name" @click="show_login" v-model="name">{{name}}</span>
-            <div class="down-box" @click="hide" v-show="sort_box.length!=0">
+            <div class="down-box" @blur="hide" v-show="sort_box.length!=0">
                 <ul>
                     <li class="sort-box1">
                         <router-link to="/search_index" style="color: #0f0f0f" @click="push_search()">
@@ -75,8 +75,8 @@
         },
         created() {
           bus.$on('toggleLoading', (show) =>{
-              this.showloading = show;
-          });
+                this.showloading = show;
+            });
           bus.$on('change_name',(name) =>{
               this.name = name;
           });
@@ -119,15 +119,20 @@
             hide:function () {
                 this.sort_box = ''
             },
-            enter:function () {
-                this.sort_box = '';
-                this.$store.commit('push_search_content', this.sort_box);
-                this.$router.push({path: '/search_index'});
-            },
+//            enter:function () {
+//                this.sort_box = '';
+//                if (this.sort_box != ''){
+//                    this.$store.commit('push_search_content', this.sort_box);
+//                    this.$router.push({path: '/search_index'});
+//                }
+//            },
             search:function () {
+                this.$route.params.pageId = 1;
+//                this.$route.params.
+                this.sort_box = '';
                 if (this.sort_box != ''){
                     this.$store.commit('push_search_content', this.sort_box);
-                    this.$router.push({path: '/search_index'});
+                    this.$router.push({name: 'search_index', params: this.$route.params});
                 }
             },
 
