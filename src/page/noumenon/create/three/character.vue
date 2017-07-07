@@ -152,6 +152,7 @@
 <script>
     /*let Mock = require('mockjs');
     Mock.mock('/ancient_books/add_person.action','post', {
+        "status|200":200,
         "result|0":0,
         "id|123":123
     });*/
@@ -207,17 +208,17 @@
         },
 
         watch:{
-            $route(){
+            '$route'(){
                 setTimeout("modal_fadeout()",4000);
                 console.log("$route modal fadeout");
             }
         },
         methods:{
             modal_fadeout(){
-                this.show_info=false;
+                this.show_info=true;
             },
             success_create(response){
-                this.show_info=true;
+                //this.show_info=true;
                 //路由跳转
                 this.$router.push({name:'char_detail',params:{nouId:response.body.id}});
                 //清空Vuex
