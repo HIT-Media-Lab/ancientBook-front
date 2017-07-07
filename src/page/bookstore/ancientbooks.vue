@@ -54,7 +54,7 @@
             get_bls(){
 //                this.bls = this.$store.getters.get_bls;
 //                this.bls_name = this.$store.getters.get_bls_name;
-                let item = this.book_url + "?bu=" + this.$route.params.bu +"&&lei=" + this.$route.params.lei + "&&shu=" + this.$route.params.shu + "&&page_conut=" + this.$route.params.pageId;
+                let item = this.book_url + "?bu=" + this.$route.params.bu_id +"&&lei=" + this.$route.params.lei_id + "&&shu=" + this.$route.params.shu_id + "&&page_conut=" + this.$route.params.pageId;
                 this.bu = this.$route.params.bu;
                 this.lei = this.$route.params.lei;
                 this.shu = this.$route.params.shu;
