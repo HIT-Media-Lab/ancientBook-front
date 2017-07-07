@@ -150,7 +150,7 @@
 </template>
 
 <script>
-    let Mock = require('mockjs');
+    /*let Mock = require('mockjs');
     Mock.mock('/ancient_books/add_person.action','post', {
         "status|200":200,
         "id|123":123
@@ -158,7 +158,7 @@
 
     Mock.mock('/ancient_books/getToken.action','get', {
         "token|200":100,
-    });
+    });*/
 
     import create_word from '../../../../component/create-word.vue';
     import success_create from '../../../../component/success_create.vue';
