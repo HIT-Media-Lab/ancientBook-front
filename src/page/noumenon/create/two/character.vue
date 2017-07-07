@@ -7,7 +7,7 @@
         <p class="zxw-create-character" v-bind="standard_title" v-model="input_content.standard_name">本体名称：{{input_content.standard_name}}</p>
         <div class="zxw-character-row">
             <label class="zxw-character-span zxw-must-write">人名：</label>
-            <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_content.person_name">
+            <input type="text"  class="zxw-character-input zxw-character-input-margin" v-model="input_content.person_name" @blur="input_chinese()" v-bind:class="{'zxw-input-chinese':show_input}">
             <label class="zxw-character-span">英译：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_content.english">
         </div>
@@ -51,7 +51,7 @@
             </div>
             <label class="zxw-character-span">子：</label>
             <div class="zxw-character-input zxw-character-input-margin">
-                <p class="zxw-person-relation-span" v-for="(item,index) in input_content.son_standard_name"  @mouseover="show_son=index" @mouseout="show_son =-1">{{item}}<button class="zxw-add-hover-img" v-show="show_son === index" @click="delete_son(index)"></button></p>
+                <span class="zxw-person-relation-span" v-for="(item,index) in input_content.son_standard_name"  @mouseover="show_son=index" @mouseout="show_son =-1">{{item}}<button class="zxw-add-hover-img" v-show="show_son === index" @click="delete_son(index)"></button></span>
                 <button class="zxw-input-add-character" @click="open_son()"></button>
             </div>
         </div>
@@ -107,7 +107,7 @@
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length">上一步</button>
             </router-link>
 
-            <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="input_content.birth_standard_name === ''|| input_content.death_standard_name === ''||input_content.person_name === ''">下一步</button>
+            <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="input_content.birth_standard_name === ''|| input_content.death_standard_name === ''||input_content.person_name === ''|| show_input === true" >下一步</button>
 
         </div>
 
@@ -155,6 +155,7 @@
 
         data(){
             return{
+                show_input:false,
                 show_father:false,
                 show_mother:false,
                 show_son:0,
@@ -222,6 +223,18 @@
         },
 
         methods:{
+            input_chinese(){
+                if(this.input_content.person_name !== '') {
+                    if (/[^\u0000-\u00FF]/.test(this.input_content.person_name) === false) {
+                        this.show_input = true;
+                    } else {
+                        this.show_input = false;
+                    }
+                } else{
+                    this.show_input = false;
+                }
+            },
+
             /*出生时间*/
             open_birth(){
                 this.time_modal_1 = true;
@@ -509,8 +522,6 @@
                     this.add_data[1].remark = this.input_content.remark_2;
                 }
             }
-
-
         }
     }
 </script>
@@ -604,6 +615,9 @@
         width:10px;
         height:10px;
         float:right;
+    }
+    .zxw-input-chinese{
+        border-color:#a50000;
     }
 
 </style>

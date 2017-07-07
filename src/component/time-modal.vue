@@ -6,25 +6,25 @@
 
             <div slot="body" class="zxw-time-body">
                 <label class="zxw-time-label">朝代：</label>
-                <select  class="zxw-select zxw-time-select" v-model="selected_1" @change="get_year()">
+                <select  class="zxw-time-select" v-model="selected_1" @change="get_year()">
                     <option v-for="item in menu_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}"> {{item.chinese_name}}</option>
                 </select>
 
                 <label>年号：</label>
-                <select class="zxw-select zxw-time-select" v-model="selected_2">
+                <select class="zxw-time-select" v-model="selected_2">
                     <option v-for="item in year_data" v-bind:value="{id:item.item_2_id,option:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
 
                 <label>年份：</label>
-                <input type="text" class="zxw-time-select zxw-character-input" v-model="year_number" v-bind:disabled="selected_2.option === ''">
+                <input type="text" class="zxw-time-select zxw-time-input" v-model="year_number" v-bind:disabled="selected_2.option === ''">
 
                 <label>月：</label>
-                <select  class="zxw-select zxw-time-select" v-model="selected_3">
+                <select  class="zxw-time-select" v-model="selected_3">
                     <option v-for="item in month_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}" v-bind:disabled="year_number === ''">{{item.chinese_name}}</option>
                 </select>
 
                 <label>日：</label>
-                <select  class="zxw-select zxw-time-select" v-model="selected_4">
+                <select  class="zxw-time-select" v-model="selected_4">
                     <option v-for="item in day_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}" v-bind:disabled="selected_3.option === ''">{{item.chinese_name}}</option>
                 </select>
 
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    /*let Mock = require('mockjs');
+    let Mock = require('mockjs');
     Mock.mock('/ancient_books/get_menu_items.action?model_id=25&&item_1_id=0&&item_2_id=0','get', {
         "g":[
             {"model_id|1": 1,
@@ -94,7 +94,7 @@
 
     Mock.mock('/ancient_books/getToken.action','get', {
         "token|100":100,
-    });*/
+    });
 
     import modal from '../component/modal.vue'
     export default{
@@ -266,6 +266,7 @@
         background-image: url("../assets/img/create-next-step.png");
         background-color: transparent;
         background-size: 100%;
+        background-repeat: no-repeat;
         border: none;
         width:70px;
         height:30px;
@@ -279,16 +280,18 @@
         background-image: url("../assets/img/弹框标题.png");
         background-size: contain;
         background-color: transparent;
-        width:750px;
+        width:800px;
         height:40px;
         padding:10px 0 0 0;
     }
 
     .zxw-time-select{
+        width:70px;
+        height:25px;
+        border: 2px solid;
+        background-color: transparent;
         font-size: 10px;
-        width:50px;
-        height:20px;
-        margin:0 20px 0 0;
+        margin:0 15px 0 0;
     }
 
     .zxw-time-label{
@@ -297,14 +300,24 @@
 
     .zxw-time-body{
         margin:24px auto;
-        width:700px;
+        width:750px;
     }
 
     .zxw-time-modal{
-        width:750px;
+        width:800px;
         height:150px;
         background-repeat: no-repeat;
         background-size: 750px 150px;
         margin:auto;
+    }
+
+    .zxw-time-input{
+        display:inline-block;
+        border: 2px solid black;
+        background-color: transparent;
+        height:25px;
+        width:70px;
+        text-align: left;
+        padding-left:10px;
     }
 </style>
