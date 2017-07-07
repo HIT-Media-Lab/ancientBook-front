@@ -206,14 +206,18 @@
             }
         },
 
+        watch:{
+            $route(){
+                setTimeout("modal_fadeout()",4000);
+                console.log("$route modal fadeout");
+            }
+        },
         methods:{
             modal_fadeout(){
                 this.show_info=false;
             },
             success_create(response){
-                console.log("success");
                 this.show_info=true;
-                setTimeout("modal_fadeout()",4000);
                 //路由跳转
                 this.$router.push({name:'char_detail',params:{nouId:response.body.id}});
                 //清空Vuex
