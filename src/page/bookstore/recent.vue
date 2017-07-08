@@ -2,7 +2,7 @@
     <div class="j-recent">
         <recent_title class="j-recent-bar" :title="this.title"></recent_title>
         <div v-for="item in recent_book" class="j-picture-name" >
-            <img id="book_img" class="j-picture" alt="最近古籍" @click="push_success()" >
+            <img src="hhh" id="book_img" class="j-picture" alt="最近古籍" @click="push_success()" >
             <p style="color: #0f0f0f; text-align: center" @click="push_success()">{{item.standardName}}</p>
         </div>
     </div>
@@ -50,7 +50,6 @@
                     console.log( this.recent_book[i].id);
                     let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.recent_book[i].id;
                     this.http_json(item, 'get', item, this.success_page, this.fail_id);
-                    document.getElementById("book_img")[i].setAttribute("name", "hhh");
                     document.getElementById("book_img")[i].setAttribute("src", this.picture_id_url);
                 }
             },
