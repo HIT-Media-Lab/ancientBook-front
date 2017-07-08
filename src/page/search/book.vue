@@ -37,7 +37,7 @@
         },
         data(){
             return{
-                content: [],
+                content: [{},{},{},{},{},{},{},{},{},{}],
                 book_info: '',
                 book_info_split: [],
                 book_info1:'',
@@ -60,6 +60,7 @@
             success1(response){
                 this.search_number = response.body.total_number;
                 this.total_page = response.body.total_page;
+                console.log(this.content);
                 for (let i = 0; i < this.content.length; i++){
                     this.content[i].name =  response.body.content.name;
                     this.content[i].id =  response.body.content.id;
