@@ -46,7 +46,7 @@
                 book_info4:'',
                 search_number: 0,
                 search_content: '',
-                total_page: 9,
+                total_page: 1,
                 search_url: '/ancient_books/get_ancient_books_list_by_name.action'
             }
         },
@@ -54,7 +54,7 @@
             get_search(){
                 this.search_content = this.$store.getters.get_search_content;
                 console.log(this.$store.getters.get_search_content);
-                let url = this.search_url + '?name=' + this.search_content + '&&page_conut=' + this.$route.params.pageId;
+                let url = this.search_url + '?name=' + this.search_content + '&&page_count=' + this.$route.params.pageId;
                 this.http_json( url, 'get', url, this.success1, this.fail1)
             },
             success1(response){

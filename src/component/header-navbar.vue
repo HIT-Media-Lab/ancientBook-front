@@ -124,11 +124,10 @@
 //            },
             search:function () {
                 this.$route.params.pageId = 1;
-//                this.$route.params.
-                this.sort_box = '';
                 if (this.sort_box != ''){
                     this.$store.commit('push_search_content', this.sort_box);
                     this.$router.push({name: 'search_index', params: this.$route.params});
+                    this.sort_box = '';
                 }
             },
 
