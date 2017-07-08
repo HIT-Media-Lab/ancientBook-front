@@ -38,6 +38,15 @@ export default {
     get_upload_file(state,file){
         state.upload_file = file
     },
+    get_images(state,images){
+        state.images = images
+    },
+    get_picture_name(state,names){
+        state.picture_name = names
+    },
+    get_upload_file(state,texts){
+        state.texts = texts
+    },
     get_upload1_info(state,info){
         state.upload1_info = info
     },

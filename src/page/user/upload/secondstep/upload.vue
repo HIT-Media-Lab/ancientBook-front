@@ -3,24 +3,23 @@
     <div id="upload2-box" class="ry-upload-two">
         <span>
             <span>冊號:</span>
-            <input class="ry-input-upload2">
+            <input class="ry-input-upload2" v-model="upload2.book_num">
         </span>
         <br>
         <span>
             <span>冊名:</span>
-            <input class="ry-input-upload2">
+            <input class="ry-input-upload2" v-model="upload2.book_name">
         </span>
 
         <div class="width800">
             <a href="javascript:;" class="ry-file-picture ry-white">上傳圖片
-                <input type="file" @change="onFileChange" name="picture">
+                <input id="pic-name" type="file" @change="onFileChange" multiple name="picture">
             </a>
             <a href="javascript:;" class="ry-file-text ry-white">上傳文本
-                <input type="file" @change="onTextChange" name="text">
+                <input type="file" @change="onTextChange" multiple name="text">
             </a>
         </div>
     </div>
-
 
 </template>
 
@@ -28,21 +27,25 @@
     export default{
         data() {
             return{
-                upload2 : {
-                    book_name : '',
-                    book_num : '',
-                    images : {},
-                    texts : {},
-                },
+                images : [],
+                picture_name : [],
+                texts : [],
+                upload2 : {},
             }
         },
 
         created : function () {
-            this.upload2 = this.$store.getters.get_upload_file
+            this.upload2 = this.$store.getters.get_upload_file;
+            this.images = this.$store.getters.get_images;
+            this.texts = this.$store.getters.get_texts;
+            this.picture_name = this.$store.getters.get_picture_name;
         },
 
-        beforeRouteLeave (to, from, next) {
+        beforeRouteLeave(to, from, next) {
             this.$store.commit("get_upload_file",this.upload2);
+            this.$store.commit("get_images",this.images);
+            this.$store.commit("get_texts",this.texts);
+            this.$store.commit("get_picture_name",this.picture_name);
             next();
         },
 
@@ -51,18 +54,23 @@
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)return;
                 this.createImage(files);
+                var obj = document.getElementById("pic-name");
+                for(var i = 0; i < obj.files.length; i++) {
+                    var temp = obj.files[i].name;
+                    this.picture_name.push(temp);
+                }
             },
             createImage(file) {
-                if(typeof FileReader==='undefined'){
+                if (typeof FileReader === 'undefined') {
                     alert('您的浏览器不支持图片上传，请升级您的浏览器');
                     return false;
                 }
                 var vm = this;
-                var leng=file.length;
-                for(var i=0;i<leng;i++){
+                var leng = file.length;
+                for (var i = 0; i < leng; i++) {
                     var reader = new FileReader();
                     reader.readAsDataURL(file[i]);
-                    reader.onload =function(e){
+                    reader.onload = function(e) {
                         vm.images.push(e.target.result);
                     };
                 }
@@ -74,16 +82,16 @@
                 this.createText(files);
             },
             createText(file) {
-                if(typeof FileReader==='undefined'){
+                if (typeof FileReader === 'undefined') {
                     alert('您的浏览器不支持图片上传，请升级您的浏览器');
                     return false;
                 }
                 var vm = this;
-                var leng=file.length;
-                for(var i=0;i<leng;i++){
+                var leng = file.length;
+                for (var i = 0; i < leng; i++) {
                     var reader = new FileReader();
                     reader.readAsDataURL(file[i]);
-                    reader.onload =function(e){
+                    reader.onload = function(e) {
                         vm.texts.push(e.target.result);
                     };
                 }
