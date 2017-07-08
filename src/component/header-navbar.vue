@@ -12,15 +12,15 @@
             <button class="search-btn" @click="search">搜 索</button>
             <img src="../assets/img/头像.png" class="user-img" @click="show_login">
             <span class="user-name" @click="show_login" v-model="name">{{name}}</span>
-            <div class="down-box" @blur="hide" v-show="sort_box.length!=0">
+            <div class="down-box"  v-show="sort_box.length!=0">
                 <ul>
-                    <li class="sort-box1">
-                        <router-link to="/search_index" style="color: #0f0f0f" @click="push_search()">
+                    <li class="sort-box1" @click="push_search()">
+                        <router-link to="/search_index" style="color: #0f0f0f" >
                             搜古籍：{{sort_box}}
                         </router-link>
                     </li>
-                    <li class="sort-box2">
-                        <router-link to="/search_index/search_noumenon" style="color: #0f0f0f" @click="push_search()">
+                    <li class="sort-box2" @click="push_search()">
+                        <router-link to="/search_index/search_noumenon" style="color: #0f0f0f">
                             搜本体：{{sort_box}}
                         </router-link>
                     </li>
