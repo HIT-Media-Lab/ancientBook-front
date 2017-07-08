@@ -59,11 +59,11 @@
             success1(response){
                 this.search_number = response.body.total_number;
                 this.total_page = response.body.total_page;
-                console.log(this.content.length)
+                console.log(this.content.length);
                 for (let i = 0; i < this.content.length; i++){
-                    this.content[i].name =  response.body.content.name;
-                    this.content[i].id =  response.body.content.id;
-                    this.book_info_split = this.book_info.split('[' || '【');
+                    this.content[i].name =  response.body.content[i].name;
+                    this.content[i].id =  response.body.content[i].id;
+                    this.book_info_split = response.body.content[i].standard_name.split('[' || '【');
                     this.content[i].book_info1 = this.book_info_split[1];
                     this.content[i].book_info2 = this.book_info_split[2];
                     this.content[i].book_info3 = this.book_info_split[3];
