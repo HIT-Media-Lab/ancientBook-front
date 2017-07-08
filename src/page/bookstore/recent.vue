@@ -46,13 +46,11 @@
             },
             get_picture(){
                 console.log(this.length);
-                let a = document.getElementsByClassName('j-picture');
                 for(let i = 0; i < this.length; i++) {
                     console.log( this.recent_book[i].id);
                     let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.recent_book[i].id;
-//                    this.recent_id = this.recent_book[i].id;
                     this.http_json(item, 'get', item, this.success_page, this.fail_id);
-                    a[i].setAttribute("src", this.picture_id_url)
+                    document.getElementsByClassName('j-picture')[i].setAttribute("src", this.picture_id_url);
                 }
             },
 
