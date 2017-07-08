@@ -59,8 +59,8 @@
             success1(response){
                 this.search_number = response.body.total_number;
                 this.total_page = response.body.total_page;
-                console.log(this.content.length);
-                for (let i = 0; i < response.body.content; i++){
+                console.log(response.body.content);
+                for (let i = 0; i < response.body.content.length; i++){
 //                    this.content[i].name =  response.body.content[i].name;
 //                    this.content[i].id =  response.body.content[i].id;
                     this.book_info_split = response.body.content[i].standard_name.split('[');
