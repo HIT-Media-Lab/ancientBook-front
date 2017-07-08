@@ -53,22 +53,22 @@
         methods:{
             get_search(){
                 this.search_content = this.$store.getters.get_search_content;
-                console.log(this.$store.getters.get_search_content);
                 let url = this.search_url + '?name=' + this.search_content + '&&page_count=' + this.$route.params.pageId;
                 this.http_json( url, 'get', url, this.success1, this.fail1)
             },
             success1(response){
                 this.search_number = response.body.total_number;
                 this.total_page = response.body.total_page;
-                console.log(this.content);
+                console.log(this.content.length)
                 for (let i = 0; i < this.content.length; i++){
                     this.content[i].name =  response.body.content.name;
                     this.content[i].id =  response.body.content.id;
-                    this.book_info_split = this.book_info.split('[');
+                    this.book_info_split = this.book_info.split('[' || '【');
                     this.content[i].book_info1 = this.book_info_split[1];
                     this.content[i].book_info2 = this.book_info_split[2];
                     this.content[i].book_info3 = this.book_info_split[3];
                     this.content[i].book_info4 = this.book_info_split[4];
+                    console.log(this.content);
                 }
             },
             fail1(){

@@ -115,13 +115,6 @@
             hide:function () {
                 this.sort_box = ''
             },
-//            enter:function () {
-//                this.sort_box = '';
-//                if (this.sort_box != ''){
-//                    this.$store.commit('push_search_content', this.sort_box);
-//                    this.$router.push({path: '/search_index'});
-//                }
-//            },
             search:function () {
                 this.$route.params.pageId = 1;
                 if (this.sort_box != ''){
