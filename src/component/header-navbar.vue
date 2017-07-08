@@ -8,21 +8,17 @@
             <router-link to="/noumenon" style="color: white; margin-left: 47px">
                 <button class="noumenon-store">本体库</button>
             </router-link>
-            <input placeholder=" 请输入关键字搜索" class="search-input" v-model="sort_box" v-on:keydown.enter="enter">
+            <input placeholder=" 请输入关键字搜索" class="search-input" v-model="sort_box" v-on:keydown.enter="search">
             <button class="search-btn" @click="search">搜 索</button>
             <img src="../assets/img/头像.png" class="user-img" @click="show_login">
             <span class="user-name" @click="show_login" v-model="name">{{name}}</span>
-            <div class="down-box" @click="hide" v-show="sort_box.length!=0">
+            <div class="down-box"  v-show="sort_box.length!=0">
                 <ul>
-                    <li class="sort-box1">
-                        <router-link to="/search_index" style="color: #0f0f0f">
-                            搜古籍：{{sort_box}}
-                        </router-link>
+                    <li class="sort-box1" @click="push_search1()" style="color: #0f0f0f">
+                        搜古籍：{{sort_box}}
                     </li>
-                    <li class="sort-box2">
-                        <router-link to="/search_index/search_noumenon" style="color: #0f0f0f">
-                            搜本体：{{sort_box}}
-                        </router-link>
+                    <li class="sort-box2" @click="push_search2()" style="color: #0f0f0f">
+                        搜本体：{{sort_box}}
                     </li>
                 </ul>
             </div>
@@ -75,9 +71,9 @@
         },
         created() {
           bus.$on('toggleLoading', (show) =>{
-              this.showloading = show;
-          });
-          bus.$on('chang_name',(name) =>{
+                this.showloading = show;
+            });
+          bus.$on('change_name',(name) =>{
               this.name = name;
           });
         },
@@ -119,14 +115,25 @@
             hide:function () {
                 this.sort_box = ''
             },
-            enter:function () {
-                this.sort_box = '';
-                this.$router.push({path: '/search_index'});
-            },
             search:function () {
+                this.$route.params.pageId = 1;
                 if (this.sort_box != ''){
-                    this.$router.push({path: '/search_index'});
+                    this.$store.commit('push_search_content', this.sort_box);
+                    this.$router.push({name: 'search_index', params: this.$route.params});
+                    this.sort_box = '';
                 }
+            },
+
+            push_search1(){
+                this.$store.commit('push_search_content', this.sort_box);
+                console.log(this.$store.getters.get_search_content);
+                this.$router.push("/search_index");
+            },
+
+            push_search2(){
+                this.$store.commit('push_search_content', this.sort_box);
+                console.log(this.$store.getters.get_search_content);
+                this.$router.push("/search_index/search_noumenon");
             },
 
             /**
@@ -157,7 +164,7 @@
                 }
             },
             coverCode(){
-              document.getElementById("v_picture").src = this.code_url+'?'+(new Date()).getTime()
+                document.getElementById("v_picture").src = this.code_url+'?'+(new Date()).getTime()
             },
 
             create_v_picture(){
@@ -252,7 +259,7 @@
         background-image: url("../assets/img/搜索按钮小.png");
         background-repeat: no-repeat;
         width: 100px;
-        height: 52px;
+        height: 50px;
         border: none;
         margin-left: -15px;
         color: white;

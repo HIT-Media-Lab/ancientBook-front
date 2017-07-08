@@ -67,6 +67,9 @@ export default {
     },
     get_bls_name:state => {
         return state.sort_item_name
+    },
+    get_search_content: state => {
+        return state.search_content
     }
 
 

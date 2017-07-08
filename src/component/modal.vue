@@ -2,7 +2,6 @@
     <div class="dialogs " :class="{ 'dialog-active': show_modal }">
         <div class="dialog-content">
             <div class="j-close j-rotate">
-                <!--<img src="../assets/img/叉.png" @click="$emit('fireclose')">-->
                 <span @click="$emit('fireclose')" style="font-size: 30px;">×</span>
             </div>
             <slot name="header"></slot>
@@ -32,8 +31,8 @@
             width: auto;
             height: auto;
             position: fixed;
-            left: 50%;
-            margin: 0 0 0 -201px;
+            left: 35%;
+            /*margin: 0 0 0 -201px;*/
             top: 100px;
             z-index: 2000;
             visibility: hidden;

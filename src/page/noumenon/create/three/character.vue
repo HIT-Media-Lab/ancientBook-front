@@ -45,28 +45,28 @@
             <label class="zxw-character-span">母：</label>
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.mother_standard_name">
             <label class="zxw-character-span">子：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.son_standard_name">
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.son_standard_name" @click="show_tooltipinfo_son()">
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">女：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.daughter_standard_name">
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.daughter_standard_name" @click="show_tooltipinfo_daughter()">
             <label class="zxw-character-span">兄弟：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.brother_standard_name">
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.brother_standard_name" @click="show_tooltipinfo_brother()">
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">姐妹：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.sister_standard_name">
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.sister_standard_name" @click="show_tooltipinfo_sister()">
             <label class="zxw-character-span">师：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.teacher_standard_name">
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.teacher_standard_name" @click="show_tooltipinfo_teacher()">
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">学生：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.student_standard_name">
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.student_standard_name" @click="show_tooltipinfo_student()">
             <label class="zxw-character-span">友：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.friend_standard_name">
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.friend_standard_name" @click="show_tooltipinfo_friend()">
         </div>
 
         <div>
@@ -87,17 +87,87 @@
             <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()" v-bind:disabled="this.$store.getters.get_build_character.length === 0">确认</button>
         </div>
 
-        <success_create :show_info="show_info"></success_create>
+        <success_create id="op" :show_info="show_info"></success_create>
+
+        <!--子的具体信息显示-->
+        <modal :show_modal="show_tooltip_son" v-on:fireclose="close_tooltip_son" class="zxw-modal-character">
+            <div slot="header" class="zxw-relation-modal-header">
+            </div>
+            <div slot="body" class="zxw-relation-modal-body">
+              <p class="zxw-relation-info" v-for="item in this.$store.getters.get_build_character.son_standard_name">{{item}}</p>
+            </div>
+        </modal>
+
+        <!--女的具体信息显示-->
+        <modal :show_modal="show_tooltip_daughter" v-on:fireclose="close_tooltip_daughter" class="zxw-modal-character">
+            <div slot="header" class="zxw-relation-modal-header"></div>
+            <div slot="body" class="zxw-relation-modal-body">
+                <p class="zxw-relation-info" v-for="item in this.$store.getters.get_build_character.daughter_standard_name">{{item}}</p>
+            </div>
+        </modal>
+
+        <!--兄弟的具体信息显示-->
+        <modal :show_modal="show_tooltip_brother" v-on:fireclose="close_tooltip_brother" class="zxw-modal-character">
+            <div slot="header" class="zxw-relation-modal-header"></div>
+            <div slot="body" class="zxw-relation-modal-body">
+                <p class="zxw-relation-info" v-for="item in this.$store.getters.get_build_character.brother_standard_name">{{item}}</p>
+            </div>
+        </modal>
+
+        <!--姐妹的具体信息显示-->
+        <modal :show_modal="show_tooltip_sister" v-on:fireclose="close_tooltip_sister" class="zxw-modal-character">
+            <div slot="header" class="zxw-relation-modal-header"></div>
+            <div slot="body" class="zxw-relation-modal-body">
+                <p class="zxw-relation-info" v-for="item in this.$store.getters.get_build_character.sister_standard_name">{{item}}</p>
+            </div>
+        </modal>
+
+        <!--师的具体信息显示-->
+        <modal :show_modal="show_tooltip_teacher" v-on:fireclose="close_tooltip_teacher" class="zxw-modal-character">
+            <div slot="header" class="zxw-relation-modal-header"></div>
+            <div slot="body" class="zxw-relation-modal-body">
+                <p class="zxw-relation-info" v-for="item in this.$store.getters.get_build_character.teacher_standard_name">{{item}}</p>
+            </div>
+        </modal>
+
+        <!--生的具体信息显示-->
+        <modal :show_modal="show_tooltip_student" v-on:fireclose="close_tooltip_student" class="zxw-modal-character">
+            <div slot="header" class="zxw-relation-modal-header"></div>
+            <div slot="body" class="zxw-relation-modal-body">
+                <p class="zxw-relation-info" v-for="item in this.$store.getters.get_build_character.student_standard_name">{{item}}</p>
+            </div>
+        </modal>
+
+        <!--友的具体信息显示-->
+        <modal :show_modal="show_tooltip_friend" v-on:fireclose="close_tooltip_friend" class="zxw-modal-character">
+            <div slot="header" class="zxw-relation-modal-header"></div>
+            <div slot="body" class="zxw-relation-modal-body">
+                <p class="zxw-relation-info" v-for="item in this.$store.getters.get_build_character.friend_standard_name">{{item}}</p>
+            </div>
+        </modal>
     </div>
+
 </template>
 
 <script>
+    /*let Mock = require('mockjs');
+    Mock.mock('/ancient_books/add_person.action','post', {
+        "status|200":200,
+        "id|123":123
+    });
+
+    Mock.mock('/ancient_books/getToken.action','get', {
+        "token|200":100,
+    });*/
+
     import create_word from '../../../../component/create-word.vue';
     import success_create from '../../../../component/success_create.vue';
+    import modal from '../../../../component/modal.vue';
     export default{
         components:{
             create_word,
-            success_create
+            success_create,
+            modal
         },
 
         created(){
@@ -122,6 +192,13 @@
 
         data(){
             return{
+                show_tooltip_son:false,
+                show_tooltip_daughter:false,
+                show_tooltip_brother:false,
+                show_tooltip_sister:false,
+                show_tooltip_teacher:false,
+                show_tooltip_student:false,
+                show_tooltip_friend:false,
                 prams:'',
                 show_info:false,
                 remark_1_name:'',
@@ -134,9 +211,51 @@
         },
 
         methods:{
+            modal_fadeout(response){
+               this.show_info=false;
+               this.$router.push({name:'char_detail',params:{nouId:response.body.id}});
+            },
             success_create(response){
-                //this.show_info=true;
-                this.$router.push({name:'char_detail',params:{nouId:response.body.id}});
+                this.show_info=true;
+                //路由跳转
+                //清空Vuex
+                setTimeout(this.modal_fadeout(response),20000);
+                console.log("hh");
+                this.$store.getters.get_build_character.standard_name = '';
+                this.$store.getters.get_build_character.person_name='';
+                this.$store.getters.get_build_character.xing='';
+                this.$store.getters.get_build_character.shi='';
+                this.$store.getters.get_build_character.zi='';
+                this.$store.getters.get_build_character.other_name='';
+                this.$store.getters.get_build_character.birth_time_id='';
+                this.$store.getters.get_build_character.birth_standard_name='';
+                this.$store.getters.get_build_character.death_time_id='';
+                this.$store.getters.get_build_character.death_standard_name='';
+                this.$store.getters.get_build_character.remark_1_name='';
+                this.$store.getters.get_build_character.remark_2_name='';
+                this.$store.getters.get_build_character.remark_1='';
+                this.$store.getters.get_build_character.remark_2='';
+                this.$store.getters.get_build_character.english='';
+                this.$store.getters.get_build_character.location_id='';
+                this.$store.getters.get_build_character.location='';
+                this.$store.getters.get_build_character.father={};
+                this.$store.getters.get_build_character.mother={};
+                this.$store.getters.get_build_character.son.splice(0,this.$store.getters.get_build_character.son.length);
+                this.$store.getters.get_build_character.daughter.splice(0,this.$store.getters.get_build_character.daughter.length);
+                this.$store.getters.get_build_character.brother.splice(0,this.$store.getters.get_build_character.brother.length);
+                this.$store.getters.get_build_character.sister.splice(0,this.$store.getters.get_build_character.sister.length);
+                this.$store.getters.get_build_character.teacher.splice(0,this.$store.getters.get_build_character.teacher.length);
+                this.$store.getters.get_build_character.student.splice(0,this.$store.getters.get_build_character.student.length);
+                this.$store.getters.get_build_character.father_standard_name='';
+                this.$store.getters.get_build_character.mother_standard_name='';
+                this.$store.getters.get_build_character.friend.splice(0,this.$store.getters.get_build_character.friend.length);
+                this.$store.getters.get_build_character.son_standard_name.splice(0,this.$store.getters.get_build_character.son_standard_name.length);
+                this.$store.getters.get_build_character.daughter_standard_name.splice(0,this.$store.getters.get_build_character.daughter_standard_name.length);
+                this.$store.getters.get_build_character.brother_standard_name.splice(0,this.$store.getters.get_build_character.brother_standard_name.length);
+                this.$store.getters.get_build_character.sister_standard_name.splice(0,this.$store.getters.get_build_character.sister_standard_name.length);
+                this.$store.getters.get_build_character.teacher.splice(0,this.$store.getters.get_build_character.teacher_standard_name.length);
+                this.$store.getters.get_build_character.student.splice(0,this.$store.getters.get_build_character.student_standard_name.length);
+                this.$store.getters.get_build_character.friend.splice(0,this.$store.getters.get_build_character.friend_standard_name.length);
             },
 
             fail_create(){
@@ -198,7 +317,85 @@
                     this.create_character.person_relations.push(this.$store.getters.get_build_character.friend[f]);
                 }
                 this.http_json(this.create_character_url,'post',this.create_character,this.success_create,this.fail_create);
-            }
+            },
+
+            /*查看子的人物关系*/
+            show_tooltipinfo_son(){
+                if(this.$store.getters.get_build_character.son_standard_name.length !== 0){
+                    this.show_tooltip_son = true;
+                }
+                //window.setTimeout(function(){document.getElementById("ss").modal("hide")},10);
+            },
+
+            close_tooltip_son(){
+                this.show_tooltip_son = false;
+            },
+
+            /*查看女儿人物关系*/
+            show_tooltipinfo_daughter(){
+                if(this.$store.getters.get_build_character.daughter_standard_name.length !== 0){
+                    this.show_tooltip_daughter = true;
+                }
+            },
+
+            close_tooltip_daughter(){
+                this.show_tooltip_daughter = false;
+            },
+
+            /*查看兄弟人物关系*/
+            show_tooltipinfo_brother(){
+                if(this.$store.getters.get_build_character.brother_standard_name.length !== 0){
+                    this.show_tooltip_brother = true;
+                }
+            },
+
+            close_tooltip_brother(){
+                this.show_tooltip_brother = false;
+            },
+
+            /*查看姐妹人物关系*/
+            show_tooltipinfo_sister(){
+                if(this.$store.getters.get_build_character.sister_standard_name.length !== 0){
+                    this.show_tooltip_sister = true;
+                }
+            },
+
+            close_tooltip_sister(){
+                this.show_tooltip_sister = false;
+            },
+
+            /*查看师人物关系*/
+            show_tooltipinfo_teacher(){
+                if(this.$store.getters.get_build_character.teacher_standard_name.length !== 0){
+                    this.show_tooltip_teacher = true;
+                }
+            },
+
+            close_tooltip_teacher(){
+                this.show_tooltip_teacher = false;
+            },
+
+            /*查看生人物关系*/
+            show_tooltipinfo_student(){
+                if(this.$store.getters.get_build_character.student_standard_name.length !== 0){
+                    this.show_tooltip_student = true;
+                }
+            },
+
+            close_tooltip_student(){
+                this.show_tooltip_student = false;
+            },
+
+            /*查看友人物关系*/
+            show_tooltipinfo_friend(){
+                if(this.$store.getters.get_build_character.friend_standard_name.length !== 0){
+                    this.show_tooltip_friend = true;
+                }
+            },
+
+            close_tooltip_friend(){
+                this.show_tooltip_friend = false;
+            },
         }
     }
 </script>
@@ -210,5 +407,15 @@
         height:30px;
         width:220px;
         font-weight: bold;
+    }
+
+    .zxw-relation-modal-header{
+        width:50px;
+        height:15px;
+    }
+
+
+    .zxw-relation-info{
+        margin:20px 0 5px 30px;
     }
 </style>

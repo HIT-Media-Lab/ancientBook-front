@@ -6,8 +6,8 @@
             <span v-model="shu">{{shu}}</span>
         </p>
         <div class="j-bls-book1">
-            <router-link to="/bookstore/book_info" style="color: #8a6d3b;" v-for="item in books">
-                <p class="j-bls-bookname">{{item}}</p>
+            <router-link to="/bookstore/book_info" style="color: #8a6d3b;" v-for="(item,index) in books">
+                <p class="j-bls-bookname">{{index+1}}、{{item}}</p>
             </router-link>
         </div>
         <div class="j-bls-page">
@@ -30,10 +30,10 @@
                 lei:'',
                 shu:'',
                 book_url:'/ancient_books/search_ancient_book_by_bls.action',
-                total_page: 0,
+                total_page: 1,
                 content_name:[],
                 content_id:[],
-                books:[],
+                books:[]
             }
         },
         created: function () {
@@ -45,16 +45,26 @@
             }
         },
         methods: {
+
+//            this.$route.params.bu = this.item_name.bu;
+//    this.$route.params.lei = this.item_name.lei;
+//    this.$route.params.shu = this.item_name.shu;
+
+
             get_bls(){
-                this.bls = this.$store.getters.get_bls;
-                this.bls_name = this.$store.getters.get_bls_name;
-                let item = this.book_url + "?bu=" + this.bls.bu +"&&lei=" + this.bls.lei + "&&shu=" + this.bls.shu + "&&page_conut=" + this.$route.params.pageId;
-                this.bu = this.bls_name.bu;
-                this.lei = this.bls_name.lei;
-                this.shu = this .bls_name.shu;
+//                this.bls = this.$store.getters.get_bls;
+//                this.bls_name = this.$store.getters.get_bls_name;
+                let item = this.book_url + "?bu=" + this.$route.params.bu_id +"&&lei=" + this.$route.params.lei_id + "&&shu=" + this.$route.params.shu_id + "&&page_conut=" + this.$route.params.pageId;
+                this.bu = this.$route.params.bu;
+                this.lei = this.$route.params.lei;
+                this.shu = this.$route.params.shu;
                 this.http_json(item, 'get', item, this.success1, this.fail1)
             },
             success1(response){
+                this.books = [];
+                this.content_name = [];
+                this.content_id = [];
+                this.total_page = 0;
                 this.total_page = response.body.total_page;
                 for (let i = 0; i < response.body.content.length; i++){
                     this.content_name[i] = response.body.content[i].standard_name;
@@ -62,6 +72,8 @@
                 }
                 for (let i = 0; i < 20; i++){
                     this.books[i] = this.content_name[i];
+                    console.log(this.content_name[i]);
+                    console.log(this.books[i]);
                 }
                 console.log(this.books);
             },
@@ -93,7 +105,10 @@
         margin-top: 35px;
     }
     .j-bls-bookname{
-        margin-bottom: 20px;
+        margin-bottom: 5px;
+    }
+    .j-bls-bookname:hover{
+        color: #a50000;
     }
     .j-bls-page{
         margin-top: 50px;

@@ -50,7 +50,6 @@
                 noumenon_button.className = "";
             },
             change_button(){
-                alert(this.$route.name);
                 if(this.$route.name == "search_book"){
                     this.remove_noumenon()
                 }else if(this.$route.name == "search_noumenon"){

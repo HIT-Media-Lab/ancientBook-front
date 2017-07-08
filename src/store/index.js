@@ -127,15 +127,15 @@ const store = new Vuex.Store({
         texts : [],
         upload1_info:{},
         create_character:{
-            standard_name:'',
+            standard_name:'hh',
             person_name:'',
             xing:'',
             shi:'',
             zi:'',
             other_name:'',
-            birth_time_id:'',
+            birth_time_id:'2',
             birth_standard_name:'',
-            death_time_id:'',
+            death_time_id:'1',
             death_standard_name:'',
             remark_1_name:'',
             remark_2_name:'',
@@ -167,7 +167,8 @@ const store = new Vuex.Store({
         create_one_selection:0,
 
         sort_item:{},
-        sort_item_name:{}
+        sort_item_name:{},
+        search_content: ''
     },
     getters,
     mutations,
