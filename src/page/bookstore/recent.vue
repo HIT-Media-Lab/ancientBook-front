@@ -44,8 +44,8 @@
                 for(let i = 0; i < this.length; i++) {
                     let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.recent_book[i].id;
                     this.http_json(item, 'get', item, this.success_page, this.fail_id);
-                    console.log(this.response.body[i].id);
-                    document.getElementById(this.response.body[i].id).src = this.picture_id_url;
+                    console.log(response.body[i].id);
+                    document.getElementById(response.body[i].id).src = this.picture_id_url;
                 }
             },
             fail_id(){
