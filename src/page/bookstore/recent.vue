@@ -16,7 +16,7 @@
         },
         created() {
             this.get_id();
-            this.get_picture();
+//            window.setTimeout("get_picture()", 2000);
         },
         data(){
             return{
@@ -50,6 +50,7 @@
 ////                        'ancient_book_id': response.body[i].id
 ////                    };
 //                  }
+                this.get_picture();
             },
             get_picture(){
                 console.log(this.length);
