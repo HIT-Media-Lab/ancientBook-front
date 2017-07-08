@@ -2,7 +2,7 @@
     <div class="j-recent">
         <recent_title class="j-recent-bar" :title="this.title"></recent_title>
         <div v-for="item in recent_book" class="j-picture-name" >
-            <img name=item.id src="" class="j-picture" alt="最近古籍" @click="push_success()">
+            <img src=""  id=item.id class="j-picture" alt="最近古籍" @click="push_success()">
             <p style="color: #0f0f0f; text-align: center" @click="push_success()">{{item.standardName}}</p>
         </div>
     </div>
@@ -70,7 +70,7 @@
 //                this.page_id = response.body.id;
                 let id_url = '';
                 id_url = this.picture_url + '?page_id=' + response.body.id;
-                document.getElementsByName(this.recent_id).src = id_url;
+                document.getElementById(this.recent_id).src = id_url;
             },
 
             push_success(){
