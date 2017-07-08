@@ -10,10 +10,10 @@
                     <router-link to="/bookstore/book_info">
                         <p class="j-book1-word1" >{{item.name}}</p>
                     </router-link>
-                    <p>[{{item.book_info1}}</p>
-                    <p>[{{item.book_info2}}</p>
-                    <p>[{{item.book_info3}}</p>
-                    <p>[{{item.book_info4}}</p>
+                    <p>{{item.book_info1}}</p>
+                    <p>{{item.book_info2}}</p>
+                    <p>{{item.book_info3}}</p>
+                    <p>{{item.book_info4}}</p>
                 </div>
             </div>
         </div>
@@ -63,11 +63,20 @@
                 for (let i = 0; i < this.content.length; i++){
                     this.content[i].name =  response.body.content[i].name;
                     this.content[i].id =  response.body.content[i].id;
-                    this.book_info_split = response.body.content[i].standard_name.split('[' || '【');
-                    this.content[i].book_info1 = this.book_info_split[1];
-                    this.content[i].book_info2 = this.book_info_split[2];
-                    this.content[i].book_info3 = this.book_info_split[3];
-                    this.content[i].book_info4 = this.book_info_split[4];
+                    this.book_info_split = response.body.content[i].standard_name.split('[');
+                    if (this.book_info_split.length > 1){
+                        this.content[i].book_info1 = '[' + this.book_info_split[1];
+                        this.content[i].book_info2 = '[' + this.book_info_split[2];
+                        this.content[i].book_info3 = '[' + this.book_info_split[3];
+                        this.content[i].book_info4 = '[' + this.book_info_split[4];
+                    }else {
+                        this.book_info_split = response.body.content[i].standard_name.split('【');
+                        this.content[i].book_info1 = '【' + this.book_info_split[1];
+                        this.content[i].book_info2 = '【' + this.book_info_split[2];
+                        this.content[i].book_info3 = '【' + this.book_info_split[3];
+                        this.content[i].book_info4 = '【' + this.book_info_split[4];
+                    }
+
                     console.log(this.content);
                 }
             },
