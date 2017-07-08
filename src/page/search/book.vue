@@ -37,7 +37,7 @@
         },
         data(){
             return{
-                content: [{},{},{},{},{},{},{},{},{},{}],
+                content: [],
                 book_info: '',
                 book_info_split: [],
                 book_info1:'',
@@ -60,23 +60,30 @@
                 this.search_number = response.body.total_number;
                 this.total_page = response.body.total_page;
                 console.log(this.content.length);
-                for (let i = 0; i < this.content.length; i++){
-                    this.content[i].name =  response.body.content[i].name;
-                    this.content[i].id =  response.body.content[i].id;
+                for (let i = 0; i < response.body.content; i++){
+//                    this.content[i].name =  response.body.content[i].name;
+//                    this.content[i].id =  response.body.content[i].id;
                     this.book_info_split = response.body.content[i].standard_name.split('[');
                     if (this.book_info_split.length > 1){
-                        this.content[i].book_info1 = '[' + this.book_info_split[1];
-                        this.content[i].book_info2 = '[' + this.book_info_split[2];
-                        this.content[i].book_info3 = '[' + this.book_info_split[3];
-                        this.content[i].book_info4 = '[' + this.book_info_split[4];
+                        this.book_info1 = '[' + this.book_info_split[1];
+                        this.book_info2 = '[' + this.book_info_split[2];
+                        this.book_info3 = '[' + this.book_info_split[3];
+                        this.book_info4 = '[' + this.book_info_split[4];
                     }else {
                         this.book_info_split = response.body.content[i].standard_name.split('【');
-                        this.content[i].book_info1 = '【' + this.book_info_split[1];
-                        this.content[i].book_info2 = '【' + this.book_info_split[2];
-                        this.content[i].book_info3 = '【' + this.book_info_split[3];
-                        this.content[i].book_info4 = '【' + this.book_info_split[4];
+                        this.book_info1 = '【' + this.book_info_split[1];
+                        this.book_info2 = '【' + this.book_info_split[2];
+                        this.book_info3 = '【' + this.book_info_split[3];
+                        this.book_info4 = '【' + this.book_info_split[4];
                     }
-
+                    this.content.push({
+                        name: response.body.content[i].name,
+                        id: response.body.content[i].id,
+                        book_info1: this.book_info1,
+                        book_info2: this.book_info2,
+                        book_info3: this.book_info3,
+                        book_info4: this.book_info4
+                    });
                     console.log(this.content);
                 }
             },
