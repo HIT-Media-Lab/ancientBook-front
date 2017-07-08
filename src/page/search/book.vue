@@ -53,7 +53,7 @@
         methods:{
             get_search(){
                 this.search_content = this.$store.getters.get_search_content;
-                let url = this.search_url + '?name=' + this.search_url + '&&page_conut=' + this.$route.params.pageId;
+                let url = this.search_url + '?name=' + this.search_content + '&&page_conut=' + this.$route.params.pageId;
                 this.http_json( url, 'get', url, this.success1, this.fail1)
             },
             success1(response){
