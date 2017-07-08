@@ -2,7 +2,7 @@
     <div class="j-recent">
         <recent_title class="j-recent-bar" :title="this.title"></recent_title>
         <div v-for="item in recent_book" class="j-picture-name" >
-            <img src=""  id={{item.id}} class="j-picture" alt="最近古籍" @click="push_success()" v-model="item.id">
+            <img src=""  class="j-picture" alt="最近古籍" @click="push_success()" >
             <p style="color: #0f0f0f; text-align: center" @click="push_success()">{{item.standardName}}</p>
         </div>
     </div>
@@ -27,9 +27,11 @@
                 id_url:'/ancient_books/get_recient_ancient_book_list.action',
                 picture_url: '/ancient_books/get_picture_by_id.action',
                 picture_page_url: "/ancient_books/get_page_id_by_jcy.action",
+                picture_id_url:'',
                 book_cover:{},
                 recent_id:'',
-                length: 0
+                length: 0,
+                a: []
             }
         },
         methods: {
@@ -41,15 +43,6 @@
                 this.recent_book = response.body;
                 this.length = response.body.length;
                 console.log(this.length);
-//                for (let i = 0; i < response.body.length; i++) {
-//                    let id_url = '';
-////                    this.book_cover = {
-////                        'book': '1',
-////                        'volume': '1',
-////                        'page': '1',
-////                        'ancient_book_id': response.body[i].id
-////                    };
-//                  }
                 this.get_picture();
             },
             get_picture(){
@@ -59,6 +52,8 @@
                     let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.recent_book[i].id;
                     this.recent_id = this.recent_book[i].id;
                     this.http_json(item, 'get', item, this.success_page, this.fail_id);
+                    this.a =  document.getElementsByClassName('j-picture');
+                    this.a[i].setAttribute("src", this.picture_id_url)
                 }
             },
 
@@ -67,10 +62,7 @@
 
             },
             success_page(response){
-//                this.page_id = response.body.id;
-                let id_url = '';
-                id_url = this.picture_url + '?page_id=' + response.body.id;
-                document.getElementById(this.recent_id).src = id_url;
+                this.picture_id_url = this.picture_url + '?page_id=' + response.body.id;
             },
 
             push_success(){
