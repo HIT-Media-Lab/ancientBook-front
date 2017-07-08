@@ -16,12 +16,8 @@
         },
         created() {
             this.get_id();
-        },
-        mounted() {
             this.get_picture();
         },
-
-
         data(){
             return{
                 title: '最近',
@@ -39,7 +35,7 @@
         methods: {
             get_id(){
                 this.http_json(this.id_url, 'get',{}, this.success_id, this.fail_id);
-                console.log("最近");
+
             },
             success_id(response){
                 this.recent_book = response.body;
@@ -56,9 +52,9 @@
 //                  }
             },
             get_picture(){
-                console.log("执行了mounted");
-                for(let i = 0; i<this.length; i++) {
-                    console.log(this.recent_book[i].id);
+                console.log(this.length);
+                for(let i = 0; i < this.length; i++) {
+                    console.log( this.recent_book[i].id);
                     let id_url = '';
                     let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.recent_book[i].id;
                     this.http_json(item, 'get', item, this.success_page, this.fail_id);
