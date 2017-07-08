@@ -14,15 +14,11 @@
             <span class="user-name" @click="show_login" v-model="name">{{name}}</span>
             <div class="down-box"  v-show="sort_box.length!=0">
                 <ul>
-                    <li class="sort-box1" @click="push_search()">
-                        <router-link to="/search_index" style="color: #0f0f0f" >
-                            搜古籍：{{sort_box}}
-                        </router-link>
+                    <li class="sort-box1" @click="push_search1()" style="color: #0f0f0f">
+                        搜古籍：{{sort_box}}
                     </li>
-                    <li class="sort-box2" @click="push_search()">
-                        <router-link to="/search_index/search_noumenon" style="color: #0f0f0f">
-                            搜本体：{{sort_box}}
-                        </router-link>
+                    <li class="sort-box2" @click="push_search2()" style="color: #0f0f0f">
+                        搜本体：{{sort_box}}
                     </li>
                 </ul>
             </div>
@@ -136,8 +132,16 @@
                 }
             },
 
-            push_search(){
+            push_search1(){
                 this.$store.commit('push_search_content', this.sort_box);
+                console.log(this.$store.getters.get_search_content);
+                this.$router.push("/search_index");
+            },
+
+            push_search2(){
+                this.$store.commit('push_search_content', this.sort_box);
+                console.log(this.$store.getters.get_search_content);
+                this.$router.push("/search_index/search_noumenon");
             },
 
             /**
