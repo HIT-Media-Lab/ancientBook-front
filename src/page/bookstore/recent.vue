@@ -29,9 +29,8 @@
                 picture_page_url: "/ancient_books/get_page_id_by_jcy.action",
                 picture_id_url:'',
                 book_cover:{},
-                recent_id:'',
+//                recent_id:'',
                 length: 0,
-                a: []
             }
         },
         methods: {
@@ -47,13 +46,13 @@
             },
             get_picture(){
                 console.log(this.length);
+                let a = document.getElementsByClassName('j-picture');
                 for(let i = 0; i < this.length; i++) {
                     console.log( this.recent_book[i].id);
                     let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.recent_book[i].id;
-                    this.recent_id = this.recent_book[i].id;
+//                    this.recent_id = this.recent_book[i].id;
                     this.http_json(item, 'get', item, this.success_page, this.fail_id);
-                    this.a =  document.getElementsByClassName('j-picture');
-                    this.a[i].setAttribute("src", this.picture_id_url)
+                    a[i].setAttribute("src", this.picture_id_url)
                 }
             },
 
