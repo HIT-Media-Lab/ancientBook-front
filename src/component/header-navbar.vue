@@ -168,7 +168,7 @@
                 }
             },
             coverCode(){
-              document.getElementById("v_picture").src = this.code_url+'?'+(new Date()).getTime()
+                document.getElementById("v_picture").src = this.code_url+'?'+(new Date()).getTime()
             },
 
             create_v_picture(){
