@@ -14,7 +14,7 @@
         components:{
             recent_title
         },
-        created: function () {
+        mounted: function () {
             this.get_id();
         },
         data(){
@@ -39,7 +39,6 @@
                 this.recent_book = response.body;
                 for (let i = 0; i < response.body.length; i++) {
                     let id_url = '';
-                    console.log("获得最近古籍没问题");
 //                    this.book_cover = {
 //                        'book': '1',
 //                        'volume': '1',
@@ -50,7 +49,6 @@
                     this.http_json(item, 'get', item, this.success_page, this.fail_id);
                     id_url = this.picture_url + '?page_id=' + this.page_id;
                     document.getElementById(response.body[i].id).src = id_url;
-                    console.log("得到最近成功")
                 }
             },
             fail_id(){

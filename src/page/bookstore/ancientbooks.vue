@@ -6,8 +6,8 @@
             <span v-model="shu">{{shu}}</span>
         </p>
         <div class="j-bls-book1">
-            <router-link to="/bookstore/book_info" style="color: #8a6d3b;" v-for="item in books">
-                <p class="j-bls-bookname">{{item}}</p>
+            <router-link to="/bookstore/book_info" style="color: #8a6d3b;" v-for="(item,index) in books">
+                <p class="j-bls-bookname">{{index+1}}、{{item}}</p>
             </router-link>
         </div>
         <div class="j-bls-page">
@@ -33,7 +33,7 @@
                 total_page: 9,
                 content_name:[],
                 content_id:[],
-                books:[],
+                books:[]
             }
         },
         created: function () {
