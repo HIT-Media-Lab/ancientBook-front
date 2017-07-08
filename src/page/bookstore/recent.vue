@@ -2,7 +2,7 @@
     <div class="j-recent">
         <recent_title class="j-recent-bar" :title="this.title"></recent_title>
         <div v-for="item in recent_book" class="j-picture-name" >
-            <img :src="book_id" :id="item.id" class="j-picture" alt="最近古籍" @click="push_success()" >
+            <img src="" :id="item.id" class="j-picture" alt="最近古籍" @click="push_success()" >
             <p style="color: #0f0f0f; text-align: center" @click="push_success()">{{item.name}}</p>
         </div>
     </div>
