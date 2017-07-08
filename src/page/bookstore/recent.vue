@@ -50,7 +50,8 @@
                     console.log( this.recent_book[i].id);
                     let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.recent_book[i].id;
                     this.http_json(item, 'get', item, this.success_page, this.fail_id);
-                    document.getElementsByClassName('j-picture')[i].setAttribute("src", this.picture_id_url);
+                    console.log("不行写了" + document.getElementsByTagName("img")[i]);
+                    document.getElementsByTagName("img")[i].setAttribute("src", this.picture_id_url);
                 }
             },
 
