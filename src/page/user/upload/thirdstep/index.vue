@@ -13,15 +13,14 @@
         </div>
 
         <div class="width950 height650 center ry-scroll">
-            <div class="row">
-                <div class="ry-picture-view" v-for="image in images">
-                    <img :src="image"/>
-                </div>
-                <div class="ry-picture-view">
-                    <a href="javascript:;" class="ry-file-picture">添加图片
-                        <input id="add" type="file" @change="onFileChange" multiple name="picture">
-                    </a>
-                </div>
+            <div id="div1" class="ry-picture-box" v-for="image in images" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <img id="drag1" :src="image" class="ry-picture-view" draggable="true" ondragstart="drag(event)"/>
+                <p class="picture-names" style="text-align: center"></p>
+            </div>
+            <div class="ry-picture-box">
+                <a href="javascript:;" class="ry-picture-view">
+                    <input id="add" type="file" @change="onFileChange" multiple name="picture">
+                </a>
             </div>
         </div>
 
@@ -82,6 +81,10 @@
             this.picture_name = this.$store.getters.get_picture_name;
         },
 
+        mounted : function () {
+            this.view_names();
+        },
+
         beforeRouteLeave(to, from, next) {
             this.$store.commit("get_images",this.images);
             this.$store.commit("get_texts",this.texts);
@@ -90,6 +93,9 @@
         },
 
         methods : {
+            /**
+             * 添加上传图片
+             */
             onFileChange(e) {
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)return;
@@ -99,7 +105,9 @@
                     var temp = obj.files[i].name;
                     this.picture_name.push(temp);
                 }
+                this.view_names();
             },
+
             createImage(file) {
                 if (typeof FileReader === 'undefined') {
                     alert('您的浏览器不支持图片上传，请升级您的浏览器');
@@ -116,6 +124,39 @@
                 }
             },
 
+
+            /**
+             * 渲染图片文件名称
+             */
+            view_names() {
+                var ps = document.getElementsByClassName("picture-names");
+                for(var i = 0; i < ps.length; i++) {
+                    ps[i].innerText = this.picture_name[i]
+                }
+            },
+
+
+            /**
+             * 拖动图片
+             */
+            allowDrop(ev) {
+                ev.preventDefault();
+            },
+
+            drag(ev) {
+                ev.dataTransfer.setData("URL",ev.target.id);
+            },
+
+            drop(ev) {
+                ev.preventDefault();
+                var data=ev.dataTransfer.getData("URL");
+                ev.target.appendChild(document.getElementById(data));
+            },
+
+
+            /**
+             * 取消上传
+             */
             cancel_upload() {
                 this.$router.push({path: '/user'});
             },
@@ -128,6 +169,10 @@
                 this.$router.push({path:'/bookstore/book_info'});
             },
 
+
+            /**
+             * post上传请求
+             */
             complete_upload() {
                 this.varieties_item = this.$store.getters.get_varieties_item;
                 this.edition_item = this.$store.getters.get_edition_item;
@@ -222,8 +267,11 @@
     .ry-picture-view{
         width: 120px;
         height: 160px;
+    }
+
+    .ry-picture-box{
         display: inline-block;
-        margin: 30px;
+        margin: 15px 30px;
     }
 
     .height650{
