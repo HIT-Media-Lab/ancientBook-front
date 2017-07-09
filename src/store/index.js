@@ -126,7 +126,7 @@ const store = new Vuex.Store({
         },
         upload1_info:{},
         create_character:{
-            standard_name:'hh',
+            standard_name:'',
             person_name:'',
             xing:'',
             shi:'',

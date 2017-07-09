@@ -9,7 +9,7 @@
                 <input class="zxw-search-input" type="search" v-model="search_content">
                 <button class="zxw-search-icon" @click="search_character()" v-bind:disabled="search_content === ''"></button>
             </div>
-            <p class="zxw-search-tip" v-show="show_tip">请在输入框中输入本体规范名称进行搜索</p>
+            <p class="zxw-search-tip" v-if="show_tip === true">请在输入框中输入本体规范名称进行搜索</p>
 
             <!--显示搜索成功的结果-->
             <div class="zxw-search-success" v-for="(result,index) in search_result">
@@ -89,15 +89,15 @@
     Mock.mock('/ancient_books/get_person_list_by_name.action?name=dc&&page_count=1','get', {
         "content":[
             {
-                "standard_name":"邓超",
+                "standard_name":"邓超(1996西周韩国)",
                 "noumenon_id|100":50
             },
             {
-                "standard_name":"邓超",
+                "standard_name":"邓超(1996西周韩国)",
                 "noumenon_id|100":50
             },
             {
-                "standard_name":"邓超",
+                "standard_name":"邓超(1996西周韩国)",
                 "noumenon_id|100":50
             },
         ]
@@ -145,6 +145,7 @@
                 this.$emit('close_modal');
                 this.search_content = '';
                 this.search_result.splice(0,this.search_result.length);
+                this.show_tip = false;
             },
 
             /*搜索本体*/
@@ -181,9 +182,8 @@
             },
 
             search_character(){
-                let new_url;
                 let search_object = {};
-                new_url = this.search_url+'?name='+this.search_content+'&&page_count=1';
+                let new_url = this.search_url+'?name='+this.search_content+'&&page_count=1';
                 this.http_json(new_url,'get',search_object,this.success_search,this.fail_search);
             },
 
@@ -280,8 +280,8 @@
 
     .zxw-search-result{
         display: inline-block;
-        width:100px;
-        margin:0 50% 0 3%;
+        width:200px;
+        margin:0 80px 0 15px;
     }
 
     .zxw-fail-tip{

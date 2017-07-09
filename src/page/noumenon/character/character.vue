@@ -117,7 +117,7 @@
 </template>
 
 <script>
-    let Mock = require('mockjs');
+    /*let Mock = require('mockjs');
      //显示用户列表
      Mock.mock('/ancient_books/get_person_by_id.action?id=1','get',{
      "status|200":200,
@@ -198,7 +198,7 @@
              "person_id|100-1000": 1,
              "person_name|10000": 1
          }]
-     });
+     });*/
     import noumenon_title from '../../../component/noumenon-title.vue';
     import noumenon_button from '../../../component/noumenon-button.vue';
     export default{

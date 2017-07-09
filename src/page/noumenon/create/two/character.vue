@@ -7,7 +7,7 @@
         <p class="zxw-create-character" v-bind="standard_title" v-model="input_content.standard_name">本体名称：{{input_content.standard_name}}</p>
         <div class="zxw-character-row">
             <label class="zxw-character-span zxw-must-write">人名：</label>
-            <input type="text"  class="zxw-character-input zxw-character-input-margin" v-model="input_content.person_name" @blur="input_chinese()" v-bind:class="{'zxw-input-chinese':show_input}">
+            <input type="text"  class="zxw-character-input zxw-character-input-margin" v-model="input_content.person_name" @change="input_chinese()" v-bind:class="{'zxw-input-chinese':show_input}">
             <label class="zxw-character-span">英译：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_content.english">
         </div>
@@ -37,60 +37,105 @@
             <label class="zxw-character-span">籍贯：</label>
             <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_content.location">
             <label class="zxw-character-span">父：</label>
-            <div class="zxw-character-input zxw-character-input-margin">
-                <p class="zxw-person-relation-span" v-model="input_content.father_standard_name" @mouseover="show_father = true" @mouseout="show_father = false">{{input_content.father_standard_name}}<button class="zxw-add-hover-img" v-show="show_father===true" @click="delete_father()"></button></p>
+            <div  class="zxw-character-input zxw-character-input-margin">
+                <div class="zxw-div-input" placeholder="点击右侧按钮添加">
+                    <span class="zxw-person-relation-span"  @mouseover="show_father = true" @mouseout="show_father = false" v-if="input_content.father_standard_name !== ''">
+                        <span contenteditable="false" v-model="input_content.father_standard_name">{{input_content.father_standard_name}}</span>
+                        <button class="zxw-add-hover-img" contenteditable="false" v-show="show_father===true" @click="delete_father()"></button>
+                    </span>
+                </div>
                 <button class="zxw-input-add-character" @click="open_father()"></button>
             </div>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">母：</label>
-            <div class="zxw-character-input zxw-character-input-margin">
-                <p class="zxw-person-relation-span" v-model="input_content.father_standard_name" @mouseover="show_mother = true" @mouseout="show_mother = false">{{input_content.mother_standard_name}}<button class="zxw-add-hover-img" v-show="show_mother===true" @click="delete_mother()"></button></p>
-                <button class="zxw-input-add-character" @click="open_mother()"></button>
+            <div  class="zxw-character-input zxw-character-input-margin">
+                <div class="zxw-div-input" placeholder="点击右侧按钮添加">
+                    <span class="zxw-person-relation-span"  @mouseover="show_mother = true" @mouseout="show_mother = false" v-if="input_content.mother_standard_name !== ''">
+                        <span contenteditable="false" v-model="input_content.mother_standard_name">{{input_content.mother_standard_name}}</span>
+                        <button class="zxw-add-hover-img" contenteditable="false" v-show="show_mother===true" @click="delete_mother()"></button>
+                    </span>
+                </div>
+                <button class="zxw-input-add-character" @click="open_father()"></button>
             </div>
             <label class="zxw-character-span">子：</label>
-            <div class="zxw-character-input zxw-character-input-margin">
-                <span class="zxw-person-relation-span" v-for="(item,index) in input_content.son_standard_name"  @mouseover="show_son=index" @mouseout="show_son =-1">{{item}}<button class="zxw-add-hover-img" v-show="show_son === index" @click="delete_son(index)"></button></span>
+            <div  class="zxw-character-input zxw-character-input-margin">
+                <div id="son" class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" @mousedown="son_edit()">
+                    <span class="zxw-person-relation-span" v-for="(item,index) in input_content.son_standard_name"  @mouseover="show_son=index" @mouseout="show_son =-1">
+                        <span contenteditable="false">{{item}}</span>
+                        <button class="zxw-add-hover-img" contenteditable="false" v-show="show_son === index" @click="delete_son(index)"></button>
+                    </span>
+                </div>
                 <button class="zxw-input-add-character" @click="open_son()"></button>
             </div>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">女：</label>
-            <div class="zxw-character-input zxw-character-input-margin">
-                <p class="zxw-person-relation-span" v-for="(item,index) in input_content.daughter_standard_name"  @mouseover="show_daughter=index" @mouseout="show_daughter =-1">{{item}}<button class="zxw-add-hover-img" v-show="show_daughter === index" @click="delete_daughter(index)"></button></p>
+            <div  class="zxw-character-input zxw-character-input-margin">
+                <div id="daughter" class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" @mousedown="daughter_edit()">
+                    <span class="zxw-person-relation-span" v-for="(item,index) in input_content.daughter_standard_name"  @mouseover="show_daughter=index" @mouseout="show_daughter =-1">
+                        <span contenteditable="false">{{item}}</span>
+                        <button class="zxw-add-hover-img" contenteditable="false" v-show="show_daughter === index" @click="delete_daughter(index)"></button>
+                    </span>
+                </div>
                 <button class="zxw-input-add-character" @click="open_daughter()"></button>
             </div>
             <label class="zxw-character-span">兄弟：</label>
-            <div class="zxw-character-input zxw-character-input-margin">
-                <p class="zxw-person-relation-span" v-for="(item,index) in input_content.brother_standard_name"  @mouseover="show_brother=index" @mouseout="show_brother=-1">{{item}}<button class="zxw-add-hover-img" v-show="show_brother === index" @click="delete_brother(index)"></button></p>
+            <div  class="zxw-character-input zxw-character-input-margin">
+                <div id="brother" class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" @mousedown="brother_edit()">
+                    <span class="zxw-person-relation-span" v-for="(item,index) in input_content.brother_standard_name"  @mouseover="show_brother=index" @mouseout="show_brother =-1">
+                        <span contenteditable="false">{{item}}</span>
+                        <button class="zxw-add-hover-img" contenteditable="false" v-show="show_brother === index" @click="delete_brother(index)"></button>
+                    </span>
+                </div>
                 <button class="zxw-input-add-character" @click="open_brother()"></button>
             </div>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">姐妹：</label>
-            <div class="zxw-character-input zxw-character-input-margin">
-                <p class="zxw-person-relation-span" v-for="(item,index) in input_content.sister_standard_name"  @mouseover="show_sister=index" @mouseout="show_sister=-1">{{item}}<button class="zxw-add-hover-img" v-show="show_sister === index" @click="delete_sister(index)"></button></p>
+            <div  class="zxw-character-input zxw-character-input-margin">
+                <div id="sister" class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" @mousedown="sister_edit()">
+                    <span class="zxw-person-relation-span" v-for="(item,index) in input_content.sister_standard_name"  @mouseover="show_sister=index" @mouseout="show_sister =-1">
+                        <span contenteditable="false">{{item}}</span>
+                        <button class="zxw-add-hover-img" contenteditable="false" v-show="show_sister === index" @click="delete_sister(index)"></button>
+                    </span>
+                </div>
                 <button class="zxw-input-add-character" @click="open_sister()"></button>
             </div>
             <label class="zxw-character-span">师：</label>
-            <div class="zxw-character-input zxw-character-input-margin">
-                <p class="zxw-person-relation-span" v-for="(item,index) in input_content.teacher_standard_name"  @mouseover="show_teacher=index" @mouseout="show_teacher=-1">{{item}}<button class="zxw-add-hover-img" v-show="show_teacher === index" @click="delete_teacher(index)"></button></p>
+            <div  class="zxw-character-input zxw-character-input-margin">
+                <div id="teacher" class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" @mousedown="teacher_edit()">
+                    <span class="zxw-person-relation-span" v-for="(item,index) in input_content.teacher_standard_name"  @mouseover="show_teacher=index" @mouseout="show_teacher =-1">
+                        <span contenteditable="false">{{item}}</span>
+                        <button class="zxw-add-hover-img" contenteditable="false" v-show="show_teacher === index" @click="delete_teacher(index)"></button>
+                    </span>
+                </div>
                 <button class="zxw-input-add-character" @click="open_teacher()"></button>
             </div>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">学生：</label>
-            <div class="zxw-character-input zxw-character-input-margin">
-                <p class="zxw-person-relation-span" v-for="(item,index) in input_content.student_standard_name"  @mouseover="show_student=index" @mouseout="show_student=-1">{{item}}<button class="zxw-add-hover-img" v-show="show_student === index" @click="delete_student(index)"></button></p>
+            <div  class="zxw-character-input zxw-character-input-margin">
+                <div id="student" class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" @mousedown="student_edit()">
+                    <span class="zxw-person-relation-span" v-for="(item,index) in input_content.student_standard_name"  @mouseover="show_student=index" @mouseout="show_student =-1">
+                        <span contenteditable="false">{{item}}</span>
+                        <button class="zxw-add-hover-img" contenteditable="false" v-show="show_student === index" @click="delete_student(index)"></button>
+                    </span>
+                </div>
                 <button class="zxw-input-add-character" @click="open_student()"></button>
             </div>
             <label class="zxw-character-span">友：</label>
-            <div class="zxw-character-input zxw-character-input-margin">
-                <p class="zxw-person-relation-span" v-for="(item,index) in input_content.friend_standard_name"  @mouseover="show_friend=index" @mouseout="show_friend=-1">{{item}}<button class="zxw-add-hover-img" v-show="show_friend === index" @click="delete_friend(index)"></button></p>
+            <div  class="zxw-character-input zxw-character-input-margin">
+                <div id="friend" class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" @mousedown="friend_edit()">
+                    <span class="zxw-person-relation-span" v-for="(item,index) in input_content.friend_standard_name"  @mouseover="show_friend=index" @mouseout="show_friend =-1">
+                        <span contenteditable="false">{{item}}</span>
+                        <button class="zxw-add-hover-img" contenteditable="false" v-show="show_friend === index" @click="delete_friend(index)"></button>
+                    </span>
+                </div>
                 <button class="zxw-input-add-character" @click="open_friend()"></button>
             </div>
         </div>
@@ -135,6 +180,7 @@
         created(){
             this.prams = this.$route.name;
             this.show_character_info();
+
         },
 
         components:{
@@ -223,9 +269,16 @@
         },
 
         methods:{
+            down_delete(){
+                let c = event.keyCode;
+                if (c === 8 || c === 46||c===32||(c >= 48 && c <= 57)||(c >= 65 && c <= 90)||(c >= 96 && c <= 105)||c === 106||(c >= 186 && c <= 192)||(c >= 219 && c <= 222)) {
+                    event.returnValue = false;
+                }
+            },
+
             input_chinese(){
                 if(this.input_content.person_name !== '') {
-                    if (/[^\u0000-\u00FF]/.test(this.input_content.person_name) === false) {
+                    if(/[^\u0000-\u00FF]/.test(this.input_content.person_name) === false) {
                         this.show_input = true;
                     } else {
                         this.show_input = false;
@@ -343,6 +396,14 @@
                 console.log('splice son:'+JSON.stringify(this.input_content.son));
             },
 
+            son_edit(){
+                if (this.input_content.son_standard_name.length===0){
+                    document.getElementById("son").contentEditable=false;
+                }else{
+                    document.getElementById("son").contentEditable=true;
+                }
+            },
+
             close_son(){
                 this.son_modal = false;
             },
@@ -366,6 +427,14 @@
                 this.input_content.daughter_standard_name.splice(p,1);
                 this.input_content.daughter.splice(p,1);
                 console.log('splice daughter:'+JSON.stringify(this.input_content.daughter));
+            },
+
+            daughter_edit(){
+                if(this.input_content.daughter_standard_name.length === 0){
+                    document.getElementById("daughter").contentEditable=false;
+                }else{
+                    document.getElementById("daughter").contentEditable=true;
+                }
             },
 
             close_daughter(){
@@ -394,6 +463,14 @@
                 console.log('splice brother:'+JSON.stringify(this.input_content.brother));
             },
 
+            brother_edit(){
+                if(this.input_content.brother_standard_name.length === 0){
+                    document.getElementById("brother").contentEditable=false;
+                }else{
+                    document.getElementById("brother").contentEditable=true;
+                }
+            },
+
             close_brother(){
                 this.brother_modal = false;
             },
@@ -417,6 +494,14 @@
                 this.input_content.sister_standard_name.splice(p,1);
                 this.input_content.sister.splice(p,1);
                 console.log('splice sister:'+JSON.stringify(this.input_content.sister));
+            },
+
+            sister_edit(){
+                if(this.input_content.sister_standard_name.length === 0){
+                    document.getElementById("sister").contentEditable=false;
+                }else{
+                    document.getElementById("sister").contentEditable=true;
+                }
             },
 
             close_sister(){
@@ -444,6 +529,14 @@
                 console.log('splice teacher:'+JSON.stringify(this.input_content.teacher));
             },
 
+            teacher_edit(){
+                if(this.input_content.teacher_standard_name.length === 0){
+                    document.getElementById("teacher").contentEditable=false;
+                }else{
+                    document.getElementById("teacher").contentEditable=true;
+                }
+            },
+
             close_teacher(){
                 this.teacher_modal = false;
             },
@@ -469,6 +562,14 @@
                 console.log('splice student:'+JSON.stringify(this.input_content.student));
             },
 
+            student_edit(){
+                if(this.input_content.student_standard_name.length === 0){
+                    document.getElementById("student").contentEditable=false;
+                }else{
+                    document.getElementById("student").contentEditable=true;
+                }
+            },
+
             close_student(){
                 this.student_modal = false;
             },
@@ -492,6 +593,14 @@
                 this.input_content.friend_standard_name.splice(p,1);
                 this.input_content.friend.splice(p,1);
                 console.log('splice friend:'+JSON.stringify(this.input_content.friend));
+            },
+
+            friend_edit(){
+                if(this.input_content.friend_standard_name.length === 0){
+                    document.getElementById("friend").contentEditable=false;
+                }else{
+                    document.getElementById("friend").contentEditable=true;
+                }
             },
 
             close_friend(){
@@ -548,7 +657,7 @@
         height:30px;
         width:220px;
         text-align: left;
-        padding-left:10px;
+        padding-left:5px;
     }
 
     /*输入框间距*/
@@ -592,18 +701,19 @@
     .zxw-input-add-character{
         background-image: url("../../../../assets/img/add-character.png");
         background-repeat: no-repeat;
-        background-position: center;
-        background-size: 100%;
+        background-position: right;
+        background-size: 20px 20px;
         width:20px;
         height:20px;
         float:right;
         margin:3px 3px 0 0;
+        position: static;
     }
 
     .zxw-person-relation-span{
         display:inline-block;
-        margin:3px 5px 0 0;
-        width:auto;
+        margin:0 5px 0 0;
+        padding:0 3px 0 3px;
         background-color: #f5dece;
     }
 
@@ -616,8 +726,28 @@
         height:10px;
         float:right;
     }
+
     .zxw-input-chinese{
         border-color:#a50000;
+    }
+
+    .zxw-div-input{
+        display:inline-block;
+        width:185px;
+        height:25px;
+        padding:3px 0 0 0;
+        outline: none;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+        -o-text-overflow:ellipsis;
+        overflow: hidden;
+    }
+
+
+    .zxw-div-input:empty::before{
+        font-size: 13px;
+        color:gray;
+        content:attr(placeholder);
     }
 
 </style>
