@@ -52,9 +52,9 @@
 
             },
             success_page(response){
-                console.log(this,i);
+                console.log(this.i);
                 this.picture_id_url = this.picture_url + '?page_id=' + response.body.id;
-                alert(this.picture_id_url)
+                alert(this.picture_id_url);
                 document.getElementById(response.body[this.i].id).setAttribute("src", this.picture_id_url);
             },
 
