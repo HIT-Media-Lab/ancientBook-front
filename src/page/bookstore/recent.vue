@@ -2,8 +2,8 @@
     <div class="j-recent">
         <recent_title class="j-recent-bar" :title="this.title"></recent_title>
         <div v-for="item in recent_book" class="j-picture-name" >
-            <img id=item.id src="" class="j-picture" alt="最近古籍" @click="push_success()">
-            <p style="color: #0f0f0f; text-align: center" @click="push_success()">{{item.standardName}}</p>
+            <img :id="item.id" class="j-picture" alt="最近古籍" @click="push_success()" >
+            <p style="color: #0f0f0f; text-align: center" @click="push_success()">{{item.name}}</p>
         </div>
     </div>
 </template>
@@ -14,50 +14,45 @@
         components:{
             recent_title
         },
-        created: function () {
+        created() {
             this.get_id();
+//            window.setTimeout("get_picture()", 2000);
         },
         data(){
             return{
                 title: '最近',
                 recent_book: [],
-                book_id: [],
+                book_id: '',
                 book_name: [],
                 id_url:'/ancient_books/get_recient_ancient_book_list.action',
                 picture_url: '/ancient_books/get_picture_by_id.action',
                 picture_page_url: "/ancient_books/get_page_id_by_jcy.action",
+                picture_id_url:'',
                 book_cover:{},
-                page_id: ''
+                length: 0,
+                i: 0
             }
         },
         methods: {
             get_id(){
                 this.http_json(this.id_url, 'get',{}, this.success_id, this.fail_id);
-                console.log("最近");
+
             },
             success_id(response){
                 this.recent_book = response.body;
-                for (let i = 0; i < response.body.length; i++) {
-                    let id_url = '';
-                    console.log("获得最近古籍没问题");
-//                    this.book_cover = {
-//                        'book': '1',
-//                        'volume': '1',
-//                        'page': '1',
-//                        'ancient_book_id': response.body[i].id
-//                    };
-                    let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + response.body[i].id;
+                this.length = response.body.length;
+                for(let i = 0; i < this.length; i++) {
+                    let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.recent_book[i].id;
                     this.http_json(item, 'get', item, this.success_page, this.fail_id);
-                    id_url = this.picture_url + '?page_id=' + this.page_id;
-                    document.getElementById(response.body[i].id).src = id_url;
-                    console.log("得到最近成功")
                 }
             },
             fail_id(){
 
             },
             success_page(response){
-                this.page_id = response.body.id;
+                this.picture_id_url = this.picture_url + '?page_id=' + response.body.id;
+                document.getElementById(this.recent_book[this.i].id).setAttribute("src", this.picture_id_url);
+                this.i = this.i + 1;
             },
 
             push_success(){

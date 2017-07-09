@@ -12,7 +12,18 @@
             <img src="../../../../assets/img/本体标记/墨水线上.png" height="7" width="974"/>
         </div>
 
-        <upload_edit class="width800 center"></upload_edit>
+        <div class="width950 height650 center ry-scroll">
+            <div class="row">
+                <div class="ry-picture-view" v-for="image in images">
+                    <img :src="image"/>
+                </div>
+                <div class="ry-picture-view">
+                    <a href="javascript:;" class="ry-file-picture">添加图片
+                        <input id="add" type="file" @change="onFileChange" multiple name="picture">
+                    </a>
+                </div>
+            </div>
+        </div>
 
         <!--底按鈕欄-->
         <div class="width1000 center">
@@ -46,12 +57,7 @@
 </template>
 
 <script>
-    import upload_edit from './upload-edit.vue';
     export default{
-        components:{
-            upload_edit,
-        },
-
         data() {
             return{
                 varieties_item : {},
@@ -60,6 +66,9 @@
                 copy_item : {},
                 upload_one_info : {},
                 summary : {},
+                images : [],
+                picture_name : [],
+                texts : [],
                 upload_file : {},
                 responsibility_info :[],
                 add_book_obj : {},
@@ -67,10 +76,46 @@
         },
 
         created : function () {
+            this.upload_file = this.$store.getters.get_upload_file;
+            this.images = this.$store.getters.get_images;
+            this.texts = this.$store.getters.get_texts;
+            this.picture_name = this.$store.getters.get_picture_name;
+        },
 
+        beforeRouteLeave(to, from, next) {
+            this.$store.commit("get_images",this.images);
+            this.$store.commit("get_texts",this.texts);
+            this.$store.commit("get_picture_name",this.picture_name);
+            next();
         },
 
         methods : {
+            onFileChange(e) {
+                var files = e.target.files || e.dataTransfer.files;
+                if (!files.length)return;
+                this.createImage(files);
+                var obj = document.getElementById("add");
+                for(var i = 0; i < obj.files.length; i++) {
+                    var temp = obj.files[i].name;
+                    this.picture_name.push(temp);
+                }
+            },
+            createImage(file) {
+                if (typeof FileReader === 'undefined') {
+                    alert('您的浏览器不支持图片上传，请升级您的浏览器');
+                    return false;
+                }
+                var vm = this;
+                var leng = file.length;
+                for (var i = 0; i < leng; i++) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file[i]);
+                    reader.onload = function(e) {
+                        vm.images.push(e.target.result);
+                    };
+                }
+            },
+
             cancel_upload() {
                 this.$router.push({path: '/user'});
             },
@@ -90,7 +135,6 @@
                 this.copy_item = this.$store.getters.get_copy_item;
                 this.upload_one_info = this.$store.getters.get_upload1_info;
                 this.summary = this.$store.getters.get_book_summary;
-                this.upload_file = this.$store.getters.get_upload_file;
 
                 this.add_book_obj.english = this.varieties_item.english;
                 this.add_book_obj.type_name = this.varieties_item.type_name;
@@ -173,5 +217,21 @@
         width: 127px;
         height: 54px;
         background-image: url("../../../../assets/img/上传2/下一步.png");
+    }
+
+    .ry-picture-view{
+        width: 120px;
+        height: 160px;
+        display: inline-block;
+        margin: 30px;
+    }
+
+    .height650{
+        height: 650px;
+    }
+
+    .ry-scroll{
+        overflow-y: scroll;
+        overflow-x: hidden;
     }
 </style>

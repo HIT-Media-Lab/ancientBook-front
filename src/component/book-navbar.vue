@@ -110,8 +110,6 @@
                 this.item_3_id = this.select_3.id;
                 this.item.shu = this.item_3_id;
                 this.item_name.shu = this.select_3.name;
-//                this.$store.commit("put_bls_name", this.item_name);
-//                this.$store.commit("put_bls", this.item);
                 console.log(this.item.bu);
                 console.log(this.item.lei);
                 console.log(this.item.shu);

@@ -12,17 +12,13 @@
             <button class="search-btn" @click="search">搜 索</button>
             <img src="../assets/img/头像.png" class="user-img" @click="show_login">
             <span class="user-name" @click="show_login" v-model="name">{{name}}</span>
-            <div class="down-box" @blur="hide" v-show="sort_box.length!=0">
+            <div class="down-box"  v-show="sort_box.length!=0">
                 <ul>
-                    <li class="sort-box1">
-                        <router-link to="/search_index" style="color: #0f0f0f" @click="push_search()">
-                            搜古籍：{{sort_box}}
-                        </router-link>
+                    <li class="sort-box1" @click="search()" style="color: #0f0f0f">
+                        搜古籍：{{sort_box}}
                     </li>
-                    <li class="sort-box2">
-                        <router-link to="/search_index/search_noumenon" style="color: #0f0f0f" @click="push_search()">
-                            搜本体：{{sort_box}}
-                        </router-link>
+                    <li class="sort-box2" @click="search()" style="color: #0f0f0f">
+                        搜本体：{{sort_box}}
                     </li>
                 </ul>
             </div>
@@ -119,27 +115,15 @@
             hide:function () {
                 this.sort_box = ''
             },
-//            enter:function () {
-//                this.sort_box = '';
-//                if (this.sort_box != ''){
-//                    this.$store.commit('push_search_content', this.sort_box);
-//                    this.$router.push({path: '/search_index'});
-//                }
-//            },
             search:function () {
+                this.$route.params.content = this.sort_box;
                 this.$route.params.pageId = 1;
-//                this.$route.params.
-                this.sort_box = '';
                 if (this.sort_box != ''){
-                    this.$store.commit('push_search_content', this.sort_box);
-                    this.$router.push({name: 'search_index', params: this.$route.params});
+//                    this.$store.commit('push_search_content', this.sort_box);
+                    this.$router.push({name: 'search_book', params: this.$route.params});
+                    this.sort_box = '';
                 }
             },
-
-            push_search(){
-                this.$store.commit('push_search_content', this.sort_box);
-            },
-
             /**
              *  账号 正则判断输入是否规范
              */
@@ -168,7 +152,7 @@
                 }
             },
             coverCode(){
-              document.getElementById("v_picture").src = this.code_url+'?'+(new Date()).getTime()
+                document.getElementById("v_picture").src = this.code_url+'?'+(new Date()).getTime()
             },
 
             create_v_picture(){

@@ -292,19 +292,19 @@ const router = new VueRouter({
             component:search_index,
             name:'search_index',
             children:[
+                // {
+                //     path:'',
+                //     component:search_book,
+                //     redirect: 'search_book//page/1',
+                //     name:'search_book',
+                // },
                 {
-                    path:'',
+                    path:'search_book/:content/page/:pageId',
                     component:search_book,
-                    redirect: 'search_book/page/1',
                     name:'search_book',
                 },
                 {
-                    path:'search_book/page/:pageId',
-                    component:search_book,
-                    name:'search_book',
-                },
-                {
-                    path:'search_noumenon/page/:pageId',
+                    path:'search_noumenon/:content/page/:pageId',
                     component:search_noumenon,
                     name:'search_noumenon',
                 },

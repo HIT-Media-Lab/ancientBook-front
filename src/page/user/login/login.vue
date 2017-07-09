@@ -35,6 +35,8 @@ import store from '../../../store'
 
      data(){
          return{
+//             hhh:'scsc',
+//             gg: [],
              sort_box:'',
              login_url: '/ancient_books/login.action',
              code_url: '/ancient_books/get_v_picture.action',
@@ -69,6 +71,13 @@ import store from '../../../store'
          },
          // 网页启动得到token
          onload_token(){
+//             this.hhh = '[品种层] 责任结束时间-朝代 + 责任者 + 责任行为[版本层] 责任结束时间-朝代 + 责任者 + 责任行为[印次层] 责任结束时间-朝代 + 责任者 + 责任行为';
+//             this.gg = this.hhh.split('[') ;
+//             console.log(this.gg[0]);
+//             console.log(this.gg[1]);
+//             console.log(this.gg[2]);
+//
+
              if (this.$store.getters.GetToken == ''){
                  this.$http.get('/ancient_books/getToken.action').then(function (response) {
                      console.log("成功得到token");
