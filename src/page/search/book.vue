@@ -4,7 +4,7 @@
         <div class="j-searched-book" v-for="item in content">
             <div class="j-shi1">
                 <router-link to="/bookstore/book_info">
-                    <img src="../../assets/img/古籍封面1.jpg" alt="搜索古籍" class="j-book-img1">
+                    <img :id="item.id" alt="搜索古籍" class="j-book-img1">
                 </router-link>
                 <div class="j-book1-word">
                     <router-link to="/bookstore/book_info">
@@ -47,22 +47,23 @@
                 search_number: 0,
                 search_content: '',
                 total_page: 1,
-                search_url: '/ancient_books/get_ancient_books_list_by_name.action'
+                search_url: '/ancient_books/get_ancient_books_list_by_name.action',
+                picture_id_url: '/ancient_books/get_page_id_by_jcy.action',
+                picture_url: '/ancient_books/get_picture_by_id.action',
+                i: 0
             }
         },
         methods:{
             get_search(){
-                this.search_content = this.$store.getters.get_search_content;
+                this.search_content = this.$route.params.content;
                 let url = this.search_url + '?name=' + this.search_content + '&&page_count=' + this.$route.params.pageId;
                 this.http_json( url, 'get', url, this.success1, this.fail1)
             },
             success1(response){
                 this.search_number = response.body.total_number;
                 this.total_page = response.body.total_page;
-                console.log(response.body.content);
+
                 for (let i = 0; i < response.body.content.length; i++){
-//                    this.content[i].name =  response.body.content[i].name;
-//                    this.content[i].id =  response.body.content[i].id;
                     this.book_info_split = response.body.content[i].standard_name.split('[');
                     if (this.book_info_split.length > 1){
                         this.book_info1 = '[' + this.book_info_split[1];
@@ -84,10 +85,19 @@
                         book_info3: this.book_info3,
                         book_info4: this.book_info4
                     });
-                    console.log(this.content);
+                    let item = this.picture_id_url + '?book=1' + '&&volume=1'+'&&page=1' + '&&ancient_book_id=' + response.body.content[i].id;
+                    this.http_json(item, 'get', item, this.success_pic, this.fail_pic);
                 }
             },
             fail1(){
+
+            },
+            success_pic(response){
+                let url = this.picture_url + '?page_id=' + response.body.id;
+                document.getElementById(this.content[this.i].id).setAttribute("src", url);
+                this.i = this.i +1;
+            },
+            fail_pic(){
 
             }
         }

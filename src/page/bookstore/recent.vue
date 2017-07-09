@@ -50,9 +50,7 @@
 
             },
             success_page(response){
-                console.log(this.i);
                 this.picture_id_url = this.picture_url + '?page_id=' + response.body.id;
-                alert(this.picture_id_url);
                 document.getElementById(this.recent_book[this.i].id).setAttribute("src", this.picture_id_url);
                 this.i = this.i + 1;
             },

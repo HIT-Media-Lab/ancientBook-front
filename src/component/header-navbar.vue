@@ -14,10 +14,10 @@
             <span class="user-name" @click="show_login" v-model="name">{{name}}</span>
             <div class="down-box"  v-show="sort_box.length!=0">
                 <ul>
-                    <li class="sort-box1" @click="push_search1()" style="color: #0f0f0f">
+                    <li class="sort-box1" @click="search()" style="color: #0f0f0f">
                         搜古籍：{{sort_box}}
                     </li>
-                    <li class="sort-box2" @click="push_search2()" style="color: #0f0f0f">
+                    <li class="sort-box2" @click="search()" style="color: #0f0f0f">
                         搜本体：{{sort_box}}
                     </li>
                 </ul>
@@ -116,26 +116,14 @@
                 this.sort_box = ''
             },
             search:function () {
+                this.$route.params.content = this.sort_box;
                 this.$route.params.pageId = 1;
                 if (this.sort_box != ''){
-                    this.$store.commit('push_search_content', this.sort_box);
-                    this.$router.push({name: 'search_index', params: this.$route.params});
+//                    this.$store.commit('push_search_content', this.sort_box);
+                    this.$router.push({name: 'search_book', params: this.$route.params});
                     this.sort_box = '';
                 }
             },
-
-            push_search1(){
-                this.$store.commit('push_search_content', this.sort_box);
-                console.log(this.$store.getters.get_search_content);
-                this.$router.push("/search_index");
-            },
-
-            push_search2(){
-                this.$store.commit('push_search_content', this.sort_box);
-                console.log(this.$store.getters.get_search_content);
-                this.$router.push("/search_index/search_noumenon");
-            },
-
             /**
              *  账号 正则判断输入是否规范
              */
