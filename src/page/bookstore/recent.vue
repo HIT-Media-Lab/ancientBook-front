@@ -30,7 +30,7 @@
                 picture_id_url:'',
                 book_cover:{},
                 length: 0,
-                i:  0
+                i: 0
             }
         },
         methods: {
@@ -42,7 +42,6 @@
                 this.recent_book = response.body;
                 this.length = response.body.length;
                 for(let i = 0; i < this.length; i++) {
-                    this.i = i;
                     let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.recent_book[i].id;
                     this.http_json(item, 'get', item, this.success_page, this.fail_id);
                 }
@@ -55,6 +54,7 @@
                 this.picture_id_url = this.picture_url + '?page_id=' + response.body.id;
                 alert(this.picture_id_url);
                 document.getElementById(this.recent_book[this.i].id).setAttribute("src", this.picture_id_url);
+                this.i = this.i + 1;
             },
 
             push_success(){
