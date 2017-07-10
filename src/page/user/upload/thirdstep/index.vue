@@ -18,7 +18,7 @@
                 <p class="picture-names" style="text-align: center"></p>
             </div>
             <div class="ry-picture-box">
-                <a href="javascript:;" class="ry-picture-view">
+                <a href="javascript:;" class="ry-add">
                     <input id="add" type="file" @change="onFileChange" multiple name="picture">
                 </a>
             </div>
@@ -180,6 +180,50 @@
                 this.copy_item = this.$store.getters.get_copy_item;
                 this.upload_one_info = this.$store.getters.get_upload1_info;
                 this.summary = this.$store.getters.get_book_summary;
+                this.responsibility_info.push({
+                    location_id:this.varieties_item.varieties_responsibility.location_id,
+                    person_id:this.varieties_item.varieties_responsibility.person_id,
+                    begin_time:this.varieties_item.varieties_responsibility.begin_time_id,
+                    end_time:this.varieties_item.varieties_responsibility.end_time_id,
+                    action:this.varieties_item.varieties_responsibility.action,
+                    explain:this.varieties_item.varieties_responsibility.explain,
+                    confirm:this.varieties_item.varieties_responsibility.confirm,
+                    type:this.varieties_item.varieties_responsibility.type,
+                    level:1
+                });
+                this.responsibility_info.push({
+                    location_id:this.edition_item.edition_responsibility.location_id,
+                    person_id:this.edition_item.edition_responsibility.person_id,
+                    begin_time:this.edition_item.edition_responsibility.begin_time_id,
+                    end_time:this.edition_item.edition_responsibility.end_time_id,
+                    action:this.edition_item.edition_responsibility.action,
+                    explain:this.edition_item.edition_responsibility.explain,
+                    confirm:this.edition_item.edition_responsibility.confirm,
+                    type:this.edition_item.edition_responsibility.type,
+                    level:2
+                });
+                this.responsibility_info.push({
+                    location_id:this.impression_item.impression_responsibility.location_id,
+                    person_id:this.impression_item.impression_responsibility.person_id,
+                    begin_time:this.impression_item.impression_responsibility.begin_time_id,
+                    end_time:this.impression_item.impression_responsibility.end_time_id,
+                    action:this.impression_item.impression_responsibility.action,
+                    explain:this.impression_item.impression_responsibility.explain,
+                    confirm:this.impression_item.impression_responsibility.confirm,
+                    type:this.impression_item.impression_responsibility.type,
+                    level:3
+                });
+                this.responsibility_info.push({
+                    location_id:this.copy_item.copy_responsibility.location_id,
+                    person_id:this.copy_item.copy_responsibility.person_id,
+                    begin_time:this.copy_item.copy_responsibility.begin_time_id,
+                    end_time:this.copy_item.copy_responsibility.end_time_id,
+                    action:this.copy_item.copy_responsibility.action,
+                    explain:this.copy_item.copy_responsibility.explain,
+                    confirm:this.copy_item.copy_responsibility.confirm,
+                    type:this.copy_item.copy_responsibility.type,
+                    level:4
+                });
 
                 this.add_book_obj.english = this.varieties_item.english;
                 this.add_book_obj.type_name = this.varieties_item.type_name;
@@ -281,5 +325,28 @@
     .ry-scroll{
         overflow-y: scroll;
         overflow-x: hidden;
+    }
+
+    .ry-add{
+        position: relative;
+        display: inline-block;
+        width: 120px;
+        height: 160px;
+        background-image:  url("../../../../assets/img/upload3/upload3_add.png");
+        background-size: 100%;
+        padding-top: 25px;
+        padding-left: 40px;
+        overflow: hidden;
+        text-decoration: none;
+        text-indent: 0;
+        line-height: 20px;
+    }
+
+    .ry-add input{
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
     }
 </style>

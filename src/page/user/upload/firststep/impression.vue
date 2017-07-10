@@ -63,7 +63,7 @@
                 <div class="row">
                     <label class="col-md-2">責任地點：</label>
                     <div class="col-md-4">
-                        <input>
+                        <input readonly @click="open_location()" v-model="impression_item.impression_responsibility.location">
                     </div>
 
                     <div class="col-md-2">
@@ -71,7 +71,7 @@
                         <label>責任者名稱:</label>
                     </div>
                     <div class="col-md-4">
-                        <input>
+                        <input readonly @click="open_character()" v-model="impression_item.impression_responsibility.person">
                     </div>
                 </div>
 
@@ -128,6 +128,8 @@
 
             <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></time_modal>
             <time_modal :time_modal="this.time_modal_2" v-on:success_time="dead_time" v-on:close_modal="close_dead()"></time_modal>
+            <location_modal :location_modal="this.location_modal" v-on:close_modal="close_location" v-on:add_location_relations="add_location"></location_modal>
+            <character_modal :character_modal="this.character_modal"  v-on:close_modal="close_character" v-on:add_person_relations="add_character"></character_modal>
         </div>
     </div>
 
@@ -135,20 +137,28 @@
 
 <script>
     import time_modal from '../../../../component/time-modal.vue';
+    import location_modal from '../../../../component/search_location.vue';
+    import character_modal from '../../../../component/search_character.vue';
     export default{
         components:{
             time_modal,
+            location_modal,
+            character_modal,
         },
         
         data() {
             return{
-                time_modal_1:false,
-                time_modal_2:false,
+                time_modal_1 : false,
+                time_modal_2 : false,
+                location_modal : false,
+                character_modal : false,
                 impression_item :{
                     printing_type : '',
                     printing_number : '',
                     impression_responsibility : {
+                        location : '',
                         location_id : '',
+                        person : '',
                         person_id : '',
                         begin_time : '',
                         begin_time_id : '',
@@ -196,6 +206,7 @@
                 this.time_modal_1 = false;
             },
 
+
             /**
              * 责任结束时间
              */
@@ -212,6 +223,41 @@
             close_dead() {
                 this.time_modal_2 = false;
             },
+
+
+            /**
+             * 责任地点
+             */
+            open_location() {
+                this.location_modal = true;
+            },
+
+            add_location(p) {
+                this.impression_item.impression_responsibility.location_id = p.noumenon_id;
+                this.impression_item.impression_responsibility.location = p.standard_name;
+            },
+
+            close_location(){
+                this.location_modal = false;
+            },
+
+
+            /**
+             * 责任者名称
+             */
+            open_character(){
+                this.character_modal = true;
+            },
+
+            add_character(p){
+                this.impression_item.impression_responsibility.person_id = p.noumenon_id;
+                this.impression_item.impression_responsibility.person = p.standard_name;
+            },
+
+            close_character(){
+                this.character_modal = false;
+            },
+
 
             /**
              * 获得用户选择的option并存储
