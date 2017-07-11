@@ -147,7 +147,7 @@
 
             /*朝代下拉框*/
             success_menu(response){
-                for(let i = 0; i < response.body.g.length; i++){
+                for(let i = 0; i < response.body.length; i++){
                     this.menu_data.push({
                         item_1_id:response.body[i].item_1_id,
                         chinese_name:response.body[i].chinese_name,
