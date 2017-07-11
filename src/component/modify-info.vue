@@ -67,7 +67,7 @@
             login_modal,
         },
         created(){
-            http_json(this.get_info_url, 'get', {}, this.info_success, this.info_fail)
+            this.http_json(this.get_info_url, 'get', {}, this.info_success, this.info_fail)
         },
         data(){
             return{
