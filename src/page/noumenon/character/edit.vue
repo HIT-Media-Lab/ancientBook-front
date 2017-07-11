@@ -218,10 +218,14 @@ export default{
                 this.show_input = false;
             }
 
+
             if(this.input_content.person_name !== '' && this.input_content.birth_standard_name !== ''&& this.show_input === false){
-                let repeat_object={};
-                let new_url= this.check_noumenon_repeat+'?name='+this.input_content.standard_name+'&&type=1';
-                this.http_json(new_url,'get',repeat_object,this.success_repeat,this.fail_repeat);
+                let new_title = this.input_content.person_name+'('+this.input_content.birth_standard_name+')';
+                if(new_title !== this.edit_character_title){
+                    let repeat_object={};
+                    let new_url= this.check_noumenon_repeat+'?name='+this.input_content.standard_name+'&&type=1';
+                    this.http_json(new_url,'get',repeat_object,this.success_repeat,this.fail_repeat);
+                }
             }
         }
 

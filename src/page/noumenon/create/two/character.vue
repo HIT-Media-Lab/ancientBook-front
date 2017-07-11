@@ -185,7 +185,7 @@
 
 <script>
 
-    /*let Mock = require('mockjs');
+    let Mock = require('mockjs');
     Mock.mock('/ancient_books/check_noumenon_standard_name.action?name=%E9%B9%BF%E6%99%97(%E5%AE%8B%E6%9C%9D)&&type=1','get', {
         "status|200":200,
         "result|0":1,
@@ -196,7 +196,7 @@
         "status|200":200,
         "result|1":0,
         "id:|300":250
-    });*/
+    });
 
     import create_word from '../../../../component/create-word.vue';
     import time_modal from '../../../../component/time-modal.vue';
