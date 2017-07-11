@@ -183,6 +183,14 @@ import  ins_detail from './page/noumenon/institution/institution.vue'
 import  terms_detail from  './page/noumenon/terms/terms.vue'
 // import  timeM from  './page/noumenon/Time/check_china.vue'
 
+//本体编辑
+import char_edit from  './page/noumenon/character/edit.vue'
+import lit_edit from './page/noumenon/literature/edit.vue'
+import  off_edit from './page/noumenon/office/edit.vue'
+import  pla_edit from './page/noumenon/place/edit.vue'
+import  ins_edit from './page/noumenon/institution/edit.vue'
+import  terms_edit from  './page/noumenon/terms/edit.vue'
+
 // 创建一个路由器实例
 // 并且配置路由规则
 const router = new VueRouter({
@@ -342,6 +350,11 @@ const router = new VueRouter({
                     name:'char_detail'
                 },
                 {
+                    path:'char_edit/:nouId',
+                    component:char_edit,
+                    name:'char_edit'
+                },
+                {
                     path:'institution/page/:pageId/letter/:letterId',
                     component:institution,
                     name:'institution'
@@ -350,6 +363,11 @@ const router = new VueRouter({
                     path:'ins_detail/:nouId',
                     component:ins_detail,
                     name:'ins_detail'
+                },
+                {
+                    path:'ins_edit/:nouId',
+                    component:ins_edit,
+                    name:'ins_edit'
                 },
                 {
                     path:'literature/page/:pageId/letter/:letterId',
@@ -362,6 +380,11 @@ const router = new VueRouter({
                     name:'lit_detail'
                 },
                 {
+                    path:'lit_edit/:nouId',
+                    component:lit_edit,
+                    name:'lit_edit'
+                },
+                {
                     path:'office/page/:pageId/letter/:letterId',
                     component:office,
                     name:'office'
@@ -370,6 +393,11 @@ const router = new VueRouter({
                     path:'off_detail/:nouId',
                     component:off_detail,
                     name:'off_detail'
+                },
+                {
+                    path:'off_edit/:nouId',
+                    component:off_edit,
+                    name:'off_edit'
                 },
                 {
                     path:'place/page/:pageId/letter/:letterId',
@@ -382,6 +410,11 @@ const router = new VueRouter({
                     name:'pla_detail'
                 },
                 {
+                    path:'plac_edit/:nouId',
+                    component:pla_edit,
+                    name:'pla_edit'
+                },
+                {
                     path:'terms/page/:pageId/letter/:letterId',
                     component:terms,
                     name:'terms'
@@ -390,6 +423,11 @@ const router = new VueRouter({
                     path:'terms_detail/:nouId',
                     component:terms_detail,
                     name:'terms_detail'
+                },
+                {
+                    path:'terms_edit/:nouId',
+                    component:terms_edit,
+                    name:'terms_edit'
                 },
                 {
                     path:'time/page/:pageId/letter/:letterId',

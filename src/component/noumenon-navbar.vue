@@ -1,7 +1,7 @@
 <template>
     <div class="zxw-bar-img">
         <router-link to="/noumenon/time">
-            <img src="../assets/img/spot.png" class="zxw-spot" v-show="this.$route.name==='time'">
+            <img src="../assets/img/spot.png" class="zxw-spot" v-show="this.$route.name==='time'"><!--时间未配置路由-->
             <span class="zxw-bar-title">时间</span>
         </router-link>
 
@@ -16,12 +16,12 @@
         </router-link>
 
         <router-link to="/noumenon/office">
-            <img src="../assets/img/spot.png" class="zxw-spot" v-show="this.$route.name==='office'||this.$route.name==='off_detail'">
+            <img src="../assets/img/spot.png" class="zxw-spot" v-show="this.$route.name==='institution'||this.$route.name==='ins_detail'">
             <span class="zxw-bar-title">机构</span>
         </router-link>
 
         <router-link to="/noumenon/institution">
-            <img src="../assets/img/spot.png" class="zxw-spot" v-show="this.$route.name==='institution'||this.$route.name==='ins_detail'">
+            <img src="../assets/img/spot.png" class="zxw-spot" v-show="this.$route.name==='office'||this.$route.name==='off_detail'">
             <span class="zxw-bar-title">职官</span>
         </router-link>
 

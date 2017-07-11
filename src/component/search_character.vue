@@ -35,7 +35,7 @@
 </template>
 
 <script>
-    /*let Mock = require('mockjs');
+   let Mock = require('mockjs');
     Mock.mock('/ancient_books/get_person_list_by_name.action?name=lsm&&page_count=1','get', {
         "content":[
             {
@@ -73,15 +73,15 @@
         "content":[
             {
                 "standard_name":"鹿晗",
-                "noumenon_id|100":50
+                "noumenon_id|200":50
             },
             {
                 "standard_name":"鹿晗",
-                "noumenon_id|100":50
+                "noumenon_id|200":50
             },
             {
                 "standard_name":"鹿晗",
-                "noumenon_id|100":50
+                "noumenon_id|200":50
             },
         ]
     });
@@ -107,18 +107,18 @@
         "content":[
             {
                 "standard_name":"陈赫",
-                "noumenon_id|100":50
+                "noumenon_id|150":50
             },
             {
                 "standard_name":"陈赫",
-                "noumenon_id|100":50
+                "noumenon_id|150":50
             },
             {
                 "standard_name":"陈赫",
-                "noumenon_id|100":50
+                "noumenon_id|150":50
             },
         ]
-    });*/
+    });
 
     import modal from "../component/modal.vue";
     export default{

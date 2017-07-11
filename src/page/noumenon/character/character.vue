@@ -1,7 +1,7 @@
 <template>
     <div class="zxwnoumenom-body">
         <noumenon_title :title="this.title">
-            <noumenon_button slot="children"></noumenon_button>
+            <noumenon_button slot="children" :noumenon_number="char_number"></noumenon_button>
         </noumenon_title>
 
             <div class=" zxw-characterbody">
@@ -52,55 +52,55 @@
             <div class="zxw-infospan">
                 <p class="zxwspan-length">父：</p>
                 <template v-if="father.length > 0">
-                    <button class="zxwbtn-info zxwspan-length" v-model="father[0]"  @click="person_info(father[0].person_id)">{{father[0].person_name}}</button>
+                    <button class="zxwbtn-info zxwspan-length" v-model="father[0]"  @click="to_character(father[0].person_id)">{{father[0].person_name}}</button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">母：</p>
                 <template v-if="mother.length > 0">
-                    <button class="zxwbtn-info zxwspan-length" v-model="mother[0]" @click="person_info(mother[0].person_id)">{{mother[0].person_name}}</button>
+                    <button class="zxwbtn-info zxwspan-length" v-model="mother[0]" @click="to_character(mother[0].person_id)">{{mother[0].person_name}}</button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">子：</p>
                 <template v-if="son.length > 0">
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in son" @click="person_info(item.person_id)">{{item.person_name}} <span v-if="son.length > 1">;</span></button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in son" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="son.length > 1">;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">女：</p>
                 <template v-if="daughter.length > 0">
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in daughter" @click="person_info(item.person_id)">{{item.person_name}} <span v-if="daughter.length > 1">;</span></button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in daughter" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="daughter.length > 1">;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">兄弟：</p>
                 <template v-if="brother.length > 0">
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in brother" @click="person_info(item.person_id)">{{item.person_name}} <span v-if="brother.length > 1">;</span></button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in brother" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="brother.length > 1">;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">姐妹：</p>
                 <template v-if="sister.length > 0">
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in sister" @click="person_info(item.person_id)">{{item.person_name}} <span v-if="sister.length > 1">;</span></button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in sister" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="sister.length > 1">;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">师：</p>
                 <template v-if="teacher.length > 0">
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in teacher" @click="person_info(item.person_id)">{{item.person_name}} <span v-if="teacher.length > 1">;</span></button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in teacher" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="teacher.length > 1">;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">学生：</p>
                 <template v-if="student.length > 0">
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in student" @click="person_info(item.person_id)">{{item.person_name}} <span v-if="student.length > 1">;</span></button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in student" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="student.length > 1">;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">友：</p>
                 <template v-if="friend.length > 0">
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in friend" @click="person_info(item.person_id)">{{item.person_name}} <span v-if="friend.length > 1">;</span></button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in friend" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="friend.length > 1">;</span></button>
                 </template>
             </div>
 
@@ -117,44 +117,44 @@
 </template>
 
 <script>
-    /*let Mock = require('mockjs');
+    let Mock = require('mockjs');
      //显示用户列表
      Mock.mock('/ancient_books/get_person_by_id.action?id=1','get',{
      "status|200":200,
-     "standard_name":'鹿晗（西周）',
-         "name":'鹿晗',
-     "english|6": 6,
-     "xing|5": 5,
-     "shi|5": 5,
-     "zi|5":5,
-     "other_name|7":7,
-     "birth_time_id|19962526": 1,
-     "birth_time_name|1996": 1,
-     "death_time_id|0": 0,
-     "death_time_name|0": 0,
-     "jiguan_location_id|555":1,
-     "jiguan_location_name|555":1,
+     "standard_name":'鹿晗（天朝1990）',
+     "name":'鹿晗',
+     "english": 'lu',
+     "xing": 'xing',
+     "shi": 'shi',
+     "zi":'zi',
+     "other_name":'小姐夫',
+     "birth_time_id": '27',
+     "birth_time_name": '天朝1990',
+     "death_time_id": '25',
+     "death_time_name": '天朝1992',
+     "jiguan_location_id":'27',
+     "jiguan_location_name":'北京',
      "remark_1_name|1": 1,
-     "remark_2_name": "",
+     "remark_2_name|2": 2,
      "remark_1|111":1,
-     "remark_2|222": 1,
+     "remark_2": '',
      "relations": [{
             "relation_type|4": 1,
             "relation_id|1-100": 1,
             "person_id|100-1000": 1,
-            "person_name|10000": 1
+            "person_name": '邓超'
          },
          {
              "relation_type|5": 1,
              "relation_id|1-100": 1,
              "person_id|100-1000": 1,
-             "person_name|10000": 1
+             "person_name": '陈赫'
          },
          {
              "relation_type|6": 1,
              "relation_id|1-100": 1,
-             "person_id|100-1000": 1,
-             "person_name": '鹿晗'
+             "person_id|122": 122,
+             "person_name": '武则天'
          },
          {
              "relation_type|6": 1,
@@ -172,33 +172,116 @@
              "relation_type|7": 1,
              "relation_id|1-100": 1,
              "person_id|100-1000": 1,
-             "person_name|10000": 1
+             "person_name": 'hr'
          },
          {
              "relation_type|8": 1,
              "relation_id|1-100": 1,
              "person_id|100-1000": 1,
-             "person_name|10000": 1
+             "person_name": 'ghd'
          },
          {
              "relation_type|9": 1,
              "relation_id|1-100": 1,
              "person_id|100-1000": 1,
-             "person_name|10000": 1
+             "person_name": 'ffj'
          },
          {
              "relation_type|10": 1,
              "relation_id|1-100": 1,
              "person_id|100-1000": 1,
-             "person_name|10000": 1
+             "person_name": 'tny'
          },
          {
              "relation_type|11": 1,
              "relation_id|1-100": 1,
              "person_id|100-1000": 1,
-             "person_name|10000": 1
+             "person_name": 'scdhj'
          }]
-     });*/
+     });
+
+    Mock.mock('/ancient_books/get_person_by_id.action?id=122','get',{
+        "status|200":200,
+        "standard_name":'武则天（唐朝）',
+        "name":'武则天',
+        "english|6": 6,
+        "xing|5": 5,
+        "shi|5": 5,
+        "zi|5":5,
+        "other_name|7":7,
+        "birth_time_id": 1,
+        "birth_time_name|1996": 1,
+        "death_time_id|0": 0,
+        "death_time_name|0": 0,
+        "jiguan_location_id|555":1,
+        "jiguan_location_name|555":1,
+        "remark_1_name|1": 1,
+        "remark_2_name|2": 1,
+        "remark_1|111":1,
+        "remark_2": '',
+        "relations": [{
+            "relation_type|4": 1,
+            "relation_id|1-100": 1,
+            "person_id|100-1000": 1,
+            "person_name|10000": 1
+        },
+            {
+                "relation_type|5": 1,
+                "relation_id|1-100": 1,
+                "person_id|100-1000": 1,
+                "person_name|10000": 1
+            },
+            {
+                "relation_type|6": 1,
+                "relation_id|1-100": 1,
+                "person_id|1": 1,
+                "person_name": '鹿晗'
+            },
+            {
+                "relation_type|6": 1,
+                "relation_id|1-100": 1,
+                "person_id|100-1000": 1,
+                "person_name": '迪丽热巴'
+            },
+            {
+                "relation_type|6": 1,
+                "relation_id|1-100": 1,
+                "person_id|100-1000": 1,
+                "person_name": '陈赫'
+            },
+            {
+                "relation_type|7": 1,
+                "relation_id|1-100": 1,
+                "person_id|100-1000": 1,
+                "person_name|10000": 1
+            },
+            {
+                "relation_type|8": 1,
+                "relation_id|1-100": 1,
+                "person_id|100-1000": 1,
+                "person_name|10000": 1
+            },
+            {
+                "relation_type|9": 1,
+                "relation_id|1-100": 1,
+                "person_id|100-1000": 1,
+                "person_name|10000": 1
+            },
+            {
+                "relation_type|10": 1,
+                "relation_id|1-100": 1,
+                "person_id|100-1000": 1,
+                "person_name|10000": 1
+            },
+            {
+                "relation_type|11": 1,
+                "relation_id|1-100": 1,
+                "person_id|100-1000": 1,
+                "person_name|10000": 1
+            }]
+    });
+
+
     import noumenon_title from '../../../component/noumenon-title.vue';
     import noumenon_button from '../../../component/noumenon-button.vue';
     export default{
@@ -211,6 +294,7 @@
         },
         data(){
             return{
+                char_number:1,
                 title:'',
                 get_person_url:'/ancient_books/get_person_by_id.action',
                 delete_character_url:'/ancient_books/delete_person_by_id.action',
@@ -228,6 +312,23 @@
                 delete_info:''
             }
         },
+
+        watch:{
+            $route(){
+                this.person_content={};
+                this.father.splice(0,this.father.length);
+                this.mother.splice(0,this.mother.length);
+                this.son.splice(0,this.son.length);
+                this.daughter.splice(0,this.daughter.length);
+                this.brother.splice(0,this.brother.length);
+                this.sister.splice(0,this.sister.length);
+                this.teacher.splice(0,this.teacher.length);
+                this.student.splice(0,this.son.length);
+                this.friend.splice(0,this.friend.length);
+                this.person_info();
+            }
+        },
+
         methods:{
             success_id(response){
                 //存在前端显示的数组里
@@ -350,10 +451,6 @@
             success_delete(response){
                 if(response.body.result === 1){
                     this.$router.push({path:'/noumenon'});
-                } else {
-                    //this.$router.match()
-                    //this.show_info =true;
-                    //this.delete_info = response.body.info;
                 }
             },
 
@@ -365,6 +462,10 @@
                 let delete_object = {};
                 delete_object.id = this.$route.params.nouId;
                 this.http_json(this.delete_character_url,'post',delete_object,this.success_delete,this.fail_delete);
+            },
+
+            to_character(p){
+                this.$router.push({name:'char_detail',params:{nouId:p}});
             }
         }
     }
