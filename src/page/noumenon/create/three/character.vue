@@ -45,39 +45,40 @@
             <label class="zxw-character-span">母：</label>
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.mother_standard_name">
             <label class="zxw-character-span">子：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.son_standard_name" @click="show_tooltipinfo_son()">
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.son_standard_name" @mouseover="show_tooltipinfo_son()" @mouseout="close_tooltip_son()">
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">女：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.daughter_standard_name" @click="show_tooltipinfo_daughter()">
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.daughter_standard_name" @mouseover="show_tooltipinfo_daughter()" @mouseout="close_tooltip_daughter()">
             <label class="zxw-character-span">兄弟：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.brother_standard_name" @click="show_tooltipinfo_brother()">
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.brother_standard_name" @mouseover="show_tooltipinfo_brother()" @mouseout="close_tooltip_brother()">
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">姐妹：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.sister_standard_name" @click="show_tooltipinfo_sister()">
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.sister_standard_name" @mouseover="show_tooltipinfo_sister()" @mouseout="close_tooltip_sister()">
             <label class="zxw-character-span">师：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.teacher_standard_name" @click="show_tooltipinfo_teacher()">
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.teacher_standard_name" @mouseover="show_tooltipinfo_teacher()" @mouseout="close_tooltip_teacher()">
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">学生：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.student_standard_name" @click="show_tooltipinfo_student()">
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.student_standard_name" @mouseover="show_tooltipinfo_student()" @mouseout="close_tooltip_student()">
             <label class="zxw-character-span">友：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.friend_standard_name" @click="show_tooltipinfo_friend()">
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.friend_standard_name" @mouseover="show_tooltipinfo_friend()" @mouseout="close_tooltip_friend()">
         </div>
+       <template v-if="remark_1_name!==''||this.$store.getters.get_build_character.remark_1!==''||remark_2_name!==''||this.$store.getters.get_build_character.remark_2!==''">
+            <div>
+                <label class="zxw-character-span" v-model="remark_1_name" v-bind="show_remark">{{remark_1_name}}</label>
+                <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.remark_1">
+            </div>
 
-        <div>
-            <label class="zxw-character-span" v-model="remark_1_name" v-bind="show_remark">{{remark_1_name}}</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.remark_1">
-        </div>
-
-        <div>
-            <label class="zxw-character-span" v-model="remark_2_name" v-bind="show_remark">{{remark_2_name}}</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.remark_2">
-        </div>
+            <div>
+                <label class="zxw-character-span" v-model="remark_2_name" v-bind="show_remark">{{remark_2_name}}</label>
+                <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.remark_2">
+            </div>
+        </template>
 
         <div class="zxw-build-step2-btn">
             <router-link to="/chartwo">
@@ -86,9 +87,7 @@
 
             <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()" v-bind:disabled="this.$store.getters.get_build_character.length === 0">确认</button>
         </div>
-
-        <success_create id="op" :show_info="show_info"></success_create>
-
+        <success_create id="show_info" :show_info="show_info"></success_create>
         <!--子的具体信息显示-->
         <modal :show_modal="show_tooltip_son" v-on:fireclose="close_tooltip_son" class="zxw-modal-character">
             <div slot="header" class="zxw-relation-modal-header">
@@ -150,20 +149,25 @@
 </template>
 
 <script>
-    /*let Mock = require('mockjs');
+   /*let Mock = require('mockjs');
     Mock.mock('/ancient_books/add_person.action','post', {
         "status|200":200,
+        "result|1":1,
         "id|123":123
-    });
-
-    Mock.mock('/ancient_books/getToken.action','get', {
-        "token|200":100,
     });*/
+
 
     import create_word from '../../../../component/create-word.vue';
     import success_create from '../../../../component/success_create.vue';
     import modal from '../../../../component/modal.vue';
     export default{
+        beforeRouteLeave (to, from, next){
+            window.setTimeout(function(){
+                document.getElementById("show_info").setAttribute('class','zxw-show-info');
+                next();
+            },500);
+        },
+
         components:{
             create_word,
             success_create,
@@ -201,6 +205,7 @@
                 show_tooltip_friend:false,
                 prams:'',
                 show_info:false,
+                close_icon:true,
                 remark_1_name:'',
                 remark_1:'',
                 remark_2_name:'',
@@ -209,18 +214,11 @@
                 create_character_url:'/ancient_books/add_person.action',
             }
         },
-
         methods:{
-            modal_fadeout(response){
-               this.show_info=false;
-               this.$router.push({name:'char_detail',params:{nouId:response.body.id}});
-            },
             success_create(response){
                 this.show_info=true;
-                //路由跳转
+                this.$router.push({name:'char_detail',params:{nouId:response.body.id}});
                 //清空Vuex
-                setTimeout(this.modal_fadeout(response),20000);
-                console.log("hh");
                 this.$store.getters.get_build_character.standard_name = '';
                 this.$store.getters.get_build_character.person_name='';
                 this.$store.getters.get_build_character.xing='';
@@ -324,11 +322,12 @@
                 if(this.$store.getters.get_build_character.son_standard_name.length !== 0){
                     this.show_tooltip_son = true;
                 }
-                //window.setTimeout(function(){document.getElementById("ss").modal("hide")},10);
             },
 
             close_tooltip_son(){
-                this.show_tooltip_son = false;
+                if(this.$store.getters.get_build_character.son_standard_name.length !== 0){
+                    this.show_tooltip_son = false;
+                }
             },
 
             /*查看女儿人物关系*/
@@ -339,7 +338,9 @@
             },
 
             close_tooltip_daughter(){
-                this.show_tooltip_daughter = false;
+                if(this.$store.getters.get_build_character.daughter_standard_name.length !== 0){
+                    this.show_tooltip_daughter = false;
+                }
             },
 
             /*查看兄弟人物关系*/
@@ -350,7 +351,9 @@
             },
 
             close_tooltip_brother(){
-                this.show_tooltip_brother = false;
+                if(this.$store.getters.get_build_character.brother_standard_name.length !== 0){
+                    this.show_tooltip_brother = false;
+                }
             },
 
             /*查看姐妹人物关系*/
@@ -361,7 +364,9 @@
             },
 
             close_tooltip_sister(){
-                this.show_tooltip_sister = false;
+                if(this.$store.getters.get_build_character.sister_standard_name.length !== 0){
+                    this.show_tooltip_sister = false;
+                }
             },
 
             /*查看师人物关系*/
@@ -372,7 +377,9 @@
             },
 
             close_tooltip_teacher(){
-                this.show_tooltip_teacher = false;
+                if(this.$store.getters.get_build_character.teacher_standard_name.length !== 0){
+                    this.show_tooltip_teacher = false;
+                }
             },
 
             /*查看生人物关系*/
@@ -383,7 +390,9 @@
             },
 
             close_tooltip_student(){
-                this.show_tooltip_student = false;
+                if(this.$store.getters.get_build_character.student_standard_name.length !== 0){
+                    this.show_tooltip_student = false;
+                }
             },
 
             /*查看友人物关系*/
@@ -394,8 +403,10 @@
             },
 
             close_tooltip_friend(){
-                this.show_tooltip_friend = false;
-            },
+                if(this.$store.getters.get_build_character.friend_standard_name.length !== 0){
+                    this.show_tooltip_friend = false;
+                }
+            }
         }
     }
 </script>
@@ -407,6 +418,7 @@
         height:30px;
         width:220px;
         font-weight: bold;
+        text-overflow: ellipsis;
     }
 
     .zxw-relation-modal-header{
@@ -416,6 +428,13 @@
 
 
     .zxw-relation-info{
-        margin:20px 0 5px 30px;
+        margin:20px 0 10px 30px;
+    }
+
+    .zxw-relation-modal-body{
+        margin-bottom: 20px;
+    }
+    .zxw-show-info{
+        visibility: hidden;
     }
 </style>

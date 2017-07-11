@@ -89,10 +89,11 @@
 
     Mock.mock('/ancient_books/get_time_by_chinese_name.action','post', {
         "status|200":200,
+        "result|1":1,
         "id|100":100,
     });
 
-    Mock.mock('/ancient_books/getToken.action','get', {
+     Mock.mock('/ancient_books/getToken.action','get', {
         "token|100":100,
     });*/
 
@@ -146,10 +147,10 @@
 
             /*朝代下拉框*/
             success_menu(response){
-                for(let i = 0; i < response.body.length; i++){
+                for(let i = 0; i < response.body.g.length; i++){
                     this.menu_data.push({
-                        item_1_id:response.body[i].item_1_id,
-                        chinese_name:response.body[i].chinese_name,
+                        item_1_id:response.body.g[i].item_1_id,
+                        chinese_name:response.body.g[i].chinese_name,
                     })
                 }
                 console.log('this.menu_data:'+JSON.stringify(this.menu_data));

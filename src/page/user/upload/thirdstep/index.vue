@@ -13,15 +13,14 @@
         </div>
 
         <div class="width950 height650 center ry-scroll">
-            <div class="row">
-                <div class="ry-picture-view" v-for="image in images">
-                    <img :src="image"/>
-                </div>
-                <div class="ry-picture-view">
-                    <a href="javascript:;" class="ry-file-picture">添加图片
-                        <input id="add" type="file" @change="onFileChange" multiple name="picture">
-                    </a>
-                </div>
+            <div id="div1" class="ry-picture-box" v-for="image in images" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <img id="drag1" :src="image" class="ry-picture-view" draggable="true" ondragstart="drag(event)"/>
+                <p class="picture-names" style="text-align: center"></p>
+            </div>
+            <div class="ry-picture-box">
+                <a href="javascript:;" class="ry-add">
+                    <input id="add" type="file" @change="onFileChange" multiple name="picture">
+                </a>
             </div>
         </div>
 
@@ -82,6 +81,10 @@
             this.picture_name = this.$store.getters.get_picture_name;
         },
 
+        mounted : function () {
+            this.view_names();
+        },
+
         beforeRouteLeave(to, from, next) {
             this.$store.commit("get_images",this.images);
             this.$store.commit("get_texts",this.texts);
@@ -90,6 +93,9 @@
         },
 
         methods : {
+            /**
+             * 添加上传图片
+             */
             onFileChange(e) {
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)return;
@@ -99,7 +105,9 @@
                     var temp = obj.files[i].name;
                     this.picture_name.push(temp);
                 }
+                this.view_names();
             },
+
             createImage(file) {
                 if (typeof FileReader === 'undefined') {
                     alert('您的浏览器不支持图片上传，请升级您的浏览器');
@@ -116,6 +124,39 @@
                 }
             },
 
+
+            /**
+             * 渲染图片文件名称
+             */
+            view_names() {
+                var ps = document.getElementsByClassName("picture-names");
+                for(var i = 0; i < ps.length; i++) {
+                    ps[i].innerText = this.picture_name[i]
+                }
+            },
+
+
+            /**
+             * 拖动图片
+             */
+            allowDrop(ev) {
+                ev.preventDefault();
+            },
+
+            drag(ev) {
+                ev.dataTransfer.setData("URL",ev.target.id);
+            },
+
+            drop(ev) {
+                ev.preventDefault();
+                var data=ev.dataTransfer.getData("URL");
+                ev.target.appendChild(document.getElementById(data));
+            },
+
+
+            /**
+             * 取消上传
+             */
             cancel_upload() {
                 this.$router.push({path: '/user'});
             },
@@ -128,6 +169,10 @@
                 this.$router.push({path:'/bookstore/book_info'});
             },
 
+
+            /**
+             * post上传请求
+             */
             complete_upload() {
                 this.varieties_item = this.$store.getters.get_varieties_item;
                 this.edition_item = this.$store.getters.get_edition_item;
@@ -135,6 +180,50 @@
                 this.copy_item = this.$store.getters.get_copy_item;
                 this.upload_one_info = this.$store.getters.get_upload1_info;
                 this.summary = this.$store.getters.get_book_summary;
+                this.responsibility_info.push({
+                    location_id:this.varieties_item.varieties_responsibility.location_id,
+                    person_id:this.varieties_item.varieties_responsibility.person_id,
+                    begin_time:this.varieties_item.varieties_responsibility.begin_time_id,
+                    end_time:this.varieties_item.varieties_responsibility.end_time_id,
+                    action:this.varieties_item.varieties_responsibility.action,
+                    explain:this.varieties_item.varieties_responsibility.explain,
+                    confirm:this.varieties_item.varieties_responsibility.confirm,
+                    type:this.varieties_item.varieties_responsibility.type,
+                    level:1
+                });
+                this.responsibility_info.push({
+                    location_id:this.edition_item.edition_responsibility.location_id,
+                    person_id:this.edition_item.edition_responsibility.person_id,
+                    begin_time:this.edition_item.edition_responsibility.begin_time_id,
+                    end_time:this.edition_item.edition_responsibility.end_time_id,
+                    action:this.edition_item.edition_responsibility.action,
+                    explain:this.edition_item.edition_responsibility.explain,
+                    confirm:this.edition_item.edition_responsibility.confirm,
+                    type:this.edition_item.edition_responsibility.type,
+                    level:2
+                });
+                this.responsibility_info.push({
+                    location_id:this.impression_item.impression_responsibility.location_id,
+                    person_id:this.impression_item.impression_responsibility.person_id,
+                    begin_time:this.impression_item.impression_responsibility.begin_time_id,
+                    end_time:this.impression_item.impression_responsibility.end_time_id,
+                    action:this.impression_item.impression_responsibility.action,
+                    explain:this.impression_item.impression_responsibility.explain,
+                    confirm:this.impression_item.impression_responsibility.confirm,
+                    type:this.impression_item.impression_responsibility.type,
+                    level:3
+                });
+                this.responsibility_info.push({
+                    location_id:this.copy_item.copy_responsibility.location_id,
+                    person_id:this.copy_item.copy_responsibility.person_id,
+                    begin_time:this.copy_item.copy_responsibility.begin_time_id,
+                    end_time:this.copy_item.copy_responsibility.end_time_id,
+                    action:this.copy_item.copy_responsibility.action,
+                    explain:this.copy_item.copy_responsibility.explain,
+                    confirm:this.copy_item.copy_responsibility.confirm,
+                    type:this.copy_item.copy_responsibility.type,
+                    level:4
+                });
 
                 this.add_book_obj.english = this.varieties_item.english;
                 this.add_book_obj.type_name = this.varieties_item.type_name;
@@ -222,8 +311,11 @@
     .ry-picture-view{
         width: 120px;
         height: 160px;
+    }
+
+    .ry-picture-box{
         display: inline-block;
-        margin: 30px;
+        margin: 15px 30px;
     }
 
     .height650{
@@ -233,5 +325,28 @@
     .ry-scroll{
         overflow-y: scroll;
         overflow-x: hidden;
+    }
+
+    .ry-add{
+        position: relative;
+        display: inline-block;
+        width: 120px;
+        height: 160px;
+        background-image:  url("../../../../assets/img/upload3/upload3_add.png");
+        background-size: 100%;
+        padding-top: 25px;
+        padding-left: 40px;
+        overflow: hidden;
+        text-decoration: none;
+        text-indent: 0;
+        line-height: 20px;
+    }
+
+    .ry-add input{
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
     }
 </style>
