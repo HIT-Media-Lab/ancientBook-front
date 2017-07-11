@@ -133,7 +133,7 @@ const store = new Vuex.Store({
             shi:'',
             zi:'',
             other_name:'',
-            birth_time_id:'2',
+            birth_time_id:'',
             birth_standard_name:'',
             death_time_id:'1',
             death_standard_name:'',
