@@ -47,7 +47,7 @@
         </div>
 
         <div class="width1000 center">
-            <button class="ry-btn-submit float-right" @click="complete_upload1()">發佈</button>
+            <button class="ry-btn-submit float-right" @click="complete_upload()">發佈</button>
             <button class="ry-btn-last-step3 float-right" @click="last_page()">上一步</button>
         </div>
 
@@ -68,6 +68,7 @@
                 images : [],
                 picture_name : [],
                 texts : [],
+                page : 1,
                 upload_file : {},
                 responsibility_info :[],
                 add_book_obj : {},
@@ -139,12 +140,7 @@
             /**
              * 拖动图片
              */
-            drag_image() {
-                var images = document.getElementsByClassName("ry-picture-view");
-                var sel = window.getSelection();
-                var begin = sel.anchorNode.parentNode.id;
-                this.begin_add_comment = parseInt(begin);
-            },
+
 
 
 
@@ -157,10 +153,6 @@
 
             last_page() {
                 this.$router.push({path: '/user/upload2'});
-            },
-
-            complete_upload1() {
-                this.$router.push({path:'/bookstore/book_info'});
             },
 
 
@@ -266,9 +258,24 @@
             },
 
             success_post_add(response) {
+                var vm = this;
                 if (response.body.result === 1) {
                     console.log ("success add!");
-                    window.location.reload();   //  重新加载
+
+                    for(var i = 1;i < vm.picture.length+1; i++) {
+                        var upload_picture_obj = {};
+                        upload_picture_obj.ancient_book_id = response.body.id;
+                        upload_picture_obj.book = 1;
+                        upload_picture_obj.volume = 1;
+                        upload_picture_obj.page = i;
+                        upload_picture_obj.picture = vm.images[i-1];
+                        upload_picture_obj.content = vm.texts[i-1];
+                        upload_picture_obj.book_name = vm.upload_file.book_name;
+                        this.before_http(upload_picture_obj);
+                        this.http_json('/ancient_books/upload_page.action' , 'post' , upload_picture_obj , this.success_post_picture,this.fail_post_picture);
+                    }
+
+                    this.$router.push({path:'/bookstore/book_info'});
                 }
                 else if (response.body.result === 0) {
                     console.log ("fail add");
@@ -277,6 +284,19 @@
 
             fail_post_add() {
                 console.log("fail add!");
+            },
+
+            success_post_picture(response) {
+                if (response.body.result === 1) {
+                    console.log("success upload picture!");
+                }
+                else if (response.body.result === 0) {
+                    console.log ("fail upload picture");
+                }
+            },
+
+            fail_post_picture() {
+                console.log("fail upload picture!");
             },
         },
     }

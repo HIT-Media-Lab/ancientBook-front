@@ -44,6 +44,9 @@ export default {
     get_picture_name(state,names){
         state.picture_name = names
     },
+    get_texts(state,texts){
+        state.texts = texts
+    },
     get_upload_file(state,texts){
         state.texts = texts
     },
