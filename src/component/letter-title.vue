@@ -62,7 +62,7 @@
 
 <style>
     .zxwcharacter-title{
-        margin: 35px 0 47px 30px;
+        margin: 35px 0 47px 40px;
         padding:15px 0 0 40px;
         width:968px;
         height:53px;

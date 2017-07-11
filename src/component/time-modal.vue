@@ -149,8 +149,8 @@
             success_menu(response){
                 for(let i = 0; i < response.body.g.length; i++){
                     this.menu_data.push({
-                        item_1_id:response.body.g[i].item_1_id,
-                        chinese_name:response.body.g[i].chinese_name,
+                        item_1_id:response.body[i].item_1_id,
+                        chinese_name:response.body[i].chinese_name,
                     })
                 }
                 console.log('this.menu_data:'+JSON.stringify(this.menu_data));

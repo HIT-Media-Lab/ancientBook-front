@@ -9,9 +9,11 @@
         <letter_title></letter_title>
 
         <!--人物列表-->
+        <div style="margin-left:50px; ">
         <button class="zxw-chadail" @click="go_character(index)" v-for="(item,index) in character_data">
             {{ item.standard_name }}
         </button>
+        </div>
         <!--翻页组件-->
         <paginator :max=this.total_page></paginator>
     </div>

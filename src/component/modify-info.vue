@@ -61,6 +61,7 @@
 <script>
     import login_modal from  '../component/modal.vue'
     import store from '../store/index'
+    import bus from '../lib/bus'
 
     export default{
         components:{
@@ -129,6 +130,10 @@
                     this.Active4 = false;
                     this.disabled = false;
                     this.show = false;
+                    alert("请重新登录");
+                    localStorage.setItem('user', JSON.stringify("guest"));
+                    this.$router.push('/login');
+                    bus.$emit('change_name','登录')
                 } else {
                     alert(response.body.info);
                 }

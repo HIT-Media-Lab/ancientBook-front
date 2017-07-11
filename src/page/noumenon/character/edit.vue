@@ -2,10 +2,10 @@
     <div>
         <noumenon_title :title="edit_character_title"> </noumenon_title>
         <div style="margin-left:60px">
-            <p class="zxw-create-character" v-bind="standard_title,repeat_noumenom"  v-model="input_content.standard_name">本体名称：{{input_content.standard_name}}</p>
+            <p class="zxw-create-character" v-bind="standard_title"  v-model="input_content.standard_name">本体名称：{{input_content.standard_name}}</p>
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">人名：</label>
-                <input id="person_name" type="text"  class="zxw-character-input zxw-edit-character-input-margin" v-model="input_content.person_name" v-bind:class="{'zxw-input-chinese':show_input}" >
+                <input id="person_name" type="text"  class="zxw-character-input zxw-edit-character-input-margin" v-model="input_content.person_name" v-bind:class="{'zxw-input-chinese':show_input}" :="repeat_nou_1">
                 <label class="zxw-character-span">英译：</label>
                 <input type="text" class="zxw-character-input" v-model="input_content.english">
             </div>
@@ -154,7 +154,7 @@
 
             <div class="zxw-edit-btn">
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length" @click="cancel_edit()">取消</button>
-                <button class="zxw-nextbtn zxw-nextbtn-length" @click="finish_edit()" v-bind:disabled="input_content.birth_standard_name === ''|| input_content.death_standard_name === ''||input_content.person_name === ''|| show_input === true" >完成</button>
+                <button class="zxw-nextbtn zxw-nextbtn-length" @click="finish_edit()" v-bind:disabled="input_content.birth_standard_name === ''|| input_content.death_standard_name === ''||input_content.person_name === ''|| show_input === true|| repeat_id !== '' ||add_data[0].remark_name === '' ||(add_data[1] !== undefined && add_data[1].remark_name === '')"  >完成</button>
             </div>
         </div>
 
@@ -206,19 +206,8 @@ export default{
             }
         },
 
-        repeat_noumenom(){
-            if(this.input_content.person_name !== '' && this.input_content.birth_standard_name !== ''){
-                let repeat_object={};
-                let new_url= this.check_noumenon_repeat+'?name='+this.input_content.standard_name+'&&type=1';
-                this.http_json(new_url,'get',repeat_object,this.success_repeat,this.fail_repeat);
-            }
-        }
-
-    },
-
-    watch:{
-        /*检查人名仅能输入中文*/
-        'input_content.person_name':function(){
+        repeat_nou_1(){
+            /*检查人名仅能输入中文*/
             if(this.input_content.person_name !== '') {
                 if(!/^[\u4E00-\u9FA5]*$/.test(this.input_content.person_name)) {
                     this.show_input = true;
@@ -228,7 +217,18 @@ export default{
             } else if(this.input_content.person_name === ''){
                 this.show_input = false;
             }
+
+
+            if(this.input_content.person_name !== '' && this.input_content.birth_standard_name !== ''&& this.show_input === false){
+                let new_title = this.input_content.person_name+'('+this.input_content.birth_standard_name+')';
+                if(new_title !== this.edit_character_title){
+                    let repeat_object={};
+                    let new_url= this.check_noumenon_repeat+'?name='+this.input_content.standard_name+'&&type=1';
+                    this.http_json(new_url,'get',repeat_object,this.success_repeat,this.fail_repeat);
+                }
+            }
         }
+
     },
 
     data(){
@@ -451,12 +451,21 @@ export default{
         },
 
         /*本体是否重复*/
+        repeat_nou_2(){
+            if(this.input_content.person_name !== '' && this.input_content.birth_standard_name !== ''&& this.show_input === false){
+                let repeat_object={};
+                let new_url= this.check_noumenon_repeat+'?name='+this.input_content.standard_name+'&&type=1';
+                this.http_json(new_url,'get',repeat_object,this.success_repeat,this.fail_repeat);
+            }
+        },
+
         success_repeat(response){
             if(response.body.result === 0){
                 this.show_repeat = true;
                 this.repeat_id = response.body.id;
                 console.log("本体重复");
             } else if(response.body.result === 1){
+                this.repeat_id = '';
                 console.log("没有重复信息");
             }
         },
@@ -487,6 +496,7 @@ export default{
             this.input_content.birth_time_id = p.time_id;
             this.input_content.birth_standard_name = p.standard_name;
             this.close_birth();
+            this.repeat_nou_2();
         },
 
         close_birth(){
@@ -510,13 +520,15 @@ export default{
 
         /*添加备注信息*/
         add_tip(p){
-            this.add_data[p].value = false;
-            this.add_data.push({
-                value:true,
-                remark_name:'',
-                remark:''
-            });
-            console.log(this.add_data.length+JSON.stringify(this.add_data));
+            if(this.add_data.length < 2){
+                this.add_data[p].value = false;
+                this.add_data.push({
+                    value:true,
+                    remark_name:'',
+                    remark:''
+                });
+                console.log(this.add_data.length+JSON.stringify(this.add_data));
+            }
         },
 
         /*关联籍贯*/
@@ -919,6 +931,10 @@ export default{
             if(response.body.result === 1){
                 this.$router.push({name:'char_detail',params:{nouId:this.$route.params.nouId}});
             }
+        },
+
+        fail_modify_char(){
+            console.log("修改人物本体失败");
         }
     }
 }

@@ -5,10 +5,10 @@
         <create_word :prams="this.prams"></create_word>
 
         <div>
-            <p class="zxw-create-character" v-bind="standard_title,repeat_noumenom"  v-model="input_content.standard_name">本体名称：{{input_content.standard_name}}</p>
+            <p class="zxw-create-character" v-bind="standard_title"  v-model="input_content.standard_name">本体名称：{{input_content.standard_name}}</p>
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">人名：</label>
-                <input id="person_name" type="text"  class="zxw-character-input zxw-character-input-margin" v-model="input_content.person_name" v-bind:class="{'zxw-input-chinese':show_input}" >
+                <input id="person_name" type="text"  class="zxw-character-input zxw-character-input-margin" v-model="input_content.person_name" v-bind:class="{'zxw-input-chinese':show_input}" :="repeat_nou_1">
                 <label class="zxw-character-span">英译：</label>
                 <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_content.english">
             </div>
@@ -49,8 +49,8 @@
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_father = true" @mouseout="show_father = false" v-if="input_content.father_standard_name !== ''">
-                            <span contenteditable="false" v-model="input_content.father_standard_name">{{input_content.father_standard_name}}</span>
-                            <button class="zxw-add-hover-img" contenteditable="false" v-show="show_father===true" @click="delete_father()"></button>
+                            <span v-model="input_content.father_standard_name">{{input_content.father_standard_name}}</span>
+                            <button class="zxw-add-hover-img" v-show="show_father===true" @click="delete_father()"></button>
                         </span>
                     </div>
                     <button class="zxw-input-add-character" @click="open_father()"></button>
@@ -62,8 +62,8 @@
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_mother = true" @mouseout="show_mother = false" v-if="input_content.mother_standard_name !== ''">
-                            <span contenteditable="false" v-model="input_content.mother_standard_name">{{input_content.mother_standard_name}}</span>
-                            <button class="zxw-add-hover-img" contenteditable="false" v-show="show_mother===true" @click="delete_mother()"></button>
+                            <span v-model="input_content.mother_standard_name">{{input_content.mother_standard_name}}</span>
+                            <button class="zxw-add-hover-img" v-show="show_mother===true" @click="delete_mother()"></button>
                         </span>
                     </div>
                     <button class="zxw-input-add-character" @click="open_mother()"></button>
@@ -72,8 +72,8 @@
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" v-bind:contenteditable="input_content.son_standard_name.length !== 0" >
                         <span class="zxw-person-relation-span" v-for="(item,index) in input_content.son_standard_name"  @mouseover="show_son=index" @mouseout="show_son =-1">
-                            <span contenteditable="false">{{item}}</span>
-                            <button class="zxw-add-hover-img" contenteditable="false" v-show="show_son === index" @click="delete_son(index)"></button>
+                            <span>{{item}}</span>
+                            <button class="zxw-add-hover-img"  v-show="show_son === index" @click="delete_son(index)"></button>
                         </span>
                     </div>
                     <button class="zxw-input-add-character" @click="open_son()"></button>
@@ -85,8 +85,8 @@
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" v-bind:contenteditable="input_content.daughter_standard_name.length !== 0">
                         <span class="zxw-person-relation-span" v-for="(item,index) in input_content.daughter_standard_name"  @mouseover="show_daughter=index" @mouseout="show_daughter =-1">
-                            <span contenteditable="false">{{item}}</span>
-                            <button class="zxw-add-hover-img" contenteditable="false" v-show="show_daughter === index" @click="delete_daughter(index)"></button>
+                            <span>{{item}}</span>
+                            <button class="zxw-add-hover-img" v-show="show_daughter === index" @click="delete_daughter(index)"></button>
                         </span>
                     </div>
                     <button class="zxw-input-add-character" @click="open_daughter()"></button>
@@ -95,8 +95,8 @@
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" v-bind:contenteditable="input_content.brother_standard_name.length !== 0">
                         <span class="zxw-person-relation-span" v-for="(item,index) in input_content.brother_standard_name"  @mouseover="show_brother=index" @mouseout="show_brother =-1">
-                            <span contenteditable="false">{{item}}</span>
-                            <button class="zxw-add-hover-img" contenteditable="false" v-show="show_brother === index" @click="delete_brother(index)"></button>
+                            <span>{{item}}</span>
+                            <button class="zxw-add-hover-img" v-show="show_brother === index" @click="delete_brother(index)"></button>
                         </span>
                     </div>
                     <button class="zxw-input-add-character" @click="open_brother()"></button>
@@ -108,8 +108,8 @@
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" v-bind:contenteditable="input_content.sister_standard_name.length !== 0">
                         <span class="zxw-person-relation-span" v-for="(item,index) in input_content.sister_standard_name"  @mouseover="show_sister=index" @mouseout="show_sister =-1">
-                            <span contenteditable="false">{{item}}</span>
-                            <button class="zxw-add-hover-img" contenteditable="false" v-show="show_sister === index" @click="delete_sister(index)"></button>
+                            <span>{{item}}</span>
+                            <button class="zxw-add-hover-img" v-show="show_sister === index" @click="delete_sister(index)"></button>
                         </span>
                     </div>
                     <button class="zxw-input-add-character" @click="open_sister()"></button>
@@ -118,8 +118,8 @@
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" v-bind:contenteditable="input_content.teacher_standard_name.length !== 0">
                         <span class="zxw-person-relation-span" v-for="(item,index) in input_content.teacher_standard_name"  @mouseover="show_teacher=index" @mouseout="show_teacher =-1">
-                            <span contenteditable="false">{{item}}</span>
-                            <button class="zxw-add-hover-img" contenteditable="false" v-show="show_teacher === index" @click="delete_teacher(index)"></button>
+                            <span>{{item}}</span>
+                            <button class="zxw-add-hover-img" v-show="show_teacher === index" @click="delete_teacher(index)"></button>
                         </span>
                     </div>
                     <button class="zxw-input-add-character" @click="open_teacher()"></button>
@@ -131,8 +131,8 @@
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" v-bind:contenteditable="input_content.student_standard_name.length !== 0">
                         <span class="zxw-person-relation-span" v-for="(item,index) in input_content.student_standard_name"  @mouseover="show_student=index" @mouseout="show_student =-1">
-                            <span contenteditable="false">{{item}}</span>
-                            <button class="zxw-add-hover-img" contenteditable="false" v-show="show_student === index" @click="delete_student(index)"></button>
+                            <span>{{item}}</span>
+                            <button class="zxw-add-hover-img" v-show="show_student === index" @click="delete_student(index)"></button>
                         </span>
                     </div>
                     <button class="zxw-input-add-character" @click="open_student()"></button>
@@ -141,8 +141,8 @@
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" v-bind:contenteditable="input_content.friend_standard_name.length !== 0">
                         <span class="zxw-person-relation-span" v-for="(item,index) in input_content.friend_standard_name"  @mouseover="show_friend=index" @mouseout="show_friend =-1">
-                            <span contenteditable="false">{{item}}</span>
-                            <button class="zxw-add-hover-img" contenteditable="false" v-show="show_friend === index" @click="delete_friend(index)"></button>
+                            <span>{{item}}</span>
+                            <button class="zxw-add-hover-img" v-show="show_friend === index" @click="delete_friend(index)"></button>
                         </span>
                     </div>
                     <button class="zxw-input-add-character" @click="open_friend()"></button>
@@ -151,13 +151,13 @@
 
             <div v-for="(item ,index) in add_data">
                 <input type="text" class="zxw-character-input-head zxw-character-input" v-model="item.remark_name">
-                <input type="text" class="zxw-character-input" v-bind:disabled="item.remark_name === ''" v-model="item.remark">
+                <input type="text" class="zxw-character-input" v-bind:readonly="item.remark_name === ''&&item.remark === ''" v-model="item.remark">
                 <button class="zxw-add-button" @click="add_tip(index)" v-show="add_data[index].value">添加</button>
             </div>
 
             <div class="zxw-build-step2-btn">
-                <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length" @click="go_pre_step()">上一步</button>
-                <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="input_content.birth_standard_name === ''|| input_content.death_standard_name === ''||input_content.person_name === ''|| show_input === true" >下一步</button>
+                <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length" @click="pre_step()">上一步</button>
+                <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="input_content.birth_standard_name === ''|| input_content.death_standard_name === ''||input_content.person_name === ''|| show_input === true|| repeat_id !== '' ||add_data[0].remark_name === '' ||(add_data[1] !== undefined && add_data[1].remark_name === '')" >下一步</button>
             </div>
         </div>
 
@@ -175,7 +175,7 @@
         <search_modal :search_url="this.search_person" :noumenon_modal="this.friend_modal" :noumenon_number="1" v-on:close_modal="close_friend" v-on:add_noumenon_relations="add_friend"></search_modal>
 
         <!--若人物本体规范已存在的模态框-->
-        <repeat_modal :show_repeat="this.show_repeat" :repeat_name="this.input_content.standard_name" :repeat_id="this.repeat_idr" :repeat_noumenon="this.repeat_noumenon" v-on:close_modal="close_repeat"></repeat_modal>
+        <repeat_modal :show_repeat="this.show_repeat" :repeat_name="this.input_content.standard_name" :repeat_id="this.repeat_id" :repeat_noumenon="this.repeat_noumenon" v-on:close_modal="close_repeat"></repeat_modal>
 
         <!--添加籍贯的模态框-->
         <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal" :noumenon_number="7" v-on:close_modal="close_location" v-on:add_noumenon_relations="add_location"></search_modal>
@@ -190,6 +190,12 @@
         "status|200":200,
         "result|0":1,
         "id:|250":250
+    });
+
+    Mock.mock('/ancient_books/check_noumenon_standard_name.action?name=%E5%93%88%E5%93%88(%E5%AE%8B%E6%9C%9D)&&type=1','get', {
+        "status|200":200,
+        "result|1":0,
+        "id:|300":250
     });*/
 
     import create_word from '../../../../component/create-word.vue';
@@ -219,19 +225,8 @@
                 }
             },
 
-            repeat_noumenom(){
-                if(this.input_content.person_name !== '' && this.input_content.birth_standard_name !== ''){
-                    let repeat_object={};
-                    let new_url= this.check_noumenon_repeat+'?name='+this.input_content.standard_name+'&&type=1';
-                    this.http_json(new_url,'get',repeat_object,this.success_repeat,this.fail_repeat);
-                }
-            }
-
-        },
-
-        watch:{
-            /*检查人名仅能输入中文*/
-            'input_content.person_name':function(){
+            repeat_nou_1(){
+                /*检查人名仅能输入中文*/
                 if(this.input_content.person_name !== '') {
                     if(!/^[\u4E00-\u9FA5]*$/.test(this.input_content.person_name)) {
                         this.show_input = true;
@@ -240,6 +235,13 @@
                     }
                 } else if(this.input_content.person_name === ''){
                     this.show_input = false;
+                }
+
+                /*判断人物本体名称是否重复*/
+                if(this.input_content.person_name !== '' && this.input_content.birth_standard_name !== '' && this.show_input === false){
+                    let repeat_object={};
+                    let new_url= this.check_noumenon_repeat+'?name='+this.input_content.standard_name+'&&type=1';
+                    this.http_json(new_url,'get',repeat_object,this.success_repeat,this.fail_repeat);
                 }
             }
         },
@@ -316,21 +318,30 @@
                     }],
                 check_noumenon_repeat:'/ancient_books/check_noumenon_standard_name.action',
                 show_repeat:false,
-                repeat_idr:'',
+                repeat_id:'',
                 repeat_noumenon:'人物本体'
             }
         },
 
         methods:{
-
             /*本体是否重复*/
+            repeat_nou_2(){
+                if(this.input_content.person_name !== '' && this.input_content.birth_standard_name !== '' && this.show_input === false){
+                    let repeat_object={};
+                    let new_url= this.check_noumenon_repeat+'?name='+this.input_content.standard_name+'&&type=1';
+                    this.http_json(new_url,'get',repeat_object,this.success_repeat,this.fail_repeat);
+                }
+            },
+
             success_repeat(response){
                 if(response.body.result === 0){
                     this.show_repeat = true;
                     this.repeat_id = response.body.id;
                     console.log("本体重复");
                 } else if(response.body.result === 1){
+                    this.repeat_id = '';
                     console.log("没有重复信息");
+                    console.log(JSON.stringify(this.repeat_id));
                 }
             },
 
@@ -360,6 +371,7 @@
                 this.input_content.birth_time_id = p.time_id;
                 this.input_content.birth_standard_name = p.standard_name;
                 this.close_birth();
+                this.repeat_nou_2();
             },
 
             close_birth(){
@@ -382,14 +394,16 @@
             },
 
             /*添加备注信息*/
-            add_tip(p){
-                this.add_data[p].value = false;
-                this.add_data.push({
-                    value:true,
-                    remark_name:'',
-                    remark:''
-                });
-                console.log(this.add_data.length+JSON.stringify(this.add_data));
+            add_tip(p){ //目前只能添加两条备注，后续会改数据库为无限增加
+                if(this.add_data.length < 2){
+                    this.add_data[p].value = false;
+                    this.add_data.push({
+                        value:true,
+                        remark_name:'',
+                        remark:''
+                    });
+                    console.log(this.add_data.length+JSON.stringify(this.add_data));
+                }
             },
 
             /*关联籍贯*/
@@ -662,42 +676,44 @@
                 }
             },
 
-            go_pre_step(){
-                this.input_content.standard_name = '';
-                this.input_content.person_name='';
-                this.input_content.xing='';
-                this.input_content.shi='';
-                this.input_content.zi='';
-                this.input_content.other_name='';
-                this.input_content.birth_time_id='';
-                this.input_content.birth_standard_name='';
-                this.input_content.death_time_id='';
-                this.input_content.death_standard_name='';
-                this.input_content.remark_1_name='';
-                this.input_content.remark_2_name='';
-                this.input_content.remark_1='';
-                this.input_content.remark_2='';
-                this.input_content.english='';
-                this.input_content.location_id='';
-                this.input_content.location='';
-                this.input_content.father={};
-                this.input_content.mother={};
-                this.input_content.son.splice(0,this.input_content.son.length);
-                this.input_content.daughter.splice(0,this.input_content.daughter.length);
-                this.input_content.brother.splice(0,this.input_content.brother.length);
-                this.input_content.sister.splice(0,this.input_content.sister.length);
-                this.input_content.teacher.splice(0,this.input_content.teacher.length);
-                this.input_content.student.splice(0,this.input_content.student.length);
-                this.input_content.father_standard_name='';
-                this.input_content.mother_standard_name='';
-                this.input_content.friend.splice(0,this.input_content.friend.length);
-                this.input_content.son_standard_name.splice(0,this.input_content.son_standard_name.length);
-                this.input_content.daughter_standard_name.splice(0,this.input_content.daughter_standard_name.length);
-                this.input_content.brother_standard_name.splice(0,this.input_content.brother_standard_name.length);
-                this.input_content.sister_standard_name.splice(0,this.input_content.sister_standard_name.length);
-                this.input_content.teacher.splice(0,this.input_content.teacher_standard_name.length);
-                this.input_content.student.splice(0,this.input_content.student_standard_name.length);
-                this.input_content.friend.splice(0,this.input_content.friend_standard_name.length);
+            pre_step(){
+                //清空Vuex
+                this.$store.getters.get_build_character.standard_name = '';
+                this.$store.getters.get_build_character.person_name='';
+                this.$store.getters.get_build_character.xing='';
+                this.$store.getters.get_build_character.shi='';
+                this.$store.getters.get_build_character.zi='';
+                this.$store.getters.get_build_character.other_name='';
+                this.$store.getters.get_build_character.birth_time_id='';
+                this.$store.getters.get_build_character.birth_standard_name='';
+                this.$store.getters.get_build_character.death_time_id='';
+                this.$store.getters.get_build_character.death_standard_name='';
+                this.$store.getters.get_build_character.remark_1_name='';
+                this.$store.getters.get_build_character.remark_2_name='';
+                this.$store.getters.get_build_character.remark_1='';
+                this.$store.getters.get_build_character.remark_2='';
+                this.$store.getters.get_build_character.english='';
+                this.$store.getters.get_build_character.location_id='';
+                this.$store.getters.get_build_character.location='';
+                this.$store.getters.get_build_character.father={};
+                this.$store.getters.get_build_character.mother={};
+                this.$store.getters.get_build_character.son.splice(0,this.$store.getters.get_build_character.son.length);
+                this.$store.getters.get_build_character.daughter.splice(0,this.$store.getters.get_build_character.daughter.length);
+                this.$store.getters.get_build_character.brother.splice(0,this.$store.getters.get_build_character.brother.length);
+                this.$store.getters.get_build_character.sister.splice(0,this.$store.getters.get_build_character.sister.length);
+                this.$store.getters.get_build_character.teacher.splice(0,this.$store.getters.get_build_character.teacher.length);
+                this.$store.getters.get_build_character.student.splice(0,this.$store.getters.get_build_character.student.length);
+                this.$store.getters.get_build_character.father_standard_name='';
+                this.$store.getters.get_build_character.mother_standard_name='';
+                this.$store.getters.get_build_character.friend.splice(0,this.$store.getters.get_build_character.friend.length);
+                this.$store.getters.get_build_character.son_standard_name.splice(0,this.$store.getters.get_build_character.son_standard_name.length);
+                this.$store.getters.get_build_character.daughter_standard_name.splice(0,this.$store.getters.get_build_character.daughter_standard_name.length);
+                this.$store.getters.get_build_character.brother_standard_name.splice(0,this.$store.getters.get_build_character.brother_standard_name.length);
+                this.$store.getters.get_build_character.sister_standard_name.splice(0,this.$store.getters.get_build_character.sister_standard_name.length);
+                this.$store.getters.get_build_character.teacher.splice(0,this.$store.getters.get_build_character.teacher_standard_name.length);
+                this.$store.getters.get_build_character.student.splice(0,this.$store.getters.get_build_character.student_standard_name.length);
+                this.$store.getters.get_build_character.friend.splice(0,this.$store.getters.get_build_character.friend_standard_name.length);
+                this.$store.commit('get_create_one_selection',2);
                 this.$router.push({name:'build'});
             }
         }

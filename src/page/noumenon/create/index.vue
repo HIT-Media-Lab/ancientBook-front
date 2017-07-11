@@ -35,7 +35,8 @@ export default{
 
     methods:{
         go_step2(){
-            if(this.noumenon_option[this.number] === '人物'){
+            console.log(this.noumenon_option[this.number]);
+            if(this.noumenon_option[this.number]==='人物'){
                 this.$router.push({name:'charactertwo'});
             }
         }
