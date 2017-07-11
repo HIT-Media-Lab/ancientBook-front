@@ -13,8 +13,8 @@
         </div>
 
         <div class="width950 height650 center ry-scroll">
-            <div id="div1" class="ry-picture-box" v-for="image in images" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <img id="drag1" :src="image" class="ry-picture-view" draggable="true" ondragstart="drag(event)"/>
+            <div class="ry-picture-box" v-for="image in images">
+                <img :src="image" class="ry-picture-view" />
                 <p class="picture-names" style="text-align: center"></p>
             </div>
             <div class="ry-picture-box">
@@ -139,19 +139,13 @@
             /**
              * 拖动图片
              */
-            allowDrop(ev) {
-                ev.preventDefault();
+            drag_image() {
+                var images = document.getElementsByClassName("ry-picture-view");
+                var sel = window.getSelection();
+                var begin = sel.anchorNode.parentNode.id;
+                this.begin_add_comment = parseInt(begin);
             },
 
-            drag(ev) {
-                ev.dataTransfer.setData("URL",ev.target.id);
-            },
-
-            drop(ev) {
-                ev.preventDefault();
-                var data=ev.dataTransfer.getData("URL");
-                ev.target.appendChild(document.getElementById(data));
-            },
 
 
             /**
@@ -289,6 +283,9 @@
 </script>
 
 <style>
+    #div1, #div2
+    {float:left; width:198px; height:66px; margin:10px;padding:10px;border:1px solid #aaaaaa;}
+
     .ry-upload-three button{
         background-color: transparent;
         border: none;

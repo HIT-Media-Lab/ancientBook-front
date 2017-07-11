@@ -777,7 +777,7 @@
                 if (window.getSelection().getRangeAt(0).toString().length != 0) {
                     document.getElementById("btn-add-comment").style.visibility = "visible"; //  添加批注按钮显示
                     var sel = window.getSelection();
-                    var begin = sel.anchorNode.parentNode.id
+                    var begin = sel.anchorNode.parentNode.id;
                     this.begin_add_comment = parseInt(begin);
                     var end = sel.focusNode.parentNode.id;
                     this.end_add_comment = parseInt(end)+1;
