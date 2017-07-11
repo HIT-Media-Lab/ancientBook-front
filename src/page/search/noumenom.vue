@@ -19,11 +19,16 @@
         },
         created(){
             if (this.content.length == 0){
-                let item = '';
-                item = this.content_url + '?name=' + this.$route.params.content;
-                this.http_json(item, 'get', item, this.success_noumenon, this.fail);
-            }else{
-
+                 let item = this.content_url + '?name=' + this.$route.params.content;
+                 this.http_json(item, 'get', item, this.success_noumenon, this.fail);
+            }
+        },
+        watch:{
+            $route(){
+                if (this.content.length == 0){
+                    let item = this.content_url + '?name=' + this.$route.params.content;
+                    this.http_json(item, 'get', item, this.success_noumenon, this.fail);
+                }
             }
         },
         data(){
