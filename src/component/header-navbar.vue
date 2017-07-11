@@ -240,7 +240,7 @@
     }
     .head-bar{
         margin: 0 auto;
-        width: 890px;
+        width: 990px;
     }
     .bookstore{
         background-image: url("../assets/img/墨点按钮.png");
@@ -271,7 +271,7 @@
     }
     .user-name{
         padding: 5px;
-        width:50px;
+        width: auto;
         height: 13px;
         font-weight:700;
         font-style:normal;

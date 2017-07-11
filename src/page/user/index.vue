@@ -3,7 +3,7 @@
         <div class="j-head">
             <div style="width: 180px;margin: 0 auto">
                 <img src="../../assets/img/头像.png" class="j-userhead" @click="go_to_modify">
-                <span class="j-simple-user" @click="go_to_modify">普通用户</span>
+                <span class="j-simple-user" @click="go_to_modify" v-model="name">{{name}}</span>
             </div>
             <img src="../../assets/img/墨水线.png" class="j-user-line" >
         </div>
@@ -29,14 +29,24 @@
     import store from '../../store'
     import bus from '../../lib/bus'
     export default{
+        created(){
+            this.http_json(this.get_info_url, 'get', {}, this.success_info, this.fail_info)
+        },
         data(){
             return{
-
+                get_info_url: '/ancient_books/get_user_info.action',
+                name: ''
             }
         },
         methods:{
+            success_info(response){
+                this.name = response.body.name;
+            },
             go_to_modify(){
                 this.$router.push("/modify_info");
+            },
+            fail_info(){
+
             },
             logout(){
                 this.$http.get('/ancient_books/logout.action').then(function () {
