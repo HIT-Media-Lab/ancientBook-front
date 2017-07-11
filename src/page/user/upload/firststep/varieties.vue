@@ -177,8 +177,8 @@
 
             <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></time_modal>
             <time_modal :time_modal="this.time_modal_2" v-on:success_time="dead_time" v-on:close_modal="close_dead()"></time_modal>
-            <location_modal :location_modal="this.location_modal" v-on:close_modal="close_location" v-on:add_location_relations="add_location"></location_modal>
-            <character_modal :character_modal="this.character_modal"  v-on:close_modal="close_character" v-on:add_person_relations="add_character"></character_modal>
+            <!--<location_modal :location_modal="this.location_modal" v-on:close_modal="close_location" v-on:add_location_relations="add_location"></location_modal>-->
+            <!--<character_modal :character_modal="this.character_modal"  v-on:close_modal="close_character" v-on:add_person_relations="add_character"></character_modal>-->
         </div>
     </div>
 
