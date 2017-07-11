@@ -52,7 +52,7 @@
             },
             success_noumenon(response){
                 console.log(response.body.content.length);
-                for (let i = 0 ; i< response.body.content.length; i++){
+                for (let i = 0 ; i < response.body.content.length; i++){
                     let type = '';
                     if (response.body.content[i].type_id = 1){
                         type = '【人物】'
