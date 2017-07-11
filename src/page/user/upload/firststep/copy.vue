@@ -167,8 +167,8 @@
     export default{
         components:{
             time_modal,
-            location_modal,
-            character_modal,
+//            location_modal,
+//            character_modal,
         },
 
         data() {
