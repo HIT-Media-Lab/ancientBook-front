@@ -39,8 +39,8 @@
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_location = true" @mouseout="show_location = false" v-if="input_content.location !== ''">
-                            <span contenteditable="false" v-model="input_content.location" >{{input_content.location}}</span>
-                            <button class="zxw-add-hover-img" contenteditable="false" v-show="show_location===true" @click="delete_location()"></button>
+                            <span v-model="input_content.location" >{{input_content.location}}</span>
+                            <button class="zxw-add-hover-img" v-show="show_location===true" @click="delete_location()"></button>
                         </span>
                     </div>
                     <button class="zxw-input-add-character" @click="open_location()"></button>
