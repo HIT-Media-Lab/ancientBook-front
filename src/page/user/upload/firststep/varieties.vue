@@ -177,8 +177,8 @@
 
             <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></time_modal>
             <time_modal :time_modal="this.time_modal_2" v-on:success_time="dead_time" v-on:close_modal="close_dead()"></time_modal>
-            <!--<location_modal :location_modal="this.location_modal" v-on:close_modal="close_location" v-on:add_location_relations="add_location"></location_modal>-->
-            <!--<character_modal :character_modal="this.character_modal"  v-on:close_modal="close_character" v-on:add_person_relations="add_character"></character_modal>-->
+            <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal" :noumenon_number="7" v-on:close_modal="close_location" v-on:add_noumenon_relations="add_location"></search_modal>
+            <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal" :noumenon_number="1" v-on:close_modal="close_character" v-on:add_noumenon_relations="add_character"></search_modal>
         </div>
     </div>
 
@@ -186,17 +186,17 @@
 
 <script>
     import time_modal from '../../../../component/time-modal.vue';
-//    import location_modal from '../../../../component/search_location.vue';
-//    import character_modal from '../../../../component/search_noumenon.vue';
+    import search_modal from '../../../../component/search_noumenon.vue';
     export default{
         components:{
             time_modal,
-//            location_modal,
-//            character_modal,
+            search_modal,
         },
 
         data() {
             return{
+                search_person:'/ancient_books/get_person_list_by_name.action',
+                search_location:'/ancient_books/get_location_list_by_name.action',
                 time_modal_1 : false,
                 time_modal_2 : false,
                 location_modal : false,
@@ -230,6 +230,7 @@
                         end_time : '',
                         end_time_id :'',
                         action : '',
+                        action_value : '',
                         explain : '',
                         confirm : '',
                         type : '',
@@ -250,8 +251,9 @@
         },
 
         beforeRouteLeave (to, from, next) {
+            this.varieties_item.varieties_responsibility.action_value = document.getElementById("ry-v-action").options[document.getElementById("ry-v-action").selectedIndex].text;
             this.$store.commit("get_varieties_contents",this.varieties_item);
-//            this.selections_variety();
+            this.selections_variety();
             next();
         },
 

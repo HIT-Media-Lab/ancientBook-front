@@ -16,10 +16,10 @@
             <h3 style="display:inline-block" class="float-left">古籍規範名稱：</h3>
             <h4 id="bookName" style="display:inline-block" class="float-left ry-book-name">{{ varieties_item.type_name }}</h4>
             <div class="ry-4layers" style="display:inline-block">
-                <p>[品種層]責任結束時間-朝代 + 責任者 + 責任行為</p>
-                <p>[版本層]責任結束時間-朝代 + 責任者 + 責任行為</p>
-                <p>[印次層]責任結束時間-朝代 + 責任者 + 責任行為</p>
-                <p>[複本層]責任結束時間-朝代 + 責任者 + 責任行為</p>
+                <p id="v-standard-name">[品種層]{{ varieties_item.varieties_responsibility.end_time }} + {{ varieties_item.varieties_responsibility.person }} + {{ varieties_item.varieties_responsibility.action_value }}</p>
+                <p id="e-standard-name">[版本層]{{ edition_item.edition_responsibility.end_time }} + {{ edition_item.edition_responsibility.person }} + {{ edition_item.edition_responsibility.action_value }}</p>
+                <p id="i-standard-name">[印次層]{{ impression_item.impression_responsibility.end_time }} + {{ impression_item.impression_responsibility.person }} + {{ impression_item.impression_responsibility.action_value }}</p>
+                <p id="c-standard-name">[複本層]{{ copy_item.copy_responsibility.end_time }} + {{ copy_item.copy_responsibility.person }} + {{ copy_item.copy_responsibility.action_value }}</p>
             </div>
         </div>
 
@@ -59,6 +59,9 @@
         data() {
             return{
                 varieties_item : {},
+                edition_item : {},
+                impression_item : {},
+                copy_item : {},
                 upload_one_info : {
                     pri : 0,
                     standard_name : '',
@@ -68,7 +71,10 @@
         },
 
         created : function () {
-            this.varieties_item = this.$store.getters.get_varieties_item
+            this.varieties_item = this.$store.getters.get_varieties_item;
+            this.edition_item = this.$store.getters.get_edition_item;
+            this.impression_item = this.$store.getters.get_impression_item;
+            this.copy_item = this.$store.getters.get_copy_item;
         },
 
         mounted : function () {
@@ -97,7 +103,11 @@
                     this.upload_one_info.pri = 0;
                 }
                 this.upload_one_info.name = this.varieties_item.type_name;
-//                this.upload_one_info.standard_name =
+                var a = document.getElementById("v-standard-name").innerText;
+                var b = document.getElementById("e-standard-name").innerText;
+                var c = document.getElementById("i-standard-name").innerText;
+                var d = document.getElementsByClassName("c-standard-name").innerText;
+                this.upload_one_info.standard_name = a + b + c + d;
             },
 
             next_page() {
