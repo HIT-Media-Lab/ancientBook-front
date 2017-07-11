@@ -32,13 +32,13 @@
                 total_page: 1,
                 content: [],
                 page_content: [],
-                content_url: '/ancient_books/get_all——noumenon_searched.action',
+                content_url: '/ancient_books/get_all_noumenon_searched.action',
                 character_url: '/ancient_books/get_person_list_by_name.action',
                 location_url: '/ancient_books/get_location_list_by_name.action',
                 office_url: '/ancient_books/get_office_list_by_name.action',
                 term_url: '/ancient_books/get_technical_list_by_name.action',
                 institution_url: '/ancient_books/get_institution_list_by_name.action',
-                literature_url: '/ancient_books/get_literature_list_by_name.action',
+                literature_url: '/ancient_books/get_literature_list_by_name.action'
 
             }
         },

@@ -171,14 +171,20 @@
                             this.warning = "";
                             this.Active3 = false;
                             this.disabled = false;
-                            if ( this.new_pwd == this.twi_pwd){
+                            if (this.twi_pwd == ''){
                                 this.warning = "";
-                                this.Active4 = false;
-                                this.disabled = false;
-                            }else {
-                                this.warning = "两次输入的密码不相符";
-                                this.Active4 = true;
+                                this.Active3 = false;
                                 this.disabled = true;
+                            } else {
+                                if ( this.new_pwd == this.twi_pwd){
+                                    this.warning = "";
+                                    this.Active4 = false;
+                                    this.disabled = false;
+                                }else {
+                                    this.warning = "两次输入的密码不相符";
+                                    this.Active4 = true;
+                                    this.disabled = true;
+                                }
                             }
                         }else {
                             this.warning = '新密码格式错误';
