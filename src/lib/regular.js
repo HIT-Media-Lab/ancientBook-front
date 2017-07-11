@@ -43,8 +43,10 @@ Vue.prototype.check_pwd = function(pwd) {
 Vue.prototype.check_name = function(name) {
     let success =true;
     if (name.match('^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$')) {
+        console.log("正则成功");
         return success;
     } else {
+        console.log("正则失败");
         success=false;
         return success;
     }

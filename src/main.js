@@ -131,6 +131,7 @@ import  notfound from './page/error/404.vue'
 
 //用户
 import  user from  './page/user/index.vue'
+import  modify_info  from './component/modify-info.vue'
 
 /**
  * 上传
@@ -140,7 +141,6 @@ import  copy from './page/user/upload/firststep/copy.vue'
 import  edition from './page/user/upload/firststep/edition.vue'
 import  impression from './page/user/upload/firststep/impression.vue'
 import  varieties from  './page/user/upload/firststep/varieties.vue'
-import  synopsis from  './page/user/upload/firststep/synopsis.vue'
 import  upload2 from  './page/user/upload/secondstep/index.vue'
 import  upload3 from  './page/user/upload/thirdstep/index.vue'
 
@@ -212,6 +212,11 @@ const router = new VueRouter({
             redirect: '/admin/page/1',
             component:admin,
             name:'admin'
+        },
+        {
+            path: '/modify_info',
+            component: modify_info,
+            name: 'modify_info'
         },
         {
             path:'/user',

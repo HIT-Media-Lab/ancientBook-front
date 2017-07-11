@@ -6,26 +6,19 @@
             <h3 class="web-name">兰台古籍研究平台</h3>
         </div>
         <div class="search-login">
-            <input placeholder=" 请输入关键字搜索" class="search-input-login" v-model="sort_box" v-on:keydown.enter="enter">
-            <button class="search-btn-login" @click="search">搜 索</button>
+            <input placeholder=" 请输入关键字搜索" class="search-input-login" v-model="sort_box" v-on:keydown.enter="search1">
+            <button class="search-btn-login" @click="search1">搜 索</button>
         </div>
         <div class="drop-search-login" @click="hide" v-show="sort_box.length!=0">
             <ul>
-                <li class="sort-box1-login">
-                    <router-link to="/search_index" style="color: #0f0f0f">
-                        搜古籍：{{sort_box}}
-                    </router-link>
+                <li class="sort-box1-login" @click="search1()" style="color: #0f0f0f">
+                    搜古籍：{{sort_box}}
                 </li>
-                <li class="sort-box2-login">
-                    <router-link to="/search_index/search_noumenon" style="color: #0f0f0f">
-                        搜本体：{{sort_box}}
-                    </router-link>
+                <li class="sort-box2-login" @click="search2()" style="color: #0f0f0f">
+                    搜本体：{{sort_box}}
                 </li>
             </ul>
         </div>
-        <!--<button @click="test1()">有用户权限</button>-->
-        <!--<button @click="test2()">有超级用户权限</button>-->
-        <!--<button @click="test3()">没用权限</button>-->
     </div>
 </template>
 
@@ -51,33 +44,26 @@ import store from '../../../store'
          hide:function () {
              this.sort_box = ''
          },
-         enter:function () {
-             this.sort_box = '';
-             this.$router.push({path: '/search_index'});
-         },
-         search:function () {
-             if (this.sort_box != ''){
-                 this.$router.push({path: '/search_index'});
+         search1:function () {
+             if (this.sort_box == ''){
+                 this.$router.push("/login");
+             } else if (this.sort_box != '') {
+                 this.$route.params.content = this.sort_box;
+                 this.$route.params.pageId = 1;
+                 this.$router.push({name: 'search_book', params: this.$route.params});
+                 this.sort_box = '';
              }
          },
-         test1(){
-             localStorage.setItem('user',JSON.stringify("user"));
+         search2: function () {
+             this.$route.params.content = this.sort_box;
+             this.$route.params.pageId = 1;
+             if (this.sort_box != ''){
+//                    this.$store.commit('push_search_content', this.sort_box);
+                 this.$router.push({name: 'search_noumenon', params: this.$route.params});
+                 this.sort_box = '';
+             }
          },
-         test2(){
-             localStorage.setItem('user',JSON.stringify("admin"));
-         },
-         test3(){
-             localStorage.setItem('user',JSON.stringify("guest"));
-         },
-         // 网页启动得到token
          onload_token(){
-//             this.hhh = '[品种层] 责任结束时间-朝代 + 责任者 + 责任行为[版本层] 责任结束时间-朝代 + 责任者 + 责任行为[印次层] 责任结束时间-朝代 + 责任者 + 责任行为';
-//             this.gg = this.hhh.split('[') ;
-//             console.log(this.gg[0]);
-//             console.log(this.gg[1]);
-//             console.log(this.gg[2]);
-//
-
              if (this.$store.getters.GetToken == ''){
                  this.$http.get('/ancient_books/getToken.action').then(function (response) {
                      console.log("成功得到token");

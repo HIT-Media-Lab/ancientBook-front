@@ -70,7 +70,7 @@
                     this.content_name[i] = response.body.content[i].standard_name;
                     this.content_id[i] = response.body.content[i].ancient_book_id;
                 }
-                for (let i = 0; i < 20; i++){
+                for (let i = 0; i < response.body.content.length; i++){
                     this.books[i] = this.content_name[i];
                     console.log(this.content_name[i]);
                     console.log(this.books[i]);
