@@ -45,7 +45,6 @@
                     </div>
                     <button class="zxw-input-add-character" @click="open_location()"></button>
                 </div>
-                >
                 <label class="zxw-character-span">父：</label>
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
@@ -165,16 +164,21 @@
         <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></time_modal>
         <time_modal :time_modal="this.time_modal_2" v-on:success_time="dead_time" v-on:close_modal="close_dead()"></time_modal>
 
-        <character_modal :character_modal="this.father_modal"  v-on:close_modal="close_father" v-on:add_person_relations="add_father"></character_modal>
-        <character_modal :character_modal="this.mother_modal" v-on:close_modal="close_mother" v-on:add_person_relations="add_mother"></character_modal>
-        <character_modal :character_modal="this.son_modal" v-on:close_modal="close_son" v-on:add_person_relations="add_son"></character_modal>
-        <character_modal :character_modal="this.daughter_modal" v-on:close_modal="close_daughter" v-on:add_person_relations="add_daughter"></character_modal>
-        <character_modal :character_modal="this.brother_modal" v-on:close_modal="close_brother" v-on:add_person_relations="add_brother"></character_modal>
-        <character_modal :character_modal="this.sister_modal" v-on:close_modal="close_sister" v-on:add_person_relations="add_sister"></character_modal>
-        <character_modal :character_modal="this.teacher_modal" v-on:close_modal="close_teacher" v-on:add_person_relations="add_teacher"></character_modal>
-        <character_modal :character_modal="this.student_modal" v-on:close_modal="close_student" v-on:add_person_relations="add_student"></character_modal>
-        <character_modal :character_modal="this.friend_modal" v-on:close_modal="close_friend" v-on:add_person_relations="add_friend"></character_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.father_modal" :noumenon_number="1"  v-on:close_modal="close_father" v-on:add_noumenon_relations="add_father"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.mother_modal" :noumenon_number="1" v-on:close_modal="close_mother" v-on:add_noumenon_relations="add_mother"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.son_modal" :noumenon_number="1" v-on:close_modal="close_son" v-on:add_noumenon_relations="add_son"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.daughter_modal" :noumenon_number="1" v-on:close_modal="close_daughter" v-on:add_noumenon_relations="add_daughter"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.brother_modal" :noumenon_number="1" v-on:close_modal="close_brother" v-on:add_noumenon_relations="add_brother"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.sister_modal" :noumenon_number="1" v-on:close_modal="close_sister" v-on:add_noumenon_relations="add_sister"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.teacher_modal" :noumenon_number="1" v-on:close_modal="close_teacher" v-on:add_noumenon_relations="add_teacher"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.student_modal" :noumenon_number="1" v-on:close_modal="close_student" v-on:add_noumenon_relations="add_student"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.friend_modal" :noumenon_number="1" v-on:close_modal="close_friend" v-on:add_noumenon_relations="add_friend"></search_modal>
+
+        <!--若人物本体规范已存在的模态框-->
         <repeat_modal :show_repeat="this.show_repeat" :repeat_name="this.input_content.standard_name" :repeat_id="this.repeat_idr" :repeat_noumenon="this.repeat_noumenon" v-on:close_modal="close_repeat"></repeat_modal>
+
+        <!--添加籍贯的模态框-->
+        <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal" :noumenon_number="7" v-on:close_modal="close_location" v-on:add_noumenon_relations="add_location"></search_modal>
     </div>
 
 </template>
@@ -190,7 +194,7 @@
 
     import create_word from '../../../../component/create-word.vue';
     import time_modal from '../../../../component/time-modal.vue';
-    import character_modal from '../../../../component/search_character.vue';
+    import search_modal from '../../../../component/search_noumenon.vue';
     import repeat_modal from '../../../../component/repeat_modal.vue';
     export default{
         created(){
@@ -202,8 +206,8 @@
         components:{
             create_word,
             time_modal,
-            character_modal,
-            repeat_modal
+            search_modal,
+            repeat_modal,
         },
 
         computed:{
@@ -242,6 +246,8 @@
 
         data(){
             return{
+                search_person:'/ancient_books/get_person_list_by_name.action',
+                search_location:'/ancient_books/get_location_list_by_name.action',
                 show_location:false,
                 show_input:false,
                 show_father:false,
@@ -388,40 +394,25 @@
 
             /*关联籍贯*/
             open_location(){
-                this.father_modal = true;
+                this.location_modal = true;
             },
 
-            add_father(p){
-                this.input_content.father.relation_type=4;
-                this.input_content.father.person_id = p.noumenon_id;
-                this.input_content.father_standard_name = p.standard_name;
-                console.log('this.input_content.father_standard_name:'+JSON.stringify( this.input_content.father_standard_name));
-                console.log('this.input_content.father:'+JSON.stringify(this.input_content.father));
+            add_location(p){
+                this.input_content.location_id = p.noumenon_id;
+                this.input_content.location = p.standard_name;
+                console.log('this.input_content.location_id: '+this.input_content.location_id);
+                console.log('this.input_content.location: '+this.input_content.location);
             },
 
-            delete_father(){
-                this.input_content.father.person_id = undefined;
-                this.input_content.father_standard_name = '';
+            delete_location(){
+                this.input_content.location_id = '';
+                this.input_content.location = '';
                 console.log(JSON.stringify(this.input_content));
             },
 
-            close_father(){
-                this.father_modal = false;
+            close_location(){
+                this.location_modal = false;
             },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             /*关联父亲*/
             open_father(){

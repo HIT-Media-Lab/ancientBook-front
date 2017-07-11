@@ -1,5 +1,5 @@
 <template>
-    <modal :show_modal="this.character_modal" v-on:fireclose="this.close_modal" class="zxw-modal-character">
+    <modal :show_modal="this.noumenon_modal" v-on:fireclose="this.close_modal" class="zxw-modal-character">
         <div slot="header" class="zxw-character-header">
             <span>添加关系属性</span>
         </div>
@@ -7,14 +7,14 @@
         <div slot="body" class="zxw-time-body">
             <div class="zxw-search-header">
                 <input class="zxw-search-input" type="search" v-model="search_content">
-                <button class="zxw-search-icon" @click="search_character()" v-bind:disabled="search_content === ''"></button>
+                <button class="zxw-search-icon" @click="search_noumenon()" v-bind:disabled="search_content === ''"></button>
             </div>
             <p class="zxw-search-tip" v-if="show_tip === true">请在输入框中输入本体规范名称进行搜索</p>
 
             <!--显示搜索成功的结果-->
             <div class="zxw-search-success" v-for="(result,index) in search_result">
                 <p class="zxw-search-result">{{result.standard_name}}</p>
-                <button class="zxw-prebtn zxw-character-add"  @click="add_person_relations(index)" v-model="index">添加</button>
+                <button class="zxw-prebtn zxw-character-add"  @click="add_noumenon_relations(index)" v-model="index">添加</button>
             </div>
 
             <!--显示搜索失败的结果-->
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-   let Mock = require('mockjs');
+   /*let Mock = require('mockjs');
     Mock.mock('/ancient_books/get_person_list_by_name.action?name=lsm&&page_count=1','get', {
         "content":[
             {
@@ -120,12 +120,77 @@
         ]
     });
 
+   Mock.mock('/ancient_books/get_location_list_by_name.action?name=ty&&page_count=1','get', {
+       "content":[
+           {
+               "standard_name":"太原",
+               "noumenon_id|25":25
+           },
+           {
+               "standard_name":"太原",
+               "noumenon_id|25":25
+           },
+           {
+               "standard_name":"太原",
+               "noumenon_id|25":100
+           },
+           {"standard_name":"太原",
+               "noumenon_id|25":100
+           },
+           {
+               "standard_name":"太原",
+               "noumenon_id|25":100
+           },
+           {
+               "standard_name":"太原",
+               "noumenon_id|25":100
+           },
+           {
+               "standard_name":"太原",
+               "noumenon_id|25":100
+           }
+       ]
+   });
+
+   Mock.mock('/ancient_books/get_location_list_by_name.action?name=hrb&&page_count=1','get', {
+       "content":[
+           {
+               "standard_name":"哈尔滨",
+               "noumenon_id|26":26
+           },
+           {
+               "standard_name":"哈尔滨",
+               "noumenon_id|26":26
+           },
+           {
+               "standard_name":"哈尔滨",
+               "noumenon_id|26":26
+           },
+           {
+               "standard_name":"哈尔滨",
+               "noumenon_id|26":26
+           },
+           {
+               "standard_name":"哈尔滨",
+               "noumenon_id|26":26
+           },
+           {
+               "standard_name":"哈尔滨",
+               "noumenon_id|26":26
+           },
+           {
+               "standard_name":"哈尔滨",
+               "noumenon_id|26":26
+           }
+       ]
+   });*/
+
     import modal from "../component/modal.vue";
     export default{
         components:{
             modal
         },
-        props:['character_modal'],
+        props:['search_url','noumenon_modal','noumenon_number'],//noumenon_number:本体对应的序号 1.人物本体 2.文献本体 3.术语本体 4.时间本体（未配置路由） 5.职官本体 6.机构本体 7.地名本体
 
         data(){
             return {
@@ -133,7 +198,6 @@
                 fail_tip:false,
                 create_btn:true,
                 search_content:'',
-                search_url:'/ancient_books/get_person_list_by_name.action',
                 search_result:[]
             }
         },
@@ -181,21 +245,23 @@
                 console.log("根据人名获取人物列表失败");
             },
 
-            search_character(){
+            search_noumenon(){
                 let search_object = {};
                 let new_url = this.search_url+'?name='+this.search_content+'&&page_count=1';
                 this.http_json(new_url,'get',search_object,this.success_search,this.fail_search);
             },
 
             /*添加搜索的本体*/
-            add_person_relations(q){
+            add_noumenon_relations(q){
                 console.log(q+':this.search_result:'+JSON.stringify(this.search_result[q]));
-                this.$emit('add_person_relations',this.search_result[q]);
+                this.$emit('add_noumenon_relations',this.search_result[q]);
                 this.close_modal();
             },
 
             new_character(){
-                window.open("/chartwo");
+                if(this.noumenon_number === 1){
+                    window.open("/chartwo");
+                }
             }
         }
     }

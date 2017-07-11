@@ -262,7 +262,7 @@
 <script>
     import time_modal from '../../../../component/time-modal.vue';
     import location_modal from '../../../../component/search_location.vue';
-    import character_modal from '../../../../component/search_character.vue';
+    import character_modal from '../../../../component/search_noumenon.vue';
     export default{
         components:{
             time_modal,

@@ -33,7 +33,15 @@
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span">籍贯：</label>
-                <input type="text" class="zxw-character-input zxw-edit-character-input-margin" v-model="input_content.location">
+                <div  class="zxw-character-input zxw-edit-character-input-margin">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
+                        <span class="zxw-person-relation-span"  @mouseover="show_location = true" @mouseout="show_location = false" v-if="input_content.location !== ''">
+                            <span contenteditable="false" v-model="input_content.location" >{{input_content.location}}</span>
+                            <button class="zxw-add-hover-img" contenteditable="false" v-show="show_location===true" @click="delete_location()"></button>
+                        </span>
+                    </div>
+                    <button class="zxw-input-add-character" @click="open_location()"></button>
+                </div>
                 <label class="zxw-character-span">父：</label>
                 <div  class="zxw-character-input">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
@@ -153,24 +161,28 @@
         <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></time_modal>
         <time_modal :time_modal="this.time_modal_2" v-on:success_time="dead_time" v-on:close_modal="close_dead()"></time_modal>
 
-        <character_modal :character_modal="this.father_modal"  v-on:close_modal="close_father" v-on:add_person_relations="add_father"></character_modal>
-        <character_modal :character_modal="this.mother_modal" v-on:close_modal="close_mother" v-on:add_person_relations="add_mother"></character_modal>
-        <character_modal :character_modal="this.son_modal" v-on:close_modal="close_son" v-on:add_person_relations="add_son"></character_modal>
-        <character_modal :character_modal="this.daughter_modal" v-on:close_modal="close_daughter" v-on:add_person_relations="add_daughter"></character_modal>
-        <character_modal :character_modal="this.brother_modal" v-on:close_modal="close_brother" v-on:add_person_relations="add_brother"></character_modal>
-        <character_modal :character_modal="this.sister_modal" v-on:close_modal="close_sister" v-on:add_person_relations="add_sister"></character_modal>
-        <character_modal :character_modal="this.teacher_modal" v-on:close_modal="close_teacher" v-on:add_person_relations="add_teacher"></character_modal>
-        <character_modal :character_modal="this.student_modal" v-on:close_modal="close_student" v-on:add_person_relations="add_student"></character_modal>
-        <character_modal :character_modal="this.friend_modal" v-on:close_modal="close_friend" v-on:add_person_relations="add_friend"></character_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.father_modal" :noumenon_number="1"  v-on:close_modal="close_father" v-on:add_noumenon_relations="add_father"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.mother_modal" :noumenon_number="1" v-on:close_modal="close_mother" v-on:add_noumenon_relations="add_mother"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.son_modal" :noumenon_number="1" v-on:close_modal="close_son" v-on:add_noumenon_relations="add_son"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.daughter_modal" :noumenon_number="1" v-on:close_modal="close_daughter" v-on:add_noumenon_relations="add_daughter"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.brother_modal" :noumenon_number="1" v-on:close_modal="close_brother" v-on:add_noumenon_relations="add_brother"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.sister_modal" :noumenon_number="1" v-on:close_modal="close_sister" v-on:add_noumenon_relations="add_sister"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.teacher_modal" :noumenon_number="1" v-on:close_modal="close_teacher" v-on:add_noumenon_relations="add_teacher"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.student_modal" :noumenon_number="1" v-on:close_modal="close_student" v-on:add_noumenon_relations="add_student"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.friend_modal" :noumenon_number="1" v-on:close_modal="close_friend" v-on:add_noumenon_relations="add_friend"></search_modal>
+
+        <!--若人物本体规范已存在的模态框-->
         <repeat_modal :show_repeat="this.show_repeat" :repeat_name="this.input_content.standard_name" :repeat_id="this.repeat_id" :repeat_noumenon="this.repeat_noumenon" v-on:close_modal="close_repeat"></repeat_modal>
 
+        <!--添加籍贯的模态框-->
+        <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal" :noumenon_number="7" v-on:close_modal="close_location" v-on:add_noumenon_relations="add_location"></search_modal>
     </div>
 </template>
 
 <script>
 import noumenon_title from '../../../component/noumenon-title.vue';
 import time_modal from '../../../component/time-modal.vue';
-import character_modal from '../../../component/search_character.vue';
+import search_modal from '../../../component/search_noumenon.vue';
 import repeat_modal from '../../../component/repeat_modal.vue';
 
 export default{
@@ -181,8 +193,8 @@ export default{
     components:{
         noumenon_title,
         time_modal,
-        character_modal,
-        repeat_modal
+        search_modal,
+        repeat_modal,
     },
 
     computed:{
@@ -221,8 +233,11 @@ export default{
 
     data(){
         return {
+            search_person:'/ancient_books/get_person_list_by_name.action',
+            search_location:'/ancient_books/get_location_list_by_name.action',
             edit_character_title:'',
             character_url:'/ancient_books/get_person_by_id.action',
+            show_location:false,
             show_input:false,
             show_father:false,
             show_mother:false,
@@ -234,6 +249,7 @@ export default{
             show_student:0,
             show_friend:0,
             prams:'',
+            location_modal:false,
             time_modal_1:false,
             time_modal_2:false,
             father_modal:false,
@@ -294,6 +310,7 @@ export default{
             person_relations_delete:[],
             person_relations_modify:[],
             person_relations_add:[],
+            modify_url:'/ancient_books/modify_person_by_id.action'
         }
     },
     methods:{
@@ -501,6 +518,29 @@ export default{
             });
             console.log(this.add_data.length+JSON.stringify(this.add_data));
         },
+
+        /*关联籍贯*/
+        open_location(){
+            this.location_modal = true;
+        },
+
+        add_location(p){
+            this.input_content.location_id = p.noumenon_id;
+            this.input_content.location = p.standard_name;
+            console.log('this.input_content.location_id: '+this.input_content.location_id);
+            console.log('this.input_content.location: '+this.input_content.location);
+        },
+
+        delete_location(){
+            this.input_content.location_id = '';
+            this.input_content.location = '';
+            console.log(JSON.stringify(this.input_content));
+        },
+
+        close_location(){
+            this.location_modal = false;
+        },
+
 
         /*关联父亲*/
         open_father(){
@@ -867,7 +907,18 @@ export default{
             edit_object.remark_1=this.input_content.remark_1;
             edit_object.remark_2=this.input_content.remark_2;
             edit_object.english=this.input_content.english;
-            edit_object.location_id=this.input_content.standard_name;
+            edit_object.location_id=this.input_content.location_id;
+            edit_object.person_relations_delete=this.person_relations_delete;
+            edit_object.person_relations_modify=this.person_relations_modify;
+            edit_object.person_relations_add=this.person_relations_add;
+            console.log(JSON.stringify(edit_object));
+            this.http_json(this.modify_url,'post',this.success_modify_char,this.fail_modify_char);
+        },
+
+        success_modify_char(response){
+            if(response.body.result === 1){
+                this.$router.push({name:'char_detail',params:{nouId:this.$route.params.nouId}});
+            }
         }
     }
 }
