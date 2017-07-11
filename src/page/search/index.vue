@@ -1,15 +1,15 @@
 <template>
     <div class="j-search-all">
         <ul class="nav nav-tabs">
-            <li id="j-book-button" class="active" @click="remove_noumenon">
-                <router-link to="/search_index" data-toggle="tab">
+            <li id="j-book-button" class="active" @click="remove_noumenon_link">
+                <a data-toggle="tab">
                     古籍库
-                </router-link>
+                </a>
             </li>
-            <li id="j-noumenon-button" @click="remove_book">
-                <router-link to="/search_index/search_noumenon" data-toggle="tab">
+            <li id="j-noumenon-button" @click="remove_book_link">
+                <a data-toggle="tab">
                     本体库
-                </router-link>
+                </a>
             </li>
         </ul>
         <router-view></router-view>
@@ -33,7 +33,7 @@
 
             }
         },
-        mounted: function () {
+        mounted() {
           this.change_button()
         },
         methods : {
@@ -43,11 +43,25 @@
                 book_button.className = "";
                 noumenon_button.className = "active";
             },
+            remove_book_link() {
+                let book_button = document.getElementById("j-book-button");
+                let noumenon_button = document.getElementById("j-noumenon-button");
+                book_button.className = "";
+                noumenon_button.className = "active";
+                this.$router.push({name: 'search_noumenon', params: this.$route.params})
+            },
             remove_noumenon() {
                 let book_button = document.getElementById("j-book-button");
                 let noumenon_button = document.getElementById("j-noumenon-button");
                 book_button.className = "active";
                 noumenon_button.className = "";
+            },
+            remove_noumenon_link() {
+                let book_button = document.getElementById("j-book-button");
+                let noumenon_button = document.getElementById("j-noumenon-button");
+                book_button.className = "active";
+                noumenon_button.className = "";
+                this.$router.push({name: 'search_book', params: this.$route.params})
             },
             change_button(){
                 if(this.$route.name == "search_book"){

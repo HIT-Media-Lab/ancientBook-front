@@ -8,23 +8,23 @@
             <router-link to="/noumenon" style="color: white; margin-left: 47px">
                 <button class="noumenon-store">本体库</button>
             </router-link>
-            <input placeholder=" 请输入关键字搜索" class="search-input" v-model="sort_box" v-on:keydown.enter="search">
-            <button class="search-btn" @click="search">搜 索</button>
+            <input placeholder=" 请输入关键字搜索" class="search-input" v-model="sort_box" v-on:keydown.enter="search1">
+            <button class="search-btn" @click="search1">搜 索</button>
             <img src="../assets/img/头像.png" class="user-img" @click="show_login">
             <span class="user-name" @click="show_login" v-model="name">{{name}}</span>
             <div class="down-box"  v-show="sort_box.length!=0">
                 <ul>
-                    <li class="sort-box1" @click="search()" style="color: #0f0f0f">
+                    <li class="sort-box1" @click="search1()" style="color: #0f0f0f">
                         搜古籍：{{sort_box}}
                     </li>
-                    <li class="sort-box2" @click="search()" style="color: #0f0f0f">
+                    <li class="sort-box2" @click="search2()" style="color: #0f0f0f">
                         搜本体：{{sort_box}}
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="login-box">
-            <login_modal v-bind:show_modal.sync = show_m @fireclose = "shut_box" class="j-login-bag">
+        <div>
+            <login_modal v-bind:show_modal.sync = show_m @fireclose = "shut_box" >
                 <header class="dialog-header" slot="header">
                     <h3 class="dialog-title">登 录</h3>
                 </header>
@@ -110,17 +110,32 @@
                     this.create_v_picture();
                 }else if(user_id == 'user'){
                     this.$router.push({path: '/user'});
+                }else if(user_id == 'admin'){
+                    this.$router.push({path: '/admin/page/1'});
                 }
             },
             hide:function () {
                 this.sort_box = ''
             },
-            search:function () {
+            search1:function () {
+                if (this.sort_box == ''){
+                    this.$router.push("/login");
+                } else if (this.sort_box != ''){
+                    this.$route.params.content = this.sort_box;
+                    this.$route.params.pageId = 1;
+                    this.$router.push({name: 'search_book', params: this.$route.params});
+                    this.sort_box = '';
+                }
+                if (this.sort_box != ''){
+
+                }
+            },
+            search2: function () {
                 this.$route.params.content = this.sort_box;
                 this.$route.params.pageId = 1;
                 if (this.sort_box != ''){
 //                    this.$store.commit('push_search_content', this.sort_box);
-                    this.$router.push({name: 'search_book', params: this.$route.params});
+                    this.$router.push({name: 'search_noumenon', params: this.$route.params});
                     this.sort_box = '';
                 }
             },

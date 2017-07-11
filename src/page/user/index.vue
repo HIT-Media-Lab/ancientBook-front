@@ -1,9 +1,11 @@
 <template>
     <div class="user">
         <div class="j-head">
-            <img src="../../assets/img/头像.png" class="j-userhead">
-            <p class="j-simple-user">普通用户</p>
-            <img src="../../assets/img/墨水线.png" class="j-user-line">
+            <div style="width: 180px;margin: 0 auto">
+                <img src="../../assets/img/头像.png" class="j-userhead" @click="go_to_modify">
+                <span class="j-simple-user" @click="go_to_modify">普通用户</span>
+            </div>
+            <img src="../../assets/img/墨水线.png" class="j-user-line" >
         </div>
         <div class="j-link">
             <router-link to="/user/upload1">
@@ -33,6 +35,9 @@
             }
         },
         methods:{
+            go_to_modify(){
+                this.$router.push("/modify_info");
+            },
             logout(){
                 this.$http.get('/ancient_books/logout.action').then(function () {
                     alert("注销成功");
@@ -64,15 +69,19 @@
         margin: 80px auto;
     }
     .j-user-line{
-
+        margin: 0 auto;
     }
     .j-userhead{
         width: 80px;
-        margin-left: 46%;
+        margin: 0 auto;
     }
     .j-simple-user{
-        margin: 0 auto;
+        margin-left: 15px ;
         width: 60px;
+        font-weight:700;
+        font-style:normal;
+        font-size:16px;
+        color:#999999;
     }
     .j-link{
         letter-spacing:60px;
