@@ -50,6 +50,9 @@ export default {
     get_texts:state => {
         return state.texts
     },
+    get_text_name:state => {
+        return state.text_name
+    },
     get_book_summary:state => {
         return state.book_summary
     },

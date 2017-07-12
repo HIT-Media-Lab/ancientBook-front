@@ -129,6 +129,7 @@ const store = new Vuex.Store({
         images : [],
         picture_name : [],
         texts : [],
+        text_name : [],
         upload1_info:{},
         create_character:{
             standard_name:'',
