@@ -922,8 +922,8 @@ export default{
             edit_object.person_relations_delete=this.person_relations_delete;
             edit_object.person_relations_modify=this.person_relations_modify;
             edit_object.person_relations_add=this.person_relations_add;
-            console.log(JSON.stringify(edit_object));
-            this.http_json(this.modify_url,'post',this.success_modify_char,this.fail_modify_char);
+            console.log('edit object: '+JSON.stringify(edit_object));
+            this.http_json(this.modify_url,'post',edit_object,this.success_modify_char,this.fail_modify_char);
         },
 
         success_modify_char(response){
