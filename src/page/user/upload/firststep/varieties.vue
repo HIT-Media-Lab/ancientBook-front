@@ -380,7 +380,7 @@
             get_lei_item() {
                 var bu = document.getElementById("ry-select-b");
                 var bu_index = bu.selectedIndex + 1;
-                this.http_json ('/ancient_books/get_menu_items.action?model_id=8&&item_1_id=' + bu_index + '&&item_2_id=0' , 'get' , this.success_get_lei_items , this.fail_get_lei_items);
+                this.http_json ('/ancient_books/get_menu_items.action?model_id=8&&item_1_id=' + bu_index + '&&item_2_id=0' , 'get' , this.get_lei_items_obj , this.success_get_lei_items , this.fail_get_lei_items);
             },
 
             success_get_lei_items(response) {
@@ -407,7 +407,7 @@
                 var lei = document.getElementById("ry-select-l");
                 var bu_index = bu.selectedIndex + 1;
                 var lei_index = lei.selectedIndex + 1;
-                this.http_json ('/ancient_books/get_menu_items.action?model_id=8&&item_1_id=' + bu_index + '&&item_2_id=' + lei_index , 'get' , this.success_get_shu_items , this.fail_get_shu_items);
+                this.http_json ('/ancient_books/get_menu_items.action?model_id=8&&item_1_id=' + bu_index + '&&item_2_id=' + lei_index , 'get' , this.get_shu_items_obj , this.success_get_shu_items , this.fail_get_shu_items);
             },
 
             success_get_shu_items(response) {
