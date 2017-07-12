@@ -45,7 +45,7 @@
                 <label class="zxw-character-span">父：</label>
                 <div  class="zxw-character-input">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
-                        <span class="zxw-person-relation-span"  @mouseover="show_father = true" @mouseout="show_father = false" v-if="input_content.father !== {}">
+                        <span class="zxw-person-relation-span"  @mouseover="show_father = true" @mouseout="show_father = false" v-if="input_content.father.person_id !== undefined">
                             <span v-model="input_content.father.person_name">{{input_content.father.person_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_father===true" @click="delete_father()"></button>
                         </span>
@@ -58,7 +58,7 @@
                 <label class="zxw-character-span">母：</label>
                 <div  class="zxw-character-input zxw-edit-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
-                        <span class="zxw-person-relation-span"  @mouseover="show_mother = true" @mouseout="show_mother = false" v-if="input_content.mother !== {}">
+                        <span class="zxw-person-relation-span"  @mouseover="show_mother = true" @mouseout="show_mother = false" v-if="input_content.mother.person_id !== undefined">
                             <span v-model="input_content.mother.person_name">{{input_content.mother.person_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_mother===true" @click="delete_mother()"></button>
                         </span>
@@ -559,14 +559,15 @@ export default{
         },
 
         add_father(p){
+            this.input_content.father.relation_type = 4;
             this.input_content.father.person_id = p.noumenon_id;
             this.input_content.father.person_name = p.standard_name;
             console.log('修改的father:'+JSON.stringify(this.input_content.father));
         },
 
         delete_father(){
-            this.input_content.father.person_name = '';
-            this.input_content.father.person_id = '';
+            this.input_content.father.person_name = undefined;
+            this.input_content.father.person_id = undefined;
             console.log('删除的father: '+JSON.stringify(this.input_content.father));
         },
 
@@ -580,14 +581,15 @@ export default{
         },
 
         add_mother(p){
+            this.input_content.mother.relation_type = 5;
             this.input_content.mother.person_id = p.noumenon_id;
             this.input_content.mother.person_name = p.standard_name;
             console.log('修改的mother:'+JSON.stringify(this.input_content.mother));
         },
 
         delete_mother(){
-            this.input_content.mother.person_name = '';
-            this.input_content.mother.person_id = '';
+            this.input_content.mother.person_name = undefined;
+            this.input_content.mother.person_id = undefined;
             console.log('删除的mother: '+JSON.stringify(this.input_content.mother));
         },
 
@@ -791,14 +793,34 @@ export default{
         },
 
         finish_edit(){
-            if(this.input_content.father !== {} && this.input_content.father.person_id !== this.father_id){
-                this.person_relations_modify.push({
-                    relation_id:this.input_content.father.relation_id,
-                    person_id:this.input_content.father.person_id
-                })
-            }
+            //父亲关系判断
+           if(this.input_content.father.relation_id === undefined && this.input_content.father.person_id !== undefined){
+               this.person_relations_add.push({
+                   relation_type:this.input_content.father.relation_type,
+                   person_id:this.input_content.father.person_id
+               })
+           } else if(this.input_content.father.relation_id !== undefined && this.input_content.father.person_id === undefined){
+               this.person_relations_delete.push({
+                   relation_id:this.input_content.father.relation_id
+               })
+           } else if(this.input_content.father.relation_id !== undefined && this.input_content.father.person_id !== undefined && this.input_content.father.person_id !== this.father_id ){
+               this.person_relations_modify.push({
+                   relation_id:this.input_content.father.relation_id,
+                   person_id:this.input_content.father.person_id
+               })
+           }
 
-            if(this.input_content.mother !== {} && this.input_content.mother.person_id !== this.mother_id){
+            //母亲关系判断
+            if(this.input_content.mother.relation_id === undefined && this.input_content.mother.person_id !== undefined){
+                this.person_relations_add.push({
+                    relation_type:this.input_content.mother.relation_type,
+                    person_id:this.input_content.mother.person_id
+                })
+            } else if(this.input_content.mother.relation_id !== undefined && this.input_content.mother.person_id === undefined){
+                this.person_relations_delete.push({
+                    relation_id:this.input_content.mother.relation_id
+                })
+            } else if(this.input_content.mother.relation_id !== undefined && this.input_content.mother.person_id !== undefined && this.input_content.mother.person_id !== this.mother_id ){
                 this.person_relations_modify.push({
                     relation_id:this.input_content.mother.relation_id,
                     person_id:this.input_content.mother.person_id
@@ -902,6 +924,15 @@ export default{
                     })
                 }
             }
+
+            //备注信息
+            this.input_content.remark_1_name = this.add_data[0].remark_name ;
+            this.input_content.remark_1 = this.add_data[0].remark;
+            if(this.add_data.length > 1){
+                this.input_content.remark_2_name = this.add_data[1].remark_name ;
+                this.input_content.remark_2 = this.add_data[1].remark ;
+            }
+            console.log("post:add_data "+JSON.stringify(this.add_data));
 
             let edit_object={};
             edit_object.id=this.$route.params.nouId;

@@ -134,7 +134,7 @@
 </template>
 
 <script>
-    /*let Mock = require('mockjs');
+    let Mock = require('mockjs');
      //显示用户列表
      Mock.mock('/ancient_books/get_person_by_id.action?id=1','get',{
      "status|200":200,
@@ -151,22 +151,12 @@
      "death_time_name": '天朝1992',
      "jiguan_location_id":'27',
      "jiguan_location_name":'北京',
-     "remark_1_name|1": 1,
+     "remark_1_name": '',
      "remark_2_name": '',
-     "remark_1|111":1,
+     "remark_1":'',
      "remark_2": '',
-     "relations": [{
-            "relation_type|4": 1,
-            "relation_id|1-100": 1,
-            "person_id|100-1000": 1,
-            "person_name": '邓超'
-         },
-         {
-             "relation_type|5": 1,
-             "relation_id|1-100": 1,
-             "person_id|100-1000": 1,
-             "person_name": '陈赫'
-         },
+     "relations": [
+
          {
              "relation_type|6": 1,
              "relation_id|1-100": 1,
@@ -296,7 +286,7 @@
                 "person_id|100-1000": 1,
                 "person_name|10000": 1
             }]
-    });*/
+    });
 
 
     import noumenon_title from '../../../component/noumenon-title.vue';

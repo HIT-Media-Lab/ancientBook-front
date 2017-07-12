@@ -165,12 +165,12 @@
 </template>
 
 <script>
-   /*let Mock = require('mockjs');
+   let Mock = require('mockjs');
     Mock.mock('/ancient_books/add_person.action','post', {
         "status|200":200,
         "result|1":1,
         "id|123":123
-    });*/
+    });
 
 
     import create_word from '../../../../component/create-word.vue';
