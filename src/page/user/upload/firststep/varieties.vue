@@ -454,7 +454,7 @@
                 var action = document.getElementById("ry-v-action");
                 var action_index = action.selectedIndex;
                 this.varieties_item.varieties_responsibility.action = action_index + 1;
-                var confirm = document.getElementById("ry-v-confirrm");
+                var confirm = document.getElementById("ry-v-confirm");
                 var confirm_index = confirm.selectedIndex;
                 this.varieties_item.varieties_responsibility.confirm = confirm_index + 1;
             },
