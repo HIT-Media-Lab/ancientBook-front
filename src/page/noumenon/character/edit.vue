@@ -148,8 +148,8 @@
 
             <div v-for="(item ,index) in add_data">
                 <input type="text" class="zxw-character-input-head zxw-character-input" v-model="item.remark_name">
-                <input type="text" class="zxw-character-input" v-bind:disabled="item.remark_name === ''" v-model="item.remark">
-                <button class="zxw-add-button" @click="add_tip(index)" v-show="add_data[index].value">添加</button>
+                <input type="text" class="zxw-character-input" v-bind:readonly="item.remark_name === ''&&item.remark === ''" v-model="item.remark">
+                <button class="zxw-add-button" @click="add_tip(index)" v-show="add_data[index].value" :disabled="add_data.length >=2">添加</button>
             </div>
 
             <div class="zxw-edit-btn">
@@ -430,20 +430,19 @@ export default{
                         });
                     }
                 }
-
-                this.add_data[0].remark_name = response.body.remark_1_name;
-                this.add_data[0].remark = response.body.remark_1;
-                if(response.body.remark_2_name !== ''){
-                    this.add_data[0].value = false;
-                    this.add_data.push({
-                        value:true,
-                        remark_name:response.body.remark_2_name,
-                        remark:response.body.remark_2
-                    })
-                }
-                console.log('input_content: '+JSON.stringify(this.input_content));
-                console.log('add_data: '+JSON.stringify(this.add_data));
             }
+            this.add_data[0].remark_name = response.body.remark_1_name;
+            this.add_data[0].remark = response.body.remark_1;
+            if(response.body.remark_2_name !== ''){
+                this.add_data[0].value = false;
+                this.add_data.push({
+                    value:true,
+                    remark_name:response.body.remark_2_name,
+                    remark:response.body.remark_2
+                })
+            }
+            console.log('input_content: '+JSON.stringify(this.input_content));
+            console.log('add_data: '+JSON.stringify(this.add_data));
         },
 
         fail_character(){
