@@ -18,13 +18,21 @@
             page_button
         },
         created(){
-            let item = this.content_url + '?name=' + this.$route.params.content;
-            this.http_json(item, 'get', item, this.success_noumenon, this.fail);
+            if (this.content.length == 0){
+                let item = this.content_url + '?name=' + this.$route.params.content;
+                this.http_json(item, 'get', item, this.success_noumenon, this.fail);
+            } else {
+                this.print_content();
+            }
         },
         watch:{
             $route(){
-                let item = this.content_url + '?name=' + this.$route.params.content;
-                this.http_json(item, 'get', item, this.success_noumenon, this.fail);
+                if (this.content.length == 0){
+                    let item = this.content_url + '?name=' + this.$route.params.content;
+                    this.http_json(item, 'get', item, this.success_noumenon, this.fail);
+                } else {
+                    this.print_content();
+                }
             }
         },
         data(){
@@ -57,15 +65,20 @@
                     let type = '';
                     if (response.body.content[i].type_id = 1){
                         type = '【人物】'
-                    } else if(response.body.content[i].type_id = 2){
+                    }
+                    if(response.body.content[i].type_id = 2){
                         type = '【文献】'
-                    } else if(response.body.content[i].type_id = 3){
+                    }
+                    if(response.body.content[i].type_id = 3){
                         type = '【术语】'
-                    } else if(response.body.content[i].type_id = 5){
+                    }
+                    if(response.body.content[i].type_id = 5){
                         type = '【职官】'
-                    } else if(response.body.content[i].type_id = 6){
+                    }
+                    if(response.body.content[i].type_id = 6){
                         type = '【机构】'
-                    } else if(response.body.content[i].type_id = 7){
+                    }
+                    if(response.body.content[i].type_id = 7){
                         type = '【地点】'
                     }
                     this.content.push({
@@ -78,6 +91,16 @@
                 this.info_num = this.content.length;
                 this.total_page = Math.ceil(this.info_num/20);
                 this.content.sort(this.change);
+                this.print_content();
+            },
+            fail(){
+                alert("获取信息失败");
+            },
+            go_to_char_detail(){
+                this.$route.params.nouId = 1;
+                this.$route.push({name: 'char_detail', params: this.$route.params})
+            },
+            print_content(){
                 let num = this.$route.params.pageId;
                 for (let i = (num-1)*20; i < (num-1)*20+20; i++ ){
                     this.page_content.push({
@@ -86,14 +109,8 @@
                         noumenon_id: this.content[i].noumenon_id
                     })
                 }
-            },
-            fail(){
-                alert("获取信息失败");
-            },
-            go_to_char_detail(){
-                this.$route.params.nouId = 1;
-                this.$route.push({name: 'char_detail', params: this.$route.params})
             }
+
         }
     }
 </script>
