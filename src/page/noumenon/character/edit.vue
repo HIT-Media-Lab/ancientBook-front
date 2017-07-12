@@ -45,7 +45,7 @@
                 <label class="zxw-character-span">父：</label>
                 <div  class="zxw-character-input">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
-                        <span class="zxw-person-relation-span"  @mouseover="show_father = true" @mouseout="show_father = false" v-if="input_content.father.person_name !== ''">
+                        <span class="zxw-person-relation-span"  @mouseover="show_father = true" @mouseout="show_father = false" v-if="input_content.father !== {}">
                             <span v-model="input_content.father.person_name">{{input_content.father.person_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_father===true" @click="delete_father()"></button>
                         </span>
@@ -58,7 +58,7 @@
                 <label class="zxw-character-span">母：</label>
                 <div  class="zxw-character-input zxw-edit-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
-                        <span class="zxw-person-relation-span"  @mouseover="show_mother = true" @mouseout="show_mother = false" v-if="input_content.mother.person_name !== ''">
+                        <span class="zxw-person-relation-span"  @mouseover="show_mother = true" @mouseout="show_mother = false" v-if="input_content.mother !== {}">
                             <span v-model="input_content.mother.person_name">{{input_content.mother.person_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_mother===true" @click="delete_mother()"></button>
                         </span>
@@ -791,14 +791,14 @@ export default{
         },
 
         finish_edit(){
-            if(this.input_content.father.person_id !== this.father_id){
+            if(this.input_content.father !== {} && this.input_content.father.person_id !== this.father_id){
                 this.person_relations_modify.push({
                     relation_id:this.input_content.father.relation_id,
                     person_id:this.input_content.father.person_id
                 })
             }
 
-            if(this.input_content.mother.person_id !== this.mother_id){
+            if(this.input_content.mother !== {} && this.input_content.mother.person_id !== this.mother_id){
                 this.person_relations_modify.push({
                     relation_id:this.input_content.mother.relation_id,
                     person_id:this.input_content.mother.person_id
