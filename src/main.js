@@ -565,7 +565,6 @@ router.beforeEach( (to, from, next) => {
 
         })
     }
-
     let flag = false;
     if (user_id == 'guest'){
         for (let i = 0; i < guest_acl.length; i++) {
