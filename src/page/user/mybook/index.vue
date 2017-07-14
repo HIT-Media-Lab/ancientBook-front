@@ -60,9 +60,9 @@
         },
         data(){
             return{
-                recent_mybook_url: '/ancient_books/get_recent_ancient_books_list_edited_by_user',
+                recent_mybook_url: '/ancient_books/get_recent_ancient_books_list_edited_by_user.action',
                 upload_book_url: '/ancient_books/get_recient_ancient_books_list_by_user_upload.action',
-                private_book_url: '/ancient_books/get_recent_private_ancient_books_by_user',
+                private_book_url: '/ancient_books/get_recent_private_ancient_books_by_user.action',
                 picture_page_url: "/ancient_books/get_page_id_by_jcy.action",
                 picture_url: '/ancient_books/get_picture_by_id.action',
                 title: '我的古籍',

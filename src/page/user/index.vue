@@ -87,7 +87,7 @@
     }
     .j-simple-user{
         margin-left: 15px ;
-        width: 60px;
+        width: auto;
         font-weight:700;
         font-style:normal;
         font-size:16px;
