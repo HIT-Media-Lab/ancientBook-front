@@ -94,11 +94,7 @@ function response_post(response, success, fail) {
 function response_get(response, success) {
     let status = response.status;
     if (status == 200){
-        if (response.body.result == 1){
-            success(response);
-        } else if (response.body.result == 0){
-            fail(response);
-        }
+        success(response);
     } else if (status == 403){
         this.$router.push('/403');
     } else if (status == 404){
