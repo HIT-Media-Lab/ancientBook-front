@@ -14,7 +14,7 @@
             <!--显示搜索成功的结果-->
             <div class="zxw-search-success" v-for="(result,index) in search_result">
                 <p class="zxw-search-result">{{result.standard_name}}</p>
-                <button class="zxw-prebtn zxw-character-add"  @click="add_noumenon_relations(index)" v-model="index">添加</button>
+                <button class="zxw-prebtn zxw-character-add"  @click="add_noumenon_relations(index)" v-model="index" :="repeat_array" :disabled="forbidden_btn">添加</button>
             </div>
 
             <!--显示搜索失败的结果-->
@@ -190,7 +190,7 @@
         components:{
             modal
         },
-        props:['search_url','noumenon_modal','noumenon_number'],//noumenon_number:本体对应的序号 1.人物本体 2.文献本体 3.术语本体 4.时间本体（未配置路由） 5.职官本体 6.机构本体 7.地名本体
+        props:['search_url','noumenon_modal','noumenon_number','repeat_arr'],//noumenon_number:本体对应的序号 1.人物本体 2.文献本体 3.术语本体 4.时间本体（未配置路由） 5.职官本体 6.机构本体 7.地名本体
 
         data(){
             return {
@@ -198,7 +198,8 @@
                 fail_tip:false,
                 create_btn:true,
                 search_content:'',
-                search_result:[]
+                search_result:[],
+                forbidden_btn:false
             }
         },
 
@@ -263,6 +264,19 @@
                     window.open("/chartwo");
                 }
             }
+        },
+        computed:{
+            repeat_array(){
+                console.log('search repeat: '+JSON.stringify(this.repeat_arr));
+                for(let i =0;i < this.search_result.length;i++ ){
+                    console.log('::::'+this.repeat_arr.indexOf(this.search_result[i].standard_name));
+                    if(this.repeat_arr.indexOf(this.search_result[i].standard_name) !== -1){
+                        this.forbidden_btn =true;
+                    } else {
+                        this.forbidden_btn = false;
+                    }
+                }
+            }
         }
     }
 </script>
@@ -278,7 +292,7 @@
         background-color: transparent;
         border:none;
         font-size:15px;
-        width:260px;
+        width:320px;
         height:35px;
         float:left;
         margin:0 0 0 5px;

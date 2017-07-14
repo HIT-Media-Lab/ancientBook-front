@@ -58,7 +58,7 @@
                 <label class="zxw-character-span">母：</label>
                 <div  class="zxw-character-input zxw-edit-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
-                        <span class="zxw-person-relation-span"  @mouseover="show_mother = true" @mouseout="show_mother = false" v-if="input_content.mother.person_id !== undefined">
+                        <span class="zxw-person-relation-span" @mouseover="show_mother = true" @mouseout="show_mother = false" v-if="input_content.mother.person_id !== undefined">
                             <span v-model="input_content.mother.person_name">{{input_content.mother.person_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_mother===true" @click="delete_mother()"></button>
                         </span>
@@ -67,9 +67,9 @@
                 </div>
                 <label class="zxw-character-span">子：</label>
                 <div  class="zxw-character-input">
-                    <div id="son" class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" v-bind:contenteditable="input_content.son_standard_name.length !== 0">
+                    <div id="son" class="zxw-div-input" placeholder="点击右侧按钮添加" @keydown="down_delete()" v-bind:contenteditable="input_content.son_standard_name.length !== 0">
                         <span class="zxw-person-relation-span" v-for="(item,index) in input_content.son_standard_name"  @mouseover="show_son=index" @mouseout="show_son =-1">
-                            <span>{{item}}</span>
+                            <span onpaste="return false">{{item}}</span>
                             <button class="zxw-add-hover-img" v-show="show_son === index" @click="delete_son(index)"></button>
                         </span>
                     </div>
@@ -161,15 +161,15 @@
         <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></time_modal>
         <time_modal :time_modal="this.time_modal_2" v-on:success_time="dead_time" v-on:close_modal="close_dead()"></time_modal>
 
-        <search_modal :search_url="this.search_person" :noumenon_modal="this.father_modal" :noumenon_number="1"  v-on:close_modal="close_father" v-on:add_noumenon_relations="add_father"></search_modal>
-        <search_modal :search_url="this.search_person" :noumenon_modal="this.mother_modal" :noumenon_number="1" v-on:close_modal="close_mother" v-on:add_noumenon_relations="add_mother"></search_modal>
-        <search_modal :search_url="this.search_person" :noumenon_modal="this.son_modal" :noumenon_number="1" v-on:close_modal="close_son" v-on:add_noumenon_relations="add_son"></search_modal>
-        <search_modal :search_url="this.search_person" :noumenon_modal="this.daughter_modal" :noumenon_number="1" v-on:close_modal="close_daughter" v-on:add_noumenon_relations="add_daughter"></search_modal>
-        <search_modal :search_url="this.search_person" :noumenon_modal="this.brother_modal" :noumenon_number="1" v-on:close_modal="close_brother" v-on:add_noumenon_relations="add_brother"></search_modal>
-        <search_modal :search_url="this.search_person" :noumenon_modal="this.sister_modal" :noumenon_number="1" v-on:close_modal="close_sister" v-on:add_noumenon_relations="add_sister"></search_modal>
-        <search_modal :search_url="this.search_person" :noumenon_modal="this.teacher_modal" :noumenon_number="1" v-on:close_modal="close_teacher" v-on:add_noumenon_relations="add_teacher"></search_modal>
-        <search_modal :search_url="this.search_person" :noumenon_modal="this.student_modal" :noumenon_number="1" v-on:close_modal="close_student" v-on:add_noumenon_relations="add_student"></search_modal>
-        <search_modal :search_url="this.search_person" :noumenon_modal="this.friend_modal" :noumenon_number="1" v-on:close_modal="close_friend" v-on:add_noumenon_relations="add_friend"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.father_modal" :noumenon_number="1" :repeat_arr="[]"  v-on:close_modal="close_father" v-on:add_noumenon_relations="add_father"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.mother_modal" :noumenon_number="1" :repeat_arr="[]" v-on:close_modal="close_mother" v-on:add_noumenon_relations="add_mother"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.son_modal" :noumenon_number="1" :repeat_arr="this.input_content.son_standard_name" v-on:close_modal="close_son" v-on:add_noumenon_relations="add_son"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.daughter_modal" :noumenon_number="1" :repeat_arr="this.input_content.daughter_standard_name" v-on:close_modal="close_daughter" v-on:add_noumenon_relations="add_daughter"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.brother_modal" :noumenon_number="1" :repeat_arr="this.input_content.brother_standard_name" v-on:close_modal="close_brother" v-on:add_noumenon_relations="add_brother"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.sister_modal" :noumenon_number="1" :repeat_arr="this.input_content.sister_standard_name" v-on:close_modal="close_sister" v-on:add_noumenon_relations="add_sister"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.teacher_modal" :noumenon_number="1" :repeat_arr="this.input_content.teacher_standard_name" v-on:close_modal="close_teacher" v-on:add_noumenon_relations="add_teacher"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.student_modal" :noumenon_number="1" :repeat_arr="this.input_content.student_standard_name" v-on:close_modal="close_student" v-on:add_noumenon_relations="add_student"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.friend_modal" :noumenon_number="1" :repeat_arr="this.input_content.friend_standard_name" v-on:close_modal="close_friend" v-on:add_noumenon_relations="add_friend"></search_modal>
 
         <!--若人物本体规范已存在的模态框-->
         <repeat_modal :show_repeat="this.show_repeat" :repeat_name="this.input_content.standard_name" :repeat_id="this.repeat_id" :repeat_noumenon="this.repeat_noumenon" v-on:close_modal="close_repeat"></repeat_modal>
@@ -314,6 +314,13 @@ export default{
         }
     },
     methods:{
+        /*人物本体关系禁止键盘输入*/
+        down_delete(){
+            let c = event.keyCode;
+            if (c === 8 || c === 46||c===32||c===9||c===12||c===13||c===16||c===17||c===18||c===20||c===27||(c>=32&&c<=36)||c===38||c===40||c===45||(c >= 48 && c <= 57)||(c >= 65 && c <= 90)||(c >= 96 && c <= 123)||(c >= 186 && c <= 192)||(c >= 219 && c <= 222)) {
+                event.returnValue = false;
+            }
+        },
 
         /*根据id获取任务具体信息*/
         show_character(){
@@ -477,13 +484,7 @@ export default{
             this.show_repeat=false;
         },
 
-        /*人物本体关系禁止键盘输入*/
-        down_delete(){
-            let c = event.keyCode;
-            if (c === 8 || c === 46||c===32||(c >= 48 && c <= 57)||(c >= 65 && c <= 90)||(c >= 96 && c <= 105)||c === 106||(c >= 186 && c <= 192)||(c >= 219 && c <= 222)) {
-                event.returnValue = false;
-            }
-        },
+
 
 
         /*出生时间*/
