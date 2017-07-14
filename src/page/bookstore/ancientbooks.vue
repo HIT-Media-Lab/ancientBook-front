@@ -96,7 +96,7 @@
     }
     .j-bls-book1{
         display: inline-block;
-        margin-left: 180px;
+        margin-left: 10px;
         margin-top: 35px;
     }
     .j-bls-book2{

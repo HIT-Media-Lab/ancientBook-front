@@ -20,7 +20,7 @@
 </template>
 
 <script>
-   /*let Mock = require('mockjs');
+    /*let Mock = require('mockjs');
 
     //显示用户列表
     Mock.mock('/ancient_books/get_person_list_by_word.action?word=A&&page_count=1','get',{

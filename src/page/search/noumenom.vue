@@ -89,7 +89,6 @@
                         noumenon_id:response.body.content[i].noumenon_id
                     })
                 }
-                alert(this.content.length);
                 this.info_num = this.content.length;
                 this.total_page = Math.ceil(this.info_num/20);
                 this.content.sort(this.change);

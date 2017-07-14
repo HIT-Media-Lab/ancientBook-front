@@ -132,6 +132,7 @@ import  notfound from './page/error/404.vue'
 //用户
 import  user from  './page/user/index.vue'
 import  modify_info  from './component/modify-info.vue'
+import  user_info  from './page/user/user_index.vue'
 
 /**
  * 上传
@@ -151,6 +152,7 @@ import  alupload from  './page/user/mybook/alupload/index.vue'
 import  privatebook from './page/user/mybook/private/index.vue'
 import  collection from  './page/user/mycollection/index.vue'
 import  offer from  './page/user/myoffer/edit/index.vue'
+import  edit  from  './page/user/myoffer/edit/index.vue'
 import  mark from  './page/user/myoffer/mark/index.vue'
 import  ancientbook from  './component/ancientbook.vue'
 import  comment from  './page/user/myoffer/comment/index.vue'
@@ -261,56 +263,74 @@ const router = new VueRouter({
             name:'upload3'
         },
         {
-            path:'/user/mybook',
-            component:mybook,
-            name:'mybook'
-        },
-        {
-            path:'/user/collection',
-            component:collection,
-            name:'collection'
-        },
-        {
-            path:'/user/offer',
-            component:offer,
-            name:'offer'
-        },
-        {
-            path:'/user/alupload',
-            component:alupload,
-            name:'alupload'
-        },
-        {
-            path:'/user/privatebook',
-            component:privatebook,
-            name:'privatebook'
-        },
-        {
-            path:'/user/mark',
-            component:mark,
-            name:'mark'
-        },
-        {
-            path:'/user/comment',
-            component:comment,
-            name:'comment'
-        },
-        {
-            path:'/user/revise',
-            component:revise,
-            name:'revise'
+            path:'/user_info',
+            component:user_info,
+            name:'user_info',
+            children: [
+                {
+                    path:'',
+                    component:mybook,
+                    name:'mybook'
+                },
+                {
+                    path:'mybook',
+                    component:mybook,
+                    name:'mybook'
+                },
+                {
+                    path:'collection',
+                    component:collection,
+                    name:'collection'
+                },
+                {
+                    path:'offer',
+                    component:offer,
+                    name:'offer',
+                    children: [
+                        {
+                            path:'',
+                            component:edit,
+                            name:'edit'
+                        },
+                        {
+                            path:'edit',
+                            component:edit,
+                            name:'edit'
+                        },
+                        {
+                            path:'mark',
+                            component:mark,
+                            name:'mark'
+                        },
+                        {
+                            path:'comment',
+                            component:comment,
+                            name:'comment'
+                        },
+                        {
+                            path:'revise',
+                            component:revise,
+                            name:'revise'
+                        },
+                    ]
+                },
+                {
+                    path:'alupload/page/:pageId',
+                    component:alupload,
+                    name:'alupload'
+                },
+                {
+                    path:'privatebook/page/:pageId',
+                    component:privatebook,
+                    name:'privatebook'
+                },
+            ]
         },
         {
             path:'/search_index',
             component:search_index,
             name:'search_index',
             children:[
-                // {
-                //     path:'',
-                //     component:search_book,
-                //     redirect: 'search_book//page/1',
-                //     name:'search_book',
-                // },
                 {
                     path:'search_book/:content/page/:pageId',
                     component:search_book,
@@ -471,12 +491,6 @@ const router = new VueRouter({
                     component: sort_book,
                     name: 'sort_book'
                 },
-                // {
-                //     path: 'sort_book',
-                //     redirect: '/sort_book/page/1',
-                //     component: sort_book,
-                //     name: 'sort_book'
-                // },
                 {
                     path: 'book_info',
                     component: book_info,

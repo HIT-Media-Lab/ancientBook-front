@@ -1,42 +1,213 @@
-<template>
-    <div class="zxw-bar-img ">
-      <!-- <user_navigation_bar></user_navigation_bar>-->
-       <div class="zxw-bar-img">
-           <router-link to="/noumenon/time">
-               <img src="../../../assets/img/spot.png" class="zxw-spot" v-show="this.$route.name==='alupload'">
-               <span class="zxw-userbar-title">上传</span>
-           </router-link>
-
-           <router-link to="/noumenon/place">
-               <img src="../../../assets/img/spot.png" class="zxw-spot" v-show="this.$route.name==='place'||this.$route.name==='pla_detail'">
-               <span class="zxw-userbar-title">我的古籍</span>
-           </router-link>
-
-           <router-link to="/noumenon/character/letter/A/page/1">
-               <img src="../../../assets/img/spot.png" class="zxw-spot" v-show="this.$route.name==='character'||this.$route.name==='char_detail'">
-               <span class="zxw-userbar-title">我的收藏</span>
-           </router-link>
-
-           <router-link to="/noumenon/office">
-               <img src="../../../assets/img/spot.png" class="zxw-spot" v-show="this.$route.name==='office'||this.$route.name==='off_detail'">
-               <span class="zxw-userbar-title">我的贡献</span>
-           </router-link>
-
-       </div>
+`<template>
+    <div class="all">
+        <recent_title class="j-mybook-bar" :title="this.title"></recent_title>
+        <div class="j-mybook">
+            <p class="j-mybook-recent-name">最近</p>
+            <div class="j-mybook-recent-img">
+                <div class="j-mybook-recent-div" v-for="item in recent_mybook">
+                    <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo">
+                    <p class="j-mybook-p" @click="go_to_bookinfo">{{item.standard_name}}</p>
+                </div>
+            </div>
+            <p class="j-mybook-recent-name">已上传</p>
+            <div class="j-mybook-al-img">
+                <div class="j-mybook-recent-div" v-for="item in al_up_book">
+                    <div>
+                        <div class="show-edit" v-on:mouseover="show_edit" v-on:mouseout="shut_edit">
+                            <img style="margin-left: 60px" src="../../../assets/img/白笔.png">
+                            <img src="../../../assets/img/叉.png">
+                        </div>
+                        <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo" v-on:mouseover="show_edit" v-on:mouseout="shut_edit">
+                    </div>
+                    <p class="j-mybook-p" @click="go_to_bookinfo">{{item.standard_name}}</p>
+                </div>
+                <div class="j-mybook-morelink" v-show="show_more1">
+                    <span class="j-mybook-more" @click="go_to_more_upbook">更多</span>
+                    <img src="../../../assets/img/more_logo.png" @click="go_to_more_upbook">
+                </div>
+            </div>
+            <p class="j-mybook-recent-name">私密古籍</p>
+            <div class="j-mybook-al-img">
+                <div class="j-mybook-recent-div" v-for="item in private_book">
+                    <div>
+                        <div class="show-edit" v-on:mouseover="show_edit" v-on:mouseout="shut_edit">
+                            <img style="margin-left: 60px" src="../../../assets/img/白笔.png">
+                            <img src="../../../assets/img/叉.png">
+                        </div>
+                        <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo" v-on:mouseover="show_edit" v-on:mouseout="shut_edit">
+                    </div>
+                    <p class="j-mybook-p" @click="go_to_bookinfo">{{item.standard_name}}</p>
+                </div>
+                <div class="j-mybook-morelink" v-show="show_more2">
+                    <span class="j-mybook-more" @click="go_to_more_privatebook">更多</span>
+                    <img src="../../../assets/img/more_logo.png"  @click="go_to_more_privatebook">
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-   import user_navigation_bar from  '../../../component/user-bar.vue'
-   export default{
-       components:{user_navigation_bar}
-   }
+    import recent_title from '../../../component/noumenon-title.vue'
+    export default{
+        components: {
+            recent_title
+        },
+        created(){
+            this.http_json(this.recent_mybook_url, 'get', {}, this.recbook_success, this.recbook_fail);
+            this.http_json(this.upload_book_url, 'get', {}, this.up_success, this.recbook_fail);
+            this.http_json(this.private_book_url, 'get', {}, this.private_success, this.recbook_fail)
+        },
+        data(){
+            return{
+                recent_mybook_url: '/ancient_books/get_recent_ancient_books_list_edited_by_user.action',
+                upload_book_url: '/ancient_books/get_recient_ancient_books_list_by_user_upload.action',
+                private_book_url: '/ancient_books/get_recent_private_ancient_books_by_user.action',
+                picture_page_url: "/ancient_books/get_page_id_by_jcy.action",
+                picture_url: '/ancient_books/get_picture_by_id.action',
+                title: '我的古籍',
+                recent_mybook: [],
+                al_up_book: [],
+                private_book: [],
+                i: 0,
+                j: 0,
+                k: 0,
+                show_more1: true,
+                show_more2: true
+            }
+        },
+        methods: {
+            show_edit(){
+                document.getElementsByClassName('show-edit').style.opacity = 0.5;
+
+            },
+            shut_edit(){
+                document.getElementsByClassName('show-edit')[0].style.opacity = 0;
+            },
+            go_to_bookinfo(){
+                this.$router.push({path: '/bookstore/book_info'});
+            },
+            go_to_more_privatebook(){
+                this.$route.params.pageId = 1;
+                this.$router.push({name: 'privatebook', params: this.$route.params});
+            },
+            go_to_more_upbook(){
+                this.$route.params.pageId = 1;
+                this.$router.push({name: 'alupload', params: this.$route.params});
+            },
+            recbook_success(response){
+                this.recent_mybook = response.body;
+                for (let i = 0; i < response.body.length; i++){
+                    let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.recent_mybook[i].ancient_book_id;
+                    this.http_json(item, 'get', item, this.success_page1, this.recbook_fail);
+                }
+            },
+            up_success(response){
+                this.al_up_book = response.body;
+                if (response.body.length == 3){
+                    this.show_more1 = true;
+                }else{
+                    this.show_more1 = false ;
+                }
+                for (let i = 0; i < response.body.length; i++){
+                    let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.al_up_book[i].ancient_book_id;
+                    this.http_json(item, 'get', item, this.success_page2, this.recbook_fail);
+                }
+            },
+            private_success(response){
+                this.private_book = response.body;
+                if (response.body.length == 3){
+                    this.show_more2 = true;
+                }else {
+                    this.show_more2 = false;
+                }
+                for (let i = 0; i < response.body.length; i++){
+                    let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.private_book[i].ancient_book_id;
+                    this.http_json(item, 'get', item, this.success_page3, this.recbook_fail);
+                }
+            },
+            success_page1(response){
+                let picture_id_url1 = this.picture_url + '?page_id=' + response.body.id;
+                document.getElementById(this.recent_mybook[this.i].ancient_book_id).setAttribute("src", picture_id_url1);
+                this.i = this.i + 1;
+            },
+            success_page2(response){
+                let picture_id_url2 = this.picture_url + '?page_id=' + response.body.id;
+                document.getElementById(this.al_up_book[this.j].ancient_book_id).setAttribute("src", picture_id_url2);
+                this.j = this.j + 1;
+            },
+            success_page3(response){
+                let picture_id_url3 = this.picture_url + '?page_id=' + response.body.id;
+                document.getElementById(this.private_book[this.k].ancient_book_id).setAttribute("src", picture_id_url3);
+                this.k = this.k + 1;
+            },
+            recbook_fail(){
+
+            }
+        }
+    }
 </script>
+
 <style>
-   .zxw-userbar-title{
-       margin:20px 90px 20px 0;
-       font-size: 16px;
-       color: gainsboro;
-       display: inline-block;
-   }
+    .j-mybook-bar{
+        margin: -65px auto;
+    }
+    .j-mybook{
+        margin: 80px auto;
+        width: 900px ;
+        height: auto ;
+    }
+    .j-mybook-recent-name{
+        margin-left: 60px;
+        width: 70px;
+        font-weight:700;
+        font-style:normal;
+        font-size:16px;
+        color: black;
+    }
+    .j-mybook-recent-img{
+        margin-top: 10px;
+        width: auto;
+        height: 198px;
+    }
+    .j-mybook-recent-img1{
+        width: 120px;
+        height: 170px;
+    }
+    .j-mybook-recent-div{
+        float: left;
+        margin-left: 60px;
+        width: 120px;
+        height: auto;
+    }
+    .j-mybook-p{
+        margin-top: 3px;
+        text-align: center;
+    }
+    .j-mybook-al-img{
+        margin-top: 10px;
+        width: auto;
+        height: 198px;
+    }
+    .j-mybook-more{
+        font-weight: 600;
+        font-style:normal;
+        font-size:18px;
+        color: black;
+    }
+    .j-mybook-morelink{
+        height: 30px;
+        display: inline-block;
+        margin-top: 80px;
+        margin-left: 80px;
+    }
+    .show-edit{
+        width: 120px;
+        height: 30px;
+        background-color: brown;
+        opacity:0;
+        position:absolute;
+    }
 </style>
+
+
