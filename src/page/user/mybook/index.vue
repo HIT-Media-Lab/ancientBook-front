@@ -78,8 +78,7 @@
         },
         methods: {
             show_edit(){
-                document.getElementsByClassName('show-edit').style.opacity = 0.5;
-
+                document.getElementsByClassName('show-edit')[0].style.opacity = 0.5;
             },
             shut_edit(){
                 document.getElementsByClassName('show-edit')[0].style.opacity = 0;
