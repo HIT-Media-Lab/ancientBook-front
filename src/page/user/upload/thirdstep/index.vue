@@ -13,9 +13,9 @@
         </div>
 
         <div class="width950 height650 center ry-scroll">
-            <div class="ry-picture-box" v-for="image in images">
-                <img :src="image" class="ry-picture-view" />
-                <p class="picture-names" style="text-align: center"></p>
+            <div id="ry-pictures" class="ry-picture-box" v-for="item in images">
+                <img :src="item.picture" class="ry-picture-view" @mouseover="view_picture()"/>
+                <p class="picture-names" style="text-align: center">{{item.pic_name}}</p>
             </div>
             <div class="ry-picture-box">
                 <a href="javascript:;" class="ry-add">
@@ -51,14 +51,39 @@
             <button class="ry-btn-last-step3 float-right" @click="last_page()">上一步</button>
         </div>
 
+        <hover_modal :show_modal="this.hover_modal" v-on:fireclose="this.close_modal" class="ry-hover-modal">
+            <div slot="header" class="ry-hover-modal-header">
+                <span>图文</span>
+            </div>
+
+            <div slot="body">
+                <div>
+                    <img id="ry-hover-picture" class="ry-hover-picture">
+                </div>
+                <div class="ry-hover-text">
+
+                </div>
+            </div>
+
+            <div slot="footer">
+
+            </div>
+        </hover_modal>
+
     </div>
 
 </template>
 
 <script>
+    import hover_modal from '../../../../component/modal.vue';
     export default{
+        components:{
+            hover_modal,
+        },
+
         data() {
             return{
+                hover_modal : true,
                 varieties_item : {},
                 edition_item : {},
                 impression_item : {},
@@ -66,7 +91,6 @@
                 upload_one_info : {},
                 summary : {},
                 images : [],
-                picture_name : [],
                 texts : [],
                 page : 1,
                 upload_file : {},
@@ -79,21 +103,32 @@
             this.upload_file = this.$store.getters.get_upload_file;
             this.images = this.$store.getters.get_images;
             this.texts = this.$store.getters.get_texts;
-            this.picture_name = this.$store.getters.get_picture_name;
         },
 
         mounted : function () {
-            this.view_names();
+
         },
 
         beforeRouteLeave(to, from, next) {
             this.$store.commit("get_images",this.images);
             this.$store.commit("get_texts",this.texts);
-            this.$store.commit("get_picture_name",this.picture_name);
             next();
         },
 
         methods : {
+            /**
+             * 悬浮模态框
+             */
+            close_modal() {
+                this.hover_modal = false;
+            },
+
+            view_picture() {
+                var src = event.currentTarget.src;
+                document.getElementById("ry-hover-picture").src = src;
+            },
+
+
             /**
              * 添加上传图片
              */
@@ -101,12 +136,6 @@
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)return;
                 this.createImage(files);
-                var obj = document.getElementById("add");
-                for(var i = 0; i < obj.files.length; i++) {
-                    var temp = obj.files[i].name;
-                    this.picture_name.push(temp);
-                }
-                this.view_names();
             },
 
             createImage(file) {
@@ -119,20 +148,47 @@
                 for (var i = 0; i < leng; i++) {
                     var reader = new FileReader();
                     reader.readAsDataURL(file[i]);
+                    var name = file[i].name;
+                    var a = file[i].size;
+                    var size = a/1000;
                     reader.onload = function(e) {
-                        vm.images.push(e.target.result);
+                        vm.images.push({
+                            picture:e.target.result,
+                            pic_name:name,
+                            pic_size:size
+                        });
                     };
                 }
             },
 
 
             /**
-             * 渲染图片文件名称
+             * 上传文本文件
              */
-            view_names() {
-                var ps = document.getElementsByClassName("picture-names");
-                for(var i = 0; i < ps.length; i++) {
-                    ps[i].innerText = this.picture_name[i]
+            onTextChange(e) {
+                var files = e.target.files || e.dataTransfer.files;
+                if (!files.length)return;
+                this.createText(files);
+                var obj = document.getElementById("text-name");
+                for(var i = 0; i < obj.files.length; i++) {
+                    var temp = obj.files[i].name;
+                    this.text_name.push(temp);
+                }
+            },
+
+            createText(file) {
+                if (typeof FileReader === 'undefined') {
+                    alert('您的浏览器不支持图片上传，请升级您的浏览器');
+                    return false;
+                }
+                var vm = this;
+                var leng = file.length;
+                for (var i = 0; i < leng; i++) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file[i]);
+                    reader.onload = function(e) {
+                        vm.texts.push(e.target.result);
+                    };
                 }
             },
 
@@ -315,14 +371,14 @@
         color: white;
         width: 127px;
         height: 54px;
-        background-image: url("../../../../assets/img/上传2/下一步.png");
+        background-image: url("../../../../assets/img/upload2/下一步.png");
     }
 
     .ry-btn-last-step3{
         color: white;
         width: 127px;
         height: 54px;
-        background-image: url("../../../../assets/img/上传2/下一步.png");
+        background-image: url("../../../../assets/img/upload2/下一步.png");
     }
 
     .ry-picture-view{
@@ -365,5 +421,29 @@
         right: 0;
         top: 0;
         opacity: 0;
+    }
+
+    .ry-hover-modal{
+        width:400px;
+        background-repeat: no-repeat;
+        background-size:400px auto;
+    }
+
+    .ry-hover-modal-header{
+        color:gainsboro;
+        font-size: 18px;
+        text-align: center;
+        background-image: url("../../../../assets/img/弹框标题.png");
+        background-size: contain;
+        background-color: transparent;
+        width:400px;
+        height:50px;
+        padding:10px 0 0 0;
+    }
+
+    .ry-hover-picture{
+        display: inline-block;
+        width: 200px;
+        height: 400px;
     }
 </style>

@@ -127,7 +127,6 @@ const store = new Vuex.Store({
             book_num : '',
         },
         images : [],
-        picture_name : [],
         texts : [],
         text_name : [],
         upload1_info:{},

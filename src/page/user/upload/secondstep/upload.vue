@@ -34,13 +34,13 @@
                     <span class="col-md-2">上传至</span>
                     <span class="col-md-2">状态</span>
                 </div>
-                <img src="../../../../assets/img/上传2/形状 1.png" height="1" width="750"/>
-                <div class="row" v-for="item in picture_name">
-                    <span class="col-md-5"><img src="../../../../assets/img/上传2/1.png" height="40" width="30"/>{{item.pic_name}}</span>
+                <img src="../../../../assets/img/upload2/形状 1.png" height="1" width="750"/>
+                <div class="row" v-for="item in images">
+                    <span class="col-md-5"><img src="../../../../assets/img/upload2/1.png" height="40" width="30"/>{{item.pic_name}}</span>
                     <span class="col-md-3">{{item.pic_size}}KB</span>
                     <span class="col-md-2">册1</span>
-                    <span class="col-md-2"><img src="../../../../assets/img/上传2/correct.png" height="25" width="26"/>已上传</span>
-                    <img src="../../../../assets/img/上传2/形状 1.png" height="1" width="750"/>
+                    <span class="col-md-2"><img src="../../../../assets/img/upload2/correct.png" height="25" width="26"/>已上传</span>
+                    <img src="../../../../assets/img/upload2/形状 1.png" height="1" width="750"/>
                 </div>
             </div>
 
@@ -65,7 +65,6 @@
             return{
                 modal : false,
                 images : [],
-                picture_name : [],
                 texts : [],
                 text_name : [],
                 upload2 : {},
@@ -76,7 +75,6 @@
             this.upload2 = this.$store.getters.get_upload_file;
             this.images = this.$store.getters.get_images;
             this.texts = this.$store.getters.get_texts;
-            this.picture_name = this.$store.getters.get_picture_name;
             this.text_name = this.$store.getters.get_text_name;
         },
 
@@ -84,7 +82,6 @@
             this.$store.commit("get_upload_file",this.upload2);
             this.$store.commit("get_images",this.images);
             this.$store.commit("get_texts",this.texts);
-            this.$store.commit("get_picture_name",this.picture_name);
             this.$store.commit("get_text_name",this.text_name);
             next();
         },
@@ -99,22 +96,12 @@
 
 
             /**
-             * 上传图片文件
+             * 添加上传图片
              */
             onFileChange(e) {
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)return;
                 this.createImage(files);
-                var obj = document.getElementById("pic-name");
-                for(var i = 0; i < obj.files.length; i++) {
-                    var temp = obj.files[i].name;
-                    var a = obj.files[i].size;
-                    var size = a/1000;
-                    this.picture_name.push({
-                        pic_name:temp,
-                        pic_size:size
-                    });
-                }
                 this.check_picture_name();
             },
 
@@ -128,15 +115,23 @@
                 for (var i = 0; i < leng; i++) {
                     var reader = new FileReader();
                     reader.readAsDataURL(file[i]);
+                    var name = file[i].name;
+                    var a = file[i].size;
+                    var size = a/1000;
                     reader.onload = function(e) {
-                        vm.images.push(e.target.result);
+                        vm.images.push({
+                            picture:e.target.result,
+                            pic_name:name,
+                            pic_size:size
+                        });
                     };
                 }
             },
 
             check_picture_name() {
-                for (var i = 0; i < this.picture_name.length; i ++) {
-                    var name = this.picture_name[i].pic_name;
+                for (var i = 0; i < this.images.length; i ++) {
+                    var name = this.images[i].pic_name;
+                    alert(name);
                     var one = name.charAt(0);
                     var two = name.charAt(1);
                     var three = name.charAt(2);
@@ -155,49 +150,41 @@
                     var eighth =  /^[0-9]+.?[0-9]*$/;
                     if (one != first) {
                         alert("上传文件名不符合规范，第一个字符应为“卷”，请重新上传");
-                        this.picture_name = [];
                         this.images = [];
                         break;
                     }
                     else if (!second.test(two)) {
                         alert("上传文件名不符合规范，第二个字符应为数字，请重新上传");
-                        this.picture_name = [];
                         this.images = [];
                         break;
                     }
                     else if (!third.test(three)) {
                         alert("上传文件名不符合规范，第三个字符应为数字，请重新上传");
-                        this.picture_name = [];
                         this.images = [];
                         break;
                     }
                     else if (!fourth.test(four)) {
                         alert("上传文件名不符合规范，第四个字符应为数字，请重新上传");
-                        this.picture_name = [];
                         this.images = [];
                         break;
                     }
                     else if (five != fifth) {
                         alert("上传文件名不符合规范，第五个字符应为“-”，请重新上传");
-                        this.picture_name = [];
                         this.images = [];
                         break;
                     }
                     else if (!sixth.test(six)) {
                         alert("上传文件名不符合规范，第六个字符应为数字，请重新上传");
-                        this.picture_name = [];
                         this.images = [];
                         break;
                     }
                     else if (!seventh.test(seven)) {
                         alert("上传文件名不符合规范，第七个字符应为数字，请重新上传");
-                        this.picture_name = [];
                         this.images = [];
                         break;
                     }
                     else if (!eighth.test(eight)) {
                         alert("上传文件名不符合规范，第八个字符应为数字，请重新上传");
-                        this.picture_name = [];
                         this.images = [];
                         break;
                     }
@@ -334,13 +321,13 @@
         color: white;
         width: 127px;
         height: 54px;
-        background-image: url("../../../../assets/img/上传2/下一步.png");
+        background-image: url("../../../../assets/img/upload2/下一步.png");
     }
 
     .ry-btn-upload2-last{
         width: 127px;
         height: 54px;
-        background-image: url("../../../../assets/img/上传2/上一步.png");
+        background-image: url("../../../../assets/img/upload2/上一步.png");
     }
 
     .ry-input-upload2{
@@ -357,7 +344,7 @@
         font-size: x-large;
         width: 175px;
         height: 74px;
-        background-image:  url("../../../../assets/img/上传2/上传文本文本.png");
+        background-image:  url("../../../../assets/img/upload2/上传文本文本.png");
         padding-top: 25px;
         padding-left: 40px;
         overflow: hidden;
@@ -381,7 +368,7 @@
         font-size: x-large;
         width: 175px;
         height: 74px;
-        background-image:  url("../../../../assets/img/上传2/上传文本文本.png");
+        background-image:  url("../../../../assets/img/upload2/上传文本文本.png");
         padding-top: 25px;
         padding-left: 40px;
         overflow: hidden;
@@ -402,7 +389,7 @@
         color: white;
         width: 142px;
         height: 47px;
-        background-image: url("../../../../assets/img/上传2/添加新册.png");
+        background-image: url("../../../../assets/img/upload2/添加新册.png");
     }
 
     .ry-upload-modal{

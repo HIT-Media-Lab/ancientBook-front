@@ -44,9 +44,6 @@ export default {
     get_images:state => {
         return state.images
     },
-    get_picture_name:state => {
-        return state.picture_name
-    },
     get_texts:state => {
         return state.texts
     },
