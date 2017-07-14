@@ -55,30 +55,6 @@
             }
         },
         methods:{
-//            hhh(){
-//               let ee = [{
-//                    name: '1',
-//                    num: 8,
-//                },{
-//                    name: '136',
-//                    num: 8,
-//                },{
-//                    name: '15',
-//                    num: 8,
-//                },{
-//                   name: '444',
-//                   num: 8,
-//               },{
-//                   name: '13',
-//                   num: 8,
-//               }];
-//               ee.sort(this.change);
-//                alert(ee[0].name);
-//                alert(ee[1].name);
-//                alert(ee[2].name);
-//                alert(ee[3].name);
-//                alert(ee[4].name);
-//            },
             change(a,b){
                 if (a.name.length < b.name.length){
                     return -1
@@ -152,6 +128,7 @@
         vertical-align: top;
     }
     .j-book1-word{
+        margin-top: 30px;
         display: inline-block;
         margin-left: 35px;
     }
