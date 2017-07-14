@@ -10,21 +10,26 @@
             <label class="zxw-character-span">人名：</label>
             <input type="text" class="zxw-character-input-margin zxw-character-input-content" readonly v-model="this.$store.getters.get_build_character.person_name">
             <label class="zxw-character-span">英译：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content" readonly v-model="this.$store.getters.get_build_character.english">
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.english === '' " >
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content" readonly v-model="this.$store.getters.get_build_character.english" v-else>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">姓：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.xing">
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.xing === '' " >
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.xing" v-else>
             <label class="zxw-character-span">氏：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.shi">
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.shi === '' " >
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.shi" v-else>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">字：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.zi">
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.zi === '' " >
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.zi" v-else>
             <label class="zxw-character-span">别名：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.other_name">
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.other_name === '' " >
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.other_name" v-else>
         </div>
 
         <div class="zxw-character-row">
@@ -36,40 +41,50 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">籍贯：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.location">
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.location === '' " >
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.location" v-else>
             <label class="zxw-character-span">父：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.father_standard_name">
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.father_standard_name.length === 0 " >
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.father_standard_name" v-else>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">母：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.mother_standard_name">
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.mother_standard_name.length === 0 " >
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.mother_standard_name" v-else>
             <label class="zxw-character-span">子：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.son_standard_name" @mouseover="show_tooltipinfo_son()" @mouseout="close_tooltip_son()">
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.son_standard_name.length === 0 " >
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.son_standard_name" @mouseover="show_tooltipinfo_son()" @mouseout="close_tooltip_son()" v-else>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">女：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.daughter_standard_name" @mouseover="show_tooltipinfo_daughter()" @mouseout="close_tooltip_daughter()">
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.daughter_standard_name.length === 0 " >
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.daughter_standard_name" @mouseover="show_tooltipinfo_daughter()" @mouseout="close_tooltip_daughter()" v-else>
             <label class="zxw-character-span">兄弟：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.brother_standard_name" @mouseover="show_tooltipinfo_brother()" @mouseout="close_tooltip_brother()">
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.brother_standard_name.length === 0 " >
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.brother_standard_name" @mouseover="show_tooltipinfo_brother()" @mouseout="close_tooltip_brother()" v-else>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">姐妹：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.sister_standard_name" @mouseover="show_tooltipinfo_sister()" @mouseout="close_tooltip_sister()">
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.sister_standard_name.length === 0 " >
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.sister_standard_name" @mouseover="show_tooltipinfo_sister()" @mouseout="close_tooltip_sister()" v-else>
             <label class="zxw-character-span">师：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.teacher_standard_name" @mouseover="show_tooltipinfo_teacher()" @mouseout="close_tooltip_teacher()">
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.teacher_standard_name.length === 0 " >
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.teacher_standard_name" @mouseover="show_tooltipinfo_teacher()" @mouseout="close_tooltip_teacher()" v-else>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">学生：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.student_standard_name" @mouseover="show_tooltipinfo_student()" @mouseout="close_tooltip_student()">
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.student_standard_name.length === 0 " >
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.student_standard_name" @mouseover="show_tooltipinfo_student()" @mouseout="close_tooltip_student()" v-else>
             <label class="zxw-character-span">友：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.friend_standard_name" @mouseover="show_tooltipinfo_friend()" @mouseout="close_tooltip_friend()">
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.friend_standard_name.length === 0 " >
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.friend_standard_name" @mouseover="show_tooltipinfo_friend()" @mouseout="close_tooltip_friend()" v-else>
         </div>
 
-       <template v-if="remark_1_name!==''||remark_2_name!==''">
+       <template v-if="this.$store.getters.get_build_character.remark_1 !== ''||this.$store.getters.get_build_character.remark_2 !==''">
             <div>
                 <label class="zxw-character-span" v-model="remark_1_name" v-bind="show_remark">{{remark_1_name}}</label>
                 <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.remark_1">
@@ -163,6 +178,44 @@
     import modal from '../../../../component/modal.vue';
     export default{
         beforeRouteLeave (to, from, next){
+            //清空Vuex
+            this.$store.getters.get_build_character.standard_name = '';
+            this.$store.getters.get_build_character.person_name='';
+            this.$store.getters.get_build_character.xing='';
+            this.$store.getters.get_build_character.shi='';
+            this.$store.getters.get_build_character.zi='';
+            this.$store.getters.get_build_character.other_name='';
+            this.$store.getters.get_build_character.birth_time_id='';
+            this.$store.getters.get_build_character.birth_standard_name='';
+            this.$store.getters.get_build_character.death_time_id='';
+            this.$store.getters.get_build_character.death_standard_name='';
+            this.$store.getters.get_build_character.remark_1_name='';
+            this.$store.getters.get_build_character.remark_2_name='';
+            this.$store.getters.get_build_character.remark_1='';
+            this.$store.getters.get_build_character.remark_2='';
+            this.$store.getters.get_build_character.english='';
+            this.$store.getters.get_build_character.location_id='';
+            this.$store.getters.get_build_character.location='';
+            this.$store.getters.get_build_character.father={};
+            this.$store.getters.get_build_character.mother={};
+            this.$store.getters.get_build_character.son.splice(0,this.$store.getters.get_build_character.son.length);
+            this.$store.getters.get_build_character.daughter.splice(0,this.$store.getters.get_build_character.daughter.length);
+            this.$store.getters.get_build_character.brother.splice(0,this.$store.getters.get_build_character.brother.length);
+            this.$store.getters.get_build_character.sister.splice(0,this.$store.getters.get_build_character.sister.length);
+            this.$store.getters.get_build_character.teacher.splice(0,this.$store.getters.get_build_character.teacher.length);
+            this.$store.getters.get_build_character.student.splice(0,this.$store.getters.get_build_character.student.length);
+            this.$store.getters.get_build_character.father_standard_name='';
+            this.$store.getters.get_build_character.mother_standard_name='';
+            this.$store.getters.get_build_character.friend.splice(0,this.$store.getters.get_build_character.friend.length);
+            this.$store.getters.get_build_character.son_standard_name.splice(0,this.$store.getters.get_build_character.son_standard_name.length);
+            this.$store.getters.get_build_character.daughter_standard_name.splice(0,this.$store.getters.get_build_character.daughter_standard_name.length);
+            this.$store.getters.get_build_character.brother_standard_name.splice(0,this.$store.getters.get_build_character.brother_standard_name.length);
+            this.$store.getters.get_build_character.sister_standard_name.splice(0,this.$store.getters.get_build_character.sister_standard_name.length);
+            this.$store.getters.get_build_character.teacher.splice(0,this.$store.getters.get_build_character.teacher_standard_name.length);
+            this.$store.getters.get_build_character.student.splice(0,this.$store.getters.get_build_character.student_standard_name.length);
+            this.$store.getters.get_build_character.friend.splice(0,this.$store.getters.get_build_character.friend_standard_name.length);
+
+            //模态框自动关闭
             window.setTimeout(function(){
                 document.getElementById("show_info").setAttribute('class','zxw-show-info');
                 next();
@@ -182,13 +235,13 @@
         computed:{
             show_remark(){
                 if( this.$store.getters.get_build_character.remark_1_name !== ''){
-                    this.remark_1_name = this.$store.getters.get_build_character.remark_1_name+':';
+                    this.remark_1_name = this.$store.getters.get_build_character.remark_1_name+' :';
                 } else{
                     this.remark_1_name = '';
                 }
 
                 if( this.$store.getters.get_build_character.remark_2_name !== ''){
-                    this.remark_2_name = this.$store.getters.get_build_character.remark_2_name+':';
+                    this.remark_2_name = this.$store.getters.get_build_character.remark_2_name+' :';
                 } else {
                     this.remark_2_name = '';
                 }
@@ -219,42 +272,6 @@
             success_create(response){
                 this.show_info=true;
                 this.$router.push({name:'char_detail',params:{nouId:response.body.id}});
-                //清空Vuex
-                this.$store.getters.get_build_character.standard_name = '';
-                this.$store.getters.get_build_character.person_name='';
-                this.$store.getters.get_build_character.xing='';
-                this.$store.getters.get_build_character.shi='';
-                this.$store.getters.get_build_character.zi='';
-                this.$store.getters.get_build_character.other_name='';
-                this.$store.getters.get_build_character.birth_time_id='';
-                this.$store.getters.get_build_character.birth_standard_name='';
-                this.$store.getters.get_build_character.death_time_id='';
-                this.$store.getters.get_build_character.death_standard_name='';
-                this.$store.getters.get_build_character.remark_1_name='';
-                this.$store.getters.get_build_character.remark_2_name='';
-                this.$store.getters.get_build_character.remark_1='';
-                this.$store.getters.get_build_character.remark_2='';
-                this.$store.getters.get_build_character.english='';
-                this.$store.getters.get_build_character.location_id='';
-                this.$store.getters.get_build_character.location='';
-                this.$store.getters.get_build_character.father={};
-                this.$store.getters.get_build_character.mother={};
-                this.$store.getters.get_build_character.son.splice(0,this.$store.getters.get_build_character.son.length);
-                this.$store.getters.get_build_character.daughter.splice(0,this.$store.getters.get_build_character.daughter.length);
-                this.$store.getters.get_build_character.brother.splice(0,this.$store.getters.get_build_character.brother.length);
-                this.$store.getters.get_build_character.sister.splice(0,this.$store.getters.get_build_character.sister.length);
-                this.$store.getters.get_build_character.teacher.splice(0,this.$store.getters.get_build_character.teacher.length);
-                this.$store.getters.get_build_character.student.splice(0,this.$store.getters.get_build_character.student.length);
-                this.$store.getters.get_build_character.father_standard_name='';
-                this.$store.getters.get_build_character.mother_standard_name='';
-                this.$store.getters.get_build_character.friend.splice(0,this.$store.getters.get_build_character.friend.length);
-                this.$store.getters.get_build_character.son_standard_name.splice(0,this.$store.getters.get_build_character.son_standard_name.length);
-                this.$store.getters.get_build_character.daughter_standard_name.splice(0,this.$store.getters.get_build_character.daughter_standard_name.length);
-                this.$store.getters.get_build_character.brother_standard_name.splice(0,this.$store.getters.get_build_character.brother_standard_name.length);
-                this.$store.getters.get_build_character.sister_standard_name.splice(0,this.$store.getters.get_build_character.sister_standard_name.length);
-                this.$store.getters.get_build_character.teacher.splice(0,this.$store.getters.get_build_character.teacher_standard_name.length);
-                this.$store.getters.get_build_character.student.splice(0,this.$store.getters.get_build_character.student_standard_name.length);
-                this.$store.getters.get_build_character.friend.splice(0,this.$store.getters.get_build_character.friend_standard_name.length);
             },
 
             fail_create(){
@@ -437,5 +454,10 @@
     }
     .zxw-show-info{
         visibility: hidden;
+    }
+
+    .zxw-null{
+        color:darkgrey;
+
     }
 </style>

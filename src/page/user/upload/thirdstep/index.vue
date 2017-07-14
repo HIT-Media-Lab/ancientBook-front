@@ -19,7 +19,7 @@
             </div>
             <div class="ry-picture-box">
                 <a href="javascript:;" class="ry-add">
-                    <input id="add" type="file" @change="onFileChange" multiple name="picture">
+                    <input id="add" type="file" @change="onFileChange" multiple accept="image/jpeg" name="picture">
                 </a>
             </div>
         </div>

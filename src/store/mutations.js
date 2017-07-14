@@ -47,6 +47,9 @@ export default {
     get_texts(state,texts){
         state.texts = texts
     },
+    get_text_name(state,text_name){
+        state.text_name = text_name
+    },
     get_upload_file(state,texts){
         state.texts = texts
     },

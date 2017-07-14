@@ -1,35 +1,73 @@
 <template>
+    <div>
 
-    <div id="upload2-box" class="ry-upload-two">
-        <span>
-            <span>冊號:</span>
-            <input class="ry-input-upload2" v-model="upload2.book_num">
-        </span>
-        <br>
-        <span>
-            <span>冊名:</span>
-            <input class="ry-input-upload2" v-model="upload2.book_name">
-        </span>
+        <div id="upload2-box" class="ry-upload-two">
+            <span>
+                <span>冊號:</span>
+                <input class="ry-input-upload2" v-model="upload2.book_num">
+            </span>
+            <br>
+            <span>
+                <span>冊名:</span>
+                <input class="ry-input-upload2" v-model="upload2.book_name">
+            </span>
 
-        <div class="width800">
-            <a href="javascript:;" class="ry-file-picture ry-white">上傳圖片
-                <input id="pic-name" type="file" @change="onFileChange" multiple name="picture">
-            </a>
-            <a href="javascript:;" class="ry-file-text ry-white">上傳文本
-                <input type="file" @change="onTextChange" multiple name="text">
-            </a>
+            <div class="width800">
+                <a href="javascript:;" class="ry-file-picture ry-white">上傳圖片
+                    <input id="pic-name" type="file" @change="onFileChange" multiple accept="image/jpeg" name="picture">
+                </a>
+                <a href="javascript:;" class="ry-file-text ry-white">上傳文本
+                    <input id="text-name" type="file" @change="onTextChange" multiple accept="text/plain" name="text">
+                </a>
+            </div>
         </div>
+
+        <modal :show_modal="this.modal" v-on:fireclose="this.close_modal" class="ry-upload-modal">
+            <div slot="header" class="ry-upload-modal-header">
+                <span>上传图片</span>
+            </div>
+
+            <div slot="body" class="zxw-time-body" style="text-align: center">
+                <div class="row">
+                    <span class="col-md-5">文件名</span>
+                    <span class="col-md-3">大小</span>
+                    <span class="col-md-2">上传至</span>
+                    <span class="col-md-2">状态</span>
+                </div>
+                <img src="../../../../assets/img/上传2/形状 1.png" height="1" width="750"/>
+                <div class="row" v-for="item in picture_name">
+                    <span class="col-md-5"><img src="../../../../assets/img/上传2/1.png" height="40" width="30"/>{{item.pic_name}}</span>
+                    <span class="col-md-3">{{item.pic_size}}KB</span>
+                    <span class="col-md-2">册1</span>
+                    <span class="col-md-2"><img src="../../../../assets/img/上传2/correct.png" height="25" width="26"/>已上传</span>
+                    <img src="../../../../assets/img/上传2/形状 1.png" height="1" width="750"/>
+                </div>
+            </div>
+
+            <div slot="footer" class="zxw-search-footer">
+                <button class="zxw-prebtn zxw-search-create" @click="close_modal">继续上传</button>
+                <button class="zxwnoumenom-button zxw-search-cancel" @click="close_modal">完成</button>
+            </div>
+        </modal>
+
     </div>
 
 </template>
 
 <script>
+    import modal from '../../../../component/modal.vue';
     export default{
+        components:{
+            modal,
+        },
+
         data() {
             return{
+                modal : false,
                 images : [],
                 picture_name : [],
                 texts : [],
+                text_name : [],
                 upload2 : {},
             }
         },
@@ -39,6 +77,7 @@
             this.images = this.$store.getters.get_images;
             this.texts = this.$store.getters.get_texts;
             this.picture_name = this.$store.getters.get_picture_name;
+            this.text_name = this.$store.getters.get_text_name;
         },
 
         beforeRouteLeave(to, from, next) {
@@ -46,10 +85,22 @@
             this.$store.commit("get_images",this.images);
             this.$store.commit("get_texts",this.texts);
             this.$store.commit("get_picture_name",this.picture_name);
+            this.$store.commit("get_text_name",this.text_name);
             next();
         },
 
         methods :{
+            /**
+             * 上传进度模态框
+             */
+            close_modal() {
+                this.modal = false
+            },
+
+
+            /**
+             * 上传图片文件
+             */
             onFileChange(e) {
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)return;
@@ -57,9 +108,16 @@
                 var obj = document.getElementById("pic-name");
                 for(var i = 0; i < obj.files.length; i++) {
                     var temp = obj.files[i].name;
-                    this.picture_name.push(temp);
+                    var a = obj.files[i].size;
+                    var size = a/1000;
+                    this.picture_name.push({
+                        pic_name:temp,
+                        pic_size:size
+                    });
                 }
+                this.check_picture_name();
             },
+
             createImage(file) {
                 if (typeof FileReader === 'undefined') {
                     alert('您的浏览器不支持图片上传，请升级您的浏览器');
@@ -76,11 +134,95 @@
                 }
             },
 
+            check_picture_name() {
+                for (var i = 0; i < this.picture_name.length; i ++) {
+                    var name = this.picture_name[i].pic_name;
+                    var one = name.charAt(0);
+                    var two = name.charAt(1);
+                    var three = name.charAt(2);
+                    var four = name.charAt(3);
+                    var five = name.charAt(4);
+                    var six = name.charAt(5);
+                    var seven = name.charAt(6);
+                    var eight = name.charAt(7);
+                    var first = '卷';
+                    var second =  /^[0-9]+.?[0-9]*$/;
+                    var third =  /^[0-9]+.?[0-9]*$/;
+                    var fourth =  /^[0-9]+.?[0-9]*$/;
+                    var fifth =  '-';
+                    var sixth =  /^[0-9]+.?[0-9]*$/;
+                    var seventh =  /^[0-9]+.?[0-9]*$/;
+                    var eighth =  /^[0-9]+.?[0-9]*$/;
+                    if (one != first) {
+                        alert("上传文件名不符合规范，第一个字符应为“卷”，请重新上传");
+                        this.picture_name = [];
+                        this.images = [];
+                        break;
+                    }
+                    else if (!second.test(two)) {
+                        alert("上传文件名不符合规范，第二个字符应为数字，请重新上传");
+                        this.picture_name = [];
+                        this.images = [];
+                        break;
+                    }
+                    else if (!third.test(three)) {
+                        alert("上传文件名不符合规范，第三个字符应为数字，请重新上传");
+                        this.picture_name = [];
+                        this.images = [];
+                        break;
+                    }
+                    else if (!fourth.test(four)) {
+                        alert("上传文件名不符合规范，第四个字符应为数字，请重新上传");
+                        this.picture_name = [];
+                        this.images = [];
+                        break;
+                    }
+                    else if (five != fifth) {
+                        alert("上传文件名不符合规范，第五个字符应为“-”，请重新上传");
+                        this.picture_name = [];
+                        this.images = [];
+                        break;
+                    }
+                    else if (!sixth.test(six)) {
+                        alert("上传文件名不符合规范，第六个字符应为数字，请重新上传");
+                        this.picture_name = [];
+                        this.images = [];
+                        break;
+                    }
+                    else if (!seventh.test(seven)) {
+                        alert("上传文件名不符合规范，第七个字符应为数字，请重新上传");
+                        this.picture_name = [];
+                        this.images = [];
+                        break;
+                    }
+                    else if (!eighth.test(eight)) {
+                        alert("上传文件名不符合规范，第八个字符应为数字，请重新上传");
+                        this.picture_name = [];
+                        this.images = [];
+                        break;
+                    }
+                    else{
+                        this.modal = true;
+                    }
+                }
+            },
+
+
+            /**
+             * 上传文本文件
+             */
             onTextChange(e) {
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)return;
                 this.createText(files);
+                var obj = document.getElementById("text-name");
+                for(var i = 0; i < obj.files.length; i++) {
+                    var temp = obj.files[i].name;
+                    this.text_name.push(temp);
+                }
+                this.check_text_name();
             },
+
             createText(file) {
                 if (typeof FileReader === 'undefined') {
                     alert('您的浏览器不支持图片上传，请升级您的浏览器');
@@ -94,6 +236,76 @@
                     reader.onload = function(e) {
                         vm.texts.push(e.target.result);
                     };
+                }
+            },
+
+            check_text_name() {
+                for (var i = 0; i < this.text_name.length; i ++) {
+                    var name = this.text_name[i];
+                    var one = name.charAt(0);
+                    var two = name.charAt(1);
+                    var three = name.charAt(2);
+                    var four = name.charAt(3);
+                    var five = name.charAt(4);
+                    var six = name.charAt(5);
+                    var seven = name.charAt(6);
+                    var eight = name.charAt(7);
+                    var first = '卷';
+                    var second =  /^[0-9]+.?[0-9]*$/;
+                    var third =  /^[0-9]+.?[0-9]*$/;
+                    var fourth =  /^[0-9]+.?[0-9]*$/;
+                    var fifth =  '-';
+                    var sixth =  /^[0-9]+.?[0-9]*$/;
+                    var seventh =  /^[0-9]+.?[0-9]*$/;
+                    var eighth =  /^[0-9]+.?[0-9]*$/;
+                    if (one != first) {
+                        alert("上传文件名不符合规范，第一个字符应为“卷”，请重新上传");
+                        this.text_name = [];
+                        this.texts = [];
+                        break;
+                    }
+                    else if (!second.test(two)) {
+                        alert("上传文件名不符合规范，第二个字符应为数字，请重新上传");
+                        this.text_name = [];
+                        this.texts = [];
+                        break;
+                    }
+                    else if (!third.test(three)) {
+                        alert("上传文件名不符合规范，第三个字符应为数字，请重新上传");
+                        this.text_name = [];
+                        this.texts = [];
+                        break;
+                    }
+                    else if (!fourth.test(four)) {
+                        alert("上传文件名不符合规范，第四个字符应为数字，请重新上传");
+                        this.text_name = [];
+                        this.texts = [];
+                        break;
+                    }
+                    else if (five != fifth) {
+                        alert("上传文件名不符合规范，第五个字符应为“-”，请重新上传");
+                        this.text_name = [];
+                        this.texts = [];
+                        break;
+                    }
+                    else if (!sixth.test(six)) {
+                        alert("上传文件名不符合规范，第六个字符应为数字，请重新上传");
+                        this.text_name = [];
+                        this.texts = [];
+                        break;
+                    }
+                    else if (!seventh.test(seven)) {
+                        alert("上传文件名不符合规范，第七个字符应为数字，请重新上传");
+                        this.text_name = [];
+                        this.texts = [];
+                        break;
+                    }
+                    else if (!eighth.test(eight)) {
+                        alert("上传文件名不符合规范，第八个字符应为数字，请重新上传");
+                        this.text_name = [];
+                        this.texts = [];
+                        break;
+                    }
                 }
             },
         },
@@ -186,11 +398,28 @@
         opacity: 0;
     }
 
-
     .ry-btn-add-book{
         color: white;
         width: 142px;
         height: 47px;
         background-image: url("../../../../assets/img/上传2/添加新册.png");
+    }
+
+    .ry-upload-modal{
+        width:800px;
+        background-repeat: no-repeat;
+        background-size:800px auto;
+    }
+
+    .ry-upload-modal-header{
+        color:gainsboro;
+        font-size: 18px;
+        text-align: center;
+        background-image: url("../../../../assets/img/弹框标题.png");
+        background-size: contain;
+        background-color: transparent;
+        width:800px;
+        height:50px;
+        padding:10px 0 0 0;
     }
 </style>

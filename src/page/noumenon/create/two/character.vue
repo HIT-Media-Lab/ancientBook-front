@@ -152,12 +152,12 @@
             <div v-for="(item ,index) in add_data">
                 <input type="text" class="zxw-character-input-head zxw-character-input" v-model="item.remark_name">
                 <input type="text" class="zxw-character-input" v-bind:readonly="item.remark_name === ''&&item.remark === ''" v-model="item.remark">
-                <button class="zxw-add-button" @click="add_tip(index)" v-show="add_data[index].value">添加</button>
+                <button class="zxw-add-button" @click="add_tip(index)" v-show="add_data[index].value" :disabled="add_data.length >=2">添加</button>
             </div>
 
             <div class="zxw-build-step2-btn">
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length" @click="pre_step()">上一步</button>
-                <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="input_content.birth_standard_name === ''|| input_content.death_standard_name === ''||input_content.person_name === ''|| show_input === true|| repeat_id !== '' ||add_data[0].remark_name === '' ||(add_data[1] !== undefined && add_data[1].remark_name === '')" >下一步</button>
+                <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="input_content.birth_standard_name === ''|| input_content.death_standard_name === ''||input_content.person_name === ''|| show_input === true|| repeat_id !== '' ||(add_data[0].remark_name === '' && add_data[0].remark !== '' )||(add_data[1] !== undefined && add_data[1].remark_name === '' && add_data[1].remark !=='')" >下一步</button>
             </div>
         </div>
 
@@ -203,6 +203,50 @@
     import search_modal from '../../../../component/search_noumenon.vue';
     import repeat_modal from '../../../../component/repeat_modal.vue';
     export default{
+        beforeRouteLeave(to,from,next){
+            if(to.name !== 'characterthree'){
+                //清空Vuex
+                this.$store.getters.get_build_character.standard_name = '';
+                this.$store.getters.get_build_character.person_name='';
+                this.$store.getters.get_build_character.xing='';
+                this.$store.getters.get_build_character.shi='';
+                this.$store.getters.get_build_character.zi='';
+                this.$store.getters.get_build_character.other_name='';
+                this.$store.getters.get_build_character.birth_time_id='';
+                this.$store.getters.get_build_character.birth_standard_name='';
+                this.$store.getters.get_build_character.death_time_id='';
+                this.$store.getters.get_build_character.death_standard_name='';
+                this.$store.getters.get_build_character.remark_1_name='';
+                this.$store.getters.get_build_character.remark_2_name='';
+                this.$store.getters.get_build_character.remark_1='';
+                this.$store.getters.get_build_character.remark_2='';
+                this.$store.getters.get_build_character.english='';
+                this.$store.getters.get_build_character.location_id='';
+                this.$store.getters.get_build_character.location='';
+                this.$store.getters.get_build_character.father={};
+                this.$store.getters.get_build_character.mother={};
+                this.$store.getters.get_build_character.son.splice(0,this.$store.getters.get_build_character.son.length);
+                this.$store.getters.get_build_character.daughter.splice(0,this.$store.getters.get_build_character.daughter.length);
+                this.$store.getters.get_build_character.brother.splice(0,this.$store.getters.get_build_character.brother.length);
+                this.$store.getters.get_build_character.sister.splice(0,this.$store.getters.get_build_character.sister.length);
+                this.$store.getters.get_build_character.teacher.splice(0,this.$store.getters.get_build_character.teacher.length);
+                this.$store.getters.get_build_character.student.splice(0,this.$store.getters.get_build_character.student.length);
+                this.$store.getters.get_build_character.father_standard_name='';
+                this.$store.getters.get_build_character.mother_standard_name='';
+                this.$store.getters.get_build_character.friend.splice(0,this.$store.getters.get_build_character.friend.length);
+                this.$store.getters.get_build_character.son_standard_name.splice(0,this.$store.getters.get_build_character.son_standard_name.length);
+                this.$store.getters.get_build_character.daughter_standard_name.splice(0,this.$store.getters.get_build_character.daughter_standard_name.length);
+                this.$store.getters.get_build_character.brother_standard_name.splice(0,this.$store.getters.get_build_character.brother_standard_name.length);
+                this.$store.getters.get_build_character.sister_standard_name.splice(0,this.$store.getters.get_build_character.sister_standard_name.length);
+                this.$store.getters.get_build_character.teacher.splice(0,this.$store.getters.get_build_character.teacher_standard_name.length);
+                this.$store.getters.get_build_character.student.splice(0,this.$store.getters.get_build_character.student_standard_name.length);
+                this.$store.getters.get_build_character.friend.splice(0,this.$store.getters.get_build_character.friend_standard_name.length);
+                next();
+            } else{
+                next();
+            }
+        },
+
         created(){
             this.prams = this.$route.name;
             this.show_character_info();
@@ -677,42 +721,6 @@
             },
 
             pre_step(){
-                //清空Vuex
-                this.$store.getters.get_build_character.standard_name = '';
-                this.$store.getters.get_build_character.person_name='';
-                this.$store.getters.get_build_character.xing='';
-                this.$store.getters.get_build_character.shi='';
-                this.$store.getters.get_build_character.zi='';
-                this.$store.getters.get_build_character.other_name='';
-                this.$store.getters.get_build_character.birth_time_id='';
-                this.$store.getters.get_build_character.birth_standard_name='';
-                this.$store.getters.get_build_character.death_time_id='';
-                this.$store.getters.get_build_character.death_standard_name='';
-                this.$store.getters.get_build_character.remark_1_name='';
-                this.$store.getters.get_build_character.remark_2_name='';
-                this.$store.getters.get_build_character.remark_1='';
-                this.$store.getters.get_build_character.remark_2='';
-                this.$store.getters.get_build_character.english='';
-                this.$store.getters.get_build_character.location_id='';
-                this.$store.getters.get_build_character.location='';
-                this.$store.getters.get_build_character.father={};
-                this.$store.getters.get_build_character.mother={};
-                this.$store.getters.get_build_character.son.splice(0,this.$store.getters.get_build_character.son.length);
-                this.$store.getters.get_build_character.daughter.splice(0,this.$store.getters.get_build_character.daughter.length);
-                this.$store.getters.get_build_character.brother.splice(0,this.$store.getters.get_build_character.brother.length);
-                this.$store.getters.get_build_character.sister.splice(0,this.$store.getters.get_build_character.sister.length);
-                this.$store.getters.get_build_character.teacher.splice(0,this.$store.getters.get_build_character.teacher.length);
-                this.$store.getters.get_build_character.student.splice(0,this.$store.getters.get_build_character.student.length);
-                this.$store.getters.get_build_character.father_standard_name='';
-                this.$store.getters.get_build_character.mother_standard_name='';
-                this.$store.getters.get_build_character.friend.splice(0,this.$store.getters.get_build_character.friend.length);
-                this.$store.getters.get_build_character.son_standard_name.splice(0,this.$store.getters.get_build_character.son_standard_name.length);
-                this.$store.getters.get_build_character.daughter_standard_name.splice(0,this.$store.getters.get_build_character.daughter_standard_name.length);
-                this.$store.getters.get_build_character.brother_standard_name.splice(0,this.$store.getters.get_build_character.brother_standard_name.length);
-                this.$store.getters.get_build_character.sister_standard_name.splice(0,this.$store.getters.get_build_character.sister_standard_name.length);
-                this.$store.getters.get_build_character.teacher.splice(0,this.$store.getters.get_build_character.teacher_standard_name.length);
-                this.$store.getters.get_build_character.student.splice(0,this.$store.getters.get_build_character.student_standard_name.length);
-                this.$store.getters.get_build_character.friend.splice(0,this.$store.getters.get_build_character.friend_standard_name.length);
                 this.$store.commit('get_create_one_selection',2);
                 this.$router.push({name:'build'});
             }
