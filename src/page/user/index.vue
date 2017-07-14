@@ -113,4 +113,8 @@
     .logout{
         width: 95px;
     }
+    .all{
+        width: 950px;
+        margin: 0 auto;
+    }
 </style>

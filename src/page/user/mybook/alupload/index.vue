@@ -1,5 +1,5 @@
 <template>
-    <div style="width: ">
+    <div class="all">
         <recent_title class="j-alup-bar" :title="this.title"></recent_title>
         <div class="j-alup">
 

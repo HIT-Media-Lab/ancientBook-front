@@ -1,5 +1,5 @@
 `<template>
-    <div>
+    <div class="all">
         <recent_title class="j-mybook-bar" :title="this.title"></recent_title>
         <div class="j-mybook">
             <p class="j-mybook-recent-name">最近</p>
@@ -132,12 +132,12 @@
             },
             success_page2(response){
                 let picture_id_url2 = this.picture_url + '?page_id=' + response.body.id;
-                document.getElementById(this.al_up_book[this.i].ancient_book_id).setAttribute("src", picture_id_url2);
+                document.getElementById(this.al_up_book[this.j].ancient_book_id).setAttribute("src", picture_id_url2);
                 this.j = this.j + 1;
             },
             success_page3(response){
                 let picture_id_url3 = this.picture_url + '?page_id=' + response.body.id;
-                document.getElementById(this.private_book[this.i].ancient_book_id).setAttribute("src", picture_id_url3);
+                document.getElementById(this.private_book[this.k].ancient_book_id).setAttribute("src", picture_id_url3);
                 this.k = this.k + 1;
             },
             recbook_fail(){
