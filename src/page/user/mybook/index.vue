@@ -17,7 +17,7 @@
                             <img style="margin-left: 60px" src="../../../assets/img/白笔.png">
                             <img src="../../../assets/img/叉.png">
                         </div>
-                        <img :id = "item.id" class="j-mybook-recent-img1" @click="go_to_bookinfo" v-on:mouseover="show_edit" v-on:mouseout="shut_edit">
+                        <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo" v-on:mouseover="show_edit" v-on:mouseout="shut_edit">
                     </div>
                     <p class="j-mybook-p" @click="go_to_bookinfo">{{item.standard_name}}</p>
                 </div>
@@ -78,7 +78,8 @@
         },
         methods: {
             show_edit(){
-                document.getElementsByClassName('show-edit')[0].style.opacity = 0.5;
+                document.getElementsByClassName('show-edit').style.opacity = 0.5;
+
             },
             shut_edit(){
                 document.getElementsByClassName('show-edit')[0].style.opacity = 0;
@@ -109,7 +110,7 @@
                     this.show_more1 = false ;
                 }
                 for (let i = 0; i < response.body.length; i++){
-                    let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.al_up_book[i].id;
+                    let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.al_up_book[i].ancient_book_id;
                     this.http_json(item, 'get', item, this.success_page2, this.recbook_fail);
                 }
             },
