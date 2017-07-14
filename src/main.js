@@ -315,12 +315,12 @@ const router = new VueRouter({
                     ]
                 },
                 {
-                    path:'alupload',
+                    path:'alupload/page/:pageId',
                     component:alupload,
                     name:'alupload'
                 },
                 {
-                    path:'privatebook',
+                    path:'privatebook/page/:pageId',
                     component:privatebook,
                     name:'privatebook'
                 },

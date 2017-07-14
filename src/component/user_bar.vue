@@ -5,7 +5,7 @@
             <span class="j-userbar-title">上传</span>
         </router-link>
         <router-link to="/user_info/mybook">
-            <img src="../assets/img/spot.png" class="j-spot" v-show="this.$route.name==='mybook'">
+            <img src="../assets/img/spot.png" class="j-spot" v-show="this.$route.name==='mybook' || 'privatebook' || 'alupload'">
             <span class="j-userbar-title">我的古籍</span>
         </router-link>
         <router-link to="/user_info/collection">

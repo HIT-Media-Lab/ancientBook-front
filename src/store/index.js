@@ -21,7 +21,7 @@ const store = new Vuex.Store({
             'book_varieties','book_edition','book_impression',
             'book_copy','sort_book','search_index','search_book',
             'search_noumenon','modify_info','user_info',
-            'alupload','privatebooks','collection','offer','mark',
+            'alupload','privatebook','collection','offer','mark',
             'ancientbook','comment','revise','chacheck','edit',
             'build','charactertwo','characterthree'],
         acl_admin:['404','admin','modify_info'],
