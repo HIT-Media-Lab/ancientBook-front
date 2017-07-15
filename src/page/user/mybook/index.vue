@@ -15,8 +15,8 @@
 
 
                 <div class="j-mybook-recent-div" v-for="(item,index) in al_up_book">
-                    <div  v-on:mouseover="show_edit(index)" v-on:mouseout="shut_edit(index)">
-                        <div class="show-edit">
+                    <div  v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
+                        <div class="show-edit1">
                             <img style="margin-left: 60px" src="../../../assets/img/白笔.png">
                             <img src="../../../assets/img/叉.png">
                         </div>
@@ -38,7 +38,7 @@
             <div class="j-mybook-al-img">
                 <div class="j-mybook-recent-div" v-for="item in private_book">
                     <div>
-                        <div class="show-edit" v-on:mouseover="show_edit" v-on:mouseout="shut_edit">
+                        <div class="show-edit2" v-on:mouseover="show_edit" v-on:mouseout="shut_edit">
                             <img style="margin-left: 60px" src="../../../assets/img/白笔.png">
                             <img src="../../../assets/img/叉.png">
                         </div>
@@ -86,12 +86,13 @@
             }
         },
         methods: {
-            show_edit(index){
-                document.getElementsByClassName('show-edit')[index].style.opacity = 0;
+            show_edit1(index){
+                alert(index);
+                document.getElementsByClassName('show-edit1')[index].style.opacity = 0.5;
             },
-            shut_edit(index){
-
-                document.getElementsByClassName('show-edit')[index].style.opacity = 0;
+            shut_edit1(index){
+                alert(index);
+                document.getElementsByClassName('show-edit1')[index].style.opacity = 0;
             },
             go_to_bookinfo(){
                 this.$router.push({path: '/bookstore/book_info'});
@@ -210,7 +211,14 @@
         margin-top: 80px;
         margin-left: 80px;
     }
-    .show-edit{
+    .show-edit1{
+        width: 120px;
+        height: 30px;
+        background-color: brown;
+        opacity:0;
+        position:absolute;
+    }
+    .show-edit2{
         width: 120px;
         height: 30px;
         background-color: brown;
