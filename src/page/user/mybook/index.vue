@@ -11,16 +11,24 @@
             </div>
             <p class="j-mybook-recent-name">已上传</p>
             <div class="j-mybook-al-img">
-                <div class="j-mybook-recent-div" v-for="item in al_up_book">
-                    <div>
-                        <div class="show-edit" v-on:mouseover="show_edit" v-on:mouseout="shut_edit">
+
+
+
+                <div class="j-mybook-recent-div" v-for="(item,index) in al_up_book">
+                    <div  v-on:mouseover="show_edit(index)" v-on:mouseout="shut_edit(index)">
+                        <div class="show-edit">
                             <img style="margin-left: 60px" src="../../../assets/img/白笔.png">
                             <img src="../../../assets/img/叉.png">
                         </div>
-                        <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo" v-on:mouseover="show_edit" v-on:mouseout="shut_edit">
+                        <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo">
                     </div>
                     <p class="j-mybook-p" @click="go_to_bookinfo">{{item.standard_name}}</p>
                 </div>
+
+
+
+
+
                 <div class="j-mybook-morelink" v-show="show_more1">
                     <span class="j-mybook-more" @click="go_to_more_upbook">更多</span>
                     <img src="../../../assets/img/more_logo.png" @click="go_to_more_upbook">
@@ -73,15 +81,17 @@
                 j: 0,
                 k: 0,
                 show_more1: true,
-                show_more2: true
+                show_more2: true,
+                name: ''
             }
         },
         methods: {
-            show_edit(){
-                document.getElementsByClassName('show-edit')[0].style.opacity = 0.5;
+            show_edit(index){
+                document.getElementsByClassName('show-edit')[index].style.opacity = 0;
             },
-            shut_edit(){
-                document.getElementsByClassName('show-edit')[0].style.opacity = 0;
+            shut_edit(index){
+
+                document.getElementsByClassName('show-edit')[index].style.opacity = 0;
             },
             go_to_bookinfo(){
                 this.$router.push({path: '/bookstore/book_info'});
