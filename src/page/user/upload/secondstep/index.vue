@@ -74,7 +74,7 @@
             },
 
             remove(item) {
-                var i = this.upload_box.indexOf(item)
+                var i = this.upload_box.indexOf(item);
                 this.upload_box.splice(i, 1)
             }
         }

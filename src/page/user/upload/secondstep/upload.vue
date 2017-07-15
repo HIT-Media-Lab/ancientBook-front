@@ -131,7 +131,6 @@
             check_picture_name() {
                 for (var i = 0; i < this.images.length; i ++) {
                     var name = this.images[i].pic_name;
-                    alert(name);
                     var one = name.charAt(0);
                     var two = name.charAt(1);
                     var three = name.charAt(2);
@@ -211,15 +210,11 @@
             },
 
             createText(file) {
-                if (typeof FileReader === 'undefined') {
-                    alert('您的浏览器不支持图片上传，请升级您的浏览器');
-                    return false;
-                }
                 var vm = this;
                 var leng = file.length;
                 for (var i = 0; i < leng; i++) {
                     var reader = new FileReader();
-                    reader.readAsDataURL(file[i]);
+                    reader.readAsText(file[i],'gbk');
                     reader.onload = function(e) {
                         vm.texts.push(e.target.result);
                     };

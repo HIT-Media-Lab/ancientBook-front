@@ -57,12 +57,16 @@
             </div>
 
             <div slot="body">
-                <div>
+                <div class="ry-hover-picture">
                     <img id="ry-hover-picture" class="ry-hover-picture">
+                    <a href="javascript:;" class="ry-fixed-left">更改图片
+                        <input type="file" @change="change_picture" accept="image/jpeg" name="picture">
+                    </a>
+                    <a href="javascript:;" class="ry-fixed-right">更改文本
+                        <input id="text-name" type="file" @change="change_text" accept="text/plain" name="text">
+                    </a>
                 </div>
-                <div class="ry-hover-text">
-
-                </div>
+                <div id="ry-hover-text" class="ry-hover-text"></div>
             </div>
 
             <div slot="footer">
@@ -83,7 +87,8 @@
 
         data() {
             return{
-                hover_modal : true,
+                index : 0,
+                hover_modal : false,
                 varieties_item : {},
                 edition_item : {},
                 impression_item : {},
@@ -94,7 +99,7 @@
                 texts : [],
                 page : 1,
                 upload_file : {},
-                responsibility_info :[],
+                responsibility_info : [],
                 add_book_obj : {},
             }
         },
@@ -124,8 +129,73 @@
             },
 
             view_picture() {
+                this.hover_modal = true;
                 var src = event.currentTarget.src;
                 document.getElementById("ry-hover-picture").src = src;
+                for (var i = 0; i < this.images.length; i++) {
+                    var key = this.images[i].picture;
+                    if (src == key) {
+                        var index = i;
+                        this.index = index;
+                        break;
+                    }
+                }
+                document.getElementById("ry-hover-text").innerText = this.texts[index]
+            },
+
+
+            /**
+             * 更改图片
+             */
+            change_picture(e) {
+                var files = e.target.files || e.dataTransfer.files;
+                if (!files.length)return;
+                this.change_image(files);
+            },
+
+            change_image(file) {
+                if (typeof FileReader === 'undefined') {
+                    alert('您的浏览器不支持图片上传，请升级您的浏览器');
+                    return false;
+                }
+                var vm = this;
+                var leng = file.length;
+                for (var i = 0; i < leng; i++) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file[i]);
+                    var name = file[i].name;
+                    var a = file[i].size;
+                    var size = a/1000;
+                    reader.onload = function(e) {
+                        vm.$set(vm.images,vm.index,{
+                            picture:e.target.result,
+                            pic_name:name,
+                            pic_size:size
+                        });
+                    };
+                }
+            },
+
+
+            /**
+             * 更改文本
+             */
+            change_text(e) {
+                var files = e.target.files || e.dataTransfer.files;
+                if (!files.length)return;
+                this.change_content(files);
+            },
+
+            change_content(file) {
+                var vm = this;
+                var leng = file.length;
+                for (var i = 0; i < leng; i++) {
+                    var reader = new FileReader();
+                    reader.readAsText(file[i],'gbk');
+                    reader.onload = function(e) {
+                        vm.$set(vm.texts,vm.index,e.target.result);
+                    };
+                }
             },
 
 
@@ -177,15 +247,11 @@
             },
 
             createText(file) {
-                if (typeof FileReader === 'undefined') {
-                    alert('您的浏览器不支持图片上传，请升级您的浏览器');
-                    return false;
-                }
                 var vm = this;
                 var leng = file.length;
                 for (var i = 0; i < leng; i++) {
                     var reader = new FileReader();
-                    reader.readAsDataURL(file[i]);
+                    reader.readAsText(file[i],'gbk');
                     reader.onload = function(e) {
                         vm.texts.push(e.target.result);
                     };
@@ -445,5 +511,59 @@
         display: inline-block;
         width: 200px;
         height: 400px;
+        float: left;
+        position: fixed;
+    }
+
+    .ry-hover-text{
+        display: inline-block;
+        width: 200px;
+        height: 400px;
+        float: right;
+        overflow: hidden;
+    }
+
+    .ry-fixed-left{
+        position: fixed;
+        margin-left: 5px;
+        margin-top: 360px;
+        background-image: url("../../../../assets/img/upload3/change-file.png");
+        width: 80px;
+        height: 30px;
+        background-size: 100%;
+        color: white;
+        line-height: 30px;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .ry-fixed-right{
+        position: fixed;
+        margin-left: 100px;
+        margin-top: 360px;
+        background-image: url("../../../../assets/img/upload3/change-file.png");
+        width: 80px;
+        height: 30px;
+        background-size: 100%;
+        color: white;
+        line-height: 30px;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .ry-fixed-left input{
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
+
+    .ry-fixed-right input{
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
     }
 </style>
