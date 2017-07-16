@@ -27,13 +27,13 @@
         },
         created(){
             this.content = [];
-            let url = this.collection_url + '?page_count=' + this.$route.params.pageId;
+            let url = this.collection_url + '?page=' + this.$route.params.pageId;
             this.http_json(url, 'get', url, this.collection_success, this.collection_fail);
         },
         watch:{
             $route(){
                 this.content = [];
-                let url = this.collection_url + '?page_count=' + this.$route.params.pageId;
+                let url = this.collection_url + '?page=' + this.$route.params.pageId;
                 this.http_json(url, 'get', url, this.collection_success, this.collection_fail);
             }
         },
@@ -64,7 +64,7 @@
                 }
             },
             collection_pic_success(response){
-                let picture_id_url1 = this.picture_url + '?page=' + response.body.id;
+                let picture_id_url1 = this.picture_url + '?page_id=' + response.body.id;
                 document.getElementById(this.content[this.i].ancient_book_id).setAttribute("src", picture_id_url1);
                 this.i = this.i + 1;
 
