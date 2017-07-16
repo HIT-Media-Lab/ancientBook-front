@@ -125,6 +125,7 @@
             },
             private_get_success(response){
                 this.private_book = response.body.content;
+                console.log("hhh");
                 if (response.body.content.length == 3){
                     this.show_more2 = true;
                 }else {
@@ -146,7 +147,9 @@
                 this.j = this.j + 1;
             },
             success_page3(response){
+                console.log(this.k);
                 let picture_id_url3 = this.picture_url + '?page_id=' + response.body.id;
+                console.log(picture_id_url3);
                 document.getElementById(this.private_book[this.k].ancient_book_id).setAttribute("src", picture_id_url3);
                 this.k = this.k + 1;
             },

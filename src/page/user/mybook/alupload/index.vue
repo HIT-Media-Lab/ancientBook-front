@@ -97,7 +97,7 @@
     }
     .j-alupload-p{
         margin-top: 3px;
-        padding-bottom: 15px;
+        margin-bottom: 15px;
         text-align: center;
         display: -webkit-box;
         -webkit-line-clamp: 1;
