@@ -39,7 +39,7 @@
         },
         data(){
             return{
-                private_url:'/ancient_books/get_ancient_book_list_by_user_upload.action',
+                private_url:'/ancient_books/get_private_ancient_books_list_by_user_upload.action',
                 picture_page_url: "/ancient_books/get_page_id_by_jcy.action",
                 picture_url: '/ancient_books/get_picture_by_id.action',
                 title: '私密古籍',
@@ -50,7 +50,7 @@
         },
         methods:{
             show_edit1(index){
-                document.getElementsByClassName('show-edit1')[index].style.opacity = 0.5;
+                document.getElementsByClassName('show-edit1')[index].style.opacity = 0.9;
             },
             shut_edit1(index){
                 document.getElementsByClassName('show-edit1')[index].style.opacity = 0;
