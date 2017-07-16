@@ -34,7 +34,7 @@
                             <img style="margin-left: 60px" src="../../../assets/img/白笔.png">
                             <img src="../../../assets/img/叉.png">
                         </div>
-                        <img :id = "item.ancient_book_id + '2'" class="j-mybook-recent-img1" @click="go_to_bookinfo">
+                        <img :id = "item.ancient_book_id + 's'" class="j-mybook-recent-img1" @click="go_to_bookinfo">
                     </div>
                     <p class="j-mybook-p" @click="go_to_bookinfo" :title="item.standard_name">{{item.standard_name}}</p>
                 </div>
@@ -150,7 +150,7 @@
                 console.log(this.k);
                 let picture_id_url3 = this.picture_url + '?page_id=' + response.body.id;
                 console.log(picture_id_url3);
-                document.getElementById(this.private_book[this.k].ancient_book_id + '2').setAttribute("src", picture_id_url3);
+                document.getElementById(this.private_book[this.k].ancient_book_id + 's').setAttribute("src", picture_id_url3);
                 this.k = this.k + 1;
             },
             recbook_fail(){
