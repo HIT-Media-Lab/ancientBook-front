@@ -96,6 +96,7 @@
         height: 170px;
     }
     .j-alupload-p{
+        height: 20px;
         margin-top: 3px;
         margin-bottom: 15px;
         text-align: center;

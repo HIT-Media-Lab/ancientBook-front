@@ -96,6 +96,7 @@
         height: 170px;
     }
     .j-private-p{
+        height: 20px;
         margin-top: 3px;
         padding-bottom: 15px;
         text-align: center;
