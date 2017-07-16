@@ -79,7 +79,7 @@
             </div>
 
             <div>
-                <img src="../../../../assets/img/上传1/中间墨线.png" height="6" width="843"/>
+                <img src="../../../../assets/img/upload1/中间墨线.png" height="6" width="843"/>
             </div>
 
             <div id="form-variety">
@@ -172,7 +172,7 @@
             </div>
 
             <div>
-                <img src="../../../../assets/img/上传1/中间墨线.png" height="6" width="843"/>
+                <img src="../../../../assets/img/upload1/中间墨线.png" height="6" width="843"/>
             </div>
 
             <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></time_modal>
@@ -488,13 +488,13 @@
     #ry-select-b,#ry-select-l,#ry-select-s{
         width: 208px;
         height: 33px;
-        background-image: url("../../../../assets/img/上传1/标准分类.png");
+        background-image: url("../../../../assets/img/upload1/标准分类.png");
     }
 
     #ry-input-info,#ry-input-responsibility{
         width: 664px;
         height: 74px;
-        background-image: url("../../../../assets/img/上传1/责任信息.png");
+        background-image: url("../../../../assets/img/upload1/责任信息.png");
     }
 
 

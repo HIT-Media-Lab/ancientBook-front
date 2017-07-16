@@ -270,7 +270,7 @@
         margin-left: 10px;
         width: 127px;
         height: 54px;
-        background: url("../assets/img/上传1/下一步按钮.png");
+        background: url("../assets/img/upload1/下一步按钮.png");
         font-size: 20px;
         color: white;
     }
@@ -278,7 +278,7 @@
         margin-left: 40px;
         width: 127px;
         height: 54px;
-        background: url("../assets/img/上传1/下一步按钮.png");
+        background: url("../assets/img/upload1/下一步按钮.png");
         font-size: 20px;
         color: white;
     }

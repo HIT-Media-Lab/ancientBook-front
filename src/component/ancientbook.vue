@@ -109,7 +109,7 @@
                             <br>
                             <br>
                             <br>
-                            <img src="../assets/img/上传1/中间墨线.png" height="6" width="600"/>
+                            <img src="../assets/img/upload1/中间墨线.png" height="6" width="600"/>
                             <!--修订信息编辑框标题-->
                             <h5>修訂信息:</h5>
                             <!--修订信息编辑框-->
@@ -1454,7 +1454,7 @@
         height: 44px;
         margin-left: 440px;
         background-size: 100%;
-        background-image: url("../assets/img/上传1/下一步按钮.png");
+        background-image: url("../assets/img/upload1/下一步按钮.png");
     }
     
 
