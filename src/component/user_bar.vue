@@ -48,16 +48,17 @@
                 }
             },
             choose_my_offer(){
-                if (this.mybook == '我的贡献' || '本体编辑'){
+                alert(this)
+                if (this.my_collection == '我的贡献' || '本体编辑'){
                     this.$route.params.pageId = 1;
                     this.$router.push({name: 'edit', params: this.$route.params});
-                }else if(this.mybook == '本体标记'){
+                }else if(this.my_collection == '本体标记'){
                     this.$route.params.pageId = 1;
                     this.$router.push({name: 'mark', params: this.$route.params});
-                }else if (this.mybook == '批注'){
+                }else if (this.my_collection == '批注'){
                     this.$route.params.pageId = 1;
                     this.$router.push({name: 'comment', params: this.$route.params});
-                }else if (this.mybook == '修订'){
+                }else if (this.my_collection == '修订'){
                     this.$route.params.pageId = 1;
                     this.$router.push({name: 'revise', params: this.$route.params});
                 }
