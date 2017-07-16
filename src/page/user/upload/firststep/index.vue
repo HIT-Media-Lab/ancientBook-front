@@ -173,21 +173,21 @@
         width: 148px;
         height: 44px;
         color: white;
-        background-image: url("../../../../assets/img/上传1/取消上传按钮.png");
+        background-image: url("../../../../assets/img/upload1/取消上传按钮.png");
     }
 
     .ry-btn-use-other{
         width: 148px;
         height: 44px;
         color: white;
-        background-image: url("../../../../assets/img/上传1/调用其它信息按钮.png");
+        background-image: url("../../../../assets/img/upload1/调用其它信息按钮.png");
     }
 
     .ry-form-upload{
         padding:0 80px;
         width: 968px;
         height: 991px;
-        background-image: url("../../../../assets/img/上传1/边框.png");
+        background-image: url("../../../../assets/img/upload1/边框.png");
     }
 
     .ry-4layers{
@@ -207,7 +207,7 @@
         margin: 5px 0px;
         width: 225px;
         height: 33px;
-        background-image: url("../../../../assets/img/上传1/书名什么的.png");
+        background-image: url("../../../../assets/img/upload1/书名什么的.png");
     }
 
     .layer-input label{
@@ -217,28 +217,28 @@
     .layer-input select{
         width: 225px;
         height: 33px;
-        background-image: url("../../../../assets/img/上传1/品级信息.png");
+        background-image: url("../../../../assets/img/upload1/品级信息.png");
     }
 
     .ry-btn-add{
         width: 103px;
         height: 44px;
         color: white;
-        background-image: url("../../../../assets/img/上传1/添加按钮.png");
+        background-image: url("../../../../assets/img/upload1/添加按钮.png");
     }
 
     .ry-btn-del{
         width: 103px;
         height: 44px;
         color: white;
-        background-image: url("../../../../assets/img/上传1/添加按钮.png");
+        background-image: url("../../../../assets/img/upload1/添加按钮.png");
     }
 
     .ry-check-pri{
         background-color: transparent;
         width: 18px;
         height: 19px;
-        background-image: url("../../../../assets/img/上传1/私密上传复选框.png");
+        background-image: url("../../../../assets/img/upload1/私密上传复选框.png");
     }
 
     .ry-btn-next-step{
@@ -246,6 +246,6 @@
         margin-left: 50px;
         width: 127px;
         height: 54px;
-        background-image: url("../../../../assets/img/上传1/下一步按钮.png");
+        background-image: url("../../../../assets/img/upload1/下一步按钮.png");
     }
 </style>

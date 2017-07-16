@@ -59,7 +59,7 @@
             </div>
 
             <div>
-                <img src="../../../assets/img/上传1/中间墨线.png" height="6" width="843"/>
+                <img src="../../../assets/img/upload1/中间墨线.png" height="6" width="843"/>
             </div>
 
             <div id="form-variety">
@@ -127,7 +127,7 @@
             </div>
 
             <div>
-                <img src="../../../assets/img/上传1/中间墨线.png" height="6" width="843"/>
+                <img src="../../../assets/img/upload1/中间墨线.png" height="6" width="843"/>
             </div>
         </div>
     </div>

@@ -329,7 +329,7 @@
         margin: 5px 0px;
         width: 225px;
         height: 33px;
-        background-image: url("../../../../assets/img/上传1/书名什么的.png");
+        background-image: url("../../../../assets/img/upload1/书名什么的.png");
     }
 
     .ry-file-picture{
