@@ -278,7 +278,7 @@ const router = new VueRouter({
                     name:'mybook'
                 },
                 {
-                    path:'collection',
+                    path:'collection/page/:pageId',
                     component:collection,
                     name:'collection'
                 },
@@ -293,22 +293,22 @@ const router = new VueRouter({
                             name:'edit'
                         },
                         {
-                            path:'edit',
+                            path:'edit/page/:pageId',
                             component:edit,
                             name:'edit'
                         },
                         {
-                            path:'mark',
+                            path:'mark/page/:pageId',
                             component:mark,
                             name:'mark'
                         },
                         {
-                            path:'comment',
+                            path:'comment/page/:pageId',
                             component:comment,
                             name:'comment'
                         },
                         {
-                            path:'revise',
+                            path:'revise/page/:pageId',
                             component:revise,
                             name:'revise'
                         },

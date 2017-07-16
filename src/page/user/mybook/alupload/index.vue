@@ -50,7 +50,7 @@
         },
         methods:{
             show_edit1(index){
-                document.getElementsByClassName('show-edit1')[index].style.opacity = 0.5;
+                document.getElementsByClassName('show-edit1')[index].style.opacity = 0.9;
             },
             shut_edit1(index){
                 document.getElementsByClassName('show-edit1')[index].style.opacity = 0;
@@ -96,6 +96,7 @@
         height: 170px;
     }
     .j-alupload-p{
+        height: 20px;
         margin-top: 3px;
         margin-bottom: 15px;
         text-align: center;

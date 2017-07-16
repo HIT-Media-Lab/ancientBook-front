@@ -84,9 +84,7 @@
                 url: '/ancient_books/logout.action',
                 name:'登录',
                 show_m: false,
-
                 showloading: false,
-
                 login_url: '/ancient_books/login.action',
                 code_url: '/ancient_books/get_v_picture.action',
                 judge_code_url: '/ancient_books/get_v_picture.action',
