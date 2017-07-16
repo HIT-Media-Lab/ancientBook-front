@@ -4,17 +4,17 @@
             <img src="../assets/img/spot.png" class="j-spot" v-show="this.$route.name == 'upload1'">
             <span class="j-userbar-title">上传</span>
         </router-link>
-        <img src="../assets/img/spot.png" class="j-spot" v-show="this.$route.name==='mybook' || 'privatebook' || 'alupload'">
+        <img src="../assets/img/spot.png" class="j-spot" v-show="this.$route.name == 'mybook' || this.$route.name =='privatebook' || this.$route.name =='alupload'">
         <select class="j-userbar-title" v-model="mybook" @change="choose_mybook">
             <option selected class="j-option">我的古籍</option>
             <option class="j-option">私密古籍</option>
             <option class="j-option">已上传</option>
         </select>
         <router-link to="/user_info/collection/page/1">
-            <img src="../assets/img/spot.png" class="j-spot" v-show="this.$route.name==='collection'">
+            <img src="../assets/img/spot.png" class="j-spot" v-show="this.$route.name == 'collection'">
             <span class="j-userbar-title">我的收藏</span>
         </router-link>
-        <img src="../assets/img/spot.png" class="j-spot" v-show="this.$route.name==='edit'">
+        <img src="../assets/img/spot.png" class="j-spot" v-show="this.$route.name == 'edit'">
         <select class="j-userbar-title" v-model="my_collection" @change="choose_my_offer">
             <option selected class="j-option">我的贡献</option>
             <option class="j-option">本体编辑</option>
@@ -48,14 +48,18 @@
                 }
             },
             choose_my_offer(){
-                if (this.mybook == '我的古籍'){
-                    this.$router.push('/user_info/mybook');
-                }else if(this.mybook == '已上传'){
+                if (this.mybook == '我的贡献' || '本体编辑'){
                     this.$route.params.pageId = 1;
-                    this.$router.push({name: 'alupload', params: this.$route.params});
-                }else if (this.mybook == '私密古籍'){
+                    this.$router.push({name: 'edit', params: this.$route.params});
+                }else if(this.mybook == '本体标记'){
                     this.$route.params.pageId = 1;
-                    this.$router.push({name: 'privatebook', params: this.$route.params});
+                    this.$router.push({name: 'mark', params: this.$route.params});
+                }else if (this.mybook == '批注'){
+                    this.$route.params.pageId = 1;
+                    this.$router.push({name: 'comment', params: this.$route.params});
+                }else if (this.mybook == '修订'){
+                    this.$route.params.pageId = 1;
+                    this.$router.push({name: 'revise', params: this.$route.params});
                 }
             }
         }

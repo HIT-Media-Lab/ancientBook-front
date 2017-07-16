@@ -64,7 +64,7 @@
                 }
             },
             collection_pic_success(response){
-                let picture_id_url1 = this.picture_url + '?page_id=' + response.body.id;
+                let picture_id_url1 = this.picture_url + '?page=' + response.body.id;
                 document.getElementById(this.content[this.i].ancient_book_id).setAttribute("src", picture_id_url1);
                 this.i = this.i + 1;
 
