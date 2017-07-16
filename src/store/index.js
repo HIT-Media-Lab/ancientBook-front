@@ -122,12 +122,13 @@ const store = new Vuex.Store({
             }
         },
         book_summary:'',
-        upload_file:{
+        upload_file : [{
+            value : true,
             book_name : '',
             book_num : '',
-        },
-        images : [],
-        texts : [],
+            images : [],
+            texts : [],
+        }],
         text_name : [],
         upload1_info:{},
         create_character:{
