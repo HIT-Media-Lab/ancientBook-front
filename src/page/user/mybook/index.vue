@@ -17,15 +17,13 @@
                 <div class="j-mybook-recent-div" v-for="(item,index) in al_up_book">
                     <div  v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                         <div class="show-edit1">
-                            <img style="margin-left: 60px" src="../../../assets/img/白笔.png">
+                            <img style="margin-left: 60px" src="../../../assets/img/白笔.png" @click="">
                             <img src="../../../assets/img/叉.png">
                         </div>
                         <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo">
                     </div>
                     <p class="j-mybook-p" @click="go_to_bookinfo">{{item.standard_name}}</p>
                 </div>
-
-
 
 
 
@@ -87,11 +85,9 @@
         },
         methods: {
             show_edit1(index){
-                alert(index);
                 document.getElementsByClassName('show-edit1')[index].style.opacity = 0.5;
             },
             shut_edit1(index){
-                alert(index);
                 document.getElementsByClassName('show-edit1')[index].style.opacity = 0;
             },
             go_to_bookinfo(){
@@ -186,7 +182,7 @@
     }
     .j-mybook-recent-div{
         float: left;
-        margin-left: 60px;
+        margin-left: 70px;
         width: 120px;
         height: auto;
     }
