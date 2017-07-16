@@ -10,7 +10,7 @@
                     </div>
                     <img :id="item.ancient_book_id" class="j-alupload-img" @click="go_to_bookinfo">
                 </div>
-                <p class="j-alupload-p" @click="go_to_bookinfo">{{item.standard_name}}</p>
+                <p class="j-alupload-p" @click="go_to_bookinfo" :title="item.standard_name">{{item.standard_name}}</p>
             </div>
         </div>
         <page_button :max=this.total_page></page_button>
@@ -26,8 +26,16 @@
             page_button
         },
         created(){
+            this.content = [];
             let url = this.alupload_url + '?page_count=' + this.$route.params.pageId;
-            this.http_json(url, 'get', url, this.alup_success, this.alup_fail)
+            this.http_json(url, 'get', url, this.alup_success, this.alup_fail);
+        },
+        watch:{
+            $route(){
+                this.content = [];
+                let url = this.alupload_url + '?page_count=' + this.$route.params.pageId;
+                this.http_json(url, 'get', url, this.alup_success, this.alup_fail);
+            }
         },
         data(){
             return{
@@ -50,7 +58,7 @@
             alup_success(response){
                 this.total_page = response.body.total_page;
                 this.content = response.body.content;
-                for (let i = 0; i < response.body.length; i++){
+                for (let i = 0; i < response.body.content.length; i++){
                     let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.content[i].ancient_book_id;
                     this.http_json(item, 'get', item, this.up_page_success, this.alup_fail);
                 }
@@ -91,6 +99,9 @@
         margin-top: 3px;
         padding-bottom: 15px;
         text-align: center;
-
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 </style>

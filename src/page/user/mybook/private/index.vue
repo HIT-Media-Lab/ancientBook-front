@@ -10,7 +10,7 @@
                     </div>
                     <img :id="item.ancient_book_id" class="j-private-img" @click="go_to_bookinfo">
                 </div>
-                <p class="j-private-p" @click="go_to_bookinfo">{{item.standard_name}}</p>
+                <p class="j-private-p" @click="go_to_bookinfo" :title="item.standard_name">{{item.standard_name}}</p>
             </div>
         </div>
         <page_button :max=this.total_page></page_button>
@@ -26,8 +26,16 @@
             page_button
         },
         created(){
+            this.content = [];
             let url = this.private_url + '?page_count=' + this.$route.params.pageId;
-            this.http_json(url, 'get', url, this.private_success, this.private_fail)
+            this.http_json(url, 'get', url, this.private_success, this.private_fail);
+        },
+        watch:{
+            $route(){
+                this.content = [];
+                let url = this.private_url + '?page_count=' + this.$route.params.pageId;
+                this.http_json(url, 'get', url, this.private_success, this.private_fail);
+            }
         },
         data(){
             return{
@@ -91,6 +99,9 @@
         margin-top: 3px;
         padding-bottom: 15px;
         text-align: center;
-
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 </style>

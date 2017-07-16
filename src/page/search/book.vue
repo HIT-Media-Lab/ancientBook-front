@@ -8,7 +8,7 @@
                 </router-link>
                 <div class="j-book1-word">
                     <router-link to="/bookstore/book_info">
-                        <p class="j-book1-word1" >{{item.name}}</p>
+                        <p class="j-book1-word1" :title="item.name">{{item.name}}</p>
                     </router-link>
                     <p>{{item.book_info1}}</p>
                     <p>{{item.book_info2}}</p>
@@ -138,6 +138,10 @@
         margin-bottom: 20px;
         font-weight: 900;
         display: inline-block;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
     .j-book1-word1:hover{
         color: brown;

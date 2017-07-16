@@ -6,14 +6,11 @@
             <div class="j-mybook-recent-img">
                 <div class="j-mybook-recent-div" v-for="item in recent_mybook">
                     <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo">
-                    <p class="j-mybook-p" @click="go_to_bookinfo">{{item.standard_name}}</p>
+                    <p class="j-mybook-p" @click="go_to_bookinfo" :title="item.standard_name">{{item.standard_name}}</p>
                 </div>
             </div>
             <p class="j-mybook-recent-name">已上传</p>
             <div class="j-mybook-al-img">
-
-
-
                 <div class="j-mybook-recent-div" v-for="(item,index) in al_up_book">
                     <div  v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                         <div class="show-edit1">
@@ -22,11 +19,8 @@
                         </div>
                         <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo">
                     </div>
-                    <p class="j-mybook-p" @click="go_to_bookinfo">{{item.standard_name}}</p>
+                    <p class="j-mybook-p" @click="go_to_bookinfo" :title="item.standard_name">{{item.standard_name}}</p>
                 </div>
-
-
-
                 <div class="j-mybook-morelink" v-show="show_more1">
                     <span class="j-mybook-more" @click="go_to_more_upbook">更多</span>
                     <img src="../../../assets/img/more_logo.png" @click="go_to_more_upbook">
@@ -36,13 +30,13 @@
             <div class="j-mybook-al-img">
                 <div class="j-mybook-recent-div" v-for="item in private_book">
                     <div>
-                        <div class="show-edit2" v-on:mouseover="show_edit" v-on:mouseout="shut_edit">
+                        <div class="show-edit2" v-on:mouseover="show_edit2" v-on:mouseout="shut_edit2">
                             <img style="margin-left: 60px" src="../../../assets/img/白笔.png">
                             <img src="../../../assets/img/叉.png">
                         </div>
                         <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo" v-on:mouseover="show_edit" v-on:mouseout="shut_edit">
                     </div>
-                    <p class="j-mybook-p" @click="go_to_bookinfo">{{item.standard_name}}</p>
+                    <p class="j-mybook-p" @click="go_to_bookinfo" :title="item.standard_name">{{item.standard_name}}</p>
                 </div>
                 <div class="j-mybook-morelink" v-show="show_more2">
                     <span class="j-mybook-more" @click="go_to_more_privatebook">更多</span>
@@ -60,9 +54,12 @@
             recent_title
         },
         created(){
+            this.recent_mybook = [];
+            this.al_up_book = [];
+            this.private_book = [];
             this.http_json(this.recent_mybook_url, 'get', {}, this.recbook_success, this.recbook_fail);
             this.http_json(this.upload_book_url, 'get', {}, this.up_success, this.recbook_fail);
-            this.http_json(this.private_book_url, 'get', {}, this.private_success, this.recbook_fail)
+            this.http_json(this.private_book_url, 'get', {}, this.private_get_success, this.recbook_fail)
         },
         data(){
             return{
@@ -89,6 +86,12 @@
             },
             shut_edit1(index){
                 document.getElementsByClassName('show-edit1')[index].style.opacity = 0;
+            },
+            show_edit2(index){
+                document.getElementsByClassName('show-edit2')[index].style.opacity = 0.5;
+            },
+            shut_edit2(index){
+                document.getElementsByClassName('show-edit2')[index].style.opacity = 0;
             },
             go_to_bookinfo(){
                 this.$router.push({path: '/bookstore/book_info'});
@@ -120,15 +123,15 @@
                     this.http_json(item, 'get', item, this.success_page2, this.recbook_fail);
                 }
             },
-            private_success(response){
-                this.private_book = response.body;
-                if (response.body.length == 3){
+            private_get_success(response){
+                this.private_book = response.body.content;
+                if (response.body.content.length == 3){
                     this.show_more2 = true;
                 }else {
                     this.show_more2 = false;
                 }
-                for (let i = 0; i < response.body.length; i++){
-                    let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.private_book[i].ancient_book_id;
+                for (let a = 0; a < response.body.content.length; a++){
+                    let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.private_book[a].ancient_book_id;
                     this.http_json(item, 'get', item, this.success_page3, this.recbook_fail);
                 }
             },
@@ -188,7 +191,12 @@
     }
     .j-mybook-p{
         margin-top: 3px;
+        color: #0f0f0f;
         text-align: center;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
     .j-mybook-al-img{
         margin-top: 10px;

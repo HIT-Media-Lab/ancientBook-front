@@ -3,10 +3,11 @@
         <recent_title class="j-recent-bar" :title="this.title"></recent_title>
         <div v-for="item in recent_book" class="j-picture-name" >
             <img :id="item.id" class="j-picture" alt="最近古籍" @click="push_success()" >
-            <p style="color: #0f0f0f; text-align: center" @click="push_success()">{{item.name}}</p>
+            <p class="j-pic-p" @click="push_success()" :title="item.name">{{item.name}}</p>
         </div>
     </div>
 </template>
+
 
 <script>
     import recent_title from '../../component/noumenon-title.vue'
@@ -78,5 +79,13 @@
     .j-picture{
         width: 200px;
         height: 200px;
+    }
+    .j-pic-p{
+        color: #0f0f0f;
+        text-align: center;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 </style>
