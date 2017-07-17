@@ -1,7 +1,7 @@
 <template>
     <div class="all">
         <recent_title class="j-edit-bar" :title="'我的贡献/本体编辑' + '（共' + this.count + '条）'">
-            <select class="j-edit-select" v-model="sort" slot="children" @change="sort">
+            <select class="j-edit-select" v-model="sort_name" slot="children" @change="sort">
                 <option>全部本体</option>
                 <option>人物本体</option>
                 <option>文献本体</option>
@@ -68,7 +68,7 @@
                 total_page: 1,
                 count: 0,
                 content: [],
-                sort: '全部本体'
+                sort_name: '全部本体'
             }
         },
         methods:{
@@ -83,19 +83,19 @@
                     }else if (response.body.content[i].operation_type == 0){
                         edit_type = '编辑本体';
                     }
-                    if (response.body.content.noumenon_type == 1){
+                    if (response.body.content[i].noumenon_type == 1){
                         type = ' 【人物】';
-                    }else if (response.body.content.noumenon_type == 2){
+                    }else if (response.body.content[i].noumenon_type == 2){
                         type = ' 【文献】';
-                    }else if (response.body.content.noumenon_type == 3){
+                    }else if (response.body.content[i].noumenon_type == 3){
                         type = ' 【术语】';
-                    }else if (response.body.content.noumenon_type == 4){
+                    }else if (response.body.content[i].noumenon_type == 4){
                         type = ' 【时间】';
-                    }else if (response.body.content.noumenon_type == 5){
+                    }else if (response.body.content[i].noumenon_type == 5){
                         type = ' 【职官】';
-                    }else if (response.body.content.noumenon_type == 6){
+                    }else if (response.body.content[i].noumenon_type == 6){
                         type = ' 【机构】';
-                    }else if (response.body.content.noumenon_type == 7){
+                    }else if (response.body.content[i].noumenon_type == 7){
                         type = ' 【地名】';
                     }
                     this.content.push ({
@@ -112,41 +112,42 @@
             },
             sort(){
                 let type = 0;
-                if (this.sort == '全部本体'){
+                console.log(this.sort_name);
+                if (this.sort_name == '全部本体'){
                     this.$route.params.pageId = 1;
                     this.$route.params.content = '全部本体';
                     this.$router.push({name: 'edit', params:this.$route.params})
-                }else if (this.sort == '人物本体'){
+                }else if (this.sort_name == '人物本体'){
                     this.$route.params.pageId = 1;
                     this.$route.params.content = '人物本体';
                     this.$router.push({name: 'edit', params:this.$route.params});
                     type = 1
-                }else if (this.sort == '文献本体'){
+                }else if (this.sort_name == '文献本体'){
                     this.$route.params.pageId = 1;
                     this.$route.params.content = '文献本体';
                     this.$router.push({name: 'edit', params:this.$route.params});
                     type = 2
-                }else if (this.sort == '术语本体'){
+                }else if (this.sort_name == '术语本体'){
                     this.$route.params.pageId = 1;
                     this.$route.params.content = '术语本体';
                     this.$router.push({name: 'edit', params:this.$route.params});
                     type = 3
-                }else if (this.sort == '时间本体'){
+                }else if (this.sort_name == '时间本体'){
                     this.$route.params.pageId = 1;
                     this.$route.params.content = '时间本体';
                     this.$router.push({name: 'edit', params:this.$route.params});
                     type = 4
-                }else if (this.sort == '职官本体'){
+                }else if (this.sort_name == '职官本体'){
                     this.$route.params.pageId = 1;
                     this.$route.params.content = '职官本体';
                     this.$router.push({name: 'edit', params:this.$route.params});
                     type = 5
-                }else if (this.sort == '机构本体'){
+                }else if (this.sort_name == '机构本体'){
                     this.$route.params.pageId = 1;
                     this.$route.params.content = '机构本体';
                     this.$router.push({name: 'edit', params:this.$route.params});
                     type = 6
-                }else if (this.sort == '地名本体'){
+                }else if (this.sort_name == '地名本体'){
                     this.$route.params.pageId = 1;
                     this.$route.params.content = '地名本体';
                     this.$router.push({name: 'edit', params:this.$route.params});
@@ -162,9 +163,9 @@
                     let edit_type = '';
                     let type = '';
                     if (response.body.content[i].operation_type == 1){
-                        edit_type = '编辑本体';
-                    }else if (response.body.content[i].operation_type == 0){
                         edit_type = '创建本体';
+                    }else if (response.body.content[i].operation_type == 0){
+                        edit_type = '编辑本体';
                     }
                     if (this.$route.params.content == '人物本体'){
                         type = ' 【人物】';
@@ -182,11 +183,11 @@
                         type = ' 【地名】';
                     }
                     this.content.push ({
-                        standard_name: response.body.content.standard_name,
+                        standard_name: response.body.content[i].standard_name,
                         edit_type: edit_type,
-                        time: response.body.content.time,
+                        time: response.body.content[i].time,
                         noumenon_type: type,
-                        noumenon_id: response.body.content.noumenon_id
+                        noumenon_id: response.body.content[i].noumenon_id
                     })
                 }
             }
