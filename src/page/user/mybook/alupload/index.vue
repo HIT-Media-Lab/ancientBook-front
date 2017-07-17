@@ -2,11 +2,11 @@
     <div class="all">
         <recent_title class="j-alup-bar" :title="this.title"></recent_title>
         <div class="j-alup">
-            <div class="j-alupload-div" v-for="(item,index) in content">
+            <div class="j-alupload-div" v-for="(item,index) in content" :id = "index">
                 <div  v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                     <div class="show-edit1">
                         <img style="margin-left: 60px" src="../../../../assets/img/白笔.png" @click="">
-                        <img src="../../../../assets/img/叉.png">
+                        <img src="../../../../assets/img/叉.png" @click="">
                     </div>
                     <img :id="item.ancient_book_id" class="j-alupload-img" @click="go_to_bookinfo">
                 </div>

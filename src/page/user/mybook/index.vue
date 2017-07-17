@@ -11,11 +11,11 @@
             </div>
             <p class="j-mybook-recent-name">已上传</p>
             <div class="j-mybook-al-img">
-                <div class="j-mybook-recent-div" v-for="(item,index) in al_up_book">
-                    <div :id = "index" v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
+                <div class="j-mybook-recent-div" v-for="(item,index) in al_up_book" :id = "index">
+                    <div v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                         <div class="show-edit1">
                             <img style="margin-left: 60px" src="../../../assets/img/白笔.png" @click="">
-                            <img src="../../../assets/img/叉.png">
+                            <img src="../../../assets/img/叉.png" @click="">
                         </div>
                         <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo">
                     </div>
@@ -28,11 +28,11 @@
             </div>
             <p class="j-mybook-recent-name">私密古籍</p>
             <div class="j-mybook-al-img">
-                <div class="j-mybook-recent-div" v-for="(item,index) in private_book">
+                <div class="j-mybook-recent-div" v-for="(item,index) in private_book" :id = "index">
                     <div>
                         <div class="show-edit2" v-on:mouseover="show_edit2(index)" v-on:mouseout="shut_edit2(index)">
-                            <img style="margin-left: 60px" src="../../../assets/img/白笔.png">
-                            <img src="../../../assets/img/叉.png">
+                            <img style="margin-left: 60px" src="../../../assets/img/白笔.png" @click="">
+                            <img src="../../../assets/img/叉.png" @click="">
                         </div>
                         <img :id = "item.ancient_book_id + 's'" class="j-mybook-recent-img1" @click="go_to_bookinfo">
                     </div>

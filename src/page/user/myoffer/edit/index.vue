@@ -23,9 +23,9 @@
                 </thead>
                 <tbody>
                 <tr v-for="item in content"> <!--v-for循环数据里的数组数据-->
-                    <td class="j-edit-table" style="width: 400px">{{item.standard_name}} {{item.noumenon_type}}</td>
-                    <td class="j-edit-table" style="width: 200px">{{item.edit_type}}</td>
-                    <td class="j-edit-table" style="width: 200px">{{item.time}}</td>
+                    <td class="j-edit-table" style="width: 400px" :title="item.standard_name">{{item.standard_name}} {{item.noumenon_type}}</td>
+                    <td class="j-edit-table" style="width: 200px" :title="item.standard_name">{{item.edit_type}}</td>
+                    <td class="j-edit-table" style="width: 200px" :title="item.standard_name">{{item.time}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -51,6 +51,16 @@
                 this.sort();
             }
         },
+        watch:{
+            $route(){
+                if (this.$route.params.content == '全部本体'){
+                    let item = this.all_edit_url + '?page_count=' + this.$route.params.pageId;
+                    this.http_json(item, 'get', item, this.edit_all_success, this.edit_all_fail);
+                }else {
+                    this.sort();
+                }
+            }
+        },
         data(){
             return{
                 all_edit_url: '/ancient_books/get_noumenon_log_by_user.action',
@@ -69,9 +79,9 @@
                     let edit_type = '';
                     let type = '';
                     if (response.body.content[i].operation_type == 1){
-                        edit_type = '编辑本体';
-                    }else if (response.body.content[i].operation_type == 0){
                         edit_type = '创建本体';
+                    }else if (response.body.content[i].operation_type == 0){
+                        edit_type = '编辑本体';
                     }
                     if (response.body.content.noumenon_type == 1){
                         type = ' 【人物】';
@@ -89,11 +99,11 @@
                         type = ' 【地名】';
                     }
                     this.content.push ({
-                        standard_name: response.body.content.standard_name,
+                        standard_name: response.body.content[i].standard_name,
                         edit_type: edit_type,
-                        time: response.body.content.time,
+                        time: response.body.content[i].time,
                         noumenon_type: type,
-                        noumenon_id: response.body.content.noumenon_id
+                        noumenon_id: response.body.content[i].noumenon_id
                     })
                 }
             },

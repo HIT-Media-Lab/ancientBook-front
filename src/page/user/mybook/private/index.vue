@@ -2,11 +2,11 @@
     <div class="all">
         <recent_title class="j-private-bar" :title="this.title"></recent_title>
         <div class="j-private">
-            <div class="j-private-div" v-for="(item,index) in content">
+            <div class="j-private-div" v-for="(item,index) in content" :id = "index">
                 <div  v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                     <div class="show-edit1">
                         <img style="margin-left: 60px" src="../../../../assets/img/白笔.png" @click="">
-                        <img src="../../../../assets/img/叉.png">
+                        <img src="../../../../assets/img/叉.png" @click="">
                     </div>
                     <img :id="item.ancient_book_id" class="j-private-img" @click="go_to_bookinfo">
                 </div>
