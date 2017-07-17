@@ -151,7 +151,6 @@ import  mybook from  './page/user/mybook/index.vue'
 import  alupload from  './page/user/mybook/alupload/index.vue'
 import  privatebook from './page/user/mybook/private/index.vue'
 import  collection from  './page/user/mycollection/index.vue'
-import  offer from  './page/user/myoffer/edit/index.vue'
 import  edit  from  './page/user/myoffer/edit/index.vue'
 import  mark from  './page/user/myoffer/mark/index.vue'
 import  ancientbook from  './component/ancientbook.vue'
@@ -283,36 +282,24 @@ const router = new VueRouter({
                     name:'collection'
                 },
                 {
-                    path:'offer',
-                    component:offer,
-                    name:'offer',
-                    children: [
-                        {
-                            path:'',
-                            component:edit,
-                            name:'edit'
-                        },
-                        {
-                            path:'edit/page/:pageId',
-                            component:edit,
-                            name:'edit'
-                        },
-                        {
-                            path:'mark/page/:pageId',
-                            component:mark,
-                            name:'mark'
-                        },
-                        {
-                            path:'comment/page/:pageId',
-                            component:comment,
-                            name:'comment'
-                        },
-                        {
-                            path:'revise/page/:pageId',
-                            component:revise,
-                            name:'revise'
-                        },
-                    ]
+                    path:'edit/:content/page/:pageId',
+                    component:edit,
+                    name:'edit'
+                },
+                {
+                    path:'mark/:content/page/:pageId',
+                    component:mark,
+                    name:'mark'
+                },
+                {
+                    path:'comment/:content/page/:pageId',
+                    component:comment,
+                    name:'comment'
+                },
+                {
+                    path:'revise/:content/page/:pageId',
+                    component:revise,
+                    name:'revise'
                 },
                 {
                     path:'alupload/page/:pageId',

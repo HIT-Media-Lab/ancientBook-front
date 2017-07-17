@@ -11,7 +11,7 @@
             <input placeholder=" 请输入关键字搜索" class="search-input" v-model="sort_box" v-on:keydown.enter="search1">
             <button class="search-btn" @click="search1">搜 索</button>
             <img src="../assets/img/头像.png" class="user-img" @click="show_login">
-            <span class="user-name" @click="show_login" v-model="name">{{name}}</span>
+            <span class="user-name" @click="show_login" v-model="user_name">{{user_name}}</span>
             <div class="down-box"  v-show="sort_box.length!=0">
                 <ul>
                     <li class="sort-box1" @click="search1()" style="color: #0f0f0f">
@@ -73,16 +73,15 @@
           bus.$on('toggleLoading', (show) =>{
                 this.showloading = show;
             });
-          bus.$on('change_name',(name) =>{
-              this.name = name;
+          bus.$on('change_name',(item) =>{
+              this.user_name = item;
           });
         },
         data(){
             return{
-
+                user_name: '登录',
                 sort_box:'',
                 url: '/ancient_books/logout.action',
-                name:'登录',
                 show_m: false,
                 showloading: false,
                 login_url: '/ancient_books/login.action',
