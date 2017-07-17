@@ -13,9 +13,11 @@
         </div>
 
         <div class="width950 height650 center ry-scroll">
-            <div id="ry-pictures" class="ry-picture-box" v-for="item in upload_file[this.array_index].images">
-                <img :src="item.picture" class="ry-picture-view" @mouseover="view_picture()"/>
-                <p class="picture-names" style="text-align: center">{{item.pic_name}}</p>
+            <div id="ry-pictures" v-for="item in upload_file[this.book_index].images" style="display: inline-block">
+                <div class="ry-picture-box" v-show="item.show">
+                    <img :src="item.picture" class="ry-picture-view" @mouseover="view_picture()"/>
+                    <p class="picture-names" style="text-align: center">{{item.pic_name}}</p>
+                </div>
             </div>
             <div class="ry-picture-box">
                 <a href="javascript:;" class="ry-add">
@@ -25,25 +27,23 @@
         </div>
 
         <!--底按鈕欄-->
-        <div class="width1000 center">
-            <div class="ry-bottom-bar">
-                <button class="float-right ry-btn-next-page">下一卷</button>
-                <button class="float-right ry-btn-go">GO</button>
-                <div class="float-right ry-page">
-                    <input class="ry-input-page">
-                    <span>/</span>
-                    <span>80</span>
-                </div>
-                <button class="float-right ry-btn-last-page">上一卷</button>
-                <button class="ry-btn-last-page" @click="last_book">上一冊</button>
-                <div style="display: inline-block" class="ry-page">
-                    <input class="ry-input-page">
-                    <span>/</span>
-                    <span>80</span>
-                </div>
-                <button class="ry-btn-go">GO</button>
-                <button class="ry-btn-next-page" @click="next_book">下一冊</button>
+        <div class="width1000 center ry-bottom-bar">
+            <button class="float-right ry-btn-next-page" @click="next_volume">下一卷</button>
+            <button class="float-right ry-btn-go" @click="go_volume">GO</button>
+            <div class="float-right ry-page">
+                <input id="ry-volume-page" class="ry-input-page" v-model="this.volume_bind">
+                <span>/</span>
+                <span>80</span>
             </div>
+            <button class="float-right ry-btn-last-page" @click="last_volume">上一卷</button>
+            <button class="ry-btn-last-page" @click="last_book">上一冊</button>
+            <div style="display: inline-block" class="ry-page">
+                <input id="ry-book-page" class="ry-input-page" v-model="this.book_bind">
+                <span>/</span>
+                <span>80</span>
+            </div>
+            <button class="ry-btn-go" @click="go_book">GO</button>
+            <button class="ry-btn-next-page" @click="next_book">下一冊</button>
         </div>
 
         <div class="width1000 center">
@@ -87,7 +87,10 @@
 
         data() {
             return{
-                array_index : 0,
+                book_bind : 1,
+                volume_bind : 1,
+                book_index : 0,
+                volume_index : 0,
                 index : 0,
                 hover_modal : false,
                 varieties_item : {},
@@ -108,7 +111,7 @@
         },
 
         mounted : function () {
-
+            this.set_show()
         },
 
         beforeRouteLeave(to, from, next) {
@@ -128,15 +131,15 @@
                 this.hover_modal = true;
                 var src = event.currentTarget.src;
                 document.getElementById("ry-hover-picture").src = src;
-                for (var i = 0; i < this.upload_file[this.array_index].images.length; i++) {
-                    var key = this.upload_file[this.array_index].images[i].picture;
+                for (var i = 0; i < this.upload_file[this.book_index].images.length; i++) {
+                    var key = this.upload_file[this.book_index].images[i].picture;
                     if (src == key) {
                         var index = i;
                         this.index = index;
                         break;
                     }
                 }
-                document.getElementById("ry-hover-text").innerText = this.upload_file[this.array_index].texts[index]
+                document.getElementById("ry-hover-text").innerText = this.upload_file[this.book_index].texts[index]
             },
 
 
@@ -146,7 +149,7 @@
             change_picture(e) {
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)return;
-                this.change_image(files,this.array_index);
+                this.change_image(files,this.book_index);
             },
 
             change_image(file,index) {
@@ -164,6 +167,7 @@
                     var size = a/1000;
                     reader.onload = function(e) {
                         vm.$set(vm.upload_file[index].images,vm.index,{
+                            show:true,
                             picture:e.target.result,
                             pic_name:name,
                             pic_size:size
@@ -201,7 +205,7 @@
             onFileChange(e) {
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)return;
-                this.createImage(files,this.array_index);
+                this.createImage(files,this.book_index);
             },
 
             createImage(file,index) {
@@ -219,6 +223,7 @@
                     var size = a/1000;
                     reader.onload = function(e) {
                         vm.upload_file[index].images.push({
+                            show:true,
                             picture:e.target.result,
                             pic_name:name,
                             pic_size:size
@@ -259,13 +264,77 @@
              * 上下册翻册
              */
             last_book() {
-                this.array_index = this.array_index - 1;
+                if (this.book_index == 0) {
+                    alert("这是第一册")
+                }
+                else{
+                    this.book_index = this.book_index - 1;
+                    this.book_bind = this.book_bind - 1;
+                }
             },
             next_book() {
-                this.array_index = this.array_index + 1;
+                if (this.book_index == this.upload_file.length) {
+                    alert("这是最后一册")
+                }
+                else{
+                    this.book_index = this.book_index + 1;
+                    this.book_bind = this.book_bind + 1;
+                }
+            },
+            go_book() {
+                var page = parseInt(document.getElementById("ry-book-page").value);
+                this.book_index = page-1;
+                this.book_bind = page;
+                alert(this.book_index)
             },
 
 
+            /**
+             * 上下卷翻卷
+             */
+            set_show() {
+                for (var i = 0; i < this.upload_file[this.book_index].images.length; i++) {
+                    var name = this.upload_file[this.book_index].images[i].pic_name;
+                    var first = name.charAt(1);
+                    var second = name.charAt(2);
+                    var third = name.charAt(3);
+                    var str = first + second + third;
+                    var key = parseInt(str) - 1;
+                    if (key == this.volume_index) {
+                        this.upload_file[this.book_index].images[i].show = true;
+                    }
+                    else{
+                        this.upload_file[this.book_index].images[i].show = false;
+                    }
+                }
+            },
+
+            last_volume() {
+                if (this.volume_index == 0) {
+                    alert("这是第一卷")
+                }
+                else{
+                    this.volume_index = this.volume_index - 1;
+                    this.volume_bind = this.volume_bind - 1;
+                    this.set_show();
+                }
+            },
+            next_volume() {
+                if (this.volume_index == this.upload_file[this.book_index].images.length) {
+                    alert("这是最后一卷");
+                }
+                else{
+                    this.volume_index = this.volume_index + 1;
+                    this.volume_bind = this.volume_bind + 1;
+                    this.set_show();
+                }
+            },
+            go_volume() {
+                var page = parseInt(document.getElementById("ry-volume-page").value);
+                this.volume_index = page-1;
+                this.volume_bind = page;
+                this.set_show();
+            },
 
 
             /**

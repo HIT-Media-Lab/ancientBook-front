@@ -156,13 +156,13 @@
                 <img src="../../../../assets/img/upload1/中间墨线.png" height="6" width="843"/>
             </div>
 
-            <div id="form-edition">
+            <div id="form-edition" v-for="(item,index) in edition_item.edition_responsibility">
                 <div class="row">
                     <div class="col-md-2 float-right">
-                        <button id="btn-add-edition" class="ry-btn-add">添加</button>
+                        <button id="btn-add-edition" class="ry-btn-add" @click="add_new_box(index)" v-show="edition_item.edition_responsibility[index].value">添加</button>
                     </div>
                     <div class="col-md-2 float-right">
-                        <button id="btn-delete-edition" class="ry-btn-del">刪除</button>
+                        <button id="btn-delete-edition" class="ry-btn-del" v-show="edition_item.edition_responsibility[index].value">刪除</button>
                     </div>
                 </div>
 
@@ -172,7 +172,7 @@
                         <label>責任開始時間:</label>
                     </div>
                     <div class="col-md-4">
-                        <input readonly @click="open_birth()" v-model="edition_item.edition_responsibility.begin_time">
+                        <input readonly @click="open_birth()" v-model="item.begin_time">
                     </div>
 
                     <div class="col-md-2">
@@ -180,14 +180,14 @@
                         <label>責任結束時間:</label>
                     </div>
                     <div class="col-md-4">
-                        <input readonly @click="open_dead()" v-model="edition_item.edition_responsibility.end_time">
+                        <input readonly @click="open_dead()" v-model="item.end_time">
                     </div>
                 </div>
 
                 <div class="row">
                     <label class="col-md-2">責任地點：</label>
                     <div class="col-md-4">
-                        <input readonly @click="open_location()" v-model="edition_item.edition_responsibility.location">
+                        <input readonly @click="open_location()" v-model="item.location">
                     </div>
 
                     <div class="col-md-2">
@@ -195,7 +195,7 @@
                         <label>責任者名稱:</label>
                     </div>
                     <div class="col-md-4">
-                        <input readonly @click="open_character()" v-model="edition_item.edition_responsibility.person">
+                        <input readonly @click="open_character()" v-model="item.person">
                     </div>
                 </div>
 
@@ -205,7 +205,7 @@
                         <label>責任者類型：</label>
                     </div>
                     <div class="col-md-4">
-                        <select id="ry-e-type">
+                        <select class="ry-e-type">
                             <option>不详</option>
                             <option>责任人</option>
                             <option>责任机构</option>
@@ -217,7 +217,7 @@
                         <label>責任行為：</label>
                     </div>
                     <div class="col-md-4">
-                        <select id="ry-e-action">
+                        <select class="ry-e-action">
                             <option v-for="item in menu_nineteen">{{item.chinese_name}}</option>
                         </select>
                     </div>
@@ -229,7 +229,7 @@
                         <label>確定性：</label>
                     </div>
                     <div class="col-md-4">
-                        <select id="ry-e-confirm">
+                        <select class="ry-e-confirm">
                             <option>不详</option>
                             <option>确定</option>
                             <option>題</option>
@@ -240,7 +240,7 @@
                 <div class="row">
                     <label class="col-md-2">責任說明：</label>
                     <div class="col-md-4">
-                        <input v-model="edition_item.edition_responsibility.explain" id="ry-input-responsibility">
+                        <input v-model="item.explain" id="ry-input-responsibility">
                     </div>
                 </div>
 
@@ -270,6 +270,7 @@
 
         data() {
             return{
+                index : 0,
                 search_person:'/ancient_books/get_person_list_by_name.action',
                 search_location:'/ancient_books/get_location_list_by_name.action',
                 time_modal_1 : false,
@@ -317,7 +318,8 @@
                     version_banxin_content : '',
                     version_youshuwuer : '',
                     version_youwujiazhu  : '',
-                    edition_responsibility : {
+                    edition_responsibility : [{
+                        value : true,
                         location : '',
                         location_id : '',
                         person : '',
@@ -332,7 +334,7 @@
                         confirm : '',
                         type : '',
                         level : 2,
-                    }
+                    }]
                 },
             }
         },
@@ -351,7 +353,7 @@
         },
 
         mounted : function () {
-            this.default_selections_edition()
+            this.default_selections_edition();
         },
 
         beforeRouteLeave (to, from, next) {
@@ -362,6 +364,31 @@
         },
 
         methods : {
+            /**
+             * 添加新册
+             */
+            add_new_box(p) {
+                this.edition_item.edition_responsibility[p].value = false;
+                this.edition_item.edition_responsibility.push({
+                    value : true,
+                    location : '',
+                    location_id : '',
+                    person : '',
+                    person_id : '',
+                    begin_time : '',
+                    begin_time_id : '',
+                    end_time : '',
+                    end_time_id :'',
+                    action : '',
+                    action_value : '',
+                    explain : '',
+                    confirm : '',
+                    type : '',
+                    level : 2,
+                });
+            },
+
+
             /**
              * 责任开始时间
              */
@@ -678,15 +705,24 @@
                 var comment = document.getElementById("ry-e-comment");
                 var comment_index = comment.selectedIndex;
                 this.edition_item.version_youwujiazhu = comment_index + 1;
-                var type = document.getElementById("ry-e-type");
-                var type_index = type.selectedIndex;
-                this.edition_item.edition_responsibility.type = type_index + 1;
-                var action = document.getElementById("ry-e-action");
-                var action_index = action.selectedIndex;
-                this.edition_item.edition_responsibility.action = action_index + 1;
-                var confirm = document.getElementById("ry-e-confirm");
-                var confirm_index = confirm.selectedIndex;
-                this.edition_item.edition_responsibility.confirm = confirm_index + 1;
+
+                var types = document.getElementsByClassName("ry-e-type");
+                for (var i = 0; i < types.length; i++) {
+                    var type_index = types[i].selectedIndex;
+                    this.edition_item.edition_responsibility[i].type = type_index + 1;
+                }
+
+                var actions = document.getElementsByClassName("ry-e-action");
+                for (var j = 0; j < actions.length; j++) {
+                    var action_index = actions[j].selectedIndex;
+                    this.edition_item.edition_responsibility[j].action = action_index + 1;
+                }
+
+                var confirms = document.getElementsByClassName("ry-e-confirm");
+                for (var k = 0; k < confirms.length; k++) {
+                    var confirm_index = confirms[k].selectedIndex;
+                    this.edition_item.edition_responsibility[k].confirm = confirm_index + 1;
+                }
             },
 
             /**
@@ -711,12 +747,21 @@
                 book.selectedIndex = this.edition_item.version_shukou - 1;
                 var comment = document.getElementById("ry-e-comment");
                 comment.selectedIndex = this.edition_item.version_youwujiazhu - 1;
-                var type = document.getElementById("ry-e-type");
-                type.selectedIndex = this.edition_item.edition_responsibility.type - 1;
-                var action = document.getElementById("ry-e-action");
-                action.selectedIndex = this.edition_item.edition_responsibility.action - 1;
-                var confirm = document.getElementById("ry-e-confirm");
-                confirm.selectedIndex = this.edition_item.edition_responsibility.confirm - 1;
+
+                var types = document.getElementsByClassName("ry-e-type");
+                for (var i = 0; i < types.length; i ++) {
+                    types[i].selectedIndex = this.edition_item.edition_responsibility[i].type - 1;
+                }
+
+                var actions = document.getElementsByClassName("ry-e-action");
+                for (var k = 0; k < actions.length; k ++) {
+                    actions[k].selectedIndex = this.edition_item.edition_responsibility[k].action - 1;
+                }
+
+                var confirms = document.getElementsByClassName("ry-e-confirm");
+                for (var j = 0; j < confirms.length; j ++) {
+                    confirms[j].selectedIndex = this.edition_item.edition_responsibility[j].confirm - 1;
+                }
             },
         },
 

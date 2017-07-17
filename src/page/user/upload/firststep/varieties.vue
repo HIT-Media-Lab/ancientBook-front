@@ -82,13 +82,13 @@
                 <img src="../../../../assets/img/upload1/中间墨线.png" height="6" width="843"/>
             </div>
 
-            <div id="form-variety">
+            <div id="form-variety" v-for="(item,index) in varieties_item.varieties_responsibility">
                 <div class="row">
                     <div class="col-md-2 float-right">
-                        <button id="btn-add-copy" class="ry-btn-add">添加</button>
+                        <button id="btn-add-copy" class="ry-btn-add" @click="add_new_box(index)" v-show="varieties_item.varieties_responsibility[index].value">添加</button>
                     </div>
                     <div class="col-md-2 float-right">
-                        <button id="btn-delete-copy" class="ry-btn-del">刪除</button>
+                        <button id="btn-delete-copy" class="ry-btn-del" v-show="varieties_item.varieties_responsibility[index].value">刪除</button>
                     </div>
                 </div>
 
@@ -98,7 +98,7 @@
                         <label>責任開始時間:</label>
                     </div>
                     <div class="col-md-4">
-                        <input readonly @click="open_birth()" v-model="varieties_item.varieties_responsibility.begin_time">
+                        <input readonly @click="open_birth()" v-model="item.begin_time">
                     </div>
 
                     <div class="col-md-2">
@@ -106,14 +106,14 @@
                         <label>責任結束時間:</label>
                     </div>
                     <div class="col-md-4">
-                        <input readonly @click="open_dead()" v-model="varieties_item.varieties_responsibility.end_time">
+                        <input readonly @click="open_dead()" v-model="item.end_time">
                     </div>
                 </div>
 
                 <div class="row">
                     <label class="col-md-2">責任地點：</label>
                     <div class="col-md-4">
-                        <input readonly @click="open_location()" v-model="varieties_item.varieties_responsibility.location">
+                        <input readonly @click="open_location()" v-model="item.location">
                     </div>
 
                     <div class="col-md-2">
@@ -121,7 +121,7 @@
                         <label>責任者名稱:</label>
                     </div>
                     <div class="col-md-4">
-                        <input readonly @click="open_character()" v-model="varieties_item.varieties_responsibility.person">
+                        <input readonly @click="open_character()" v-model="item.person">
                     </div>
                 </div>
 
@@ -131,7 +131,7 @@
                         <label>責任者類型：</label>
                     </div>
                     <div class="col-md-4">
-                        <select id="ry-v-type">
+                        <select class="ry-v-type">
                             <option>不详</option>
                             <option>责任人</option>
                             <option>责任机构</option>
@@ -143,7 +143,7 @@
                         <label>責任行為：</label>
                     </div>
                     <div class="col-md-4">
-                        <select id="ry-v-action">
+                        <select class="ry-v-action">
                             <option v-for="item in menu_nine">{{item.chinese_name}}</option>
                         </select>
                     </div>
@@ -155,7 +155,7 @@
                         <label>確定性：</label>
                     </div>
                     <div class="col-md-4">
-                        <select id="ry-v-confirm">
+                        <select class="ry-v-confirm">
                             <option>不详</option>
                             <option>确定</option>
                             <option>題</option>
@@ -166,7 +166,7 @@
                 <div class="row">
                     <label class="col-md-2">責任說明：</label>
                     <div class="col-md-4">
-                        <input v-model="varieties_item.varieties_responsibility.explain" id="ry-input-responsibility">
+                        <input v-model="item.explain" id="ry-input-responsibility">
                     </div>
                 </div>
             </div>
@@ -195,6 +195,7 @@
 
         data() {
             return{
+                index : 0,
                 search_person:'/ancient_books/get_person_list_by_name.action',
                 search_location:'/ancient_books/get_location_list_by_name.action',
                 time_modal_1 : false,
@@ -220,7 +221,8 @@
                     type_shu : '',
                     type_summary : '',
                     literature_standard_name : '',
-                    varieties_responsibility : {
+                    varieties_responsibility : [{
+                        value : true,
                         location : '',
                         location_id : '',
                         person : '',
@@ -235,7 +237,7 @@
                         confirm : '',
                         type : '',
                         level : 1,
-                    }
+                    }]
                 },
             }
         },
@@ -258,6 +260,31 @@
         },
 
         methods : {
+            /**
+             * 添加新册
+             */
+            add_new_box(p) {
+                this.varieties_item.varieties_responsibility[p].value = false;
+                this.varieties_item.varieties_responsibility.push({
+                    value : true,
+                    location : '',
+                    location_id : '',
+                    person : '',
+                    person_id : '',
+                    begin_time : '',
+                    begin_time_id : '',
+                    end_time : '',
+                    end_time_id :'',
+                    action : '',
+                    action_value : '',
+                    explain : '',
+                    confirm : '',
+                    type : '',
+                    level : 1,
+                });
+            },
+
+
             /**
              * 责任开始时间
              */
@@ -448,15 +475,24 @@
                 var shu = document.getElementById("ry-select-s");
                 var shu_index = shu.selectedIndex;
                 this.varieties_item.type_shu = shu_index + 1;
-                var type = document.getElementById("ry-v-type");
-                var type_index = type.selectedIndex;
-                this.varieties_item.varieties_responsibility.type = type_index + 1;
-                var action = document.getElementById("ry-v-action");
-                var action_index = action.selectedIndex;
-                this.varieties_item.varieties_responsibility.action = action_index + 1;
-                var confirm = document.getElementById("ry-v-confirm");
-                var confirm_index = confirm.selectedIndex;
-                this.varieties_item.varieties_responsibility.confirm = confirm_index + 1;
+
+                var types = document.getElementsByClassName("ry-v-type");
+                for (var i = 0; i < types.length; i++) {
+                    var type_index = types[i].selectedIndex;
+                    this.varieties_item.varieties_responsibility[i].type = type_index + 1;
+                }
+
+                var actions = document.getElementsByClassName("ry-v-action");
+                for (var j = 0; j < actions.length; j++) {
+                    var action_index = actions[j].selectedIndex;
+                    this.varieties_item.varieties_responsibility[j].action = action_index + 1;
+                }
+
+                var confirms = document.getElementsByClassName("ry-v-confirm");
+                for (var k = 0; k < confirms.length; k++) {
+                    var confirm_index = confirms[k].selectedIndex;
+                    this.varieties_item.varieties_responsibility[k].confirm = confirm_index + 1;
+                }
             },
 
             /**
@@ -473,12 +509,21 @@
                 lei.selectedIndex = this.varieties_item.type_lei - 1;
                 var shu = document.getElementById("ry-select-s");
                 shu.selectedIndex = this.varieties_item.type_shu - 1;
-                var type = document.getElementById("ry-v-type");
-                type.selectedIndex = this.varieties_item.varieties_responsibility.type - 1;
-                var action = document.getElementById("ry-v-action");
-                action.selectedIndex = this.varieties_item.varieties_responsibility.action - 1;
-                var confirm = document.getElementById("ry-v-confirm");
-                confirm.selectedIndex = this.varieties_item.varieties_responsibility.confirm - 1;
+
+                var types = document.getElementsByClassName("ry-v-type");
+                for (var i = 0; i < types.length; i ++) {
+                    types[i].selectedIndex = this.varieties_item.varieties_responsibility[i].type - 1;
+                }
+
+                var actions = document.getElementsByClassName("ry-v-action");
+                for (var k = 0; k < actions.length; k ++) {
+                    actions[k].selectedIndex = this.varieties_item.varieties_responsibility[k].action - 1;
+                }
+
+                var confirms = document.getElementsByClassName("ry-v-confirm");
+                for (var j = 0; j < confirms.length; j ++) {
+                    confirms[j].selectedIndex = this.varieties_item.varieties_responsibility[j].confirm - 1;
+                }
             },
         },
     }

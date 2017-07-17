@@ -55,7 +55,7 @@
                     <span class="col-md-2">状态</span>
                 </div>
                 <img src="../../../../assets/img/upload2/形状 1.png" height="1" width="750"/>
-                <div class="row" v-for="item in images">
+                <div class="row" v-for="item in upload_file[index].images">
                     <span class="col-md-5"><img src="../../../../assets/img/upload2/1.png" height="40" width="30"/>{{item.pic_name}}</span>
                     <span class="col-md-3">{{item.pic_size}}KB</span>
                     <span class="col-md-2">册1</span>
@@ -102,7 +102,7 @@
         },
 
         mounted : function () {
-            this.get_index()
+
         },
 
         beforeRouteLeave(to, from, next) {
@@ -123,16 +123,16 @@
             /**
              * 添加上传图片
              */
-            get_index() {
-                var vm = this;
-                var divs = document.getElementsByClassName("ry-upload-two");
-                for (var i = 0; i < divs.length; i++) {
-                    divs[i].setAttribute("data-i",i);
-                    divs[i].addEventListener("click",function(e) {
-                        vm.index = this.getAttribute("data-i");
-                    },false);
-                }
-            },
+//            get_index() {
+//                var vm = this;
+//                var divs = document.getElementsByClassName("ry-upload-two");
+//                for (var i = 0; i < divs.length; i++) {
+//                    divs[i].setAttribute("data-i",i);
+//                    divs[i].addEventListener("click",function(e) {
+//                        vm.index = this.getAttribute("data-i");
+//                    },false);
+//                }
+//            },
 
             onFileChange(e) {
                 var files = e.target.files || e.dataTransfer.files;
@@ -156,6 +156,7 @@
                     var size = a/1000;
                     reader.onload = function(e) {
                         vm.upload_file[index].images.push({
+                            show:true,
                             picture:e.target.result,
                             pic_name:name,
                             pic_size:size
@@ -332,15 +333,29 @@
              * 添加新册
              */
             add_new_book(p) {
-                this.get_index();
-                this.upload_file[p].value = false;
-                this.upload_file.push({
-                    value:true,
-                    book_name : '',
-                    book_num : '',
-                    images : [],
-                    texts : [],
-                });
+                if (this.upload_file[this.index].book_num == '') {
+                    alert("请填写册号")
+                }
+                else if (this.upload_file[this.index].book_name == '') {
+                    alert("请填写册名")
+                }
+                else if (this.upload_file[this.index].images.length == 0) {
+                    alert("请选择要上传的图片文件")
+                }
+                else if (this.upload_file[this.index].texts.length == 0) {
+                    alert("请选择要上传的文本文件")
+                }
+                else{
+                    this.upload_file[p].value = false;
+                    this.upload_file.push({
+                        value:true,
+                        book_name : '',
+                        book_num : '',
+                        images : [],
+                        texts : [],
+                    });
+                    this.index = this.index + 1;
+                }
             },
 
 

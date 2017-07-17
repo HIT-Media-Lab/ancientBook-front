@@ -33,7 +33,8 @@ const store = new Vuex.Store({
             duplicate_level : 1,
             duplicate_complete : 1,
             duplicate_attachment : '',
-            copy_responsibility : {
+            copy_responsibility : [{
+                value:true,
                 location_id : '',
                 person_id : '',
                 begin_time : '',
@@ -44,7 +45,7 @@ const store = new Vuex.Store({
                 confirm : 1,
                 type : 1,
                 level : 4,
-            }
+            }]
         },
         edition_contents:{
             version_volume : '',
@@ -68,7 +69,8 @@ const store = new Vuex.Store({
             version_banxin_content : '',
             version_youshuwuer : '',
             version_youwujiazhu  : 1,
-            edition_responsibility : {
+            edition_responsibility : [{
+                value : true,
                 location_id : '',
                 person_id : '',
                 begin_time : '',
@@ -79,12 +81,13 @@ const store = new Vuex.Store({
                 confirm : 1,
                 type : 1,
                 level : 2,
-            }
+            }]
         },
         impression_contents:{
             printing_type : 1,
             printing_number : '',
-            impression_responsibility : {
+            impression_responsibility : [{
+                value : true,
                 location_id : '',
                 person_id : '',
                 begin_time : '',
@@ -95,7 +98,7 @@ const store = new Vuex.Store({
                 confirm : 1,
                 type : 1,
                 level : 3,
-            }
+            }]
         },
         varieties_contents:{
             type_name : '',
@@ -108,7 +111,8 @@ const store = new Vuex.Store({
             type_shu : 1,
             type_summary : '',
             literature_standard_name : '',
-            varieties_responsibility : {
+            varieties_responsibility : [{
+                value : true,
                 location_id : '',
                 person_id : '',
                 begin_time : '',
@@ -119,7 +123,7 @@ const store = new Vuex.Store({
                 confirm : 1,
                 type : 1,
                 level : 1,
-            }
+            }]
         },
         book_summary:'',
         upload_file : [{
