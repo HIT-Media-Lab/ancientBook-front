@@ -10,7 +10,7 @@
                 </div>
             </div>
             <p class="j-mybook-recent-name">已上传</p>
-            <div class="j-mybook-al-img">
+            <div class="j-mybook-al-img1">
                 <div class="j-mybook-recent1-div" v-for="(item,index) in al_up_book">
                     <div v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                         <div class="show-edit1">
@@ -27,7 +27,7 @@
                 </div>
             </div>
             <p class="j-mybook-recent-name">私密古籍</p>
-            <div class="j-mybook-al-img">
+            <div class="j-mybook-al-img2">
                 <div class="j-mybook-recent2-div" v-for="(item,index) in private_book">
                     <div>
                         <div class="show-edit2" v-on:mouseover="show_edit2(index)" v-on:mouseout="shut_edit2(index)">
@@ -95,7 +95,9 @@
             },
 
             delete_alup(index){
-                document.getElementsByClassName('j-mybook-recent1-div')[index].style.visibility = 'hidden';
+                let parent = document.getElementsByClassName('j-mybook-al-img1')[0];
+                let child = document.getElementsByClassName('j-mybook-recent1-div')[index];
+                parent.removeChild(child);
             },
 
             go_to_bookinfo(){
@@ -218,7 +220,12 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
-    .j-mybook-al-img{
+    .j-mybook-al-img1{
+        margin-top: 10px;
+        width: auto;
+        height: 198px;
+    }
+    .j-mybook-al-img2{
         margin-top: 10px;
         width: auto;
         height: 198px;
