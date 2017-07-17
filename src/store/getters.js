@@ -41,12 +41,6 @@ export default {
     get_upload_file:state => {
         return state.upload_file
     },
-    get_images:state => {
-        return state.images
-    },
-    get_texts:state => {
-        return state.texts
-    },
     get_text_name:state => {
         return state.text_name
     },

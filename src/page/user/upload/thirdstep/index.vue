@@ -13,7 +13,7 @@
         </div>
 
         <div class="width950 height650 center ry-scroll">
-            <div id="ry-pictures" class="ry-picture-box" v-for="item in images">
+            <div id="ry-pictures" class="ry-picture-box" v-for="item in upload_file[this.array_index].images">
                 <img :src="item.picture" class="ry-picture-view" @mouseover="view_picture()"/>
                 <p class="picture-names" style="text-align: center">{{item.pic_name}}</p>
             </div>
@@ -35,14 +35,14 @@
                     <span>80</span>
                 </div>
                 <button class="float-right ry-btn-last-page">上一卷</button>
-                <button class="ry-btn-last-page">上一冊</button>
+                <button class="ry-btn-last-page" @click="last_book">上一冊</button>
                 <div style="display: inline-block" class="ry-page">
                     <input class="ry-input-page">
                     <span>/</span>
                     <span>80</span>
                 </div>
                 <button class="ry-btn-go">GO</button>
-                <button class="ry-btn-next-page">下一冊</button>
+                <button class="ry-btn-next-page" @click="next_book">下一冊</button>
             </div>
         </div>
 
@@ -87,6 +87,7 @@
 
         data() {
             return{
+                array_index : 0,
                 index : 0,
                 hover_modal : false,
                 varieties_item : {},
@@ -95,10 +96,8 @@
                 copy_item : {},
                 upload_one_info : {},
                 summary : {},
-                images : [],
-                texts : [],
                 page : 1,
-                upload_file : {},
+                upload_file : [],
                 responsibility_info : [],
                 add_book_obj : {},
             }
@@ -106,8 +105,6 @@
 
         created : function () {
             this.upload_file = this.$store.getters.get_upload_file;
-            this.images = this.$store.getters.get_images;
-            this.texts = this.$store.getters.get_texts;
         },
 
         mounted : function () {
@@ -115,8 +112,7 @@
         },
 
         beforeRouteLeave(to, from, next) {
-            this.$store.commit("get_images",this.images);
-            this.$store.commit("get_texts",this.texts);
+            this.$store.commit("get_upload_file",this.upload_file);
             next();
         },
 
@@ -132,15 +128,15 @@
                 this.hover_modal = true;
                 var src = event.currentTarget.src;
                 document.getElementById("ry-hover-picture").src = src;
-                for (var i = 0; i < this.images.length; i++) {
-                    var key = this.images[i].picture;
+                for (var i = 0; i < this.upload_file[this.array_index].images.length; i++) {
+                    var key = this.upload_file[this.array_index].images[i].picture;
                     if (src == key) {
                         var index = i;
                         this.index = index;
                         break;
                     }
                 }
-                document.getElementById("ry-hover-text").innerText = this.texts[index]
+                document.getElementById("ry-hover-text").innerText = this.upload_file[this.array_index].texts[index]
             },
 
 
@@ -150,10 +146,10 @@
             change_picture(e) {
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)return;
-                this.change_image(files);
+                this.change_image(files,this.array_index);
             },
 
-            change_image(file) {
+            change_image(file,index) {
                 if (typeof FileReader === 'undefined') {
                     alert('您的浏览器不支持图片上传，请升级您的浏览器');
                     return false;
@@ -167,7 +163,7 @@
                     var a = file[i].size;
                     var size = a/1000;
                     reader.onload = function(e) {
-                        vm.$set(vm.images,vm.index,{
+                        vm.$set(vm.upload_file[index].images,vm.index,{
                             picture:e.target.result,
                             pic_name:name,
                             pic_size:size
@@ -205,10 +201,10 @@
             onFileChange(e) {
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)return;
-                this.createImage(files);
+                this.createImage(files,this.array_index);
             },
 
-            createImage(file) {
+            createImage(file,index) {
                 if (typeof FileReader === 'undefined') {
                     alert('您的浏览器不支持图片上传，请升级您的浏览器');
                     return false;
@@ -222,7 +218,7 @@
                     var a = file[i].size;
                     var size = a/1000;
                     reader.onload = function(e) {
-                        vm.images.push({
+                        vm.upload_file[index].images.push({
                             picture:e.target.result,
                             pic_name:name,
                             pic_size:size
@@ -260,8 +256,14 @@
 
 
             /**
-             * 拖动图片
+             * 上下册翻册
              */
+            last_book() {
+                this.array_index = this.array_index - 1;
+            },
+            next_book() {
+                this.array_index = this.array_index + 1;
+            },
 
 
 
