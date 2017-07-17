@@ -12,7 +12,7 @@
             <p class="j-mybook-recent-name">已上传</p>
             <div class="j-mybook-al-img">
                 <div class="j-mybook-recent-div" v-for="(item,index) in al_up_book">
-                    <div  v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
+                    <div :id = "index" v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                         <div class="show-edit1">
                             <img style="margin-left: 60px" src="../../../assets/img/白笔.png" @click="">
                             <img src="../../../assets/img/叉.png">

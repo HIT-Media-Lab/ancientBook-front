@@ -38,7 +38,7 @@
         },
         methods:{
             choose_mybook(){
-                if (this.mybook == '我的古籍'){
+                if (this.mybook == '最近古籍'){
                     this.$router.push('/user_info/mybook');
                     this.mybook = '我的古籍';
                     this.my_collection = '我的贡献';
