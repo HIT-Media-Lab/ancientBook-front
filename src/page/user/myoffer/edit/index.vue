@@ -1,7 +1,7 @@
 <template>
     <div class="all">
         <recent_title class="j-edit-bar" :title="'我的贡献/本体编辑' + '（共' + this.count + '条）'">
-            <select class="j-edit-select" v-model="sort_name" slot="children" @change="sort">
+            <select class="j-edit-select" v-model="sort_name" slot="children" @change="go_to_sort">
                 <option>全部本体</option>
                 <option>人物本体</option>
                 <option>文献本体</option>
@@ -44,7 +44,9 @@
             page_button
         },
         created(){
+            this.sort_name = this.$route.params.content;
             if (this.$route.params.content == '全部本体'){
+                this.content = [];
                 let item = this.all_edit_url + '?page_count=' + this.$route.params.pageId;
                 this.http_json(item, 'get', item, this.edit_all_success, this.edit_all_fail);
             }else {
@@ -54,6 +56,7 @@
         watch:{
             $route(){
                 if (this.$route.params.content == '全部本体'){
+                    this.content = [];
                     let item = this.all_edit_url + '?page_count=' + this.$route.params.pageId;
                     this.http_json(item, 'get', item, this.edit_all_success, this.edit_all_fail);
                 }else {
@@ -68,6 +71,7 @@
                 total_page: 1,
                 count: 0,
                 content: [],
+                type: 0,
                 sort_name: '全部本体'
             }
         },
@@ -110,8 +114,8 @@
             edit_all_fail(){
 
             },
-            sort(){
-                let type = 0;
+            go_to_sort(){
+                this.content = [];
                 console.log(this.sort_name);
                 if (this.sort_name == '全部本体'){
                     this.$route.params.pageId = 1;
@@ -121,41 +125,44 @@
                     this.$route.params.pageId = 1;
                     this.$route.params.content = '人物本体';
                     this.$router.push({name: 'edit', params:this.$route.params});
-                    type = 1
+                    this.type = 1
                 }else if (this.sort_name == '文献本体'){
                     this.$route.params.pageId = 1;
                     this.$route.params.content = '文献本体';
                     this.$router.push({name: 'edit', params:this.$route.params});
-                    type = 2
+                    this.type = 2
                 }else if (this.sort_name == '术语本体'){
                     this.$route.params.pageId = 1;
                     this.$route.params.content = '术语本体';
                     this.$router.push({name: 'edit', params:this.$route.params});
-                    type = 3
+                    this.type = 3
                 }else if (this.sort_name == '时间本体'){
                     this.$route.params.pageId = 1;
                     this.$route.params.content = '时间本体';
                     this.$router.push({name: 'edit', params:this.$route.params});
-                    type = 4
+                    this.type = 4
                 }else if (this.sort_name == '职官本体'){
                     this.$route.params.pageId = 1;
                     this.$route.params.content = '职官本体';
                     this.$router.push({name: 'edit', params:this.$route.params});
-                    type = 5
+                    this.type = 5
                 }else if (this.sort_name == '机构本体'){
                     this.$route.params.pageId = 1;
                     this.$route.params.content = '机构本体';
                     this.$router.push({name: 'edit', params:this.$route.params});
-                    type = 6
+                    this.type = 6
                 }else if (this.sort_name == '地名本体'){
                     this.$route.params.pageId = 1;
                     this.$route.params.content = '地名本体';
                     this.$router.push({name: 'edit', params:this.$route.params});
-                    type = 7
+                    this.type = 7
                 }
-                let url = this.sort_edit_url + '?type=' + type + '&&page_count=' + 1;
+            },
+            sort(){
+                let url = this.sort_edit_url + '?type=' + this.type + '&&page_count=' + this.$route.params.pageId;
                 this.http_json(url, 'get', url, this.edit_sort_success, this.edit_all_fail)
             },
+
             edit_sort_success(response){
                 this.count = response.body.count;
                 this.total_page = response.body.total_page;

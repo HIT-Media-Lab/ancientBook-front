@@ -11,11 +11,11 @@
             </div>
             <p class="j-mybook-recent-name">已上传</p>
             <div class="j-mybook-al-img">
-                <div class="j-mybook-recent-div" v-for="(item,index) in al_up_book" :id = "index">
+                <div class="j-mybook-recent1-div" v-for="(item,index) in al_up_book">
                     <div v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                         <div class="show-edit1">
                             <img style="margin-left: 60px" src="../../../assets/img/白笔.png" @click="">
-                            <img src="../../../assets/img/叉.png" @click="">
+                            <img src="../../../assets/img/叉.png" @click="delete_alup(index)">
                         </div>
                         <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo">
                     </div>
@@ -28,7 +28,7 @@
             </div>
             <p class="j-mybook-recent-name">私密古籍</p>
             <div class="j-mybook-al-img">
-                <div class="j-mybook-recent-div" v-for="(item,index) in private_book" :id = "index">
+                <div class="j-mybook-recent2-div" v-for="(item,index) in private_book">
                     <div>
                         <div class="show-edit2" v-on:mouseover="show_edit2(index)" v-on:mouseout="shut_edit2(index)">
                             <img style="margin-left: 60px" src="../../../assets/img/白笔.png" @click="">
@@ -93,6 +93,11 @@
             shut_edit2(index){
                 document.getElementsByClassName('show-edit2')[index].style.opacity = 0;
             },
+
+            delete_alup(index){
+                document.getElementsByClassName('j-mybook-recent1-div')[index].style.visibility = 'hidden';
+            },
+
             go_to_bookinfo(){
                 this.$router.push({path: '/bookstore/book_info'});
             },
@@ -187,6 +192,18 @@
         height: 170px;
     }
     .j-mybook-recent-div{
+        float: left;
+        margin-left: 70px;
+        width: 120px;
+        height: auto;
+    }
+    .j-mybook-recent1-div{
+        float: left;
+        margin-left: 70px;
+        width: 120px;
+        height: auto;
+    }
+    .j-mybook-recent2-div{
         float: left;
         margin-left: 70px;
         width: 120px;
