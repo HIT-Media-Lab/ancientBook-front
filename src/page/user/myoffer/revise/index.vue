@@ -1,6 +1,6 @@
 <template>
     <div class="all">
-        <recent_title class="j-revise-bar" :title="'我的贡献/本体标记' + '（共' + this.count + '条）'"></recent_title>
+        <recent_title class="j-revise-bar" :title="'我的贡献/修订' + '（共' + this.count + '条）'"></recent_title>
         <div class="j-revise">
             <table class="table table-bordered j-table-box">
                 <thead>
@@ -57,17 +57,6 @@
                 this.total_page = response.body.total_page;
                 this.count = response.body.count;
                 this.content = response.body.content;
-//                for (let i = 0; i < response.body.content.length; i++){
-//                    this.content.push ({
-//                        standard_name: response.body.content[i].noumenon_name,
-//                        page_id: response.body.content[i].page_id,
-//                        mark_id: response.body.content[i].mark_id,
-//                        time: response.body.content[i].time,
-//                        target: response.body.content[i].target,
-//                        noumenon_type: type,
-//                        noumenon_id: response.body.content[i].noumenon_id
-//                    })
-//                }
             },
             revise_all_fail(){
 
