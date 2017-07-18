@@ -105,8 +105,8 @@
                 this.$router.push({name: 'alupload', params: this.$route.params});
             },
             recbook_success(response){
-                this.recent_mybook = response.body;
-                for (let i = 0; i < response.body.length; i++){
+                this.recent_mybook = response.body.content;
+                for (let i = 0; i < response.body.content.length; i++){
                     let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.recent_mybook[i].ancient_book_id;
                     this.http_json(item, 'get', item, this.success_page1, this.recbook_fail);
                 }
