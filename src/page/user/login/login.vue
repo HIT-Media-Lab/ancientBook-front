@@ -28,8 +28,6 @@ import store from '../../../store'
 
      data(){
          return{
-//             hhh:'scsc',
-//             gg: [],
              sort_box:'',
              login_url: '/ancient_books/login.action',
              code_url: '/ancient_books/get_v_picture.action',

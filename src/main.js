@@ -552,20 +552,22 @@ router.beforeEach( (to, from, next) => {
     let user_acl = router.app.$store.getters.ACL_user;
     let guest_acl = router.app.$store.getters.ACL_guest;
 
-    let user_id = JSON.parse(localStorage.getItem('user'));
-    if (user_id == undefined) {
-        localStorage.setItem('user',JSON.stringify("guest"));
-        user_id = 'guest';
-    }
-    if (user_id == 'guest'){
-        bus.$emit('change_name', '登录');
-    }else {
-        router.app.$http.get('/ancient_books/get_user_info.action').then(function (response) {
+    router.app.$http.get('/ancient_books/get_user_info.action').then(function (response) {
+        if (response.body.result == 1){
+            if (response.body.su == 1){
+                localStorage.setItem('user',JSON.stringify("admin"));
+            }else if(response.body.su == 0){
+                localStorage.setItem('user',JSON.stringify("user"));
+            }
             bus.$emit('change_name', response.body.name);
-        },function () {
+        }else if (response.body.result == 0){
+            localStorage.setItem('user',JSON.stringify("guest"));
+            bus.$emit('change_name', '登录');
+        }
+    },function () {
 
-        })
-    }
+    });
+
     let flag = false;
     if (user_id == 'guest'){
         for (let i = 0; i < guest_acl.length; i++) {

@@ -3,13 +3,13 @@
         <p class="j-book-word" v-model="search_number">为您找到{{search_number}}条相关的古籍信息</p>
         <div class="j-searched-book" v-for="item in content">
             <div class="j-shi1">
-                <router-link to="/bookstore/book_info">
-                    <img :id="item.id" alt="搜索古籍" class="j-book-img1">
-                </router-link>
+                <a>
+                    <img :id="item.id" alt="搜索古籍" class="j-book-img1" @click="go_to_book(item.id)">
+                </a>
                 <div class="j-book1-word">
-                    <router-link to="/bookstore/book_info">
-                        <p class="j-book1-word1" :title="item.name">{{item.name}}</p>
-                    </router-link>
+                    <a>
+                        <p class="j-book1-word1" :title="item.name" @click="go_to_book(item.id)">{{item.name}}</p>
+                    </a>
                     <p>{{item.book_info1}}</p>
                     <p>{{item.book_info2}}</p>
                     <p>{{item.book_info3}}</p>
@@ -18,7 +18,6 @@
             </div>
         </div>
         <page_button :max=this.total_page></page_button>
-        <!--<button @click="hhh">sdfsdf</button>-->
     </div>
 </template>
 
@@ -107,6 +106,10 @@
             },
             fail_pic(){
 
+            },
+            go_to_book(id){
+                this.$store.commit('push_ancient_book_id', id);
+                this.$router.push({path: '/bookstore/book_info'});
             }
         }
     }

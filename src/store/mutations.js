@@ -68,5 +68,8 @@ export default {
     },
     push_search_content(state,item){
         state.search_content = item;
+    },
+    push_ancient_book_id(state,item){
+        state.ancient_book_id = item;
     }
 }

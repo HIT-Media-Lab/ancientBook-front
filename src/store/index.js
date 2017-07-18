@@ -177,7 +177,9 @@ const store = new Vuex.Store({
 
         sort_item:{},
         sort_item_name:{},
-        search_content: ''
+        search_content: '',
+
+        ancient_book_id: ''
     },
     getters,
     mutations,

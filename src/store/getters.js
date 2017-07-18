@@ -64,6 +64,9 @@ export default {
     },
     get_search_content: state => {
         return state.search_content
+    },
+    get_ancient_book_id: state => {
+        return state.ancient_book_id
     }
 
 
