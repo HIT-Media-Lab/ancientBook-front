@@ -67,7 +67,11 @@ export default {
     },
     get_ancient_book_id: state => {
         return state.ancient_book_id
-    }
+    },
+    get_build_place:state => {
+    return state.create_place
+},
+
 
 
 }

@@ -147,10 +147,10 @@
 
             /*朝代下拉框*/
             success_menu(response){
-                for(let i = 0; i < response.body.g.length; i++){
+                for(let i = 0; i < response.body.length; i++){
                     this.menu_data.push({
-                        item_1_id:response.body.g[i].item_1_id,
-                        chinese_name:response.body.g[i].chinese_name,
+                        item_1_id:response.body[i].item_1_id,
+                        chinese_name:response.body[i].chinese_name,
                     })
                 }
                 console.log('this.menu_data:'+JSON.stringify(this.menu_data));
@@ -235,6 +235,10 @@
                 this.time_data.time_id = response.body.id;
                 this.time_data.standard_name = this.time_object.standard_name;
                 this.$emit('success_time',this.time_data);
+                this.selected_1.option='';
+                this.selected_2.option='';
+                this.selected_3.option='';
+                this.selected_4.option='';
                 console.log('this.time_data:'+JSON.stringify(this.time_data));
              },
 

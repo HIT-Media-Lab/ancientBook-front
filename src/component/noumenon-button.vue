@@ -8,7 +8,7 @@
 <script>
  export default{
      props:['noumenon_number'],
-     methods:{
+         methods:{
          goto_edit(p){
              let id = this.$route.params.nouId;
              if (p === 1){   //人物
@@ -37,7 +37,7 @@
 
              } else if (p === 7){//地名
 
-                 this.$router.push({name:'off_edit',nouId:id})
+                 this.$router.push({name:'pla_edit',nouId:id})
              }
          }
      }

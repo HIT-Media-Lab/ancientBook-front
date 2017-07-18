@@ -70,49 +70,49 @@
                 <p class="zxwspan-length">子：</p>
                 <p class="zxwspan-length zxw-null" v-if="son.length === 0">不详</p>
                 <template v-else>
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in son" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="son.length > 1">;</span></button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in son" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="son.length > 1"> ;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">女：</p>
                 <p class="zxwspan-length zxw-null" v-if="daughter.length === 0">不详</p>
                 <template v-else>
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in daughter" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="daughter.length > 1">;</span></button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in daughter" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="daughter.length > 1"> ;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">兄弟：</p>
                 <p class="zxwspan-length zxw-null" v-if="brother.length === 0">不详</p>
                 <template v-else>
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in brother" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="brother.length > 1">;</span></button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in brother" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="brother.length > 1"> ;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">姐妹：</p>
                 <p class="zxwspan-length zxw-null" v-if="sister.length === 0">不详</p>
                 <template v-else>
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in sister" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="sister.length > 1">;</span></button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in sister" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="sister.length > 1"> ;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">师：</p>
                 <p class="zxwspan-length zxw-null" v-if="teacher.length === 0">不详</p>
                 <template v-else>
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in teacher" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="teacher.length > 1">;</span></button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in teacher" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="teacher.length > 1"> ;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">学生：</p>
                 <p class="zxwspan-length zxw-null" v-if="student.length === 0">不详</p>
                 <template v-else>
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in student" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="student.length > 1">;</span></button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in student" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="student.length > 1"> ;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">友：</p>
                 <p class="zxwspan-length zxw-null" v-if="friend.length === 0">不详</p>
                 <template v-else>
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in friend" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="friend.length > 1">;</span></button>
+                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in friend" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="friend.length > 1"> ;</span></button>
                 </template>
             </div>
 
