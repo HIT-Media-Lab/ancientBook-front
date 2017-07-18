@@ -123,18 +123,7 @@
             /**
              * 添加上传图片
              */
-//            get_index() {
-//                var vm = this;
-//                var divs = document.getElementsByClassName("ry-upload-two");
-//                for (var i = 0; i < divs.length; i++) {
-//                    divs[i].setAttribute("data-i",i);
-//                    divs[i].addEventListener("click",function(e) {
-//                        vm.index = this.getAttribute("data-i");
-//                    },false);
-//                }
-//            },
-
-            onFileChange(e) {
+             onFileChange(e) {
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)return;
                 this.createImage(files,this.index);

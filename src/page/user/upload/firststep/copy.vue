@@ -49,13 +49,13 @@
                 <img src="../../../../assets/img/upload1/中间墨线.png" height="6" width="843"/>
             </div>
 
-            <div id="form-copy" v-for="(item,index) in copy_item.copy_responsibility">
+            <div class="form-copy" v-for="(item,index) in copy_item.copy_responsibility">
                 <div class="row">
                     <div class="col-md-2 float-right">
-                        <button id="btn-add-copy" class="ry-btn-add" @click="add_new_box(index)" v-show="copy_item.copy_responsibility[index].value">添加</button>
+                        <button id="btn-add-copy" class="ry-btn-add" @click="add_new_box(index)" v-show="copy_item.copy_responsibility[index].value_add">添加</button>
                     </div>
                     <div class="col-md-2 float-right">
-                        <button id="btn-delete-copy" class="ry-btn-del" v-show="copy_item.copy_responsibility[index].value">刪除</button>
+                        <button id="btn-delete-copy" class="ry-btn-del" @click="del_new_box(index)" v-show="copy_item.copy_responsibility[index].value_del">刪除</button>
                     </div>
                 </div>
 
@@ -184,7 +184,8 @@
                     duplicate_complete : '',
                     duplicate_attachment : '',
                     copy_responsibility : [{
-                        value : true,
+                        value_add : true,
+                        value_del : false,
                         location : '',
                         location_id : '',
                         person : '',
@@ -213,7 +214,7 @@
         },
 
         beforeRouteLeave (to, from, next) {
-            this.copy_item.copy_responsibility.action_value = document.getElementById("ry-c-action").options[document.getElementById("ry-c-action").selectedIndex].text;
+            this.copy_item.copy_responsibility[0].action_value = document.getElementsByClassName("ry-c-action")[0].options[document.getElementById("ry-c-action").selectedIndex].text;
             this.$store.commit("get_copy_contents",this.copy_item);
             this.selections_copy();
             next();
@@ -223,12 +224,26 @@
 
         methods : {
             /**
-             * 添加新册
+             * 获得责任数组指数
+             */
+            get_index() {
+                var divs = document.getElementsByClassName("form-copy");
+                for (var i = 0; i < divs.length; i++) {
+                    divs[i].setAttribute("data-i", i);
+                }
+                this.index = event.currentTarget.parentNode.parentNode.parentNode.getAttribute("data-i");
+            },
+
+
+            /**
+             * 添加责任信息
              */
             add_new_box(p) {
-                this.copy_item.copy_responsibility[p].value = false;
+                this.copy_item.copy_responsibility[p].value_add = false;
+                this.copy_item.copy_responsibility[p].value_del = false;
                 this.copy_item.copy_responsibility.push({
-                    value : true,
+                    value_add : true,
+                    value_del : true,
                     location : '',
                     location_id : '',
                     person : '',
@@ -248,15 +263,33 @@
 
 
             /**
+             * 删除责任信息
+             */
+            del_new_box(p) {
+                if (p == 1) {
+                    this.copy_item.copy_responsibility[p-1].value_add = true;
+                    this.copy_item.copy_responsibility[p-1].value_del = false;
+                }
+                else{
+                    this.copy_item.copy_responsibility[p-1].value_add = true;
+                    this.copy_item.copy_responsibility[p-1].value_del = true;
+                }
+                this.copy_item.copy_responsibility.pop();
+            },
+
+
+            /**
              * 责任开始时间
              */
             open_birth() {
+                this.get_index();
+                alert(this.index);
                 this.time_modal_1 = true;
             },
 
             birth_time(p) {
-                this.copy_item.copy_responsibility.begin_time_id = p.time_id;
-                this.copy_item.copy_responsibility.begin_time = p.standard_name;
+                this.copy_item.copy_responsibility[this.index].begin_time_id = p.time_id;
+                this.copy_item.copy_responsibility[this.index].begin_time = p.standard_name;
                 this.close_birth();
             },
 
@@ -268,12 +301,13 @@
              * 责任结束时间
              */
             open_dead() {
+                this.get_index();
                 this.time_modal_2 = true;
             },
 
             dead_time(q) {
-                this.copy_item.copy_responsibility.end_time_id = q.time_id;
-                this.copy_item.copy_responsibility.end_time = q.standard_name;
+                this.copy_item.copy_responsibility[this.index].end_time_id = q.time_id;
+                this.copy_item.copy_responsibility[this.index].end_time = q.standard_name;
                 this.close_dead();
             },
 
@@ -286,12 +320,13 @@
              * 责任地点
              */
             open_location() {
+                this.get_index();
                 this.location_modal = true;
             },
 
             add_location(p) {
-                this.copy_item.copy_responsibility.location_id = p.noumenon_id;
-                this.copy_item.copy_responsibility.location = p.standard_name;
+                this.copy_item.copy_responsibility[this.index].location_id = p.noumenon_id;
+                this.copy_item.copy_responsibility[this.index].location = p.standard_name;
             },
 
             close_location(){
@@ -303,12 +338,13 @@
              * 责任者名称
              */
             open_character(){
+                this.get_index();
                 this.character_modal = true;
             },
 
             add_character(p){
-                this.copy_item.copy_responsibility.person_id = p.noumenon_id;
-                this.copy_item.copy_responsibility.person = p.standard_name;
+                this.copy_item.copy_responsibility[this.index].person_id = p.noumenon_id;
+                this.copy_item.copy_responsibility[this.index].person = p.standard_name;
             },
 
             close_character(){
