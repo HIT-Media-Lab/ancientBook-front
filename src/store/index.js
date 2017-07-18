@@ -21,8 +21,8 @@ const store = new Vuex.Store({
             'book_varieties','book_edition','book_impression',
             'book_copy','sort_book','search_index','search_book',
             'search_noumenon','modify_info','user_info',
-            'alupload','privatebooks','collection','offer','mark',
-            'ancientbook','comment','revise','chacheck','edit',
+            'alupload','privatebook','collection','offer',
+            'ancientbook','comment','revise','edit','mark',
             'build','charactertwo','characterthree','placetwo','placethree','institutiontwo','institutionthree'],
         acl_admin:['404','admin','modify_info'],
         acl_guest:['login', '404'],
@@ -33,7 +33,9 @@ const store = new Vuex.Store({
             duplicate_level : 1,
             duplicate_complete : 1,
             duplicate_attachment : '',
-            copy_responsibility : {
+            copy_responsibility : [{
+                value_add:true,
+                value_del:false,
                 location_id : '',
                 person_id : '',
                 begin_time : '',
@@ -44,7 +46,7 @@ const store = new Vuex.Store({
                 confirm : 1,
                 type : 1,
                 level : 4,
-            }
+            }]
         },
         edition_contents:{
             version_volume : '',
@@ -68,7 +70,9 @@ const store = new Vuex.Store({
             version_banxin_content : '',
             version_youshuwuer : '',
             version_youwujiazhu  : 1,
-            edition_responsibility : {
+            edition_responsibility : [{
+                value_add : true,
+                value_del : false,
                 location_id : '',
                 person_id : '',
                 begin_time : '',
@@ -79,12 +83,14 @@ const store = new Vuex.Store({
                 confirm : 1,
                 type : 1,
                 level : 2,
-            }
+            }]
         },
         impression_contents:{
             printing_type : 1,
             printing_number : '',
-            impression_responsibility : {
+            impression_responsibility : [{
+                value_add : true,
+                value_del : false,
                 location_id : '',
                 person_id : '',
                 begin_time : '',
@@ -95,7 +101,7 @@ const store = new Vuex.Store({
                 confirm : 1,
                 type : 1,
                 level : 3,
-            }
+            }]
         },
         varieties_contents:{
             type_name : '',
@@ -108,7 +114,9 @@ const store = new Vuex.Store({
             type_shu : 1,
             type_summary : '',
             literature_standard_name : '',
-            varieties_responsibility : {
+            varieties_responsibility : [{
+                value_add : true,
+                value_del : false,
                 location_id : '',
                 person_id : '',
                 begin_time : '',
@@ -119,16 +127,16 @@ const store = new Vuex.Store({
                 confirm : 1,
                 type : 1,
                 level : 1,
-            }
+            }]
         },
         book_summary:'',
-        upload_file:{
+        upload_file : [{
+            value : true,
             book_name : '',
             book_num : '',
-        },
-        images : [],
-        picture_name : [],
-        texts : [],
+            images : [],
+            texts : [],
+        }],
         text_name : [],
         upload1_info:{},
         create_character:{
@@ -169,12 +177,6 @@ const store = new Vuex.Store({
             friend_standard_name:[],
         },
 
-        create_one_selection:0,
-
-        sort_item:{},
-        sort_item_name:{},
-        search_content: '',
-
         create_place:{
             standard_name:'',
             location_name:'',
@@ -198,6 +200,14 @@ const store = new Vuex.Store({
             l_location_standard_name:'',
             seat_standard_name:[]
         },
+
+        create_one_selection:0,
+
+        sort_item:{},
+        sort_item_name:{},
+        search_content: '',
+
+        ancient_book_id: ''
     },
     getters,
     mutations,

@@ -151,7 +151,6 @@ import  mybook from  './page/user/mybook/index.vue'
 import  alupload from  './page/user/mybook/alupload/index.vue'
 import  privatebook from './page/user/mybook/private/index.vue'
 import  collection from  './page/user/mycollection/index.vue'
-import  offer from  './page/user/myoffer/edit/index.vue'
 import  edit  from  './page/user/myoffer/edit/index.vue'
 import  mark from  './page/user/myoffer/mark/index.vue'
 import  ancientbook from  './component/ancientbook.vue'
@@ -283,49 +282,37 @@ const router = new VueRouter({
                     name:'mybook'
                 },
                 {
-                    path:'collection',
+                    path:'collection/page/:pageId',
                     component:collection,
                     name:'collection'
                 },
                 {
-                    path:'offer',
-                    component:offer,
-                    name:'offer',
-                    children: [
-                        {
-                            path:'',
-                            component:edit,
-                            name:'edit'
-                        },
-                        {
-                            path:'edit',
-                            component:edit,
-                            name:'edit'
-                        },
-                        {
-                            path:'mark',
-                            component:mark,
-                            name:'mark'
-                        },
-                        {
-                            path:'comment',
-                            component:comment,
-                            name:'comment'
-                        },
-                        {
-                            path:'revise',
-                            component:revise,
-                            name:'revise'
-                        },
-                    ]
+                    path:'edit/:content/page/:pageId',
+                    component:edit,
+                    name:'edit'
                 },
                 {
-                    path:'alupload',
+                    path:'mark/:content/page/:pageId',
+                    component:mark,
+                    name:'mark'
+                },
+                {
+                    path:'comment/:content/page/:pageId',
+                    component:comment,
+                    name:'comment'
+                },
+                {
+                    path:'revise/page/:pageId',
+                    component:revise,
+                    name:'revise'
+                },
+                {
+                    path:'alupload/page/:pageId',
                     component:alupload,
                     name:'alupload'
                 },
                 {
-                    path:'privatebook',
+                    path:'privatebook/page/:pageId',
                     component:privatebook,
                     name:'privatebook'
                 },
@@ -602,57 +589,60 @@ router.beforeEach( (to, from, next) => {
     let user_acl = router.app.$store.getters.ACL_user;
     let guest_acl = router.app.$store.getters.ACL_guest;
 
-    let user_id = JSON.parse(localStorage.getItem('user'));
-    if (user_id == undefined) {
-        localStorage.setItem('user',JSON.stringify("guest"));
-        user_id = 'guest';
-    }
-    if (user_id == 'guest'){
-        bus.$emit('change_name', '登录');
-    }else {
-        router.app.$http.get('/ancient_books/get_user_info.action').then(function (response) {
+    router.app.$http.get('/ancient_books/get_user_info.action').then(function (response) {
+        if (response.body.result == 1){
+            if (response.body.su == 1){
+                localStorage.setItem('user',JSON.stringify("admin"));
+            }else if(response.body.su == 0){
+                localStorage.setItem('user',JSON.stringify("user"));
+            }
             bus.$emit('change_name', response.body.name);
-        },function () {
+        }else if (response.body.result == 0){
+            localStorage.setItem('user',JSON.stringify("guest"));
+            bus.$emit('change_name', '登录');
+        }
 
-        })
-    }
-    let flag = false;
-    if (user_id == 'guest'){
-        for (let i = 0; i < guest_acl.length; i++) {
-            if (to.name == guest_acl[i]) {
-                console.log(to.name);
+        let user_id = JSON.parse(localStorage.getItem('user'));
+        let flag = false;
+        if (user_id == 'guest'){
+            for (let i = 0; i < guest_acl.length; i++) {
+                if (to.name == guest_acl[i]) {
+                    console.log(to.name);
+                    flag = true;
+                    next();
+                    break;
+                }
+            }
+            if (!flag) {
                 flag = true;
-                next();
-                break;
+                next('/login');
+            }
+        } else if (user_id == 'user'){
+            for (let i = 0; i < user_acl.length; i++) {
+                if (to.name == user_acl[i]){
+                    console.log(to.name);
+                    flag = true;
+                    next();
+                    break;
+                }
+            }
+        } else if (user_id == 'admin'){
+            for (let i = 0; i < admin_acl.length; i++){
+                if (to.name == admin_acl[i]){
+                    console.log(to.name);
+                    flag = true;
+                    next();
+                    break;
+                }
             }
         }
         if (!flag) {
-            flag = true;
-            next('/login');
+            console.log("go to 404");
+            next('/404');
         }
-    } else if (user_id == 'user'){
-        for (let i = 0; i < user_acl.length; i++) {
-            if (to.name == user_acl[i]){
-                console.log(to.name);
-                flag = true;
-                next();
-                break;
-            }
-        }
-    } else if (user_id == 'admin'){
-        for (let i = 0; i < admin_acl.length; i++){
-            if (to.name == admin_acl[i]){
-                console.log(to.name);
-                flag = true;
-                next();
-                break;
-            }
-        }
-    }
-    if (!flag) {
-        console.log("go to 404");
-        next('/404');
-    }
+    },function () {
+
+    });
 });
 
 // 现在我们可以启动应用了！

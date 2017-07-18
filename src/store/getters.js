@@ -41,15 +41,6 @@ export default {
     get_upload_file:state => {
         return state.upload_file
     },
-    get_images:state => {
-        return state.images
-    },
-    get_picture_name:state => {
-        return state.picture_name
-    },
-    get_texts:state => {
-        return state.texts
-    },
     get_text_name:state => {
         return state.text_name
     },
@@ -74,9 +65,13 @@ export default {
     get_search_content: state => {
         return state.search_content
     },
-    get_build_place:state => {
-        return state.create_place
+    get_ancient_book_id: state => {
+        return state.ancient_book_id
     },
+    get_build_place:state => {
+    return state.create_place
+},
+
 
 
 }

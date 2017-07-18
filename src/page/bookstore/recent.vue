@@ -2,14 +2,16 @@
     <div class="j-recent">
         <recent_title class="j-recent-bar" :title="this.title"></recent_title>
         <div v-for="item in recent_book" class="j-picture-name" >
-            <img :id="item.id" class="j-picture" alt="最近古籍" @click="push_success()" >
-            <p style="color: #0f0f0f; text-align: center" @click="push_success()">{{item.name}}</p>
+            <img :id="item.id" class="j-picture" alt="最近古籍" @click="push_success(item.id)" >
+            <p class="j-pic-p" @click="push_success()" :title="item.name">{{item.name}}</p>
         </div>
     </div>
 </template>
 
+
 <script>
     import recent_title from '../../component/noumenon-title.vue'
+    import store from '../../store'
     export default{
         components:{
             recent_title
@@ -55,7 +57,8 @@
                 this.i = this.i + 1;
             },
 
-            push_success(){
+            push_success(id){
+                this.$store.commit('push_ancient_book_id', id);
                 this.$router.push({path: '/bookstore/book_info'});
             }
         }
@@ -78,5 +81,13 @@
     .j-picture{
         width: 200px;
         height: 200px;
+    }
+    .j-pic-p{
+        color: #0f0f0f;
+        text-align: center;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 </style>

@@ -14,10 +14,10 @@
             <router-link to="/user_info/mybook" >
                 <img src="../../assets/img/我的古籍.png" class="mybook_img">
             </router-link>
-            <router-link to="/user_info/collection">
+            <router-link to="/user_info/collection/page/1">
                 <img src="../../assets/img/我的收藏.png" class="mycollection_img">
             </router-link>
-            <router-link to="/user_info/offer">
+            <router-link to="/user_info/edit/全部本体/page/1">
                 <img src="../../assets/img/我的贡献.png" class="myoffer_img">
             </router-link>
             <img src="../../assets/img/注销.png" class="logout" @click="logout()">
@@ -87,7 +87,7 @@
     }
     .j-simple-user{
         margin-left: 15px ;
-        width: 60px;
+        width: auto;
         font-weight:700;
         font-style:normal;
         font-size:16px;
@@ -112,5 +112,9 @@
     }
     .logout{
         width: 95px;
+    }
+    .all{
+        width: 950px;
+        margin: 0 auto;
     }
 </style>

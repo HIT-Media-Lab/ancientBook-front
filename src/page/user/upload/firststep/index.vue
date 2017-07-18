@@ -16,10 +16,10 @@
             <h3 style="display:inline-block" class="float-left">古籍規範名稱：</h3>
             <h4 id="bookName" style="display:inline-block" class="float-left ry-book-name">{{ varieties_item.type_name }}</h4>
             <div class="ry-4layers" style="display:inline-block">
-                <p id="v-standard-name">[品種層]{{ varieties_item.varieties_responsibility.end_time }} + {{ varieties_item.varieties_responsibility.person }} + {{ varieties_item.varieties_responsibility.action_value }}</p>
-                <p id="e-standard-name">[版本層]{{ edition_item.edition_responsibility.end_time }} + {{ edition_item.edition_responsibility.person }} + {{ edition_item.edition_responsibility.action_value }}</p>
-                <p id="i-standard-name">[印次層]{{ impression_item.impression_responsibility.end_time }} + {{ impression_item.impression_responsibility.person }} + {{ impression_item.impression_responsibility.action_value }}</p>
-                <p id="c-standard-name">[複本層]{{ copy_item.copy_responsibility.end_time }} + {{ copy_item.copy_responsibility.person }} + {{ copy_item.copy_responsibility.action_value }}</p>
+                <p id="v-standard-name">[品種層]{{ varieties_item.varieties_responsibility[0].end_time }} + {{ varieties_item.varieties_responsibility[0].person }} + {{ varieties_item.varieties_responsibility[0].action_value }}</p>
+                <p id="e-standard-name">[版本層]{{ edition_item.edition_responsibility[0].end_time }} + {{ edition_item.edition_responsibility[0].person }} + {{ edition_item.edition_responsibility[0].action_value }}</p>
+                <p id="i-standard-name">[印次層]{{ impression_item.impression_responsibility[0].end_time }} + {{ impression_item.impression_responsibility[0].person }} + {{ impression_item.impression_responsibility[0].action_value }}</p>
+                <p id="c-standard-name">[複本層]{{ copy_item.copy_responsibility[0].end_time }} + {{ copy_item.copy_responsibility[0].person }} + {{ copy_item.copy_responsibility[0].action_value }}</p>
             </div>
         </div>
 
@@ -173,21 +173,21 @@
         width: 148px;
         height: 44px;
         color: white;
-        background-image: url("../../../../assets/img/上传1/取消上传按钮.png");
+        background-image: url("../../../../assets/img/upload1/取消上传按钮.png");
     }
 
     .ry-btn-use-other{
         width: 148px;
         height: 44px;
         color: white;
-        background-image: url("../../../../assets/img/上传1/调用其它信息按钮.png");
+        background-image: url("../../../../assets/img/upload1/调用其它信息按钮.png");
     }
 
     .ry-form-upload{
         padding:0 80px;
         width: 968px;
         height: 991px;
-        background-image: url("../../../../assets/img/上传1/边框.png");
+        background-image: url("../../../../assets/img/upload1/边框.png");
     }
 
     .ry-4layers{
@@ -207,7 +207,7 @@
         margin: 5px 0px;
         width: 225px;
         height: 33px;
-        background-image: url("../../../../assets/img/上传1/书名什么的.png");
+        background-image: url("../../../../assets/img/upload1/书名什么的.png");
     }
 
     .layer-input label{
@@ -217,28 +217,28 @@
     .layer-input select{
         width: 225px;
         height: 33px;
-        background-image: url("../../../../assets/img/上传1/品级信息.png");
+        background-image: url("../../../../assets/img/upload1/品级信息.png");
     }
 
     .ry-btn-add{
         width: 103px;
         height: 44px;
         color: white;
-        background-image: url("../../../../assets/img/上传1/添加按钮.png");
+        background-image: url("../../../../assets/img/upload1/添加按钮.png");
     }
 
     .ry-btn-del{
         width: 103px;
         height: 44px;
         color: white;
-        background-image: url("../../../../assets/img/上传1/添加按钮.png");
+        background-image: url("../../../../assets/img/upload1/添加按钮.png");
     }
 
     .ry-check-pri{
         background-color: transparent;
         width: 18px;
         height: 19px;
-        background-image: url("../../../../assets/img/上传1/私密上传复选框.png");
+        background-image: url("../../../../assets/img/upload1/私密上传复选框.png");
     }
 
     .ry-btn-next-step{
@@ -246,6 +246,6 @@
         margin-left: 50px;
         width: 127px;
         height: 54px;
-        background-image: url("../../../../assets/img/上传1/下一步按钮.png");
+        background-image: url("../../../../assets/img/upload1/下一步按钮.png");
     }
 </style>

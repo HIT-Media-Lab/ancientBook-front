@@ -38,15 +38,6 @@ export default {
     get_upload_file(state,file){
         state.upload_file = file
     },
-    get_images(state,images){
-        state.images = images
-    },
-    get_picture_name(state,names){
-        state.picture_name = names
-    },
-    get_texts(state,texts){
-        state.texts = texts
-    },
     get_text_name(state,text_name){
         state.text_name = text_name
     },
@@ -78,8 +69,11 @@ export default {
     push_search_content(state,item){
         state.search_content = item;
     },
+    push_ancient_book_id(state,item){
+        state.ancient_book_id = item;
+    },
     get_create_place(state,data){
         state.create_place = data;
         console.log('state.create_place:'+JSON.stringify(state.create_place));
-    },
+    }
 }
