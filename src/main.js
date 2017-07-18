@@ -564,47 +564,48 @@ router.beforeEach( (to, from, next) => {
             localStorage.setItem('user',JSON.stringify("guest"));
             bus.$emit('change_name', '登录');
         }
-    },function () {
 
-    });
-    let user_id = JSON.parse(localStorage.getItem('user'));
-    let flag = false;
-    if (user_id == 'guest'){
-        for (let i = 0; i < guest_acl.length; i++) {
-            if (to.name == guest_acl[i]) {
-                console.log(to.name);
+        let user_id = JSON.parse(localStorage.getItem('user'));
+        let flag = false;
+        if (user_id == 'guest'){
+            for (let i = 0; i < guest_acl.length; i++) {
+                if (to.name == guest_acl[i]) {
+                    console.log(to.name);
+                    flag = true;
+                    next();
+                    break;
+                }
+            }
+            if (!flag) {
                 flag = true;
-                next();
-                break;
+                next('/login');
+            }
+        } else if (user_id == 'user'){
+            for (let i = 0; i < user_acl.length; i++) {
+                if (to.name == user_acl[i]){
+                    console.log(to.name);
+                    flag = true;
+                    next();
+                    break;
+                }
+            }
+        } else if (user_id == 'admin'){
+            for (let i = 0; i < admin_acl.length; i++){
+                if (to.name == admin_acl[i]){
+                    console.log(to.name);
+                    flag = true;
+                    next();
+                    break;
+                }
             }
         }
         if (!flag) {
-            flag = true;
-            next('/login');
+            console.log("go to 404");
+            next('/404');
         }
-    } else if (user_id == 'user'){
-        for (let i = 0; i < user_acl.length; i++) {
-            if (to.name == user_acl[i]){
-                console.log(to.name);
-                flag = true;
-                next();
-                break;
-            }
-        }
-    } else if (user_id == 'admin'){
-        for (let i = 0; i < admin_acl.length; i++){
-            if (to.name == admin_acl[i]){
-                console.log(to.name);
-                flag = true;
-                next();
-                break;
-            }
-        }
-    }
-    if (!flag) {
-        console.log("go to 404");
-        next('/404');
-    }
+    },function () {
+
+    });
 });
 
 // 现在我们可以启动应用了！
