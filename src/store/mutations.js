@@ -68,5 +68,12 @@ export default {
     },
     push_search_content(state,item){
         state.search_content = item;
+    },
+    push_ancient_book_id(state,item){
+        state.ancient_book_id = item;
+    },
+    get_create_place(state,data){
+        state.create_place = data;
+        console.log('state.create_place:'+JSON.stringify(state.create_place));
     }
 }

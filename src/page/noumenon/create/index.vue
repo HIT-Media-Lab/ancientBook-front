@@ -38,6 +38,8 @@ export default{
             console.log(this.noumenon_option[this.number]);
             if(this.noumenon_option[this.number]==='人物'){
                 this.$router.push({name:'charactertwo'});
+            } else if(this.noumenon_option[this.number]==='地名'){
+                this.$router.push({name:'placetwo'});
             }
         }
     }

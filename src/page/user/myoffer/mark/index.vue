@@ -94,7 +94,7 @@
                     }else if (response.body.content[i].noumenon_type == 6){
                         type = ' 【机构】';
                     }else if (response.body.content[i].noumenon_type == 7){
-                        type = ' 【地名】';
+                        type = ' 【地点】';
                     }
                     this.content.push ({
                         standard_name: response.body.content[i].noumenon_name,
@@ -147,9 +147,9 @@
                     this.$route.params.content = '机构本体';
                     this.$router.push({name: 'mark', params:this.$route.params});
                     this.type = 6
-                }else if (this.sort_name == '地名本体'){
+                }else if (this.sort_name == '地点本体'){
                     this.$route.params.pageId = 1;
-                    this.$route.params.content = '地名本体';
+                    this.$route.params.content = '地点本体';
                     this.$router.push({name: 'mark', params:this.$route.params});
                     this.type = 7
                 }
@@ -176,8 +176,8 @@
                         type = ' 【职官】';
                     }else if (this.$route.params.content == '机构本体'){
                         type = ' 【机构】';
-                    }else if (this.$route.params.content == '地名本体'){
-                        type = ' 【地名】';
+                    }else if (this.$route.params.content == '地点本体'){
+                        type = ' 【地点】';
                     }
                     this.content.push ({
                         standard_name: response.body.content[i].noumenon_name,
@@ -203,7 +203,7 @@
         float: right;
     }
     .j-mark{
-        margin: 110px auto;
+        margin: 110px auto  40px  auto;
         width: 900px ;
         height: auto ;
     }

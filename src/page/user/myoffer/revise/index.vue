@@ -70,7 +70,7 @@
         margin: -65px auto
     }
     .j-revise{
-        margin: 110px auto;
+        margin: 110px auto  40px  auto;
         width: 900px ;
         height: auto ;
     }

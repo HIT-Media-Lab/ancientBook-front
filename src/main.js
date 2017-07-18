@@ -31,7 +31,7 @@ function after_success (response) {
 Vue.prototype.before_http = function(object) {
     object.token = this.$store.getters.GetToken;
     let token = this.$store.getters.GetToken;
-    if (object.token == null || token == null) {
+    if (object.token == '' || token == '') {
         this.$http.get('/ancient_books/getToken.action').then(function (response) {
             token = response.body.token;
         });
@@ -166,6 +166,11 @@ import  noumenon from  './page/noumenon/index.vue'
 import  build from  './page/noumenon/create/index.vue'
 import  charactertwo from  './page/noumenon/create/two/character.vue'
 import  characterthree from  './page/noumenon/create/three/character.vue'
+import  placetwo from  './page/noumenon/create/two/place.vue'
+import  placethree from  './page/noumenon/create/three/place.vue'
+import  institutiontwo from  './page/noumenon/create/two/institution.vue'
+import  institutionthree from  './page/noumenon/create/three/institution.vue'
+
 //本体查看
 import  recent from  './page/noumenon/noumenon.vue'
 import  institution from  './page/noumenon/institution/index.vue'
@@ -367,9 +372,15 @@ const router = new VueRouter({
                     name:'char_edit'
                 },
                 {
-                    path:'institution/page/:pageId/letter/:letterId',
+                    path:'institution/letter/:letterId/page/:pageId',
                     component:institution,
                     name:'institution'
+                },
+                {
+                    path: 'institution',
+                    redirect: 'institution/letter/A/page/1',
+                    component: institution,
+                    name: 'institution'
                 },
                 {
                     path:'ins_detail/:nouId',
@@ -412,9 +423,15 @@ const router = new VueRouter({
                     name:'off_edit'
                 },
                 {
-                    path:'place/page/:pageId/letter/:letterId',
+                    path:'place/letter/:letterId/page/:pageId',
                     component:place,
                     name:'place'
+                },
+                {
+                    path: 'place',
+                    redirect: 'place/letter/A/page/1',
+                    component: place,
+                    name: 'place'
                 },
                 {
                     path:'plac_detail/:nouId',
@@ -461,6 +478,26 @@ const router = new VueRouter({
             path:'/charthree',
             component:characterthree,
             name:'characterthree'
+        },
+        {
+            path:'/platwo',
+            component:placetwo,
+            name:'placetwo'
+        },
+        {
+            path:'/plathree',
+            component:placethree,
+            name:'placethree'
+        },
+        {
+            path:'/instwo',
+            component:institutiontwo,
+            name:'institutiontwo'
+        },
+        {
+            path:'/insthree',
+            component:institutionthree,
+            name:'institutionthree'
         },
 
         {
@@ -537,73 +574,76 @@ Vue.http.interceptors.push((request, next) => {
     })
 });
 
-router.beforeEach( (to, from, next) => {
-    if (router.app.$store.getters.GetToken == ''){
-        router.app.$http.get('/ancient_books/getToken.action').then(function (response) {
-            console.log("成功得到token");
-            console.log(response.body.token);
-            router.app.$store.commit("change_token",response.body.token);
-            console.log(router.app.$store.getters.GetToken + "刷新得到token");
-        },function () {
-
-        })
-    }
-    let admin_acl = router.app.$store.getters.ACL_admin;
-    let user_acl = router.app.$store.getters.ACL_user;
-    let guest_acl = router.app.$store.getters.ACL_guest;
-
-    let user_id = JSON.parse(localStorage.getItem('user'));
-    if (user_id == undefined) {
-        localStorage.setItem('user',JSON.stringify("guest"));
-        user_id = 'guest';
-    }
-    if (user_id == 'guest'){
-        bus.$emit('change_name', '登录');
-    }else {
-        router.app.$http.get('/ancient_books/get_user_info.action').then(function (response) {
-            bus.$emit('change_name', response.body.name);
-        },function () {
-
-        })
-    }
-    let flag = false;
-    if (user_id == 'guest'){
-        for (let i = 0; i < guest_acl.length; i++) {
-            if (to.name == guest_acl[i]) {
-                console.log(to.name);
-                flag = true;
-                next();
-                break;
-            }
-        }
-        if (!flag) {
-            flag = true;
-            next('/login');
-        }
-    } else if (user_id == 'user'){
-        for (let i = 0; i < user_acl.length; i++) {
-            if (to.name == user_acl[i]){
-                console.log(to.name);
-                flag = true;
-                next();
-                break;
-            }
-        }
-    } else if (user_id == 'admin'){
-        for (let i = 0; i < admin_acl.length; i++){
-            if (to.name == admin_acl[i]){
-                console.log(to.name);
-                flag = true;
-                next();
-                break;
-            }
-        }
-    }
-    if (!flag) {
-        console.log("go to 404");
-        next('/404');
-    }
-});
+// router.beforeEach( (to, from, next) => {
+//     let admin_acl = router.app.$store.getters.ACL_admin;
+//     let user_acl = router.app.$store.getters.ACL_user;
+//     let guest_acl = router.app.$store.getters.ACL_guest;
+//
+//     router.app.$http.get('/ancient_books/get_user_info.action').then(function (response) {
+//         if (router.app.$store.getters.GetToken == '') {
+//             router.app.$http.get('/ancient_books/getToken.action').then(function (response) {
+//                 console.log("成功得到token");
+//                 console.log(response.body.token);
+//                 router.app.$store.commit("change_token", response.body.token);
+//                 console.log(router.app.$store.getters.GetToken + "刷新得到token");
+//             }, function () {
+//
+//             })
+//         }
+//         if (response.body.result == 1) {
+//             if (response.body.su == 1) {
+//                 localStorage.setItem('user', JSON.stringify("admin"));
+//             } else if (response.body.su == 0) {
+//                 localStorage.setItem('user', JSON.stringify("user"));
+//             }
+//             bus.$emit('change_name', response.body.name);
+//         } else if (response.body.result == 0) {
+//             localStorage.setItem('user', JSON.stringify("guest"));
+//             bus.$emit('change_name', '登录');
+//         }
+//
+//         let user_id = JSON.parse(localStorage.getItem('user'));
+//         let flag = false;
+//         if (user_id == 'guest'){
+//             for (let i = 0; i < guest_acl.length; i++) {
+//                 if (to.name == guest_acl[i]) {
+//                     console.log(to.name);
+//                     flag = true;
+//                     next();
+//                     break;
+//                 }
+//             }
+//             if (!flag) {
+//                 flag = true;
+//                 next('/login');
+//             }
+//         } else if (user_id == 'user'){
+//             for (let i = 0; i < user_acl.length; i++) {
+//                 if (to.name == user_acl[i]){
+//                     console.log(to.name);
+//                     flag = true;
+//                     next();
+//                     break;
+//                 }
+//             }
+//         } else if (user_id == 'admin'){
+//             for (let i = 0; i < admin_acl.length; i++){
+//                 if (to.name == admin_acl[i]){
+//                     console.log(to.name);
+//                     flag = true;
+//                     next();
+//                     break;
+//                 }
+//             }
+//         }
+//         if (!flag) {
+//             console.log("go to 404");
+//             next('/404');
+//         }
+//     },function () {
+//
+//     });
+// });
 
 // 现在我们可以启动应用了！
 // 路由器会创建一个 App 实例，并且挂载到选择符 #app 匹配的元素上。
