@@ -49,7 +49,7 @@
                 all_revise_url: '/ancient_books/get_ancient_book_modify_log_by_user.action',
                 total_page: 1,
                 count: 0,
-                content: [],
+                content: []
             }
         },
         methods:{
@@ -60,7 +60,7 @@
             },
             revise_all_fail(){
 
-            },
+            }
         }
     }
 </script>
