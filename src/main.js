@@ -31,7 +31,7 @@ function after_success (response) {
 Vue.prototype.before_http = function(object) {
     object.token = this.$store.getters.GetToken;
     let token = this.$store.getters.GetToken;
-    if (object.token == null || token == null) {
+    if (object.token == '' || token == '') {
         this.$http.get('/ancient_books/getToken.action').then(function (response) {
             token = response.body.token;
         });
