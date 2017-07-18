@@ -167,6 +167,11 @@ import  noumenon from  './page/noumenon/index.vue'
 import  build from  './page/noumenon/create/index.vue'
 import  charactertwo from  './page/noumenon/create/two/character.vue'
 import  characterthree from  './page/noumenon/create/three/character.vue'
+import  placetwo from  './page/noumenon/create/two/place.vue'
+import  placethree from  './page/noumenon/create/three/place.vue'
+import  institutiontwo from  './page/noumenon/create/two/institution.vue'
+import  institutionthree from  './page/noumenon/create/three/institution.vue'
+
 //本体查看
 import  recent from  './page/noumenon/noumenon.vue'
 import  institution from  './page/noumenon/institution/index.vue'
@@ -380,9 +385,15 @@ const router = new VueRouter({
                     name:'char_edit'
                 },
                 {
-                    path:'institution/page/:pageId/letter/:letterId',
+                    path:'institution/letter/:letterId/page/:pageId',
                     component:institution,
                     name:'institution'
+                },
+                {
+                    path: 'institution',
+                    redirect: 'institution/letter/A/page/1',
+                    component: institution,
+                    name: 'institution'
                 },
                 {
                     path:'ins_detail/:nouId',
@@ -425,9 +436,15 @@ const router = new VueRouter({
                     name:'off_edit'
                 },
                 {
-                    path:'place/page/:pageId/letter/:letterId',
+                    path:'place/letter/:letterId/page/:pageId',
                     component:place,
                     name:'place'
+                },
+                {
+                    path: 'place',
+                    redirect: 'place/letter/A/page/1',
+                    component: place,
+                    name: 'place'
                 },
                 {
                     path:'plac_detail/:nouId',
@@ -474,6 +491,26 @@ const router = new VueRouter({
             path:'/charthree',
             component:characterthree,
             name:'characterthree'
+        },
+        {
+            path:'/platwo',
+            component:placetwo,
+            name:'placetwo'
+        },
+        {
+            path:'/plathree',
+            component:placethree,
+            name:'placethree'
+        },
+        {
+            path:'/instwo',
+            component:institutiontwo,
+            name:'institutiontwo'
+        },
+        {
+            path:'/insthree',
+            component:institutionthree,
+            name:'institutionthree'
         },
 
         {

@@ -73,7 +73,10 @@ export default {
     },
     get_search_content: state => {
         return state.search_content
-    }
+    },
+    get_build_place:state => {
+        return state.create_place
+    },
 
 
 }

@@ -5,7 +5,7 @@
             <span class="zxw-bar-title">时间</span>
         </router-link>
 
-        <router-link to="/noumenon/place">
+        <router-link to="/noumenon/place/letter/A/page/1/">
             <img src="../assets/img/spot.png" class="zxw-spot" v-show="this.$route.name==='place'||this.$route.name==='pla_detail'">
             <span class="zxw-bar-title">地名</span>
         </router-link>
@@ -15,12 +15,12 @@
             <span class="zxw-bar-title">人物</span>
         </router-link>
 
-        <router-link to="/noumenon/office">
+        <router-link to="/noumenon/institution/letter/A/page/1">
             <img src="../assets/img/spot.png" class="zxw-spot" v-show="this.$route.name==='institution'||this.$route.name==='ins_detail'">
             <span class="zxw-bar-title">机构</span>
         </router-link>
 
-        <router-link to="/noumenon/institution">
+        <router-link to="/noumenon/office">
             <img src="../assets/img/spot.png" class="zxw-spot" v-show="this.$route.name==='office'||this.$route.name==='off_detail'">
             <span class="zxw-bar-title">职官</span>
         </router-link>

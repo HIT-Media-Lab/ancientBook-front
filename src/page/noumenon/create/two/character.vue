@@ -29,9 +29,27 @@
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">出生时间：</label>
-                <input type="text" class="zxw-character-input zxw-character-input-margin" readonly @click="open_birth()"  v-model="input_content.birth_standard_name">
+               <!-- <input type="text" class="zxw-character-input zxw-character-input-margin" readonly @click="open_birth()"  v-model="input_content.birth_standard_name">-->
+                <div  class="zxw-character-input zxw-character-input-margin">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
+                        <span class="zxw-person-relation-span"  @mouseover="show_birth_time = true" @mouseout="show_birth_time = false" v-if="input_content.birth_standard_name !== ''">
+                            <span v-model="input_content.birth_standard_name" >{{input_content.birth_standard_name}}</span>
+                            <button class="zxw-add-hover-img" v-show="show_birth_time===true" @click="delete_birth()"></button>
+                        </span>
+                    </div>
+                    <button class="zxw-input-add-character" @click="open_birth()"></button>
+                </div>
                 <label class="zxw-character-span zxw-must-write">死亡时间：</label>
-                <input type="text" class="zxw-character-input zxw-character-input-margin" readonly @click="open_dead()" v-model="input_content.death_standard_name">
+                <!--<input type="text" class="zxw-character-input zxw-character-input-margin" readonly @click="open_dead()" v-model="input_content.death_standard_name">-->
+                <div  class="zxw-character-input zxw-character-input-margin">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
+                        <span class="zxw-person-relation-span"  @mouseover="show_dead_time = true" @mouseout="show_dead_time = false" v-if="input_content.death_standard_name !== ''">
+                            <span v-model="input_content.death_standard_name" >{{input_content.death_standard_name}}</span>
+                            <button class="zxw-add-hover-img" v-show="show_dead_time===true" @click="delete_dead()"></button>
+                        </span>
+                    </div>
+                    <button class="zxw-input-add-character" @click="open_dead()"></button>
+                </div>
             </div>
 
             <div class="zxw-character-row">
@@ -298,6 +316,8 @@
                 show_input:false,
                 show_father:false,
                 show_mother:false,
+                show_birth_time:false,
+                show_dead_time:false,
                 show_son:0,
                 show_daughter:0,
                 show_brother:0,
@@ -422,6 +442,11 @@
                 this.time_modal_1 = false;
             },
 
+            delete_birth(){
+                this.input_content.birth_time_id ='';
+                this.input_content.birth_standard_name = '';
+            },
+
             /*死亡时间*/
             open_dead(){
                 this.time_modal_2 = true;
@@ -435,6 +460,11 @@
 
             close_dead(){
                 this.time_modal_2 = false;
+            },
+
+            delete_dead(){
+                this.input_content.death_time_id = '';
+                this.input_content.death_standard_name='';
             },
 
             /*添加备注信息*/
