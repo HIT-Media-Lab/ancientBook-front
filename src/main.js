@@ -538,21 +538,21 @@ Vue.http.interceptors.push((request, next) => {
 });
 
 router.beforeEach( (to, from, next) => {
-    // if (router.app.$store.getters.GetToken == ''){
-    //     router.app.$http.get('/ancient_books/getToken.action').then(function (response) {
-    //         console.log("成功得到token");
-    //         console.log(response.body.token);
-    //         router.app.$store.commit("change_token",response.body.token);
-    //         console.log(router.app.$store.getters.GetToken + "刷新得到token");
-    //     },function () {
-    //
-    //     })
-    // }
     let admin_acl = router.app.$store.getters.ACL_admin;
     let user_acl = router.app.$store.getters.ACL_user;
     let guest_acl = router.app.$store.getters.ACL_guest;
 
     router.app.$http.get('/ancient_books/get_user_info.action').then(function (response) {
+        if (router.app.$store.getters.GetToken == ''){
+            router.app.$http.get('/ancient_books/getToken.action').then(function (response) {
+                console.log("成功得到token");
+                console.log(response.body.token);
+                router.app.$store.commit("change_token",response.body.token);
+                console.log(router.app.$store.getters.GetToken + "刷新得到token");
+            },function () {
+
+            })
+        }
         if (response.body.result == 1){
             if (response.body.su == 1){
                 localStorage.setItem('user',JSON.stringify("admin"));
