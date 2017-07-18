@@ -358,7 +358,7 @@
         },
 
         beforeRouteLeave (to, from, next) {
-            this.edition_item.edition_responsibility[0].action_value = document.getElementsByClassName("ry-e-action")[0].options[document.getElementById("ry-e-action").selectedIndex].text;
+            this.edition_item.edition_responsibility[0].action_value = document.getElementsByClassName("ry-e-action")[0].options[document.getElementsByClassName("ry-e-action")[0].selectedIndex].text;
             this.$store.commit("get_edition_contents",this.edition_item);
             this.selections_edition();
             next();

@@ -214,7 +214,7 @@
         },
 
         beforeRouteLeave (to, from, next) {
-            this.copy_item.copy_responsibility[0].action_value = document.getElementsByClassName("ry-c-action")[0].options[document.getElementById("ry-c-action").selectedIndex].text;
+            this.copy_item.copy_responsibility[0].action_value = document.getElementsByClassName("ry-c-action")[0].options[document.getElementsByClassName("ry-c-action")[0].selectedIndex].text;
             this.$store.commit("get_copy_contents",this.copy_item);
             this.selections_copy();
             next();

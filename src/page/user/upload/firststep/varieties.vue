@@ -254,7 +254,7 @@
         },
 
         beforeRouteLeave (to, from, next) {
-            this.varieties_item.varieties_responsibility[0].action_value = document.getElementsByClassName("ry-v-action")[0].options[document.getElementById("ry-v-action").selectedIndex].text;
+            this.varieties_item.varieties_responsibility[0].action_value = document.getElementsByClassName("ry-v-action")[0].options[document.getElementsByClassName("ry-v-action")[0].selectedIndex].text;
             this.$store.commit("get_varieties_contents",this.varieties_item);
             this.selections_variety();
             next();

@@ -186,7 +186,7 @@
         },
 
         beforeRouteLeave (to, from, next) {
-            this.impression_item.impression_responsibility[0].action_value = document.getElementsByClassName("ry-i-action")[0].options[document.getElementById("ry-i-action").selectedIndex].text;
+            this.impression_item.impression_responsibility[0].action_value = document.getElementsByClassName("ry-i-action")[0].options[document.getElementsByClassName("ry-i-action")[0].selectedIndex].text;
             this.$store.commit("get_impression_contents",this.impression_item);
             this.selections_impression();
             next();
