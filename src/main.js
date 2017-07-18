@@ -297,7 +297,7 @@ const router = new VueRouter({
                     name:'comment'
                 },
                 {
-                    path:'revise/:content/page/:pageId',
+                    path:'revise/page/:pageId',
                     component:revise,
                     name:'revise'
                 },

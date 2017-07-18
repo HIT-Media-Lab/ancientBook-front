@@ -74,7 +74,6 @@
                     this.my_collection = '我的贡献';
                 }else if (this.my_collection == '修订'){
                     this.$route.params.pageId = 1;
-                    this.$route.params.content = '全部本体';
                     this.$router.push({name: 'revise', params: this.$route.params});
                     this.mybook = '我的古籍';
                     this.my_collection = '我的贡献';

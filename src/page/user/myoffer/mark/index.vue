@@ -24,7 +24,7 @@
                 <tbody>
                 <tr v-for="item in content"> <!--v-for循环数据里的数组数据-->
                     <td class="j-mark-table" style="width: 200px" :title="item.standard_name">{{item.standard_name}} {{item.noumenon_type}}</td>
-                    <td class="j-mark-table" style="width: 400px" :title="item.standard_name">{{item.edit_type}}</td>
+                    <td class="j-mark-table" style="width: 400px" :title="item.standard_name">{{item.target}}</td>
                     <td class="j-mark-table" style="width: 200px" :title="item.standard_name">{{item.time}}</td>
                 </tr>
                 </tbody>
@@ -48,7 +48,7 @@
             if (this.$route.params.content == '全部本体'){
                 this.content = [];
                 let item = this.all_mark_url + '?page_count=' + this.$route.params.pageId;
-                this.http_json(item, 'get', item, this.edit_all_success, this.edit_all_fail);
+                this.http_json(item, 'get', item, this.mark_all_success, this.mark_all_fail);
             }else {
                 this.sort();
             }
@@ -58,7 +58,7 @@
                 if (this.$route.params.content == '全部本体'){
                     this.content = [];
                     let item = this.all_mark_url + '?page_count=' + this.$route.params.pageId;
-                    this.http_json(item, 'get', item, this.edit_all_success, this.edit_all_fail);
+                    this.http_json(item, 'get', item, this.mark_all_success, this.mark_all_fail);
                 }else {
                     this.sort();
                 }
@@ -66,8 +66,8 @@
         },
         data(){
             return{
-                all_mark_url: '/ancient_books/get_noumenon_log_by_user.action',
-                sort_mark_url: '/ancient_books/get_noumenon_log_by_user_class.action',
+                all_mark_url: '/ancient_books/get_mark_list_by_user.action',
+                sort_mark_url: '/ancient_books/get_mark_list_by_user_class.action',
                 total_page: 1,
                 count: 0,
                 content: [],
@@ -76,17 +76,11 @@
             }
         },
         methods:{
-            edit_all_success(response){
+            mark_all_success(response){
                 this.total_page = response.body.total_page;
                 this.count = response.body.count;
                 for (let i = 0; i < response.body.content.length; i++){
-                    let edit_type = '';
                     let type = '';
-                    if (response.body.content[i].operation_type == 1){
-                        edit_type = '创建本体';
-                    }else if (response.body.content[i].operation_type == 0){
-                        edit_type = '编辑本体';
-                    }
                     if (response.body.content[i].noumenon_type == 1){
                         type = ' 【人物】';
                     }else if (response.body.content[i].noumenon_type == 2){
@@ -103,15 +97,17 @@
                         type = ' 【地名】';
                     }
                     this.content.push ({
-                        standard_name: response.body.content[i].standard_name,
-                        edit_type: edit_type,
+                        standard_name: response.body.content[i].noumenon_name,
+                        page_id: response.body.content[i].page_id,
+                        mark_id: response.body.content[i].mark_id,
                         time: response.body.content[i].time,
+                        target: response.body.content[i].target,
                         noumenon_type: type,
                         noumenon_id: response.body.content[i].noumenon_id
                     })
                 }
             },
-            edit_all_fail(){
+            mark_all_fail(){
 
             },
             go_to_sort(){
@@ -160,20 +156,14 @@
             },
             sort(){
                 let url = this.sort_mark_url + '?type=' + this.type + '&&page_count=' + this.$route.params.pageId;
-                this.http_json(url, 'get', url, this.edit_sort_success, this.edit_all_fail)
+                this.http_json(url, 'get', url, this.mark_sort_success, this.mark_all_fail)
             },
 
-            edit_sort_success(response){
+            mark_sort_success(response){
                 this.count = response.body.count;
                 this.total_page = response.body.total_page;
                 for (let i = 0; i < response.body.content.length; i++){
-                    let edit_type = '';
                     let type = '';
-                    if (response.body.content[i].operation_type == 1){
-                        edit_type = '创建本体';
-                    }else if (response.body.content[i].operation_type == 0){
-                        edit_type = '编辑本体';
-                    }
                     if (this.$route.params.content == '人物本体'){
                         type = ' 【人物】';
                     }else if (this.$route.params.content == '文献本体'){
@@ -190,9 +180,11 @@
                         type = ' 【地名】';
                     }
                     this.content.push ({
-                        standard_name: response.body.content[i].standard_name,
-                        edit_type: edit_type,
+                        standard_name: response.body.content[i].noumenon_name,
+                        page_id: response.body.content[i].page_id,
+                        mark_id: response.body.content[i].mark_id,
                         time: response.body.content[i].time,
+                        target: response.body.content[i].target,
                         noumenon_type: type,
                         noumenon_id: response.body.content[i].noumenon_id
                     })

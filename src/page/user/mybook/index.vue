@@ -10,12 +10,12 @@
                 </div>
             </div>
             <p class="j-mybook-recent-name">已上传</p>
-            <div class="j-mybook-al-img1">
-                <div class="j-mybook-recent1-div" v-for="(item,index) in al_up_book">
+            <div class="j-mybook-al-img">
+                <div class="j-mybook-recent-div" v-for="(item,index) in al_up_book">
                     <div v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                         <div class="show-edit1">
                             <img style="margin-left: 60px" src="../../../assets/img/白笔.png" @click="">
-                            <img src="../../../assets/img/叉.png" @click="delete_alup(index)">
+                            <img src="../../../assets/img/叉.png">
                         </div>
                         <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo">
                     </div>
@@ -27,12 +27,12 @@
                 </div>
             </div>
             <p class="j-mybook-recent-name">私密古籍</p>
-            <div class="j-mybook-al-img2">
-                <div class="j-mybook-recent2-div" v-for="(item,index) in private_book">
+            <div class="j-mybook-al-img">
+                <div class="j-mybook-recent-div" v-for="(item,index) in private_book">
                     <div>
                         <div class="show-edit2" v-on:mouseover="show_edit2(index)" v-on:mouseout="shut_edit2(index)">
-                            <img style="margin-left: 60px" src="../../../assets/img/白笔.png" @click="">
-                            <img src="../../../assets/img/叉.png" @click="">
+                            <img style="margin-left: 60px" src="../../../assets/img/白笔.png">
+                            <img src="../../../assets/img/叉.png">
                         </div>
                         <img :id = "item.ancient_book_id + 's'" class="j-mybook-recent-img1" @click="go_to_bookinfo">
                     </div>
@@ -93,13 +93,6 @@
             shut_edit2(index){
                 document.getElementsByClassName('show-edit2')[index].style.opacity = 0;
             },
-
-            delete_alup(index){
-                let parent = document.getElementsByClassName('j-mybook-al-img1')[0];
-                let child = document.getElementsByClassName('j-mybook-recent1-div')[index];
-                parent.removeChild(child);
-            },
-
             go_to_bookinfo(){
                 this.$router.push({path: '/bookstore/book_info'});
             },
@@ -199,18 +192,6 @@
         width: 120px;
         height: auto;
     }
-    .j-mybook-recent1-div{
-        float: left;
-        margin-left: 70px;
-        width: 120px;
-        height: auto;
-    }
-    .j-mybook-recent2-div{
-        float: left;
-        margin-left: 70px;
-        width: 120px;
-        height: auto;
-    }
     .j-mybook-p{
         margin-top: 3px;
         color: #0f0f0f;
@@ -220,12 +201,7 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
-    .j-mybook-al-img1{
-        margin-top: 10px;
-        width: auto;
-        height: 198px;
-    }
-    .j-mybook-al-img2{
+    .j-mybook-al-img{
         margin-top: 10px;
         width: auto;
         height: 198px;
