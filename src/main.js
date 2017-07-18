@@ -567,7 +567,7 @@ router.beforeEach( (to, from, next) => {
     },function () {
 
     });
-
+    let user_id = JSON.parse(localStorage.getItem('user'));
     let flag = false;
     if (user_id == 'guest'){
         for (let i = 0; i < guest_acl.length; i++) {
