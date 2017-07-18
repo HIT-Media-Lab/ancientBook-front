@@ -130,6 +130,7 @@ const store = new Vuex.Store({
             }]
         },
         book_summary:'',
+        upload_book_index : 0,
         upload_file : [{
             value : true,
             book_name : '',

@@ -41,8 +41,8 @@ export default {
     get_text_name(state,text_name){
         state.text_name = text_name
     },
-    get_upload_file(state,texts){
-        state.texts = texts
+    get_upload_book_index(state,index){
+        state.upload_book_index = index
     },
     get_upload1_info(state,info){
         state.upload1_info = info

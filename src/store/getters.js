@@ -38,6 +38,9 @@ export default {
     get_copy_item:state => {
         return state.copy_contents
     },
+    get_upload_book_index:state => {
+        return state.upload_book_index
+    },
     get_upload_file:state => {
         return state.upload_file
     },
