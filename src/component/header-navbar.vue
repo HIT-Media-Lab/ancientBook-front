@@ -77,6 +77,10 @@
               this.user_name = item;
           });
         },
+        destroyed(){
+            localStorage.setItem('user',JSON.stringify("guest"));
+            bus.$emit('change_name', '登录');
+        },
         data(){
             return{
                 user_name: '登录',
