@@ -34,7 +34,8 @@ const store = new Vuex.Store({
             duplicate_complete : 1,
             duplicate_attachment : '',
             copy_responsibility : [{
-                value:true,
+                value_add:true,
+                value_del:false,
                 location_id : '',
                 person_id : '',
                 begin_time : '',
@@ -70,7 +71,8 @@ const store = new Vuex.Store({
             version_youshuwuer : '',
             version_youwujiazhu  : 1,
             edition_responsibility : [{
-                value : true,
+                value_add : true,
+                value_del : false,
                 location_id : '',
                 person_id : '',
                 begin_time : '',
@@ -87,7 +89,8 @@ const store = new Vuex.Store({
             printing_type : 1,
             printing_number : '',
             impression_responsibility : [{
-                value : true,
+                value_add : true,
+                value_del : false,
                 location_id : '',
                 person_id : '',
                 begin_time : '',
@@ -112,7 +115,8 @@ const store = new Vuex.Store({
             type_summary : '',
             literature_standard_name : '',
             varieties_responsibility : [{
-                value : true,
+                value_add : true,
+                value_del : false,
                 location_id : '',
                 person_id : '',
                 begin_time : '',

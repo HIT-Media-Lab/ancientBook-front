@@ -32,13 +32,13 @@
                 <img src="../../../../assets/img/upload1/中间墨线.png" height="6" width="843"/>
             </div>
 
-            <div id="form-impression" v-for="(item,index) in impression_item.impression_responsibility">
+            <div class="form-impression" v-for="(item,index) in impression_item.impression_responsibility">
                 <div class="row">
                     <div class="col-md-2 float-right">
-                        <button id="btn-add-copy" class="ry-btn-add" @click="add_new_box(index)" v-show="impression_item.impression_responsibility[index].value">添加</button>
+                        <button id="btn-add-copy" class="ry-btn-add" @click="add_new_box(index)" v-show="impression_item.impression_responsibility[index].value_add">添加</button>
                     </div>
                     <div class="col-md-2 float-right">
-                        <button id="btn-delete-copy" class="ry-btn-del" v-show="impression_item.impression_responsibility[index].value">刪除</button>
+                        <button id="btn-delete-copy" class="ry-btn-del" @click="del_new_box(index)" v-show="impression_item.impression_responsibility[index].value_del">刪除</button>
                     </div>
                 </div>
 
@@ -157,7 +157,8 @@
                     printing_type : '',
                     printing_number : '',
                     impression_responsibility : [{
-                        value : true,
+                        value_add : true,
+                        value_del : false,
                         location : '',
                         location_id : '',
                         person : '',
@@ -185,7 +186,7 @@
         },
 
         beforeRouteLeave (to, from, next) {
-            this.impression_item.impression_responsibility.action_value = document.getElementById("ry-i-action").options[document.getElementById("ry-i-action").selectedIndex].text;
+            this.impression_item.impression_responsibility[0].action_value = document.getElementsByClassName("ry-i-action")[0].options[document.getElementsByClassName("ry-i-action")[0].selectedIndex].text;
             this.$store.commit("get_impression_contents",this.impression_item);
             this.selections_impression();
             next();
@@ -193,12 +194,26 @@
 
         methods : {
             /**
-             * 添加新册
+             * 获得责任数组指数
+             */
+            get_index() {
+                var divs = document.getElementsByClassName("form-impression");
+                for (var i = 0; i < divs.length; i++) {
+                    divs[i].setAttribute("data-i", i);
+                }
+                this.index = event.currentTarget.parentNode.parentNode.parentNode.getAttribute("data-i");
+            },
+
+
+            /**
+             * 添加责任信息
              */
             add_new_box(p) {
-                this.impression_item.impression_responsibility[p].value = false;
+                this.impression_item.impression_responsibility[p].value_add = false;
+                this.impression_item.impression_responsibility[p].value_del = false;
                 this.impression_item.impression_responsibility.push({
-                    value : true,
+                    value_add : true,
+                    value_del : true,
                     location : '',
                     location_id : '',
                     person : '',
@@ -218,15 +233,32 @@
 
 
             /**
+             * 删除责任信息
+             */
+            del_new_box(p) {
+                if (p == 1) {
+                    this.impression_item.impression_responsibility[p-1].value_add = true;
+                    this.impression_item.impression_responsibility[p-1].value_del = false;
+                }
+                else{
+                    this.impression_item.impression_responsibility[p-1].value_add = true;
+                    this.impression_item.impression_responsibility[p-1].value_del = true;
+                }
+                this.impression_item.impression_responsibility.pop();
+            },
+
+
+            /**
              * 责任开始时间
              */
             open_birth() {
+                this.get_index();
                 this.time_modal_1 = true;
             },
 
             birth_time(p) {
-                this.impression_item.impression_responsibility.begin_time_id = p.time_id;
-                this.impression_item.impression_responsibility.begin_time = p.standard_name;
+                this.impression_item.impression_responsibility[this.index].begin_time_id = p.time_id;
+                this.impression_item.impression_responsibility[this.index].begin_time = p.standard_name;
                 this.close_birth();
             },
 
@@ -239,12 +271,13 @@
              * 责任结束时间
              */
             open_dead() {
+                this.get_index();
                 this.time_modal_2 = true;
             },
 
             dead_time(q) {
-                this.impression_item.impression_responsibility.end_time_id = q.time_id;
-                this.impression_item.impression_responsibility.end_time = q.standard_name;
+                this.impression_item.impression_responsibility[this.index].end_time_id = q.time_id;
+                this.impression_item.impression_responsibility[this.index].end_time = q.standard_name;
                 this.close_dead();
             },
 
@@ -257,12 +290,13 @@
              * 责任地点
              */
             open_location() {
+                this.get_index();
                 this.location_modal = true;
             },
 
             add_location(p) {
-                this.impression_item.impression_responsibility.location_id = p.noumenon_id;
-                this.impression_item.impression_responsibility.location = p.standard_name;
+                this.impression_item.impression_responsibility[this.index].location_id = p.noumenon_id;
+                this.impression_item.impression_responsibility[this.index].location = p.standard_name;
             },
 
             close_location(){
@@ -274,12 +308,14 @@
              * 责任者名称
              */
             open_character(){
+                this.get_index();
+                alert(this.index);
                 this.character_modal = true;
             },
 
             add_character(p){
-                this.impression_item.impression_responsibility.person_id = p.noumenon_id;
-                this.impression_item.impression_responsibility.person = p.standard_name;
+                this.impression_item.impression_responsibility[this.index].person_id = p.noumenon_id;
+                this.impression_item.impression_responsibility[this.index].person = p.standard_name;
             },
 
             close_character(){
