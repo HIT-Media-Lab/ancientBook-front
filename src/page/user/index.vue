@@ -5,7 +5,7 @@
                 <img src="../../assets/img/picture-button/avatar.png" class="j-userhead" @click="go_to_modify">
                 <span class="j-simple-user" @click="go_to_modify" v-model="name">{{name}}</span>
             </div>
-            <img src="../../assets/img/no-use-picture/ink-line.png" class="j-user-line" >
+            <img src="../../assets/img/no-use-picture/ink-line-long.png" class="j-user-line" >
         </div>
         <div class="j-link">
             <router-link to="/user/upload1">

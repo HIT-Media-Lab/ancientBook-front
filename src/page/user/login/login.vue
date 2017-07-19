@@ -154,7 +154,7 @@ import store from '../../../store'
         width: 500px;
         height: 90px;
         background-repeat: no-repeat;
-        background-image: url("../../../assets/img/modal-box/drop-box.png");
+        background-image: url("../../../assets/img/modal-box/search-drop-box.png");
         background-size: 100%;
     }
     .sort-box1-login{

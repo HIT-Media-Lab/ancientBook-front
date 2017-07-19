@@ -285,7 +285,7 @@
         height: 50px;
     }
     .down-box{
-        background-image: url("../assets/img/modal-box/drop-box.png");
+        background-image: url("../assets/img/modal-box/search-drop-box.png");
         background-size:100%;
         padding: 2px;
         background-repeat: no-repeat;
