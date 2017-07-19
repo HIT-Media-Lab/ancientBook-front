@@ -10,7 +10,7 @@
             </router-link>
             <input placeholder=" 请输入关键字搜索" class="search-input" v-model="sort_box" v-on:keydown.enter="search1">
             <button class="search-btn" @click="search1">搜 索</button>
-            <img src="../assets/img/头像.png" class="user-img" @click="show_login">
+            <img src="../assets/img/picture-button/avatar.png" class="user-img" @click="show_login">
             <span class="user-name" @click="show_login" v-model="user_name">{{user_name}}</span>
             <div class="down-box"  v-show="sort_box.length!=0">
                 <ul>
@@ -135,7 +135,6 @@
                 this.$route.params.content = this.sort_box;
                 this.$route.params.pageId = 1;
                 if (this.sort_box != ''){
-//                    this.$store.commit('push_search_content', this.sort_box);
                     this.$router.push({name: 'search_noumenon', params: this.$route.params});
                     this.sort_box = '';
                 }
@@ -244,7 +243,7 @@
         width: 990px;
     }
     .bookstore{
-        background-image: url("../assets/img/墨点按钮.png");
+        background-image: url("../assets/img/button/ink-button.png");
         border: none;
         background-color: transparent;
         width: 135px;
@@ -252,7 +251,7 @@
     }
     .noumenon-store{
         /*margin-left: 47px;*/
-        background-image: url("../assets/img/墨点按钮.png");
+        background-image: url("../assets/img/button/ink-button.png");
         border: none;
         background-color: transparent;
         width: 135px;
@@ -260,7 +259,7 @@
 
     }
     .search-btn{
-        background-image: url("../assets/img/搜索按钮小.png");
+        background-image: url("../assets/img/button/search-button-small.png");
         background-repeat: no-repeat;
         width: 100px;
         height: 50px;
@@ -286,7 +285,7 @@
         height: 50px;
     }
     .down-box{
-        background-image: url("../assets/img/下拉框.png");
+        background-image: url("../assets/img/modal-box/drop-box.png");
         background-size:100%;
         padding: 2px;
         background-repeat: no-repeat;
@@ -299,7 +298,7 @@
         margin-left: 30px;
         vertical-align:middle;
         padding: 0 20px;
-        background-image: url("../assets/img/搜索框小.png");
+        background-image: url("../assets/img/modal-box/search-input-small.png");
         background-color: transparent;
         background-repeat: no-repeat;
         border: none;
@@ -402,20 +401,19 @@
         width: 320px;
         height: 45px;
         color: white;
-        background-image: url("../assets/img/登录按钮.png");
+        background-image: url("../assets/img/button/login-button.png");
         background-repeat: no-repeat;
         background-size: 100%;
         border: none;
     }
     .dialog-header {
-        background-image: url("../assets/img/弹框标题.png");
+        background-image: url("../assets/img/no-use-picture/modal-header.png ");
         background-size:100%;
     }
 
     .dialog-title {
         color: white;
         font-size: 30px;
-        font-family: 楷体;
         text-align: center;
         width:6em;
         margin-left: 110px;

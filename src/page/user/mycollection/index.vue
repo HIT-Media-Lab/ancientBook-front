@@ -5,12 +5,12 @@
             <div class="j-collection-div" v-for="(item,index) in content">
                 <div  v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                     <div class="show-edit1">
-                        <img style="margin-left: 60px" src="../../../assets/img/白笔.png" @click="">
-                        <img src="../../../assets/img/叉.png">
+                        <img style="margin-left: 60px" src="../../../assets/img/picture-button/white-pen.png" @click="">
+                        <img src="../../../assets/img/picture-button/white-cross.png">
                     </div>
-                    <img :id="item.ancient_book_id" class="j-collection-img" @click="go_to_bookinfo">
+                    <img :id="item.ancient_book_id" class="j-collection-img" @click="go_to_bookinfo(item.ancient_book_id)">
                 </div>
-                <p class="j-collection-p" @click="go_to_bookinfo" :title="item.standard_name">{{item.standard_name}}</p>
+                <p class="j-collection-p" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
             </div>
         </div>
         <page_button :max=this.total_page></page_button>
@@ -49,6 +49,10 @@
             }
         },
         methods:{
+            go_to_bookinfo(item){
+                this.$store.commit("push_ancient_book_id", item);
+                this.$router.push({path: '/bookstore/book_info'});
+            },
             show_edit1(index){
                 document.getElementsByClassName('show-edit1')[index].style.opacity = 0.9;
             },

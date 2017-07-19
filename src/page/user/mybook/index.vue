@@ -5,8 +5,8 @@
             <p class="j-mybook-recent-name">最近</p>
             <div class="j-mybook-recent-img">
                 <div class="j-mybook-recent-div" v-for="item in recent_mybook">
-                    <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo">
-                    <p class="j-mybook-p" @click="go_to_bookinfo" :title="item.standard_name">{{item.standard_name}}</p>
+                    <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo(item.ancient_book_id)">
+                    <p class="j-mybook-p" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
                 </div>
             </div>
             <p class="j-mybook-recent-name">已上传</p>
@@ -14,16 +14,16 @@
                 <div class="j-mybook-recent-div" v-for="(item,index) in al_up_book">
                     <div v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                         <div class="show-edit1">
-                            <img style="margin-left: 60px" src="../../../assets/img/白笔.png" @click="">
-                            <img src="../../../assets/img/叉.png">
+                            <img style="margin-left: 60px" src="../../../assets/img/picture-button/white-pen.png" @click="">
+                            <img src="../../../assets/img/picture-button/white-cross.png">
                         </div>
-                        <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo">
+                        <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo(item.ancient_book_id)">
                     </div>
-                    <p class="j-mybook-p" @click="go_to_bookinfo" :title="item.standard_name">{{item.standard_name}}</p>
+                    <p class="j-mybook-p" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
                 </div>
                 <div class="j-mybook-morelink" v-show="show_more1">
                     <span class="j-mybook-more" @click="go_to_more_upbook">更多</span>
-                    <img src="../../../assets/img/more_logo.png" @click="go_to_more_upbook">
+                    <img src="../../../assets/img/picture-button/more_logo.png" @click="go_to_more_upbook">
                 </div>
             </div>
             <p class="j-mybook-recent-name">私密古籍</p>
@@ -31,16 +31,16 @@
                 <div class="j-mybook-recent-div" v-for="(item,index) in private_book">
                     <div>
                         <div class="show-edit2" v-on:mouseover="show_edit2(index)" v-on:mouseout="shut_edit2(index)">
-                            <img style="margin-left: 60px" src="../../../assets/img/白笔.png">
-                            <img src="../../../assets/img/叉.png">
+                            <img style="margin-left: 60px" src="../../../assets/img/picture-button/white-pen.png">
+                            <img src="../../../assets/img/picture-button/white-cross.png">
                         </div>
-                        <img :id = "item.ancient_book_id + 's'" class="j-mybook-recent-img1" @click="go_to_bookinfo">
+                        <img :id = "item.ancient_book_id + 's'" class="j-mybook-recent-img1" @click="go_to_bookinfo(item.ancient_book_id)">
                     </div>
-                    <p class="j-mybook-p" @click="go_to_bookinfo" :title="item.standard_name">{{item.standard_name}}</p>
+                    <p class="j-mybook-p" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
                 </div>
                 <div class="j-mybook-morelink" v-show="show_more2">
                     <span class="j-mybook-more" @click="go_to_more_privatebook">更多</span>
-                    <img src="../../../assets/img/more_logo.png"  @click="go_to_more_privatebook">
+                    <img src="../../../assets/img/picture-button/more_logo.png"  @click="go_to_more_privatebook">
                 </div>
             </div>
         </div>
@@ -48,6 +48,7 @@
 </template>
 
 <script>
+    import store from '../../../store'
     import recent_title from '../../../component/noumenon-title.vue'
     export default{
         components: {
@@ -93,7 +94,8 @@
             shut_edit2(index){
                 document.getElementsByClassName('show-edit2')[index].style.opacity = 0;
             },
-            go_to_bookinfo(){
+            go_to_bookinfo(item){
+                this.$store.commit("push_ancient_book_id", item);
                 this.$router.push({path: '/bookstore/book_info'});
             },
             go_to_more_privatebook(){

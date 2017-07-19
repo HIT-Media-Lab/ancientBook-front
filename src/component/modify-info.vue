@@ -2,11 +2,11 @@
     <div class="j-modify">
         <div>
             <div style="width: 180px;margin: 0 auto">
-                <img src="../assets/img/头像.png" class="j-userhead" >
+                <img src="../assets/img/picture-button/avatar.png" class="j-userhead" >
                 <span class="j-simple-user"  v-model="name">{{name}}</span>
             </div>
             <p class="j-modify-edit" @click="show_edit">编辑</p>
-            <img src="../assets/img/墨水线.png" class="j-user-line" >
+            <img src="../assets/img/no-use-picture/ink-line.png" class="j-user-line" >
         </div>
         <div class="j-modify-info">
             <p>
@@ -65,7 +65,7 @@
 
     export default{
         components:{
-            login_modal,
+            login_modal
         },
         created(){
             this.http_json(this.get_info_url, 'get', {}, this.info_success, this.info_fail)
@@ -87,7 +87,7 @@
                 disabled: true,
                 show: false,
                 modify_url: '/ancient_books/modify_user_self.action',
-                get_info_url: '/ancient_books/get_user_info.action',
+                get_info_url: '/ancient_books/get_user_info.action'
             }
         },
         methods: {
@@ -270,7 +270,7 @@
         margin-left: 10px;
         width: 127px;
         height: 54px;
-        background: url("../assets/img/upload1/下一步按钮.png");
+        background: url("../assets/img/button/create-next-step.png");
         font-size: 20px;
         color: white;
     }
@@ -278,7 +278,7 @@
         margin-left: 40px;
         width: 127px;
         height: 54px;
-        background: url("../assets/img/upload1/下一步按钮.png");
+        background: url("../assets/img/button/create-next-step.png");
         font-size: 20px;
         color: white;
     }

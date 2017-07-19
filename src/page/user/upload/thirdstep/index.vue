@@ -99,7 +99,6 @@
                 copy_item : {},
                 upload_one_info : {},
                 summary : {},
-                page : 1,
                 upload_file : [],
                 responsibility_info : [],
                 add_book_obj : {},
@@ -359,50 +358,62 @@
                 this.copy_item = this.$store.getters.get_copy_item;
                 this.upload_one_info = this.$store.getters.get_upload1_info;
                 this.summary = this.$store.getters.get_book_summary;
-                this.responsibility_info.push({
-                    location_id:this.varieties_item.varieties_responsibility.location_id,
-                    person_id:this.varieties_item.varieties_responsibility.person_id,
-                    begin_time:this.varieties_item.varieties_responsibility.begin_time_id,
-                    end_time:this.varieties_item.varieties_responsibility.end_time_id,
-                    action:this.varieties_item.varieties_responsibility.action,
-                    explain:this.varieties_item.varieties_responsibility.explain,
-                    confirm:this.varieties_item.varieties_responsibility.confirm,
-                    type:this.varieties_item.varieties_responsibility.type,
-                    level:1
-                });
-                this.responsibility_info.push({
-                    location_id:this.edition_item.edition_responsibility.location_id,
-                    person_id:this.edition_item.edition_responsibility.person_id,
-                    begin_time:this.edition_item.edition_responsibility.begin_time_id,
-                    end_time:this.edition_item.edition_responsibility.end_time_id,
-                    action:this.edition_item.edition_responsibility.action,
-                    explain:this.edition_item.edition_responsibility.explain,
-                    confirm:this.edition_item.edition_responsibility.confirm,
-                    type:this.edition_item.edition_responsibility.type,
-                    level:2
-                });
-                this.responsibility_info.push({
-                    location_id:this.impression_item.impression_responsibility.location_id,
-                    person_id:this.impression_item.impression_responsibility.person_id,
-                    begin_time:this.impression_item.impression_responsibility.begin_time_id,
-                    end_time:this.impression_item.impression_responsibility.end_time_id,
-                    action:this.impression_item.impression_responsibility.action,
-                    explain:this.impression_item.impression_responsibility.explain,
-                    confirm:this.impression_item.impression_responsibility.confirm,
-                    type:this.impression_item.impression_responsibility.type,
-                    level:3
-                });
-                this.responsibility_info.push({
-                    location_id:this.copy_item.copy_responsibility.location_id,
-                    person_id:this.copy_item.copy_responsibility.person_id,
-                    begin_time:this.copy_item.copy_responsibility.begin_time_id,
-                    end_time:this.copy_item.copy_responsibility.end_time_id,
-                    action:this.copy_item.copy_responsibility.action,
-                    explain:this.copy_item.copy_responsibility.explain,
-                    confirm:this.copy_item.copy_responsibility.confirm,
-                    type:this.copy_item.copy_responsibility.type,
-                    level:4
-                });
+
+                for (var i = 0; i < this.varieties_item.varieties_responsibility.length; i++) {
+                    this.responsibility_info.push({
+                        location_id:this.varieties_item.varieties_responsibility[i].location_id,
+                        person_id:this.varieties_item.varieties_responsibility[i].person_id,
+                        begin_time:this.varieties_item.varieties_responsibility[i].begin_time_id,
+                        end_time:this.varieties_item.varieties_responsibility[i].end_time_id,
+                        action:this.varieties_item.varieties_responsibility[i].action,
+                        explain:this.varieties_item.varieties_responsibility[i].explain,
+                        confirm:this.varieties_item.varieties_responsibility[i].confirm,
+                        type:this.varieties_item.varieties_responsibility[i].type,
+                        level:1
+                    })
+                }
+
+                for (var j = 0; j < this.edition_item.edition_responsibility.length; j++) {
+                    this.responsibility_info.push({
+                        location_id:this.edition_item.edition_responsibility[j].location_id,
+                        person_id:this.edition_item.edition_responsibility[j].person_id,
+                        begin_time:this.edition_item.edition_responsibility[j].begin_time_id,
+                        end_time:this.edition_item.edition_responsibility[j].end_time_id,
+                        action:this.edition_item.edition_responsibility[j].action,
+                        explain:this.edition_item.edition_responsibility[j].explain,
+                        confirm:this.edition_item.edition_responsibility[j].confirm,
+                        type:this.edition_item.edition_responsibility[j].type,
+                        level:2
+                    })
+                }
+
+                for (var k = 0; k < this.impression_item.impression_responsibility.length; k++) {
+                    this.responsibility_info.push({
+                        location_id:this.impression_item.impression_responsibility[k].location_id,
+                        person_id:this.impression_item.impression_responsibility[k].person_id,
+                        begin_time:this.impression_item.impression_responsibility[k].begin_time_id,
+                        end_time:this.impression_item.impression_responsibility[k].end_time_id,
+                        action:this.impression_item.impression_responsibility[k].action,
+                        explain:this.impression_item.impression_responsibility[k].explain,
+                        confirm:this.impression_item.impression_responsibility[k].confirm,
+                        type:this.impression_item.impression_responsibility[k].type,
+                        level:3
+                    })
+                }
+
+                for (var m = 0; m < this.copy_item.copy_responsibility.length; m++) {
+                    this.responsibility_info.push({
+                        location_id:this.copy_item.copy_responsibility[m].location_id,
+                        person_id:this.copy_item.copy_responsibility[m].person_id,
+                        begin_time:this.copy_item.copy_responsibility[m].begin_time_id,
+                        end_time:this.copy_item.copy_responsibility[m].end_time_id,
+                        action:this.copy_item.copy_responsibility[m].action,
+                        explain:this.copy_item.copy_responsibility[m].explain,
+                        confirm:this.copy_item.copy_responsibility[m].confirm,
+                        type:this.copy_item.copy_responsibility[m].type,
+                        level:4
+                    })
+                }
 
                 this.add_book_obj.english = this.varieties_item.english;
                 this.add_book_obj.type_name = this.varieties_item.type_name;
@@ -447,31 +458,41 @@
                 this.add_book_obj.summary = this.summary;
                 this.add_book_obj.responsibility_info = this.responsibility_info;
                 this.before_http(this.add_book_obj);
-                this.http_json('/ancient_books/create_ancient_book_with_new_literature.action' , 'post' , this.add_book_obj , this.success_post_add,this.fail_post_add);
+                this.http_json('/ancient_books/create_ancient_book_with_new_literature.action' , 'post' , this.add_book_obj , this.success_post_add , this.fail_post_add);
             },
 
             success_post_add(response) {
                 var vm = this;
                 if (response.body.result === 1) {
-                    console.log ("success add!");
+                    console.log("success add!");
 
-                    for(var i = 1;i < vm.picture.length+1; i++) {
-                        var upload_picture_obj = {};
-                        upload_picture_obj.ancient_book_id = response.body.id;
-                        upload_picture_obj.book = 1;
-                        upload_picture_obj.volume = 1;
-                        upload_picture_obj.page = i;
-                        upload_picture_obj.picture = vm.images[i-1];
-                        upload_picture_obj.content = vm.texts[i-1];
-                        upload_picture_obj.book_name = vm.upload_file.book_name;
-                        this.before_http(upload_picture_obj);
-                        this.http_json('/ancient_books/upload_page.action' , 'post' , upload_picture_obj , this.success_post_picture,this.fail_post_picture);
+                    for (var i = 0; i < vm.upload_file.length; i++) {
+                        for (var j = 0; j < vm.upload_file[i].images.length; j++) {
+                            var upload_picture_obj = {};
+
+                            var name = vm.upload_file[i].images[j].pic_name;
+                            var first = name.charAt(1);
+                            var second = name.charAt(2);
+                            var third = name.charAt(3);
+                            var str = first + second + third;
+                            var volume = parseInt(str);
+
+                            upload_picture_obj.ancient_book_id = response.body.id;
+                            upload_picture_obj.book = i + 1;
+                            upload_picture_obj.volume = volume;
+                            upload_picture_obj.page = j + 1;
+                            upload_picture_obj.picture = vm.upload_file[i].images[j].picture;
+                            upload_picture_obj.content = vm.upload_file[i].texts[j];
+                            upload_picture_obj.book_name = vm.upload_file[i].book_name;
+                            this.before_http(upload_picture_obj);
+                            this.http_json('/ancient_books/upload_page.action' , 'post' , upload_picture_obj , this.success_post_picture , this.fail_post_picture);
+                        }
                     }
 
                     this.$router.push({path:'/bookstore/book_info'});
                 }
                 else if (response.body.result === 0) {
-                    console.log ("fail add");
+                    console.log("fail add");
                 }
             },
 
@@ -484,7 +505,7 @@
                     console.log("success upload picture!");
                 }
                 else if (response.body.result === 0) {
-                    console.log ("fail upload picture");
+                    console.log("fail upload picture");
                 }
             },
 
@@ -533,7 +554,7 @@
     }
 
     .ry-scroll{
-        overflow-y: scroll;
+        overflow-y: auto;
         overflow-x: hidden;
     }
 
@@ -542,7 +563,7 @@
         display: inline-block;
         width: 120px;
         height: 160px;
-        background-image:  url("../../../../assets/img/upload3/upload3_add.png");
+        background-image: url("../../../../assets/img/upload3/upload3_add.png");
         background-size: 100%;
         padding-top: 25px;
         padding-left: 40px;

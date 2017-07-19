@@ -2,7 +2,7 @@
     <!--登录组件-->
     <div class="index-page">
         <div class="head">
-            <img src="../../../assets/img/logo.png" class="logo">
+            <img src="../../../assets/img/no-use-picture/logo.png" class="logo">
             <h3 class="web-name">兰台古籍研究平台</h3>
         </div>
         <div class="search-login">
@@ -128,7 +128,7 @@ import store from '../../../store'
     }
     .search-input-login{
         padding-left: 20px;
-        background-image: url("../../../assets/img/搜索框大.png");
+        background-image: url("../../../assets/img/modal-box/search-input-big.png");
         background-color: transparent;
         background-size: 100%;
         background-repeat: no-repeat;
@@ -138,7 +138,7 @@ import store from '../../../store'
     }
     .search-btn-login{
         margin-left: -15px;
-        background-image: url("../../../assets/img/搜索按钮大.png");
+        background-image: url("../../../assets/img/button/search-button-big.png");
         background-repeat: no-repeat;
         background-size: 105%;
         color: white;
@@ -154,7 +154,7 @@ import store from '../../../store'
         width: 500px;
         height: 90px;
         background-repeat: no-repeat;
-        background-image: url("../../../assets/img/下拉框.png");
+        background-image: url("../../../assets/img/modal-box/drop-box.png");
         background-size: 100%;
     }
     .sort-box1-login{
