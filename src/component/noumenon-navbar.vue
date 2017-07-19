@@ -49,7 +49,7 @@
         margin-top: 35px;
         background-repeat:no-repeat;
         background-position:center;
-        background-image: url("../assets/img/navigation-bar.png");
+        background-image: url("../assets/img/no-use-picture/navigation-bar.png");
         width:1038px;
         height:68px;
         padding-left: 55px;

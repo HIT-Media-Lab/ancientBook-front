@@ -41,18 +41,18 @@
 
             <div class="zxw-infospan">
                 <p class="zxwspan-length">出生时间：</p>
-                <p class="zxwspan-length" v-model="person_content.birth_time_name,person_content.birth_time_id">{{person_content.birth_time_name}}</p>
+                <button class="zxwbtn-info zxwspan-length" v-model="person_content.birth_time_name,person_content.birth_time_id" @click="go_birth_time()">{{person_content.birth_time_name}}</button>
             </div>
 
             <div class="zxw-infospan">
                 <p class="zxwspan-length">死亡时间：</p>
-                <p class="zxwspan-length" v-model="person_content.death_time_name,person_content.death_time_id">{{person_content.death_time_name}}</p>
+                <button class="zxwbtn-info zxwspan-length" v-model="person_content.death_time_name,person_content.death_time_id" @click="go_dead_time()">{{person_content.death_time_name}}</button>
             </div>
 
             <div class="zxw-infospan">
                 <p class="zxwspan-length">籍贯：</p>
                 <p class="zxwspan-length zxw-null" v-if="person_content.jiguan_location_name === ''">不详</p>
-                <p class="zxwspan-length" v-model="person_content.jiguan_location_id,person_content.jiguan_location_name" v-else>{{person_content.jiguan_location_name}}</p>
+                <button class="zxwbtn-info zxwspan-length" v-model="person_content.jiguan_location_id,person_content.jiguan_location_name" v-else>{{person_content.jiguan_location_name}}</button>
             </div>
 
             <div class="zxw-infospan">
@@ -473,6 +473,14 @@
 
             to_character(p){
                 this.$router.push({name:'char_detail',params:{nouId:p}});
+            },
+
+            go_birth_time(){
+                this.$router.push({name:'time_detail',params:{nouId:this.person_content.birth_time_id}});
+            },
+
+            go_dead_time(){
+                this.$router.push({name:'time_detail',params:{nouId:this.person_content.death_time_id}});
             }
         }
     }

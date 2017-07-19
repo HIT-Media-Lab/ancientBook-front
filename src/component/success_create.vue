@@ -1,7 +1,7 @@
 <template>
     <modal :show_modal="this.show_info" class="zxw-modal-character zxw-success-create-body">
         <div slot="body">
-            <img src="../assets/img/success_create.png" class="zxw-success-create-icon">
+            <img src="../assets/img/no-use-picture/success_create.png" class="zxw-success-create-icon">
             <span class="zxw-success-create">已成功创建本体</span>
         </div>
     </modal>
@@ -19,7 +19,7 @@
 
 <style>
     .zxw-success-create-body{
-        background-image: url("../assets/img/success-create-background.png");
+        background-image: url("../assets/img/modal-box/success-create-background.png");
         background-repeat: no-repeat;
         background-position: center;
         background-size: 400px 200px;

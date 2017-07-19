@@ -79,7 +79,7 @@
 
     /*按钮样式*/
     .btn-pages{
-        background-image: url("../assets/img/pre-page.png");
+        background-image: url("../assets/img/button/add-button.png");
         background-repeat: no-repeat;
         background-color: transparent;
         background-position: center;

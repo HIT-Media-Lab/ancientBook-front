@@ -66,7 +66,7 @@
         padding:15px 0 0 40px;
         width:968px;
         height:53px;
-        background-image: url("../assets/img/letter-index.png");
+        background-image: url("../assets/img/modal-box/letter-index.png");
         background-position: center;
     }
 

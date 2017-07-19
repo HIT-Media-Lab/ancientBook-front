@@ -268,7 +268,7 @@
 
 <style>
     .zxw-time-add{
-        background-image: url("../assets/img/create-next-step.png");
+        background-image: url("../assets/img/button/create-next-step.png");
         background-color: transparent;
         background-size: 100%;
         background-repeat: no-repeat;
@@ -282,7 +282,7 @@
         color:gainsboro;
         font-size: 18px;
         text-align: center;
-        background-image: url("../assets/img/弹框标题.png");
+        background-image: url("../assets/img/no-use-picture/modal-header.png");
         background-size: contain;
         background-color: transparent;
         width:800px;
