@@ -134,7 +134,7 @@
             </div>
 
             <div>
-                <img src="../../../assets/img/upload1/中间墨线.png" height="6" width="843"/>
+                <img src="../../../assets/img/no-use-picture/ink-line.png" height="6" width="843"/>
             </div>
 
             <div id="form-edition">
@@ -203,7 +203,7 @@
             </div>
 
             <div>
-                <img src="../../../assets/img/upload1/中间墨线.png" height="6" width="843"/>
+                <img src="../../../assets/img/no-use-picture/ink-line.png" height="6" width="843"/>
             </div>
         </div>
     </div>
