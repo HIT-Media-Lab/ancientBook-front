@@ -407,7 +407,7 @@
         border: none;
     }
     .dialog-header {
-        background-image: url("../assets/img/no-use-picture/modal-header.png ");
+        background-image: url("../assets/img/no-use-picture/modal-header.png");
         background-size:100%;
     }
 
