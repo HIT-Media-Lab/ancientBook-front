@@ -7,7 +7,7 @@
         </div>
 
         <div class="width1000 center">
-            <img src="../../../assets/img/本体标记/墨水线上.png" height="7" width="974"/>
+            <img src="../../../assets/img/no-use-picture/ink-line.png" height="7" width="974"/>
         </div>
 
         <div class="width950 center">
@@ -31,7 +31,7 @@
                 <p>诗经》是我国第一部诗歌总集，共收入自西周初年至春秋中叶大约五百多年的诗歌三百零五篇。《诗经》共分风（160篇）、雅（105篇）、颂（40篇）三大部分。它们都得名于音乐。“风”的意义就是声调。古人所谓《秦风》、《魏风》、《郑风》，就如现在我们说陕西调、山西调、河南调、“雅”是正的意思。周代人把正声叫做雅乐，犹如清代人把昆腔叫做雅部，带有一种尊崇的意味。大雅小雅可能是根据年代先后而分的。“颂”是用于宗庙祭的乐歌。</p>
             </div>
             <div>
-                <img src="../../../assets/img/upload1/中间墨线.png" height="6" width="843"/>
+                <img src="../../../assets/img/no-use-picture/ink-line.png" height="6" width="843"/>
             </div>
             <catalogue></catalogue>
         </div>
