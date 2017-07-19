@@ -1,7 +1,7 @@
 <template>
     <div class="zxw-noumenon">
-    <navigation_bar></navigation_bar>   <!--本体导航条-->
-    <router-view></router-view>
+        <navigation_bar></navigation_bar>   <!--本体导航条-->
+        <router-view></router-view>
     </div>
 </template>
 
