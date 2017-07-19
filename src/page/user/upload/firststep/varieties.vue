@@ -172,7 +172,7 @@
             </div>
 
             <div>
-                <img src="../../../../assets/img/upload1/中间墨线.png" height="6" width="843"/>
+                <img src="../../../../assets/img/no-use-picture/ink-line.png" height="6" width="843"/>
             </div>
 
             <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></time_modal>
@@ -568,13 +568,27 @@
     #ry-select-b,#ry-select-l,#ry-select-s{
         width: 208px;
         height: 33px;
-        background-image: url("../../../../assets/img/upload1/标准分类.png");
+        background-image: url("../../../../assets/img/picture-button/biao zhun fen lei.png");
     }
 
     #ry-input-info,#ry-input-responsibility{
         width: 664px;
         height: 74px;
-        background-image: url("../../../../assets/img/upload1/责任信息.png");
+        background-image: url("../../../../assets/img/modal-box/ze ren xin xi.png");
+    }
+
+    .ry-btn-add{
+        width: 103px;
+        height: 44px;
+        color: white;
+        background-image: url("../../../../assets/img/button/add-button.png");
+    }
+
+    .ry-btn-del{
+        width: 103px;
+        height: 44px;
+        color: white;
+        background-image: url("../../../../assets/img/button/add-button.png");
     }
 
 

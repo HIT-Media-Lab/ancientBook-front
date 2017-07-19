@@ -29,7 +29,7 @@
             </div>
 
             <div>
-                <img src="../../../../assets/img/upload1/中间墨线.png" height="6" width="843"/>
+                <img src="../../../../assets/img/no-use-picture/ink-line.png" height="6" width="843"/>
             </div>
 
             <div class="form-impression" v-for="(item,index) in impression_item.impression_responsibility">

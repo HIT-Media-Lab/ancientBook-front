@@ -4,7 +4,7 @@
         <!--目录-->
         <div class="width1000 center">
             <p>经部/總類/<span style="color: red">石經之屬</span>/<span style="color: red">詩經</span>/冊1冊名/卷1</p>
-            <img src="../assets/img/墨水线上.png" height="7" width="974"/>
+            <img src="../assets/img/no-use-picture/ink-line-long.png" height="7" width="974"/>
         </div>
 
         <!--按鈕欄-->
@@ -25,9 +25,9 @@
                     <ul class="ry-module-bar float-right">
                         <!--class值为空表示未激活板块，class值为li-now表示激活板块-->
                         <li id="mark-head">本體標記</li>
-                        <img style="display: block" class="float-right" src="../assets/img/本体标记/屏风按钮间隔.png" height="31" width="6"/>
+                        <img style="display: block" class="float-right" src="../assets/img/picture-button/screen-button.png" height="31" width="6"/>
                         <li id="comment-head">批註版</li>
-                        <img style="display: block" class="float-right" src="../assets/img/本体标记/屏风按钮间隔.png" height="31" width="6"/>
+                        <img style="display: block" class="float-right" src="../assets/img/picture-button/screen-button.png" height="31" width="6"/>
                         <li id="edit-head" class="li-now">修訂版</li>
                     </ul>
                 </div>
@@ -109,7 +109,7 @@
                             <br>
                             <br>
                             <br>
-                            <img src="../assets/img/upload1/中间墨线.png" height="6" width="600"/>
+                            <img src="../assets/img/no-use-picture/ink-line-long.png" height="6" width="600"/>
                             <!--修订信息编辑框标题-->
                             <h5>修訂信息:</h5>
                             <!--修订信息编辑框-->
@@ -174,8 +174,8 @@
 
             <!--图片工作台-->
             <div>
-                <div class="float-right ry-hide-picture"><img src="../assets/img/本体标记/更多标.png" height="130" width="29"/></div>
-                <img src="../assets/img/u2099.png"/>
+                <div class="float-right ry-hide-picture"><img src="../assets/img/picture-button/more.png" height="130" width="29"/></div>
+                <img />
             </div>
         </div>
 
@@ -239,7 +239,7 @@
 
         <!--底按鈕欄-->
         <div class="width1000 center">
-            <img src="../assets/img/本体标记/墨水线 下.png" height="4" width="974"/>
+            <img src="../assets/img/no-use-picture/ink-line-long.png" height="4" width="974"/>
             <div class="ry-bottom-bar">
                 <button class="float-right ry-btn-next-page">下一</button>
                 <button class="float-right ry-btn-go">GO</button>
@@ -1289,14 +1289,14 @@
         color: white;
         width: 103px;
         height: 44px;
-        background-image: url("../assets/img/下一处按钮.png");
+        background-image: url("../assets/img/button/add-button.png");
     }
     
     .last-one{
         color: white;
         width: 103px;
         height: 44px;
-        background-image: url("../assets/img/上一处按钮.png");
+        background-image: url("../assets/img/button/add-button.png");
     }
     
     .ry-search{
@@ -1304,7 +1304,7 @@
         height: 50px;
         margin-left: 550px;
         padding-left: 20px;
-        background-image: url("../assets/img/search-input.png");
+        background-image: url("../assets/img/modal-box/search-input.png");
     }
 
     .ry-select{
@@ -1316,49 +1316,49 @@
         -moz-appearance: none;
         appearance: none;
         background-color: transparent;
-        background-image: url("../assets/img/本体标记/下拉菜单.png");
+        background-image: url("../assets/img/picture-button/drop-box.png");
     }
 
     .ry-btn-menu{
         color: white;
         width: 103px;
         height: 44px;
-        background-image: url("../assets/img/本体标记/目录.png");
+        background-image: url("../assets/img/button/add-button.png");
     }
 
     .ry-btn-go{
         color: white;
         width: 45px;
         height: 44px;
-        background-image: url("../assets/img/本体标记/go.png");
+        background-image: url("../assets/img/button/go.png");
     }
 
     .ry-btn-last-page{
         color: white;
         width: 103px;
         height: 44px;
-        background-image: url("../assets/img/本体标记/上一.png");
+        background-image: url("../assets/img/button/add-button.png");
     }
 
     .ry-btn-next-page{
         color: white;
         width: 103px;
         height: 44px;
-        background-image: url("../assets/img/本体标记/下一.png");
+        background-image: url("../assets/img/button/add-button.png");
     }
 
     .ry-btn-edit{
         color: white;
         width: 103px;
         height: 44px;
-        background-image: url("../assets/img/修订/修订按钮.png");
+        background-image: url("../assets/img/button/add-button.png");
     }
 
     .ry-btn-edit-record{
         color: white;
         width: 103px;
         height: 44px;
-        background-image: url("../assets/img/修订/修订记录按钮.png");
+        background-image: url("../assets/img/button/add-button.png");
     }
 
     .ry-input-page{
@@ -1372,7 +1372,7 @@
         color: white;
         width: 103px;
         height: 44px;
-        background-image: url("../assets/img/本体标记/卷数.png");
+        background-image: url("../assets/img/button/add-button.png");
     }
 
     .ry-hide-picture{
@@ -1389,19 +1389,19 @@
         padding-top: 5px;
         width: 299px;
         height: 47px;
-        background-image: url("../assets/img/本体标记/屏风按钮.png");
+        background-image: url("../assets/img/picture-button/screen-button.png");
     }
 
     .ry-btn-cancel-add-comment{
         width: 80px;
         height: 35px;
-        background-image: url("../assets/img/批注交互/删除按钮.png");
+        background-image: url("../assets/img/button/delete-button.png");
     }
 
     .ry-btn-confirm-add-comment{
         width: 80px;
         height: 35px;
-        background-image: url("../assets/img/批注交互/删除按钮.png");
+        background-image: url("../assets/img/button/delete-button.png");
     }
 
     .ry-modal-add-comment-box{
@@ -1424,7 +1424,7 @@
         height: 36px;
         padding-left: 4px;
         margin-left: 20px;
-        background-image: url("../assets/img/本体标记交互/搜索框.png");
+        background-image: url("../assets/img/modal-box/search-input-black.png");
     }
 
     .ry-type-select{
@@ -1432,7 +1432,7 @@
         height: 36px;
         border: none;
         padding-left: 4px;
-        background-image: url("../assets/img/本体标记交互/本体筛选.png");
+        background-image: url("../assets/img/picture-button/drop-box.png");
     }
 
     .ry-btn-search-pic{
@@ -1440,7 +1440,7 @@
         height: 20px;
         margin-left: 10px;
         background-size: 100%;
-        background-image: url("../assets/img/本体标记交互/搜索放大镜.png");
+        background-image: url("../assets/img/picture-button/magnifier.png");
     }
 
     .ry-add-mark-modal-box{
@@ -1454,7 +1454,7 @@
         height: 44px;
         margin-left: 440px;
         background-size: 100%;
-        background-image: url("../assets/img/upload1/下一步按钮.png");
+        background-image: url("../assets/img/button/add-button.png");
     }
     
 

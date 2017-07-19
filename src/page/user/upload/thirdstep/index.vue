@@ -9,7 +9,7 @@
         </div>
 
         <div class="width1000 center">
-            <img src="../../../../assets/img/本体标记/墨水线上.png" height="7" width="974"/>
+            <img src="../../../../assets/img/no-use-picture/ink-line-long.png" height="7" width="974"/>
         </div>
 
         <div class="width950 height650 center ry-scroll">
@@ -529,14 +529,14 @@
         color: white;
         width: 127px;
         height: 54px;
-        background-image: url("../../../../assets/img/upload2/下一步.png");
+        background-image: url("../../../../assets/img/button/create-next-step.png");
     }
 
     .ry-btn-last-step3{
         color: white;
         width: 127px;
         height: 54px;
-        background-image: url("../../../../assets/img/upload2/下一步.png");
+        background-image: url("../../../../assets/img/button/create-next-step.png");
     }
 
     .ry-picture-view{
@@ -563,7 +563,7 @@
         display: inline-block;
         width: 120px;
         height: 160px;
-        background-image: url("../../../../assets/img/upload3/upload3_add.png");
+        background-image: url("../../../../assets/img/picture-button/upload3_add.png");
         background-size: 100%;
         padding-top: 25px;
         padding-left: 40px;
@@ -591,7 +591,7 @@
         color:gainsboro;
         font-size: 18px;
         text-align: center;
-        background-image: url("../../../../assets/img/弹框标题.png");
+        background-image: url("../../../../assets/img/no-use-picture/modal-header.png");
         background-size: contain;
         background-color: transparent;
         width:400px;
@@ -619,7 +619,7 @@
         position: fixed;
         margin-left: 5px;
         margin-top: 360px;
-        background-image: url("../../../../assets/img/upload3/change-file.png");
+        background-image: url("../../../../assets/img/button/change-file.png");
         width: 80px;
         height: 30px;
         background-size: 100%;
@@ -633,7 +633,7 @@
         position: fixed;
         margin-left: 100px;
         margin-top: 360px;
-        background-image: url("../../../../assets/img/upload3/change-file.png");
+        background-image: url("../../../../assets/img/button/change-file.png");
         width: 80px;
         height: 30px;
         background-size: 100%;
