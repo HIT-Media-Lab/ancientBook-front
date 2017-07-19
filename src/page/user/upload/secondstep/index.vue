@@ -97,6 +97,7 @@
         },
 
         created : function () {
+            this.index = this.$store.getters.get_upload_book_index;
             this.upload_file = this.$store.getters.get_upload_file;
             this.text_name = this.$store.getters.get_text_name;
         },
@@ -108,6 +109,7 @@
         beforeRouteLeave(to, from, next) {
             this.$store.commit("get_upload_file",this.upload_file);
             this.$store.commit("get_text_name",this.text_name);
+            this.$store.commit("get_upload_book_index",this.index);
             next();
         },
 
@@ -127,8 +129,9 @@
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)return;
                 this.createImage(files,this.index);
+                console.log(this.upload_file[this.index].images);
                 this.check_picture_name();
-            },
+             },
 
             createImage(file,index) {
                 if (typeof FileReader === 'undefined') {
@@ -155,7 +158,7 @@
             },
 
             check_picture_name() {
-                for (var i = 0; i < this.upload_file[this.index].images.length; i ++) {
+                for (var i = 0; i < this.upload_file[this.index].images.length; i++) {
                     var name = this.upload_file[this.index].images[i].pic_name;
                     var one = name.charAt(0);
                     var two = name.charAt(1);
@@ -330,9 +333,6 @@
                 }
                 else if (this.upload_file[this.index].images.length == 0) {
                     alert("请选择要上传的图片文件")
-                }
-                else if (this.upload_file[this.index].texts.length == 0) {
-                    alert("请选择要上传的文本文件")
                 }
                 else{
                     this.upload_file[p].value = false;
