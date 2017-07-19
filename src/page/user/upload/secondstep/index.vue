@@ -9,7 +9,7 @@
         </div>
 
         <div class="width1000 center">
-            <img src="../../../../assets/img/本体标记/墨水线上.png" height="7" width="974"/>
+            <img src="../../../../assets/img/no-use-picture/ink-line-long.png" height="7" width="974"/>
         </div>
 
         <div class="width600 center">
@@ -54,13 +54,13 @@
                     <span class="col-md-2">上传至</span>
                     <span class="col-md-2">状态</span>
                 </div>
-                <img src="../../../../assets/img/upload2/形状 1.png" height="1" width="750"/>
+                <img src="../../../../assets/img/no-use-picture/ink-line.png" height="1" width="750"/>
                 <div class="row" v-for="item in upload_file[index].images">
-                    <span class="col-md-5"><img src="../../../../assets/img/upload2/1.png" height="40" width="30"/>{{item.pic_name}}</span>
+                    <span class="col-md-5"><img src="../../../../assets/img/no-use-picture/1.png" height="40" width="30"/>{{item.pic_name}}</span>
                     <span class="col-md-3">{{item.pic_size}}KB</span>
                     <span class="col-md-2">册1</span>
-                    <span class="col-md-2"><img src="../../../../assets/img/upload2/correct.png" height="25" width="26"/>已上传</span>
-                    <img src="../../../../assets/img/upload2/形状 1.png" height="1" width="750"/>
+                    <span class="col-md-2"><img src="../../../../assets/img/no-use-picture/correct.png" height="25" width="26"/>已上传</span>
+                    <img src="../../../../assets/img/no-use-picture/ink-line.png" height="1" width="750"/>
                 </div>
             </div>
 
@@ -416,20 +416,20 @@
         color: white;
         width: 127px;
         height: 54px;
-        background-image: url("../../../../assets/img/upload2/下一步.png");
+        background-image: url("../../../../assets/img/button/create-next-step.png");
     }
 
     .ry-btn-upload2-last{
         width: 127px;
         height: 54px;
-        background-image: url("../../../../assets/img/upload2/上一步.png");
+        background-image: url("../../../../assets/img/button/create-next-step.png");
     }
 
     .ry-input-upload2{
         margin: 5px 0px;
         width: 225px;
         height: 33px;
-        background-image: url("../../../../assets/img/upload1/书名什么的.png");
+        background-image: url("../../../../assets/img/modal-box/book-name.png");
     }
 
     .ry-file-picture{
@@ -439,7 +439,8 @@
         font-size: x-large;
         width: 175px;
         height: 74px;
-        background-image:  url("../../../../assets/img/upload2/上传文本文本.png");
+        background-image:  url("../../../../assets/img/button/create-next-step.png");
+        background-size: 100%;
         padding-top: 25px;
         padding-left: 40px;
         overflow: hidden;
@@ -463,7 +464,8 @@
         font-size: x-large;
         width: 175px;
         height: 74px;
-        background-image:  url("../../../../assets/img/upload2/上传文本文本.png");
+        background-image:  url("../../../../assets/img/button/create-next-step.png");
+        background-size: 100%;
         padding-top: 25px;
         padding-left: 40px;
         overflow: hidden;
@@ -484,7 +486,7 @@
         color: white;
         width: 142px;
         height: 47px;
-        background-image: url("../../../../assets/img/upload2/添加新册.png");
+        background-image: url("../../../../assets/img/button/build-button.png");
     }
 
     .ry-upload-modal{
@@ -497,8 +499,8 @@
         color:gainsboro;
         font-size: 18px;
         text-align: center;
-        background-image: url("../../../../assets/img/弹框标题.png");
-        background-size: contain;
+        background-image: url("../../../../assets/img/no-use-picture/modal-header.png");
+        background-size: 100%;
         background-color: transparent;
         width:800px;
         height:50px;
