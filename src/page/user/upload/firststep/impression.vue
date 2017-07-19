@@ -123,7 +123,7 @@
             </div>
 
             <div>
-                <img src="../../../../assets/img/upload1/中间墨线.png" height="6" width="843"/>
+                <img src="../../../../assets/img/no-use-picture/ink-line.png" height="6" width="843"/>
             </div>
 
             <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></time_modal>

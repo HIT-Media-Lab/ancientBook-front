@@ -46,7 +46,7 @@
             </div>
 
             <div>
-                <img src="../../../../assets/img/upload1/中间墨线.png" height="6" width="843"/>
+                <img src="../../../../assets/img/no-use-picture/ink-line.png" height="6" width="843"/>
             </div>
 
             <div class="form-copy" v-for="(item,index) in copy_item.copy_responsibility">

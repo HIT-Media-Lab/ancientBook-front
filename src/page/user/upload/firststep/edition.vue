@@ -153,7 +153,7 @@
             </div>
 
             <div>
-                <img src="../../../../assets/img/upload1/中间墨线.png" height="6" width="843"/>
+                <img src="../../../../assets/img/no-use-picture/ink-line.png" height="6" width="843"/>
             </div>
 
             <div class="form-edition" v-for="(item,index) in edition_item.edition_responsibility">

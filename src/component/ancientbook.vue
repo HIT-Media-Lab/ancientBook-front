@@ -871,7 +871,7 @@
                 if (window.getSelection().getRangeAt(0).toString().length != 0) {
                     document.getElementById("btn-mark-noumenon").style.visibility = "visible";
                     var sel = window.getSelection();
-                    var begin = sel.anchorNode.parentNode.id
+                    var begin = sel.anchorNode.parentNode.id;
                     this.begin_add_mark = parseInt(begin);
                     var end = sel.focusNode.parentNode.id;
                     this.end_add_mark = parseInt(end)+1;

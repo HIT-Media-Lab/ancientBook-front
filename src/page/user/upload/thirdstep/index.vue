@@ -33,14 +33,14 @@
             <div class="float-right ry-page">
                 <input id="ry-volume-page" class="ry-input-page" v-model="this.volume_bind">
                 <span>/</span>
-                <span>80</span>
+                <span>{{this.volume_total}}</span>
             </div>
             <button class="float-right ry-btn-last-page" @click="last_volume">上一卷</button>
             <button class="ry-btn-last-page" @click="last_book">上一冊</button>
             <div style="display: inline-block" class="ry-page">
                 <input id="ry-book-page" class="ry-input-page" v-model="this.book_bind">
                 <span>/</span>
-                <span>80</span>
+                <span>{{this.book_total}}</span>
             </div>
             <button class="ry-btn-go" @click="go_book">GO</button>
             <button class="ry-btn-next-page" @click="next_book">下一冊</button>
@@ -87,6 +87,8 @@
 
         data() {
             return{
+                book_total : 0,
+                volume_total : 0,
                 book_bind : 1,
                 volume_bind : 1,
                 book_index : 0,
@@ -107,6 +109,8 @@
 
         created : function () {
             this.upload_file = this.$store.getters.get_upload_file;
+            this.book_total = this.upload_file.length;
+            this.volume_total = this.upload_file[0].length
         },
 
         mounted : function () {
@@ -119,6 +123,14 @@
         },
 
         methods : {
+            /**
+             * 获得每册卷数最大值
+             */
+            get_volume_total() {
+
+            },
+
+
             /**
              * 悬浮模态框
              */
