@@ -15,7 +15,7 @@
                     <div v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                         <div class="show-edit1">
                             <img style="margin-left: 60px" src="../../../assets/img/picture-button/white-pen.png" @click="">
-                            <img src="../../../assets/img/picture-button/white-cross.png">
+                            <img src="../../../assets/img/picture-button/white-cross.png" @click="delete_book(item.ancient_book_id)">
                         </div>
                         <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo(item.ancient_book_id)">
                     </div>
@@ -31,8 +31,8 @@
                 <div class="j-mybook-recent-div" v-for="(item,index) in private_book">
                     <div>
                         <div class="show-edit2" v-on:mouseover="show_edit2(index)" v-on:mouseout="shut_edit2(index)">
-                            <img style="margin-left: 60px" src="../../../assets/img/picture-button/white-pen.png">
-                            <img src="../../../assets/img/picture-button/white-cross.png">
+                            <img style="margin-left: 60px" src="../../../assets/img/picture-button/white-pen.png" @click="">
+                            <img src="../../../assets/img/picture-button/white-cross.png" @click="delete_book(item.ancient_book_id)">
                         </div>
                         <img :id = "item.ancient_book_id + 's'" class="j-mybook-recent-img1" @click="go_to_bookinfo(item.ancient_book_id)">
                     </div>
@@ -69,6 +69,7 @@
                 private_book_url: '/ancient_books/get_recent_private_ancient_books_by_user.action',
                 picture_page_url: "/ancient_books/get_page_id_by_jcy.action",
                 picture_url: '/ancient_books/get_picture_by_id.action',
+                delete_url: '/ancient_book/delete_ancient_book.action',
                 title: '我的古籍',
                 recent_mybook: [],
                 al_up_book: [],
@@ -78,7 +79,8 @@
                 k: 0,
                 show_more1: true,
                 show_more2: true,
-                name: ''
+                name: '',
+                params: {}
             }
         },
         methods: {
@@ -127,7 +129,6 @@
             },
             private_get_success(response){
                 this.private_book = response.body.content;
-                console.log("hhh");
                 if (response.body.content.length == 3){
                     this.show_more2 = true;
                 }else {
@@ -157,7 +158,17 @@
             },
             recbook_fail(){
 
-            }
+            },
+            delete_book(id){
+                this.params.id = id;
+                this.http_json(this.delete_url, 'post', this.params, this.delete_book_success, this.delete_book_fail)
+            },
+            delete_book_success(response){
+                window.location.reload();
+            },
+            delete_book_fail(response){
+                alert(response.body.info);
+            },
         }
     }
 </script>
