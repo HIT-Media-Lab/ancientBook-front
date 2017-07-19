@@ -6,7 +6,7 @@
                 <div  v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                     <div class="show-edit1">
                         <img style="margin-left: 60px" src="../../../../assets/img/picture-button/white-pen.png" @click="">
-                        <img src="../../../../assets/img/picture-button/white-cross.png" @click="">
+                        <img src="../../../../assets/img/picture-button/white-cross.png" @click="delete_book(item.ancient_book_id)">
                     </div>
                     <img :id="item.ancient_book_id" class="j-alupload-img" @click="go_to_bookinfo(item.ancient_book_id)">
                 </div>
@@ -75,6 +75,16 @@
             },
             alup_fail(){
 
+            },
+            delete_book(id){
+                this.params.id = id;
+                this.http_json(this.delete_url, 'post', this.params, this.delete_book_success, this.delete_book_fail)
+            },
+            delete_book_success(response){
+                window.location.reload();
+            },
+            delete_book_fail(response){
+                alert(response.body.info);
             }
         }
     }

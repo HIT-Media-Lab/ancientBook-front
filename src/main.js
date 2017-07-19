@@ -52,7 +52,7 @@ Vue.prototype.http_json = function (url, type, params, success, fail) {
         })
     } else if (type.toLocaleLowerCase() == "post") {
         //验证是否有无token
-        params.token=store.getters.GetToken;
+        params.token = this.$store.getters.GetToken;
         this.before_http(params);
         params.token =this.$store.getters.GetToken;
         this.$http.post(url, params,
