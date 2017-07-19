@@ -1,7 +1,7 @@
 <template>
     <div class="zxwcreate">
         <p class="zxwcreate-title">新建本体</p>
-        <img src="../../../assets/img/create-step1.png" class="zxwcreate-img">
+        <img src="../../../assets/img/no-use-picture/create-step1.png" class="zxwcreate-img">
         <create-word :prams="this.prams"></create-word>
         <div class="zxw-noumenon-select">
             <label>选择本体类型：</label>
@@ -68,7 +68,7 @@ export default{
     }
 
     .zxw-nextbtn{
-        background-image: url("../../../assets/img/create-next-step.png");
+        background-image: url("../../../assets/img/button/create-next-step.png");
         background-color: transparent;
         border-style: none;
         background-size: 100%;
@@ -86,7 +86,7 @@ export default{
         height:55px;
     }
     .zxw-prebtn{
-        background-image: url("../../../assets/img/create-pre-step.png");
+        background-image: url("../../../assets/img/button/create-pre-step.png");
         background-color: transparent;
         border-style: none;
         background-size: 100%;

@@ -41,24 +41,24 @@
 
         <div class="zxw-infospan">
              <p class="zxwspan-length">起始时间：</p>
-             <p class="zxwspan-length" v-model="location_content.begin_time_name,location_content.begin_time_id">{{location_content.begin_time_name}}</p>
+             <button class="zxwbtn-info zxwspan-length" v-model="location_content.begin_time_name,location_content.begin_time_id" @click="go_begin_time()">{{location_content.begin_time_name}}</button>
          </div>
 
          <div class="zxw-infospan">
              <p class="zxwspan-length">终止时间：</p>
-             <p class="zxwspan-length" v-model="location_content.end_time_name,location_content.end_time_id">{{location_content.end_time_name}}</p>
+             <button class="zxwbtn-info zxwspan-length" v-model="location_content.end_time_name,location_content.end_time_id" @click="go_end_time()">{{location_content.end_time_name}}</button>
          </div>
 
          <div class="zxw-infospan">
              <p class="zxwspan-length">上级地名：</p>
              <p class="zxwspan-length zxw-null" v-if="location_content.s_location_name === ''">不详</p>
-             <button class="zxwbtn-info zxwspan-length" v-model="location_content.s_location_id,location_content.s_location_name" v-else>{{location_content.s_location_name}}</button>
+             <button class="zxwbtn-info zxwspan-length" v-model="location_content.s_location_id,location_content.s_location_name" @click="go_s_location()" v-else>{{location_content.s_location_name}}</button>
          </div>
 
          <div class="zxw-infospan">
              <p class="zxwspan-length">下级地名 ：</p>
              <p class="zxwspan-length zxw-null" v-if="location_content.l_location_name === '' ">不详</p>
-             <button class="zxwbtn-info zxwspan-length" v-model="location_content.l_location_name,location_content.l_location_id"  v-else>{{location_content.l_location_name}}</button>
+             <button class="zxwbtn-info zxwspan-length" v-model="location_content.l_location_name,location_content.l_location_id" @click="go_l_location()"  v-else>{{location_content.l_location_name}}</button>
          </div>
          <div class="zxw-infospan">
             <p class="zxwspan-length">治所：</p>
@@ -291,6 +291,22 @@
 
             to_place(p){
                 this.$router.push({name:'pla_detail',params:{nouId:p}});
+            },
+
+            go_begin_time(){
+                this.$router.push({name:'time_detail',params:{nouId:this.location_content.begin_time_id}});
+            },
+
+            go_end_time(){
+                this.$router.push({name:'time_detail',params:{nouId:this.location_content.end_time_id}});
+            },
+
+            go_s_location(){
+                this.$router.push({name:'pla_detail',params:{nouId:this.location_content.s_location_id}});
+            },
+
+            go_l_location(){
+                this.$router.push({name:'pla_detail',params:{nouId:this.location_content.l_location_id}});
             }
         }
     }

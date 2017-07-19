@@ -35,7 +35,7 @@
 </template>
 
 <script>
-   /*let Mock = require('mockjs');
+    /*let Mock = require('mockjs');
     Mock.mock('/ancient_books/get_person_list_by_name.action?name=lsm&&page_count=1','get', {
         "content":[
             {
@@ -299,7 +299,7 @@
     }
 
     .zxw-search-icon{
-        background-image: url("../assets/img/big-mirror.png");
+        background-image: url("../assets/img/picture-button/magnifier.png");
         background-repeat: no-repeat;
         background-position: center;
         background-size: 100%;
@@ -341,7 +341,7 @@
         color:gainsboro;
         font-size: 18px;
         text-align: center;
-        background-image: url("../assets/img/弹框标题.png");
+        background-image: url("../assets/img/no-use-picture/modal-header.png");
         background-size: contain;
         background-color: transparent;
         width:400px;

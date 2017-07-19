@@ -13,7 +13,7 @@
 
 <style>
     .zxwnoumenom-header{
-        background-image: url("../assets/img/no-use-picture/navigation-bar.png");
+        background-image: url("../assets/img/no-use-picture/ink-line.png");
         background-repeat:no-repeat;
         background-position: bottom;
         padding-bottom: 10px;

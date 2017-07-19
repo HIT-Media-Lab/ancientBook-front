@@ -1,7 +1,7 @@
 <template>
     <div class="zxwcreate">
         <p class="zxwcreate-title">新建本体</p>
-        <img src="../../../../assets/img/create-step2.png" class="zxwcreate-img">
+        <img src="../../../../assets/img/no-use-picture/create-step2.png" class="zxwcreate-img">
         <create_word :prams="this.prams"></create_word>
 
         <div>
@@ -806,7 +806,7 @@
 
     /*添加按钮的间距*/
     .zxw-add-button{
-        background-image: url("../../../../assets/img/add-button.png");
+        background-image: url("../../../../assets/img/button/add-button.png");
         background-color: transparent;
         border: none;
         width:100px;
@@ -821,7 +821,7 @@
     }
 
     .zxw-input-add-character{
-        background-image: url("../../../../assets/img/add-character.png");
+        background-image: url("../../../../assets/img/picture-button/add-character.png");
         background-repeat: no-repeat;
         background-position: right;
         background-size: 20px 20px;
@@ -840,7 +840,7 @@
     }
 
     .zxw-add-hover-img{
-        background-image: url("../../../../assets/img/add-character-hover.png");
+        background-image: url("../../../../assets/img/picture-button/add-character-hover.png");
         background-repeat: no-repeat;
         background-position: center;
         background-size: 100%;

@@ -1,7 +1,7 @@
 <template>
     <div class="zxwcreate">
         <p class="zxwcreate-title">新建本体</p>
-        <img src="../../../../assets/img/create-step3.png" class="zxwcreate-img">
+        <img src="../../../../assets/img/no-use-picture/create-step3.png" class="zxwcreate-img">
         <create_word :prams="this.prams"></create_word>
 
         <p class="zxw-create-character">本体名称：{{this.$store.getters.get_build_character.standard_name}}</p>

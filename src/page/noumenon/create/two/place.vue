@@ -1,7 +1,7 @@
 <template>
     <div class="zxwcreate">
         <p class="zxwcreate-title">新建本体</p>
-        <img src="../../../../assets/img/create-step2.png" class="zxwcreate-img">
+        <img src="../../../../assets/img/no-use-picture/create-step2.png" class="zxwcreate-img">
         <create_word :prams="this.prams"></create_word>
 
         <div id="333">
