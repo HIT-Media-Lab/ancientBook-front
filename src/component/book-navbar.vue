@@ -133,7 +133,7 @@
 
 <style>
     .j-book-navbar{
-        background-image: url("../assets/img/navigation-bar.png");
+        background-image: url("../assets/img/no-use-picture/navigation-bar.png");
         margin-top: 35px;
         background-repeat:no-repeat;
         background-position:center;
@@ -147,7 +147,6 @@
         display: inline-block;
         background-color: transparent;
         border: none;
-
     }
     .j-option{
         background-color: #a50000;

@@ -2,25 +2,25 @@
     <div class="user">
         <div class="j-head">
             <div style="width: 180px;margin: 0 auto">
-                <img src="../../assets/img/头像.png" class="j-userhead" @click="go_to_modify">
+                <img src="../../assets/img/picture-button/avatar.png" class="j-userhead" @click="go_to_modify">
                 <span class="j-simple-user" @click="go_to_modify" v-model="name">{{name}}</span>
             </div>
-            <img src="../../assets/img/墨水线.png" class="j-user-line" >
+            <img src="../../assets/img/no-use-picture/ink-line.png" class="j-user-line" >
         </div>
         <div class="j-link">
             <router-link to="/user/upload1">
-                <img src="../../assets/img/上传.png" class="upload_img">
+                <img src="../../assets/img/picture-button/user-upload.png" class="upload_img">
             </router-link>
             <router-link to="/user_info/mybook" >
-                <img src="../../assets/img/我的古籍.png" class="mybook_img">
+                <img src="../../assets/img/picture-button/user-mybook.png" class="mybook_img">
             </router-link>
             <router-link to="/user_info/collection/page/1">
-                <img src="../../assets/img/我的收藏.png" class="mycollection_img">
+                <img src="../../assets/img/picture-button/user-my-collection.png" class="mycollection_img">
             </router-link>
             <router-link to="/user_info/edit/全部本体/page/1">
-                <img src="../../assets/img/我的贡献.png" class="myoffer_img">
+                <img src="../../assets/img/picture-button/user-myoffer.png" class="myoffer_img">
             </router-link>
-            <img src="../../assets/img/注销.png" class="logout" @click="logout()">
+            <img src="../../assets/img/picture-button/user-logout.png" class="logout" @click="logout()">
         </div>
     </div>
 </template>

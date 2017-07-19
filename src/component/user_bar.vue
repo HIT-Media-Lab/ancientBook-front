@@ -1,10 +1,10 @@
 <template>
     <div class="j-bar-img">
         <router-link to="/user/upload1">
-            <img src="../assets/img/spot.png" class="j-spot" v-show="this.$route.name == 'upload1'">
+            <img src="../assets/img/no-use-picture/spot.png" class="j-spot" v-show="this.$route.name == 'upload1'">
             <span class="j-userbar-title">上传</span>
         </router-link>
-        <img src="../assets/img/spot.png" class="j-spot" v-show="this.$route.name == 'mybook' || this.$route.name =='privatebook' || this.$route.name =='alupload'">
+        <img src="../assets/img/no-use-picture/spot.png" class="j-spot" v-show="this.$route.name == 'mybook' || this.$route.name =='privatebook' || this.$route.name =='alupload'">
         <select class="j-userbar-title" v-model="mybook" @change="choose_mybook">
             <option selected class="j-option">我的古籍</option>
             <option class="j-option">最近古籍</option>
@@ -12,10 +12,10 @@
             <option class="j-option">已上传</option>
         </select>
         <router-link to="/user_info/collection/page/1">
-            <img src="../assets/img/spot.png" class="j-spot" v-show="this.$route.name == 'collection'">
+            <img src="../assets/img/no-use-picture/spot.png" class="j-spot" v-show="this.$route.name == 'collection'">
             <span class="j-userbar-title">我的收藏</span>
         </router-link>
-        <img src="../assets/img/spot.png" class="j-spot" v-show="this.$route.name == 'edit' || this.$route.name == 'mark'|| this.$route.name == 'comment'|| this.$route.name == 'revise'">
+        <img src="../assets/img/no-use-picture/spot.png" class="j-spot" v-show="this.$route.name == 'edit' || this.$route.name == 'mark'|| this.$route.name == 'comment'|| this.$route.name == 'revise'">
         <select class="j-userbar-title" v-model="my_collection" @change="choose_my_offer">
             <option selected class="j-option">我的贡献</option>
             <option class="j-option">本体编辑</option>
@@ -94,7 +94,7 @@
         margin: 35px auto;
         background-repeat: no-repeat;
         background-position: 50%;
-        background-image: url(../assets/img/navigation-bar.png);
+        background-image: url(../assets/img/no-use-picture/navigation-bar.png);
         width: 1038px;
         height: 68px;
         padding-left: 55px;

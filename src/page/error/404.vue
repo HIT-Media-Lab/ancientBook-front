@@ -6,11 +6,11 @@
 
 <style>
     .fault-404{
-        position: relative;
+
         height: auto;
         width: auto;
     }
     .word-404{
-
+        margin: 0 auto;
     }
 </style>
