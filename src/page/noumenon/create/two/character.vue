@@ -817,7 +817,7 @@
 
     .zxw-build-step2-btn{
         float:right;
-        margin:20px 300px 0 0;
+        margin:20px 200px 0 0;
     }
 
     .zxw-input-add-character{
