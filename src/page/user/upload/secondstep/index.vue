@@ -244,9 +244,36 @@
                 for (var i = 0; i < leng; i++) {
                     var reader = new FileReader();
                     reader.readAsText(file[i],'gbk');
-                    reader.onload = function(e) {
-                        vm.upload_file[index].texts.push(e.target.result);
-                    };
+
+                    var name = file[i].name;
+                    var first = name.charAt(1);
+                    var second = name.charAt(2);
+                    var third = name.charAt(3);
+                    var fourth = name .charAt(5);
+                    var fifth = name.charAt(6);
+                    var sixth = name.charAt(7);
+                    var text_index = first + second + third + fourth + fifth + sixth;
+
+                    for (var j = 0; j < vm.upload_file[index].images.length; j++) {
+                        var pic_name = vm.upload_file[index].images[j].pic_name;
+                        var one = pic_name.charAt(1);
+                        var two = pic_name.charAt(2);
+                        var three = pic_name.charAt(3);
+                        var four = pic_name .charAt(5);
+                        var five = pic_name.charAt(6);
+                        var six = pic_name.charAt(7);
+                        var pic_index = one + two + three + four + five + six;
+                        if (pic_index == text_index) {
+                            reader.onload = function(e) {
+                                vm.upload_file[index].texts.push(e.target.result);
+                            };
+                        }
+                        else{
+                            reader.onload = function(e) {
+                                vm.upload_file[index].texts.push(null);
+                            };
+                        }
+                    }
                 }
             },
 

@@ -99,7 +99,6 @@
                 copy_item : {},
                 upload_one_info : {},
                 summary : {},
-                page : 1,
                 upload_file : [],
                 responsibility_info : [],
                 add_book_obj : {},
@@ -459,7 +458,7 @@
                 this.add_book_obj.summary = this.summary;
                 this.add_book_obj.responsibility_info = this.responsibility_info;
                 this.before_http(this.add_book_obj);
-                this.http_json('/ancient_books/create_ancient_book_with_new_literature.action' , 'post' , this.add_book_obj , this.success_post_add,this.fail_post_add);
+                this.http_json('/ancient_books/create_ancient_book_with_new_literature.action' , 'post' , this.add_book_obj , this.success_post_add , this.fail_post_add);
             },
 
             success_post_add(response) {
@@ -470,15 +469,23 @@
                     for (var i = 0; i < vm.upload_file.length; i++) {
                         for (var j = 0; j < vm.upload_file[i].images.length; j++) {
                             var upload_picture_obj = {};
+
+                            var name = vm.upload_file[i].images[j].pic_name;
+                            var first = name.charAt(1);
+                            var second = name.charAt(2);
+                            var third = name.charAt(3);
+                            var str = first + second + third;
+                            var volume = parseInt(str);
+
                             upload_picture_obj.ancient_book_id = response.body.id;
-                            upload_picture_obj.book = 1;
-                            upload_picture_obj.volume = 1;
-                            upload_picture_obj.page = i;
-                            upload_picture_obj.picture = vm.images[i-1];
-                            upload_picture_obj.content = vm.texts[i-1];
-                            upload_picture_obj.book_name = vm.upload_file.book_name;
+                            upload_picture_obj.book = i + 1;
+                            upload_picture_obj.volume = volume;
+                            upload_picture_obj.page = j + 1;
+                            upload_picture_obj.picture = vm.upload_file[i].images[j].picture;
+                            upload_picture_obj.content = vm.upload_file[i].texts[j];
+                            upload_picture_obj.book_name = vm.upload_file[i].book_name;
                             this.before_http(upload_picture_obj);
-                            this.http_json('/ancient_books/upload_page.action' , 'post' , upload_picture_obj , this.success_post_picture,this.fail_post_picture);
+                            this.http_json('/ancient_books/upload_page.action' , 'post' , upload_picture_obj , this.success_post_picture , this.fail_post_picture);
                         }
                     }
 
