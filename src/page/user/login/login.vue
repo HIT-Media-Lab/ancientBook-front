@@ -19,6 +19,9 @@
                 </li>
             </ul>
         </div>
+        <div class="down-info">
+            <img src="../../../assets/img/no-use-picture/ink-line-long.png">
+        </div>
     </div>
 </template>
 
@@ -110,6 +113,7 @@ import store from '../../../store'
     }
     .web-name{
         display: inline;
+        font-size: 23px;
     }
     .logo{
         width: 40px;
@@ -166,5 +170,9 @@ import store from '../../../store'
         font-size: 18px;
         padding-top: 10px;
         list-style: none;
+    }
+    .down-info{
+       margin: 0 auto;
+        width: 947px;
     }
 </style>
