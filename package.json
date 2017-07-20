@@ -25,6 +25,7 @@
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
     "gulp-font-spider": "^0.3.6",
+    "url-loader": "^0.5.9",
     "vue-loader": "^11.1.4",
     "vue-template-compiler": "^2.2.1",
     "vuex": "^2.3.1",

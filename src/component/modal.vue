@@ -29,9 +29,8 @@
         methods: {
             middle(){
                 let x = document.getElementById("dialogs").offsetWidth;
-                let y = window.screen.width;
+                let y = document.body.clientWidth;
                 let z = (y-x)/2;
-                alert(z);
                 document.getElementById('dialogs').style.left = z + 'px';
             }
         }

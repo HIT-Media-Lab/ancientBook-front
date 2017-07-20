@@ -137,7 +137,7 @@ import store from '../../../store'
         height: 50px;
     }
     .search-btn-login{
-        margin-left: -15px;
+        margin-left: -20px;
         background-image: url("../../../assets/img/button/search-button-big.png");
         background-repeat: no-repeat;
         background-size: 105%;
@@ -160,8 +160,10 @@ import store from '../../../store'
     .sort-box1-login{
         padding-top: 10px;
         list-style: none;
+        font-size: 18px;
     }
     .sort-box2-login{
+        font-size: 18px;
         padding-top: 10px;
         list-style: none;
     }

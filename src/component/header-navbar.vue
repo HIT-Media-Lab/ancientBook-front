@@ -105,15 +105,15 @@
         },
         methods:{
             show_login(){
-                let user_id = JSON.parse(localStorage.getItem('user'));
-                if (user_id == 'guest'){
+//                let user_id = JSON.parse(localStorage.getItem('user'));
+//                if (user_id == 'guest'){
                     this.show_m = true;
-                    this.create_v_picture();
-                }else if(user_id == 'user'){
-                    this.$router.push({path: '/user'});
-                }else if(user_id == 'admin'){
-                    this.$router.push({path: '/admin/page/1'});
-                }
+//                    this.create_v_picture();
+//                }else if(user_id == 'user'){
+//                    this.$router.push({path: '/user'});
+//                }else if(user_id == 'admin'){
+//                    this.$router.push({path: '/admin/page/1'});
+//                }
             },
             hide:function () {
                 this.sort_box = ''
@@ -264,7 +264,7 @@
         width: 100px;
         height: 50px;
         border: none;
-        margin-left: -15px;
+        margin-left: -20px;
         color: white;
         background-color: transparent;
         /*display: inline-block;*/
@@ -275,7 +275,7 @@
         height: 13px;
         font-weight:700;
         font-style:normal;
-        font-size:16px;
+        font-size:20px;
         color:#999999;
         text-align:center;
     }
@@ -289,12 +289,14 @@
         background-size:100%;
         padding: 2px;
         background-repeat: no-repeat;
-        margin-left: 360px;
+        margin-left: 370px;
         margin-top: -8px;
         height: 50px;
         width: 290px;
     }
     .search-input{
+
+        font-family: SuXinShiLiuKaiFan ;
         margin-left: 30px;
         vertical-align:middle;
         padding: 0 20px;
@@ -307,13 +309,13 @@
     }
     .sort-box1{
         /*display: inline;*/
-        font-size: 12px;
+        font-size: 14px;
         margin-left: 10px;
         list-style: none;
         width: 178px;
     }
     .sort-box2{
-        font-size: 12px;
+        font-size: 14px;
         margin-left: 10px;
         list-style: none;
         width: 178px;
