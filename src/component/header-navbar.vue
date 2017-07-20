@@ -425,7 +425,7 @@
     }
 
     .dialog-body {
-        padding: 2em;
+        padding: 1.5em;
     }
     /*错误提示红框*/
     .warnborder {
