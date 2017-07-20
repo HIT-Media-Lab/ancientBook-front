@@ -295,7 +295,7 @@
                 }
             },
             next_book() {
-                if (this.book_index == this.upload_file.length) {
+                if (this.book_bind == this.book_total) {
                     alert("这是最后一册")
                 }
                 else{

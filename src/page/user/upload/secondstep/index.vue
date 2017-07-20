@@ -141,11 +141,11 @@
                 var vm = this;
                 var leng = file.length;
                 for (var i = 0; i < leng; i++) {
-                    var reader = new FileReader();
-                    reader.readAsDataURL(file[i]);
                     var name = file[i].name;
                     var a = file[i].size;
                     var size = a/1000;
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file[i]);
                     reader.onload = function(e) {
                         vm.upload_file[index].images.push({
                             show:true,
@@ -178,42 +178,42 @@
                     var eighth =  /^[0-9]+.?[0-9]*$/;
                     if (one != first) {
                         alert("上传文件名不符合规范，第一个字符应为“卷”，请重新上传");
-                        this.images = [];
+                        this.upload_file[this.index].images = [];
                         break;
                     }
                     else if (!second.test(two)) {
                         alert("上传文件名不符合规范，第二个字符应为数字，请重新上传");
-                        this.images = [];
+                        this.upload_file[this.index].images = [];
                         break;
                     }
                     else if (!third.test(three)) {
                         alert("上传文件名不符合规范，第三个字符应为数字，请重新上传");
-                        this.images = [];
+                        this.upload_file[this.index].images = [];
                         break;
                     }
                     else if (!fourth.test(four)) {
                         alert("上传文件名不符合规范，第四个字符应为数字，请重新上传");
-                        this.images = [];
+                        this.upload_file[this.index].images = [];
                         break;
                     }
                     else if (five != fifth) {
                         alert("上传文件名不符合规范，第五个字符应为“-”，请重新上传");
-                        this.images = [];
+                        this.upload_file[this.index].images = [];
                         break;
                     }
                     else if (!sixth.test(six)) {
                         alert("上传文件名不符合规范，第六个字符应为数字，请重新上传");
-                        this.images = [];
+                        this.upload_file[this.index].images = [];
                         break;
                     }
                     else if (!seventh.test(seven)) {
                         alert("上传文件名不符合规范，第七个字符应为数字，请重新上传");
-                        this.images = [];
+                        this.upload_file[this.index].images = [];
                         break;
                     }
                     else if (!eighth.test(eight)) {
                         alert("上传文件名不符合规范，第八个字符应为数字，请重新上传");
-                        this.images = [];
+                        this.upload_file[this.index].images = [];
                         break;
                     }
                     else{
@@ -299,49 +299,49 @@
                     if (one != first) {
                         alert("上传文件名不符合规范，第一个字符应为“卷”，请重新上传");
                         this.text_name = [];
-                        this.texts = [];
+                        this.upload_file[this.index].texts = [];
                         break;
                     }
                     else if (!second.test(two)) {
                         alert("上传文件名不符合规范，第二个字符应为数字，请重新上传");
                         this.text_name = [];
-                        this.texts = [];
+                        this.upload_file[this.index].texts = [];
                         break;
                     }
                     else if (!third.test(three)) {
                         alert("上传文件名不符合规范，第三个字符应为数字，请重新上传");
                         this.text_name = [];
-                        this.texts = [];
+                        this.upload_file[this.index].texts = [];
                         break;
                     }
                     else if (!fourth.test(four)) {
                         alert("上传文件名不符合规范，第四个字符应为数字，请重新上传");
                         this.text_name = [];
-                        this.texts = [];
+                        this.upload_file[this.index].texts = [];
                         break;
                     }
                     else if (five != fifth) {
                         alert("上传文件名不符合规范，第五个字符应为“-”，请重新上传");
                         this.text_name = [];
-                        this.texts = [];
+                        this.upload_file[this.index].texts = [];
                         break;
                     }
                     else if (!sixth.test(six)) {
                         alert("上传文件名不符合规范，第六个字符应为数字，请重新上传");
                         this.text_name = [];
-                        this.texts = [];
+                        this.upload_file[this.index].texts = [];
                         break;
                     }
                     else if (!seventh.test(seven)) {
                         alert("上传文件名不符合规范，第七个字符应为数字，请重新上传");
                         this.text_name = [];
-                        this.texts = [];
+                        this.upload_file[this.index].texts = [];
                         break;
                     }
                     else if (!eighth.test(eight)) {
                         alert("上传文件名不符合规范，第八个字符应为数字，请重新上传");
                         this.text_name = [];
-                        this.texts = [];
+                        this.upload_file[this.index].texts = [];
                         break;
                     }
                 }
