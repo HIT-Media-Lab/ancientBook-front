@@ -3,14 +3,14 @@
 
         <!--目录-->
         <div class="width1000 center">
-            <p>经部/總類/<span style="color: red">石經之屬</span>/<span style="color: red">詩經</span>/冊1冊名/卷1</p>
+            <p>经部/总类/<span style="color: red">石经之属</span>/<span style="color: red">诗经</span>/册1册名/卷1</p>
             <img src="../assets/img/no-use-picture/ink-line-long.png" height="7" width="974"/>
         </div>
 
         <!--按鈕欄-->
         <div class="width1000 center">
-            <button class="float-right next-one" @click="next_key">下一處</button>
-            <button class="float-right last-one" @click="last_key">上一處</button>
+            <button class="float-right next-one" @click="next_key">下一处</button>
+            <button class="float-right last-one" @click="last_key">上一处</button>
             <input type="text" class="ry-search" placeholder="請輸入關鍵字" v-model="search_key" @change="key_array()">
         </div>
 
@@ -24,11 +24,11 @@
                 <div id="workspace-text-head">
                     <ul class="ry-module-bar float-right">
                         <!--class值为空表示未激活板块，class值为li-now表示激活板块-->
-                        <li id="mark-head">本體標記</li>
+                        <li id="mark-head">本体标记</li>
                         <img style="display: block" class="float-right" src="../assets/img/picture-button/screen-button.png" height="31" width="6"/>
-                        <li id="comment-head">批註版</li>
+                        <li id="comment-head">批注版</li>
                         <img style="display: block" class="float-right" src="../assets/img/picture-button/screen-button.png" height="31" width="6"/>
-                        <li id="edit-head" class="li-now">修訂版</li>
+                        <li id="edit-head" class="li-now">修订版</li>
                     </ul>
                 </div>
 
@@ -40,46 +40,46 @@
                     <!--本体标记版块-->
                     <div id="mark" class="div">
                         <!--文本标题-->
-                        <h4>詩經卷一</h4>
+                        <h4>诗经卷一</h4>
                         <!--文本主体-->
                         <p class="body-text" id="text-mark" @click="text_mark_onclick()"></p>
                         <!--本体种类选择菜单-->
                         <select id="ry-select-mark-type" class="ry-select" @click="select_noumenon_type()">
                             <option>全部</option>
                             <option>人物</option>
-                            <option>地點</option>
-                            <option>職官</option>
-                            <option>時間</option>
-                            <option>機構</option>
-                            <option>術語</option>
-                            <option>文獻</option>
+                            <option>地点</option>
+                            <option>职官</option>
+                            <option>时间</option>
+                            <option>机构</option>
+                            <option>术语</option>
+                            <option>文献</option>
                         </select>
                         <!--标记本体按钮，选中文本后激活显示，点击弹出标记本体模态框-->
-                        <button class="ry-btn-cancel-add-comment" data-toggle="modal" data-target="#layer-mark-noumenon" id="btn-mark-noumenon" style="visibility: hidden" @click="btn_mark_noumenon_onclick()">標記本體</button>
+                        <button class="ry-btn-cancel-add-comment" data-toggle="modal" data-target="#layer-mark-noumenon" id="btn-mark-noumenon" style="visibility: hidden" @click="btn_mark_noumenon_onclick()">标记本体</button>
                     </div>
 
                     <!--批注版块-->
                     <div id="comment" class="div">
                         <!--文本标题-->
-                        <h4>詩經卷一</h4>
+                        <h4>诗经卷一</h4>
                         <!--文本主体-->
                         <div class="body-text" id="text-comment" @click="text_comment_onclick()"></div>
                         <!--添加批注按钮，选中文本后激活显示，点击弹出添加批注模态框-->
-                        <button class="ry-btn-cancel-add-comment" id="btn-add-comment" style="visibility: hidden" @click="btn_add_comment_onclick()">添加批註</button>
+                        <button class="ry-btn-cancel-add-comment" id="btn-add-comment" style="visibility: hidden" @click="btn_add_comment_onclick()">添加批注</button>
                     </div>
 
                     <!--修订板块-->
                     <div id="edit" class="div div-now">
                         <!--文本标题-->
-                        <h4>詩經卷一</h4>
+                        <h4>诗经卷一</h4>
                         <!--文本主体-->
                         <div id="ry-edit-text" class="body-text">蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。</div>
                         <br>
                         <br>
                         <br>
                         <!--查看修订记录-->
-                        <button class="ry-btn-edit-record" data-toggle="modal" data-target="#layer-edit-record" id="btn-edit-record" @click="edit_record_onclick()">修訂記錄</button>
-                        <button class="ry-btn-edit" id="btn-edit" @click="btn_edit_onclick()">修訂</button>
+                        <button class="ry-btn-edit-record" data-toggle="modal" data-target="#layer-edit-record" id="btn-edit-record" @click="edit_record_onclick()">修订记录</button>
+                        <button class="ry-btn-edit" id="btn-edit" @click="btn_edit_onclick()">修订</button>
                     </div>
                 </div>
 
@@ -87,7 +87,7 @@
                 <div>
                     <modal :show_modal.sync = "edit_record_modal" @fireclose = "edit_record_modal = false" class="ry-modal-border">
                         <div class="width600 dialog-body" slot="body">
-                            <h4 style="text-align: center">修訂記錄</h4>
+                            <h4 style="text-align: center">修订记录</h4>
                             <div v-for="item in commit_edit_record">
                                 <p>修訂者：{{item.username_edit_record}}</p>
                                 <p>修訂時間：{{item.time_edit_record}}</p>
@@ -95,7 +95,7 @@
                                 <p>修訂版本：{{item.version_edit_record}}</p>
                                 <hr>
                             </div>
-                            <button class="ry-btn-confirm-edit-record-modal" @click="close_edit_record_modal()">確定</button>
+                            <button class="ry-btn-confirm-edit-record-modal" @click="close_edit_record_modal()">确定</button>
                         </div>
                     </modal>
                 </div>
@@ -104,17 +104,17 @@
                 <div>
                     <modal :show_modal.sync = "edit_modal" @fireclose = "edit_modal = false" class="ry-modal-border">
                         <div class="width600 dialog-body" slot="body">
-                            <h4 class="modal-title" style="text-align: center">修訂</h4>
+                            <h4 class="modal-title" style="text-align: center">修订</h4>
                             <div id="text-edit" class="body-text" contentEditable="true"></div>
                             <br>
                             <br>
                             <br>
                             <img src="../assets/img/no-use-picture/ink-line-long.png" height="6" width="600"/>
                             <!--修订信息编辑框标题-->
-                            <h5>修訂信息:</h5>
+                            <h5>修订信息:</h5>
                             <!--修订信息编辑框-->
                             <div id="textarea-editInfo" contentEditable="true" style="height: 100px"></div>
-                            <button class="ry-btn-confirm-edit-record-modal" @click="btn_confirm_edit_onclick()">確定</button>
+                            <button class="ry-btn-confirm-edit-record-modal" @click="btn_confirm_edit_onclick()">确定</button>
                         </div>
                     </modal>
                 </div>
@@ -123,13 +123,13 @@
                 <div>
                     <modal :show_modal.sync = "add_comment_modal" @fireclose = "add_comment_modal = false" class="ry-modal-border">
                         <div class="dialog-body" slot="body">
-                            <span>選中內容：{{target_add_comment}}</span>
-                            <p>添加批註：</p>
+                            <span>选中內容：{{target_add_comment}}</span>
+                            <p>添加批注：</p>
                             <textarea id="textarea-addComment"></textarea>
                             <div class="ry-modal-add-comment-box">
-                                <input id="check-private" type="checkbox" value="選為私密">選為私密
+                                <input id="check-private" type="checkbox" value="选为私密">选为私密
                                 <button class="ry-btn-cancel-add-comment" data-dismiss="modal" @click="btn_cancel_add_comment_onclick()">取消</button>
-                                <button class="ry-btn-confirm-add-comment" data-dismiss="modal" @click="btn_confirm_add_comment_onclick()">確定</button>
+                                <button class="ry-btn-confirm-add-comment" data-dismiss="modal" @click="btn_confirm_add_comment_onclick()">确定</button>
                             </div>
                         </div>
                     </modal>
@@ -151,19 +151,19 @@
                 <div>
                     <modal :show_modal.sync = "add_mark_modal" @fireclose = "add_mark_modal = false" class="ry-modal-border">
                         <div class="dialog-body" slot="body">
-                            本體類型：
+                            本体类型：
                             <select id="ry-noumenon-type-select" class="ry-type-select">
                                 <option>人物</option>
-                                <option>地點</option>
-                                <option>職官</option>
-                                <option>時間</option>
-                                <option>機構</option>
-                                <option>術語</option>
-                                <option>文獻</option>
+                                <option>地点</option>
+                                <option>职官</option>
+                                <option>时间</option>
+                                <option>机构</option>
+                                <option>术语</option>
+                                <option>文献</option>
                             </select>
                             <input id="ry-noumenon-input" type="text" class="ry-input-search" placeholder="請輸入本體名查找"><button class="ry-btn-search-pic" @click="btn_search_noumenon_onclick()"></button>
                             <div class="ry-add-mark-modal-box">
-                                <h3 style="margin-top: 80px" v-show="before_search">請在搜索框中輸入本體規範名稱進行搜索</h3>
+                                <h3 style="margin-top: 80px" v-show="before_search">请在搜索框中输入本体规范名称进行搜索</h3>
 
                                 <!--显示搜索成功的结果-->
                                 <div class="zxw-search-success" v-for="(result,index) in search_noumenon_content">
@@ -179,7 +179,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <button class="ry-btn-cancel-add-comment" style="margin-left: 330px;" @click="btn_add_mark_onclick()">創建本體</button>
+                            <button class="ry-btn-cancel-add-comment" style="margin-left: 330px;" @click="btn_add_mark_onclick()">创建本体</button>
                             <button class="ry-btn-cancel-add-comment" @click="close_add_mark_modal()">取消</button>
                         </div>
                     </modal>
@@ -265,7 +265,7 @@
                     <span>{{page_total}}</span>
                 </div>
                 <button class="float-right ry-btn-last-page" @click="last_page">上一</button>
-                <button class="ry-btn-menu" @click="catalogue_onclick()">目錄</button>
+                <button class="ry-btn-menu" @click="catalogue_onclick()">目录</button>
             </div>
         </div>
 

@@ -7,20 +7,20 @@
                 <div class="row">
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>書名:</label>
+                        <label>书名:</label>
                     </div>
                     <div class="col-md-4">
                         <input id="bookName" v-model="varieties_item.type_name">
                     </div>
 
-                    <label class="col-md-2">別名:</label>
+                    <label class="col-md-2">别名:</label>
                     <div class="col-md-4">
-                        <input v-model="varieties_item.type_other_name" placeholder="多值屬性用逗號隔開">
+                        <input v-model="varieties_item.type_other_name" placeholder="多值属性用逗号隔开">
                     </div>
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">存佚類型:</label>
+                    <label class="col-md-2">存佚类型:</label>
                     <div class="col-md-4">
                         <select id="ry-type-save">
                             <option>不详</option>
@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">品種級別：</label>
+                    <label class="col-md-2">品种级别：</label>
                     <div class="col-md-4">
                         <select id="ry-type-level">
                             <option>不详</option>
@@ -45,7 +45,7 @@
                         </select>
                     </div>
 
-                    <label class="col-md-2">英譯：</label>
+                    <label class="col-md-2">英译：</label>
                     <div class="col-md-4">
                         <input v-model="varieties_item.english">
                     </div>
@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">標準分類：</label>
+                    <label class="col-md-2">标准分类：</label>
                     <div class="col-md-3">
                         <select id="ry-select-b" @change="">
                             <option v-for="item in menu_eight">{{item.chinese_name}}</option>
@@ -88,14 +88,14 @@
                         <button id="btn-add-copy" class="ry-btn-add" @click="add_new_box(index)" v-show="varieties_item.varieties_responsibility[index].value_add">添加</button>
                     </div>
                     <div class="col-md-2 float-right">
-                        <button id="btn-delete-copy" class="ry-btn-del" @click="del_new_box(index)" v-show="varieties_item.varieties_responsibility[index].value_del">刪除</button>
+                        <button id="btn-delete-copy" class="ry-btn-del" @click="del_new_box(index)" v-show="varieties_item.varieties_responsibility[index].value_del">删除</button>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任開始時間:</label>
+                        <label>责任开始时间:</label>
                     </div>
                     <div class="col-md-4">
                         <input readonly @click="open_birth()" v-model="item.begin_time">
@@ -103,7 +103,7 @@
 
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任結束時間:</label>
+                        <label>责任结束时间:</label>
                     </div>
                     <div class="col-md-4">
                         <input readonly @click="open_dead()" v-model="item.end_time">
@@ -111,14 +111,14 @@
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">責任地點：</label>
+                    <label class="col-md-2">责任地点：</label>
                     <div class="col-md-4">
                         <input readonly @click="open_location()" v-model="item.location">
                     </div>
 
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任者名稱:</label>
+                        <label>责任者名称:</label>
                     </div>
                     <div class="col-md-4">
                         <input readonly @click="open_character()" v-model="item.person">
@@ -128,7 +128,7 @@
                 <div class="row">
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任者類型：</label>
+                        <label>责任者类型：</label>
                     </div>
                     <div class="col-md-4">
                         <select class="ry-v-type">
@@ -140,7 +140,7 @@
 
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任行為：</label>
+                        <label>责任行为：</label>
                     </div>
                     <div class="col-md-4">
                         <select class="ry-v-action">
@@ -152,13 +152,13 @@
                 <div class="row">
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>確定性：</label>
+                        <label>确定性：</label>
                     </div>
                     <div class="col-md-4">
                         <select class="ry-v-confirm">
                             <option>不详</option>
                             <option>确定</option>
-                            <option>題</option>
+                            <option>题</option>
                         </select>
                     </div>
                 </div>
