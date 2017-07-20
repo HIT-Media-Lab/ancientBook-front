@@ -376,8 +376,20 @@
 
 
             next_page() {
-                this.$router.push({path: '/user/upload3'});
+                if (this.upload_file[this.index].book_num == '') {
+                    alert("请填写册号")
+                }
+                else if (this.upload_file[this.index].book_name == '') {
+                    alert("请填写册名")
+                }
+                else if (this.upload_file[this.index].images.length == 0) {
+                    alert("请选择要上传的图片文件")
+                }
+                else{
+                    this.$router.push({path: '/user/upload3'});
+                }
             },
+
             last_page() {
                 this.$router.push({path: '/user/upload1'});
             },
@@ -420,6 +432,7 @@
     }
 
     .ry-btn-upload2-last{
+        color: white;
         width: 127px;
         height: 54px;
         background-image: url("../../../../assets/img/button/create-next-step.png");

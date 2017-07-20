@@ -568,13 +568,14 @@
     #ry-select-b,#ry-select-l,#ry-select-s{
         width: 208px;
         height: 33px;
-        background-image: url("../../../../assets/img/picture-button/biao zhun fen lei.png");
+        background-image: url("../../../../assets/img/picture-button/biaozhunfenlei.png");
     }
 
     #ry-input-info,#ry-input-responsibility{
         width: 664px;
         height: 74px;
-        background-image: url("../../../../assets/img/modal-box/ze ren xin xi.png");
+        background-image: url("../../../../assets/img/modal-box/zerenxinxi.png");
+        background-size: 100%;
     }
 
     .ry-btn-add{

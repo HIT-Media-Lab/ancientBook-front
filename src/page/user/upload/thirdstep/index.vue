@@ -110,11 +110,11 @@
         created : function () {
             this.upload_file = this.$store.getters.get_upload_file;
             this.book_total = this.upload_file.length;
-            this.volume_total = this.upload_file[0].length
+            this.get_volume_total();
         },
 
         mounted : function () {
-            this.set_show()
+            this.set_show();
         },
 
         beforeRouteLeave(to, from, next) {
@@ -127,7 +127,17 @@
              * 获得每册卷数最大值
              */
             get_volume_total() {
-
+                for (var i = 0; i < this.upload_file[this.book_index].images.length; i++) {
+                    var name = this.upload_file[this.book_index].images[i].pic_name;
+                    var first = name.charAt(1);
+                    var second = name.charAt(2);
+                    var third = name.charAt(3);
+                    var str = first + second + third;
+                    var num = parseInt(str);
+                    if (num > this.volume_total) {
+                        this.volume_total = num;
+                    }
+                }
             },
 
 
@@ -281,6 +291,7 @@
                 else{
                     this.book_index = this.book_index - 1;
                     this.book_bind = this.book_bind - 1;
+                    this.get_volume_total();
                 }
             },
             next_book() {
@@ -290,6 +301,7 @@
                 else{
                     this.book_index = this.book_index + 1;
                     this.book_bind = this.book_bind + 1;
+                    this.get_volume_total();
                 }
             },
             go_book() {
@@ -331,7 +343,7 @@
                 }
             },
             next_volume() {
-                if (this.volume_index == this.upload_file[this.book_index].images.length) {
+                if (this.volume_bind == this.volume_total) {
                     alert("这是最后一卷");
                 }
                 else{

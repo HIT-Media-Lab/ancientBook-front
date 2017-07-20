@@ -217,7 +217,7 @@
     .layer-input select{
         width: 225px;
         height: 33px;
-        background-image: url("../../../../assets/img/picture-button/pin ji xin xi.png");
+        background-image: url("../../../../assets/img/picture-button/pinjixinxi.png");
     }
 
     .ry-check-pri{
