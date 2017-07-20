@@ -15,7 +15,7 @@
 <script>
     export default {
         mounted(){
-            if(this.show_modal){
+            if(!this.show_modal){
                 this.middle();
             }
         },
@@ -29,7 +29,7 @@
         methods: {
             middle(){
                 let x = document.getElementById("dialogs").offsetWidth;
-                let y = document.body.clientWidth;
+                let y = window.screen.width;
                 let z = (y-x)/2;
                 document.getElementById('dialogs').style.left = z + 'px';
             }
