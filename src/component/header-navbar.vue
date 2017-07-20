@@ -105,15 +105,15 @@
         },
         methods:{
             show_login(){
-//                let user_id = JSON.parse(localStorage.getItem('user'));
-//                if (user_id == 'guest'){
+                let user_id = JSON.parse(localStorage.getItem('user'));
+                if (user_id == 'guest'){
                     this.show_m = true;
-//                    this.create_v_picture();
-//                }else if(user_id == 'user'){
-//                    this.$router.push({path: '/user'});
-//                }else if(user_id == 'admin'){
-//                    this.$router.push({path: '/admin/page/1'});
-//                }
+                    this.create_v_picture();
+                }else if(user_id == 'user'){
+                    this.$router.push({path: '/user'});
+                }else if(user_id == 'admin'){
+                    this.$router.push({path: '/admin/page/1'});
+                }
             },
             hide:function () {
                 this.sort_box = ''
