@@ -58,7 +58,7 @@
 
     .zxw-bar-title{
         margin:20px 90px 20px 0;
-        font-size: 14px;
+        font-size: 18px;
         color: gainsboro;
         display: inline-block;
     }

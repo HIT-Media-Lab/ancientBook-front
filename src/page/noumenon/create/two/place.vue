@@ -32,7 +32,7 @@
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_begin_time = true" @mouseout="show_begin_time = false" v-if="input_place.begin_standard_time !== ''">
-                            <span v-model="input_place.begin_standard_time" >{{input_place.begin_standard_time}}</span>
+                            <span class="zxw-tag-font" v-model="input_place.begin_standard_time" >{{input_place.begin_standard_time}}</span>
                             <button class="zxw-add-hover-img" v-show="show_begin_time===true" @click="delete_begin()"></button>
                         </span>
                     </div>
@@ -42,7 +42,7 @@
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_end_time = true" @mouseout="show_end_time = false" v-if="input_place.end_standard_time !== ''">
-                            <span v-model="input_place.end_standard_time" >{{input_place.end_standard_time}}</span>
+                            <span class="zxw-tag-font" v-model="input_place.end_standard_time" >{{input_place.end_standard_time}}</span>
                             <button class="zxw-add-hover-img" v-show="show_end_time===true" @click="delete_end()"></button>
                         </span>
                     </div>
@@ -55,7 +55,7 @@
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_s_location = true" @mouseout="show_s_location = false" v-if="input_place.s_location_standard_name !== ''">
-                            <span v-model="input_place.s_location_standard_name" >{{input_place.s_location_standard_name}}</span>
+                            <span class="zxw-tag-font" v-model="input_place.s_location_standard_name" >{{input_place.s_location_standard_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_s_location===true" @click="delete_s_location()"></button>
                         </span>
                     </div>
@@ -65,7 +65,7 @@
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_l_location = true" @mouseout="show_l_location = false" v-if="input_place.l_location_standard_name !== ''">
-                            <span v-model="input_place.l_location_standard_name">{{input_place.l_location_standard_name}}</span>
+                            <span class="zxw-tag-font" v-model="input_place.l_location_standard_name">{{input_place.l_location_standard_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_l_location ===true" @click="delete_l_location()"></button>
                         </span>
                     </div>
@@ -78,7 +78,7 @@
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" v-bind:contenteditable="input_place.seat_standard_name.length !== 0" >
                         <span class="zxw-person-relation-span" v-for="(item,index) in input_place.seat_standard_name"  @mouseover="show_seat = index" @mouseout="show_seat =-1">
-                            <span>{{item}}</span>
+                            <span class="zxw-tag-font">{{item}}</span>
                             <button class="zxw-add-hover-img"  v-show="show_seat === index" @click="delete_seat(index)"></button>
                         </span>
                     </div>
@@ -94,7 +94,7 @@
 
             <div class="zxw-build-step2-btn">
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length" @click="pre_step()">上一步</button>
-                <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="input_place.begin_time_id === ''|| input_place.end_time_id === ''||input_place.location_name === ''|| show_input === true|| repeat_id !== '' ||(add_data[0].remark_name === '' && add_data[0].remark !== '' )||(add_data[1] !== undefined && add_data[1].remark_name === '' && add_data[1].remark !=='')||show_begin_time === false||show_end_time === false" >下一步</button>
+                <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="input_place.begin_time_id === ''|| input_place.end_time_id === ''||input_place.location_name === ''|| show_input === true|| repeat_id !== '' ||(add_data[0].remark_name === '' && add_data[0].remark !== '' )||(add_data[1] !== undefined && add_data[1].remark_name === '' && add_data[1].remark !=='')||show_latitude === true||show_longitude === true" >下一步</button>
             </div>
         </div>
 

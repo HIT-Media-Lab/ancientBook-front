@@ -8,17 +8,17 @@
     </div>
 </template>
 <script>
-    /*  let Mock = require('mockjs');
+     let Mock = require('mockjs');
 
      //显示用户列表
      Mock.mock('/ancient_books/get_recent_noumenons.action','get', {
          "status": 200,
          "noumenons|10": [{
-             'standard_name': '@FIRST',
+             'standard_name': '迪丽热巴',
              'id|1': 1,
              'type|1': 1
          }]
-     });*/
+     });
 
     import noumenon_title from '../../component/noumenon-title.vue';
     import build_button from '../../component/build-button.vue'
@@ -110,7 +110,6 @@
     .zxwnoumenon-row{
         display:block;
         margin:20px 0 25px 5%;
-        font-size: 14px;
-        font-weight: bold;
+        font-size: 18px;
     }
 </style>
