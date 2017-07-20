@@ -162,7 +162,23 @@
                                 <option>文獻</option>
                             </select>
                             <input id="ry-noumenon-input" type="text" class="ry-input-search" placeholder="請輸入本體名查找"><button class="ry-btn-search-pic" @click="btn_search_noumenon_onclick()"></button>
-                            <div class="ry-add-mark-modal-box"><h3 style="margin-top: 80px">請在搜索框中輸入本體規範名稱進行搜索</h3></div>
+                            <div class="ry-add-mark-modal-box">
+                                <h3 style="margin-top: 80px" v-show="before_search">請在搜索框中輸入本體規範名稱進行搜索</h3>
+
+                                <!--显示搜索成功的结果-->
+                                <div class="zxw-search-success" v-for="(result,index) in search_noumenon_content">
+                                    <p class="zxw-search-result">{{result.standard_name}}</p>
+                                    <button class="zxw-prebtn zxw-character-add" v-model="index">添加</button>
+                                </div>
+
+                                <!--显示搜索失败的结果-->
+                                <div class="zxw-fail-tip" v-show="fail_tip">
+                                    <p>很抱歉，未搜索到本体：{{noumenon_search_content}}</p>
+                                    <p><span class="zxw-search-p-tip">您可以</span>
+                                        <button class="zxw-prebtn zxw-search-create">创建本体</button>
+                                    </p>
+                                </div>
+                            </div>
                             <button class="ry-btn-cancel-add-comment" style="margin-left: 330px;" @click="btn_add_mark_onclick()">創建本體</button>
                             <button class="ry-btn-cancel-add-comment" @click="close_add_mark_modal()">取消</button>
                         </div>
@@ -175,7 +191,7 @@
             <!--图片工作台-->
             <div>
                 <div class="float-right ry-hide-picture"><img src="../assets/img/picture-button/more.png" height="130" width="29"/></div>
-                <img />
+                <img id="ry-picture-work"/>
             </div>
         </div>
 
@@ -241,14 +257,14 @@
         <div class="width1000 center">
             <img src="../assets/img/no-use-picture/ink-line-long.png" height="4" width="974"/>
             <div class="ry-bottom-bar">
-                <button class="float-right ry-btn-next-page">下一</button>
+                <button class="float-right ry-btn-next-page" @click="next_page">下一</button>
                 <button class="float-right ry-btn-go">GO</button>
                 <div class="float-right ry-page">
-                    <input class="ry-input-page">
+                    <input class="ry-input-page" v-model="page_bind">
                     <span>/</span>
-                    <span>12</span>
+                    <span>{{page_total}}</span>
                 </div>
-                <button class="float-right ry-btn-last-page">上一</button>
+                <button class="float-right ry-btn-last-page" @click="last_page">上一</button>
                 <button class="ry-btn-menu" @click="catalogue_onclick()">目錄</button>
             </div>
         </div>
@@ -267,6 +283,10 @@
 
         data() {
             return{
+                //  本体标记模态框
+                before_search : true,
+                fail_tip:false,
+
                 add_comment_modal : false,
                 get_comment_modal : false,
                 add_mark_modal : false,
@@ -278,6 +298,12 @@
 
                 get_content_obj : {},
                 content : '蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。',
+                book : 1,
+                volume : 1,
+                page : 1,
+                page_bind : 1,
+                page_total : 1,
+                ancient_book_id : '',
                 page_id : 1,
 
                 get_comment_obj : {},
@@ -346,25 +372,11 @@
                 noumenon_search_url : '',
                 total_page_search_noumenon : 0,
                 search_noumenon_content : [],
-
-
-//                a : 0,  //  选区第一个节点位置
-//                b : 0,  //  选区最后一个节点位置
-//                //后端传回JSON
-//
-//                //文本内容
-//                content : "蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。";
-//                //标记
-//                mark : [{id_mark:"123123",target_mark:"，白露为",begin_mark:4,end_mark:8},{id_mark:"456456",target_mark:"伊人，在",begin_mark:12,end_mark:16}];
-//                //批注
-//                comment : [{id_comment:"654654",target_comment:"露为霜。",begin_comment:6,end_comment:10},{id_comment:"321321",target_comment:"，在水一",begin_comment:14,end_comment:18}];
             }
         },
 
         created : function () {
-            this.get_text();
-            this.get_comment();
-            this.get_mark();
+
         },
 
         mounted : function () {
@@ -375,6 +387,32 @@
         },
 
         methods: {
+            /**
+             * 获取page_id
+             */
+            get_page_id() {
+                var url = '/ancient_books/get_page_id_by_jcy.action?book=' + this.book + '&&volume=' + this.volume + '&&page=' + this.page + '&&ancient_book_id' + this.ancient_book_id;
+                var get_page_id = '';
+                this.http_json (url , 'get' , get_page_id , this.success_get_page_id , this.fail_get_page_id);
+            },
+            success_get_page_id(response) {
+                this.page_id = response.body.id;
+            },
+            fail_get_page_id() {
+                console.log("fail get page_id!");
+            },
+
+            /**
+             * 获取图片内容请求
+             */
+            get_picture() {
+                var url = '/ancient_books/get_picture_by_id.action?page_id=' + this.page_id;
+                var img = document.getElementById("ry-picture-work");
+                img.src = url;
+            },
+
+
+
             /**
              * 获取文本内容请求
              */
@@ -507,10 +545,7 @@
             success_get_noumenon_search() {
                 console.log ("success get noumenon search ");
                 //将后端数据显示在前端页面里
-                if (response.body.content.length === 0) {
-                    console.log ("没有返回数组！");
-                }
-                else {
+                if (response.body.content.length !== 0) {
                     this.total_page_search_noumenon = response.body.total_page;
                     for (var i = 0; i <= response.body.content.length-1; i++) {
                         this.search_noumenon_content.push({
@@ -519,6 +554,9 @@
                             noumenon_id: response.body.content[i].noumenon_id,
                         });
                     }
+                }
+                else {
+                    this.fail_tip = true;
                 }
             },
 
@@ -534,7 +572,7 @@
                 this.edit_text_obj.content = this.content;
                 this.edit_text_obj.commit = this.commit;
                 this.before_http(this.edit_text);
-                this.http_json('/ancient_books/modify_page_content.action' , 'post' , this.edit_text_obj , this.success_post_edit,this.fail_post_edit);
+                this.http_json('/ancient_books/modify_page_content.action' , 'post' , this.edit_text_obj , this.success_post_edit , this.fail_post_edit);
             },
 
             success_post_edit(response) {
@@ -928,6 +966,16 @@
                 var name = document.getElementById("ry-noumenon-input");
                 this.noumenon_search_content = name.value;
                 this.get_noumenon_search();
+                this.before_search = false;
+            },
+
+            /**
+             * 标记本体模态框
+             */
+            close_add_mark_modal() {
+                this.search_content = '';
+                this.search_result.splice(0,this.search_result.length);
+                this.before_search = false;
             },
 
             /**
@@ -943,6 +991,24 @@
              */
             catalogue_onclick() {
                 this.catalogue_modal = true;
+            },
+
+            /**
+             * 上一页按钮
+             */
+            last_page() {
+                if (this.page_bind = 1) {
+                    alert("这是第一页")
+                }
+                else if (this.page_bind = this.page_total) {
+                    alert("这是最后一页")
+                }
+                else{
+                    this.page = this.page - 1;
+                    this.page_bind = this.page_bind - 1;
+                    this.get_page_id();
+                    this.get_picture()
+                }
             },
 
 
