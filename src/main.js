@@ -336,7 +336,7 @@ const router = new VueRouter({
             ]
         },
         {
-            path:'/ancientbook',
+            path:'/ancientbook/:book_name/:volume/:pageId',
             component:ancientbook,
             name:'ancientbook'
         },

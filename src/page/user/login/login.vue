@@ -1,23 +1,30 @@
 <template>
     <!--登录组件-->
-    <div class="index-page">
-        <div class="head">
-            <img src="../../../assets/img/no-use-picture/logo.png" class="logo">
-            <h3 class="web-name">兰台古籍研究平台</h3>
+    <div style="height: 360px">
+        <div class="index-page">
+            <div class="head">
+                <img src="../../../assets/img/no-use-picture/logo.png" class="logo">
+                <h3 class="web-name">兰台古籍研究平台</h3>
+            </div>
+            <div class="search-login">
+                <input placeholder=" 请输入关键字搜索" class="search-input-login" v-model="sort_box" v-on:keydown.enter="search1">
+                <button class="search-btn-login" @click="search1">搜 索</button>
+            </div>
+            <div class="drop-search-login" @click="hide" v-show="sort_box.length!=0">
+                <ul>
+                    <li class="sort-box1-login" @click="search1()" style="color: #0f0f0f">
+                        搜古籍：{{sort_box}}
+                    </li>
+                    <li class="sort-box2-login" @click="search2()" style="color: #0f0f0f">
+                        搜本体：{{sort_box}}
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="search-login">
-            <input placeholder=" 请输入关键字搜索" class="search-input-login" v-model="sort_box" v-on:keydown.enter="search1">
-            <button class="search-btn-login" @click="search1">搜 索</button>
-        </div>
-        <div class="drop-search-login" @click="hide" v-show="sort_box.length!=0">
-            <ul>
-                <li class="sort-box1-login" @click="search1()" style="color: #0f0f0f">
-                    搜古籍：{{sort_box}}
-                </li>
-                <li class="sort-box2-login" @click="search2()" style="color: #0f0f0f">
-                    搜本体：{{sort_box}}
-                </li>
-            </ul>
+        <div class="down-info">
+            <img src="../../../assets/img/no-use-picture/ink-line-long.png" >
+            <p class="down-info-p1">Cooperation by Chinese Academy of Sciences and the Department of New Media and Art</p>
+            <p class="down-info-p2">@2017 Ancient Book Project</p>
         </div>
     </div>
 </template>
@@ -106,10 +113,12 @@ import store from '../../../store'
 <style>
     .index-page{
         width: 600px;
+        height: 195px;
         margin: 150px auto;
     }
     .web-name{
         display: inline;
+        font-size: 23px;
     }
     .logo{
         width: 40px;
@@ -166,5 +175,18 @@ import store from '../../../store'
         font-size: 18px;
         padding-top: 10px;
         list-style: none;
+    }
+    .down-info{
+       margin: 0 auto 20px auto;
+        width: 947px;
+
+    }
+    .down-info-p1{
+        margin: 0 auto;
+        width: 780px;
+    }
+    .down-info-p2{
+        margin: 0 auto;
+        width: 250px;
     }
 </style>

@@ -35,7 +35,9 @@
     export default{
         methods : {
             go_to() {
-                this.$router.push({path: '/ancientbook'});
+                this.$route.params.book_name = this.book_name;
+
+                this.$router.push({name:'ancientbook', params: this.$route.params});
             }
         }
     }

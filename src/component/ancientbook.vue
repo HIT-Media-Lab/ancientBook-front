@@ -9,9 +9,9 @@
 
         <!--按鈕欄-->
         <div class="width1000 center">
-            <button class="float-right next-one">下一處</button>
-            <button class="float-right last-one">上一處</button>
-            <input type="text" class="ry-search" placeholder="請輸入關鍵字">
+            <button class="float-right next-one" @click="next_key">下一處</button>
+            <button class="float-right last-one" @click="last_key">上一處</button>
+            <input type="text" class="ry-search" placeholder="請輸入關鍵字" v-model="search_key" @change="key_array()">
         </div>
 
         <!--图文-->
@@ -73,7 +73,7 @@
                         <!--文本标题-->
                         <h4>詩經卷一</h4>
                         <!--文本主体-->
-                        <div class="body-text">蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。</div>
+                        <div id="ry-edit-text" class="body-text">蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。</div>
                         <br>
                         <br>
                         <br>
@@ -283,6 +283,9 @@
 
         data() {
             return{
+                search_key : '',
+                now_index : 0,
+                key_position : [],
                 //  本体标记模态框
                 before_search : true,
                 fail_tip:false,
@@ -725,6 +728,70 @@
 
 
             /**
+             * 关键字检索
+             */
+            key_array() {
+                this.key_position = [];
+                var pos = this.content.indexOf(this.search_key);
+                while (pos > -1) {
+                    this.key_position.push(pos);
+                    pos = this.content.indexOf(this.search_key , pos + 1);
+                }
+                alert(this.key_position);
+                this.renew_text();
+            },
+
+            renew_text() {
+                var length = this.search_key.length;
+                var div = document.getElementById("ry-edit-text");
+                div.innerText = '';
+
+                //文本逐字遍历
+                for (var i = 0; i < this.content.length; i++) {
+                    //按顺序依次获得文本中的字
+                    var p = this.content.charAt(i);
+
+                    //该字在搜索关键字中
+                    if (i >= this.key_position[this.now_index] && i < this.key_position[this.now_index] + length) {
+                        var span1 = document.createElement("span");
+                        var text1 = document.createTextNode(p);
+                        span1.appendChild(text1);
+                        span1.setAttribute("class", "ry-search-key");
+                        div.appendChild(span1);
+                    }
+
+                    //该字不在搜索关键字中
+                    else{
+                        var span2 = document.createElement("span");
+                        var text2 = document.createTextNode(p);
+                        span2.appendChild(text2);
+                        div.appendChild(span2);
+                    }
+                }
+            },
+
+            last_key() {
+                if (this.now_index == 0) {
+                    alert("这是第一处")
+                }
+                else{
+                    this.now_index = this.now_index - 1;
+                    this.renew_text();
+                }
+            },
+
+            next_key(){
+                if (this.now_index == this.key_position.length - 1) {
+                    alert("这是最后一处")
+                }
+                else{
+                    this.now_index = this.now_index + 1;
+                    this.renew_text();
+                }
+            },
+
+
+            /**
              * 3个模块切换功能，通过赋予被激活模块class属性来控制模块的切换
              */
             change_module() {
@@ -1010,6 +1077,14 @@
                     this.get_picture()
                 }
             },
+
+            /**
+             * 下一页按钮
+             */
+            next_page() {
+
+            },
+
 
 
 
@@ -1653,6 +1728,10 @@
     .ry-mark{
         cursor: pointer;
         text-decoration: underline;
+        color: red;
+    }
+
+    .ry-search-key{
         color: red;
     }
 </style>
