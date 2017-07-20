@@ -7,7 +7,7 @@
             </router-link>
             <br/>
         </div>
-        <page_button :max = this.total_page></page_button>
+        <page_button :max=this.total_page></page_button>
     </div>
 </template>
 
@@ -91,6 +91,9 @@
                 }
                 this.info_num = this.content.length;
                 this.total_page = Math.ceil(this.info_num/20);
+                if (this.total_page = 0){
+                    this.total_page = 1;
+                }
                 this.content.sort(this.change);
                 this.print_content();
             },

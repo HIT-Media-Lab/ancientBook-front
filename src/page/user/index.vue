@@ -5,7 +5,9 @@
                 <img src="../../assets/img/picture-button/avatar.png" class="j-userhead" @click="go_to_modify">
                 <span class="j-simple-user" @click="go_to_modify" v-model="name">{{name}}</span>
             </div>
-            <img src="../../assets/img/no-use-picture/ink-line-long.png" class="j-user-line" >
+            <div class="j-user-line">
+                <img src="../../assets/img/no-use-picture/ink-line-long.png" >
+            </div>
         </div>
         <div class="j-link">
             <router-link to="/user/upload1">
@@ -78,6 +80,7 @@
         margin: 80px auto;
     }
     .j-user-line{
+        width: 974px;
         margin: 0 auto;
     }
     .j-userhead{
@@ -95,7 +98,7 @@
     .j-link{
         letter-spacing:60px;
         margin: 0 auto;
-        width: 750px;
+        width: 760px;
     }
     .upload_img{
         width: 95px;

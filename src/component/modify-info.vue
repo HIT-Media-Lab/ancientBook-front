@@ -6,7 +6,9 @@
                 <span class="j-simple-user"  v-model="name">{{name}}</span>
             </div>
             <p class="j-modify-edit" @click="show_edit">编辑</p>
-            <img src="../assets/img/no-use-picture/ink-line-long.png" class="j-user-line" >
+            <div  class="j-user-line">
+                <img src="../assets/img/no-use-picture/ink-line-long.png">
+            </div>
         </div>
         <div class="j-modify-info">
             <p>

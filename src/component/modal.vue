@@ -28,10 +28,12 @@
         props: ['show_modal'],
         methods: {
             middle(){
-                let x = document.getElementById("dialogs").offsetWidth;
-                let y = window.screen.width;
-                let z = (y-x)/2;
-                document.getElementById('dialogs').style.left = z + 'px';
+                for (let i = 0; i < document.getElementsByClassName('dialogs').length; i++){
+                    let x = document.getElementsByClassName("dialogs")[i].offsetWidth;
+                    let y = window.screen.width;
+                    let z = (y-x)/2;
+                    document.getElementsByClassName("dialogs")[i].style.left = z + 'px';
+                }
             }
         }
     }
