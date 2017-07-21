@@ -10,8 +10,8 @@
             <label class="zxw-character-span">地名：</label>
             <input type="text" class="zxw-character-input-margin zxw-character-input-content" readonly v-model="this.$store.getters.get_build_place.location_name">
             <label class="zxw-character-span">英译：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.english === '' " >
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content" readonly v-model="this.$store.getters.get_build_place.english" v-else>
+            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.english === '' " >
+            <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_place.english" v-else>
         </div>
 
         <div class="zxw-character-row">
@@ -19,8 +19,8 @@
             <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.other_name === '' " >
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_place.other_name" v-else>
             <label class="zxw-character-span">经度：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.longitude === '' " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_place.longitude" v-else>
+            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.longitude === '' " >
+            <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_place.longitude" v-else>
         </div>
 
         <div class="zxw-character-row">
@@ -28,24 +28,24 @@
             <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.latitude === '' " >
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_place.latitude" v-else>
             <label class="zxw-character-span">今所在：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.location_today === '' " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_place.location_today" v-else>
+            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.location_today === '' " >
+            <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_place.location_today" v-else>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">起始时间：</label>
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_place.begin_standard_time">
             <label class="zxw-character-span">终止时间：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_place.end_standard_time">
+            <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_place.end_standard_time">
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">上级地名：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.s_location">
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.s_location_standard_name ===''">
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_place.s_location" v-else>
             <label class="zxw-character-span">下级地名：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.l_location === '' " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_place.l_location" v-else>
+            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.l_location_standard_name === '' " >
+            <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_place.l_location" v-else>
         </div>
 
         <div class="zxw-character-row">
@@ -54,15 +54,15 @@
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_place.seat_standard_name" @mouseover="show_tooltipinfo_seat()" @mouseout="close_tooltip_seat()"  v-else>
         </div>
 
-        <template v-if="this.$store.getters.get_build_character.remark_1 !== ''||this.$store.getters.get_build_character.remark_2 !==''">
+        <template v-if="this.$store.getters.get_build_place.remark_1 !== ''||this.$store.getters.get_build_place.remark_2 !==''">
             <div>
                 <label class="zxw-character-span" v-model="remark_1_name" v-bind="show_remark">{{remark_1_name}}</label>
-                <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.remark_1">
+                <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_place.remark_1">
             </div>
 
             <div>
                 <label class="zxw-character-span" v-model="remark_2_name" v-bind="show_remark">{{remark_2_name}}</label>
-                <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.remark_2">
+                <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_place.remark_2">
             </div>
         </template>
 
@@ -190,7 +190,7 @@
                 this.create_place.location_name = this.$store.getters.get_build_place.location_name;
                 this.create_place.longitude = this.$store.getters.get_build_place.longitude;
                 this.create_place.latitude = this.$store.getters.get_build_place.latitude;
-                this.create_place.location_todayi = this.$store.getters.get_build_place.location_today;
+                this.create_place.location_today = this.$store.getters.get_build_place.location_today;
                 this.create_place.other_name = this.$store.getters.get_build_place.other_name;
                 this.create_place.begin_time_id = this.$store.getters.get_build_place.begin_time_id;
                 this.create_place.end_time_id = this.$store.getters.get_build_place.end_time_id;

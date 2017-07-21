@@ -34,9 +34,9 @@
 </template>
 
 <script>
-    /*let Mock = require('mockjs');
+    let Mock = require('mockjs');
     Mock.mock('/ancient_books/get_menu_items.action?model_id=25&&item_1_id=0&&item_2_id=0','get', {
-        "g|100":[
+        "g":[
             {"model_id|1": 1,
              "item_1_id|1": 1,
              "chinese_name": "宋朝"
@@ -44,14 +44,6 @@
             {"model_id|1": 1,
                 "item_1_id|2": 2,
                 "chinese_name": "元朝"
-            },
-            {"model_id|1": 1,
-                "item_1_id|3": 3,
-                "chinese_name": "明朝"
-            },
-            {"model_id|1": 1,
-                "item_1_id|3": 3,
-                "chinese_name": "明朝"
             },
             {"model_id|1": 1,
                 "item_1_id|3": 3,
@@ -103,7 +95,7 @@
 
      Mock.mock('/ancient_books/getToken.action','get', {
         "token|100":100,
-    });*/
+    });
 
     import modal from '../component/modal.vue'
     export default{
@@ -155,10 +147,10 @@
 
             /*朝代下拉框*/
             success_menu(response){
-                for(let i = 0; i < response.body.length; i++){
+                for(let i = 0; i < response.body.g.length; i++){
                     this.menu_data.push({
-                        item_1_id:response.body[i].item_1_id,
-                        chinese_name:response.body[i].chinese_name,
+                        item_1_id:response.body.g[i].item_1_id,
+                        chinese_name:response.body.g[i].chinese_name,
                     })
                 }
                 console.log('this.menu_data:'+JSON.stringify(this.menu_data));

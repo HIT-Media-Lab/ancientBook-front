@@ -170,6 +170,9 @@ import  placetwo from  './page/noumenon/create/two/place.vue'
 import  placethree from  './page/noumenon/create/three/place.vue'
 import  institutiontwo from  './page/noumenon/create/two/institution.vue'
 import  institutionthree from  './page/noumenon/create/three/institution.vue'
+import  termstwo from  './page/noumenon/create/two/terms.vue'
+import  termsthree from  './page/noumenon/create/three/terms.vue'
+
 
 //本体查看
 import  recent from  './page/noumenon/noumenon.vue'
@@ -408,7 +411,7 @@ const router = new VueRouter({
                     name:'lit_edit'
                 },
                 {
-                    path:'office/page/:pageId/letter/:letterId',
+                    path:'office/letter/:letterId/page/:pageId',
                     component:office,
                     name:'office'
                 },
@@ -434,19 +437,25 @@ const router = new VueRouter({
                     name: 'place'
                 },
                 {
-                    path:'plac_detail/:nouId',
+                    path:'pla_detail/:nouId',
                     component:pla_detail,
                     name:'pla_detail'
                 },
                 {
-                    path:'plac_edit/:nouId',
+                    path:'pla_edit/:nouId',
                     component:pla_edit,
                     name:'pla_edit'
                 },
                 {
-                    path:'terms/page/:pageId/letter/:letterId',
+                    path:'terms/letter/:letterId/page/:pageId',
                     component:terms,
                     name:'terms'
+                },
+                {
+                    path: 'terms',
+                    redirect: 'terms/letter/A/page/1',
+                    component: place,
+                    name: 'place'
                 },
                 {
                     path:'terms_detail/:nouId',
@@ -498,6 +507,16 @@ const router = new VueRouter({
             path:'/insthree',
             component:institutionthree,
             name:'institutionthree'
+        },
+        {
+            path:'/termstwo',
+            component:termstwo,
+            name:'termstwo'
+        },
+        {
+            path:'/termsthree',
+            component:termsthree,
+            name:'termsthree'
         },
 
         {

@@ -441,6 +441,7 @@
         height:30px;
         width:220px;
         font-weight: bold;
+        font-size: 18px;
         text-overflow: ellipsis;
     }
 
