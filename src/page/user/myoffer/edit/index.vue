@@ -44,6 +44,7 @@
             page_button
         },
         created(){
+            this.content = [];
             this.sort_name = this.$route.params.content;
             if (this.$route.params.content == '全部本体'){
                 this.content = [];
@@ -55,6 +56,7 @@
         },
         watch:{
             $route(){
+                this.content = [];
                 if (this.$route.params.content == '全部本体'){
                     this.content = [];
                     let item = this.all_edit_url + '?page_count=' + this.$route.params.pageId;
