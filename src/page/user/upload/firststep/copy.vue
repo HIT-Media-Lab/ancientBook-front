@@ -260,7 +260,6 @@
              */
             open_birth() {
                 this.get_index();
-                alert(this.index);
                 this.time_modal_1 = true;
             },
 

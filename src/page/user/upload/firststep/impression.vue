@@ -289,7 +289,6 @@
              */
             open_character(){
                 this.get_index();
-                alert(this.index);
                 this.character_modal = true;
             },
 
