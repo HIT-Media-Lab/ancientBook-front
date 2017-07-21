@@ -134,10 +134,10 @@
             },
 
             success_check(response) {
-                if (response.body.result == 0) {
+                if (response.body.result === 0) {
                     this.$router.push({path: '/user/upload2'});
                 }
-                else if (response.body.result == 1) {
+                else if (response.body.result === 1) {
                     alert("古籍规范名称重复")
                 }
             },
