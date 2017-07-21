@@ -13,9 +13,12 @@
         </div>
 
         <div class="width950 height650 center ry-scroll">
-            <div id="ry-pictures" v-for="item in upload_file[this.book_index].images" style="display: inline-block">
+            <div id="ry-pictures" v-for="(item,index) in upload_file[this.book_index].images" style="display: inline-block">
                 <div class="ry-picture-box" v-show="item.show">
-                    <img :src="item.picture" class="ry-picture-view" @mouseover="view_picture()"/>
+                    <div class="ry-picture-view ry-fixed">
+                        <button class="ry-del-pic" @click="del_picture(index)"><img src="../../../../assets/img/picture-button/add-character-hover.png" height="14" width="15" /></button>
+                        <img :src="item.picture" class="ry-picture-view" @mouseover="view_picture()"/>
+                    </div>
                     <p class="picture-names" style="text-align: center">{{item.pic_name}}</p>
                 </div>
             </div>
@@ -87,8 +90,8 @@
 
         data() {
             return{
-                book_total : 0,
-                volume_total : 0,
+                book_total : 1,
+                volume_total : 1,
                 book_bind : 1,
                 volume_bind : 1,
                 book_index : 0,
@@ -163,6 +166,13 @@
                 document.getElementById("ry-hover-text").innerText = this.upload_file[this.book_index].texts[index]
             },
 
+
+            /**
+             * 删除图片
+             */
+            del_picture(index) {
+                this.upload_file[this.book_index].images.splice(index,1)
+            },
 
             /**
              * 更改图片
@@ -682,4 +692,10 @@
         top: 0;
         opacity: 0;
     }
+
+    .ry-del-pic{
+        position: absolute;
+        margin-left: 105px;
+    }
+
 </style>

@@ -115,12 +115,12 @@
                             <option>藏</option>
                             <option>装</option>
                             <option>购</option>
-                            <option>題籤</option>
-                            <option>題跋</option>
-                            <option>過錄</option>
+                            <option>题签</option>
+                            <option>题跋</option>
+                            <option>过录</option>
                             <option>批注</option>
                             <option>批校</option>
-                            <option>補目</option>
+                            <option>补目</option>
                         </select>
                     </div>
                 </div>

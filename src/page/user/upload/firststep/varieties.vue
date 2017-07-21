@@ -37,11 +37,11 @@
                     <div class="col-md-4">
                         <select id="ry-type-level">
                             <option>不详</option>
-                            <option>叢書總目</option>
-                            <option>叢書子目</option>
-                            <option>單行本</option>
-                            <option>合訂本總目</option>
-                            <option>合訂本子目</option>
+                            <option>丛书总目</option>
+                            <option>丛书子目</option>
+                            <option>单行本</option>
+                            <option>合订本总目</option>
+                            <option>合订本子目</option>
                         </select>
                     </div>
 
