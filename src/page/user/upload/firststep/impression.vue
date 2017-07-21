@@ -44,7 +44,7 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任开始时间:</label>
                     </div>
                     <div class="col-md-4">
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任结束时间:</label>
                     </div>
                     <div class="col-md-4">
@@ -67,7 +67,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任者名称:</label>
                     </div>
                     <div class="col-md-4">
@@ -77,7 +77,7 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任者类型：</label>
                     </div>
                     <div class="col-md-4">
@@ -89,7 +89,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任行为：</label>
                     </div>
                     <div class="col-md-4">
@@ -102,7 +102,7 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>确定性：</label>
                     </div>
                     <div class="col-md-4">
@@ -115,7 +115,7 @@
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">責任說明：</label>
+                    <label class="col-md-2">责任说明：</label>
                     <div class="col-md-4">
                         <input v-model="item.explain" id="ry-input-responsibility">
                     </div>
@@ -153,27 +153,7 @@
                 time_modal_2 : false,
                 location_modal : false,
                 character_modal : false,
-                impression_item :{
-                    printing_type : '',
-                    printing_number : '',
-                    impression_responsibility : [{
-                        value_add : true,
-                        value_del : false,
-                        location : '',
-                        location_id : '',
-                        person : '',
-                        person_id : '',
-                        begin_time : '',
-                        begin_time_id : '',
-                        end_time : '',
-                        end_time_id :'',
-                        action : '',
-                        explain : '',
-                        confirm : '',
-                        type : '',
-                        level : 3,
-                    }]
-                },
+                impression_item :{},
             }
         },
 
