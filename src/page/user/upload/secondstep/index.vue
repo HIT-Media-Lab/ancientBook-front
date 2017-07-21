@@ -179,42 +179,34 @@
                     if (one != first) {
                         alert("上传文件名不符合规范，第一个字符应为“卷”，请重新上传");
                         this.upload_file[this.index].images = [];
-                        break;
                     }
                     else if (!second.test(two)) {
                         alert("上传文件名不符合规范，第二个字符应为数字，请重新上传");
                         this.upload_file[this.index].images = [];
-                        break;
                     }
                     else if (!third.test(three)) {
                         alert("上传文件名不符合规范，第三个字符应为数字，请重新上传");
                         this.upload_file[this.index].images = [];
-                        break;
                     }
                     else if (!fourth.test(four)) {
                         alert("上传文件名不符合规范，第四个字符应为数字，请重新上传");
                         this.upload_file[this.index].images = [];
-                        break;
                     }
                     else if (five != fifth) {
                         alert("上传文件名不符合规范，第五个字符应为“-”，请重新上传");
                         this.upload_file[this.index].images = [];
-                        break;
                     }
                     else if (!sixth.test(six)) {
                         alert("上传文件名不符合规范，第六个字符应为数字，请重新上传");
                         this.upload_file[this.index].images = [];
-                        break;
                     }
                     else if (!seventh.test(seven)) {
                         alert("上传文件名不符合规范，第七个字符应为数字，请重新上传");
                         this.upload_file[this.index].images = [];
-                        break;
                     }
                     else if (!eighth.test(eight)) {
                         alert("上传文件名不符合规范，第八个字符应为数字，请重新上传");
                         this.upload_file[this.index].images = [];
-                        break;
                     }
                     else{
                         this.modal = true;
