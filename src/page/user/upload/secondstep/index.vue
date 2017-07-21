@@ -158,6 +158,7 @@
             },
 
             check_picture_name() {
+                var key = 0;
                 for (var i = 0; i < this.upload_file[this.index].images.length; i++) {
                     var name = this.upload_file[this.index].images[i].pic_name;
                     var one = name.charAt(0);
@@ -179,38 +180,54 @@
                     if (one != first) {
                         alert("上传文件名不符合规范，第一个字符应为“卷”，请重新上传");
                         this.upload_file[this.index].images = [];
+                        key = 1;
+                        break;
                     }
                     else if (!second.test(two)) {
                         alert("上传文件名不符合规范，第二个字符应为数字，请重新上传");
                         this.upload_file[this.index].images = [];
+                        key = 1;
+                        break;
                     }
                     else if (!third.test(three)) {
                         alert("上传文件名不符合规范，第三个字符应为数字，请重新上传");
                         this.upload_file[this.index].images = [];
+                        key = 1;
+                        break;
                     }
                     else if (!fourth.test(four)) {
                         alert("上传文件名不符合规范，第四个字符应为数字，请重新上传");
                         this.upload_file[this.index].images = [];
+                        key = 1;
+                        break;
                     }
                     else if (five != fifth) {
                         alert("上传文件名不符合规范，第五个字符应为“-”，请重新上传");
                         this.upload_file[this.index].images = [];
+                        key = 1;
+                        break;
                     }
                     else if (!sixth.test(six)) {
                         alert("上传文件名不符合规范，第六个字符应为数字，请重新上传");
                         this.upload_file[this.index].images = [];
+                        key = 1;
+                        break;
                     }
                     else if (!seventh.test(seven)) {
                         alert("上传文件名不符合规范，第七个字符应为数字，请重新上传");
                         this.upload_file[this.index].images = [];
+                        key = 1;
+                        break;
                     }
                     else if (!eighth.test(eight)) {
                         alert("上传文件名不符合规范，第八个字符应为数字，请重新上传");
                         this.upload_file[this.index].images = [];
+                        key = 1;
+                        break;
                     }
-                    else{
-                        this.modal = true;
-                    }
+                }
+                if (key == 0) {
+                    this.modal = true;
                 }
             },
 
@@ -234,6 +251,7 @@
                 var vm = this;
                 var leng = file.length;
                 for (var i = 0; i < leng; i++) {
+                    var　name_check = 0;
                     var reader = new FileReader();
                     reader.readAsText(file[i],'gbk');
 
@@ -244,7 +262,8 @@
                     var fourth = name .charAt(5);
                     var fifth = name.charAt(6);
                     var sixth = name.charAt(7);
-                    var text_index = first + second + third + fourth + fifth + sixth;
+                    var text = first + second + third + fourth + fifth + sixth;
+                    var text_index = parseInt(text);
 
                     for (var j = 0; j < vm.upload_file[index].images.length; j++) {
                         var pic_name = vm.upload_file[index].images[j].pic_name;
@@ -254,17 +273,25 @@
                         var four = pic_name .charAt(5);
                         var five = pic_name.charAt(6);
                         var six = pic_name.charAt(7);
-                        var pic_index = one + two + three + four + five + six;
+                        var pic = one + two + three + four + five + six;
+                        var pic_index = parseInt(pic);
                         if (pic_index == text_index) {
                             reader.onload = function(e) {
                                 vm.upload_file[index].texts.push(e.target.result);
                             };
+                            name_check = 1;
+                            break;
                         }
-                        else{
+                        else if (pic_index < text_index) {
                             reader.onload = function(e) {
                                 vm.upload_file[index].texts.push(null);
                             };
                         }
+                    }
+
+                    if (name_check == 0) {
+                        alert("您上传的文本文件中含有没有与其对应的图片文件，不能上传");
+                        break;
                     }
                 }
             },

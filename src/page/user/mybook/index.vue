@@ -17,7 +17,7 @@
                             <img style="margin-left: 60px" src="../../../assets/img/picture-button/white-pen.png" @click="">
                             <img src="../../../assets/img/picture-button/white-cross.png" @click="delete_book(item.ancient_book_id)">
                         </div>
-                        <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo(item.ancient_book_id)">
+                        <img :id = "item.ancient_book_id + 'alup'" class="j-mybook-recent-img1" @click="go_to_bookinfo(item.ancient_book_id)">
                     </div>
                     <p class="j-mybook-p" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
                 </div>
@@ -58,6 +58,9 @@
             this.recent_mybook = [];
             this.al_up_book = [];
             this.private_book = [];
+            this.i = 0;
+            this.j = 0;
+            this.k = 0;
             this.http_json(this.recent_mybook_url, 'get', {}, this.recbook_success, this.recbook_fail);
             this.http_json(this.upload_book_url, 'get', {}, this.up_success, this.recbook_fail);
             this.http_json(this.private_book_url, 'get', {}, this.private_get_success, this.recbook_fail)
@@ -146,7 +149,7 @@
             },
             success_page2(response){
                 let picture_id_url2 = this.picture_url + '?page_id=' + response.body.id;
-                document.getElementById(this.al_up_book[this.j].ancient_book_id).setAttribute("src", picture_id_url2);
+                document.getElementById(this.al_up_book[this.j].ancient_book_id + 'alup').setAttribute("src", picture_id_url2);
                 this.j = this.j + 1;
             },
             success_page3(response){
@@ -168,7 +171,7 @@
             },
             delete_book_fail(response){
                 alert(response.body.info);
-            },
+            }
         }
     }
 </script>

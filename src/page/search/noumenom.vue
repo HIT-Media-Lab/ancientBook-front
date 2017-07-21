@@ -3,11 +3,11 @@
         <p class="j-noumenon-word" v-model="info_num">为您找到{{info_num}}条相关的本体信息</p>
         <div class="j-searched-noumenon" v-for="item in page_content">
             <router-link to="/noumenon/char_detail/1">
-                <span class="j-w" @click="go_to_char_detail" :id="item.noumenon_id">{{item.standard_name}}  {{item.type}}</span>
+                <a class="j-w" @click="go_to_char_detail" :id="item.noumenon_id">{{item.standard_name}}  {{item.type}}</a>
             </router-link>
             <br/>
         </div>
-        <page_button :max=this.total_page></page_button>
+        <page_button v-model="total_page" :max=this.total_page></page_button>
     </div>
 </template>
 
@@ -39,7 +39,7 @@
         },
         data(){
             return{
-                info_num: 0,
+                info_num: 1,
                 total_page: 1,
                 content: [],
                 page_content: [],
@@ -89,9 +89,15 @@
                         noumenon_id:response.body.content[i].noumenon_id
                     })
                 }
-                this.info_num = this.content.length;
-                this.total_page = Math.ceil(this.info_num/20);
-                if (this.total_page = 0){
+                this.info_num = response.body.content.length;
+                console.log(this.info_num);
+                this.total_page = (this.info_num)/20 ;
+                this.total_page = parseInt(this.total_page.toString());
+                console.log( this.total_page);
+                if(this.info_num%20 != 0){
+                    this.total_page ++;
+                }
+                if (this.total_page == 0){
                     this.total_page = 1;
                 }
                 this.content.sort(this.change);

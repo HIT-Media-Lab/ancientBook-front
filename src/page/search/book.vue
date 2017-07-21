@@ -28,10 +28,12 @@
           page_button
         },
         created(){
+            this.i = 0;
             this.get_search();
         },
         watch:{
             $route(){
+                this.i = 0;
                 this.get_search();
             }
         },

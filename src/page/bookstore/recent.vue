@@ -17,11 +17,13 @@
             recent_title
         },
         created() {
+            this.i = 0;
             this.get_id();
 //            window.setTimeout("get_picture()", 2000);
         },
         watch:{
             $route(){
+                this.i = 0;
                 this.get_id();
             }
         },
