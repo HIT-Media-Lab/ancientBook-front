@@ -1003,7 +1003,7 @@ export default{
 
 <style>
    .zxw-edit-character-input-margin{
-     margin-right:300px;
+     margin-right:250px;
    }
 
     .zxw-edit-btn{

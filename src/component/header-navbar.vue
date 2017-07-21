@@ -1,6 +1,6 @@
 <template>
     <!--顶端固定不变的导航条-->
-    <div id="store" class="store">
+    <div id="store" class="store" v-show="show_bar">
         <div class="head-bar">
             <router-link to="/bookstore" style="color: white">
                 <button class="bookstore">古籍库 </button>
@@ -70,12 +70,34 @@
             loading
         },
         created() {
-          bus.$on('toggleLoading', (show) =>{
+            if (this.$route.name == '403' || this.$route.name == '404'){
+                this.show_bar = false;
+            }else {
+                this.show_bar = true;
+            }
+
+            bus.$on('toggleLoading', (show) =>{
                 this.showloading = show;
             });
-          bus.$on('change_name',(item) =>{
-              this.user_name = item;
-          });
+            bus.$on('change_name',(item) =>{
+                this.user_name = item;
+            });
+        },
+        watch:{
+            $route(){
+                if (this.$route.name == '403' || this.$route.name == '404'){
+                    this.show_bar = false;
+                }else {
+                    this.show_bar = true;
+                }
+
+                bus.$on('toggleLoading', (show) =>{
+                    this.showloading = show;
+                });
+                bus.$on('change_name',(item) =>{
+                    this.user_name = item;
+                });
+            }
         },
         destroyed(){
             localStorage.setItem('user',JSON.stringify("guest"));
@@ -100,7 +122,8 @@
                 disabled: false,
                 auto: false,
                 object: {},
-                show:''
+                show:'',
+                show_bar: true
             }
         },
         methods:{

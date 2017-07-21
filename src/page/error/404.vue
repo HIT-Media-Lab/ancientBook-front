@@ -1,16 +1,17 @@
 <template>
     <div class="fault-404">
-        <h1 class="word-404">抱歉，加载不到此页面</h1>
     </div>
 </template>
 
 <style>
     .fault-404{
-
-        height: auto;
-        width: auto;
-    }
-    .word-404{
-        margin: 0 auto;
+        position: absolute;
+        background-image: url("../../assets/img/no-use-picture/404.png");
+        background-repeat:no-repeat ;
+        background-size: cover;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
     }
 </style>

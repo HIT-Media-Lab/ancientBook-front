@@ -14,7 +14,7 @@ const store = new Vuex.Store({
         ifLogin:'guest',
         Token:'',
         acl_user:
-            ['login','404','bookstore','user','upload1','mybook',
+            ['login','404','403','bookstore','user','upload1','mybook',
             'character','recent','char_detail','char_edit','place','pla_detail','pla_edit','institution','ins_detail','ins_edit','upload1','upload2',
             'upload3','copy','edition','impression','varieties',
             'bookstore','book_recent','book_info',
@@ -24,8 +24,8 @@ const store = new Vuex.Store({
             'alupload','privatebook','collection','offer',
             'ancientbook','comment','revise','edit','mark',
             'build','charactertwo','characterthree','placetwo','placethree','institutiontwo','institutionthree'],
-        acl_admin:['404','admin','modify_info'],
-        acl_guest:['login', '404'],
+        acl_admin:['404','403','admin','modify_info'],
+        acl_guest:['login', '404','403'],
         a:{},
         menu_items:[],
         copy_contents:{
@@ -225,6 +225,33 @@ const store = new Vuex.Store({
             s_location_standard_name:'',
             l_location_standard_name:'',
             seat_standard_name:[]
+        },
+
+        create_ins:{
+            standard_name:'',
+            ins_name:'',
+            type:0,
+            type_ins:[],
+            selected_ins_type:[{
+                id:0,
+                option:''
+            }],
+            english:'',
+            other_name:'',
+            begin_time_id:'',
+            begin_standard_time:'',
+            end_time_id:'',
+            end_standard_time:'',
+            remark_1_name:'',
+            remark_2_name:'',
+            remark_1:'',
+            remark_2:'',
+            chief_office_id:'',
+            chief_office_name:'',
+            vice_office_id:'',
+            vice_office_name:'',
+            parent_body_id:'',
+            parent_body_name:''
         },
 
         create_one_selection:0,

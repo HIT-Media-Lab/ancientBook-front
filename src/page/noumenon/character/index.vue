@@ -137,7 +137,7 @@
 <style>
 
     .zxw-chadail{
-        font-size: 14px;
+        font-size: 18px;
         text-align: left;
         margin:0 200px 20px 35px;
         width:200px;

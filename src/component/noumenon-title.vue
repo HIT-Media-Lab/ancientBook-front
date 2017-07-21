@@ -21,7 +21,7 @@
         margin:auto;
     }
     .zxwnoumenom-title{
-        font-size: 18px;
+        font-size: 20px;
         margin:65px 0 5px 0;
         display:inline-block;
         font-weight: bold;
