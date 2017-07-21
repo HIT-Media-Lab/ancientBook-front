@@ -108,7 +108,7 @@
 </template>
 
 <script>
-   let Mock = require('mockjs');
+   /*let Mock = require('mockjs');
     Mock.mock('/ancient_books/get_menu_items.action?model_id=1&&item_1_id=0&&item_2_id=0','get', {
         "g":[
             {"model_id|1": 1,
@@ -132,7 +132,7 @@
                 "chinese_name": "民间机构"
             }
         ]
-    });
+    });*/
 
 
     import noumenon_title from '../../../component/noumenon-title.vue';
@@ -491,7 +491,7 @@
                 let edit_object={};
                 edit_object.id=this.$route.params.nouId;
                 edit_object.standard_name = this.input_content.standard_name;
-                edit_object.institution_name = this.input_content.institution_name;
+                edit_object.institution_name = this.input_content.ins_name;
                 edit_object.type=this.input_content.type_number;
                 edit_object.english=this.input_content.english;
                 edit_object.other_name=this.input_content.other_name;

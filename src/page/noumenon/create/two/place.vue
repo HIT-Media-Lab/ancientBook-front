@@ -387,7 +387,7 @@
 
             add_s_location(p){
                 this.input_place.s_location_id = p.noumenon_id;
-                this.input_content.s_location_standard_name= p.standard_name;
+                this.input_place.s_location_standard_name= p.standard_name;
                 console.log('this.input_place.s_location_id: '+this.input_place.s_location_id);
                 console.log('this.input_place.s_location_standard_name: '+this.input_place.s_location_standard_name);
             },
@@ -410,7 +410,7 @@
 
             add_l_location(p){
                 this.input_place.l_location_id = p.noumenon_id;
-                this.input_content.l_location_standard_name= p.standard_name;
+                this.input_place.l_location_standard_name= p.standard_name;
                 console.log('this.input_place.l_location_id: '+this.input_place.l_location_id);
                 console.log('this.input_place.l_location_standard_name: '+this.input_place.l_location_standard_name);
             },

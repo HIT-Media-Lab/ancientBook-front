@@ -75,5 +75,9 @@ export default {
     get_create_place(state,data){
         state.create_place = data;
         console.log('state.create_place:'+JSON.stringify(state.create_place));
+    },
+    get_create_ins(state,data){
+        state.create_ins = data;
+        console.log('state.create_ins:'+JSON.stringify(state.create_ins));
     }
 }

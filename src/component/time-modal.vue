@@ -5,25 +5,25 @@
             </div>
 
             <div slot="body" class="zxw-time-body">
-                <label class="zxw-time-label">朝代：</label>
+                <label class="zxw-time-label zxw-font-sixteen">朝代：</label>
                 <select  class="zxw-time-select" v-model="selected_1" @change="get_year()">
                     <option v-for="item in menu_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}"> {{item.chinese_name}}</option>
                 </select>
 
-                <label>年号：</label>
+                <label class="zxw-font-sixteen">年号：</label>
                 <select class="zxw-time-select" v-model="selected_2">
                     <option v-for="item in year_data" v-bind:value="{id:item.item_2_id,option:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
 
-                <label>年份：</label>
+                <label class="zxw-font-sixteen">年份：</label>
                 <input type="text" class="zxw-time-select zxw-time-input" v-model="year_number" v-bind:disabled="selected_2.option === ''">
 
-                <label>月：</label>
+                <label class="zxw-font-sixteen">月：</label>
                 <select  class="zxw-time-select" v-model="selected_3">
                     <option v-for="item in month_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}" v-bind:disabled="year_number === ''">{{item.chinese_name}}</option>
                 </select>
 
-                <label>日：</label>
+                <label class="zxw-font-sixteen">日：</label>
                 <select  class="zxw-time-select" v-model="selected_4">
                     <option v-for="item in day_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}" v-bind:disabled="selected_3.option === ''">{{item.chinese_name}}</option>
                 </select>
@@ -34,9 +34,9 @@
 </template>
 
 <script>
-    let Mock = require('mockjs');
+    /*let Mock = require('mockjs');
     Mock.mock('/ancient_books/get_menu_items.action?model_id=25&&item_1_id=0&&item_2_id=0','get', {
-        "g":[
+        "g|100":[
             {"model_id|1": 1,
              "item_1_id|1": 1,
              "chinese_name": "宋朝"
@@ -44,6 +44,14 @@
             {"model_id|1": 1,
                 "item_1_id|2": 2,
                 "chinese_name": "元朝"
+            },
+            {"model_id|1": 1,
+                "item_1_id|3": 3,
+                "chinese_name": "明朝"
+            },
+            {"model_id|1": 1,
+                "item_1_id|3": 3,
+                "chinese_name": "明朝"
             },
             {"model_id|1": 1,
                 "item_1_id|3": 3,
@@ -95,7 +103,7 @@
 
      Mock.mock('/ancient_books/getToken.action','get', {
         "token|100":100,
-    });
+    });*/
 
     import modal from '../component/modal.vue'
     export default{
@@ -147,9 +155,9 @@
 
             /*朝代下拉框*/
             success_menu(response){
-                for(let i = 0; i < response.body.g.length; i++){
+                for(let i = 0; i < response.body.length; i++){
                     this.menu_data.push({
-                        item_1_id:response.body.g[i].item_1_id,
+                        item_1_id:response.body[i].item_1_id,
                         chinese_name:response.body[i].chinese_name,
                     })
                 }
@@ -270,11 +278,13 @@
     .zxw-time-add{
         background-image: url("../assets/img/button/create-next-step.png");
         background-color: transparent;
-        background-size: 100%;
+        background-size: contain;
         background-repeat: no-repeat;
+        background-position: center;
         border: none;
-        width:70px;
+        width:60px;
         height:30px;
+        font-size: 16px;
         color:gainsboro;
     }
 
@@ -284,9 +294,10 @@
         text-align: center;
         background-image: url("../assets/img/no-use-picture/modal-header.png");
         background-size: contain;
+        background-position: center;
         background-color: transparent;
         width:800px;
-        height:40px;
+        height:50px;
         padding:10px 0 0 0;
     }
 
@@ -295,8 +306,8 @@
         height:25px;
         border: 2px solid;
         background-color: transparent;
-        font-size: 10px;
-        margin:0 15px 0 0;
+        font-size: 14px;
+        margin:0 10px 0 0;
     }
 
     .zxw-time-label{
@@ -304,15 +315,14 @@
     }
 
     .zxw-time-body{
-        margin:24px auto;
-        width:750px;
+        margin-top:24px;
+        width:800px;
+        height:85px;
     }
 
     .zxw-time-modal{
         width:800px;
         height:150px;
-        background-repeat: no-repeat;
-        background-size: 750px 150px;
         margin:auto;
     }
 
@@ -324,5 +334,9 @@
         width:70px;
         text-align: left;
         padding-left:10px;
+    }
+
+    .zxw-font-sixteen{
+        font-size: 16px;
     }
 </style>

@@ -84,7 +84,7 @@
 </template>
 
 <script>
-    let Mock = require('mockjs');
+    /*let Mock = require('mockjs');
      //显示用户列表
      Mock.mock('/ancient_books/get_location_by_id.action?id=2','get',{
      "status|200":200,
@@ -157,7 +157,7 @@
         "remark_1_name": "",
         "remark_2_name": "哈哈"
 
-    });
+    });*/
 
 
 

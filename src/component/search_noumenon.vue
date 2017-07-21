@@ -4,7 +4,7 @@
             <span>添加关系属性</span>
         </div>
 
-        <div slot="body" class="zxw-time-body">
+        <div slot="body" class="zxw-noumenon-body">
             <div class="zxw-search-header">
                 <input class="zxw-search-input" type="search" v-model="search_content">
                 <button class="zxw-search-icon" @click="search_noumenon()" v-bind:disabled="search_content === ''"></button>
@@ -27,15 +27,15 @@
         </div>
 
         <div slot="footer" class="zxw-search-footer">
-            <button class="zxw-prebtn zxw-search-create" v-show="create_btn" @click="new_noumenon_window()">创建本体</button>
             <button class="zxwnoumenom-button zxw-search-cancel" @click="close_modal">取消</button>
+            <button class="zxw-prebtn zxw-search-create" v-show="create_btn" @click="new_noumenon_window()">创建本体</button>
         </div>
 
     </modal>
 </template>
 
 <script>
-    let Mock = require('mockjs');
+    /*let Mock = require('mockjs');
     Mock.mock('/ancient_books/get_person_list_by_name.action?name=lsm&&page_count=1','get', {
         "content":[
             {
@@ -229,7 +229,7 @@
                 "noumenon_id|27":28
             }
         ]
-    });
+    });*/
 
     import modal from "../component/modal.vue";
     export default{
@@ -371,24 +371,30 @@
     }
 
     .zxw-search-tip{
-        width:230px;
-        margin:50px 50px 0 100px;
-        font-size:12px;
+        width:260px;
+        margin:50px 50px 0 80px;
+        font-size:14px;
     }
 
     .zxw-search-create{
         width:80px;
         height:50px;
+        float:right;
+        font-size: 18px;
     }
 
     .zxw-search-cancel{
         width:80px;
         height:50px;
+        float:right;
+        margin-right: 20px;
         background-size: 80px 40px;
     }
 
     .zxw-search-footer{
-        float:right;
+        width:400px;
+        height:60px;
+        padding-top: 10px;
         margin: 0 20px 0 0;
     }
 
@@ -417,12 +423,14 @@
     .zxw-character-add{
         width:60px;
         height:30px;
+        font-size: 18px;
     }
 
     .zxw-search-result{
         display: inline-block;
         width:200px;
         margin:0 80px 0 15px;
+        font-size: 18px;
     }
 
     .zxw-fail-tip{
@@ -433,5 +441,10 @@
 
     .zxw-search-p-tip{
         color:grey;
+    }
+
+    .zxw-noumenon-body{
+        margin-top: 24px;
+        width: 800px;
     }
 </style>
