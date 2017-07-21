@@ -114,15 +114,18 @@
 
             next_page() {
                 if (this.varieties_item.type_name == '') {
-                    alert("请填写书名")
+                    alert("请填写书名");
+                    console.log(this.varieties_item.varieties_responsibility[0].begin_time);
+                    console.log(this.varieties_item.varieties_responsibility[0].begin_time);
+                    console.log(this.varieties_item.varieties_responsibility[0].begin_time)
                 }
-                else if (this.varieties_item.varieties_responsibility[0].begin_time = '') {
+                if (this.varieties_item.varieties_responsibility[0].begin_time = '') {
                     alert("请填写责任开始时间")
                 }
-                else if (this.varieties_item.varieties_responsibility[0].end_time = '') {
+                if (this.varieties_item.varieties_responsibility[0].end_time = '') {
                     alert("请填写责任结束时间")
                 }
-                else if (this.varieties_item.varieties_responsibility[0].person = '') {
+                if (this.varieties_item.varieties_responsibility[0].person = '') {
                     alert("请填写责任者名称")
                 }
                 else{
