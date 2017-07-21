@@ -14,7 +14,7 @@ const store = new Vuex.Store({
         ifLogin:'guest',
         Token:'',
         acl_user:
-            ['login','404','bookstore','user','upload1','mybook',
+            ['login','404','403','bookstore','user','upload1','mybook',
             'character','recent','char_detail','char_edit','place','pla_detail','pla_edit','institution','ins_detail','ins_edit','upload1','upload2',
             'upload3','copy','edition','impression','varieties',
             'bookstore','book_recent','book_info',
@@ -24,8 +24,8 @@ const store = new Vuex.Store({
             'alupload','privatebook','collection','offer',
             'ancientbook','comment','revise','edit','mark',
             'build','charactertwo','characterthree','placetwo','placethree','institutiontwo','institutionthree'],
-        acl_admin:['404','admin','modify_info'],
-        acl_guest:['login', '404'],
+        acl_admin:['404','403','admin','modify_info'],
+        acl_guest:['login', '404','403'],
         a:{},
         menu_items:[],
         copy_contents:{
