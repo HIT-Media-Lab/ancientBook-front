@@ -134,11 +134,16 @@
             },
 
             success_check(response) {
-                if (response.body.result === 0) {
-                    this.$router.push({path: '/user/upload2'});
+                if (response.body.length === 0) {
+                    console.log ("没有返回判断值！");
                 }
-                else if (response.body.result === 1) {
-                    alert("古籍规范名称重复")
+                else{
+                    if (response.body.result === 1) {
+                        alert("古籍规范名称重复")
+                    }
+                    else{
+                        this.$router.push({path: '/user/upload2'});
+                    }
                 }
             },
 
