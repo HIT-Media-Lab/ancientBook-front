@@ -58,7 +58,6 @@
 
         data() {
             return{
-                check_key : true,
                 varieties_item : {},
                 edition_item : {},
                 impression_item : {},
@@ -116,30 +115,22 @@
             next_page() {
                 if (this.varieties_item.type_name == '') {
                     alert("请填写书名");
-                    this.check_key = false;
-                    console.log(this.varieties_item.varieties_responsibility[0].begin_time);
-                    console.log(this.varieties_item.varieties_responsibility[0].begin_time);
-                    console.log(this.varieties_item.varieties_responsibility[0].begin_time)
                 }
-                if (this.varieties_item.varieties_responsibility[0].begin_time == '') {
+                else if (this.varieties_item.varieties_responsibility[0].begin_time == '') {
                     alert("请填写责任开始时间");
-                    this.check_key = false;
                 }
-                if (this.varieties_item.varieties_responsibility[0].end_time == '') {
+                else if (this.varieties_item.varieties_responsibility[0].end_time == '') {
                     alert("请填写责任结束时间");
-                    this.check_key = false;
                 }
-                if (this.varieties_item.varieties_responsibility[0].person == '') {
+                else if (this.varieties_item.varieties_responsibility[0].person == '') {
                     alert("请填写责任者名称");
-                    this.check_key = false;
                 }
-                if (this.check_key == true) {
+                else{
                     this.get_upload_one_info();
                     let url = '/ancient_books/check_if_ancient_book_already_exist.action?name=' + this.upload_one_info.standard_name;
                     var check_obj = '';
                     this.http_json (url , 'get' , check_obj , this.success_check , this.fail_check);
                 }
-                this.check_key = true;
             },
 
             success_check(response) {
