@@ -5,7 +5,7 @@
         <div class="form-center">
             <div>
                 <div class="row">
-                    <label class="col-md-2">冊數：</label>
+                    <label class="col-md-2">册数：</label>
                     <div class="col-md-4">
                         <input v-model="copy_item.duplicate_book_count">
                     </div>
@@ -21,20 +21,20 @@
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">品級：</label>
+                    <label class="col-md-2">品级：</label>
                     <div class="col-md-4">
                         <select id="ry-c-level">
                             <option>不详</option>
-                            <option>一級甲等</option>
-                            <option>一級乙等</option>
-                            <option>一級丙等</option>
-                            <option>二級甲等</option>
-                            <option>二級乙等</option>
-                            <option>二級丙等</option>
-                            <option>三級甲等</option>
-                            <option>三級乙等</option>
-                            <option>三級丙等</option>
-                            <option>四級</option>
+                            <option>一级甲等</option>
+                            <option>一级乙等</option>
+                            <option>一级丙等</option>
+                            <option>二级甲等</option>
+                            <option>二级乙等</option>
+                            <option>二级丙等</option>
+                            <option>三级甲等</option>
+                            <option>三级乙等</option>
+                            <option>三级丙等</option>
+                            <option>四级</option>
                         </select>
                     </div>
 
@@ -55,14 +55,14 @@
                         <button id="btn-add-copy" class="ry-btn-add" @click="add_new_box(index)" v-show="copy_item.copy_responsibility[index].value_add">添加</button>
                     </div>
                     <div class="col-md-2 float-right">
-                        <button id="btn-delete-copy" class="ry-btn-del" @click="del_new_box(index)" v-show="copy_item.copy_responsibility[index].value_del">刪除</button>
+                        <button id="btn-delete-copy" class="ry-btn-del" @click="del_new_box(index)" v-show="copy_item.copy_responsibility[index].value_del">删除</button>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任開始時間:</label>
+                        <label>责任开始时间:</label>
                     </div>
                     <div class="col-md-4">
                         <input readonly @click="open_birth()" v-model="item.begin_time">
@@ -70,7 +70,7 @@
 
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任結束時間:</label>
+                        <label>责任结束时间:</label>
                     </div>
                     <div class="col-md-4">
                         <input readonly @click="open_dead()" v-model="item.end_time">
@@ -78,14 +78,14 @@
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">責任地點：</label>
+                    <label class="col-md-2">责任地点：</label>
                     <div class="col-md-4">
                         <input readonly @click="open_location()" v-model="item.location">
                     </div>
 
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任者名稱:</label>
+                        <label>责任者名称：</label>
                     </div>
                     <div class="col-md-4">
                         <input readonly @click="open_character()" v-model="item.person">
@@ -95,7 +95,7 @@
                 <div class="row">
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任者類型：</label>
+                        <label>责任者类型：</label>
                     </div>
                     <div class="col-md-4">
                         <select class="ry-c-type">
@@ -107,14 +107,14 @@
 
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任行為：</label>
+                        <label>责任行为：</label>
                     </div>
                     <div class="col-md-4">
                         <select class="ry-c-action">
-                            <option>贈</option>
+                            <option>赠</option>
                             <option>藏</option>
-                            <option>裝</option>
-                            <option>購</option>
+                            <option>装</option>
+                            <option>购</option>
                             <option>題籤</option>
                             <option>題跋</option>
                             <option>過錄</option>
@@ -128,19 +128,19 @@
                 <div class="row">
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>確定性：</label>
+                        <label>确定性：</label>
                     </div>
                     <div class="col-md-4">
                         <select class="ry-c-confirm">
                             <option>不详</option>
                             <option>确定</option>
-                            <option>題</option>
+                            <option>题</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">責任說明：</label>
+                    <label class="col-md-2">责任说明：</label>
                     <div class="col-md-4">
                         <input v-model="item.explain" id="ry-input-responsibility">
                     </div>

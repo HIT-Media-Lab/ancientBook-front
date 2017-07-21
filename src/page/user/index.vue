@@ -92,7 +92,7 @@
         width: auto;
         font-weight:700;
         font-style:normal;
-        font-size:16px;
+        font-size:20px;
         color:#999999;
     }
     .j-link{

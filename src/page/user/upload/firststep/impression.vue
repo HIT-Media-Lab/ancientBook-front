@@ -5,16 +5,16 @@
         <div class="form-center">
             <div>
                 <div class="row">
-                    <label class="col-md-2">印刷類型：</label>
+                    <label class="col-md-2">印刷类型：</label>
                     <div class="col-md-4">
                         <select id="ry-i-print">
                             <option>不详</option>
                             <option>墨印</option>
                             <option>朱印</option>
-                            <option>藍印</option>
-                            <option>綠印</option>
+                            <option>蓝印</option>
+                            <option>绿印</option>
                             <option>套印</option>
-                            <option>雙色套印</option>
+                            <option>双色套印</option>
                             <option>三色套印</option>
                             <option>四色套印</option>
                             <option>四色以上套印</option>
@@ -38,14 +38,14 @@
                         <button id="btn-add-copy" class="ry-btn-add" @click="add_new_box(index)" v-show="impression_item.impression_responsibility[index].value_add">添加</button>
                     </div>
                     <div class="col-md-2 float-right">
-                        <button id="btn-delete-copy" class="ry-btn-del" @click="del_new_box(index)" v-show="impression_item.impression_responsibility[index].value_del">刪除</button>
+                        <button id="btn-delete-copy" class="ry-btn-del" @click="del_new_box(index)" v-show="impression_item.impression_responsibility[index].value_del">删除</button>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任開始時間:</label>
+                        <label>责任开始时间:</label>
                     </div>
                     <div class="col-md-4">
                         <input readonly @click="open_birth()" v-model="item.begin_time">
@@ -53,7 +53,7 @@
 
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任結束時間:</label>
+                        <label>责任结束时间:</label>
                     </div>
                     <div class="col-md-4">
                         <input readonly @click="open_dead()" v-model="item.end_time">
@@ -61,14 +61,14 @@
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">責任地點：</label>
+                    <label class="col-md-2">责任地点：</label>
                     <div class="col-md-4">
                         <input readonly @click="open_location()" v-model="item.location">
                     </div>
 
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任者名稱:</label>
+                        <label>责任者名称:</label>
                     </div>
                     <div class="col-md-4">
                         <input readonly @click="open_character()" v-model="item.person">
@@ -78,7 +78,7 @@
                 <div class="row">
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任者類型：</label>
+                        <label>责任者类型：</label>
                     </div>
                     <div class="col-md-4">
                         <select class="ry-i-type">
@@ -90,7 +90,7 @@
 
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任行為：</label>
+                        <label>责任行为：</label>
                     </div>
                     <div class="col-md-4">
                         <select class="ry-i-action">
@@ -103,13 +103,13 @@
                 <div class="row">
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>確定性：</label>
+                        <label>确定性：</label>
                     </div>
                     <div class="col-md-4">
                         <select class="ry-i-confirm">
                             <option>不详</option>
                             <option>确定</option>
-                            <option>題</option>
+                            <option>题</option>
                         </select>
                     </div>
                 </div>
