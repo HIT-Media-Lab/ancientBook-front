@@ -38,24 +38,24 @@
                 <div class="row">
                     <label class="col-md-2">板框长度：</label>
                     <div class="col-md-4">
-                        <input v-model="edition_item.version_frame_length">
+                        <input v-model="edition_item.version_frame_length_str">
                     </div>
 
                     <label class="col-md-2">板框宽度：</label>
                     <div class="col-md-4">
-                        <input v-model="edition_item.version_frame_width">
+                        <input v-model="edition_item.version_frame_width_str">
                     </div>
                 </div>
 
                 <div class="row">
                     <label class="col-md-2">开本长度：</label>
                     <div class="col-md-4">
-                        <input v-model="edition_item.version_format_length">
+                        <input v-model="edition_item.version_format_length_str">
                     </div>
 
                     <label class="col-md-2">开本宽度：</label>
                     <div class="col-md-4">
-                        <input v-model="edition_item.version_format_width">
+                        <input v-model="edition_item.version_format_width_str">
                     </div>
                 </div>
 
@@ -74,19 +74,19 @@
                 <div class="row">
                     <label class="col-md-2">半页行数：</label>
                     <div class="col-md-4">
-                        <input v-model="edition_item.version_half_page_line_number">
+                        <input v-model="edition_item.version_half_page_line_number_str">
                     </div>
 
                     <label class="col-md-2">每行字数：</label>
                     <div class="col-md-4">
-                        <input v-model="edition_item.version_page_line_number">
+                        <input v-model="edition_item.version_page_line_number_str">
                     </div>
                 </div>
 
                 <div class="row">
                     <label class="col-md-2">双行小字字数：</label>
                     <div class="col-md-4">
-                        <input v-model="edition_item.version_double_page_number">
+                        <input v-model="edition_item.version_double_page_number_str">
                     </div>
 
                     <label class="col-md-2">鱼尾样式：</label>
@@ -147,7 +147,7 @@
                 <div class="row">
                     <label class="col-md-2">卷数:</label>
                     <div class="col-md-4">
-                        <input v-model="edition_item.version_volume">
+                        <input v-model="edition_item.version_volume_str">
                     </div>
                 </div>
             </div>
@@ -168,7 +168,7 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任开始时间:</label>
                     </div>
                     <div class="col-md-4">
@@ -176,7 +176,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任结束时间:</label>
                     </div>
                     <div class="col-md-4">
@@ -191,7 +191,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任者名称:</label>
                     </div>
                     <div class="col-md-4">
@@ -201,7 +201,7 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任者类型：</label>
                     </div>
                     <div class="col-md-4">
@@ -213,7 +213,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任行为：</label>
                     </div>
                     <div class="col-md-4">
@@ -225,7 +225,7 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>确定性：</label>
                     </div>
                     <div class="col-md-4">
@@ -238,7 +238,7 @@
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">責任說明：</label>
+                    <label class="col-md-2">责任说明：</label>
                     <div class="col-md-4">
                         <input v-model="item.explain" id="ry-input-responsibility">
                     </div>
@@ -253,7 +253,7 @@
             <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></time_modal>
             <time_modal :time_modal="this.time_modal_2" v-on:success_time="dead_time" v-on:close_modal="close_dead()"></time_modal>
             <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal" :noumenon_number="7" v-on:close_modal="close_location" v-on:add_noumenon_relations="add_location"></search_modal>
-            <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal" :noumenon_number="1" v-on:close_modal="close_character" v-on:add_noumenon_relations="add_character"></search_modal>
+            <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal" :noumenon_number="1" :repeat_arr="[]" v-on:close_modal="close_character" v-on:add_noumenon_relations="add_character"></search_modal>
         </div>
     </div>
 
@@ -296,47 +296,7 @@
                 get_menu_nineteen_obj : {},
                 menu_nineteen : [],
                 menu_items :[],
-                edition_item : {
-                    version_volume : '',
-                    version_type : '',
-                    version_age : '',
-                    version_support : '',
-                    version_binding : '',
-                    version_frame_length : '',
-                    version_frame_width : '',
-                    version_format_length : '',
-                    version_format_width : '',
-                    version_paiji_content : '',
-                    version_paiji_location : '',
-                    version_half_page_line_number : '',
-                    version_page_line_number : '',
-                    version_yuwei : '',
-                    version_double_page_number : '',
-                    version_bianlan : '',
-                    version_fenlan : '',
-                    version_shukou : '',
-                    version_banxin_content : '',
-                    version_youshuwuer : '',
-                    version_youwujiazhu  : '',
-                    edition_responsibility : [{
-                        value_add : true,
-                        value_del : false,
-                        location : '',
-                        location_id : '',
-                        person : '',
-                        person_id : '',
-                        begin_time : '',
-                        begin_time_id : '',
-                        end_time : '',
-                        end_time_id :'',
-                        action : '',
-                        action_value : '',
-                        explain : '',
-                        confirm : '',
-                        type : '',
-                        level : 2,
-                    }]
-                },
+                edition_item : {},
             }
         },
 

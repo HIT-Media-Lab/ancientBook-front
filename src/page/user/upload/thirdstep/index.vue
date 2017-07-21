@@ -13,9 +13,12 @@
         </div>
 
         <div class="width950 height650 center ry-scroll">
-            <div id="ry-pictures" v-for="item in upload_file[this.book_index].images" style="display: inline-block">
+            <div id="ry-pictures" v-for="(item,index) in upload_file[this.book_index].images" style="display: inline-block">
                 <div class="ry-picture-box" v-show="item.show">
-                    <img :src="item.picture" class="ry-picture-view" @mouseover="view_picture()"/>
+                    <div class="ry-picture-view ry-fixed">
+                        <button class="ry-del-pic" @click="del_picture(index)"><img src="../../../../assets/img/picture-button/add-character-hover.png" height="14" width="15" /></button>
+                        <img :src="item.picture" class="ry-picture-view" @mouseover="view_picture()"/>
+                    </div>
                     <p class="picture-names" style="text-align: center">{{item.pic_name}}</p>
                 </div>
             </div>
@@ -87,8 +90,8 @@
 
         data() {
             return{
-                book_total : 0,
-                volume_total : 0,
+                book_total : 1,
+                volume_total : 1,
                 book_bind : 1,
                 volume_bind : 1,
                 book_index : 0,
@@ -163,6 +166,13 @@
                 document.getElementById("ry-hover-text").innerText = this.upload_file[this.book_index].texts[index]
             },
 
+
+            /**
+             * 删除图片
+             */
+            del_picture(index) {
+                this.upload_file[this.book_index].images.splice(index,1)
+            },
 
             /**
              * 更改图片
@@ -449,21 +459,21 @@
                 this.add_book_obj.type_shu = this.varieties_item.type_shu;
                 this.add_book_obj.type_summary = this.varieties_item.type_summary;
                 this.add_book_obj.literature_standard_name = this.varieties_item.literature_standard_name;
-                this.add_book_obj.version_volume = this.edition_item.version_volume;
+                this.add_book_obj.version_volume = parseInt(this.edition_item.version_volume_str);
                 this.add_book_obj.version_type = this.edition_item.version_type;
                 this.add_book_obj.version_age = this.edition_item.version_age;
                 this.add_book_obj.version_support = this.edition_item.version_support;
                 this.add_book_obj.version_binding = this.edition_item.version_binding;
-                this.add_book_obj.version_frame_length = this.edition_item.version_frame_length;
-                this.add_book_obj.version_frame_width = this.edition_item.version_frame_width;
-                this.add_book_obj.version_format_length = this.edition_item.version_format_length;
-                this.add_book_obj.version_format_width = this.edition_item.version_format_width;
+                this.add_book_obj.version_frame_length = parseInt(this.edition_item.version_frame_length_str);
+                this.add_book_obj.version_frame_width = parseInt(this.edition_item.version_frame_width_str);
+                this.add_book_obj.version_format_length = parseInt(this.edition_item.version_format_length_str);
+                this.add_book_obj.version_format_width = parseInt(this.edition_item.version_format_width_str);
                 this.add_book_obj.version_paiji_content = this.edition_item.version_paiji_content;
                 this.add_book_obj.version_paiji_location = this.edition_item.version_paiji_location;
-                this.add_book_obj.version_half_page_line_number = this.edition_item.version_half_page_line_number;
-                this.add_book_obj.version_page_line_number = this.edition_item.version_page_line_number;
+                this.add_book_obj.version_half_page_line_number = parseInt(this.edition_item.version_half_page_line_number_str);
+                this.add_book_obj.version_page_line_number = parseInt(this.edition_item.version_page_line_number_str);
                 this.add_book_obj.version_yuwei = this.edition_item.version_yuwei;
-                this.add_book_obj.version_double_page_number = this.edition_item.version_double_page_number;
+                this.add_book_obj.version_double_page_number = parseInt(this.edition_item.version_double_page_number_str);
                 this.add_book_obj.version_bianlan = this.edition_item.version_bianlan;
                 this.add_book_obj.version_fenlan = this.edition_item.version_fenlan;
                 this.add_book_obj.version_shukou = this.edition_item.version_shukou;
@@ -472,7 +482,7 @@
                 this.add_book_obj.version_youwujiazhu = this.edition_item.version_youwujiazhu;
                 this.add_book_obj.printing_type = this.impression_item.printing_type;
                 this.add_book_obj.printing_number = this.impression_item.printing_number;
-                this.add_book_obj.duplicate_book_count = this.copy_item.duplicate_book_count;
+                this.add_book_obj.duplicate_book_count = parseInt(this.copy_item.duplicate_book_count_str);
                 this.add_book_obj.duplicate_level = this.copy_item.duplicate_level;
                 this.add_book_obj.duplicate_complete = this.copy_item.duplicate_complete;
                 this.add_book_obj.duplicate_attachment = this.copy_item.duplicate_attachment;
@@ -682,4 +692,10 @@
         top: 0;
         opacity: 0;
     }
+
+    .ry-del-pic{
+        position: absolute;
+        margin-left: 105px;
+    }
+
 </style>

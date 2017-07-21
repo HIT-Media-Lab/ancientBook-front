@@ -1,24 +1,23 @@
 <template>
     <div class="j-book-navbar">
         <select class="j-book-select" v-model="select_1" id="bu" @change="go_item_2()">
-            <option selected v-bind:value="{id: 'bu',name: ''}">部</option>
+            <option class="j-option" selected v-bind:value="{id: 'bu',name: ''}">部</option>
             <option v-for="item in item_1" class="j-option" v-bind:value="{id: item.item_1_id, name: item.chinese_name}">
                 {{item.chinese_name}}
             </option>
         </select>
         <select class="j-book-select" v-model="select_2" id="lei" @change="go_item_3()">
-            <option selected v-bind:value="{id: 'lei', name: ''}">类</option>
+            <option class="j-option" selected v-bind:value="{id: 'lei', name: ''}">类</option>
             <option v-for="item in item_2" class="j-option" v-bind:value="{id: item.item_2_id, name: item.chinese_name}">
                 {{item.chinese_name}}
             </option>
         </select>
         <select class="j-book-select" v-model="select_3" id="shu" @change="go_to_sortbook()">
-            <option selected v-bind:value="{id: 'shu', name: ''}">属</option>
+            <option class="j-option" selected v-bind:value="{id: 'shu', name: ''}">属</option>
             <option v-for="item in item_3" class="j-option" v-bind:value="{id: item.item_3_id, name: item.chinese_name}">
                 {{item.chinese_name}}
             </option>
         </select>
-        <!--<button @click="go_to_sortbook()">sdfsdf</button>-->
     </div>
 </template>
 <script>
@@ -64,6 +63,16 @@
             this.http_json(this.id,'get',{}, this.success2, this.fail2);
             this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + 1 + '&&item_2_id=' + 1;
             this.http_json(this.id,'get',{}, this.success3, this.fail3);
+        },
+        watch:{
+            $route(){
+                this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + 0 + '&&item_2_id=' + 0;
+                this.http_json(this.id,'get',{}, this.success1, this.fail1);
+                this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + 1 + '&&item_2_id=' + 0;
+                this.http_json(this.id,'get',{}, this.success2, this.fail2);
+                this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + 1 + '&&item_2_id=' + 1;
+                this.http_json(this.id,'get',{}, this.success3, this.fail3);
+            }
         },
         methods:{
             success1(response){
@@ -143,16 +152,14 @@
     .j-book-select{
         margin:21px 90px 40px;
         font-size: 20px;
-        color: gainsboro;
+        color: white;
         display: inline-block;
         background-color: transparent;
         border: none;
     }
     .j-option{
-        background-color: #a50000;
-        border: transparent;
-    }
-    .j-option :hover{
-        background-color: grey;
-    }
+        background-color: #fef7e5;
+        color: black;
+
+   }
 </style>

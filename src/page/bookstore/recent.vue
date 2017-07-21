@@ -20,6 +20,11 @@
             this.get_id();
 //            window.setTimeout("get_picture()", 2000);
         },
+        watch:{
+            $route(){
+                this.get_id();
+            }
+        },
         data(){
             return{
                 title: '最近',

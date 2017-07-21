@@ -104,4 +104,7 @@
         width: 25px;
         height: 28px;
     }
+    option:hover{
+        color: black;
+    }
 </style>

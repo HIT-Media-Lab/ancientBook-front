@@ -79,5 +79,8 @@ export default {
     get_create_ins(state,data){
         state.create_ins = data;
         console.log('state.create_ins:'+JSON.stringify(state.create_ins));
+    },
+    change_fork(state, bool){
+        state.fork = bool;
     }
 }

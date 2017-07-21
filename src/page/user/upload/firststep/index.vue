@@ -82,7 +82,9 @@
         },
 
         beforeRouteLeave (to, from, next) {
+            this.varieties_item.literature_standard_name = document.getElementById("v-standard-name").innerText;
             this.get_upload_one_info();
+            this.$store.commit("get_varieties_contents",this.varieties_item);
             this.$store.commit("get_upload1_info",this.upload_one_info);
             next();
         },
@@ -111,7 +113,69 @@
             },
 
             next_page() {
-                this.$router.push({path: '/user/upload2'});
+                if (this.varieties_item.type_name == '') {
+                    alert("请填写书名");
+                }
+                else if (this.varieties_item.varieties_responsibility[0].begin_time == '') {
+                    alert("请填写品种层责任开始时间");
+                }
+                else if (this.varieties_item.varieties_responsibility[0].end_time == '') {
+                    alert("请填写品种层责任结束时间");
+                }
+                else if (this.varieties_item.varieties_responsibility[0].person == '') {
+                    alert("请填写品种层责任者名称");
+                }
+                else if (this.edition_item.edition_responsibility[0].begin_time == '') {
+                    alert("请填写版本层责任开始时间");
+                }
+                else if (this.edition_item.edition_responsibility[0].end_time == '') {
+                    alert("请填写版本层责任结束时间");
+                }
+                else if (this.edition_item.edition_responsibility[0].person == '') {
+                    alert("请填写版本层责任者名称");
+                }
+                else if (this.impression_item.impression_responsibility[0].begin_time == '') {
+                    alert("请填写印次层责任开始时间");
+                }
+                else if (this.impression_item.impression_responsibility[0].end_time == '') {
+                    alert("请填写印次层责任结束时间");
+                }
+                else if (this.impression_item.impression_responsibility[0].person == '') {
+                    alert("请填写印次层责任者名称");
+                }
+                else if (this.copy_item.copy_responsibility[0].begin_time == '') {
+                    alert("请填写复本层责任开始时间");
+                }
+                else if (this.copy_item.copy_responsibility[0].end_time == '') {
+                    alert("请填写复本层责任结束时间");
+                }
+                else if (this.copy_item.copy_responsibility[0].person == '') {
+                    alert("请填写复本层责任者名称");
+                }
+                else{
+                    this.get_upload_one_info();
+                    let url = '/ancient_books/check_if_ancient_book_already_exist.action?name=' + this.upload_one_info.standard_name;
+                    var check_obj = '';
+                    this.http_json (url , 'get' , check_obj , this.success_check , this.fail_check);
+                }
+            },
+
+            success_check(response) {
+                if (response.body.length === 0) {
+                    console.log ("没有返回判断值！");
+                }
+                else{
+                    if (response.body.result === 1) {
+                        alert("古籍规范名称重复")
+                    }
+                    else{
+                        this.$router.push({path: '/user/upload2'});
+                    }
+                }
+            },
+
+            fail_check() {
+                console.log("error!")
             },
 
             cancel_upload() {

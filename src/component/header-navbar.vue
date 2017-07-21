@@ -82,6 +82,7 @@
             bus.$on('change_name',(item) =>{
                 this.user_name = item;
             });
+            this.$store.commit('change_fork', true);
         },
         watch:{
             $route(){

@@ -7,7 +7,7 @@
                 <div class="row">
                     <label class="col-md-2">册数：</label>
                     <div class="col-md-4">
-                        <input v-model="copy_item.duplicate_book_count">
+                        <input v-model="copy_item.duplicate_book_count_str">
                     </div>
 
                     <label class="col-md-2">完整性：</label>
@@ -61,7 +61,7 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任开始时间:</label>
                     </div>
                     <div class="col-md-4">
@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任结束时间:</label>
                     </div>
                     <div class="col-md-4">
@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任者名称：</label>
                     </div>
                     <div class="col-md-4">
@@ -94,7 +94,7 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任者类型：</label>
                     </div>
                     <div class="col-md-4">
@@ -106,7 +106,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任行为：</label>
                     </div>
                     <div class="col-md-4">
@@ -115,19 +115,19 @@
                             <option>藏</option>
                             <option>装</option>
                             <option>购</option>
-                            <option>題籤</option>
-                            <option>題跋</option>
-                            <option>過錄</option>
+                            <option>题签</option>
+                            <option>题跋</option>
+                            <option>过录</option>
                             <option>批注</option>
                             <option>批校</option>
-                            <option>補目</option>
+                            <option>补目</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>确定性：</label>
                     </div>
                     <div class="col-md-4">
@@ -154,7 +154,7 @@
             <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></time_modal>
             <time_modal :time_modal="this.time_modal_2" v-on:success_time="dead_time" v-on:close_modal="close_dead()"></time_modal>
             <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal" :noumenon_number="7" v-on:close_modal="close_location" v-on:add_noumenon_relations="add_location"></search_modal>
-            <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal" :noumenon_number="1" v-on:close_modal="close_character" v-on:add_noumenon_relations="add_character"></search_modal>
+            <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal" :noumenon_number="1" :repeat_arr="[]" v-on:close_modal="close_character" v-on:add_noumenon_relations="add_character"></search_modal>
         </div>
     </div>
 
@@ -178,30 +178,7 @@
                 time_modal_2 : false,
                 location_modal : false,
                 character_modal : false,
-                copy_item : {
-                    duplicate_book_count : '',
-                    duplicate_level : '',
-                    duplicate_complete : '',
-                    duplicate_attachment : '',
-                    copy_responsibility : [{
-                        value_add : true,
-                        value_del : false,
-                        location : '',
-                        location_id : '',
-                        person : '',
-                        person_id : '',
-                        begin_time : '',
-                        begin_time_id : '',
-                        end_time : '',
-                        end_time_id : '',
-                        action : '',
-                        action_value : '',
-                        explain : '',
-                        confirm : '',
-                        type : '',
-                        level : 4,
-                    }]
-                }
+                copy_item : {}
             }
         },
 

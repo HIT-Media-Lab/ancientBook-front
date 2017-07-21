@@ -44,14 +44,17 @@
 
             get_bls(){
                 this.books = [];
-                let item = this.book_url + "?bu=" + this.$route.params.bu_id +"&&lei=" + this.$route.params.lei_id + "&&shu=" + this.$route.params.shu_id + "&&page_count=" + this.$route.params.pageId;
-                this.bu = this.$route.params.bu;
-                this.lei = this.$route.params.lei;
-                this.shu = this.$route.params.shu;
-                this.http_json(item, 'get', item, this.success1, this.fail1)
+                if (this.$route.params.bu_id == undefined || this.$route.params.lei_id == undefined || this.$route.params.shu_id == undefined){
+                    this.$router.push({path: '/bookstore'})
+                }else {
+                    let item = this.book_url + "?bu=" + this.$route.params.bu_id +"&&lei=" + this.$route.params.lei_id + "&&shu=" + this.$route.params.shu_id + "&&page_count=" + this.$route.params.pageId;
+                    this.bu = this.$route.params.bu;
+                    this.lei = this.$route.params.lei;
+                    this.shu = this.$route.params.shu;
+                    this.http_json(item, 'get', item, this.success1, this.fail1)
+                }
             },
             success1(response){
-                this.total_page = 1;
                 this.total_page = response.body.total_page;
                 this.books = response.body.content;
             },
