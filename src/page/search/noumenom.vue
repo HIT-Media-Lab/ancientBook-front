@@ -92,11 +92,12 @@
                 this.info_num = response.body.content.length;
                 console.log(this.info_num);
                 this.total_page = (this.info_num)/20 ;
+                this.total_page = parseInt(this.total_page.toString());
                 console.log( this.total_page);
                 if(this.info_num%20 != 0){
                     this.total_page ++;
                 }
-                if (this.total_page = 0){
+                if (this.total_page == 0){
                     this.total_page = 1;
                 }
                 this.content.sort(this.change);
