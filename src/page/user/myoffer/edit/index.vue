@@ -2,14 +2,14 @@
     <div class="all">
         <recent_title class="j-edit-bar" :title="'我的贡献/本体编辑' + '（共' + this.count + '条）'">
             <select class="j-edit-select" v-model="sort_name" slot="children" @change="go_to_sort">
-                <option>全部本体</option>
-                <option>人物本体</option>
-                <option>文献本体</option>
-                <option>术语本体</option>
-                <option>时间本体</option>
-                <option>职官本体</option>
-                <option>机构本体</option>
-                <option>地点本体</option>
+                <option class="j-option">全部本体</option>
+                <option class="j-option">人物本体</option>
+                <option class="j-option">文献本体</option>
+                <option class="j-option">术语本体</option>
+                <option class="j-option">时间本体</option>
+                <option class="j-option">职官本体</option>
+                <option class="j-option">机构本体</option>
+                <option class="j-option">地点本体</option>
             </select>
         </recent_title>
         <div class="j-edit">

@@ -2,8 +2,8 @@
     <div class="all">
         <recent_title class="j-comment-bar" :title="'我的贡献/批注' + '（共' + this.count + '条）'">
             <select class="j-comment-select" v-model="sort_name" slot="children" @change="go_to_sort">
-                <option>公开批注</option>
-                <option>私密批注</option>
+                <option class="j-option">公开批注</option>
+                <option class="j-option">私密批注</option>
             </select>
         </recent_title>
         <div class="j-comment">
