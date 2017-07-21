@@ -77,6 +77,9 @@ export default {
     get_build_ins:state => {
         return state.create_ins
     },
+    get_fork:state => {
+        return state.fork;
+    }
 
 
 

@@ -1,7 +1,7 @@
 <template id="modal" >
     <div id="dialogs" class="dialogs" :class="{ 'dialog-active': show_modal }">
         <div class="dialog-content">
-            <div class="j-close j-rotate">
+            <div class="j-close j-rotate" v-model="show_fork" v-show="show_fork">
                 <span @click="$emit('fireclose')" style="font-size: 30px;">×</span>
             </div>
             <slot name="header"></slot>
@@ -13,7 +13,11 @@
 </template>
 
 <script>
+    import bus from '../lib/bus'
     export default {
+        created(){
+            this.show_fork = this.$store.getters.get_fork;
+        },
         mounted(){
             if(!this.show_modal){
                 this.middle();
@@ -21,8 +25,7 @@
         },
         data(){
             return {
-                hhh: ''
-//                show_modal: false
+                show_fork: true
             }
         },
         props: ['show_modal'],

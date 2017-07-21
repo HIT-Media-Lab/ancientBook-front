@@ -235,7 +235,8 @@ const store = new Vuex.Store({
         sort_item_name:{},
         search_content: '',
 
-        ancient_book_id: ''
+        ancient_book_id: '',
+        fork: true
     },
     getters,
     mutations,
