@@ -73,7 +73,7 @@
 </template>
 
 <script>
-    let Mock = require('mockjs');
+    /*let Mock = require('mockjs');
     //显示用户列表
     Mock.mock('/ancient_books/get_institution_by_id.action?id=1','get',{
         "status|200":200,
@@ -97,7 +97,7 @@
         "remark_1_name": "",
         "remark_2_name": "谏书"
 
-    });
+    });*/
 
     import noumenon_title from '../../../component/noumenon-title.vue';
     import noumenon_button from '../../../component/noumenon-button.vue';
@@ -197,9 +197,9 @@
             },
 
             ins_info(){
-                let place_object={};
+                let ins_object={};
                 let new_url = this.get_ins_url +'?id='+this.$route.params.nouId;
-                this.http_json(new_url,'get',place_object,this.success_id,this.fail_id);
+                this.http_json(new_url,'get',ins_object,this.success_id,this.fail_id);
             },
 
             success_delete(response){

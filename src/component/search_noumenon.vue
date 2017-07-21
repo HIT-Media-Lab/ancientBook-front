@@ -35,7 +35,7 @@
 </template>
 
 <script>
-    let Mock = require('mockjs');
+    /*let Mock = require('mockjs');
     Mock.mock('/ancient_books/get_person_list_by_name.action?name=lsm&&page_count=1','get', {
         "content":[
             {
@@ -229,10 +229,14 @@
                 "noumenon_id|27":28
             }
         ]
-    });
+    });*/
 
     import modal from "../component/modal.vue";
     export default{
+        created(){
+            this.$store.commit('change_fork',true);
+        },
+
         components:{
             modal
         },
