@@ -4,8 +4,8 @@
 
         <!--模块名称-->
         <div class="width950 center">
-            <h3 style="display:inline-block">2上傳圖文</h3>
-            <button class="float-right ry-btn-cancel-upload" @click="cancel_upload">取消上傳</button>
+            <h3 style="display:inline-block">2上传图文</h3>
+            <button class="float-right ry-btn-cancel-upload" @click="cancel_upload">取消上传</button>
         </div>
 
         <div class="width1000 center">
@@ -14,17 +14,17 @@
 
         <div class="width600 center">
             <div id="upload2-box" class="ry-upload-two" v-for="(item,index) in upload_file">
-                <span>冊號:</span>
+                <span>册号:</span>
                 <input class="ry-input-upload2" v-model="item.book_num">
-                <button class="ry-btn-add-book" @click="add_new_book(index)" v-show="upload_file[index].value">添加新冊</button>
+                <button class="ry-btn-add-book" @click="add_new_book(index)" v-show="upload_file[index].value">添加新册</button>
                 <br>
-                <span>冊名:</span>
+                <span>册名:</span>
                 <input class="ry-input-upload2" v-model="item.book_name">
                 <div class="width800">
-                    <a href="javascript:;" class="ry-file-picture ry-white">上傳圖片
+                    <a href="javascript:;" class="ry-file-picture ry-white">上传图片
                         <input id="pic-name" type="file" @change="onFileChange" multiple accept="image/jpeg" name="picture">
                     </a>
-                    <a href="javascript:;" class="ry-file-text ry-white">上傳文本
+                    <a href="javascript:;" class="ry-file-text ry-white">上传文本
                         <input id="text-name" type="file" @change="onTextChange" multiple accept="text/plain" name="text">
                     </a>
                 </div>

@@ -92,7 +92,7 @@
 
             <div class="zxw-edit-btn">
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length" @click="cancel_edit()">取消</button>
-                <button class="zxw-nextbtn zxw-nextbtn-length" @click="finish_edit()" v-bind:disabled="input_content.begin_time_name === ''|| input_content.end_time_name === ''||input_content.location_name === ''|| show_input === true|| repeat_id !== '' ||(add_data[0].remark_name === ''&& add_data[0].remark !== '')||(add_data[1] !== undefined && add_data[1].remark_name === '' && add_data[1].remark !=='')||show_begin_time === false||show_end_time === false">完成</button>
+                <button class="zxw-nextbtn zxw-nextbtn-length" @click="finish_edit()" v-bind:disabled="input_content.begin_time_name === ''|| input_content.end_time_name === ''||input_content.location_name === ''|| show_input === true|| repeat_id !== '' ||(add_data[0].remark_name === ''&& add_data[0].remark !== '')||(add_data[1] !== undefined && add_data[1].remark_name === '' && add_data[1].remark !=='')||show_latitude === true||show_longitude === true">完成</button>
             </div>
         </div>
 
@@ -305,7 +305,7 @@
                 console.log('add_data: '+JSON.stringify(this.add_data));
             },
 
-            fail_character(){
+            fail_place(){
                 console.log("获取地名信息失败");
             },
 
@@ -355,7 +355,7 @@
             },
 
             delete_begin(){
-                this.input_place.begin_time_id='';
+                this.input_content.begin_time_id='';
                 this.input_content.begin_time_name='';
             },
 
@@ -399,7 +399,7 @@
 
             add_s_location(p){
                 this.input_content.s_location_id = p.noumenon_id;
-                this.input_content.s_location_namem = p.standard_name;
+                this.input_content.s_location_name = p.standard_name;
                 console.log('this.input_content.s_location_id: '+this.input_content.s_location_id);
                 console.log('this.input_content.s_location_name: '+this.input_content.s_location_name);
             },
@@ -414,14 +414,14 @@
                 this.s_location_modal = false;
             },
 
-            /*关联上级地名*/
+            /*关联下级地名*/
             open_l_location(){
                 this.l_location_modal = true;
             },
 
             add_l_location(p){
                 this.input_content.l_location_id = p.noumenon_id;
-                this.input_content.l_location_namem = p.standard_name;
+                this.input_content.l_location_name = p.standard_name;
                 console.log('this.input_content.l_location_id: '+this.input_content.l_location_id);
                 console.log('this.input_content.l_location_name: '+this.input_content.l_location_name);
             },

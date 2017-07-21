@@ -513,12 +513,14 @@
 
 
     .zxwspan-length{
+        font-size: 18px;
         font-weight: bold;
         width:100px;
         display:inline-block;
     }
 
     .zxwspan-length-content{
+        font-size: 18px;
         font-weight: bold;
         display:inline-block;
     }

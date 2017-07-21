@@ -37,9 +37,17 @@ export default{
         go_step2(){
             console.log(this.noumenon_option[this.number]);
             if(this.noumenon_option[this.number]==='人物'){
+
                 this.$router.push({name:'charactertwo'});
+
             } else if(this.noumenon_option[this.number]==='地名'){
+
                 this.$router.push({name:'placetwo'});
+
+            }else if(this.noumenon_option[this.number]==='机构'){
+
+                this.$router.push({name:'institutiontwo'});
+
             }
         }
     }

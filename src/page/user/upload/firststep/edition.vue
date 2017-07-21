@@ -4,14 +4,14 @@
         <div id="edition" class="form-center">
             <div>
                 <div class="row">
-                    <label class="col-md-2">版本類型：</label>
+                    <label class="col-md-2">版本类型：</label>
                     <div class="col-md-4">
                         <select id="ry-e-edition-type">
                             <option v-for="item in menu_ten">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
-                    <label class="col-md-2">版本時代：</label>
+                    <label class="col-md-2">版本时代：</label>
                     <div class="col-md-4">
                         <select id="ry-e-age">
                             <option v-for="item in menu_eleven">{{item.chinese_name}}</option>
@@ -20,14 +20,14 @@
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">載體形式：</label>
+                    <label class="col-md-2">载体形式：</label>
                     <div class="col-md-4">
                         <select id="ry-e-support">
                             <option v-for="item in menu_twelve">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
-                    <label class="col-md-2">裝幀形式：</label>
+                    <label class="col-md-2">装帧形式：</label>
                     <div class="col-md-4">
                         <select id="ry-e-binding">
                             <option v-for="item in menu_thirteen">{{item.chinese_name}}</option>
@@ -36,60 +36,60 @@
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">板框長度：</label>
+                    <label class="col-md-2">板框长度：</label>
                     <div class="col-md-4">
                         <input v-model="edition_item.version_frame_length">
                     </div>
 
-                    <label class="col-md-2">板框寬度：</label>
+                    <label class="col-md-2">板框宽度：</label>
                     <div class="col-md-4">
                         <input v-model="edition_item.version_frame_width">
                     </div>
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">開本長度：</label>
+                    <label class="col-md-2">开本长度：</label>
                     <div class="col-md-4">
                         <input v-model="edition_item.version_format_length">
                     </div>
 
-                    <label class="col-md-2">開本寬度：</label>
+                    <label class="col-md-2">开本宽度：</label>
                     <div class="col-md-4">
                         <input v-model="edition_item.version_format_width">
                     </div>
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">牌記內容：</label>
+                    <label class="col-md-2">牌记内容：</label>
                     <div class="col-md-4">
                         <input v-model="edition_item.version_paiji_content">
                     </div>
 
-                    <label class="col-md-2">牌記位置:</label>
+                    <label class="col-md-2">牌记位置:</label>
                     <div class="col-md-4">
                         <input v-model="edition_item.version_paiji_location">
                     </div>
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">半頁行數：</label>
+                    <label class="col-md-2">半页行数：</label>
                     <div class="col-md-4">
                         <input v-model="edition_item.version_half_page_line_number">
                     </div>
 
-                    <label class="col-md-2">每行字數：</label>
+                    <label class="col-md-2">每行字数：</label>
                     <div class="col-md-4">
                         <input v-model="edition_item.version_page_line_number">
                     </div>
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">雙行小字字數：</label>
+                    <label class="col-md-2">双行小字字数：</label>
                     <div class="col-md-4">
                         <input v-model="edition_item.version_double_page_number">
                     </div>
 
-                    <label class="col-md-2">魚尾樣式：</label>
+                    <label class="col-md-2">鱼尾样式：</label>
                     <div class="col-md-4">
                         <select id="ry-e-fish">
                             <option v-for="item in menu_fourteen">{{item.chinese_name}}</option>
@@ -98,14 +98,14 @@
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">邊欄樣式：</label>
+                    <label class="col-md-2">边栏样式：</label>
                     <div class="col-md-4">
                         <select id="ry-e-side">
                             <option v-for="item in menu_fifteen">{{item.chinese_name}}</option>
                         </select>
                     </div>
 
-                    <label class="col-md-2">分欄：</label>
+                    <label class="col-md-2">分栏：</label>
                     <div class="col-md-4">
                         <select id="ry-e-divide">
                             <option v-for="item in menu_sixteen">{{item.chinese_name}}</option>
@@ -114,7 +114,7 @@
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">書口樣式：</label>
+                    <label class="col-md-2">书口样式：</label>
                     <div class="col-md-4">
                         <select id="ry-e-book">
                             <option v-for="item in menu_seventeen">{{item.chinese_name}}</option>
@@ -129,12 +129,12 @@
 
 
                 <div class="row">
-                    <label class="col-md-2">有無書耳：</label>
+                    <label class="col-md-2">有无书耳：</label>
                     <div class="col-md-4">
                         <input v-model="edition_item.version_youshuwuer">
                     </div>
 
-                    <label class="col-md-2">有無夾注：</label>
+                    <label class="col-md-2">有无夹注：</label>
                     <div class="col-md-4">
                         <select id="ry-e-comment">
                             <option>不详</option>
@@ -145,7 +145,7 @@
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">卷數:</label>
+                    <label class="col-md-2">卷数:</label>
                     <div class="col-md-4">
                         <input v-model="edition_item.version_volume">
                     </div>
@@ -169,7 +169,7 @@
                 <div class="row">
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任開始時間:</label>
+                        <label>责任开始时间:</label>
                     </div>
                     <div class="col-md-4">
                         <input readonly @click="open_birth()" v-model="item.begin_time">
@@ -177,7 +177,7 @@
 
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任結束時間:</label>
+                        <label>责任结束时间:</label>
                     </div>
                     <div class="col-md-4">
                         <input readonly @click="open_dead()" v-model="item.end_time">
@@ -185,14 +185,14 @@
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">責任地點：</label>
+                    <label class="col-md-2">责任地点：</label>
                     <div class="col-md-4">
                         <input readonly @click="open_location()" v-model="item.location">
                     </div>
 
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任者名稱:</label>
+                        <label>责任者名称:</label>
                     </div>
                     <div class="col-md-4">
                         <input readonly @click="open_character()" v-model="item.person">
@@ -202,7 +202,7 @@
                 <div class="row">
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任者類型：</label>
+                        <label>责任者类型：</label>
                     </div>
                     <div class="col-md-4">
                         <select class="ry-e-type">
@@ -214,7 +214,7 @@
 
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>責任行為：</label>
+                        <label>责任行为：</label>
                     </div>
                     <div class="col-md-4">
                         <select class="ry-e-action">
@@ -226,13 +226,13 @@
                 <div class="row">
                     <div class="col-md-2">
                         <span class="star">*</span>
-                        <label>確定性：</label>
+                        <label>确定性：</label>
                     </div>
                     <div class="col-md-4">
                         <select class="ry-e-confirm">
                             <option>不详</option>
                             <option>确定</option>
-                            <option>題</option>
+                            <option>题</option>
                         </select>
                     </div>
                 </div>

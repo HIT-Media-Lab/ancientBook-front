@@ -63,7 +63,7 @@
 <style>
     .zxwcharacter-title{
         margin: 35px 0 47px 40px;
-        padding:15px 0 0 40px;
+        padding:10px 0 0 40px;
         width:968px;
         height:53px;
         background-image: url("../assets/img/modal-box/letter-index.png");
@@ -73,17 +73,26 @@
     .zxwcharacter-row{
         margin:0 25px 0 0;
         display:inline-block;
+        width:auto;
+        height:30px;
     }
 
     .zxwcharacter-span{
-        font-size: 14px;
-        margin-right: 15px;
+        color:black;
+        font-size: 16px;
+        width:auto;
+        height:20px;
         background-color: transparent;
         border-style: none;
+        margin-right: 15px;
+        text-align: center;
     }
 
     .hover{
-        font-size: 20px;
         color:#a50000;
+        font-size:25px;
+        font-weight: bold;
+        height:30px;
+
     }
 </style>

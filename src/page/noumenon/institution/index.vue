@@ -26,7 +26,7 @@
     Mock.mock('/ancient_books/get_institution_list_by_word.action?word=A&&page_count=1','get',{
         "result|1":1,
         "content|30":[{
-            'standard_name':'@FIRST',
+            'standard_name':'三省六部',
             'noumenon_id|1':1
         }],
         "total_page|10-20":1

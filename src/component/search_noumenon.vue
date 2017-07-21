@@ -4,7 +4,7 @@
             <span>添加关系属性</span>
         </div>
 
-        <div slot="body" class="zxw-time-body">
+        <div slot="body" class="zxw-noumenon-body">
             <div class="zxw-search-header">
                 <input class="zxw-search-input" type="search" v-model="search_content">
                 <button class="zxw-search-icon" @click="search_noumenon()" v-bind:disabled="search_content === ''"></button>
@@ -21,14 +21,14 @@
             <div class="zxw-fail-tip" v-show="fail_tip">
                 <p>很抱歉，未搜索到本体：{{search_content}}</p>
                 <p><span class="zxw-search-p-tip">您可以</span>
-                    <button class="zxw-prebtn zxw-search-create" @click="new_character()">创建本体</button>
+                    <button class="zxw-prebtn zxw-search-create" @click="new_noumenon_window()">创建本体</button>
                 </p>
             </div>
         </div>
 
         <div slot="footer" class="zxw-search-footer">
-            <button class="zxw-prebtn zxw-search-create" v-show="create_btn" @click="new_character()">创建本体</button>
             <button class="zxwnoumenom-button zxw-search-cancel" @click="close_modal">取消</button>
+            <button class="zxw-prebtn zxw-search-create" v-show="create_btn" @click="new_noumenon_window()">创建本体</button>
         </div>
 
     </modal>
@@ -183,7 +183,53 @@
                "noumenon_id|26":26
            }
        ]
-   });*/
+   });
+
+    Mock.mock('/ancient_books/get_office_list_by_name.action?name=bbss&&page_count=1','get', {
+        "content":[
+            {
+                "standard_name":"兵部尚书",
+                "noumenon_id|27":27
+            },
+            {
+                "standard_name":"兵部尚书",
+                "noumenon_id|27":27
+            },
+            {
+                "standard_name":"兵部尚书",
+                "noumenon_id|27":27
+            },
+            {
+                "standard_name":"兵部尚书",
+                "noumenon_id|27":27
+            },
+            {
+                "standard_name":"兵部尚书",
+                "noumenon_id|27":27
+            },
+            {
+                "standard_name": "兵部尚书",
+                "noumenon_id|27": 27
+            }
+        ]
+    });
+
+    Mock.mock('/ancient_books/get_office_list_by_name.action?name=gbss&&page_count=1','get', {
+        "content":[]
+    });
+
+    Mock.mock('/ancient_books/get_institution_list_by_name.action?name=bb&&page_count=1','get', {
+        "content":[
+            {
+                "standard_name":"兵部",
+                "noumenon_id|27":28
+            },
+            {
+                "standard_name":"兵部",
+                "noumenon_id|27":28
+            }
+        ]
+    });*/
 
     import modal from "../component/modal.vue";
     export default{
@@ -210,7 +256,10 @@
                 this.$emit('close_modal');
                 this.search_content = '';
                 this.search_result.splice(0,this.search_result.length);
-                this.show_tip = false;
+                this.show_tip = true;
+                this.fail_tip = false;
+                this.create_btn = true;
+                this.forbidden_btn = false;
             },
 
             /*搜索本体*/
@@ -259,9 +308,21 @@
                 this.close_modal();
             },
 
-            new_character(){
+            new_noumenon_window(){
                 if(this.noumenon_number === 1){
                     window.open("/chartwo");
+                } else if(this.noumenon_number === 2){
+
+                } else if(this.noumenon_number === 3){
+
+                } else if(this.noumenon_number === 4){
+
+                } else if(this.noumenon_number === 5){
+
+                } else if(this.noumenon_number === 6){
+                    window.open("/instwo");
+                } else if(this.noumenon_number === 7){
+                    window.open("/platwo");
                 }
             }
         },
@@ -310,24 +371,30 @@
     }
 
     .zxw-search-tip{
-        width:230px;
-        margin:50px 50px 0 100px;
-        font-size:12px;
+        width:260px;
+        margin:50px 50px 0 80px;
+        font-size:14px;
     }
 
     .zxw-search-create{
         width:80px;
         height:50px;
+        float:right;
+        font-size: 18px;
     }
 
     .zxw-search-cancel{
         width:80px;
         height:50px;
+        float:right;
+        margin-right: 20px;
         background-size: 80px 40px;
     }
 
     .zxw-search-footer{
-        float:right;
+        width:400px;
+        height:60px;
+        padding-top: 10px;
         margin: 0 20px 0 0;
     }
 
@@ -356,12 +423,14 @@
     .zxw-character-add{
         width:60px;
         height:30px;
+        font-size: 18px;
     }
 
     .zxw-search-result{
         display: inline-block;
         width:200px;
         margin:0 80px 0 15px;
+        font-size: 18px;
     }
 
     .zxw-fail-tip{
@@ -372,5 +441,10 @@
 
     .zxw-search-p-tip{
         color:grey;
+    }
+
+    .zxw-noumenon-body{
+        margin-top: 24px;
+        width: 800px;
     }
 </style>

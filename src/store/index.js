@@ -202,6 +202,33 @@ const store = new Vuex.Store({
             seat_standard_name:[]
         },
 
+        create_ins:{
+            standard_name:'',
+            ins_name:'',
+            type:0,
+            type_ins:[],
+            selected_ins_type:[{
+                id:0,
+                option:''
+            }],
+            english:'',
+            other_name:'',
+            begin_time_id:'',
+            begin_standard_time:'',
+            end_time_id:'',
+            end_standard_time:'',
+            remark_1_name:'',
+            remark_2_name:'',
+            remark_1:'',
+            remark_2:'',
+            chief_office_id:'',
+            chief_office_name:'',
+            vice_office_id:'',
+            vice_office_name:'',
+            parent_body_id:'',
+            parent_body_name:''
+        },
+
         create_one_selection:0,
 
         sort_item:{},

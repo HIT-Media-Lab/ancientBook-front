@@ -3,9 +3,9 @@
     <div class="ry-upload">
         <!--模块名称-->
         <div class="width950 center">
-            <h3 style="display:inline-block">1輸入古籍名稱</h3>
-            <button class="float-right ry-btn-cancel-upload" @click="cancel_upload">取消上傳</button>
-            <button class="float-right ry-btn-use-other">調用其他信息</button>
+            <h3 style="display:inline-block">1输入古籍名称</h3>
+            <button class="float-right ry-btn-cancel-upload" @click="cancel_upload">取消上传</button>
+            <button class="float-right ry-btn-use-other">调用其他信息</button>
         </div>
 
         <div class="width1000 center">
@@ -13,13 +13,13 @@
         </div>
 
         <div class="width950 center">
-            <h3 style="display:inline-block" class="float-left">古籍規範名稱：</h3>
+            <h3 style="display:inline-block" class="float-left">古籍规范名称：</h3>
             <h4 id="bookName" style="display:inline-block" class="float-left ry-book-name">{{ varieties_item.type_name }}</h4>
             <div class="ry-4layers" style="display:inline-block">
-                <p id="v-standard-name">[品種層]{{ varieties_item.varieties_responsibility[0].end_time }} + {{ varieties_item.varieties_responsibility[0].person }} + {{ varieties_item.varieties_responsibility[0].action_value }}</p>
-                <p id="e-standard-name">[版本層]{{ edition_item.edition_responsibility[0].end_time }} + {{ edition_item.edition_responsibility[0].person }} + {{ edition_item.edition_responsibility[0].action_value }}</p>
-                <p id="i-standard-name">[印次層]{{ impression_item.impression_responsibility[0].end_time }} + {{ impression_item.impression_responsibility[0].person }} + {{ impression_item.impression_responsibility[0].action_value }}</p>
-                <p id="c-standard-name">[複本層]{{ copy_item.copy_responsibility[0].end_time }} + {{ copy_item.copy_responsibility[0].person }} + {{ copy_item.copy_responsibility[0].action_value }}</p>
+                <p id="v-standard-name">[品种层]{{ varieties_item.varieties_responsibility[0].end_time }} + {{ varieties_item.varieties_responsibility[0].person }} + {{ varieties_item.varieties_responsibility[0].action_value }}</p>
+                <p id="e-standard-name">[版本层]{{ edition_item.edition_responsibility[0].end_time }} + {{ edition_item.edition_responsibility[0].person }} + {{ edition_item.edition_responsibility[0].action_value }}</p>
+                <p id="i-standard-name">[印次层]{{ impression_item.impression_responsibility[0].end_time }} + {{ impression_item.impression_responsibility[0].person }} + {{ impression_item.impression_responsibility[0].action_value }}</p>
+                <p id="c-standard-name">[复本层]{{ copy_item.copy_responsibility[0].end_time }} + {{ copy_item.copy_responsibility[0].person }} + {{ copy_item.copy_responsibility[0].action_value }}</p>
             </div>
         </div>
 
@@ -31,7 +31,7 @@
             <synopsis></synopsis>
             <div>
                 <button class="float-right ry-btn-next-step" @click="next_page">下一步</button>
-                <label class="float-right"><input id="ry-one-pri" type="checkbox" name="private" class="ry-check-pri">私密上傳</label>
+                <label class="float-right"><input id="ry-one-pri" type="checkbox" name="private" class="ry-check-pri">私密上传</label>
             </div>
         </div>
 

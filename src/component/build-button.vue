@@ -44,6 +44,7 @@
         background-position: center;
         border:none;
         color:white;
+        font-size: 18px;
     }
 
     .zxwnoumenom-button-margin{

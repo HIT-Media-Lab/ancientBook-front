@@ -4,8 +4,8 @@
 
         <!--模块名称-->
         <div class="width950 center">
-            <h3 style="display:inline-block">3編輯</h3>
-            <button class="float-right ry-btn-cancel-upload" @click="cancel_upload">取消上傳</button>
+            <h3 style="display:inline-block">3编辑</h3>
+            <button class="float-right ry-btn-cancel-upload" @click="cancel_upload">取消上传</button>
         </div>
 
         <div class="width1000 center">
@@ -36,18 +36,18 @@
                 <span>{{this.volume_total}}</span>
             </div>
             <button class="float-right ry-btn-last-page" @click="last_volume">上一卷</button>
-            <button class="ry-btn-last-page" @click="last_book">上一冊</button>
+            <button class="ry-btn-last-page" @click="last_book">上一册</button>
             <div style="display: inline-block" class="ry-page">
                 <input id="ry-book-page" class="ry-input-page" v-model="this.book_bind">
                 <span>/</span>
                 <span>{{this.book_total}}</span>
             </div>
             <button class="ry-btn-go" @click="go_book">GO</button>
-            <button class="ry-btn-next-page" @click="next_book">下一冊</button>
+            <button class="ry-btn-next-page" @click="next_book">下一册</button>
         </div>
 
         <div class="width1000 center">
-            <button class="ry-btn-submit float-right" @click="complete_upload()">發佈</button>
+            <button class="ry-btn-submit float-right" @click="complete_upload()">发布</button>
             <button class="ry-btn-last-step3 float-right" @click="last_page()">上一步</button>
         </div>
 
@@ -513,7 +513,7 @@
                         }
                     }
 
-                    this.$router.push({path:'/bookstore/book_info'});
+                    this.$router.push({path:'/user_info/mybook'});
                 }
                 else if (response.body.result === 0) {
                     console.log("fail add");

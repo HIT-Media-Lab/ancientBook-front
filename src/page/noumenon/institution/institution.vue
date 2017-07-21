@@ -77,7 +77,7 @@
     //显示用户列表
     Mock.mock('/ancient_books/get_institution_by_id.action?id=1','get',{
         "status|200":200,
-        "standard_name": "兵部尚书（唐）",
+        "standard_name": "兵部尚书（唐朝）",
         "type|1":1,
         "english": "ShangShu",
         "name": "兵部尚书",
