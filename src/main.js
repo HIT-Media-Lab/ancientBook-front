@@ -86,8 +86,6 @@ function response_post(response, success, fail) {
         this.$router.push('/403');
     } else if (status == 404){
         this.$router.push('/404');
-    } else if (status == 500){
-        this.$router.push('/500');
     }
 }
 
@@ -99,8 +97,6 @@ function response_get(response, success) {
         this.$router.push('/403');
     } else if (status == 404){
         this.$router.push('/404');
-    } else if (status == 500){
-        this.$router.push('/500');
     }
 }
 
@@ -127,7 +123,8 @@ import  sort_book from './page/bookstore/ancientbooks.vue'
 
 import  login from  './page/user/login/login.vue'
 import  admin from  './page/admin/admin.vue'
-import  notfound from './page/error/404.vue'
+import  not_found from './page/error/404.vue'
+import  no_right from './page/error/403.vue'
 
 //用户
 import  user from  './page/user/index.vue'
@@ -546,17 +543,18 @@ const router = new VueRouter({
         },
         {
             path:'/404',
-            component:notfound,
+            component:not_found,
             name:'404'
+        },
+        {
+            path:'/403',
+            component:no_right,
+            name:'403'
         },
         {
             path: '/',
             redirect: '/login'  //默认路由
         }
-        // {
-        //     path: '*',
-        //     redirect: '/login' // 输入其他不存在的地址自动跳回首页
-        // }
 
     ]
 });
@@ -637,8 +635,8 @@ Vue.http.interceptors.push((request, next) => {
 //             }
 //         }
 //         if (!flag) {
-//             console.log("go to 404");
-//             next('/404');
+//             console.log("go to 403");
+//             next('/403');
 //         }
 //     },function () {
 //
