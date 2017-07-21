@@ -7,7 +7,7 @@
                 <div class="row">
                     <label class="col-md-2">册数：</label>
                     <div class="col-md-4">
-                        <input v-model="copy_item.duplicate_book_count">
+                        <input v-model="copy_item.duplicate_book_count_str">
                     </div>
 
                     <label class="col-md-2">完整性：</label>
@@ -61,7 +61,7 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任开始时间:</label>
                     </div>
                     <div class="col-md-4">
@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任结束时间:</label>
                     </div>
                     <div class="col-md-4">
@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任者名称：</label>
                     </div>
                     <div class="col-md-4">
@@ -94,7 +94,7 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任者类型：</label>
                     </div>
                     <div class="col-md-4">
@@ -106,7 +106,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>责任行为：</label>
                     </div>
                     <div class="col-md-4">
@@ -127,7 +127,7 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star">*</span>
+                        <span class="star"></span>
                         <label>确定性：</label>
                     </div>
                     <div class="col-md-4">
@@ -178,30 +178,7 @@
                 time_modal_2 : false,
                 location_modal : false,
                 character_modal : false,
-                copy_item : {
-                    duplicate_book_count : '',
-                    duplicate_level : '',
-                    duplicate_complete : '',
-                    duplicate_attachment : '',
-                    copy_responsibility : [{
-                        value_add : true,
-                        value_del : false,
-                        location : '',
-                        location_id : '',
-                        person : '',
-                        person_id : '',
-                        begin_time : '',
-                        begin_time_id : '',
-                        end_time : '',
-                        end_time_id : '',
-                        action : '',
-                        action_value : '',
-                        explain : '',
-                        confirm : '',
-                        type : '',
-                        level : 4,
-                    }]
-                }
+                copy_item : {}
             }
         },
 
