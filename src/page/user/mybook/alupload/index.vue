@@ -26,6 +26,7 @@
             page_button
         },
         created(){
+            this.i = 0;
             this.content = [];
             let url = this.alupload_url + '?page_count=' + this.$route.params.pageId;
             this.http_json(url, 'get', url, this.alup_success, this.alup_fail);
@@ -33,6 +34,7 @@
         watch:{
             $route(){
                 this.content = [];
+                this. i = 0;
                 let url = this.alupload_url + '?page_count=' + this.$route.params.pageId;
                 this.http_json(url, 'get', url, this.alup_success, this.alup_fail);
             }

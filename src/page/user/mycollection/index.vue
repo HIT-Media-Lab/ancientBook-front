@@ -26,12 +26,14 @@
             page_button
         },
         created(){
+            this.i = 0;
             this.content = [];
             let url = this.collection_url + '?page=' + this.$route.params.pageId;
             this.http_json(url, 'get', url, this.collection_success, this.collection_fail);
         },
         watch:{
             $route(){
+                this.i = 0;
                 this.content = [];
                 let url = this.collection_url + '?page=' + this.$route.params.pageId;
                 this.http_json(url, 'get', url, this.collection_success, this.collection_fail);

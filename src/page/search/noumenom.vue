@@ -39,7 +39,7 @@
         },
         data(){
             return{
-                info_num: 0,
+                info_num: 1,
                 total_page: 1,
                 content: [],
                 page_content: [],
@@ -90,7 +90,7 @@
                     })
                 }
                 this.info_num = this.content.length;
-                this.total_page = Math.ceil(this.info_num/20);
+                this.total_page = this.info_num/20 + 1;
                 if (this.total_page = 0){
                     this.total_page = 1;
                 }
