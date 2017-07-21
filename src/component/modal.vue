@@ -13,10 +13,13 @@
 </template>
 
 <script>
+    import store from '../store'
     import bus from '../lib/bus'
     export default {
-        created(){
-            this.show_fork = this.$store.getters.get_fork;
+        watch: {
+            show_modal: function () {
+                this.show_fork = this.$store.getters.get_fork;
+            }
         },
         mounted(){
             if(!this.show_modal){
