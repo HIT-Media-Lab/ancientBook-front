@@ -121,15 +121,15 @@
                     console.log(this.varieties_item.varieties_responsibility[0].begin_time);
                     console.log(this.varieties_item.varieties_responsibility[0].begin_time)
                 }
-                if (this.varieties_item.varieties_responsibility[0].begin_time = '') {
+                if (this.varieties_item.varieties_responsibility[0].begin_time == '') {
                     alert("请填写责任开始时间");
                     this.check_key = false;
                 }
-                if (this.varieties_item.varieties_responsibility[0].end_time = '') {
+                if (this.varieties_item.varieties_responsibility[0].end_time == '') {
                     alert("请填写责任结束时间");
                     this.check_key = false;
                 }
-                if (this.varieties_item.varieties_responsibility[0].person = '') {
+                if (this.varieties_item.varieties_responsibility[0].person == '') {
                     alert("请填写责任者名称");
                     this.check_key = false;
                 }
