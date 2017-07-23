@@ -20,7 +20,7 @@
             <span class="zxw-bar-title">机构</span>
         </router-link>
 
-        <router-link to="/noumenon/office">
+        <router-link to="/noumenon/office/letter/A/page/1">
             <img src="../assets/img/no-use-picture/spot.png" class="zxw-spot" v-show="this.$route.name==='office'||this.$route.name==='off_detail'">
             <span class="zxw-bar-title">职官</span>
         </router-link>
@@ -39,9 +39,7 @@
 </template>
 
 <script>
-    export default{
 
-    }
 </script>
 
 <style>

@@ -1,7 +1,7 @@
 <template>
     <div class="zxwnoumenom-body">
         <noumenon_title :title="this.terms_content.standard_name">
-            <noumenon_button slot="children" :noumenon_number="6"></noumenon_button>
+            <noumenon_button slot="children" :noumenon_number="3"></noumenon_button>
         </noumenon_title>
 
         <div class=" zxw-characterbody">
@@ -11,8 +11,7 @@
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">学科：</p>
-            <p class="zxwspan-length zxw-null" v-if="terms_content.course === null">不详</p>
-            <p class="zxw-detail-info" v-bind="display_course" v-model="course_arr[course_number]" v-else>{{course_arr[course_number].chinese_name}}</p>
+            <p class="zxw-detail-info" v-model="selected_course">{{selected_course}}</p>
         </div>
 
         <div class="zxw-infospan">
@@ -34,7 +33,7 @@
         <div class="zxw-infospan">
             <p class="zxwspan-length">别名：</p>
             <p class="zxwspan-length zxw-null" v-if="terms_content.other_name === ''">不详</p>
-            <p class="zzxw-detail-info" v-model="terms_content.other_name" v-else>{{terms_content.other_name}}</p>
+            <p class="zxw-detail-info" v-model="terms_content.other_name" v-else>{{terms_content.other_name}}</p>
         </div>
 
         <div class="zxw-infospan">
@@ -75,7 +74,7 @@
         "standard_name": "水电工(语文)",
         "name":"水电工",
         "course|3":3,
-        "course_subdivision|2":2,
+        "course_subdivision|1":1,
         "english": "Shuidiangong",
         "other_name": "",
         "begin_time_id|1": 1,
@@ -116,7 +115,6 @@
     export default{
         created(){
             this.get_course_arr();
-            this.terms_info();
         },
         components:{
             noumenon_title,
@@ -132,7 +130,7 @@
                     english: '',
                     name: '',
                     course:0,
-                    course_subdivision:0,
+                    course_subdivision:1,
                     other_name: '',
                     begin_time_id:'',
                     begin_time_name: '',
@@ -145,11 +143,11 @@
                     remark_2_name: ''
                 },
                 course_arr:[],
-                course_number:0
+                selected_course:''
             }
         },
 
-        watch:{
+        /*watch:{
             $route(){
                 this.terms_content.standard_name = '';
                 this.terms_content.name = '';
@@ -169,21 +167,10 @@
                 this.course_arr.splice(1,this.course_arr.length);
                 this.terms_info();
             }
-        },
-
-        computed:{
-            display_course(){
-                if(this.terms_content.course !== null){
-                    for(let i = 0; i < this.course_arr.length;i++){
-                        if(this.terms_content.course === this.course_arr[i].item_1_id){
-                            this.course_number = i;
-                        }
-                    }
-                }
-            }
-        },
+        },*/
 
         methods:{
+
             success_id(response){
                 //存在前端显示的数组里
                 this.terms_content.standard_name = response.body.standard_name;
@@ -201,7 +188,15 @@
                 this.terms_content.explain = response.body.explain;
                 this.terms_content.course = response.body.course;
                 this.terms_content.course_subdivision = response.body.course_subdivision;
+                if(this.terms_content.course !== null){
+                    for(let i = 0; i < this.course_arr.length;i++){
+                        if(this.terms_content.course === this.course_arr[i].item_1_id){
+                            this.selected_course = this.course_arr[i].chinese_name;
+                        }
+                    }
+                }
                 console.log('terms_content: '+JSON.stringify(this.terms_content));
+                console.log('selected_course: '+this.selected_course);
             },
 
             fail_id(response){
@@ -253,6 +248,7 @@
                     })
                 }
                 console.log('course_arr: '+JSON.stringify(this.course_arr));
+                this.terms_info();
             },
 
             fail_course(response){

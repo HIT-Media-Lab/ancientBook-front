@@ -44,18 +44,18 @@
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_ins.parent_body_name" v-else>
         </div>
 
-        <template v-if="this.$store.getters.get_build_ins.remark_1 !== ''||this.$store.getters.get_build_ins.remark_2 !==''">
+        <template v-if="this.$store.getters.get_build_ins.remark_1_name !== ''">
             <div>
                 <label class="zxw-character-span" v-model="remark_1_name" v-bind="show_remark">{{remark_1_name}}</label>
                 <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_ins.remark_1">
             </div>
-
+        </template>
+        <template v-if="this.$store.getters.get_build_ins.remark_2_name !==''">
             <div>
                 <label class="zxw-character-span" v-model="remark_2_name" v-bind="show_remark">{{remark_2_name}}</label>
                 <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_ins.remark_2">
             </div>
         </template>
-
         <div class="zxw-build-step2-btn">
             <router-link to="/instwo">
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length">上一步</button>

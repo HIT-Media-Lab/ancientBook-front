@@ -334,6 +334,7 @@
 
             success_repeat(response){
                 if(response.body.result === 0){
+                    this.$store.commit('change_fork',false);
                     this.show_repeat = true;
                     this.repeat_id = response.body.id;
                     console.log("本体重复");

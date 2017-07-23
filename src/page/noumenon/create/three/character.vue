@@ -84,12 +84,13 @@
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.friend_standard_name" @mouseover="show_tooltipinfo_friend()" @mouseout="close_tooltip_friend()" v-else>
         </div>
 
-       <template v-if="this.$store.getters.get_build_character.remark_1 !== ''||this.$store.getters.get_build_character.remark_2 !==''">
+        <template v-if="this.$store.getters.get_build_character.remark_1_name !== ''">
             <div>
                 <label class="zxw-character-span" v-model="remark_1_name" v-bind="show_remark">{{remark_1_name}}</label>
                 <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.remark_1">
             </div>
-
+        </template>
+        <template v-if="this.$store.getters.get_build_character.remark_2_name !==''">
             <div>
                 <label class="zxw-character-span" v-model="remark_2_name" v-bind="show_remark">{{remark_2_name}}</label>
                 <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.remark_2">

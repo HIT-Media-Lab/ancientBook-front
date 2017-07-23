@@ -15,7 +15,6 @@
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span">机构类型：</label>
-                <!--<input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_ins.other_name">-->
                 <select  class="zxw-ins-select zxw-character-input-margin" v-model="input_ins.type">
                    <option v-for="(item,index) in input_ins.type_ins" v-bind:value="item.id">{{item.option}}</option>
                 </select>
@@ -272,6 +271,7 @@
 
             success_repeat(response){
                 if(response.body.result === 0){
+                    this.$store.commit('change_fork',false);
                     this.show_repeat = true;
                     this.repeat_id = response.body.id;
                     console.log("机构本体重复");

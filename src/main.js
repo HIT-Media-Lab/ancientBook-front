@@ -169,6 +169,8 @@ import  institutiontwo from  './page/noumenon/create/two/institution.vue'
 import  institutionthree from  './page/noumenon/create/three/institution.vue'
 import  termstwo from  './page/noumenon/create/two/terms.vue'
 import  termsthree from  './page/noumenon/create/three/terms.vue'
+import  officetwo from  './page/noumenon/create/two/office.vue'
+import  officethree from  './page/noumenon/create/three/office.vue'
 
 
 //本体查看
@@ -190,8 +192,8 @@ import  terms_detail from  './page/noumenon/terms/terms.vue'
 // import  timeM from  './page/noumenon/Time/check_china.vue'
 
 //本体编辑
-import char_edit from  './page/noumenon/character/edit.vue'
-import lit_edit from './page/noumenon/literature/edit.vue'
+import  char_edit from  './page/noumenon/character/edit.vue'
+import  lit_edit from './page/noumenon/literature/edit.vue'
 import  off_edit from './page/noumenon/office/edit.vue'
 import  pla_edit from './page/noumenon/place/edit.vue'
 import  ins_edit from './page/noumenon/institution/edit.vue'
@@ -413,6 +415,12 @@ const router = new VueRouter({
                     name:'office'
                 },
                 {
+                    path: 'office',
+                    redirect: 'place/letter/A/page/1',
+                    component: office,
+                    name: 'office'
+                },
+                {
                     path:'off_detail/:nouId',
                     component:off_detail,
                     name:'off_detail'
@@ -451,8 +459,8 @@ const router = new VueRouter({
                 {
                     path: 'terms',
                     redirect: 'terms/letter/A/page/1',
-                    component: place,
-                    name: 'place'
+                    component: terms,
+                    name: 'terms'
                 },
                 {
                     path:'terms_detail/:nouId',
@@ -514,6 +522,16 @@ const router = new VueRouter({
             path:'/termsthree',
             component:termsthree,
             name:'termsthree'
+        },
+        {
+            path:'/offtwo',
+            component:officetwo,
+            name:'officetwo'
+        },
+        {
+            path:'/offthree',
+            component:officethree,
+            name:'officethree'
         },
 
         {

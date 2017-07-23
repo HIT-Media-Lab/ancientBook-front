@@ -15,7 +15,7 @@ const store = new Vuex.Store({
         Token:'',
         acl_user:
             ['login','404','403','bookstore','user','upload1','mybook',
-            'character','recent','char_detail','char_edit','place','pla_detail','pla_edit','institution','ins_detail','ins_edit','terms','terms_detail','terms_edit','upload1','upload2',
+            'character','recent','char_detail','char_edit','place','pla_detail','pla_edit','institution','ins_detail','ins_edit','terms','terms_detail','terms_edit','office','off_detail','off_edit','upload1','upload2',
             'upload3','copy','edition','impression','varieties',
             'bookstore','book_recent','book_info',
             'book_varieties','book_edition','book_impression',
@@ -23,7 +23,7 @@ const store = new Vuex.Store({
             'search_noumenon','modify_info','user_info',
             'alupload','privatebook','collection','offer',
             'ancientbook','comment','revise','edit','mark',
-            'build','charactertwo','characterthree','placetwo','placethree','institutiontwo','institutionthree','termstwo','termsthree'],
+            'build','charactertwo','characterthree','placetwo','placethree','institutiontwo','institutionthree','termstwo','termsthree','officetwo','officethree'],
         acl_admin:['404','403','admin','modify_info'],
         acl_guest:['login', '404','403'],
         a:{},
@@ -248,6 +248,51 @@ const store = new Vuex.Store({
             vice_office_name:'',
             parent_body_id:'',
             parent_body_name:''
+        },
+
+        create_terms:{
+            standard_name:'',
+            terms_name:'',
+            selected_course:{
+                item_1_id:0,
+                chinese_name:''
+            },
+            course_subdivision:1,
+            english:'',
+            other_name:'',
+            explain:'',
+            begin_time_id:'',
+            begin_standard_time:'',
+            end_time_id:'',
+            end_standard_time:'',
+            remark_1_name:'',
+            remark_2_name:'',
+            remark_1:'',
+            remark_2:''
+        },
+
+        create_off:{
+            standard_name:'',
+            office_name:'',
+            english:'',
+            other_name:'',
+            institution_id:'',
+            institution_name:'',
+            s_office_id:'',
+            s_office_name:'',
+            dynasty:'',
+            selected_level:{
+                item_1_id:0,
+                chinese_name:''
+            },
+            begin_time_id:'',
+            begin_standard_time:'',
+            end_time_id:'',
+            end_standard_time:'',
+            remark_1_name:'',
+            remark_2_name:'',
+            remark_1:'',
+            remark_2:''
         },
 
         create_one_selection:0,
