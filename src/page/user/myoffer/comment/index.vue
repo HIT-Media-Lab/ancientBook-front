@@ -17,8 +17,8 @@
                 </thead>
                 <tbody>
                 <tr v-for="item in content"> <!--v-for循环数据里的数组数据-->
-                    <td class="j-comment-table" style="width: 200px" :title="item.standard_name">{{item.target}}</td>
-                    <td class="j-comment-table" style="width: 400px" :title="item.standard_name">{{item.content}}</td>
+                    <td class="j-comment-table" style="width: 200px" :title="item.standard_name" @click="go_to_book(page_id)">{{item.target}}</td>
+                    <td class="j-comment-table" style="width: 400px" :title="item.standard_name" @click="go_to_book(page_id)">{{item.content}}</td>
                     <td class="j-comment-table" style="width: 200px" :title="item.standard_name">{{item.time}}</td>
                 </tr>
                 </tbody>
@@ -69,7 +69,8 @@
                 total_page: 1,
                 count: 0,
                 content: [],
-                sort_name: '公开批注'
+                sort_name: '公开批注',
+                page_id: ''
             }
         },
         methods:{
@@ -93,6 +94,22 @@
                     this.$router.push({name: 'comment', params:this.$route.params});
                 }
             },
+            go_to_book(page_id){
+                let url = this.page_id_url + '?page_id=' + page_id;
+                this.page_id = page_id;
+                this.http_json(url, 'get', url, this.page_success, this.page_fail);
+            },
+            page_success(response){
+                this.$route.params.page_id = this.page_id;
+                this.$route.params.book_name = response.body.name;
+                this.$route.params.book = response.body.ce;
+                this.$route.params.volume = response.body.juan;
+                this.$route.params.pageId = response.body.ye;
+                this.$router.push({name: 'ancientbook', params: this.$route.params});
+            },
+            page_fail(){
+
+            }
         }
     }
 </script>

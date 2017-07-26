@@ -23,7 +23,7 @@
                 </thead>
                 <tbody>
                 <tr v-for="item in content"> <!--v-for循环数据里的数组数据-->
-                    <td class="j-edit-table" style="width: 400px" :title="item.standard_name">{{item.standard_name}} {{item.noumenon_type}}</td>
+                    <td class="j-edit-table" style="width: 400px" :title="item.standard_name" @click="go_to_noumenon(item.noumenon_id,item.type)">{{item.standard_name}} {{item.noumenon_type}}</td>
                     <td class="j-edit-table" style="width: 200px" :title="item.standard_name">{{item.edit_type}}</td>
                     <td class="j-edit-table" style="width: 200px" :title="item.standard_name">{{item.time}}</td>
                 </tr>
@@ -90,19 +90,19 @@
                         edit_type = '编辑本体';
                     }
                     if (response.body.content[i].noumenon_type == 1){
-                        type = ' 【人物】';
+                        type = '【人物】';
                     }else if (response.body.content[i].noumenon_type == 2){
-                        type = ' 【文献】';
+                        type = '【文献】';
                     }else if (response.body.content[i].noumenon_type == 3){
-                        type = ' 【术语】';
+                        type = '【术语】';
                     }else if (response.body.content[i].noumenon_type == 4){
-                        type = ' 【时间】';
+                        type = '【时间】';
                     }else if (response.body.content[i].noumenon_type == 5){
-                        type = ' 【职官】';
+                        type = '【职官】';
                     }else if (response.body.content[i].noumenon_type == 6){
-                        type = ' 【机构】';
+                        type = '【机构】';
                     }else if (response.body.content[i].noumenon_type == 7){
-                        type = ' 【地点】';
+                        type = '【地点】';
                     }
                     this.content.push ({
                         standard_name: response.body.content[i].standard_name,
@@ -177,19 +177,19 @@
                         edit_type = '编辑本体';
                     }
                     if (this.$route.params.content == '人物本体'){
-                        type = ' 【人物】';
+                        type = '【人物】';
                     }else if (this.$route.params.content == '文献本体'){
-                        type = ' 【文献】';
+                        type = '【文献】';
                     }else if (this.$route.params.content == '术语本体'){
-                        type = ' 【术语】';
+                        type = '【术语】';
                     }else if (this.$route.params.content == '时间本体'){
-                        type = ' 【时间】';
+                        type = '【时间】';
                     }else if (this.$route.params.content == '职官本体'){
-                        type = ' 【职官】';
+                        type = '【职官】';
                     }else if (this.$route.params.content == '机构本体'){
-                        type = ' 【机构】';
+                        type = '【机构】';
                     }else if (this.$route.params.content == '地点本体'){
-                        type = ' 【地点】';
+                        type = '【地点】';
                     }
                     this.content.push ({
                         standard_name: response.body.content[i].standard_name,
@@ -198,6 +198,24 @@
                         noumenon_type: type,
                         noumenon_id: response.body.content[i].noumenon_id
                     })
+                }
+            },
+            go_to_noumenon(id, type){
+                this.$route.params.nouId = id;
+                if (type == '【人物】'){
+                    this.$router.push({name: 'char_detail', params: this.$route.params});
+                }else if (type == '【文献】'){
+                    this.$router.push({name: 'lit_detail', params: this.$route.params});
+                }else if (type == '【术语】'){
+                    this.$router.push({name: 'terms_detail', params: this.$route.params});
+                }else if (type == '【时间】'){
+                    this.$router.push({name: 'time_detail', params: this.$route.params});
+                }else if (type == '【职官】'){
+                    this.$router.push({name: 'off_detail', params: this.$route.params});
+                }else if (type == '【机构】'){
+                    this.$router.push({name: 'ins_detail', params: this.$route.params});
+                }else if (type == '【地点】') {
+                    this.$router.push({name: 'pla_detail', params: this.$route.params});
                 }
             }
         }
