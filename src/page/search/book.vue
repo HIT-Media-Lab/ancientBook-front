@@ -110,8 +110,8 @@
 
             },
             go_to_book(id){
-                this.$store.commit('push_ancient_book_id', id);
-                this.$router.push({path: '/bookstore/book_info'});
+                this.$route.params.ancient_book_id = id;
+                this.$router.push({name: 'book_info', params: this.$route.params});
             }
         }
     }

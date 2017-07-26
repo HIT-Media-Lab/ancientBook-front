@@ -99,9 +99,9 @@
             shut_edit2(index){
                 document.getElementsByClassName('show-edit2')[index].style.opacity = 0;
             },
-            go_to_bookinfo(item){
-                this.$store.commit("push_ancient_book_id", item);
-                this.$router.push({path: '/bookstore/book_info'});
+            go_to_bookinfo(id){
+                this.$route.params.ancient_book_id = id;
+                this.$router.push({name: 'book_info', params: this.$route.params});
             },
             go_to_more_privatebook(){
                 this.$route.params.pageId = 1;

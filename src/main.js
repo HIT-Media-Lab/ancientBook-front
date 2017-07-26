@@ -513,7 +513,7 @@ const router = new VueRouter({
                     name: 'sort_book'
                 },
                 {
-                    path: 'book_info',
+                    path: 'book_info/:ancient_book_id',
                     component: book_info,
                     name: 'book_info',
                     children: [
