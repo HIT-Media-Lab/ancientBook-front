@@ -197,9 +197,9 @@
             },
 
             ins_info(){
-                let place_object={};
+                let ins_object={};
                 let new_url = this.get_ins_url +'?id='+this.$route.params.nouId;
-                this.http_json(new_url,'get',place_object,this.success_id,this.fail_id);
+                this.http_json(new_url,'get',ins_object,this.success_id,this.fail_id);
             },
 
             success_delete(response){

@@ -13,7 +13,10 @@
         components:{
             modal
         },
-        props:['show_info']
+        props:['show_info'],
+        created(){
+            this.$store.commit('change_fork',false);
+        }
     }
 </script>
 

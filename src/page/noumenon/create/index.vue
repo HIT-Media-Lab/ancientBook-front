@@ -44,9 +44,17 @@ export default{
 
                 this.$router.push({name:'placetwo'});
 
-            }else if(this.noumenon_option[this.number]==='机构'){
+            } else if(this.noumenon_option[this.number]==='机构'){
 
                 this.$router.push({name:'institutiontwo'});
+
+            } else if(this.noumenon_option[this.number]==='术语'){
+
+                this.$router.push({name:'termstwo'});
+
+            } else if(this.noumenon_option[this.number]==='职官'){
+
+                this.$router.push({name:'officetwo'});
 
             }
         }

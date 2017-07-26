@@ -487,6 +487,7 @@ export default{
 
         success_repeat(response){
             if(response.body.result === 0){
+                this.$store.commit('change_fork',false);
                 this.show_repeat = true;
                 this.repeat_id = response.body.id;
                 console.log("本体重复");
@@ -503,9 +504,6 @@ export default{
         close_repeat(){
             this.show_repeat=false;
         },
-
-
-
 
         /*出生时间*/
         open_birth(){

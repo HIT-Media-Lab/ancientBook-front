@@ -214,8 +214,15 @@
         ]
     });
 
-    Mock.mock('/ancient_books/get_office_list_by_name.action?name=gbss&&page_count=1','get', {
-        "content":[]
+    Mock.mock('/ancient_books/get_office_list_by_name.action?name=jy&&page_count=1','get', {
+        "content":[ {
+            "standard_name":"军营",
+            "noumenon_id|30":28
+        },
+            {
+                "standard_name":"军营",
+                "noumenon_id|30":28
+            }]
     });
 
     Mock.mock('/ancient_books/get_institution_list_by_name.action?name=bb&&page_count=1','get', {
@@ -233,6 +240,10 @@
 
     import modal from "../component/modal.vue";
     export default{
+        created(){
+            this.$store.commit('change_fork',true);
+        },
+
         components:{
             modal
         },
@@ -292,7 +303,7 @@
             },
 
             fail_search(){
-                console.log("根据人名获取人物列表失败");
+                console.log("根据名称获取人物列表失败");
             },
 
             search_noumenon(){
@@ -314,11 +325,11 @@
                 } else if(this.noumenon_number === 2){
 
                 } else if(this.noumenon_number === 3){
-
+                    window.open("/termstwo");
                 } else if(this.noumenon_number === 4){
 
                 } else if(this.noumenon_number === 5){
-
+                    window.open("/offtwo");
                 } else if(this.noumenon_number === 6){
                     window.open("/instwo");
                 } else if(this.noumenon_number === 7){
@@ -330,7 +341,7 @@
             repeat_array(){
                 console.log('search repeat: '+JSON.stringify(this.repeat_arr));
                 for(let i =0;i < this.search_result.length;i++ ){
-                    console.log('::::'+this.repeat_arr.indexOf(this.search_result[i].standard_name));
+                    //console.log('::::'+this.repeat_arr.indexOf(this.search_result[i].standard_name));
                     if(this.repeat_arr.indexOf(this.search_result[i].standard_name) !== -1){
                         this.forbidden_btn =true;
                     } else {
@@ -393,7 +404,7 @@
 
     .zxw-search-footer{
         width:400px;
-        height:60px;
+        height:80px;
         padding-top: 10px;
         margin: 0 20px 0 0;
     }

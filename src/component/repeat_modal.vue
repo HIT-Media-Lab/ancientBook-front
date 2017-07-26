@@ -35,7 +35,17 @@
 
             goto_noumenon(){
                 if(this.repeat_noumenon === '人物本体'){
+
                     this.$router.push({name:'char_detail',params:{nouId:this.repeat_id}});
+                } else if(this.repeat_noumenon === '机构本体'){
+
+                    this.$router.push({name:'ins_detail',params:{nouId:this.repeat_id}});
+                } else if(this.repeat_noumenon === '地点本体'){
+
+                    this.$router.push({name:'pla_detail',params:{nouId:this.repeat_id}});
+                } else if(this.repeat_noumenon === '术语本体'){
+
+                    this.$router.push({name:'terms_detail',params:{nouId:this.repeat_id}});
                 }
 
             }
@@ -45,16 +55,14 @@
 
 <style>
     .zxw-repeat-info1{
-        width:80px;
-        margin: 10px 0 15px 180px;
+        margin: 10px 0 15px 170px;
     }
 
     .zxw-repeat-info2{
-        width:200px;
-        margin: 0 0 0 110px;
+        margin: 0 0 0 80px;
     }
 
     .zxw-repeat-btn{
-        margin:0 140px 20px 0;
+        margin:0 160px 20px 0;
     }
 </style>
