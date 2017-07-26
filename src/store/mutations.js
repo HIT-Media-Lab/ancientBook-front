@@ -82,5 +82,17 @@ export default {
     },
     change_fork(state, bool){
         state.fork = bool;
+    },
+
+    save_book_all_info(state,obj){
+        state.book_all_info = obj
+    },
+    save_first_layer_info(state,obj){
+        state.first_layer_info = obj
+    },
+    save_three_layers_info(state,obj){
+        state.three_layers_info = obj
     }
+
+
 }

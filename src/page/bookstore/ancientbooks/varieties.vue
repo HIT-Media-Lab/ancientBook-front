@@ -6,55 +6,37 @@
             <div>
                 <div class="row">
                     <div class="col-md-2">
-                        <label>書名:</label>
+                        <label>书名:</label>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4">{{first_layer_info.type_name}}</div>
 
-                    </div>
-
-                    <label class="col-md-2">別名:</label>
-                    <div class="col-md-4">
-
-                    </div>
+                    <label class="col-md-2">别名:</label>
+                    <div class="col-md-4">{{first_layer_info.type_other_name}}</div>
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">存佚類型:</label>
-                    <div class="col-md-4">
-
-                    </div>
+                    <label class="col-md-2">存佚类型:</label>
+                    <div class="col-md-4">{{first_layer_info.type_save_name}}</div>
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">品種級別：</label>
-                    <div class="col-md-4">
+                    <label class="col-md-2">品种级别：</label>
+                    <div class="col-md-4">{{first_layer_info.type_level_name}}</div>
 
-                    </div>
-
-                    <label class="col-md-2">英譯：</label>
-                    <div class="col-md-4">
-
-                    </div>
+                    <label class="col-md-2">英译：</label>
+                    <div class="col-md-4">{{first_layer_info.english}}</div>
                 </div>
 
                 <div class="row">
                     <label class="col-md-2">提要信息：</label>
-                    <div class="col-md-4">
-
-                    </div>
+                    <div class="col-md-4">{{first_layer_info.type_summary}}</div>
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">標準分類：</label>
-                    <div class="col-md-3">
-
-                    </div>
-                    <div class="col-md-3">
-
-                    </div>
-                    <div class="col-md-4">
-
-                    </div>
+                    <label class="col-md-2">标准分类：</label>
+                    <div class="col-md-3">{{first_layer_info.type_bu_name}}</div>
+                    <div class="col-md-3">{{first_layer_info.type_lei_name}}</div>
+                    <div class="col-md-4">{{first_layer_info.type_shu_name}}</div>
                 </div>
             </div>
 
@@ -62,67 +44,51 @@
                 <img src="../../../assets/img/no-use-picture/ink-line.png" height="6" width="843"/>
             </div>
 
-            <div id="form-variety">
+            <div id="form-variety" v-for="item in first_layer_info.responsibility_infos">
                 <div class="row">
                     <div class="col-md-2">
-                        <label>責任開始時間:</label>
+                        <label>责任开始时间:</label>
                     </div>
-                    <div class="col-md-4">
-
-                    </div>
+                    <div class="col-md-4">{{item.begin_time_name}}</div>
 
                     <div class="col-md-2">
-                        <label>責任結束時間:</label>
+                        <label>责任结束时间：</label>
                     </div>
-                    <div class="col-md-4">
-
-                    </div>
+                    <div class="col-md-4">{{item.end_time_name}}</div>
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">責任地點：</label>
-                    <div class="col-md-4">
-
-                    </div>
+                    <label class="col-md-2">责任地点：</label>
+                    <div class="col-md-4">{{item.location_name}}</div>
 
                     <div class="col-md-2">
-                        <label>責任者名稱:</label>
+                        <label>责任者名称:</label>
                     </div>
-                    <div class="col-md-4">
-
-                    </div>
+                    <div class="col-md-4">{{item.name_name}}</div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-2">
-                        <label>責任者類型：</label>
+                        <label>责任者类型：</label>
                     </div>
-                    <div class="col-md-4">
-
-                    </div>
+                    <div class="col-md-4">{{item.type_name}}</div>
 
                     <div class="col-md-2">
-                        <label>責任行為：</label>
+                        <label>责任行为：</label>
                     </div>
-                    <div class="col-md-4">
-
-                    </div>
+                    <div class="col-md-4">{{item.action_name}}</div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-2">
-                        <label>確定性：</label>
+                        <label>确定性：</label>
                     </div>
-                    <div class="col-md-4">
-
-                    </div>
+                    <div class="col-md-4">{{item.confirm_name}}</div>
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">責任說明：</label>
-                    <div class="col-md-4">
-
-                    </div>
+                    <label class="col-md-2">责任说明：</label>
+                    <div class="col-md-4">{{item.explain}}</div>
                 </div>
             </div>
 
@@ -133,3 +99,22 @@
     </div>
 
 </template>
+
+<script>
+    export default{
+        data() {
+            return{
+                first_layer_info : {},
+            }
+        },
+
+        created : function () {
+            this.first_layer_info = this.$store.getters.get_first_layer_info;
+        },
+
+        mounted : function () {
+            this.first_layer_info = this.$store.getters.get_first_layer_info;
+        },
+
+    }
+</script>

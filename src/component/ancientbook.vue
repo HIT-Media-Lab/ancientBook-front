@@ -3,7 +3,7 @@
 
         <!--目录-->
         <div class="width1000 center">
-            <p>经部/总类/<span style="color: red">石经之属</span>/<span style="color: red">诗经</span>/册1册名/卷1</p>
+            <p>{{page_info.bu_name}}/{{page_info.lei_name}}/<span style="color: red">{{page_info.shu_name}}</span>/<span style="color: red">{{page_info.name}}</span>/册{{page_info.ce}}{{page_info.book_name}}/卷{{page_info.juan}}</p>
             <img src="../assets/img/no-use-picture/ink-line-long.png" height="7" width="974"/>
         </div>
 
@@ -11,7 +11,7 @@
         <div class="width1000 center">
             <button class="float-right next-one" @click="next_key">下一处</button>
             <button class="float-right last-one" @click="last_key">上一处</button>
-            <input type="text" class="ry-search" placeholder="請輸入關鍵字" v-model="search_key" @change="key_array()">
+            <input type="text" class="ry-search" placeholder="请输入关键字" v-model="search_key" @change="key_array()">
         </div>
 
         <!--图文-->
@@ -39,8 +39,6 @@
 
                     <!--本体标记版块-->
                     <div id="mark" class="div">
-                        <!--文本标题-->
-                        <h4>诗经卷一</h4>
                         <!--文本主体-->
                         <p class="body-text" id="text-mark" @click="text_mark_onclick()"></p>
                         <!--本体种类选择菜单-->
@@ -60,8 +58,6 @@
 
                     <!--批注版块-->
                     <div id="comment" class="div">
-                        <!--文本标题-->
-                        <h4>诗经卷一</h4>
                         <!--文本主体-->
                         <div class="body-text" id="text-comment" @click="text_comment_onclick()"></div>
                         <!--添加批注按钮，选中文本后激活显示，点击弹出添加批注模态框-->
@@ -70,8 +66,6 @@
 
                     <!--修订板块-->
                     <div id="edit" class="div div-now">
-                        <!--文本标题-->
-                        <h4>诗经卷一</h4>
                         <!--文本主体-->
                         <div id="ry-edit-text" class="body-text">蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。</div>
                         <br>
@@ -199,55 +193,11 @@
         <div>
             <modal :show_modal.sync = "catalogue_modal" @fireclose = "catalogue_modal = false" class="ry-modal-border">
                 <div class="dialog-body" slot="body">
-                    <div>册1册名</div>
-                    <div class="row">
-                        <a class="col-md-2">
-                            卷1
-                        </a>
-                        <a class="col-md-2">
-                            卷2
-                        </a>
-                        <a class="col-md-2">
-                            卷3
-                        </a>
-                        <a class="col-md-2">
-                            卷4
-                        </a>
-                        <a class="col-md-2">
-                            卷5
-                        </a>
-                        <a class="col-md-2">
-                            卷6
-                        </a>
-                    </div>
-                    <div class="row">
-                        <a class="col-md-2">
-                            卷7
-                        </a>
-                        <a class="col-md-2">
-                            卷8
-                        </a>
-                    </div>
-                    <div>册2册名</div>
-                    <div class="row">
-                        <a class="col-md-2">
-                            卷1
-                        </a>
-                        <a class="col-md-2">
-                            卷2
-                        </a>
-                        <a class="col-md-2">
-                            卷3
-                        </a>
-                        <a class="col-md-2">
-                            卷4
-                        </a>
-                        <a class="col-md-2">
-                            卷5
-                        </a>
-                        <a class="col-md-2">
-                            卷6
-                        </a>
+                    <div v-for="(item,index) in book_all_info.catalogue">
+                        <div>册{{item.book_count}}{{item.book_name}}</div>
+                        <div>
+                            <span v-for="volume in book_all_info.catalogue[index].volume" @click="go_to(item.book_count,volume.volume_count,volume.begin_page)">卷{{volume.volume_count}}</span>
+                        </div>
                     </div>
                 </div>
             </modal>
@@ -257,14 +207,7 @@
         <div class="width1000 center">
             <img src="../assets/img/no-use-picture/ink-line-long.png" height="4" width="974"/>
             <div class="ry-bottom-bar">
-                <button class="float-right ry-btn-next-page" @click="next_page">下一</button>
-                <button class="float-right ry-btn-go">GO</button>
-                <div class="float-right ry-page">
-                    <input class="ry-input-page" v-model="page_bind">
-                    <span>/</span>
-                    <span>{{page_total}}</span>
-                </div>
-                <button class="float-right ry-btn-last-page" @click="last_page">上一</button>
+                <page_button class="float-right" :max=this.total_page></page_button>
                 <button class="ry-btn-menu" @click="catalogue_onclick()">目录</button>
             </div>
         </div>
@@ -276,9 +219,11 @@
 
 <script type="text/javascript">
     import modal from  '../component/modal.vue'
+    import page_button from '../component/paginator.vue'
     export default{
         components:{
             modal,
+            page_button
         },
 
         data() {
@@ -305,9 +250,11 @@
                 volume : 1,
                 page : 1,
                 page_bind : 1,
-                page_total : 1,
+                total_page : 1,
                 ancient_book_id : '',
-                page_id : 1,
+                page_id : '',
+                page_info : {},
+                book_all_info : {},
 
                 get_comment_obj : {},
                 comment : [{id_comment:"654654",target_comment:"露为霜。",begin_comment:6,end_comment:10,content_comment:"123123"},{id_comment:"321321",target_comment:"，在水一",begin_comment:14,end_comment:18,content_comment:"456456"}],
@@ -379,11 +326,19 @@
         },
 
         created : function () {
-
+            this.book = this.$route.params.book;
+            this.volume = this.$route.params.volume;
+            this.page = this.$route.params.page;
+            this.ancient_book_id = this.$route.params.ancient_book_id;
+            this.get_page_id();
+            this.get_page_info();
+            this.get_ancient_books_all_info();
         },
 
         mounted : function () {
             this.change_module();
+            this.get_picture();
+            this.get_text();
             this.get_edit();
             this.renew_mark();
             this.renew_comment();
@@ -398,12 +353,58 @@
                 var get_page_id = '';
                 this.http_json (url , 'get' , get_page_id , this.success_get_page_id , this.fail_get_page_id);
             },
+
             success_get_page_id(response) {
                 this.page_id = response.body.id;
             },
+
             fail_get_page_id() {
                 console.log("fail get page_id!");
             },
+
+
+            /**
+             * 获取部类属卷册页
+             */
+            get_page_info() {
+                var url = '/ancient_books/get_page_by_id.action?page_id=' + this.page_id;
+                var get_obj = '';
+                this.http_json (url , 'get' , get_obj , this.success_get_page_info , this.fail_get_page_info)
+            },
+
+            success_get_page_info(response) {
+                this.page_info = response.body;
+            },
+
+            fail_get_page_info() {
+                console.log("fail get page_info!");
+            },
+
+
+            /**
+             * 发送古籍id，get请求得到4层信息id
+             */
+            get_ancient_books_all_info() {
+                var get_obj = {};
+                let url = '/ancient_books/get_ancient_books_all_info_by_id.action?ancient_book_id=' + this.ancient_book_id;
+                this.http_json (url , 'get' , get_obj , this.success_get_ancient_books_all_info , this.fail_get_ancient_books_all_info);
+            },
+
+            success_get_ancient_books_all_info(response) {
+                console.log ("success get books all info");
+                if (response.body.length === 0) {
+                    console.log ("返回空对象");
+                }
+                else{
+                    this.book_all_info = response.body;
+                    this.total_page = response.body.total_page;
+                }
+            },
+
+            fail_get_ancient_books_all_info() {
+                console.log ("fail get books all info!");
+            },
+
 
             /**
              * 获取图片内容请求
@@ -413,7 +414,6 @@
                 var img = document.getElementById("ry-picture-work");
                 img.src = url;
             },
-
 
 
             /**
@@ -1053,6 +1053,7 @@
                 this.add_mark_modal = false;
             },
 
+
             /**
              * 目录按钮
              */
@@ -1060,30 +1061,48 @@
                 this.catalogue_modal = true;
             },
 
-            /**
-             * 上一页按钮
-             */
-            last_page() {
-                if (this.page_bind = 1) {
-                    alert("这是第一页")
-                }
-                else if (this.page_bind = this.page_total) {
-                    alert("这是最后一页")
-                }
-                else{
-                    this.page = this.page - 1;
-                    this.page_bind = this.page_bind - 1;
-                    this.get_page_id();
-                    this.get_picture()
-                }
+            go_to(book,volume,page) {
+                this.book = book;
+                this.volume = volume;
+                this.page = page;
+
+                this.$route.params.book = this.book;
+                this.$route.params.volume = this.volume;
+                this.$route.params.page = this.page;
+                this.$route.params.ancient_book_id = this.ancient_book_id;
+
+                this.$router.push({name:'ancientbook', params: this.$route.params});
             },
 
-            /**
-             * 下一页按钮
-             */
-            next_page() {
 
-            },
+//            /**
+//             * 上一页按钮
+//             */
+//            last_page() {
+//                if (this.page_bind = 1) {
+//                    alert("这是第一页")
+//                }
+//                else if (this.page_bind = this.total_page) {
+//                    alert("这是最后一页")
+//                }
+//                else{
+//                    this.page = this.page - 1;
+//                    this.page_bind = this.page_bind - 1;
+//                    this.get_page_id();
+//                    this.get_picture();
+//                    this.get_text();
+//                    this.get_edit();
+//                    this.renew_mark();
+//                    this.renew_comment();
+//                }
+//            },
+//
+//            /**
+//             * 下一页按钮
+//             */
+//            next_page() {
+//
+//            },
 
 
 
@@ -1694,7 +1713,7 @@
 
     /*文本内容*/
     .body-text{
-        margin-top: 40px;
+        margin-top: 100px;
     }
 
     /*修订记录&批注内容编辑框*/

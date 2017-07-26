@@ -16,10 +16,10 @@
             <h3 style="display:inline-block" class="float-left">古籍规范名称：</h3>
             <h4 id="bookName" style="display:inline-block" class="float-left ry-book-name">{{ varieties_item.type_name }}</h4>
             <div class="ry-4layers" style="display:inline-block">
-                <p id="v-standard-name">[品种层]{{ varieties_item.varieties_responsibility[0].end_time }} + {{ varieties_item.varieties_responsibility[0].person }} + {{ varieties_item.varieties_responsibility[0].action_value }}</p>
-                <p id="e-standard-name">[版本层]{{ edition_item.edition_responsibility[0].end_time }} + {{ edition_item.edition_responsibility[0].person }} + {{ edition_item.edition_responsibility[0].action_value }}</p>
-                <p id="i-standard-name">[印次层]{{ impression_item.impression_responsibility[0].end_time }} + {{ impression_item.impression_responsibility[0].person }} + {{ impression_item.impression_responsibility[0].action_value }}</p>
-                <p id="c-standard-name">[复本层]{{ copy_item.copy_responsibility[0].end_time }} + {{ copy_item.copy_responsibility[0].person }} + {{ copy_item.copy_responsibility[0].action_value }}</p>
+                <p id="v-standard-name">[品种层]{{varieties_item.varieties_responsibility[0].end_time}} + {{varieties_item.varieties_responsibility[0].person}} + {{varieties_item.varieties_responsibility[0].action_value}}</p>
+                <p id="e-standard-name">[版本层]{{edition_item.edition_responsibility[0].end_time}} + {{edition_item.edition_responsibility[0].person}} + {{edition_item.edition_responsibility[0].action_value}}</p>
+                <p id="i-standard-name">[印次层]{{impression_item.impression_responsibility[0].end_time}} + {{impression_item.impression_responsibility[0].person}} + {{impression_item.impression_responsibility[0].action_value}}</p>
+                <p id="c-standard-name">[复本层]{{copy_item.copy_responsibility[0].end_time}} + {{copy_item.copy_responsibility[0].person}} + {{copy_item.copy_responsibility[0].action_value}}</p>
             </div>
         </div>
 
