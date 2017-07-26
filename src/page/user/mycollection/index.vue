@@ -48,7 +48,8 @@
                 title: '我的收藏',
                 total_page: 1,
                 i: 0,
-                content: []
+                content: [],
+                params:{}
             }
         },
         methods:{

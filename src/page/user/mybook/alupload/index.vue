@@ -48,7 +48,8 @@
                 title: '已上传古籍',
                 total_page: 1,
                 i: 0,
-                content: []
+                content: [],
+                params:{}
             }
         },
         methods:{
