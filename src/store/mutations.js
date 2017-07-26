@@ -80,6 +80,14 @@ export default {
         state.create_ins = data;
         console.log('state.create_ins:'+JSON.stringify(state.create_ins));
     },
+    get_create_terms(state,data){
+        state.create_terms = data;
+        console.log('state.create_terms: '+JSON.stringify(state.create_terms));
+    },
+    get_create_off(state,data){
+        state.create_off = data;
+        console.log('state.create_off: '+JSON.stringify(state.create_off));
+    },
     change_fork(state, bool){
         state.fork = bool;
     },

@@ -167,6 +167,11 @@ import  placetwo from  './page/noumenon/create/two/place.vue'
 import  placethree from  './page/noumenon/create/three/place.vue'
 import  institutiontwo from  './page/noumenon/create/two/institution.vue'
 import  institutionthree from  './page/noumenon/create/three/institution.vue'
+import  termstwo from  './page/noumenon/create/two/terms.vue'
+import  termsthree from  './page/noumenon/create/three/terms.vue'
+import  officetwo from  './page/noumenon/create/two/office.vue'
+import  officethree from  './page/noumenon/create/three/office.vue'
+
 
 //本体查看
 import  recent from  './page/noumenon/noumenon.vue'
@@ -187,8 +192,8 @@ import  terms_detail from  './page/noumenon/terms/terms.vue'
 // import  timeM from  './page/noumenon/Time/check_china.vue'
 
 //本体编辑
-import char_edit from  './page/noumenon/character/edit.vue'
-import lit_edit from './page/noumenon/literature/edit.vue'
+import  char_edit from  './page/noumenon/character/edit.vue'
+import  lit_edit from './page/noumenon/literature/edit.vue'
 import  off_edit from './page/noumenon/office/edit.vue'
 import  pla_edit from './page/noumenon/place/edit.vue'
 import  ins_edit from './page/noumenon/institution/edit.vue'
@@ -405,9 +410,15 @@ const router = new VueRouter({
                     name:'lit_edit'
                 },
                 {
-                    path:'office/page/:pageId/letter/:letterId',
+                    path:'office/letter/:letterId/page/:pageId',
                     component:office,
                     name:'office'
+                },
+                {
+                    path: 'office',
+                    redirect: 'place/letter/A/page/1',
+                    component: office,
+                    name: 'office'
                 },
                 {
                     path:'off_detail/:nouId',
@@ -431,19 +442,25 @@ const router = new VueRouter({
                     name: 'place'
                 },
                 {
-                    path:'plac_detail/:nouId',
+                    path:'pla_detail/:nouId',
                     component:pla_detail,
                     name:'pla_detail'
                 },
                 {
-                    path:'plac_edit/:nouId',
+                    path:'pla_edit/:nouId',
                     component:pla_edit,
                     name:'pla_edit'
                 },
                 {
-                    path:'terms/page/:pageId/letter/:letterId',
+                    path:'terms/letter/:letterId/page/:pageId',
                     component:terms,
                     name:'terms'
+                },
+                {
+                    path: 'terms',
+                    redirect: 'terms/letter/A/page/1',
+                    component: terms,
+                    name: 'terms'
                 },
                 {
                     path:'terms_detail/:nouId',
@@ -496,6 +513,26 @@ const router = new VueRouter({
             component:institutionthree,
             name:'institutionthree'
         },
+        {
+            path:'/termstwo',
+            component:termstwo,
+            name:'termstwo'
+        },
+        {
+            path:'/termsthree',
+            component:termsthree,
+            name:'termsthree'
+        },
+        {
+            path:'/offtwo',
+            component:officetwo,
+            name:'officetwo'
+        },
+        {
+            path:'/offthree',
+            component:officethree,
+            name:'officethree'
+        },
 
         {
             path:'/bookstore',
@@ -513,7 +550,7 @@ const router = new VueRouter({
                     name: 'sort_book'
                 },
                 {
-                    path: 'book_info',
+                    path: 'book_info/:ancient_book_id',
                     component: book_info,
                     name: 'book_info',
                     children: [

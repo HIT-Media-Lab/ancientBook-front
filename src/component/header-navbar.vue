@@ -14,10 +14,10 @@
             <span class="user-name" @click="show_login" v-model="user_name">{{user_name}}</span>
             <div class="down-box"  v-show="sort_box.length!=0">
                 <ul>
-                    <li class="sort-box1" @click="search1()" style="color: #0f0f0f">
+                    <li class="sort-box1" :title="sort_box" @click="search1()" style="color: #0f0f0f">
                         搜古籍：{{sort_box}}
                     </li>
-                    <li class="sort-box2" @click="search2()" style="color: #0f0f0f">
+                    <li class="sort-box2" :title="sort_box" @click="search2()" style="color: #0f0f0f">
                         搜本体：{{sort_box}}
                     </li>
                 </ul>
@@ -333,16 +333,23 @@
     }
     .sort-box1{
         /*display: inline;*/
+
         font-size: 14px;
         margin-left: 10px;
         list-style: none;
-        width: 178px;
+        width: 270px;
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
     }
     .sort-box2{
         font-size: 14px;
         margin-left: 10px;
         list-style: none;
-        width: 178px;
+        width: 270px;
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
     }
 
     .warning-login{

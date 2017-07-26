@@ -108,7 +108,7 @@
 </template>
 
 <script>
-   /*let Mock = require('mockjs');
+    /*let Mock = require('mockjs');
     Mock.mock('/ancient_books/get_menu_items.action?model_id=1&&item_1_id=0&&item_2_id=0','get', {
         "g":[
             {"model_id|1": 1,
@@ -143,7 +143,7 @@
     export default{
         created(){
             this.show_ins();
-            this.get_ins_type()
+            this.get_ins_type();
         },
 
         components:{
@@ -334,6 +334,7 @@
 
             success_repeat(response){
                 if(response.body.result === 0){
+                    this.$store.commit('change_fork',false);
                     this.show_repeat = true;
                     this.repeat_id = response.body.id;
                     console.log("本体重复");

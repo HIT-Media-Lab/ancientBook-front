@@ -10,21 +10,21 @@
                 <label class="zxw-character-span zxw-must-write">地名：</label>
                 <input id="person_name" type="text"  class="zxw-character-input zxw-character-input-margin" v-model="input_place.location_name" v-bind:class="{'zxw-input-chinese':show_input}" :="repeat_nou_1">
                 <label class="zxw-character-span">英译：</label>
-                <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_place.english">
+                <input type="text" class="zxw-character-input" v-model="input_place.english">
             </div>
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span">别名：</label>
                 <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_place.other_name">
                 <label class="zxw-character-span">经度：</label>
-                <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_place.longitude" :="number_longitude" v-bind:class="{'zxw-input-chinese':show_longitude}">
+                <input type="text" class="zxw-character-input" v-model="input_place.longitude" :="number_longitude" v-bind:class="{'zxw-input-chinese':show_longitude}">
             </div>
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span">纬度：</label>
                 <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_place.latitude" :="number_latitude" v-bind:class="{'zxw-input-chinese':show_latitude}">
                 <label class="zxw-character-span">今所在：</label>
-                <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_place.location_today">
+                <input type="text" class="zxw-character-input" v-model="input_place.location_today">
             </div>
 
             <div class="zxw-character-row">
@@ -39,7 +39,7 @@
                     <button class="zxw-input-add-character" @click="open_begin()"></button>
                 </div>
                 <label class="zxw-character-span zxw-must-write">终止时间：</label>
-                <div  class="zxw-character-input zxw-character-input-margin">
+                <div  class="zxw-character-input">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_end_time = true" @mouseout="show_end_time = false" v-if="input_place.end_standard_time !== ''">
                             <span class="zxw-tag-font" v-model="input_place.end_standard_time" >{{input_place.end_standard_time}}</span>
@@ -62,7 +62,7 @@
                     <button class="zxw-input-add-character" @click="open_s_location()"></button>
                 </div>
                 <label class="zxw-character-span">下级地名：</label>
-                <div  class="zxw-character-input zxw-character-input-margin">
+                <div  class="zxw-character-input">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_l_location = true" @mouseout="show_l_location = false" v-if="input_place.l_location_standard_name !== ''">
                             <span class="zxw-tag-font" v-model="input_place.l_location_standard_name">{{input_place.l_location_standard_name}}</span>
@@ -298,6 +298,7 @@
 
             success_repeat(response){
                 if(response.body.result === 0){
+                    this.$store.commit('change_fork',false);
                     this.show_repeat = true;
                     this.repeat_id = response.body.id;
                     console.log("地名本体重复");

@@ -524,4 +524,10 @@
         font-weight: bold;
         display:inline-block;
     }
+
+    .zxw-detail-info{
+        font-size: 18px;
+        font-weight: bold;
+        display:inline-block;
+    }
 </style>

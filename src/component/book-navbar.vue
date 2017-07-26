@@ -90,6 +90,7 @@
                 this.http_json(this.id,'get',{}, this.success3, this.fail3);
                 this.item.bu = this.item_1_id;
                 this.select_2 = {id: 'lei', name: ''};
+                this.select_3 = {id: 'shu', name: ''};
                 console.log(this.select_1);
             },
             success2(response){

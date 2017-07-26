@@ -1,5 +1,5 @@
 <template>
-   <!-- <div class="zxwcreate">
+   <div class="zxwcreate">
         <p class="zxwcreate-title">新建本体</p>
         <img src="../../../../assets/img/no-use-picture/create-step2.png" class="zxwcreate-img">
         <create_word :prams="this.prams"></create_word>
@@ -8,41 +8,59 @@
             <p class="zxw-create-character" v-bind="standard_title"  v-model="input_ins.standard_name">本体名称：{{input_ins.standard_name}}</p>
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">机构名：</label>
-                <input id="person_name" type="text"  class="zxw-character-input zxw-character-input-margin" v-model="input_ins.location_name" v-bind:class="{'zxw-input-chinese':show_input}" :="repeat_nou_1">
+                <input id="person_name" type="text"  class="zxw-character-input zxw-character-input-margin" v-model="input_ins.ins_name" v-bind:class="{'zxw-input-chinese':show_input}" :="repeat_nou_1">
                 <label class="zxw-character-span">英译：</label>
-                <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_ins.english">
+                <input type="text" class="zxw-character-input" v-model="input_ins.english">
             </div>
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span">机构类型：</label>
-                <!--<input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_ins.other_name">-->
-                <!--<label class="zxw-character-span">别名：</label>
-                <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_ins.other_name">
+                <select  class="zxw-ins-select zxw-character-input-margin" v-model="input_ins.type">
+                   <option v-for="(item,index) in input_ins.type_ins" v-bind:value="item.id">{{item.option}}</option>
+                </select>
+                <label class="zxw-character-span">别名：</label>
+                <input type="text" class="zxw-character-input" v-model="input_ins.other_name">
             </div>
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span">主管职：</label>
-                <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_ins.chief_office_name">
+               <div  class="zxw-character-input zxw-character-input-margin">
+                  <div class="zxw-div-input" placeholder="点击右侧按钮添加">
+                        <span class="zxw-person-relation-span"  @mouseover="show_chief_office = true" @mouseout="show_chief_office = false" v-if="input_ins.chief_office_name !== ''">
+                            <span class="zxw-tag-font" v-model="input_ins.chief_office_name" >{{input_ins.chief_office_name}}</span>
+                            <button class="zxw-add-hover-img" v-show="show_chief_office === true" @click="delete_chief_office()"></button>
+                        </span>
+                  </div>
+                  <button class="zxw-input-add-character" @click="open_chief_office()"></button>
+               </div>
                 <label class="zxw-character-span">副官职：</label>
-                <input type="text" class="zxw-character-input zxw-character-input-margin" v-model="input_ins.vice_office_name">
+                <div  class="zxw-character-input">
+                   <div class="zxw-div-input" placeholder="点击右侧按钮添加">
+                        <span class="zxw-person-relation-span"  @mouseover="show_vice_office = true" @mouseout="show_vice_office = false" v-if="input_ins.vice_office_name !== ''">
+                            <span class="zxw-tag-font" v-model="input_ins.vice_office_name" >{{input_ins.vice_office_name}}</span>
+                            <button class="zxw-add-hover-img" v-show="show_vice_office === true" @click="delete_vice_office()"></button>
+                        </span>
+                   </div>
+                  <button class="zxw-input-add-character" @click="open_vice_office()"></button>
+                </div>
             </div>
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">起始时间：</label>
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
-                        <span class="zxw-person-relation-span"  @mouseover="show_begin_time = true" @mouseout="show_begin_time = false" v-if="input_place.begin_standard_time !== ''">
-                            <span class="zxw-tag-font" v-model="input_place.begin_standard_time" >{{input_place.begin_standard_time}}</span>
+                        <span class="zxw-person-relation-span"  @mouseover="show_begin_time = true" @mouseout="show_begin_time = false" v-if="input_ins.begin_standard_time !== ''">
+                            <span class="zxw-tag-font" v-model="input_ins.begin_standard_time" >{{input_ins.begin_standard_time}}</span>
                             <button class="zxw-add-hover-img" v-show="show_begin_time===true" @click="delete_begin()"></button>
                         </span>
                     </div>
                     <button class="zxw-input-add-character" @click="open_begin()"></button>
                 </div>
                 <label class="zxw-character-span zxw-must-write">终止时间：</label>
-                <div  class="zxw-character-input zxw-character-input-margin">
+                <div  class="zxw-character-input">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
-                        <span class="zxw-person-relation-span"  @mouseover="show_end_time = true" @mouseout="show_end_time = false" v-if="input_place.end_standard_time !== ''">
-                            <span class="zxw-tag-font" v-model="input_place.end_standard_time" >{{input_place.end_standard_time}}</span>
+                        <span class="zxw-person-relation-span"  @mouseover="show_end_time = true" @mouseout="show_end_time = false" v-if="input_ins.end_standard_time !== ''">
+                            <span class="zxw-tag-font" v-model="input_ins.end_standard_time" >{{input_ins.end_standard_time}}</span>
                             <button class="zxw-add-hover-img" v-show="show_end_time===true" @click="delete_end()"></button>
                         </span>
                     </div>
@@ -71,7 +89,7 @@
 
             <div class="zxw-build-step2-btn">
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length" @click="pre_step()">上一步</button>
-                <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="input_ins.begin_time_id === ''|| input_ins.end_time_id === ''||input_ins.ins_name === ''|| show_input === false|| repeat_id !== '' ||(add_data[0].remark_name === '' && add_data[0].remark !== '' )||(add_data[1] !== undefined && add_data[1].remark_name === '' && add_data[1].remark !=='')" >下一步</button>
+                <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="input_ins.begin_time_id === ''|| input_ins.end_time_id === ''||input_ins.ins_name === ''|| show_input === true|| repeat_id !== '' ||(add_data[0].remark_name === '' && add_data[0].remark !== '' )||(add_data[1] !== undefined && add_data[1].remark_name === '' && add_data[1].remark !=='')" >下一步</button>
             </div>
         </div>
 
@@ -83,24 +101,12 @@
         <search_modal :search_url="this.search_ins" :noumenon_modal="this.parent_ins_modal" :noumenon_number="6" :repeat_arr="[]" v-on:close_modal="close_parent_ins" v-on:add_noumenon_relations="add_parent_ins"></search_modal>
 
         <!--若机构本体规范已存在的模态框-->
-        <!--<repeat_modal :show_repeat="this.show_repeat" :repeat_name="this.input_ins.standard_name" :repeat_id="this.repeat_id" :repeat_noumenon="this.repeat_noumenon" v-on:close_modal="close_repeat"></repeat_modal>
+        <repeat_modal :show_repeat="this.show_repeat" :repeat_name="this.input_ins.standard_name" :repeat_id="this.repeat_id" :repeat_noumenon="this.repeat_noumenon" v-on:close_modal="close_repeat"></repeat_modal>
 
     </div>
 </template>
 
 <script>
-    /*let Mock = require('mockjs');
-     Mock.mock('/ancient_books/check_noumenon_standard_name.action?name=%E9%B9%BF%E6%99%97(%E5%AE%8B%E6%9C%9D)&&type=1','get', {
-     "status|200":200,
-     "result|0":1,
-     "id:|250":250
-     });
-
-     Mock.mock('/ancient_books/check_noumenon_standard_name.action?name=%E5%93%88%E5%93%88(%E5%AE%8B%E6%9C%9D)&&type=1','get', {
-     "status|200":200,
-     "result|1":0,
-     "id:|300":250
-     });*/
 
     import create_word from '../../../../component/create-word.vue';
     import time_modal from '../../../../component/time-modal.vue';
@@ -108,28 +114,22 @@
     import repeat_modal from '../../../../component/repeat_modal.vue';
     export default{
         beforeRouteLeave(to,from,next){
-            if(to.name !== 'placethree'){
+            if(to.name !== 'institutionthree'){
                 //清空Vuex
-                this.$store.getters.get_build_place.standard_name = '';
-                this.$store.getters.get_build_place.location_name='';
-                this.$store.getters.get_build_place.longitude='';
-                this.$store.getters.get_build_place.latitude='';
-                this.$store.getters.get_build_place.location_today='';
-                this.$store.getters.get_build_place.other_name='';
-                this.$store.getters.get_build_place.begin_time_id='';
-                this.$store.getters.get_build_place.end_time_id='';
-                this.$store.getters.get_build_place.begin_standard_time='';
-                this.$store.getters.get_build_place.end_standard_time='';
-                this.$store.getters.get_build_place.remark_1_name='';
-                this.$store.getters.get_build_place.remark_2_name='';
-                this.$store.getters.get_build_place.remark_1='';
-                this.$store.getters.get_build_place.remark_2='';
-                this.$store.getters.get_build_place.english='';
-                this.$store.getters.get_build_place.s_location_id='';
-                this.$store.getters.get_build_place.l_location_id='';
-                this.$store.getters.get_build_place.s_location_standard_name='';
-                this.$store.getters.get_build_place.l_location_standard_name='';
-                this.$store.getters.get_build_place.seat_id.splice(0,this.$store.getters.get_build_place.seat_id.length);
+                this.$store.getters.get_build_ins.standard_name = '';
+                this.$store.getters.get_build_ins.ins_name='';
+                this.$store.getters.get_build_ins.type=0;
+                this.$store.getters.get_build_ins.type_ins.splice(0,this.$store.getters.get_build_ins.type_ins.length);
+                this.$store.getters.get_build_ins.english='';
+                this.$store.getters.get_build_ins.other_name='';
+                this.$store.getters.get_build_ins.begin_time_id='';
+                this.$store.getters.get_build_ins.end_time_id='';
+                this.$store.getters.get_build_ins.begin_standard_time='';
+                this.$store.getters.get_build_ins.end_standard_time='';
+                this.$store.getters.get_build_ins.remark_1_name='';
+                this.$store.getters.get_build_ins.remark_2_name='';
+                this.$store.getters.get_build_ins.remark_1='';
+                this.$store.getters.get_build_ins.remark_2='';
                 next();
             } else{
                 next();
@@ -138,7 +138,8 @@
 
         created(){
             this.prams = this.$route.name;
-            this.show_place_info();
+            this.show_ins_info();
+            this.get_ins_type();
 
         },
 
@@ -151,29 +152,29 @@
 
         computed:{
             standard_title(){
-                if( this.input_place.begin_standard_time !== '' ){
-                    this.input_place.standard_name = this.input_place.location_name +'('+this.input_place.begin_standard_time+')';
+                if( this.input_ins.begin_standard_time !== '' ){
+                    this.input_ins.standard_name = this.input_ins.ins_name +'('+this.input_ins.begin_standard_time+')';
                 } else {
-                    this.input_place.standard_name = this.input_place.location_name;
+                    this.input_ins.standard_name = this.input_ins.ins_name;
                 }
             },
 
             repeat_nou_1(){
-                /*检查地名仅能输入中文*/
-                if(this.input_place.location_name !== '') {
-                    if(!/^[\u4E00-\u9FA5]*$/.test(this.input_place.location_name)) {
+                /*检查机构名仅能输入中文*/
+                if(this.input_ins.ins_name !== '') {
+                    if(!/^[\u4E00-\u9FA5]*$/.test(this.input_ins.ins_name)) {
                         this.show_input = true;
                     } else {
                         this.show_input = false;
                     }
-                } else if(this.input_place.location_name === ''){
+                } else if(this.input_ins.ins_name === ''){
                     this.show_input = false;
                 }
 
-                /*判断地名本体名称是否重复*/
-                if(this.input_place.location_name !== '' && this.input_place.begin_standard_time !== '' && this.show_input === false){
+                /*判断机构本体名称是否重复*/
+                if(this.input_ins.ins_name !== '' && this.input_ins.begin_standard_time !== '' && this.show_input === false){
                     let repeat_object={};
-                    let new_url= this.check_noumenon_repeat+'?name='+this.input_place.standard_name+'&&type=7';
+                    let new_url= this.check_noumenon_repeat+'?name='+this.input_ins.standard_name+'&&type=6';
                     this.http_json(new_url,'get',repeat_object,this.success_repeat,this.fail_repeat);
                 }
             }
@@ -183,6 +184,7 @@
             return{
                 //对应的第几步
                 prams:'',
+                ins_type:'/ancient_books/get_menu_items.action',
                 search_office:'/ancient_books/get_office_list_by_name.action',
                 search_ins:'/ancient_books/get_institution_list_by_name.action',
                 //添加后删除符号以便删除
@@ -202,12 +204,8 @@
                 input_ins:{
                     standard_name:'',
                     ins_name:'',
-                    type:0,
+                    type:1,
                     type_ins:[],
-                    selected_ins_type:[{
-                        id:0,
-                        option:''
-                    }],
                     english:'',
                     other_name:'',
                     begin_time_id:'',
@@ -240,6 +238,28 @@
         },
 
         methods:{
+           /*机构类型下拉框*/
+            get_ins_type(){
+                let object = {};
+                let new_url = this.ins_type+'?model_id=1&&item_1_id=0&&item_2_id=0';
+                this.http_json(new_url,'get',object,this.success_ins_type,this.fail_ins_type);
+            },
+
+            success_ins_type(response){
+                for(let i = 0;i < response.body.g.length;i++){
+                    this.input_ins.type_ins.push({
+                        id:response.body.g[i].item_1_id,
+                        option:response.body.g[i].chinese_name
+                    })
+                }
+                console.log('type_ins:'+JSON.stringify(this.input_ins.type_ins));
+            },
+
+            fail_ins_type(){
+                console.log("获取机构类型失败");
+            },
+
+
             /*本体是否重复*/
             repeat_nou_2(){
                 if(this.input_ins.ins_name !== '' && this.input_ins.begin_standard_time !== '' && this.show_repeat=== false){
@@ -251,6 +271,7 @@
 
             success_repeat(response){
                 if(response.body.result === 0){
+                    this.$store.commit('change_fork',false);
                     this.show_repeat = true;
                     this.repeat_id = response.body.id;
                     console.log("机构本体重复");
@@ -351,7 +372,7 @@
                 console.log(JSON.stringify(this.input_ins));
             },
 
-            close_s_location(){
+            close_parent_ins(){
                 this.parent_ins_modal = false;
             },
 
@@ -432,4 +453,4 @@
             }
         }
     }
-</script>-->
+</script>
