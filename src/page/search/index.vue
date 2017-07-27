@@ -52,7 +52,7 @@
                 let noumenon_button = document.getElementById("j-noumenon-button");
                 book_button.className = "";
                 noumenon_button.className = "active";
-                this.this.$route.params.pageId = 1;
+                this.$route.params.pageId = 1;
                 this.$router.push({name: 'search_noumenon', params: this.$route.params})
             },
             remove_noumenon() {
@@ -66,7 +66,7 @@
                 let noumenon_button = document.getElementById("j-noumenon-button");
                 book_button.className = "active";
                 noumenon_button.className = "";
-                this.this.$route.params.pageId = 1;
+                this.$route.params.pageId = 1;
                 this.$router.push({name: 'search_book', params: this.$route.params})
             },
             change_button(){
