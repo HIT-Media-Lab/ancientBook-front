@@ -135,7 +135,7 @@
                         <div class="width400 dialog-body"  slot="body">
                             <span>【{{now_target}}】</span><span>{{now_content}}</span>
                             <div>
-                                <button class="ry-btn-cancel-add-comment float-right">删除</button>
+                                <button class="ry-btn-cancel-add-comment float-right" @click="btn_confirm_delete_comment_onclick">删除</button>
                             </div>
                         </div>
                     </modal>
@@ -155,25 +155,25 @@
                                 <option>术语</option>
                                 <option>文献</option>
                             </select>
-                            <input id="ry-noumenon-input" type="text" class="ry-input-search" placeholder="請輸入本體名查找"><button class="ry-btn-search-pic" @click="btn_search_noumenon_onclick()"></button>
+                            <input id="ry-noumenon-input" type="text" class="ry-input-search" placeholder="请输入本体名查找"><button class="ry-btn-search-pic" @click="btn_search_noumenon_onclick()"></button>
                             <div class="ry-add-mark-modal-box">
                                 <h3 style="margin-top: 80px" v-show="before_search">请在搜索框中输入本体规范名称进行搜索</h3>
 
                                 <!--显示搜索成功的结果-->
                                 <div class="zxw-search-success" v-for="(result,index) in search_noumenon_content">
                                     <p class="zxw-search-result">{{result.standard_name}}</p>
-                                    <button class="zxw-prebtn zxw-character-add" v-model="index">添加</button>
+                                    <button class="zxw-prebtn zxw-character-add" v-model="index" @click="btn_add_mark_onclick(index)">添加</button>
                                 </div>
 
                                 <!--显示搜索失败的结果-->
                                 <div class="zxw-fail-tip" v-show="fail_tip">
                                     <p>很抱歉，未搜索到本体：{{noumenon_search_content}}</p>
                                     <p><span class="zxw-search-p-tip">您可以</span>
-                                        <button class="zxw-prebtn zxw-search-create">创建本体</button>
+                                        <button class="zxw-prebtn zxw-search-create" @click="btn_create_noumenon">创建本体</button>
                                     </p>
                                 </div>
                             </div>
-                            <button class="ry-btn-cancel-add-comment" style="margin-left: 330px;" @click="btn_add_mark_onclick()">创建本体</button>
+                            <button class="ry-btn-cancel-add-comment" style="margin-left: 330px;" @click="btn_create_noumenon">创建本体</button>
                             <button class="ry-btn-cancel-add-comment" @click="close_add_mark_modal()">取消</button>
                         </div>
                     </modal>
@@ -266,12 +266,6 @@
 
                 get_mark_obj : {},
                 mark : [{id_mark:"123123",target_mark:"，白露为",begin_mark:4,end_mark:8,noumenon_type:1},{id_mark:"456456",target_mark:"伊人，在",begin_mark:12,end_mark:16,noumenon_type:2}],
-                id_mark : '',
-                noumenon_type : '',
-                noumennon_id : '',
-                begin_mark : '',
-                end_mark : '',
-                target_mark : '',
 
                 get_edit_record_obj : {},
                 page_count_edit_record : 1,
@@ -318,6 +312,18 @@
                 noumenon_search_url : '',
                 total_page_search_noumenon : 0,
                 search_noumenon_content : [],
+            }
+        },
+
+        watch:{
+            $route(){
+                this.book = this.$route.params.book;
+                this.volume = this.$route.params.volume;
+                this.page = this.$route.params.page;
+                this.ancient_book_id = this.$route.params.ancient_book_id;
+                this.get_page_id();
+                this.get_page_info();
+                this.get_ancient_books_all_info();
             }
         },
 
@@ -635,9 +641,11 @@
 
             success_add_comment(response) {
                 if (response.body.result === 1) {
+                    alert("添加批注成功");
                     console.log("success add comment!");
                 }
                 else if (response.body.result === 0) {
+                    alert("添加批注失败");
                     console.log("fail add comment");
                 }
             },
@@ -711,9 +719,12 @@
 
             success_delete_comment(response) {
                 if (response.body.result === 1) {
+                    alert("删除成功");
                     console.log("success delete comment!");
+                    window.location.reload();
                 }
                 else if (response.body.result === 0) {
+                    alert("删除失败");
                     console.log("fail delete comment");
                 }
             },
@@ -728,13 +739,18 @@
              */
             key_array() {
                 this.key_position = [];
+                this.key_position_comment = [];
+                this.key_position_mark = [];
                 var pos = this.content.indexOf(this.search_key);
                 while (pos > -1) {
                     this.key_position.push(pos);
+                    this.key_position_comment.push(pos);
+                    this.key_position_mark.push(pos);
                     pos = this.content.indexOf(this.search_key , pos + 1);
                 }
-                alert(this.key_position);
                 this.renew_text();
+                this.renew_text_comment();
+                this.renew_text_mark();
             },
 
             renew_text() {
@@ -766,6 +782,38 @@
                 }
             },
 
+            renew_text_comment() {
+                var comment = document.getElementById("text-comment");
+                comment.innerHTML = '';
+                this.renew_comment();
+                var length = this.search_key.length;
+                var comment_text = document.getElementsByClassName("ry-comment-text");
+
+                //文本逐字遍历
+                for (var i = 0; i < comment_text.length; i++) {
+                    //该字在搜索关键字中
+                    if (i >= this.key_position[this.now_index] && i < this.key_position[this.now_index] + length) {
+                        comment_text[i].setAttribute("style","color: red")
+                    }
+                }
+            },
+
+            renew_text_mark() {
+                var mark = document.getElementById("text-mark");
+                mark.innerHTML = '';
+                this.renew_mark();
+                var length = this.search_key.length;
+                var mark_text = mark.getElementsByTagName("span");
+
+                //文本逐字遍历
+                for (var i = 0; i < mark_text.length; i++) {
+                    //该字在搜索关键字中
+                    if (i >= this.key_position[this.now_index] && i < this.key_position[this.now_index] + length) {
+                        mark_text[i].setAttribute("style","color: red")
+                    }
+                }
+            },
+
             last_key() {
                 if (this.now_index == 0) {
                     alert("这是第一处")
@@ -773,6 +821,8 @@
                 else{
                     this.now_index = this.now_index - 1;
                     this.renew_text();
+                    this.renew_text_comment();
+                    this.renew_text_mark()
                 }
             },
 
@@ -783,6 +833,8 @@
                 else{
                     this.now_index = this.now_index + 1;
                     this.renew_text();
+                    this.renew_text_comment();
+                    this.renew_text_mark()
                 }
             },
 
@@ -952,7 +1004,7 @@
              * 删除批注按钮
              */
             btn_confirm_delete_comment_onclick() {
-                post_delete_comment();
+                this.post_delete_comment();
             },
 
 
@@ -988,7 +1040,25 @@
                         this.after += e;
                     }
                 }
+                else if (window.getSelection().getRangeAt(0).toString().length == 0) {
+                    var cli = window.getSelection().focusNode.parentNode.id;
+                    var click = parseInt(cli)+1;
+                    for (var k = 0; k < this.mark.length; k++) {
+                        //该点击节点不在该条标记内
+                        if (click < this.mark[k].begin_mark || click >= this.mark[k].end_mark) {
+                            continue;
+                        }
+                        //该点击在该条标记内
+                        if (click >= this.mark[k].begin_mark && click < this.mark[k].end_mark) {
+                            this.$route.params.noumenon_type = this.mark[k].noumenon_type;
+                            this.$route.params.noumenon_id = this.mark[k].noumenon_id;
+                            this.$router.push({name:'', params: this.$route.params});
+                            break;
+                        }
+                    }
+                }
             },
+
 
             /**
              * 标记本体按钮点击事件
@@ -1041,12 +1111,21 @@
                 this.before_search = false;
             },
 
+
+            btn_create_noumenon() {
+                this.$store.commit("get_create_one_selection",2);
+                this.$router.push({path: '/build'});
+            },
+
             /**
              * 添加标记按钮事件
              */
-            btn_add_mark_onclick() {
+            btn_add_mark_onclick(index) {
+                this.noumenon_type = this.search_noumenon_content[index].type_id;
+                this.noumenon_id = this.search_noumenon_content[index].noumenon_id;
                 this.post_add_mark();
                 this.add_mark_modal = false;
+                window.location.reload();
             },
 
 
@@ -1223,6 +1302,7 @@
                         var text = document.createTextNode(p);
                         span.appendChild(text);
                         span.setAttribute("id", i);
+                        span.setAttribute("class", "ry-comment-text");
                         text_comment.appendChild(span);
                     }
                     //该字是批注
@@ -1231,7 +1311,7 @@
                         var text = document.createTextNode(p);
                         span.appendChild(text);
                         span.setAttribute("id", i);
-                        span.setAttribute("class", "ry-comment id=C" + this.comment[jtemp].id_comment);
+                        span.setAttribute("class", "ry-comment ry-comment-text id=C" + this.comment[jtemp].id_comment);
                         text_comment.appendChild(span);
                     }
                 }
