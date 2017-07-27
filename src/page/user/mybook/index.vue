@@ -72,7 +72,7 @@
                 private_book_url: '/ancient_books/get_recent_private_ancient_books_by_user.action',
                 picture_page_url: "/ancient_books/get_page_id_by_jcy.action",
                 picture_url: '/ancient_books/get_picture_by_id.action',
-                delete_url: '/ancient_book/delete_ancient_books.action',
+                delete_url: '/ancient_books/delete_ancient_book.action',
                 title: '我的古籍',
                 recent_mybook: [],
                 al_up_book: [],
