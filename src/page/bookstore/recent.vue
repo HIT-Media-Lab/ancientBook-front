@@ -1,3 +1,4 @@
+<!--最近古籍页面-->
 <template>
     <div class="j-recent">
         <recent_title class="j-recent-bar" :title="this.title"></recent_title>
@@ -17,6 +18,9 @@
             recent_title
         },
         created() {
+            /**
+             *最近古籍显示逻辑
+             */
             this.i = 0;
             this.get_id();
 //            window.setTimeout("get_picture()", 2000);
@@ -58,12 +62,17 @@
             fail_id(){
 
             },
+            /**
+             *给古籍图片附上值
+             */
             success_page(response){
                 this.picture_id_url = this.picture_url + '?page_id=' + response.body.id;
                 document.getElementById(this.recent_book[this.i].id).setAttribute("src", this.picture_id_url);
                 this.i = this.i + 1;
             },
-
+            /**
+             * 点击跳转
+             */
             push_success(id){
                 this.$route.params.ancient_book_id = id;
                 this.$router.push({name: 'book_info', params: this.$route.params});

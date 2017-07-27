@@ -1,3 +1,4 @@
+<!--搜索古籍页面-->
 <template>
     <div>
         <p class="j-book-word" v-model="search_number">为您找到{{search_number}}条相关的古籍信息</p>
@@ -10,6 +11,7 @@
                     <a>
                         <p class="j-book1-word1" :title="item.name" @click="go_to_book(item.id)">{{item.name}}</p>
                     </a>
+                    <!--古籍的四层信息-->
                     <p>{{item.book_info1}}</p>
                     <p>{{item.book_info2}}</p>
                     <p>{{item.book_info3}}</p>
@@ -63,15 +65,20 @@
                     return 1
                 }
             },
+            /**
+             * 获得搜索古籍结果
+             */
             get_search(){
                 this.search_content = this.$route.params.content;
                 let url = this.search_url + '?name=' + this.search_content + '&&page_count=' + this.$route.params.pageId;
                 this.http_json( url, 'get', url, this.success1, this.fail1)
             },
+            /**
+             *获得总数，总页数，以及对古籍四层信息的拆分
+             */
             success1(response){
                 this.search_number = response.body.total_number;
                 this.total_page = response.body.total_page;
-
                 for (let i = 0; i < response.body.content.length; i++){
                     this.book_info_split = response.body.content[i].standard_name.split('[');
                     if (this.book_info_split.length > 1){
@@ -101,6 +108,9 @@
             fail1(){
 
             },
+            /**
+             *给古籍图片附上值
+             */
             success_pic(response){
                 let url = this.picture_url + '?page_id=' + response.body.id;
                 document.getElementById(this.content[this.i].id).setAttribute("src", url);

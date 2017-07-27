@@ -1,3 +1,4 @@
+<!--搜索结果总页面-->
 <template>
     <div class="j-search-all">
         <ul class="nav nav-tabs">
@@ -37,6 +38,9 @@
           this.change_button()
         },
         methods : {
+            /**
+             * 按钮效果逻辑，以及路由跳转
+             */
             remove_book() {
                 let book_button = document.getElementById("j-book-button");
                 let noumenon_button = document.getElementById("j-noumenon-button");

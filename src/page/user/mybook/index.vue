@@ -29,8 +29,8 @@
             <p class="j-mybook-recent-name">私密古籍</p>
             <div class="j-mybook-al-img">
                 <div class="j-mybook-recent-div" v-for="(item,index) in private_book">
-                    <div>
-                        <div class="show-edit2" v-on:mouseover="show_edit2(index)" v-on:mouseout="shut_edit2(index)">
+                    <div v-on:mouseover="show_edit2(index)" v-on:mouseout="shut_edit2(index)">
+                        <div class="show-edit2">
                             <img style="margin-left: 60px" src="../../../assets/img/picture-button/white-pen.png" @click="">
                             <img src="../../../assets/img/picture-button/white-cross.png" @click="delete_book(item.ancient_book_id)">
                         </div>

@@ -1,3 +1,4 @@
+<!--用户页面导航条-->
 <template>
     <div class="j-bar-img">
         <router-link to="/user/upload1">
@@ -37,6 +38,9 @@
             }
         },
         methods:{
+            /**
+             * 我的古籍下拉框逻辑
+             */
             choose_mybook(){
                 if (this.mybook == '最近古籍'){
                     this.$router.push('/user_info/mybook');
@@ -54,6 +58,9 @@
                     this.my_collection = '我的贡献';
                 }
             },
+            /**
+             * 我的贡献下拉框逻辑
+             */
             choose_my_offer(){
                 if (this.my_collection ==  '本体编辑'){
                     this.$route.params.pageId = 1;

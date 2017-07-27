@@ -1,10 +1,9 @@
+<!--搜索本体结果页面-->
 <template>
     <div>
         <p class="j-noumenon-word" v-model="info_num">为您找到{{info_num}}条相关的本体信息</p>
         <div class="j-searched-noumenon" v-for="item in page_content">
-            <router-link to="/noumenon/char_detail/1">
-                <a class="j-w" @click="go_to_char_detail" :id="item.noumenon_id">{{item.standard_name}}  {{item.type}}</a>
-            </router-link>
+            <a class="j-w" @click="go_to_nou_detail(item.type)" :id="item.noumenon_id">{{item.standard_name}}  {{item.type}}</a>
             <br/>
         </div>
         <page_button v-model="total_page" :max=this.total_page></page_button>
@@ -18,6 +17,9 @@
             page_button
         },
         created(){
+            /**
+             * 获得对应所有本体
+             */
             if (this.content.length == 0){
                 let item = this.content_url + '?name=' + this.$route.params.content;
                 this.http_json(item, 'get', item, this.success_noumenon, this.fail);
@@ -61,6 +63,9 @@
                     return 1
                 }
             },
+            /**
+             *对本体进行分类，分组，并按字符串的长短排序
+             */
             success_noumenon(response){
                 console.log(response.body.content.length);
                 for (let i = 0 ; i < response.body.content.length; i++){
@@ -106,10 +111,30 @@
             fail(){
                 alert("获取信息失败");
             },
-            go_to_char_detail(){
+            /**
+             *前往对应的本体详情页面
+             */
+            go_to_nou_detail(type){
                 this.$route.params.nouId = 1;
-                this.$route.push({name: 'char_detail', params: this.$route.params})
+                if (type == '【人物】'){
+                    this.$router.push({name: 'char_detail', params: this.$route.params});
+                }else if (type == '【文献】'){
+                    this.$router.push({name: 'lit_detail', params: this.$route.params});
+                }else if (type == '【术语】'){
+                    this.$router.push({name: 'terms_detail', params: this.$route.params});
+                }else if (type == '【时间】'){
+                    this.$router.push({name: 'time_detail', params: this.$route.params});
+                }else if (type == '【职官】'){
+                    this.$router.push({name: 'off_detail', params: this.$route.params});
+                }else if (type == '【机构】'){
+                    this.$router.push({name: 'ins_detail', params: this.$route.params});
+                }else if (type == '【地点】') {
+                    this.$router.push({name: 'pla_detail', params: this.$route.params});
+                }
             },
+            /**
+             * 设定一页最多显示二十个本体
+             */
             print_content(){
                 let num = this.$route.params.pageId;
                 for (let i = (num-1)*20; i < (num-1)*20+20; i++ ){
