@@ -44,7 +44,7 @@
                 alupload_url:'/ancient_books/get_ancient_book_list_by_user_upload.action',
                 picture_page_url: "/ancient_books/get_page_id_by_jcy.action",
                 picture_url: '/ancient_books/get_picture_by_id.action',
-                delete_url: '/ancient_book/delete_ancient_book.action',
+                delete_url: '/ancient_book/delete_ancient_books.action',
                 title: '已上传古籍',
                 total_page: 1,
                 i: 0,

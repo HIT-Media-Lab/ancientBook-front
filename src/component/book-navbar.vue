@@ -1,17 +1,21 @@
+<!--部类属导航条-->
 <template>
     <div class="j-book-navbar">
+        <!--部 下拉框-->
         <select class="j-book-select" v-model="select_1" id="bu" @change="go_item_2()">
             <option class="j-option" selected v-bind:value="{id: 'bu',name: ''}">部</option>
             <option v-for="item in item_1" class="j-option" v-bind:value="{id: item.item_1_id, name: item.chinese_name}">
                 {{item.chinese_name}}
             </option>
         </select>
+        <!--类 下拉框-->
         <select class="j-book-select" v-model="select_2" id="lei" @change="go_item_3()">
             <option class="j-option" selected v-bind:value="{id: 'lei', name: ''}">类</option>
             <option v-for="item in item_2" class="j-option" v-bind:value="{id: item.item_2_id, name: item.chinese_name}">
                 {{item.chinese_name}}
             </option>
         </select>
+        <!--属 下拉框-->
         <select class="j-book-select" v-model="select_3" id="shu" @change="go_to_sortbook()">
             <option class="j-option" selected v-bind:value="{id: 'shu', name: ''}">属</option>
             <option v-for="item in item_3" class="j-option" v-bind:value="{id: item.item_3_id, name: item.chinese_name}">
@@ -58,11 +62,11 @@
         },
         created(){
             this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + 0 + '&&item_2_id=' + 0;
-            this.http_json(this.id,'get',{}, this.success1, this.fail1);
+            this.http_json(this.id,'get',{}, this.success1, this.fail1);   // 得到部的下拉框内容
             this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + 1 + '&&item_2_id=' + 0;
-            this.http_json(this.id,'get',{}, this.success2, this.fail2);
+            this.http_json(this.id,'get',{}, this.success2, this.fail2);  // 得到类的下拉框内容（默认为经部）
             this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + 1 + '&&item_2_id=' + 1;
-            this.http_json(this.id,'get',{}, this.success3, this.fail3);
+            this.http_json(this.id,'get',{}, this.success3, this.fail3);  // 得到属的下拉框内容（默认为总类）
         },
         watch:{
             $route(){
@@ -81,6 +85,9 @@
             fail1(){
                 console.log("获取部失败");
             },
+            /**
+            选择部后,实时更新类和属
+             */
             go_item_2(){
                 this.item_1_id = this.select_1.id;
                 this.item_name.bu = this.select_1.name;
@@ -100,6 +107,9 @@
             fail2(){
                 console.log("获取类失败");
             },
+            /**
+             选择类后,实时更新属
+             */
             go_item_3(){
                 this.item_2_id = this.select_2.id;
                 this.item_name.lei = this.select_2.name;
@@ -116,6 +126,9 @@
             fail3(){
                 console.log("获取属失败");
             },
+            /**
+             选择属后,实时部类属都返回默认，同时跳转路由
+             */
             go_to_sortbook(){
                 this.item_3_id = this.select_3.id;
                 this.item.shu = this.item_3_id;

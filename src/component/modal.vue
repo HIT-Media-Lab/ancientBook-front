@@ -1,14 +1,15 @@
+<!--模态框组件-->
 <template id="modal" >
     <div id="dialogs" class="dialogs" :class="{ 'dialog-active': show_modal }">
         <div class="dialog-content">
             <div class="j-close j-rotate" v-model="show_fork" v-show="show_fork">
                 <span @click="$emit('fireclose')" style="font-size: 30px;">×</span>
             </div>
-            <slot name="header"></slot>
-            <slot name="body"></slot>
-            <slot name="footer"></slot>
+            <slot name="header"></slot> <!--模态框组件头部-->
+            <slot name="body"></slot>   <!--模态框组件正文部-->
+            <slot name="footer"></slot> <!--模态框组件脚部-->
         </div>
-        <div id="cover" :class="{ 'cover': show_modal }"></div>
+        <div id="cover" :class="{ 'cover': show_modal }"></div>  <!--模态框组件遮罩-->
     </div>
 </template>
 
@@ -18,7 +19,7 @@
     export default {
         watch: {
             show_modal: function () {
-                this.show_fork = this.$store.getters.get_fork;
+                this.show_fork = this.$store.getters.get_fork;   //控制叉的显隐
             }
         },
         mounted(){
@@ -31,14 +32,17 @@
                 show_fork: true
             }
         },
-        props: ['show_modal'],
+        props: ['show_modal'],   //控制模态框的显隐
         methods: {
+            /**
+             * 控制模态框在不同大小居中
+             */
             middle(){
                 for (let i = 0; i < document.getElementsByClassName('dialogs').length; i++){
-                    let x = document.getElementsByClassName("dialogs")[i].offsetWidth;
-                    let y = window.screen.width;
+                    let x = document.getElementsByClassName("dialogs")[i].offsetWidth;  //获得模态框的宽度
+                    let y = window.screen.width;   //获得显示屏分辨率
                     let z = (y-x)/2;
-                    document.getElementsByClassName("dialogs")[i].style.left = z + 'px';
+                    document.getElementsByClassName("dialogs")[i].style.left = z + 'px';  //使得对应模态框居中
                 }
             }
         }

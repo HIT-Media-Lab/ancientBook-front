@@ -483,16 +483,6 @@ const router = new VueRouter({
                     component: time,
                     name: 'time'
                 },
-                // {
-                //     path:'time_detail/:nouId',
-                //     component:time_detail,
-                //     name:'time_detail'
-                // },
-                // {
-                //     path:'time_edit/:nouId',
-                //     component:time_edit,
-                //     name:'time_edit'
-                // },
         ]},
         {
             path:'/build',

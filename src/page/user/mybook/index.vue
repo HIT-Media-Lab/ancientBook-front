@@ -72,7 +72,7 @@
                 private_book_url: '/ancient_books/get_recent_private_ancient_books_by_user.action',
                 picture_page_url: "/ancient_books/get_page_id_by_jcy.action",
                 picture_url: '/ancient_books/get_picture_by_id.action',
-                delete_url: '/ancient_book/delete_ancient_book.action',
+                delete_url: '/ancient_book/delete_ancient_books.action',
                 title: '我的古籍',
                 recent_mybook: [],
                 al_up_book: [],
@@ -187,10 +187,10 @@
     }
     .j-mybook-recent-name{
         margin-left: 60px;
-        width: 70px;
+        width: 80px;
         font-weight:700;
         font-style:normal;
-        font-size:16px;
+        font-size:20px;
         color: black;
     }
     .j-mybook-recent-img{
@@ -211,6 +211,7 @@
     .j-mybook-p{
         margin-top: 3px;
         color: #0f0f0f;
+        font-size: 16px;
         text-align: center;
         display: -webkit-box;
         -webkit-line-clamp: 1;
