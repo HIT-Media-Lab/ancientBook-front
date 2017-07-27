@@ -82,7 +82,7 @@
                     <modal :show_modal.sync = "edit_record_modal" @fireclose = "edit_record_modal = false" class="ry-modal-border">
                         <div class="width600 dialog-body" slot="body">
                             <h4 style="text-align: center">修订记录</h4>
-                            <div v-for="item in commit_edit_record">
+                            <div v-for="item in edit_record">
                                 <p>修訂者：{{item.username_edit_record}}</p>
                                 <p>修訂時間：{{item.time_edit_record}}</p>
                                 <p>修訂信息：{{item.commit_edit_record}}</p>
@@ -276,10 +276,6 @@
                 get_edit_record_obj : {},
                 page_count_edit_record : 1,
                 edit_record : [],
-                username_edit_record : '',
-                time_edit_record : '',
-                version_edit_record : '',
-                commit_edit_record : [],
                 total_page_edit_record : '',
 
                 edit_text_obj : {},
