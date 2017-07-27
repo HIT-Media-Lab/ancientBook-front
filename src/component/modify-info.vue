@@ -14,7 +14,7 @@
         </div>
         <div class="j-modify-info">
             <p>
-                <span style="margin-left: 82px">用户类型：</span>
+                <span style="margin-left: 90px">用户类型：</span>
                 <span style="margin-left: 10px" v-model="type">{{type}}</span>
             </p>
             <p style="margin: 15px auto">
@@ -22,7 +22,7 @@
                 <span style="margin-left: 10px" v-model="account">{{account}}</span>
             </p>
             <p style="margin: 15px auto">
-                <span style="margin-left: 99px">用户名：</span>
+                <span style="margin-left: 110px">用户名：</span>
                 <span style="margin-left: 10px" v-model="name">{{name}}</span>
             </p>
         </div>

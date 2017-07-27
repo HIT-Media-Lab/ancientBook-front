@@ -23,7 +23,7 @@
                 </thead>
                 <tbody>
                 <tr v-for="item in content"> <!--v-for循环数据里的数组数据-->
-                    <td class="j-mark-table" style="width: 200px" :title="item.standard_name" @click="go_to_noumenon(item.noumenon_id, item.noumenon_type)">{{item.standard_name}} {{item.noumenon_type}}</td>
+                    <td class="j-mark-table" style="width: 200px" :title="item.standard_name" @click="go_to_noumenon(item.noumenon_id,item.noumenon_type)">{{item.standard_name}} {{item.noumenon_type}}</td>
                     <td class="j-mark-table" style="width: 400px" :title="item.standard_name" @click="go_to_book(item.page_id)">{{item.target}}</td>
                     <td class="j-mark-table" style="width: 200px" :title="item.standard_name">{{item.time}}</td>
                 </tr>
@@ -76,7 +76,7 @@
                 content: [],
                 type: 0,
                 sort_name: '全部本体',
-                page_id: '',
+                page_id: ''
             }
         },
         methods:{
@@ -197,6 +197,7 @@
             go_to_noumenon(id, type){
                 this.$route.params.nouId = id;
                 if (type == '【人物】'){
+                    alert(type);
                     this.$router.push({name: 'char_detail', params: this.$route.params});
                 }else if (type == '【文献】'){
                     this.$router.push({name: 'lit_detail', params: this.$route.params});
