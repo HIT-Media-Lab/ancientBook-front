@@ -601,8 +601,6 @@
             post_update_cm() {
                 this.get_mark_change();
                 this.get_comment_change();
-                this.get_mark_delete();
-                this.get_comment_delete();
                 this.update_cm_obj.comments_delete = this.comments_delete;
                 this.update_cm_obj.comments_modify = this.comments_modify;
                 this.update_cm_obj.marks_delete = this.marks_delete;
@@ -613,9 +611,11 @@
 
             success_update_cm(response) {
                 if (response.body.result === 1) {
+                    alert("修订成功");
                     console.log("success update CM!");
                 }
                 else if (response.body.result === 0) {
+                    alert("修订失败");
                     console.log("fail update CM");
                 }
             },
@@ -1236,32 +1236,38 @@
                     var text_edit = document.getElementById("text-edit");
                     //该字既不是标记也不是批注
                     if (a == 0) {
-                        var text = document.createTextNode(p);
-                        text_edit.appendChild(text)
+                        var span1 = document.createElement("span");
+                        var text1 = document.createTextNode(p);
+                        span1.appendChild(text1);
+                        span1.setAttribute("id", "e" + i);
+                        text_edit.appendChild(span1)
                     }
                     //该字只是标记
                     else if (a == 1) {
-                        var span = document.createElement("span");
-                        var text = document.createTextNode(p);
-                        span.appendChild(text);
-                        span.setAttribute("class", "id=M" + this.mark[jtemp].id_mark);
-                        text_edit.appendChild(span);
+                        var span2 = document.createElement("span");
+                        var text2 = document.createTextNode(p);
+                        span2.appendChild(text2);
+                        span2.setAttribute("id", "e" + i);
+                        span2.setAttribute("class", "id=M" + this.mark[jtemp].id_mark);
+                        text_edit.appendChild(span2);
                     }
                     //该字只是批注
                     else if (a == 2) {
-                        var span = document.createElement("span");
-                        var text = document.createTextNode(p);
-                        span.appendChild(text);
-                        span.setAttribute("class", "id=C" + this.comment[ktemp].id_comment);
-                        text_edit.appendChild(span);
+                        var span3 = document.createElement("span");
+                        var text3 = document.createTextNode(p);
+                        span3.appendChild(text3);
+                        span3.setAttribute("id", "e" + i);
+                        span3.setAttribute("class", "id=C" + this.comment[ktemp].id_comment);
+                        text_edit.appendChild(span3);
                     }
                     //该字既是标记又是批注
                     else if (a == 4) {
-                        var span = document.createElement("span");
-                        var text = document.createTextNode(p);
-                        span.appendChild(text);
-                        span.setAttribute("class", "id=M" + this.mark[jtemp].id_mark + " id=C" + this.comment[ktemp].id_comment);
-                        text_edit.appendChild(span);
+                        var span4 = document.createElement("span");
+                        var text4 = document.createTextNode(p);
+                        span4.appendChild(text4);
+                        span4.setAttribute("id", "e" + i);
+                        span4.setAttribute("class", "id=M" + this.mark[jtemp].id_mark + " id=C" + this.comment[ktemp].id_comment);
+                        text_edit.appendChild(span4);
                     }
                 }
             },
@@ -1298,21 +1304,21 @@
                     var text_comment = document.getElementById("text-comment");
                     //该字不是批注
                     if (a == 0) {
-                        var span = document.createElement("span");
-                        var text = document.createTextNode(p);
-                        span.appendChild(text);
-                        span.setAttribute("id", i);
-                        span.setAttribute("class", "ry-comment-text");
-                        text_comment.appendChild(span);
+                        var span1 = document.createElement("span");
+                        var text1 = document.createTextNode(p);
+                        span1.appendChild(text1);
+                        span1.setAttribute("id", i);
+                        span1.setAttribute("class", "ry-comment-text");
+                        text_comment.appendChild(span1);
                     }
                     //该字是批注
                     else if (a == 1) {
-                        var span = document.createElement("span");
-                        var text = document.createTextNode(p);
-                        span.appendChild(text);
-                        span.setAttribute("id", i);
-                        span.setAttribute("class", "ry-comment ry-comment-text id=C" + this.comment[jtemp].id_comment);
-                        text_comment.appendChild(span);
+                        var span2 = document.createElement("span");
+                        var text2 = document.createTextNode(p);
+                        span2.appendChild(text2);
+                        span2.setAttribute("id", i);
+                        span2.setAttribute("class", "ry-comment ry-comment-text id=C" + this.comment[jtemp].id_comment);
+                        text_comment.appendChild(span2);
                     }
                 }
             },
@@ -1382,39 +1388,66 @@
             get_mark_change() {
                 var text_edit = document.getElementById("text-edit");    //  修订版文本
                 //遍历标记数组
+                var text = '';
+                var before_text = '';
+                var before = '';
+                var after = '';
                 for (var i = 0; i < this.mark.length; i++) {
                     //依次获得每条标记碎片文字
-                    var marks = document.getElementsByClassName("id=M" + this.mark[i].id_mark);
-                    //初始化每条标记内容
-                    var text = '';
-                    //遍历每条标记中的每个字
-                    for (var j = 0; j < marks.length; j++) {
-                        var mark_piece = marks[j].innerText;
-                        //拼凑所有字为一条标记
-                        text += mark_piece;
+                    var marks = text_edit.getElementsByClassName("id=M" + this.mark[i].id_mark);
+                    if (marks.length != 0) {
+                        //初始化每条标记内容
+                        text = '';
+                        var id = marks[0].getAttribute("id");
+                        var index1 = id.charAt(1);
+                        var index2 = id.charAt(2);
+                        var index3 = id.charAt(3);
+                        var index4 = id.charAt(4);
+                        var index5 = id.charAt(5);
+                        var str = index1 + index2 + index3 + index4 + index5;
+                        var index = parseInt(str);
+                        //遍历每条标记中的每个字
+                        for (var j = 0; j < marks.length; j++) {
+                            var mark_piece = marks[j].innerText;
+                            //拼凑所有字为一条标记
+                            text += mark_piece;
+                        }
+                        //获取该条新标记的位置
+                        before_text = '';
+                        for (var k = 0; k < index; k++) {
+                            var node = document.getElementById("e" + k);
+                            if (node) {
+                                var piece = node.innerText;
+                                before_text += piece;
+                            }
+                        }
+                        var new_begin = before_text.length;
+                        var new_end = new_begin + text.length;
+                        before = '';
+                        for (var n = 0; n < 5; n++) {
+                            var b = text_edit.innerText.charAt(new_begin-5+n);
+                            before += b;
+                        }
+                        after = '';
+                        for (var m = 0; m < 5; m++) {
+                            var e = text_edit.innerText.charAt(new_end+m);
+                            after += e;
+                        }
+                        //标记被修改创建标记更新数组
+                        if (text != this.mark[i].target_mark || new_begin != this.mark[i].begin_mark || new_end != this.mark[i].end_mark) {
+                            this.marks_modify.push({
+                                id: this.mark[i].id_mark,
+                                target: text,
+                                begin: new_begin,
+                                end: new_end,
+                                before: before,
+                                after: after,
+                            });
+                        }
                     }
-                    //获取该条新标记的位置
-                    var new_begin = (text_edit.innerText).indexOf(text);
-                    var new_end = new_begin + text.length;
-                    var before = '';
-                    for (var k = 0; k < 5; k++) {
-                        var b = text_edit.innerText.charAt(new_begin-5+k);
-                        before += b;
-                    }
-                    var after = '';
-                    for (var m = 0; m < 5; m++) {
-                        var e = text_edit.innerText.charAt(new_end+1+m);
-                        after += e;
-                    }
-                    //标记被修改创建标记更新数组
-                    if (text != this.mark[i].target_mark || new_begin != this.mark[i].begin_mark || new_end != this.mark[i].end_mark) {
-                        this.marks_modify.push({
-                            id: this.mark[i].id_mark,
-                            target: text,
-                            begin: new_begin,
-                            end: new_end,
-                            before: before,
-                            after: after,
+                    if (marks.length == 0) {
+                        this.marks_delete.push({
+                            id: this.mark[i].id_mark
                         })
                     }
                 }
@@ -1428,69 +1461,57 @@
             get_comment_change() {
                 var text_edit = document.getElementById("text-edit");    //  修订版文本
                 //遍历批注数组
+                var text = '';
+                var before_text = '';
                 for (var i = 0; i < this.comment.length; i++) {
                     //依次获得每条批注碎片文字
-                    var comments = document.getElementsByClassName("id=C" + this.comment[i].id_comment);
-                    //初始化每条批注内容
-                    var text = '';
-                    //遍历每条批注中的每个字
-                    for (var j = 0; j < comments.length; j++) {
-                        var comment_piece = comments[j].innerText;
-                        //拼凑所有字为一条批注
-                        text += comment_piece;
+                    var comments = text_edit.getElementsByClassName("id=C" + this.comment[i].id_comment);
+                    if (comment.length != 0) {
+                        //初始化每条批注内容
+                        text = '';
+                        var id = comments[0].getAttribute("id");
+                        var index1 = id.charAt(1);
+                        var index2 = id.charAt(2);
+                        var index3 = id.charAt(3);
+                        var index4 = id.charAt(4);
+                        var index5 = id.charAt(5);
+                        var str = index1 + index2 + index3 + index4 + index5;
+                        var index = parseInt(str);
+                        //遍历每条批注中的每个字
+                        for (var j = 0; j < comments.length; j++) {
+                            var comment_piece = comments[j].innerText;
+                            //拼凑所有字为一条批注
+                            text += comment_piece;
+                        }
+                        //获取该条新标记的位置
+                        before_text = '';
+                        for (var k = 0; k < index; k++) {
+                            var node = document.getElementById("e" + k);
+                            if (node) {
+                                var piece = node.innerText;
+                                before_text += piece;
+                            }
+                        }
+                        var new_begin = before_text.length;
+                        var new_end = new_begin + text.length;
+                        //标记被修改创建标记更新数组
+                        if (text != this.comment[i].target_comment || new_begin != this.comment[i].begin_comment || new_end != this.comment[i].end_comment) {
+                            this.comments_modify.push({
+                                id: this.comment[i].id_comment,
+                                target: text,
+                                begin: new_begin,
+                                end: new_end,
+                            });
+                        }
                     }
-                    //获取该条新批注的位置
-                    var new_begin = (text_edit.innerText).indexOf(text);
-                    var new_end = new_begin + text.length;
-                    //批注被修改创建批注更新数组
-                    if (text != this.comment[i].target_comment || new_begin != this.comment[i].begin_comment || new_end != this.comment[i].end_comment) {
-                        this.comments_modify.push({
-                            id: this.comment[i].id_comment,
-                            target: text,
-                            begin: new_begin,
-                            end: new_end,
-                        })
-                    }
-                }
-            },
-
-
-            /**
-             * 获得删除批注数组
-             */
-            get_comment_delete() {
-                var text_edit = document.getElementById("text-edit");    //  修订版文本
-                //遍历批注数组
-                for (var i = 0; i < this.comment.length; i++) {
-                    //依次获得每条批注碎片文字
-                    var comments = text_edit.getElementsByClassName("id=C" + this.comment[i].id);
-                    //向删除批注数组中添加元素
                     if (comments.length == 0) {
                         this.comments_delete.push({
-                            id: this.comment[i].id
+                            id: this.comment[i].id_comment
                         })
                     }
                 }
             },
 
-
-            /**
-             * 获得删除标记数组
-             */
-            get_mark_delete() {
-                var text_edit = document.getElementById("text-edit");    //  修订版文本
-                //遍历标记数组
-                for (var i = 0; i < this.mark.length; i++) {
-                    //依次获得每条标记碎片文字
-                    var marks = text_edit.getElementsByClassName("id=M" + this.mark[i].id);
-                    // 向删除标记数组添加元素
-                    if (marks.length == 0) {
-                        this.marks_delete.push({
-                            id: this.mark[i].id
-                        })
-                    }
-                }
-            },
         }
     }
 </script>
@@ -1793,7 +1814,7 @@
     }
 
     /*修订记录&批注内容编辑框*/
-    textarea{
+    .ry-ancient-book textarea{
         position: relative;
         top: 30px;
         width: 250px;
