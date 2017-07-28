@@ -1,3 +1,4 @@
+<!--批注页面-->
 <template>
     <div class="all">
         <recent_title class="j-comment-bar" :title="'我的贡献/批注' + '（共' + this.count + '条）'">
@@ -38,6 +39,9 @@
             page_button
         },
         created(){
+            /**
+             * 根据不同的选项，显示不同类型批注
+             */
             this.sort_name = this.$route.params.content;
             this.content = [];
             if (this.sort_name == '公开批注'){
@@ -81,6 +85,9 @@
             comment_all_fail(){
 
             },
+            /**
+             * 选择选项，显示不同类型批注
+             */
             go_to_sort(){
                 this.content = [];
                 if (this.sort_name == '公开批注'){
@@ -98,6 +105,9 @@
                 this.page_id = page_id;
                 this.http_json(url, 'get', url, this.page_success, this.page_fail);
             },
+            /**
+             *跳转到图文对照页面
+             */
             page_success(response){
                 this.$route.params.page_id = this.page_id;
                 this.$route.params.book_name = response.body.name;

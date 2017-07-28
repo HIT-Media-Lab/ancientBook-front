@@ -42,7 +42,9 @@ Vue.prototype.before_http = function(object) {
 };
 
 
-//定义的post的vue-router全局函数，以json形式传递数据
+/**
+ * 自定义的请求全局函数，以json形式传递数据
+ */
 Vue.prototype.http_json = function (url, type, params, success, fail) {
     if (type.toLocaleLowerCase() == "get") {
         this.$http.get(url).then(function (response) {
@@ -72,6 +74,9 @@ function error() {
 
 }
 
+/**
+ *post请求
+ */
 function response_post(response, success, fail) {
     let status = response.status;
     if (status == 200){
@@ -89,6 +94,9 @@ function response_post(response, success, fail) {
     }
 }
 
+/**
+ *get请求
+ */
 function response_get(response, success) {
     let status = response.status;
     if (status == 200){
@@ -100,17 +108,9 @@ function response_get(response, success) {
     }
 }
 
-//定义的post的vue-router全局函数，以form-data形式传递数据
-Vue.prototype.http_post_form=function (url,params,success,fail) {
-    params.token = store.getters.GetToken;
-    this.$http.post(url, params,
-        {emulateJSON: true}   //将json形式转换为form-data
-    ).then(function (response) {
-        response_post(response, success, fail);
-    },function () {
-        error();
-    })
-};
+/**
+ * 古籍库
+ */
 
 import  bookstore from './page/bookstore/index.vue'
 import  book_recent from './page/bookstore/recent.vue'
@@ -126,10 +126,7 @@ import  admin from  './page/admin/admin.vue'
 import  not_found from './page/error/404.vue'
 import  no_right from './page/error/403.vue'
 
-//用户
-import  user from  './page/user/index.vue'
-import  modify_info  from './component/modify-info.vue'
-import  user_info  from './page/user/user_index.vue'
+
 
 /**
  * 上传
@@ -143,7 +140,10 @@ import  upload2 from  './page/user/upload/secondstep/index.vue'
 import  upload3 from  './page/user/upload/thirdstep/index.vue'
 
 
-
+//用户
+import  user from  './page/user/index.vue'
+import  modify_info  from './component/modify-info.vue'
+import  user_info  from './page/user/user_index.vue'
 import  mybook from  './page/user/mybook/index.vue'
 import  alupload from  './page/user/mybook/alupload/index.vue'
 import  privatebook from './page/user/mybook/private/index.vue'
@@ -153,6 +153,11 @@ import  mark from  './page/user/myoffer/mark/index.vue'
 import  ancientbook from  './component/ancientbook.vue'
 import  comment from  './page/user/myoffer/comment/index.vue'
 import  revise from  './page/user/myoffer/revise/index.vue'
+
+
+/**
+ * 搜索
+ */
 import  search_index from  './page/search/index.vue'
 import  search_book from './page/search/book.vue'
 import  search_noumenon from './page/search/noumenom.vue'
@@ -651,6 +656,9 @@ Vue.http.interceptors.push((request, next) => {
     })
 });
 
+/**
+ * 用户权限，以及token的更新，用户权限储存在localstorage里
+ */
 // router.beforeEach( (to, from, next) => {
 //     let admin_acl = router.app.$store.getters.ACL_admin;
 //     let user_acl = router.app.$store.getters.ACL_user;

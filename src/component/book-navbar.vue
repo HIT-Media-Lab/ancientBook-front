@@ -55,9 +55,9 @@
                 item_1: [],
                 item_2: [],
                 item_3: [],
-                item_1_id: 0,
-                item_2_id: 0,
-                item_3_id: 0
+                item_1_id: 1,
+                item_2_id: 1,
+                item_3_id: 1
             }
         },
         created(){
@@ -117,7 +117,6 @@
                 this.http_json(this.id,'get',this.id,this.success3, this.fail3);
                 this.item.lei = this.item_2_id;
                 this.select_3 = {id: 'shu', name: ''};
-                console.log(this.select_2);
             },
             success3(response){
                 this.item_3 = response.body;

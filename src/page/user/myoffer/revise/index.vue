@@ -1,3 +1,4 @@
+<!--修订页面-->
 <template>
     <div class="all">
         <recent_title class="j-revise-bar" :title="'我的贡献/修订' + '（共' + this.count + '条）'"></recent_title>
@@ -33,6 +34,9 @@
             page_button
         },
         created(){
+            /**
+             *获得修订列表
+             */
             this.content = [];
             let item = this.all_revise_url + '?page_count=' + this.$route.params.pageId;
             this.http_json(item, 'get', item, this.revise_all_success, this.revise_all_fail);
@@ -65,12 +69,18 @@
             revise_all_fail(){
 
             },
+            /**
+             *获取page_id
+             */
             go_to_book(page_id, standard_name){
                 let url = this.page_id_url + '?page_id=' + page_id;
                 this.page_id = page_id;
                 this.standard_name = standard_name;
                 this.http_json(url, 'get', url, this.page_success, this.page_fail);
             },
+            /**
+             *跳转到图文对照页面
+             */
             page_success(response){
                 this.$route.params.page_id = this.page_id;
                 this.$route.params.book_name = this.standard_name;

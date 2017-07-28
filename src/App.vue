@@ -1,3 +1,4 @@
+<!--所有页面的父组件-->
 <template>
   <div id="app">
     <homebar></homebar>

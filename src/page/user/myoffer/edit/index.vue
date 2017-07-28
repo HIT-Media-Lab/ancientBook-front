@@ -1,3 +1,4 @@
+<!--本体标记页面-->
 <template>
     <div class="all">
         <recent_title class="j-edit-bar" :title="'我的贡献/本体编辑' + '（共' + this.count + '条）'">
@@ -44,6 +45,9 @@
             page_button
         },
         created(){
+            /**
+             *根据路由，显示不同的本体
+             */
             this.content = [];
             this.sort_name = this.$route.params.content;
             if (this.$route.params.content == '全部本体'){
@@ -77,6 +81,9 @@
             }
         },
         methods:{
+            /**
+             *得到本体信息
+             */
             edit_all_success(response){
                 this.total_page = response.body.total_page;
                 this.count = response.body.count;
@@ -115,6 +122,9 @@
             edit_all_fail(){
 
             },
+            /**
+             * 根据选择的不同选项，显示对应类型的本体
+             */
             go_to_sort(){
                 this.content = [];
                 console.log(this.sort_name);
@@ -159,6 +169,9 @@
                     this.type = 7
                 }
             },
+            /**
+             * 解决页面回退的问题
+             * */
             sort(){
                 if (this.sort_name == '人物本体'){
                     this.type = 1
@@ -214,6 +227,9 @@
                     })
                 }
             },
+            /**
+             *跳转到不同类型的本体详情
+             */
             go_to_noumenon(id, type){
                 this.$route.params.nouId = id;
                 if (type == '【人物】'){
