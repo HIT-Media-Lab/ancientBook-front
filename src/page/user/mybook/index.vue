@@ -5,7 +5,6 @@
         <div class="j-mybook">
             <p class="j-mybook-recent-name">最近</p>
             <div class="j-mybook-recent-img">
-
                 <div class="j-mybook-recent-div" v-for="item in recent_mybook">
                     <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo(item.ancient_book_id)">
                     <p class="j-mybook-p" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
@@ -116,7 +115,7 @@
              */
             go_to_bookinfo(id){
                 this.$route.params.ancient_book_id = id;
-                this.$router.push({name: 'book_info', params: this.$route.params});
+                this.$router.push({name: 'book_varieties', params: this.$route.params});
             },
             go_to_more_privatebook(){
                 this.$route.params.pageId = 1;
