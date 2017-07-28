@@ -675,7 +675,7 @@ const router = new VueRouter({
                     name: 'sort_book'
                 },
                 {
-                    path: 'book_info/:ancient_book_id',
+                    path: 'book_info',
                     component: book_info,
                     name: 'book_info',
                     children: [
