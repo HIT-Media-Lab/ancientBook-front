@@ -37,6 +37,7 @@
                 if(this.repeat_noumenon === '人物本体'){
 
                     this.$router.push({name:'char_detail',params:{nouId:this.repeat_id}});
+
                 } else if(this.repeat_noumenon === '机构本体'){
 
                     this.$router.push({name:'ins_detail',params:{nouId:this.repeat_id}});
@@ -46,6 +47,12 @@
                 } else if(this.repeat_noumenon === '术语本体'){
 
                     this.$router.push({name:'terms_detail',params:{nouId:this.repeat_id}});
+                } else if(this.repeat_noumenon === '职官本体'){
+
+                    this.$router.push({name:'off_detail',params:{nouId:this.repeat_id}});
+                } else if(this.repeat_noumenon === '时间本体'){
+
+                    this.$router.push({name:'time_detail',params:{nouId:this.repeat_id}});
                 }
 
             }

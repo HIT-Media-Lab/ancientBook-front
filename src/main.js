@@ -171,6 +171,10 @@ import  termstwo from  './page/noumenon/create/two/terms.vue'
 import  termsthree from  './page/noumenon/create/three/terms.vue'
 import  officetwo from  './page/noumenon/create/two/office.vue'
 import  officethree from  './page/noumenon/create/three/office.vue'
+import  timetwo from  './page/noumenon/create/two/time.vue'
+import  timethree from  './page/noumenon/create/three/time.vue'
+import  literaturetwo from  './page/noumenon/create/two/literature.vue'
+import  literaturethree from  './page/noumenon/create/three/literature.vue'
 
 
 //本体查看
@@ -180,7 +184,7 @@ import  literature from './page/noumenon/literature/index.vue'
 import  office from  './page/noumenon/office/index.vue'
 import  place from  './page/noumenon/place/index.vue'
 import  terms from  './page/noumenon/terms/index.vue'
-import  time from  './page/noumenon/Time/index.vue'
+import  time from  './page/noumenon/time/index.vue'
 import  character from './page/noumenon/character/index.vue'
 //本体详情
 import  char_detail from  './page/noumenon/character/character.vue'
@@ -189,6 +193,7 @@ import  off_detail from './page/noumenon/office/office.vue'
 import  pla_detail from './page/noumenon/place/place.vue'
 import  ins_detail from './page/noumenon/institution/institution.vue'
 import  terms_detail from  './page/noumenon/terms/terms.vue'
+import  time_detail from  './page/noumenon/time/time.vue'
 // import  timeM from  './page/noumenon/Time/check_china.vue'
 
 //本体编辑
@@ -198,6 +203,7 @@ import  off_edit from './page/noumenon/office/edit.vue'
 import  pla_edit from './page/noumenon/place/edit.vue'
 import  ins_edit from './page/noumenon/institution/edit.vue'
 import  terms_edit from  './page/noumenon/terms/edit.vue'
+import  time_edit from  './page/noumenon/time/edit.vue'
 
 // 创建一个路由器实例
 // 并且配置路由规则
@@ -395,9 +401,15 @@ const router = new VueRouter({
                     name:'ins_edit'
                 },
                 {
-                    path:'literature/page/:pageId/letter/:letterId',
+                    path:'literature/letter/:letterId/page/:pageId',
                     component:literature,
                     name:'literature'
+                },
+                {
+                    path: 'literature',
+                    redirect: 'literature/letter/A/page/1',
+                    component: literature,
+                    name: 'literature'
                 },
                 {
                     path:'lit_detail/:nouId',
@@ -473,10 +485,20 @@ const router = new VueRouter({
                     name:'terms_edit'
                 },
                 {
-                    path:'time/page/:pageId/letter/:letterId',
+                    path:'time',
                     component:time,
                     name:'time'
-                }
+                },
+                {
+                    path:'time_detail/:nouId',
+                    component:time_detail,
+                    name:'time_detail'
+                },
+                {
+                    path:'time_edit/:nouId',
+                    component:time_edit,
+                    name:'time_edit'
+                },
         ]},
         {
             path:'/build',
@@ -532,6 +554,26 @@ const router = new VueRouter({
             path:'/offthree',
             component:officethree,
             name:'officethree'
+        },
+        {
+            path:'/timetwo',
+            component:timetwo,
+            name:'timetwo'
+        },
+        {
+            path:'/timethree',
+            component:timethree,
+            name:'timethree'
+        },
+        {
+            path:'/littwo',
+            component:literaturetwo,
+            name:'littwo'
+        },
+        {
+            path:'/litthree',
+            component:literaturethree,
+            name:'litthree'
         },
 
         {

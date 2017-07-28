@@ -23,9 +23,9 @@
 
                  this.$router.push({name:'terms_edit',nouId:id})
 
-             } else if (p === 4){//时间未配置路由
+             } else if (p === 4){//时间
 
-                 //this.$router.push({name:'char_edit',nouId:id})
+                 this.$router.push({name:'time_edit',nouId:id})
 
              } else if (p === 5){//职官
 

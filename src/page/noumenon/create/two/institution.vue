@@ -246,10 +246,10 @@
             },
 
             success_ins_type(response){
-                for(let i = 0;i < response.body.g.length;i++){
+                for(let i = 0;i < response.body.length;i++){
                     this.input_ins.type_ins.push({
-                        id:response.body.g[i].item_1_id,
-                        option:response.body.g[i].chinese_name
+                        id:response.body[i].item_1_id,
+                        option:response.body[i].chinese_name
                     })
                 }
                 console.log('type_ins:'+JSON.stringify(this.input_ins.type_ins));

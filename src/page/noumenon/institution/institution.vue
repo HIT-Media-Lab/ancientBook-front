@@ -168,8 +168,6 @@
 
         methods:{
             success_id(response){
-                //存在前端显示的数组里
-                //this.title = response.body.standard_name;
                 this.ins_content.standard_name = response.body.standard_name;
                 this.ins_content.name = response.body.name;
                 this.ins_content.type_number=response.body.type;

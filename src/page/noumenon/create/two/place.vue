@@ -176,7 +176,7 @@
             /*经度六位小数*/
             number_longitude(){
                 if(this.input_place.longitude !== ''){
-                    if(!/^\d+(\.\d{6})*$/.test(this.input_place.longitude)){
+                    if(!/^(?:[\+\-]?\d+(?:\.\d+)?)?$/.test(this.input_place.longitude)){
                         this.show_longitude = true;
                     } else {
                         this.show_longitude = false;

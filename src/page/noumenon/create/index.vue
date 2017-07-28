@@ -5,7 +5,7 @@
         <create-word :prams="this.prams"></create-word>
         <div class="zxw-noumenon-select">
             <label>选择本体类型：</label>
-            <select  class="zxw-select" v-model="noumenon_option[number]">
+            <select  class="zxw-select" v-model="noumenon_option[number]" >
                 <option v-for="item in noumenon_option">{{item}}</option>
             </select>
         </div>
@@ -56,8 +56,13 @@ export default{
 
                 this.$router.push({name:'officetwo'});
 
+            } else if(this.noumenon_option[this.number]==='时间'){
+
+                this.$router.push({name:'timetwo'});
+
             }
-        }
+        },
+
     }
 
 }

@@ -80,6 +80,9 @@ export default {
     get_build_terms:state => {
         return state.create_terms
     },
+    get_build_time:state => {
+        return state.create_time
+    },
     get_build_off:state => {
         return state.create_off
     },

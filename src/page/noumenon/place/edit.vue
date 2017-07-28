@@ -144,7 +144,7 @@
             /*纬度六位小数*/
             number_latitude(){
                 if(this.input_content.latitude !== ''){
-                    if(!/^\d+(\.\d{6})*$/.test(this.input_content.latitude)){
+                    if(!/^(?:[\+\-]?\d+(?:\.\d+)?)?$/.test(this.input_content.latitude)){
                         this.show_latitude = true;
                     } else {
                         this.show_latitude = false;

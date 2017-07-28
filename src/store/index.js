@@ -15,7 +15,8 @@ const store = new Vuex.Store({
         Token:'',
         acl_user:
             ['login','404','403','bookstore','user','upload1','mybook',
-            'character','recent','char_detail','char_edit','place','pla_detail','pla_edit','institution','ins_detail','ins_edit','terms','terms_detail','terms_edit','office','off_detail','off_edit','upload1','upload2',
+            'character','recent','char_detail','char_edit','place','pla_detail','pla_edit','institution','ins_detail','ins_edit','terms','terms_detail','terms_edit','office','off_detail','off_edit',
+               'time','time_detail','time_edit','literature','lit_detail','lit_edit', 'upload1','upload2',
             'upload3','copy','edition','impression','varieties',
             'bookstore','book_recent','book_info',
             'book_varieties','book_edition','book_impression',
@@ -23,7 +24,7 @@ const store = new Vuex.Store({
             'search_noumenon','modify_info','user_info',
             'alupload','privatebook','collection','offer',
             'ancientbook','comment','revise','edit','mark',
-            'build','charactertwo','characterthree','placetwo','placethree','institutiontwo','institutionthree','termstwo','termsthree','officetwo','officethree'],
+            'build','charactertwo','characterthree','placetwo','placethree','institutiontwo','institutionthree','termstwo','termsthree','officetwo','officethree','littwo','litthree'],
         acl_admin:['404','403','admin','modify_info'],
         acl_guest:['login', '404','403'],
         a:{},
@@ -293,6 +294,46 @@ const store = new Vuex.Store({
             remark_2_name:'',
             remark_1:'',
             remark_2:''
+        },
+
+        create_time:{
+            standard_name:'',
+            selected_chaodai:{
+                item_1_id:0,
+                chinese_name:''
+            },
+            selected_nianhao:{
+                item_2_id:0,
+                chinese_name:''
+            },
+            year:'',
+            selected_1_month:{
+                item_1_id:0,
+                chinese_name:''
+            },
+            selected_1_day:{
+                item_1_id:0,
+                chinese_name:''
+            },
+            selected_ganzhi:{
+                item_1_id:0,
+                chinese_name:''
+            },
+            juedui:'',
+            g_year:'',
+            selected_2_month:{
+                item_1_id:0,
+                chinese_name:null
+            },
+            selected_2_day:{
+                item_1_id:0,
+                chinese_name:null
+            },
+            selected_jieqi:{
+                item_1_id:0,
+                chinese_name:''
+            },
+            english:''
         },
 
         create_one_selection:0,

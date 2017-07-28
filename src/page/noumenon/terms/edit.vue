@@ -5,9 +5,9 @@
             <p class="zxw-create-character" v-bind="standard_title" v-model="input_content.standard_name">本体名称：{{input_content.standard_name}}</p>
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">术语名称：</label>
-                <input id="person_name" type="text"  class="zxw-character-input zxw-edit-character-input-margin" v-model="input_content.terms_name" v-bind:class="{'zxw-input-chinese':show_input}" :="repeat_nou_1">
-                <label class="zxw-character-span zxw-must-write" :="repeat_nou_1">学科：</label>
-                <select  class="zxw-ins-select" v-model="selected_course">
+                <input type="text"  class="zxw-character-input zxw-edit-character-input-margin" v-model="input_content.terms_name" v-bind:class="{'zxw-input-chinese':show_input}" :="repeat_nou_1">
+                <label class="zxw-character-span zxw-must-write">学科：</label>
+                <select  class="zxw-ins-select" v-model="selected_course" :="repeat_nou_1">
                     <option v-for="item in course_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
             </div>
@@ -239,10 +239,10 @@
             },
 
             success_course_type(response){
-                for(let i = 0;i < response.body.g.length;i++){
+                for(let i = 0;i < response.body.length;i++){
                     this.course_type.push({
-                        item_1_id:response.body.g[i].item_1_id,
-                        chinese_name:response.body.g[i].chinese_name
+                        item_1_id:response.body[i].item_1_id,
+                        chinese_name:response.body[i].chinese_name
                     })
                 }
                 console.log("course_type: "+JSON.stringify(this.course_type));

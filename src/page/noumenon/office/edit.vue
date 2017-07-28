@@ -258,7 +258,7 @@
                 console.log("获取职官信息失败");
             },
 
-            /*机构类型下拉框*/
+            /*品级类型下拉框*/
             get_off_type(){
                 let object = {};
                 let new_url = this.level_type_url+'?model_id=2&&item_1_id=0&&item_2_id=0';
@@ -266,10 +266,10 @@
             },
 
             success_level_type(response){
-                for(let i = 0;i < response.body.g.length;i++){
+                for(let i = 0;i < response.body.length;i++){
                     this.level_type.push({
-                        item_1_id:response.body.g[i].item_1_id,
-                        chinese_name:response.body.g[i].chinese_name
+                        item_1_id:response.body[i].item_1_id,
+                        chinese_name:response.body[i].chinese_name
                     })
                 }
                 if(this.input_content.level !== null && this.level_type.length > 0){

@@ -240,10 +240,10 @@
             },
 
             success_level_type(response){
-                for(let i = 0;i < response.body.g.length;i++){
+                for(let i = 0;i < response.body.length;i++){
                     this.level_type.push({
-                        item_1_id:response.body.g[i].item_1_id,
-                        chinese_name:response.body.g[i].chinese_name
+                        item_1_id:response.body[i].item_1_id,
+                        chinese_name:response.body[i].chinese_name
                     })
                 }
                 if(this.$store.getters.get_build_off.selected_level.chinese_name !== ''){

@@ -88,6 +88,10 @@ export default {
         state.create_off = data;
         console.log('state.create_off: '+JSON.stringify(state.create_off));
     },
+    get_create_time(state,data){
+        state.create_time = data;
+        console.log('state.create_time: '+JSON.stringify(state.create_time));
+    },
     change_fork(state, bool){
         state.fork = bool;
     }

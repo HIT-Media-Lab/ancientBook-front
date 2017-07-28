@@ -28,7 +28,7 @@
                     <option v-for="item in day_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}" v-bind:disabled="selected_3.option === ''">{{item.chinese_name}}</option>
                 </select>
 
-                <button class="zxw-time-add" @click="add_time()">添加</button>
+                <button class="zxw-time-add" v-bind:disabled="selected_1.option === ''" @click="add_time()">添加</button>
             </div>
         </modal>
 </template>
@@ -148,10 +148,10 @@
 
             /*朝代下拉框*/
             success_menu(response){
-                for(let i = 0; i < response.body.g.length; i++){
+                for(let i = 0; i < response.body.length; i++){
                     this.menu_data.push({
-                        item_1_id:response.body.g[i].item_1_id,
-                        chinese_name:response.body.g[i].chinese_name,
+                        item_1_id:response.body[i].item_1_id,
+                        chinese_name:response.body[i].chinese_name,
                     })
                 }
                 console.log('this.menu_data:'+JSON.stringify(this.menu_data));
