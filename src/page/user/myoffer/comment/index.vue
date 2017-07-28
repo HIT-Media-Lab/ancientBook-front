@@ -38,7 +38,6 @@
             page_button
         },
         created(){
-            this.content = [];
             this.sort_name = this.$route.params.content;
             this.content = [];
             if (this.sort_name == '公开批注'){
@@ -51,7 +50,6 @@
         },
         watch:{
             $route(){
-                this.content = [];
                 this.sort_name = this.$route.params.content;
                 this.content = [];
                 if (this.sort_name == '公开批注'){

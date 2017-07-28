@@ -57,6 +57,7 @@
         watch:{
             $route(){
                 this.content = [];
+                this.sort_name = this.$route.params.content;
                 if (this.$route.params.content == '全部本体'){
                     this.content = [];
                     let item = this.all_mark_url + '?page_count=' + this.$route.params.pageId;
@@ -159,6 +160,21 @@
                 }
             },
             sort(){
+                if (this.sort_name == '人物本体'){
+                    this.type = 1
+                }else if (this.sort_name == '文献本体'){
+                    this.type = 2
+                }else if (this.sort_name == '术语本体'){
+                    this.type = 3
+                }else if (this.sort_name == '时间本体'){
+                    this.type = 4
+                }else if (this.sort_name == '职官本体'){
+                    this.type = 5
+                }else if (this.sort_name == '机构本体'){
+                    this.type = 6
+                }else if (this.sort_name == '地点本体'){
+                    this.type = 7
+                }
                 let url = this.sort_mark_url + '?type=' + this.type + '&&page_count=' + this.$route.params.pageId;
                 this.http_json(url, 'get', url, this.mark_sort_success, this.mark_all_fail)
             },
@@ -197,7 +213,6 @@
             go_to_noumenon(id, type){
                 this.$route.params.nouId = id;
                 if (type == '【人物】'){
-                    alert(type);
                     this.$router.push({name: 'char_detail', params: this.$route.params});
                 }else if (type == '【文献】'){
                     this.$router.push({name: 'lit_detail', params: this.$route.params});

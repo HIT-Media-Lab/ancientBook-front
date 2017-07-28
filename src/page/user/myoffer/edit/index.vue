@@ -85,7 +85,7 @@
                     let type = '';
                     if (response.body.content[i].operation_type == 1){
                         edit_type = '创建本体';
-                    }else if (response.body.content[i].operation_type == 0){
+                    }else if (response.body.content[i].operation_type == 2){
                         edit_type = '编辑本体';
                     }
                     if (response.body.content[i].noumenon_type == 1){
@@ -160,6 +160,21 @@
                 }
             },
             sort(){
+                if (this.sort_name == '人物本体'){
+                    this.type = 1
+                }else if (this.sort_name == '文献本体'){
+                    this.type = 2
+                }else if (this.sort_name == '术语本体'){
+                    this.type = 3
+                }else if (this.sort_name == '时间本体'){
+                    this.type = 4
+                }else if (this.sort_name == '职官本体'){
+                    this.type = 5
+                }else if (this.sort_name == '机构本体'){
+                    this.type = 6
+                }else if (this.sort_name == '地点本体'){
+                    this.type = 7
+                }
                 let url = this.sort_edit_url + '?type=' + this.type + '&&page_count=' + this.$route.params.pageId;
                 this.http_json(url, 'get', url, this.edit_sort_success, this.edit_all_fail)
             },
@@ -172,7 +187,7 @@
                     let type = '';
                     if (response.body.content[i].operation_type == 1){
                         edit_type = '创建本体';
-                    }else if (response.body.content[i].operation_type == 0){
+                    }else if (response.body.content[i].operation_type == 2){
                         edit_type = '编辑本体';
                     }
                     if (this.$route.params.content == '人物本体'){
@@ -245,3 +260,6 @@
         text-overflow:ellipsis
     }
 </style>
+
+
+
