@@ -1,6 +1,8 @@
+<!--用户页面按钮-->
 <template>
     <div class="user">
         <div class="j-head">
+            <!--跳转到修改用户个人信息-->
             <div style="width: 180px;margin: 0 auto">
                 <img src="../../assets/img/picture-button/avatar.png" class="j-userhead" @click="go_to_modify">
                 <span class="j-simple-user" @click="go_to_modify" v-model="name">{{name}}</span>
@@ -50,6 +52,9 @@
             fail_info(){
 
             },
+            /**
+             * 注销
+             */
             logout(){
                 this.$http.get('/ancient_books/logout.action').then(function () {
                     localStorage.setItem('user', JSON.stringify("guest"));

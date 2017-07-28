@@ -1,9 +1,11 @@
+<!--我的收藏页面-->
 <template>
     <div class="all">
         <recent_title class="j-collection-bar" :title="this.title"></recent_title>
         <div class="j-collection">
             <div class="j-collection-div" v-for="(item,index) in content">
                 <div  v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
+                    <!--封面悬浮出现的两个图标-->
                     <div class="show-edit1">
                         <img style="margin-left: 60px" src="../../../assets/img/picture-button/white-pen.png" @click="">
                         <img src="../../../assets/img/picture-button/white-cross.png" @click="delete_book(item.ancient_book_id)">
@@ -13,6 +15,7 @@
                 <p class="j-collection-p" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
             </div>
         </div>
+        <!--翻页组件-->
         <page_button :max=this.total_page></page_button>
     </div>
 </template>
@@ -26,6 +29,9 @@
             page_button
         },
         created(){
+            /**
+             * 获取古籍列表
+             */
             this.i = 0;
             this.content = [];
             let url = this.collection_url + '?page=' + this.$route.params.pageId;
@@ -53,10 +59,16 @@
             }
         },
         methods:{
+            /**
+             *前往古籍详情页面
+             */
             go_to_bookinfo(id){
                 this.$route.params.ancient_book_id = id;
                 this.$router.push({name: 'book_info', params: this.$route.params});
             },
+            /**
+             *控制封面图标的显隐
+             */
             show_edit1(index){
                 document.getElementsByClassName('show-edit1')[index].style.opacity = 0.9;
             },
@@ -71,6 +83,9 @@
                     this.http_json(item, 'get', item, this.collection_pic_success, this.collection_fail);
                 }
             },
+            /**
+             *根据id附上图片
+             */
             collection_pic_success(response){
                 let picture_id_url1 = this.picture_url + '?page_id=' + response.body.id;
                 document.getElementById(this.content[this.i].ancient_book_id).setAttribute("src", picture_id_url1);
@@ -80,6 +95,9 @@
             collection_fail(){
 
             },
+            /**
+             *删除古籍
+             */
             delete_book(id){
                 this.params.id = id;
                 this.http_json(this.delete_url, 'post', this.params, this.delete_book_success, this.delete_book_fail)
