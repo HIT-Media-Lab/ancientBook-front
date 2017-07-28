@@ -143,6 +143,15 @@ import  upload2 from  './page/user/upload/secondstep/index.vue'
 import  upload3 from  './page/user/upload/thirdstep/index.vue'
 
 
+import  modify1 from  './page/user/modifyinfo/firststep/index.vue'
+import  copy_modify from './page/user/modifyinfo/firststep/copy.vue'
+import  edition_modify from './page/user/modifyinfo/firststep/edition.vue'
+import  impression_modify from './page/user/modifyinfo/firststep/impression.vue'
+import  varieties_modify from  './page/user/modifyinfo/firststep/variety.vue'
+import  modify2 from  './page/user/modifyinfo/secondstep/index.vue'
+import  modify3 from  './page/user/modifyinfo/thirdstep/index.vue'
+
+
 
 import  mybook from  './page/user/mybook/index.vue'
 import  alupload from  './page/user/mybook/alupload/index.vue'
@@ -273,6 +282,43 @@ const router = new VueRouter({
             path:'/user/upload3',
             component:upload3,
             name:'upload3'
+        },
+        {
+            path:'/user/modify1',
+            component:modify1,
+            name:'modify1',
+            children: [
+                {
+                    path:'',
+                    component:varieties_modify,
+                    name:'varieties_modify',
+                },
+                {
+                    path:'edition',
+                    component:edition_modify,
+                    name:'edition_modify',
+                },
+                {
+                    path:'impression',
+                    component:impression_modify,
+                    name:'impression_modify',
+                },
+                {
+                    path:'copy',
+                    component:copy_modify,
+                    name:'copy_modify',
+                },
+            ]
+        },
+        {
+            path:'/user/modify2',
+            component:modify2,
+            name:'modify2'
+        },
+        {
+            path:'/user/modify3',
+            component:modify3,
+            name:'modify3'
         },
         {
             path:'/user_info',
