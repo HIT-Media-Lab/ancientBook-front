@@ -47,7 +47,6 @@
             this.content = [];
             this.sort_name = this.$route.params.content;
             if (this.$route.params.content == '全部本体'){
-                this.content = [];
                 let item = this.all_edit_url + '?page_count=' + this.$route.params.pageId;
                 this.http_json(item, 'get', item, this.edit_all_success, this.edit_all_fail);
             }else {
@@ -57,8 +56,8 @@
         watch:{
             $route(){
                 this.content = [];
+                this.sort_name = this.$route.params.content;
                 if (this.$route.params.content == '全部本体'){
-                    this.content = [];
                     let item = this.all_edit_url + '?page_count=' + this.$route.params.pageId;
                     this.http_json(item, 'get', item, this.edit_all_success, this.edit_all_fail);
                 }else {
