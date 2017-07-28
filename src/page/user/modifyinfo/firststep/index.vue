@@ -65,6 +65,9 @@
                 literature_id : '',
                 summary : '',
 
+                literature_info : {},
+                three_layers_info : {},
+
                 book_all_info : {},
                 book_info_split: [],
                 book_info1:'',
@@ -315,6 +318,7 @@
             success_get_literature_info(response) {
                 if (response.body.length != 0) {
                     console.log("得到文献本体信息");
+                    this.literature_info = response.body;
                     this.varieties_item.english = response.body.english;
                     this.varieties_item.type_name = response.body.type_name;
                     this.varieties_item.type_other_name = response.body.type_other_name;
@@ -368,6 +372,7 @@
             success_get_3layers_info(response) {
                 if (response.body.length != 0) {
                     console.log("得到3层信息");
+                    this.three_layers_info = response.body;
                     this.edition_item.version_volume_str = response.body.version_volume.toString();
                     this.edition_item.version_volume = response.body.version_volume;
                     this.edition_item.version_type = response.body.version_type;
@@ -501,7 +506,94 @@
              * 确定修改
              */
             confirm_modify() {
+                this.varieties_item = this.$store.getters.get_varieties_item;
+                this.edition_item = this.$store.getters.get_edition_item;
+                this.impression_item = this.$store.getters.get_impression_item;
+                this.copy_item = this.$store.getters.get_copy_item;
+                this.upload_one_info = this.$store.getters.get_upload1_info;
+                this.summary = this.$store.getters.get_book_summary;
 
+                var delet_responsibility_infos = [];
+                var add_responsibility_infos = [];
+                for (var i = 0; i < this.literature_info.responsibility_infos.length; i++) {
+                    delet_responsibility_infos.push(this.literature_info.responsibility_infos[i].responsibility_info_id)
+                }
+                for (var j = 0; j < this.literature_info.responsibility_infos.length; j++) {
+                    delet_responsibility_infos.push(this.three_layers_info.responsibility_infos[j].responsibility_info_id)
+                }
+                for (var k = 0; k < this.varieties_item.varieties_responsibility.length; k ++) {
+                    add_responsibility_infos.push(this.varieties_item.varieties_responsibility[k])
+                }
+                for (var m = 0; m < this.edition_item.edition_responsibility.length; m ++) {
+                    add_responsibility_infos.push(this.edition_item.edition_responsibility[m])
+                }
+                for (var n = 0; n < this.impression_item.impression_responsibility.length; n ++) {
+                    add_responsibility_infos.push(this.impression_item.impression_responsibility[n])
+                }
+                for (var o = 0; o < this.copy_item.copy_responsibility.length; o ++) {
+                    add_responsibility_infos.push(this.copy_item.copy_responsibility[o])
+                }
+
+                this.add_book_obj.english = this.varieties_item.english;
+                this.add_book_obj.type_name = this.varieties_item.type_name;
+                this.add_book_obj.type_other_name = this.varieties_item.type_other_name;
+                this.add_book_obj.type_save = this.varieties_item.type_save;
+                this.add_book_obj.type_level = this.varieties_item.type_level;
+                this.add_book_obj.type_bu = this.varieties_item.type_bu;
+                this.add_book_obj.type_lei = this.varieties_item.type_lei;
+                this.add_book_obj.type_shu = this.varieties_item.type_shu;
+                this.add_book_obj.type_summary = this.varieties_item.type_summary;
+                this.add_book_obj.literature_standard_name = this.varieties_item.literature_standard_name;
+                this.add_book_obj.version_volume = parseInt(this.edition_item.version_volume_str);
+                this.add_book_obj.version_type = this.edition_item.version_type;
+                this.add_book_obj.version_age = this.edition_item.version_age;
+                this.add_book_obj.version_support = this.edition_item.version_support;
+                this.add_book_obj.version_binding = this.edition_item.version_binding;
+                this.add_book_obj.version_frame_length = parseInt(this.edition_item.version_frame_length_str);
+                this.add_book_obj.version_frame_width = parseInt(this.edition_item.version_frame_width_str);
+                this.add_book_obj.version_format_length = parseInt(this.edition_item.version_format_length_str);
+                this.add_book_obj.version_format_width = parseInt(this.edition_item.version_format_width_str);
+                this.add_book_obj.version_paiji_content = this.edition_item.version_paiji_content;
+                this.add_book_obj.version_paiji_location = this.edition_item.version_paiji_location;
+                this.add_book_obj.version_half_page_line_number = parseInt(this.edition_item.version_half_page_line_number_str);
+                this.add_book_obj.version_page_line_number = parseInt(this.edition_item.version_page_line_number_str);
+                this.add_book_obj.version_yuwei = this.edition_item.version_yuwei;
+                this.add_book_obj.version_double_page_number = parseInt(this.edition_item.version_double_page_number_str);
+                this.add_book_obj.version_bianlan = this.edition_item.version_bianlan;
+                this.add_book_obj.version_fenlan = this.edition_item.version_fenlan;
+                this.add_book_obj.version_shukou = this.edition_item.version_shukou;
+                this.add_book_obj.version_banxin_content = this.edition_item.version_banxin_content;
+                this.add_book_obj.version_youshuwuer = this.edition_item.version_youshuwuer;
+                this.add_book_obj.version_youwujiazhu = this.edition_item.version_youwujiazhu;
+                this.add_book_obj.printing_type = this.impression_item.printing_type;
+                this.add_book_obj.printing_number = this.impression_item.printing_number;
+                this.add_book_obj.duplicate_book_count = parseInt(this.copy_item.duplicate_book_count_str);
+                this.add_book_obj.duplicate_level = this.copy_item.duplicate_level;
+                this.add_book_obj.duplicate_complete = this.copy_item.duplicate_complete;
+                this.add_book_obj.duplicate_attachment = this.copy_item.duplicate_attachment;
+                this.add_book_obj.ancient_book_id = this.ancient_book_id;
+                this.add_book_obj.name = this.upload_one_info.name;
+                this.add_book_obj.standard_name = this.upload_one_info.standard_name;
+                this.add_book_obj.pri = this.upload_one_info.pri;
+                this.add_book_obj.summary = this.summary;
+                this.add_book_obj.delet_responsibility_infos = delet_responsibility_infos;
+                this.add_book_obj.add_responsibility_infos = add_responsibility_infos;
+                this.before_http(this.add_book_obj);
+                this.http_json('/ancient_books/modify_ancient_book_all_info_with_literature.action' , 'post' , this.add_book_obj , this.success_post_add , this.fail_post_add);
+            },
+
+            success_post_edit(response) {
+                if (response.body.result === 1) {
+                    console.log ("修改古籍成功!");
+                    window.location.reload();   //  重新加载
+                }
+                else if (response.body.result === 0) {
+                    console.log ("修改古籍失败");
+                }
+            },
+
+            fail_post_edit() {
+                console.log("修改古籍请求发送失败");
             },
 
 

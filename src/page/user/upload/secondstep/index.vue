@@ -130,7 +130,8 @@
                 if (!files.length)return;
                 this.createImage(files,this.index);
                 console.log(this.upload_file[this.index].images);
-                this.check_picture_name();
+                console.log(this.upload_file[this.index].images.length);
+//                this.check_picture_name();
              },
 
             createImage(file,index) {
@@ -159,6 +160,7 @@
 
             check_picture_name() {
                 var key = 0;
+                console.log(this.upload_file[this.index].images);
                 for (var i = 0; i < this.upload_file[this.index].images.length; i++) {
                     var name = this.upload_file[this.index].images[i].pic_name;
                     var one = name.charAt(0);
@@ -180,6 +182,7 @@
                     if (one != first) {
                         alert("上传文件名不符合规范，第一个字符应为“卷”，请重新上传");
                         this.upload_file[this.index].images = [];
+                        console.log(this.upload_file[this.index].images);
                         key = 1;
                         break;
                     }
