@@ -44,16 +44,18 @@
                 private_url:'/ancient_books/get_private_ancient_books_list_by_user_upload.action',
                 picture_page_url: "/ancient_books/get_page_id_by_jcy.action",
                 picture_url: '/ancient_books/get_picture_by_id.action',
+                delete_url: '/ancient_books/delete_ancient_book.action',
                 title: '私密古籍',
                 total_page: 1,
                 i: 0,
-                content: []
+                content: [],
+                params:{}
             }
         },
         methods:{
-            go_to_bookinfo(item){
-                this.$store.commit("push_ancient_book_id", item);
-                this.$router.push({path: '/bookstore/book_info'});
+            go_to_bookinfo(id){
+                this.$route.params.ancient_book_id = id;
+                this.$router.push({name: 'book_info', params: this.$route.params});
             },
             show_edit1(index){
                 document.getElementsByClassName('show-edit1')[index].style.opacity = 0.9;

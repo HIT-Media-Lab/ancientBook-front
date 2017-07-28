@@ -23,8 +23,8 @@
                 </thead>
                 <tbody>
                 <tr v-for="item in content"> <!--v-for循环数据里的数组数据-->
-                    <td class="j-mark-table" style="width: 200px" :title="item.standard_name">{{item.standard_name}} {{item.noumenon_type}}</td>
-                    <td class="j-mark-table" style="width: 400px" :title="item.standard_name">{{item.target}}</td>
+                    <td class="j-mark-table" style="width: 200px" :title="item.standard_name" @click="go_to_noumenon(item.noumenon_id,item.noumenon_type)">{{item.standard_name}} {{item.noumenon_type}}</td>
+                    <td class="j-mark-table" style="width: 400px" :title="item.standard_name" @click="go_to_book(item.page_id)">{{item.target}}</td>
                     <td class="j-mark-table" style="width: 200px" :title="item.standard_name">{{item.time}}</td>
                 </tr>
                 </tbody>
@@ -70,11 +70,13 @@
             return{
                 all_mark_url: '/ancient_books/get_mark_list_by_user.action',
                 sort_mark_url: '/ancient_books/get_mark_list_by_user_class.action',
+                page_id_url: '/ancient_books/get_page_by_id.action',
                 total_page: 1,
                 count: 0,
                 content: [],
                 type: 0,
-                sort_name: '全部本体'
+                sort_name: '全部本体',
+                page_id: ''
             }
         },
         methods:{
@@ -191,6 +193,41 @@
                         noumenon_id: response.body.content[i].noumenon_id
                     })
                 }
+            },
+            go_to_noumenon(id, type){
+                this.$route.params.nouId = id;
+                if (type == '【人物】'){
+                    alert(type);
+                    this.$router.push({name: 'char_detail', params: this.$route.params});
+                }else if (type == '【文献】'){
+                    this.$router.push({name: 'lit_detail', params: this.$route.params});
+                }else if (type == '【术语】'){
+                    this.$router.push({name: 'terms_detail', params: this.$route.params});
+                }else if (type == '【时间】'){
+                    this.$router.push({name: 'time_detail', params: this.$route.params});
+                }else if (type == '【职官】'){
+                    this.$router.push({name: 'off_detail', params: this.$route.params});
+                }else if (type == '【机构】'){
+                    this.$router.push({name: 'ins_detail', params: this.$route.params});
+                }else if (type == '【地点】') {
+                    this.$router.push({name: 'pla_detail', params: this.$route.params});
+                }
+            },
+            go_to_book(page_id){
+                let url = this.page_id_url + '?page_id=' + page_id;
+                this.page_id = page_id;
+                this.http_json(url, 'get', url, this.page_id_success, this.page_id_fail);
+            },
+            page_id_success(response){
+                this.$route.params.page_id = this.page_id;
+                this.$route.params.book_name = response.body.name;
+                this.$route.params.book = response.body.ce;
+                this.$route.params.volume = response.body.juan;
+                this.$route.params.pageId = response.body.ye;
+                this.$router.push({name: 'ancientbook', params: this.$route.params});
+            },
+            page_id_fail(){
+
             }
         }
     }

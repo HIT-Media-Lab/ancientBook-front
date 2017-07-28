@@ -88,7 +88,17 @@ export default {
     },
     get_fork:state => {
         return state.fork;
+    },
+    get_book_all_info:state => {
+        return state.book_all_info;
+    },
+    get_first_layer_info:state => {
+        return state.first_layer_info;
+    },
+    get_three_layers_info:state => {
+        return state.three_layers_info;
     }
+
 
 
 

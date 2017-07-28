@@ -344,7 +344,7 @@ const router = new VueRouter({
             ]
         },
         {
-            path:'/ancientbook/:book_name/:volume/:pageId',
+            path:'/ancientbook/:book_name/:book/:volume/:pageId',
             component:ancientbook,
             name:'ancientbook'
         },
@@ -495,10 +495,10 @@ const router = new VueRouter({
                     name:'time_detail'
                 },
                 {
-                    path:'time_edit/:nouId',
-                    component:time_edit,
-                    name:'time_edit'
-                },
+                    path: 'time_edit/:nouId',
+                    component: time_edit,
+                    name: 'time_edit'
+                }
         ]},
         {
             path:'/build',
@@ -592,7 +592,7 @@ const router = new VueRouter({
                     name: 'sort_book'
                 },
                 {
-                    path: 'book_info',
+                    path: 'book_info/:ancient_book_id',
                     component: book_info,
                     name: 'book_info',
                     children: [

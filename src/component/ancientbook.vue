@@ -3,7 +3,7 @@
 
         <!--目录-->
         <div class="width1000 center">
-            <p>经部/总类/<span style="color: red">石经之属</span>/<span style="color: red">诗经</span>/册1册名/卷1</p>
+            <p>{{page_info.bu_name}}/{{page_info.lei_name}}/<span style="color: red">{{page_info.shu_name}}</span>/<span style="color: red">{{page_info.name}}</span>/册{{page_info.ce}}{{page_info.book_name}}/卷{{page_info.juan}}</p>
             <img src="../assets/img/no-use-picture/ink-line-long.png" height="7" width="974"/>
         </div>
 
@@ -11,7 +11,7 @@
         <div class="width1000 center">
             <button class="float-right next-one" @click="next_key">下一处</button>
             <button class="float-right last-one" @click="last_key">上一处</button>
-            <input type="text" class="ry-search" placeholder="請輸入關鍵字" v-model="search_key" @change="key_array()">
+            <input type="text" class="ry-search" placeholder="请输入关键字" v-model="search_key" @change="key_array()">
         </div>
 
         <!--图文-->
@@ -39,8 +39,6 @@
 
                     <!--本体标记版块-->
                     <div id="mark" class="div">
-                        <!--文本标题-->
-                        <h4>诗经卷一</h4>
                         <!--文本主体-->
                         <p class="body-text" id="text-mark" @click="text_mark_onclick()"></p>
                         <!--本体种类选择菜单-->
@@ -60,8 +58,6 @@
 
                     <!--批注版块-->
                     <div id="comment" class="div">
-                        <!--文本标题-->
-                        <h4>诗经卷一</h4>
                         <!--文本主体-->
                         <div class="body-text" id="text-comment" @click="text_comment_onclick()"></div>
                         <!--添加批注按钮，选中文本后激活显示，点击弹出添加批注模态框-->
@@ -70,8 +66,6 @@
 
                     <!--修订板块-->
                     <div id="edit" class="div div-now">
-                        <!--文本标题-->
-                        <h4>诗经卷一</h4>
                         <!--文本主体-->
                         <div id="ry-edit-text" class="body-text">蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。</div>
                         <br>
@@ -88,7 +82,7 @@
                     <modal :show_modal.sync = "edit_record_modal" @fireclose = "edit_record_modal = false" class="ry-modal-border">
                         <div class="width600 dialog-body" slot="body">
                             <h4 style="text-align: center">修订记录</h4>
-                            <div v-for="item in commit_edit_record">
+                            <div v-for="item in edit_record">
                                 <p>修訂者：{{item.username_edit_record}}</p>
                                 <p>修訂時間：{{item.time_edit_record}}</p>
                                 <p>修訂信息：{{item.commit_edit_record}}</p>
@@ -141,7 +135,7 @@
                         <div class="width400 dialog-body"  slot="body">
                             <span>【{{now_target}}】</span><span>{{now_content}}</span>
                             <div>
-                                <button class="ry-btn-cancel-add-comment float-right">删除</button>
+                                <button class="ry-btn-cancel-add-comment float-right" @click="btn_confirm_delete_comment_onclick">删除</button>
                             </div>
                         </div>
                     </modal>
@@ -161,25 +155,25 @@
                                 <option>术语</option>
                                 <option>文献</option>
                             </select>
-                            <input id="ry-noumenon-input" type="text" class="ry-input-search" placeholder="請輸入本體名查找"><button class="ry-btn-search-pic" @click="btn_search_noumenon_onclick()"></button>
+                            <input id="ry-noumenon-input" type="text" class="ry-input-search" placeholder="请输入本体名查找"><button class="ry-btn-search-pic" @click="btn_search_noumenon_onclick()"></button>
                             <div class="ry-add-mark-modal-box">
                                 <h3 style="margin-top: 80px" v-show="before_search">请在搜索框中输入本体规范名称进行搜索</h3>
 
                                 <!--显示搜索成功的结果-->
                                 <div class="zxw-search-success" v-for="(result,index) in search_noumenon_content">
                                     <p class="zxw-search-result">{{result.standard_name}}</p>
-                                    <button class="zxw-prebtn zxw-character-add" v-model="index">添加</button>
+                                    <button class="zxw-prebtn zxw-character-add" v-model="index" @click="btn_add_mark_onclick(index)">添加</button>
                                 </div>
 
                                 <!--显示搜索失败的结果-->
                                 <div class="zxw-fail-tip" v-show="fail_tip">
                                     <p>很抱歉，未搜索到本体：{{noumenon_search_content}}</p>
                                     <p><span class="zxw-search-p-tip">您可以</span>
-                                        <button class="zxw-prebtn zxw-search-create">创建本体</button>
+                                        <button class="zxw-prebtn zxw-search-create" @click="btn_create_noumenon">创建本体</button>
                                     </p>
                                 </div>
                             </div>
-                            <button class="ry-btn-cancel-add-comment" style="margin-left: 330px;" @click="btn_add_mark_onclick()">创建本体</button>
+                            <button class="ry-btn-cancel-add-comment" style="margin-left: 330px;" @click="btn_create_noumenon">创建本体</button>
                             <button class="ry-btn-cancel-add-comment" @click="close_add_mark_modal()">取消</button>
                         </div>
                     </modal>
@@ -199,55 +193,11 @@
         <div>
             <modal :show_modal.sync = "catalogue_modal" @fireclose = "catalogue_modal = false" class="ry-modal-border">
                 <div class="dialog-body" slot="body">
-                    <div>册1册名</div>
-                    <div class="row">
-                        <a class="col-md-2">
-                            卷1
-                        </a>
-                        <a class="col-md-2">
-                            卷2
-                        </a>
-                        <a class="col-md-2">
-                            卷3
-                        </a>
-                        <a class="col-md-2">
-                            卷4
-                        </a>
-                        <a class="col-md-2">
-                            卷5
-                        </a>
-                        <a class="col-md-2">
-                            卷6
-                        </a>
-                    </div>
-                    <div class="row">
-                        <a class="col-md-2">
-                            卷7
-                        </a>
-                        <a class="col-md-2">
-                            卷8
-                        </a>
-                    </div>
-                    <div>册2册名</div>
-                    <div class="row">
-                        <a class="col-md-2">
-                            卷1
-                        </a>
-                        <a class="col-md-2">
-                            卷2
-                        </a>
-                        <a class="col-md-2">
-                            卷3
-                        </a>
-                        <a class="col-md-2">
-                            卷4
-                        </a>
-                        <a class="col-md-2">
-                            卷5
-                        </a>
-                        <a class="col-md-2">
-                            卷6
-                        </a>
+                    <div v-for="(item,index) in book_all_info.catalogue">
+                        <div>册{{item.book_count}}{{item.book_name}}</div>
+                        <div>
+                            <span v-for="volume in book_all_info.catalogue[index].volume" @click="go_to(item.book_count,volume.volume_count,volume.begin_page)">卷{{volume.volume_count}}</span>
+                        </div>
                     </div>
                 </div>
             </modal>
@@ -257,14 +207,7 @@
         <div class="width1000 center">
             <img src="../assets/img/no-use-picture/ink-line-long.png" height="4" width="974"/>
             <div class="ry-bottom-bar">
-                <button class="float-right ry-btn-next-page" @click="next_page">下一</button>
-                <button class="float-right ry-btn-go">GO</button>
-                <div class="float-right ry-page">
-                    <input class="ry-input-page" v-model="page_bind">
-                    <span>/</span>
-                    <span>{{page_total}}</span>
-                </div>
-                <button class="float-right ry-btn-last-page" @click="last_page">上一</button>
+                <page_button class="float-right" :max=this.total_page></page_button>
                 <button class="ry-btn-menu" @click="catalogue_onclick()">目录</button>
             </div>
         </div>
@@ -276,9 +219,11 @@
 
 <script type="text/javascript">
     import modal from  '../component/modal.vue'
+    import page_button from '../component/paginator.vue'
     export default{
         components:{
             modal,
+            page_button
         },
 
         data() {
@@ -305,9 +250,11 @@
                 volume : 1,
                 page : 1,
                 page_bind : 1,
-                page_total : 1,
+                total_page : 1,
                 ancient_book_id : '',
-                page_id : 1,
+                page_id : '',
+                page_info : {},
+                book_all_info : {},
 
                 get_comment_obj : {},
                 comment : [{id_comment:"654654",target_comment:"露为霜。",begin_comment:6,end_comment:10,content_comment:"123123"},{id_comment:"321321",target_comment:"，在水一",begin_comment:14,end_comment:18,content_comment:"456456"}],
@@ -319,20 +266,10 @@
 
                 get_mark_obj : {},
                 mark : [{id_mark:"123123",target_mark:"，白露为",begin_mark:4,end_mark:8,noumenon_type:1},{id_mark:"456456",target_mark:"伊人，在",begin_mark:12,end_mark:16,noumenon_type:2}],
-                id_mark : '',
-                noumenon_type : '',
-                noumennon_id : '',
-                begin_mark : '',
-                end_mark : '',
-                target_mark : '',
 
                 get_edit_record_obj : {},
                 page_count_edit_record : 1,
                 edit_record : [],
-                username_edit_record : '',
-                time_edit_record : '',
-                version_edit_record : '',
-                commit_edit_record : [],
                 total_page_edit_record : '',
 
                 edit_text_obj : {},
@@ -378,12 +315,32 @@
             }
         },
 
-        created : function () {
+        watch:{
+            $route(){
+                this.book = this.$route.params.book;
+                this.volume = this.$route.params.volume;
+                this.page = this.$route.params.page;
+                this.ancient_book_id = this.$route.params.ancient_book_id;
+                this.get_page_id();
+                this.get_page_info();
+                this.get_ancient_books_all_info();
+            }
+        },
 
+        created : function () {
+            this.book = this.$route.params.book;
+            this.volume = this.$route.params.volume;
+            this.page = this.$route.params.page;
+            this.ancient_book_id = this.$route.params.ancient_book_id;
+            this.get_page_id();
+            this.get_page_info();
+            this.get_ancient_books_all_info();
         },
 
         mounted : function () {
             this.change_module();
+            this.get_picture();
+            this.get_text();
             this.get_edit();
             this.renew_mark();
             this.renew_comment();
@@ -398,12 +355,58 @@
                 var get_page_id = '';
                 this.http_json (url , 'get' , get_page_id , this.success_get_page_id , this.fail_get_page_id);
             },
+
             success_get_page_id(response) {
                 this.page_id = response.body.id;
             },
+
             fail_get_page_id() {
                 console.log("fail get page_id!");
             },
+
+
+            /**
+             * 获取部类属卷册页
+             */
+            get_page_info() {
+                var url = '/ancient_books/get_page_by_id.action?page_id=' + this.page_id;
+                var get_obj = '';
+                this.http_json (url , 'get' , get_obj , this.success_get_page_info , this.fail_get_page_info)
+            },
+
+            success_get_page_info(response) {
+                this.page_info = response.body;
+            },
+
+            fail_get_page_info() {
+                console.log("fail get page_info!");
+            },
+
+
+            /**
+             * 发送古籍id，get请求得到4层信息id
+             */
+            get_ancient_books_all_info() {
+                var get_obj = {};
+                let url = '/ancient_books/get_ancient_books_all_info_by_id.action?ancient_book_id=' + this.ancient_book_id;
+                this.http_json (url , 'get' , get_obj , this.success_get_ancient_books_all_info , this.fail_get_ancient_books_all_info);
+            },
+
+            success_get_ancient_books_all_info(response) {
+                console.log ("success get books all info");
+                if (response.body.length === 0) {
+                    console.log ("返回空对象");
+                }
+                else{
+                    this.book_all_info = response.body;
+                    this.total_page = response.body.total_page;
+                }
+            },
+
+            fail_get_ancient_books_all_info() {
+                console.log ("fail get books all info!");
+            },
+
 
             /**
              * 获取图片内容请求
@@ -413,7 +416,6 @@
                 var img = document.getElementById("ry-picture-work");
                 img.src = url;
             },
-
 
 
             /**
@@ -639,9 +641,11 @@
 
             success_add_comment(response) {
                 if (response.body.result === 1) {
+                    alert("添加批注成功");
                     console.log("success add comment!");
                 }
                 else if (response.body.result === 0) {
+                    alert("添加批注失败");
                     console.log("fail add comment");
                 }
             },
@@ -715,9 +719,12 @@
 
             success_delete_comment(response) {
                 if (response.body.result === 1) {
+                    alert("删除成功");
                     console.log("success delete comment!");
+                    window.location.reload();
                 }
                 else if (response.body.result === 0) {
+                    alert("删除失败");
                     console.log("fail delete comment");
                 }
             },
@@ -732,13 +739,18 @@
              */
             key_array() {
                 this.key_position = [];
+                this.key_position_comment = [];
+                this.key_position_mark = [];
                 var pos = this.content.indexOf(this.search_key);
                 while (pos > -1) {
                     this.key_position.push(pos);
+                    this.key_position_comment.push(pos);
+                    this.key_position_mark.push(pos);
                     pos = this.content.indexOf(this.search_key , pos + 1);
                 }
-                alert(this.key_position);
                 this.renew_text();
+                this.renew_text_comment();
+                this.renew_text_mark();
             },
 
             renew_text() {
@@ -770,6 +782,38 @@
                 }
             },
 
+            renew_text_comment() {
+                var comment = document.getElementById("text-comment");
+                comment.innerHTML = '';
+                this.renew_comment();
+                var length = this.search_key.length;
+                var comment_text = document.getElementsByClassName("ry-comment-text");
+
+                //文本逐字遍历
+                for (var i = 0; i < comment_text.length; i++) {
+                    //该字在搜索关键字中
+                    if (i >= this.key_position[this.now_index] && i < this.key_position[this.now_index] + length) {
+                        comment_text[i].setAttribute("style","color: red")
+                    }
+                }
+            },
+
+            renew_text_mark() {
+                var mark = document.getElementById("text-mark");
+                mark.innerHTML = '';
+                this.renew_mark();
+                var length = this.search_key.length;
+                var mark_text = mark.getElementsByTagName("span");
+
+                //文本逐字遍历
+                for (var i = 0; i < mark_text.length; i++) {
+                    //该字在搜索关键字中
+                    if (i >= this.key_position[this.now_index] && i < this.key_position[this.now_index] + length) {
+                        mark_text[i].setAttribute("style","color: red")
+                    }
+                }
+            },
+
             last_key() {
                 if (this.now_index == 0) {
                     alert("这是第一处")
@@ -777,6 +821,8 @@
                 else{
                     this.now_index = this.now_index - 1;
                     this.renew_text();
+                    this.renew_text_comment();
+                    this.renew_text_mark()
                 }
             },
 
@@ -787,6 +833,8 @@
                 else{
                     this.now_index = this.now_index + 1;
                     this.renew_text();
+                    this.renew_text_comment();
+                    this.renew_text_mark()
                 }
             },
 
@@ -956,7 +1004,7 @@
              * 删除批注按钮
              */
             btn_confirm_delete_comment_onclick() {
-                post_delete_comment();
+                this.post_delete_comment();
             },
 
 
@@ -992,7 +1040,25 @@
                         this.after += e;
                     }
                 }
+                else if (window.getSelection().getRangeAt(0).toString().length == 0) {
+                    var cli = window.getSelection().focusNode.parentNode.id;
+                    var click = parseInt(cli)+1;
+                    for (var k = 0; k < this.mark.length; k++) {
+                        //该点击节点不在该条标记内
+                        if (click < this.mark[k].begin_mark || click >= this.mark[k].end_mark) {
+                            continue;
+                        }
+                        //该点击在该条标记内
+                        if (click >= this.mark[k].begin_mark && click < this.mark[k].end_mark) {
+                            this.$route.params.noumenon_type = this.mark[k].noumenon_type;
+                            this.$route.params.noumenon_id = this.mark[k].noumenon_id;
+                            this.$router.push({name:'', params: this.$route.params});
+                            break;
+                        }
+                    }
+                }
             },
+
 
             /**
              * 标记本体按钮点击事件
@@ -1045,13 +1111,23 @@
                 this.before_search = false;
             },
 
+
+            btn_create_noumenon() {
+                this.$store.commit("get_create_one_selection",2);
+                this.$router.push({path: '/build'});
+            },
+
             /**
              * 添加标记按钮事件
              */
-            btn_add_mark_onclick() {
+            btn_add_mark_onclick(index) {
+                this.noumenon_type = this.search_noumenon_content[index].type_id;
+                this.noumenon_id = this.search_noumenon_content[index].noumenon_id;
                 this.post_add_mark();
                 this.add_mark_modal = false;
+                window.location.reload();
             },
+
 
             /**
              * 目录按钮
@@ -1060,30 +1136,48 @@
                 this.catalogue_modal = true;
             },
 
-            /**
-             * 上一页按钮
-             */
-            last_page() {
-                if (this.page_bind = 1) {
-                    alert("这是第一页")
-                }
-                else if (this.page_bind = this.page_total) {
-                    alert("这是最后一页")
-                }
-                else{
-                    this.page = this.page - 1;
-                    this.page_bind = this.page_bind - 1;
-                    this.get_page_id();
-                    this.get_picture()
-                }
+            go_to(book,volume,page) {
+                this.book = book;
+                this.volume = volume;
+                this.page = page;
+
+                this.$route.params.book = this.book;
+                this.$route.params.volume = this.volume;
+                this.$route.params.page = this.page;
+                this.$route.params.ancient_book_id = this.ancient_book_id;
+
+                this.$router.push({name:'ancientbook', params: this.$route.params});
             },
 
-            /**
-             * 下一页按钮
-             */
-            next_page() {
 
-            },
+//            /**
+//             * 上一页按钮
+//             */
+//            last_page() {
+//                if (this.page_bind = 1) {
+//                    alert("这是第一页")
+//                }
+//                else if (this.page_bind = this.total_page) {
+//                    alert("这是最后一页")
+//                }
+//                else{
+//                    this.page = this.page - 1;
+//                    this.page_bind = this.page_bind - 1;
+//                    this.get_page_id();
+//                    this.get_picture();
+//                    this.get_text();
+//                    this.get_edit();
+//                    this.renew_mark();
+//                    this.renew_comment();
+//                }
+//            },
+//
+//            /**
+//             * 下一页按钮
+//             */
+//            next_page() {
+//
+//            },
 
 
 
@@ -1208,6 +1302,7 @@
                         var text = document.createTextNode(p);
                         span.appendChild(text);
                         span.setAttribute("id", i);
+                        span.setAttribute("class", "ry-comment-text");
                         text_comment.appendChild(span);
                     }
                     //该字是批注
@@ -1216,7 +1311,7 @@
                         var text = document.createTextNode(p);
                         span.appendChild(text);
                         span.setAttribute("id", i);
-                        span.setAttribute("class", "ry-comment id=C" + this.comment[jtemp].id_comment);
+                        span.setAttribute("class", "ry-comment ry-comment-text id=C" + this.comment[jtemp].id_comment);
                         text_comment.appendChild(span);
                     }
                 }
@@ -1694,7 +1789,7 @@
 
     /*文本内容*/
     .body-text{
-        margin-top: 40px;
+        margin-top: 100px;
     }
 
     /*修订记录&批注内容编辑框*/

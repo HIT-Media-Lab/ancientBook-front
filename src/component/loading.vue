@@ -1,3 +1,4 @@
+<!--loading组件，旋转的小圈圈-->
 <template >
     <div class="spinner" >
         <div class="spinner-container container1">

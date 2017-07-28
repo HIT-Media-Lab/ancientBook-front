@@ -29,8 +29,8 @@
             <p class="j-mybook-recent-name">私密古籍</p>
             <div class="j-mybook-al-img">
                 <div class="j-mybook-recent-div" v-for="(item,index) in private_book">
-                    <div>
-                        <div class="show-edit2" v-on:mouseover="show_edit2(index)" v-on:mouseout="shut_edit2(index)">
+                    <div v-on:mouseover="show_edit2(index)" v-on:mouseout="shut_edit2(index)">
+                        <div class="show-edit2">
                             <img style="margin-left: 60px" src="../../../assets/img/picture-button/white-pen.png" @click="">
                             <img src="../../../assets/img/picture-button/white-cross.png" @click="delete_book(item.ancient_book_id)">
                         </div>
@@ -72,7 +72,7 @@
                 private_book_url: '/ancient_books/get_recent_private_ancient_books_by_user.action',
                 picture_page_url: "/ancient_books/get_page_id_by_jcy.action",
                 picture_url: '/ancient_books/get_picture_by_id.action',
-                delete_url: '/ancient_book/delete_ancient_book.action',
+                delete_url: '/ancient_books/delete_ancient_book.action',
                 title: '我的古籍',
                 recent_mybook: [],
                 al_up_book: [],
@@ -99,9 +99,9 @@
             shut_edit2(index){
                 document.getElementsByClassName('show-edit2')[index].style.opacity = 0;
             },
-            go_to_bookinfo(item){
-                this.$store.commit("push_ancient_book_id", item);
-                this.$router.push({path: '/bookstore/book_info'});
+            go_to_bookinfo(id){
+                this.$route.params.ancient_book_id = id;
+                this.$router.push({name: 'book_info', params: this.$route.params});
             },
             go_to_more_privatebook(){
                 this.$route.params.pageId = 1;
@@ -187,10 +187,10 @@
     }
     .j-mybook-recent-name{
         margin-left: 60px;
-        width: 70px;
+        width: 80px;
         font-weight:700;
         font-style:normal;
-        font-size:16px;
+        font-size:20px;
         color: black;
     }
     .j-mybook-recent-img{
@@ -211,6 +211,7 @@
     .j-mybook-p{
         margin-top: 3px;
         color: #0f0f0f;
+        font-size: 16px;
         text-align: center;
         display: -webkit-box;
         -webkit-line-clamp: 1;

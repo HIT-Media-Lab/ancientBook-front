@@ -343,7 +343,11 @@ const store = new Vuex.Store({
         search_content: '',
 
         ancient_book_id: '',
-        fork: true
+        fork: true,
+
+        book_all_info : {},
+        first_layer_info : {},
+        three_layers_info : {},
     },
     getters,
     mutations,

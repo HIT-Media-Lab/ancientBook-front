@@ -1,3 +1,4 @@
+<!--部类属搜索结果页面-->
 <template>
     <div class="j-sortbook">
         <p class="j-bls">
@@ -10,6 +11,7 @@
                 <p class="j-bls-bookname" @click="go_to_book(item.ancient_book_id)">{{index+1}}、{{item.standard_name}}</p>
             </a>
         </div>
+        <!--翻页组件-->
         <div class="j-bls-page">
             <page_button :max=this.total_page></page_button>
         </div>
@@ -33,6 +35,9 @@
             }
         },
         created: function () {
+            /**
+             * 部类属搜索页面逻辑
+             */
             this.get_bls();
         },
         watch:{
@@ -62,8 +67,8 @@
 
             },
             go_to_book(id){
-                this.$store.commit('push_ancient_book_id', id);
-                this.$router.push({path: '/bookstore/book_info'});
+                this.$route.params.ancient_book_id = id;
+                this.$router.push({name: 'book_info', params: this.$route.params});
             }
         }
     }

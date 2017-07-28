@@ -1,3 +1,4 @@
+<!--搜索结果总页面-->
 <template>
     <div class="j-search-all">
         <ul class="nav nav-tabs">
@@ -37,6 +38,9 @@
           this.change_button()
         },
         methods : {
+            /**
+             * 按钮效果逻辑，以及路由跳转
+             */
             remove_book() {
                 let book_button = document.getElementById("j-book-button");
                 let noumenon_button = document.getElementById("j-noumenon-button");
@@ -48,7 +52,7 @@
                 let noumenon_button = document.getElementById("j-noumenon-button");
                 book_button.className = "";
                 noumenon_button.className = "active";
-                this.this.$route.params.pageId = 1;
+                this.$route.params.pageId = 1;
                 this.$router.push({name: 'search_noumenon', params: this.$route.params})
             },
             remove_noumenon() {
@@ -62,7 +66,7 @@
                 let noumenon_button = document.getElementById("j-noumenon-button");
                 book_button.className = "active";
                 noumenon_button.className = "";
-                this.this.$route.params.pageId = 1;
+                this.$route.params.pageId = 1;
                 this.$router.push({name: 'search_book', params: this.$route.params})
             },
             change_button(){

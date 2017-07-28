@@ -1,5 +1,7 @@
+<!--用户修改用户自身的信息-->
 <template>
     <div class="j-modify">
+        <!--用户信息页面-->
         <div>
             <div style="width: 180px;margin: 0 auto">
                 <img src="../assets/img/picture-button/avatar.png" class="j-userhead" >
@@ -12,7 +14,7 @@
         </div>
         <div class="j-modify-info">
             <p>
-                <span style="margin-left: 82px">用户类型：</span>
+                <span style="margin-left: 90px">用户类型：</span>
                 <span style="margin-left: 10px" v-model="type">{{type}}</span>
             </p>
             <p style="margin: 15px auto">
@@ -20,10 +22,11 @@
                 <span style="margin-left: 10px" v-model="account">{{account}}</span>
             </p>
             <p style="margin: 15px auto">
-                <span style="margin-left: 99px">用户名：</span>
+                <span style="margin-left: 110px">用户名：</span>
                 <span style="margin-left: 10px" v-model="name">{{name}}</span>
             </p>
         </div>
+        <!--修改用户信息模态框-->
         <div>
             <login_modal v-bind:show_modal.sync = show @fireclose = "cancel">
                 <header class="dialog-header" slot="header">
@@ -70,6 +73,10 @@
             login_modal
         },
         created(){
+            /**
+             * 获取用户信息
+             */
+
             this.http_json(this.get_info_url, 'get', {}, this.info_success, this.info_fail)
         },
         data(){
@@ -93,6 +100,10 @@
             }
         },
         methods: {
+            /**
+             * 判断修改信息的用户权限
+             */
+
             info_success(response){
                 this.name = response.body.name;
                 this.account = response.body.account;
@@ -108,15 +119,21 @@
             show_edit(){
                 this.show = true;
             },
+            /**
+             * 提交修改的信息
+             */
             confirm(){
                 let item = {
-                    token: this.$store.getters.GetToken,
+//                    token: this.$store.getters.GetToken,
                     pwd: this.old_pwd,
                     new_name: this.new_name,
                     new_pwd: this.new_pwd
                 };
                 this.http_json(this.modify_url, 'post', item, this.confirm_sucess, this.confirm_fail)
             },
+            /**
+             *修改成功，重新登录
+             */
             confirm_sucess(response){
                 if (response.body.result == 1){
                     alert(response.body.info);
@@ -132,7 +149,6 @@
                     this.Active4 = false;
                     this.disabled = false;
                     this.show = false;
-                    alert("请重新登录");
                     localStorage.setItem('user', JSON.stringify("guest"));
                     this.$router.push('/login');
                     bus.$emit('change_name','登录')
@@ -143,6 +159,9 @@
             confirm_fail(){
 
             },
+            /**
+             * 取消
+             */
             cancel(){
                 this.new_name = '';
                 this.old_pwd = '';
@@ -156,6 +175,9 @@
                 this.disabled = false;
                 this.show = false;
             },
+            /**
+             * 正则判断，用户输入输入是否规范
+             */
             check(){
                 this.disabled = false;
                 this.warning = "";

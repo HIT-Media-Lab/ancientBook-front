@@ -1,5 +1,5 @@
+<!--home页面-->
 <template>
-    <!--登录组件-->
     <div style="height: 360px">
         <div class="index-page">
             <div class="head">
@@ -12,10 +12,10 @@
             </div>
             <div class="drop-search-login" @click="hide" v-show="sort_box.length!=0">
                 <ul>
-                    <li class="sort-box1-login" @click="search1()" style="color: #0f0f0f">
+                    <li class="sort-box1-login" :title="sort_box" @click="search1()" style="color: #0f0f0f">
                         搜古籍：{{sort_box}}
                     </li>
-                    <li class="sort-box2-login" @click="search2()" style="color: #0f0f0f">
+                    <li class="sort-box2-login" :title="sort_box" @click="search2()" style="color: #0f0f0f">
                         搜本体：{{sort_box}}
                     </li>
                 </ul>
@@ -43,12 +43,18 @@ import store from '../../../store'
          }
      },
     created: function () {
-         this.onload_token();
+        /**
+         * 进入页面获得token
+         */
+        this.onload_token();
      },
      methods: {
          hide:function () {
              this.sort_box = ''
          },
+         /**
+          * 搜索古籍
+          */
          search1:function () {
              if (this.sort_box == ''){
                  this.$router.push("/login");
@@ -59,6 +65,9 @@ import store from '../../../store'
                  this.sort_box = '';
              }
          },
+         /**
+          * 搜索本体
+          */
          search2: function () {
              this.$route.params.content = this.sort_box;
              this.$route.params.pageId = 1;
@@ -68,6 +77,9 @@ import store from '../../../store'
                  this.sort_box = '';
              }
          },
+         /**
+          * 获得token
+          */
          onload_token(){
              if (this.$store.getters.GetToken == ''){
                  this.$http.get('/ancient_books/getToken.action').then(function (response) {
@@ -84,7 +96,9 @@ import store from '../../../store'
              }
          },
 
-         //自动登录
+         /**
+          * 自动登录
+          */
          auto_login() {
              this.$http.get(this.autologin_url).then(function (response) {
                  if (response.body.result == 1) {
@@ -170,11 +184,17 @@ import store from '../../../store'
         padding-top: 10px;
         list-style: none;
         font-size: 18px;
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
     }
     .sort-box2-login{
         font-size: 18px;
         padding-top: 10px;
         list-style: none;
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
     }
     .down-info{
        margin: 0 auto 20px auto;
