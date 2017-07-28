@@ -64,6 +64,7 @@
         data(){
             return{
                 all_comment_url: '/ancient_books/get_comment_list_by_user.action',
+                page_id_url: '/ancient_books/get_page_by_id.action',
                 total_page: 1,
                 count: 0,
                 content: [],
