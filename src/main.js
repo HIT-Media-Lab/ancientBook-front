@@ -260,6 +260,12 @@ const router = new VueRouter({
             children: [
                 {
                     path:'',
+                    redirect: 'varieties',
+                    component:varieties,
+                    name:'varieties',
+                },
+                {
+                    path:'varieties',
                     component:varieties,
                     name:'varieties',
                 },
@@ -297,6 +303,12 @@ const router = new VueRouter({
             children: [
                 {
                     path:'',
+                    redirect: 'varieties_modify',
+                    component:varieties_modify,
+                    name:'varieties_modify',
+                },
+                {
+                    path:'varieties_modify',
                     component:varieties_modify,
                     name:'varieties_modify',
                 },
@@ -334,6 +346,12 @@ const router = new VueRouter({
             children: [
                 {
                     path:'',
+                    redirect: 'mybook',
+                    component:mybook,
+                    name:'mybook'
+                },
+                {
+                    path:'mybook',
                     component:mybook,
                     name:'mybook'
                 },
@@ -408,6 +426,12 @@ const router = new VueRouter({
             children:[
                 {
                     path:'',
+                    redirect: 'recent',
+                    component:recent,
+                    name:'recent'
+                },
+                {
+                    path:'recent',
                     component:recent,
                     name:'recent'
                 },
@@ -636,6 +660,12 @@ const router = new VueRouter({
             children:[
                 {
                     path: '',
+                    redirect: 'book_recent',
+                    component: book_recent,
+                    name: 'book_recent'
+                },
+                {
+                    path: 'book_recent',
                     component: book_recent,
                     name: 'book_recent'
                 },
@@ -651,6 +681,12 @@ const router = new VueRouter({
                     children: [
                         {
                             path: '',
+                            redirect: 'book_varieties',
+                            component: book_varieties,
+                            name: 'book_varieties'
+                        },
+                        {
+                            path: 'book_varieties',
                             component: book_varieties,
                             name: 'book_varieties'
                         },
