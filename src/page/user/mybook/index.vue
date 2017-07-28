@@ -188,7 +188,7 @@
              */
             go_to_edit_books(id){
                 this.$route.params.ancient_book_id = id;
-                this.$router.push({name: 'modify1', params: this.$route.params})
+                this.$router.push({name: 'varieties_modify', params: this.$route.params})
             },
             /**
              *删除古籍
