@@ -66,7 +66,7 @@
             visibility: visible;
         }
         .dialog-content{
-            background-color: white;
+            background-color: #fef7e5;
             position: relative;
             z-index: 3000;
         }
