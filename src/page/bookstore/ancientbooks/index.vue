@@ -78,6 +78,7 @@
 
         created : function () {
             this.get_ancient_book_id();
+            console.log(this.ancient_book_id);
             this.get_ancient_books_all_info();
             this.get_three_layers_info();
             this.get_first_layer_info();
@@ -171,7 +172,7 @@
 
             success_get_three_layers_info(response) {
                 console.log ("success get 3 layers info");
-                if (response.body.length === 0) {
+                if (response.body === '') {
                     console.log ("返回空对象");
                 }
                 else{
