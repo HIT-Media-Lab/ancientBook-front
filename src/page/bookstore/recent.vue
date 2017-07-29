@@ -75,7 +75,7 @@
              */
             push_success(id){
                 this.$route.params.ancient_book_id = id;
-                this.$router.push({name: 'book_info', params: this.$route.params});
+                this.$router.push({name: 'book_varieties', params: this.$route.params});
             }
         }
     }
