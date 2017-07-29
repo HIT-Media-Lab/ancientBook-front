@@ -517,7 +517,7 @@
 
 <style>
     .zxw-admin-title{
-        margin:20px 0 20px 330px;
+        margin:20px auto 20px auto;
     }
 
     .zxw-btn-admin{
@@ -540,7 +540,7 @@
         width:940px;
         table-layout: fixed;    /*表格每个宽度确定*/
         text-align: center;
-        margin:0 0 0 330px;
+        margin:0 auto;
     }
 
     .zxw-btn-general{

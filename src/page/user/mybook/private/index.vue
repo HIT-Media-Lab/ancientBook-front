@@ -7,12 +7,12 @@
                 <div  v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                     <!--封面悬浮出现的两个图标-->
                     <div class="show-edit1">
-                        <img style="margin-left: 60px" src="../../../../assets/img/picture-button/white-pen.png" @click="go_to_edit_books(item.ancient_book_id)">
-                        <img src="../../../../assets/img/picture-button/white-cross.png" @click="delete_book(item.ancient_book_id)">
+                        <img class="j-pen all-link" src="../../../../assets/img/picture-button/white-pen.png" @click="go_to_edit_books(item.ancient_book_id)">
+                        <img class="all-link" src="../../../../assets/img/picture-button/white-cross.png" @click="delete_book(item.ancient_book_id)">
                     </div>
-                    <img :id="item.ancient_book_id" class="j-private-img" @click="go_to_bookinfo(item.ancient_book_id)">
+                    <img :id="item.ancient_book_id" class="j-private-img all-link" @click="go_to_bookinfo(item.ancient_book_id)">
                 </div>
-                <p class="j-private-p" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
+                <p class="j-private-p all-link" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
             </div>
         </div>
         <!--翻页组件-->

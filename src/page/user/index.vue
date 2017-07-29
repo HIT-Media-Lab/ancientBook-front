@@ -3,9 +3,9 @@
     <div class="user">
         <div class="j-head">
             <!--跳转到修改用户个人信息-->
-            <div style="width: 180px;margin: 0 auto">
-                <img src="../../assets/img/picture-button/avatar.png" class="j-userhead" @click="go_to_modify">
-                <span class="j-simple-user" @click="go_to_modify" v-model="name">{{name}}</span>
+            <div class="j-link-modify">
+                <img src="../../assets/img/picture-button/avatar.png" class="j-userhead all-link" @click="go_to_modify">
+                <button class="j-simple-user" @click="go_to_modify" v-model="name">{{name}}</button>
             </div>
             <div class="j-user-line">
                 <img src="../../assets/img/no-use-picture/ink-line-long.png" >
@@ -24,7 +24,7 @@
             <router-link to="/user_info/edit/全部本体/page/1">
                 <img src="../../assets/img/picture-button/user-myoffer.png" class="myoffer_img">
             </router-link>
-            <img src="../../assets/img/picture-button/user-logout.png" class="logout" @click="logout()">
+            <img src="../../assets/img/picture-button/user-logout.png" class="logout" @click="logout">
         </div>
     </div>
 </template>
@@ -99,6 +99,10 @@
         font-style:normal;
         font-size:20px;
         color:#999999;
+    }
+    .j-link-modify{
+        width: 305px;
+        margin: 0 auto
     }
     .j-link{
         letter-spacing:60px;

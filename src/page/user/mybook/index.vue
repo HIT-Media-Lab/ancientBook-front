@@ -6,8 +6,8 @@
             <p class="j-mybook-recent-name">最近</p>
             <div class="j-mybook-recent-img">
                 <div class="j-mybook-recent-div" v-for="item in recent_mybook">
-                    <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo(item.ancient_book_id)">
-                    <p class="j-mybook-p" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
+                    <img  :id = "item.ancient_book_id" class="j-mybook-recent-img1 all-link" @click="go_to_bookinfo(item.ancient_book_id)">
+                    <p class="j-mybook-p all-link" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
                 </div>
             </div>
             <p class="j-mybook-recent-name">已上传</p>
@@ -16,17 +16,17 @@
                     <div v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                         <!--封面悬浮出现的两个图标-->
                         <div class="show-edit1">
-                            <img style="margin-left: 60px" src="../../../assets/img/picture-button/white-pen.png" @click="go_to_edit_books(item.ancient_book_id)">
-                            <img src="../../../assets/img/picture-button/white-cross.png" @click="delete_book(item.ancient_book_id)">
+                            <img class="j-pen all-link" src="../../../assets/img/picture-button/white-pen.png" @click="go_to_edit_books(item.ancient_book_id)">
+                            <img class="all-link" src="../../../assets/img/picture-button/white-cross.png" @click="delete_book(item.ancient_book_id)">
                         </div>
-                        <img :id = "item.ancient_book_id + 'alup'" class="j-mybook-recent-img1" @click="go_to_bookinfo(item.ancient_book_id)">
+                        <img :id = "item.ancient_book_id + 'alup'" class="j-mybook-recent-img1 all-link" @click="go_to_bookinfo(item.ancient_book_id)">
                     </div>
-                    <p class="j-mybook-p" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
+                    <p class="j-mybook-p all-link" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
                 </div>
                 <!--获取更多古籍按钮-->
                 <div class="j-mybook-morelink" v-show="show_more1">
-                    <span class="j-mybook-more" @click="go_to_more_upbook">更多</span>
-                    <img src="../../../assets/img/picture-button/more_logo.png" @click="go_to_more_upbook">
+                    <span class="j-mybook-more all-link" @click="go_to_more_upbook">更多</span>
+                    <img class="all-link" src="../../../assets/img/picture-button/more_logo.png" @click="go_to_more_upbook">
                 </div>
             </div>
             <p class="j-mybook-recent-name">私密古籍</p>
@@ -35,17 +35,17 @@
                     <div v-on:mouseover="show_edit2(index)" v-on:mouseout="shut_edit2(index)">
                         <!--封面悬浮出现的两个图标-->
                         <div class="show-edit2">
-                            <img style="margin-left: 60px" src="../../../assets/img/picture-button/white-pen.png" @click="go_to_edit_books(item.ancient_book_id)">
-                            <img src="../../../assets/img/picture-button/white-cross.png" @click="delete_book(item.ancient_book_id)">
+                            <img class="j-pen all-link" src="../../../assets/img/picture-button/white-pen.png" @click="go_to_edit_books(item.ancient_book_id)">
+                            <img class="all-link" src="../../../assets/img/picture-button/white-cross.png" @click="delete_book(item.ancient_book_id)">
                         </div>
-                        <img :id = "item.ancient_book_id + 's'" class="j-mybook-recent-img1" @click="go_to_bookinfo(item.ancient_book_id)">
+                        <img :id = "item.ancient_book_id + 's'" class="j-mybook-recent-img1 all-link" @click="go_to_bookinfo(item.ancient_book_id)">
                     </div>
-                    <p class="j-mybook-p" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
+                    <p class="j-mybook-p all-link" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
                 </div>
                 <!--获取更多古籍按钮-->
                 <div class="j-mybook-morelink" v-show="show_more2">
-                    <span class="j-mybook-more" @click="go_to_more_privatebook">更多</span>
-                    <img src="../../../assets/img/picture-button/more_logo.png"  @click="go_to_more_privatebook">
+                    <span class="j-mybook-more all-link" @click="go_to_more_privatebook">更多</span>
+                    <img class="all-link" src="../../../assets/img/picture-button/more_logo.png"  @click="go_to_more_privatebook">
                 </div>
             </div>
         </div>
@@ -258,6 +258,9 @@
         font-style:normal;
         font-size:18px;
         color: black;
+    }
+    .j-pen{
+        margin-left: 60px
     }
     .j-mybook-morelink{
         height: 30px;
