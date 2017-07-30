@@ -115,10 +115,6 @@ function response_get(response, success) {
 import  bookstore from './page/bookstore/index.vue'
 import  book_recent from './page/bookstore/recent.vue'
 import  book_info from './page/bookstore/ancientbooks/index.vue'
-import  book_varieties from  './page/bookstore/ancientbooks/varieties.vue'
-import  book_impression from './page/bookstore/ancientbooks/impression.vue'
-import  book_copy from './page/bookstore/ancientbooks/copy.vue'
-import  book_edition from './page/bookstore/ancientbooks/edition.vue'
 import  sort_book from './page/bookstore/ancientbooks.vue'
 
 import  login from  './page/user/login/login.vue'
@@ -675,37 +671,9 @@ const router = new VueRouter({
                     name: 'sort_book'
                 },
                 {
-                    path: 'book_info',
+                    path: 'book_info/:ancient_book_id',
                     component: book_info,
                     name: 'book_info',
-                    children: [
-                        {
-                            path: '',
-                            redirect: 'book_varieties/:ancient_book_id',
-                            component: book_varieties,
-                            name: 'book_varieties'
-                        },
-                        {
-                            path: 'book_varieties/:ancient_book_id',
-                            component: book_varieties,
-                            name: 'book_varieties'
-                        },
-                        {
-                            path: 'edition/:ancient_book_id',
-                            component: book_edition,
-                            name: 'book_edition'
-                        },
-                        {
-                            path: 'impression/:ancient_book_id',
-                            component: book_impression,
-                            name: 'book_impression'
-                        },
-                        {
-                            path: 'copy/:ancient_book_id',
-                            component: book_copy,
-                            name: 'book_copy'
-                        },
-                    ]
                 }
             ]
         },

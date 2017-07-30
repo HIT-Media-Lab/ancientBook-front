@@ -117,7 +117,7 @@
                 <div>
                     <modal :show_modal.sync = "add_comment_modal" @fireclose = "add_comment_modal = false" class="ry-modal-border">
                         <div class="dialog-body" slot="body">
-                            <span>选中內容：{{target_add_comment}}</span>
+                            <span>选中内容：{{target_add_comment}}</span>
                             <p>添加批注：</p>
                             <textarea id="textarea-addComment"></textarea>
                             <div class="ry-modal-add-comment-box">
@@ -317,30 +317,30 @@
 
         watch:{
             $route(){
-//                this.book = this.$route.params.book;
-//                this.volume = this.$route.params.volume;
-//                this.page = this.$route.params.page;
-//                this.ancient_book_id = this.$route.params.ancient_book_id;
-//                this.get_page_id();
-//                this.get_page_info();
-//                this.get_ancient_books_all_info();
+                this.book = this.$route.params.book;
+                this.volume = this.$route.params.volume;
+                this.page = this.$route.params.page;
+                this.ancient_book_id = this.$route.params.ancient_book_id;
+                this.get_page_id();
+                this.get_page_info();
+                this.get_ancient_books_all_info();
             }
         },
 
         created : function () {
-//            this.book = this.$route.params.book;
-//            this.volume = this.$route.params.volume;
-//            this.page = this.$route.params.page;
-//            this.ancient_book_id = this.$route.params.ancient_book_id;
-//            this.get_page_id();
-//            this.get_page_info();
-//            this.get_ancient_books_all_info();
+            this.book = this.$route.params.book;
+            this.volume = this.$route.params.volume;
+            this.page = this.$route.params.page;
+            this.ancient_book_id = this.$route.params.ancient_book_id;
+            this.get_page_id();
+            this.get_page_info();
+            this.get_ancient_books_all_info();
         },
 
         mounted : function () {
             this.change_module();
-//            this.get_picture();
-//            this.get_text();
+            this.get_picture();
+            this.get_text();
             this.get_edit();
             this.renew_mark();
             this.renew_comment();
