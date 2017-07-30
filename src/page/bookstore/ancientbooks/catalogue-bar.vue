@@ -3,7 +3,7 @@
     <!--4层导航按钮-->
     <div class="ry-menu-bar">
         <ul id="layer-head">
-            <router-link to="{name:'book_varieties', params: this.$route.params.ancient_book_id}">
+            <router-link to="{path:'book_varieties', params: this.$route.params.ancient_book_id}">
                 <li id="layer-head-variety" @click="click_variety"><span v-show="variety_text">品种层</span><img v-show="variety_pic" src="../../../assets/img/picture-button/variety.png" height="31" width="134"/></li>
             </router-link>
             <router-link to="{name:'book_edition', params: this.$route.params.ancient_book_id}">
@@ -34,6 +34,10 @@
                 copy_text : true,
                 copy_pic : false,
             }
+        },
+
+        created : function () {
+            this.get_ancient_book_id();
         },
 
         methods: {
