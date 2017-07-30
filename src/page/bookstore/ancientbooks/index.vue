@@ -97,6 +97,7 @@
              */
             get_ancient_book_id() {
                 this.ancient_book_id = this.$route.params.ancient_book_id;
+                console.log(this.ancient_book_id);
             },
 
 
