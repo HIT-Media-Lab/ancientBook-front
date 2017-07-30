@@ -78,7 +78,7 @@
 </template>
 
 <script>
-    /*let Mock = require('mockjs');
+    let Mock = require('mockjs');
      Mock.mock('/ancient_books/get_time_by_id.action?id=7789','get',{
      "status|200":200,
      "standard_name": "宋朝天宝2017",
@@ -99,7 +99,7 @@
      "g_ri|2":2,
      "english": 'shijian',
      "jieqi": "节气1"
-     });*/
+     });
 
     import noumenon_title from '../../../component/noumenon-title.vue';
     import noumenon_button from '../../../component/noumenon-button.vue';
