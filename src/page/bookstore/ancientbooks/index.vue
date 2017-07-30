@@ -128,7 +128,7 @@
                     }
 
                     var get_obj1 = {};
-                    let url1 = '/ancient_books/get_literature_by_id.action?literature_id=' + this.book_all_info.literature_id;
+                    let url1 = '/ancient_books/get_literature_by_id.action?id=' + this.book_all_info.literature_id;
                     this.http_json (url1 , 'get' , get_obj1 , this.success_get_first_layer_info , this.fail_get_first_layer_info);
 
                     var get_obj = {};
