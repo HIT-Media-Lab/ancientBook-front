@@ -296,34 +296,6 @@ const router = new VueRouter({
             path:'/user/modify1',
             component:modify1,
             name:'modify1',
-            children: [
-                {
-                    path:'',
-                    redirect: 'varieties_modify',
-                    component:varieties_modify,
-                    name:'varieties_modify',
-                },
-                {
-                    path:'varieties_modify',
-                    component:varieties_modify,
-                    name:'varieties_modify',
-                },
-                {
-                    path:'edition',
-                    component:edition_modify,
-                    name:'edition_modify',
-                },
-                {
-                    path:'impression',
-                    component:impression_modify,
-                    name:'impression_modify',
-                },
-                {
-                    path:'copy',
-                    component:copy_modify,
-                    name:'copy_modify',
-                },
-            ]
         },
         {
             path:'/user/modify2',

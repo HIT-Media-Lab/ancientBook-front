@@ -3,7 +3,7 @@
         <!--模块名称-->
         <div class="width950 center">
             <h3 style="display:inline-block">{{book_all_info.name}}</h3>
-            <button class="float-right ry-btn-cancel-upload">加入收藏</button>
+            <button class="float-right ry-btn-cancel-upload" @click="collect_book()">加入收藏</button>
         </div>
 
         <div class="width1000 center">
@@ -12,7 +12,7 @@
 
         <div class="width950 center">
             <h3 style="display:inline-block" class="float-left">古籍规范名称：</h3>
-            <h4 id="bookName" style="display:inline-block" class="float-left ry-book-name">{{book_all_info.name}}</h4>
+            <h4 style="display:inline-block" class="float-left ry-book-name">{{book_all_info.name}}</h4>
             <div class="ry-4layers" style="display:inline-block">
                 <p>{{book_info1}}</p>
                 <p>{{book_info2}}</p>
@@ -603,6 +603,31 @@
 
 
             /**
+             * 收藏古籍
+             */
+            collect_book() {
+                var url = '/ancient_books/collect.action';
+                var obj = {};
+                obj.ancient_book_id = this.ancient_book_id;
+                this.before_http(obj);
+                this.http_json(url , 'post' , obj , this.success_collect , this.fail_collect);
+            },
+
+            success_collect(response) {
+                if (response.body.result == 1) {
+                    alert("收藏成功")
+                }
+                else{
+                    alert("收藏失败")
+                }
+            },
+
+            fail_collect() {
+                console.log("没有成功发送收藏请求")
+            },
+
+
+            /**
              * 4层导航栏按钮显隐元素控制
              */
             click_variety() {
@@ -615,6 +640,7 @@
                 this.copy_text = true;
                 this.copy_pic = false;
             },
+
             click_edition() {
                 this.variety_text = true;
                 this.variety_pic = false;
@@ -625,6 +651,7 @@
                 this.copy_text = true;
                 this.copy_pic = false;
             },
+
             click_impression() {
                 this.variety_text = true;
                 this.variety_pic = false;
@@ -635,6 +662,7 @@
                 this.copy_text = true;
                 this.copy_pic = false;
             },
+
             click_copy() {
                 this.variety_text = true;
                 this.variety_pic = false;
