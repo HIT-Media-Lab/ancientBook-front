@@ -88,12 +88,8 @@
                     this.$router.push({name:'terms_detail',params:{nouId:this.recent_noumenons[p].id}});
 
                 } else if (i === 4){
-<<<<<<< HEAD
-                    this.$router.push({name:'time_detail',params:{id:this.recent_noumenons[p].id}});
-=======
 
                     this.$router.push({name:'time_detail',params:{nouId:this.recent_noumenons[p].id}});
->>>>>>> 811adb99122e1ba9d39c13284d836a2c9bcbc56b
 
                 } else if (i === 5){
                     this.$router.push({name:'off_detail',params:{nouId:this.recent_noumenons[p].id}});
