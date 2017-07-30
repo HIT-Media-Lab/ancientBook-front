@@ -146,7 +146,7 @@
                 course_type:[],
                 course_number:0,
                 selected_course:{
-                    item_1_id:0,
+                    item_1_id:null,
                     chinese_name:''
                 },
                 input_content:{

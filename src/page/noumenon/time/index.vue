@@ -81,19 +81,19 @@
                 menu_url:'/ancient_books/get_menu_items.action',
                 zhongli_url:'/ancient_books/get_time_by_chinese_name.action',
                 selected_chaodai:{
-                    item_1_id:0,
+                    item_1_id:null,
                     chinese_name:''
                 },
                 selected_nianhao:{
-                    item_2_id:0,
+                    item_2_id:null,
                     chinese_name:''
                 },
                 selected_month:{
-                    item_1_id:0,
+                    item_1_id:null,
                     chinese_name:''
                 },
                 selected_day:{
-                    item_1_id:0,
+                    item_1_id:null,
                     chinese_name:''
                 },
                 chaodai_type:[],

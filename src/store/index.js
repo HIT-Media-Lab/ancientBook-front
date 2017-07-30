@@ -255,7 +255,7 @@ const store = new Vuex.Store({
             standard_name:'',
             terms_name:'',
             selected_course:{
-                item_1_id:0,
+                item_1_id:null,
                 chinese_name:''
             },
             course_subdivision:1,
@@ -283,7 +283,7 @@ const store = new Vuex.Store({
             s_office_name:'',
             dynasty:'',
             selected_level:{
-                item_1_id:0,
+                item_1_id:null,
                 chinese_name:''
             },
             begin_time_id:'',
@@ -299,34 +299,34 @@ const store = new Vuex.Store({
         create_time:{
             standard_name:'',
             selected_chaodai:{
-                item_1_id:0,
+                item_1_id:null,
                 chinese_name:''
             },
             selected_nianhao:{
-                item_2_id:0,
+                item_2_id:null,
                 chinese_name:''
             },
             year:'',
             selected_1_month:{
-                item_1_id:0,
+                item_1_id:null,
                 chinese_name:''
             },
             selected_1_day:{
-                item_1_id:0,
+                item_1_id:null,
                 chinese_name:''
             },
             selected_ganzhi:{
-                item_1_id:0,
+                item_1_id:null,
                 chinese_name:''
             },
             juedui:'',
             g_year:'',
             selected_2_month:{
-                item_1_id:0,
+                item_1_id:null,
                 chinese_name:''
             },
             selected_2_day:{
-                item_1_id:0,
+                item_1_id:null,
                 chinese_name:''
             },
             selected_jieqi:'',
@@ -340,23 +340,23 @@ const store = new Vuex.Store({
             english: '',
             type_summary: '',
             selected_save: {    //选择的存佚类型
-                item_1_id: 0,
+                item_1_id: null,
                 chinese_name: ''
             },
             selected_level: {   //选择的品种级别
-                item_1_id: 0,
+                item_1_id: null,
                 chinese_name: ''
             },
             selected_bu: {
-                item_1_id: 0,
+                item_1_id: null,
                 chinese_name: ''
             },
             selected_lei: {
-                item_2_id: 0,
+                item_2_id: null,
                 chinese_name: ''
             },
             selected_shu: {
-                item_3_id: 0,
+                item_3_id: null,
                 chinese_name: ''
             },
             varieties_arr: []

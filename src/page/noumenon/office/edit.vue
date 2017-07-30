@@ -168,7 +168,7 @@
                 time_modal_2:false,
                 level_type:[],
                 selected_level:{
-                    item_1_id:0,
+                    item_1_id:null,
                     chinese_name:''
                 },
                 input_content:{
@@ -184,7 +184,7 @@
                     end_time_name: '',
                     s_office_id:'',
                     s_office_name:'',
-                    level:0,
+                    //level:0,
                     dynasty:'',
                     remark_1: '',
                     remark_2: '',
@@ -233,7 +233,7 @@
                 this.input_content.end_time_name = response.body.end_time_name;
                 this.input_content.s_office_id = response.body.s_office_id;
                 this.input_content.s_office_name = response.body.s_office_name;
-                this.input_content.level = response.body.level;
+                this.selected_level.item_1_id = response.body.level;
                 this.input_content.dynasty = response.body.dynasty;
                 this.input_content.remark_1_name = response.body.remark_1_name;
                 this.input_content.remark_2_name = response.body.remark_2_name;
@@ -272,10 +272,9 @@
                         chinese_name:response.body[i].chinese_name
                     })
                 }
-                if(this.input_content.level !== null && this.level_type.length > 0){
-                    for(let m = 0;m <this.level_type.length;m++){
-                        if(this.input_content.level === this.level_type[m].item_1_id){
-                            this.selected_level.item_1_id=this.level_type[m].item_1_id;
+                if(this.selected_level.item_1_id !== null && this.level_type.length > 0){
+                    for(let m = 0; m < this.level_type.length; m++){
+                        if(this.selected_level.item_1_id === this.level_type[m].item_1_id){
                             this.selected_level.chinese_name=this.level_type[m].chinese_name;
                             console.log('selected_level: '+JSON.stringify(this.selected_level));
                         }
@@ -345,7 +344,7 @@
 
             end_time(q){
                 this.input_content.end_time_id = q.time_id;
-                this.input_content.end_time_name=q.standard_name;
+                this.input_content.end_time_name = q.standard_name;
                 this.close_end();
             },
 

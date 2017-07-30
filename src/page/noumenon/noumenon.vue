@@ -88,8 +88,7 @@
                     this.$router.push({name:'terms_detail',params:{id:this.recent_noumenons[p].id}});
 
                 } else if (i === 4){
-                    //没有分好路由
-                    this.$router.push({name:'time',params:{id:this.recent_noumenons[p].id}});
+                    this.$router.push({name:'time_detail',params:{id:this.recent_noumenons[p].id}});
 
                 } else if (i === 5){
                     this.$router.push({name:'off_detail',params:{id:this.recent_noumenons[p].id}});

@@ -521,15 +521,15 @@
                     character_standard_name: '',
                     character_id: '',
                     selected_type_name: {
-                        item_1_id: 0,
+                        item_1_id: null,
                         chinese_name: ''
                     },
                     selected_action: {
-                        item_1_id: 0,
+                        item_1_id: null,
                         chinese_name: ''
                     },
                     selected_confirm: {
-                        item_1_id: 0,
+                        item_1_id: null,
                         chinese_name: ''
                     },
                     explain: ''
@@ -562,15 +562,15 @@
                     character_standard_name: '',
                     character_id: '',
                     selected_type_name: {
-                        item_1_id: 0,
+                        item_1_id: null,
                         chinese_name: ''
                     },
                     selected_action: {
-                        item_1_id: 0,
+                        item_1_id: null,
                         chinese_name: ''
                     },
                     selected_confirm: {
-                        item_1_id: 0,
+                        item_1_id: null,
                         chinese_name: ''
                     },
                     explain: ''
