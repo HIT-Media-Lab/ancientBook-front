@@ -1,46 +1,51 @@
-`<template>
+<!--我的古籍页面-->
+<template>
     <div class="all">
         <recent_title class="j-mybook-bar" :title="this.title"></recent_title>
         <div class="j-mybook">
             <p class="j-mybook-recent-name">最近</p>
             <div class="j-mybook-recent-img">
                 <div class="j-mybook-recent-div" v-for="item in recent_mybook">
-                    <img :id = "item.ancient_book_id" class="j-mybook-recent-img1" @click="go_to_bookinfo(item.ancient_book_id)">
-                    <p class="j-mybook-p" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
+                    <img  :id = "item.ancient_book_id" class="j-mybook-recent-img1 all-link" @click="go_to_bookinfo(item.ancient_book_id)">
+                    <p class="j-mybook-p all-link" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
                 </div>
             </div>
             <p class="j-mybook-recent-name">已上传</p>
             <div class="j-mybook-al-img">
                 <div class="j-mybook-recent-div" v-for="(item,index) in al_up_book">
                     <div v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
+                        <!--封面悬浮出现的两个图标-->
                         <div class="show-edit1">
-                            <img style="margin-left: 60px" src="../../../assets/img/picture-button/white-pen.png" @click="">
-                            <img src="../../../assets/img/picture-button/white-cross.png" @click="delete_book(item.ancient_book_id)">
+                            <img class="j-pen all-link" src="../../../assets/img/picture-button/white-pen.png" @click="go_to_edit_books(item.ancient_book_id)">
+                            <img class="all-link" src="../../../assets/img/picture-button/white-cross.png" @click="delete_book(item.ancient_book_id)">
                         </div>
-                        <img :id = "item.ancient_book_id + 'alup'" class="j-mybook-recent-img1" @click="go_to_bookinfo(item.ancient_book_id)">
+                        <img :id = "item.ancient_book_id + 'alup'" class="j-mybook-recent-img1 all-link" @click="go_to_bookinfo(item.ancient_book_id)">
                     </div>
-                    <p class="j-mybook-p" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
+                    <p class="j-mybook-p all-link" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
                 </div>
+                <!--获取更多古籍按钮-->
                 <div class="j-mybook-morelink" v-show="show_more1">
-                    <span class="j-mybook-more" @click="go_to_more_upbook">更多</span>
-                    <img src="../../../assets/img/picture-button/more_logo.png" @click="go_to_more_upbook">
+                    <span class="j-mybook-more all-link" @click="go_to_more_upbook">更多</span>
+                    <img class="all-link" src="../../../assets/img/picture-button/more_logo.png" @click="go_to_more_upbook">
                 </div>
             </div>
             <p class="j-mybook-recent-name">私密古籍</p>
             <div class="j-mybook-al-img">
                 <div class="j-mybook-recent-div" v-for="(item,index) in private_book">
                     <div v-on:mouseover="show_edit2(index)" v-on:mouseout="shut_edit2(index)">
+                        <!--封面悬浮出现的两个图标-->
                         <div class="show-edit2">
-                            <img style="margin-left: 60px" src="../../../assets/img/picture-button/white-pen.png" @click="">
-                            <img src="../../../assets/img/picture-button/white-cross.png" @click="delete_book(item.ancient_book_id)">
+                            <img class="j-pen all-link" src="../../../assets/img/picture-button/white-pen.png" @click="go_to_edit_books(item.ancient_book_id)">
+                            <img class="all-link" src="../../../assets/img/picture-button/white-cross.png" @click="delete_book(item.ancient_book_id)">
                         </div>
-                        <img :id = "item.ancient_book_id + 's'" class="j-mybook-recent-img1" @click="go_to_bookinfo(item.ancient_book_id)">
+                        <img :id = "item.ancient_book_id + 's'" class="j-mybook-recent-img1 all-link" @click="go_to_bookinfo(item.ancient_book_id)">
                     </div>
-                    <p class="j-mybook-p" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
+                    <p class="j-mybook-p all-link" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
                 </div>
+                <!--获取更多古籍按钮-->
                 <div class="j-mybook-morelink" v-show="show_more2">
-                    <span class="j-mybook-more" @click="go_to_more_privatebook">更多</span>
-                    <img src="../../../assets/img/picture-button/more_logo.png"  @click="go_to_more_privatebook">
+                    <span class="j-mybook-more all-link" @click="go_to_more_privatebook">更多</span>
+                    <img class="all-link" src="../../../assets/img/picture-button/more_logo.png"  @click="go_to_more_privatebook">
                 </div>
             </div>
         </div>
@@ -55,6 +60,9 @@
             recent_title
         },
         created(){
+            /**
+             *获取最近古籍四本，已上传古籍三本，私密古籍三本
+             */
             this.recent_mybook = [];
             this.al_up_book = [];
             this.private_book = [];
@@ -87,6 +95,9 @@
             }
         },
         methods: {
+            /**
+             *显示和隐藏封面图标
+             */
             show_edit1(index){
                 document.getElementsByClassName('show-edit1')[index].style.opacity = 0.9;
             },
@@ -99,9 +110,12 @@
             shut_edit2(index){
                 document.getElementsByClassName('show-edit2')[index].style.opacity = 0;
             },
+            /**
+             *跳转到古籍详情页面
+             */
             go_to_bookinfo(id){
                 this.$route.params.ancient_book_id = id;
-                this.$router.push({name: 'book_info', params: this.$route.params});
+                this.$router.push({name: 'book_varieties', params: this.$route.params});
             },
             go_to_more_privatebook(){
                 this.$route.params.pageId = 1;
@@ -130,6 +144,9 @@
                     this.http_json(item, 'get', item, this.success_page2, this.recbook_fail);
                 }
             },
+            /**
+             *根据返回的书的数量，决定是否显示更多按钮
+             */
             private_get_success(response){
                 this.private_book = response.body.content;
                 if (response.body.content.length == 3){
@@ -142,6 +159,9 @@
                     this.http_json(item, 'get', item, this.success_page3, this.recbook_fail);
                 }
             },
+            /**
+             *通过id附上图片
+             */
             success_page1(response){
                 let picture_id_url1 = this.picture_url + '?page_id=' + response.body.id;
                 document.getElementById(this.recent_mybook[this.i].ancient_book_id).setAttribute("src", picture_id_url1);
@@ -162,6 +182,16 @@
             recbook_fail(){
 
             },
+            /**
+             * 编辑古籍
+             */
+            go_to_edit_books(id){
+                this.$route.params.ancient_book_id = id;
+                this.$router.push({name: 'varieties_modify', params: this.$route.params})
+            },
+            /**
+             *删除古籍
+             */
             delete_book(id){
                 this.params.id = id;
                 this.http_json(this.delete_url, 'post', this.params, this.delete_book_success, this.delete_book_fail)
@@ -228,6 +258,9 @@
         font-style:normal;
         font-size:18px;
         color: black;
+    }
+    .j-pen{
+        margin-left: 60px
     }
     .j-mybook-morelink{
         height: 30px;

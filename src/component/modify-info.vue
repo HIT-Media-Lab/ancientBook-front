@@ -3,27 +3,27 @@
     <div class="j-modify">
         <!--用户信息页面-->
         <div>
-            <div style="width: 180px;margin: 0 auto">
+            <div class="j-modify1">
                 <img src="../assets/img/picture-button/avatar.png" class="j-userhead" >
                 <span class="j-simple-user"  v-model="name">{{name}}</span>
             </div>
-            <p class="j-modify-edit" @click="show_edit">编辑</p>
+            <button class="j-modify-edit" @click="show_edit">编辑</button>
             <div  class="j-user-line">
                 <img src="../assets/img/no-use-picture/ink-line-long.png">
             </div>
         </div>
         <div class="j-modify-info">
             <p>
-                <span style="margin-left: 90px">用户类型：</span>
-                <span style="margin-left: 10px" v-model="type">{{type}}</span>
+                <span class="j-modify2">用户类型：</span>
+                <span class="j-modify3" v-model="type">{{type}}</span>
             </p>
-            <p style="margin: 15px auto">
-                <span style="margin-left: 100px">账&nbsp&nbsp&nbsp号：</span>
-                <span style="margin-left: 10px" v-model="account">{{account}}</span>
+            <p class="j-modify4">
+                <span class="j-modify5">账&nbsp&nbsp&nbsp号：</span>
+                <span class="j-modify6" v-model="account">{{account}}</span>
             </p>
-            <p style="margin: 15px auto">
-                <span style="margin-left: 110px">用户名：</span>
-                <span style="margin-left: 10px" v-model="name">{{name}}</span>
+            <p class="j-modify4">
+                <span class="j-modify7">用户名：</span>
+                <span class="j-modify8" v-model="name">{{name}}</span>
             </p>
         </div>
         <!--修改用户信息模态框-->
@@ -309,5 +309,29 @@
     .warnborder {
         border: 2px solid red;
     }
-
+    .j-modify1{
+        width: 180px;
+        margin: 0 auto
+    }
+    .j-modify2{
+        margin-left: 90px
+    }
+    .j-modify3{
+        margin-left: 10px
+    }
+    .j-modify4{
+        margin: 15px auto
+    }
+    .j-modify5{
+        margin-left: 100px
+    }
+    .j-modify6{
+        margin-left: 10px
+    }
+    .j-modify7{
+        margin-left: 110px
+    }
+    .j-modify8{
+        margin-left: 10px
+    }
 </style>

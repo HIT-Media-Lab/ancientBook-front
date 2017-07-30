@@ -1,3 +1,4 @@
+<!--本体标记页面-->
 <template>
     <div class="all">
         <recent_title class="j-mark-bar" :title="'我的贡献/本体标记' + '（共' + this.count + '条）'">
@@ -23,9 +24,9 @@
                 </thead>
                 <tbody>
                 <tr v-for="item in content"> <!--v-for循环数据里的数组数据-->
-                    <td class="j-mark-table" style="width: 200px" :title="item.standard_name" @click="go_to_noumenon(item.noumenon_id,item.noumenon_type)">{{item.standard_name}} {{item.noumenon_type}}</td>
-                    <td class="j-mark-table" style="width: 400px" :title="item.standard_name" @click="go_to_book(item.page_id)">{{item.target}}</td>
-                    <td class="j-mark-table" style="width: 200px" :title="item.standard_name">{{item.time}}</td>
+                    <td class="j-mark-table all-link" style="width: 200px" :title="item.standard_name" @click="go_to_noumenon(item.noumenon_id,item.noumenon_type)">{{item.standard_name}} {{item.noumenon_type}}</td>
+                    <td class="j-mark-table all-link" style="width: 400px" :title="item.standard_name" @click="go_to_book(item.page_id)">{{item.target}}</td>
+                    <td class="j-mark-table " style="width: 200px" :title="item.standard_name">{{item.time}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -44,6 +45,9 @@
             page_button
         },
         created(){
+            /**
+             *根据不同本体获得本体标记列表
+             */
             this.content = [];
             this.sort_name = this.$route.params.content;
             if (this.$route.params.content == '全部本体'){
@@ -81,6 +85,9 @@
             }
         },
         methods:{
+            /**
+             *接收数据，本地储存
+             */
             mark_all_success(response){
                 this.total_page = response.body.total_page;
                 this.count = response.body.count;
@@ -115,6 +122,9 @@
             mark_all_fail(){
 
             },
+            /**
+             *  根据选择的不同选项，跳转不同本体的路由
+             */
             go_to_sort(){
                 this.content = [];
                 console.log(this.sort_name);
@@ -210,6 +220,9 @@
                     })
                 }
             },
+            /**
+             *跳转到本体详情
+             */
             go_to_noumenon(id, type){
                 this.$route.params.nouId = id;
                 if (type == '【人物】'){

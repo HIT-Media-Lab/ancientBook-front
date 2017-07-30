@@ -11,13 +11,13 @@
             <input placeholder=" 请输入关键字搜索" class="search-input" v-model="sort_box" v-on:keydown.enter="search1">
             <button class="search-btn" @click="search1">搜 索</button>
             <img src="../assets/img/picture-button/avatar.png" class="user-img" @click="show_login">
-            <span class="user-name" @click="show_login" v-model="user_name">{{user_name}}</span>
+            <button class="user-name" @click="show_login" v-model="user_name">{{user_name}}</button>
             <div class="down-box"  v-show="sort_box.length!=0">
                 <ul>
-                    <li class="sort-box1" :title="sort_box" @click="search1()" style="color: #0f0f0f">
+                    <li class="sort-box1 all-link" :title="sort_box" @click="search1()">
                         搜古籍：{{sort_box}}
                     </li>
-                    <li class="sort-box2" :title="sort_box" @click="search2()" style="color: #0f0f0f">
+                    <li class="sort-box2 all-link" :title="sort_box" @click="search2()">
                         搜本体：{{sort_box}}
                     </li>
                 </ul>
@@ -43,7 +43,7 @@
                     <div class="code">
                         <input type="text" placeholder="请输入验证码" class="verification-code-input" v-model="v">
                         <img src="" id="v_picture" class="code-img" alt="验证码">
-                        <span class="cover-code" @click="coverCode()" >换一张</span>
+                        <button class="cover-code" @click="coverCode()" >换一张</button>
                     </div>
                     <div class="auto">
                         <input type="checkbox" id="save-password"  class="save-password-checkbox" @click="auto()">
@@ -296,7 +296,7 @@
     .user-name{
         padding: 5px;
         width: auto;
-        height: 13px;
+        height: 40px;
         font-weight:700;
         font-style:normal;
         font-size:20px;
@@ -332,8 +332,7 @@
         height: 49px;
     }
     .sort-box1{
-        /*display: inline;*/
-
+        color: #0f0f0f;
         font-size: 14px;
         margin-left: 10px;
         list-style: none;
@@ -343,6 +342,7 @@
         text-overflow:ellipsis;
     }
     .sort-box2{
+        color: #0f0f0f;
         font-size: 14px;
         margin-left: 10px;
         list-style: none;

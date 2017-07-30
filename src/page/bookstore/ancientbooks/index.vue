@@ -12,12 +12,12 @@
 
         <div class="width950 center">
             <h3 style="display:inline-block" class="float-left">古籍规范名称：</h3>
-            <h4 id="bookName" style="display:inline-block" class="float-left ry-book-name">{{first_layer_info.type_name}}</h4>
+            <h4 id="bookName" style="display:inline-block" class="float-left ry-book-name">{{book_all_info.name}}</h4>
             <div class="ry-4layers" style="display:inline-block">
-                <!--<p>{{item.book_info1}}</p>-->
-                <!--<p>{{item.book_info2}}</p>-->
-                <!--<p>{{item.book_info3}}</p>-->
-                <!--<p>{{item.book_info4}}</p>-->
+                <p>{{book_info1}}</p>
+                <p>{{book_info2}}</p>
+                <p>{{book_info3}}</p>
+                <p>{{book_info4}}</p>
             </div>
         </div>
 
@@ -69,18 +69,12 @@
                 book_info3:'',
                 book_info4:'',
 
-                varieties_item : {},
-                edition_item : {},
-                impression_item : {},
-                copy_item : {},
             }
         },
 
         created : function () {
             this.get_ancient_book_id();
             this.get_ancient_books_all_info();
-            this.get_three_layers_info();
-            this.get_first_layer_info();
             this.$store.commit("save_book_all_info",this.book_all_info);
             this.$store.commit("save_first_layer_info",this.first_layer_info);
             this.$store.commit("save_three_layers_info",this.three_layers_info);
@@ -128,6 +122,14 @@
                         this.book_info3 = '【' + this.book_info_split[3];
                         this.book_info4 = '【' + this.book_info_split[4];
                     }
+
+                    var get_obj1 = {};
+                    let url1 = '/ancient_books/get_literature_by_id.action?id=' + this.book_all_info.literature_id;
+                    this.http_json (url1 , 'get' , get_obj1 , this.success_get_first_layer_info , this.fail_get_first_layer_info);
+
+                    var get_obj = {};
+                    let url = '/ancient_books/get_ancient_book_info_by_id.action?id=' + this.book_all_info.ancient_book_info_id;
+                    this.http_json (url , 'get' , get_obj , this.success_get_three_layers_info , this.fail_get_three_layers_info);
                 }
             },
 
@@ -139,12 +141,6 @@
             /**
              * get请求得到第一层信息
              */
-            get_first_layer_info() {
-                var get_obj = {};
-                let url = '/ancient_books/get_ancient_books_all_info_by_id.action?ancient_book_id=' + this.ancient_book_id;
-                this.http_json (url , 'get' , get_obj , this.success_get_first_layer_info , this.fail_get_first_layer_info);
-            },
-
             success_get_first_layer_info(response) {
                 console.log ("success get first layer info");
                 if (response.body.length === 0) {
@@ -163,15 +159,9 @@
             /**
              * get请求得到另外三层信息
              */
-            get_three_layers_info() {
-                var get_obj = {};
-                let url = '/ancient_books/get_ancient_book_info_by_id.action?id=' + this.book_all_info.ancient_book_info_id;
-                this.http_json (url , 'get' , get_obj , this.success_get_three_layers_info , this.fail_get_three_layers_info);
-            },
-
             success_get_three_layers_info(response) {
                 console.log ("success get 3 layers info");
-                if (response.body.length === 0) {
+                if (response.body === '') {
                     console.log ("返回空对象");
                 }
                 else{

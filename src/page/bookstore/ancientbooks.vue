@@ -7,7 +7,7 @@
             <span v-model="shu">{{shu}}</span>
         </p>
         <div class="j-bls-book1">
-            <a style="color: #8a6d3b;" v-for="(item,index) in books">
+            <a class="j-bls-book-link" v-for="(item,index) in books">
                 <p class="j-bls-bookname" @click="go_to_book(item.ancient_book_id)">{{index+1}}、{{item.standard_name}}</p>
             </a>
         </div>
@@ -68,7 +68,7 @@
             },
             go_to_book(id){
                 this.$route.params.ancient_book_id = id;
-                this.$router.push({name: 'book_info', params: this.$route.params});
+                this.$router.push({name: 'book_varieties', params: this.$route.params});
             }
         }
     }
@@ -89,10 +89,8 @@
         margin-left: 10px;
         margin-top: 35px;
     }
-    .j-bls-book2{
-        display: inline-block;
-        margin-left: 180px;
-        margin-top: 35px;
+    .j-bls-book-link{
+        color: #8a6d3b;
     }
     .j-bls-bookname{
         margin-bottom: 5px;

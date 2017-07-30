@@ -6,3 +6,4 @@
 - myoffer：我的贡献的相关页面
 - upload：上传的相关页面
 - index：用户入口页面
+- user_index: 用户各种数据页面入口

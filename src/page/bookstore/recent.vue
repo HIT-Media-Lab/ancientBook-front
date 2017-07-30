@@ -3,8 +3,8 @@
     <div class="j-recent">
         <recent_title class="j-recent-bar" :title="this.title"></recent_title>
         <div v-for="item in recent_book" class="j-picture-name" >
-            <img :id="item.id" class="j-picture" alt="最近古籍" @click="push_success(item.id)" >
-            <p class="j-pic-p" @click="push_success(item.id)" :title="item.name">{{item.name}}</p>
+            <img :id="item.id" class="j-picture all-link" alt="最近古籍" @click="push_success(item.id)" >
+            <p class="j-pic-p all-link" @click="push_success(item.id)" :title="item.name">{{item.name}}</p>
         </div>
     </div>
 </template>
@@ -75,7 +75,7 @@
              */
             push_success(id){
                 this.$route.params.ancient_book_id = id;
-                this.$router.push({name: 'book_info', params: this.$route.params});
+                this.$router.push({name: 'book_varieties', params: this.$route.params});
             }
         }
     }

@@ -12,10 +12,10 @@
             </div>
             <div class="drop-search-login" @click="hide" v-show="sort_box.length!=0">
                 <ul>
-                    <li class="sort-box1-login" :title="sort_box" @click="search1()" style="color: #0f0f0f">
+                    <li class="sort-box1-login all-link" :title="sort_box" @click="search1()">
                         搜古籍：{{sort_box}}
                     </li>
-                    <li class="sort-box2-login" :title="sort_box" @click="search2()" style="color: #0f0f0f">
+                    <li class="sort-box2-login all-link" :title="sort_box" @click="search2()">
                         搜本体：{{sort_box}}
                     </li>
                 </ul>
@@ -181,6 +181,7 @@ import store from '../../../store'
         background-size: 100%;
     }
     .sort-box1-login{
+        color: #0f0f0f;
         padding-top: 10px;
         list-style: none;
         font-size: 18px;
@@ -189,6 +190,7 @@ import store from '../../../store'
         text-overflow:ellipsis;
     }
     .sort-box2-login{
+        color: #0f0f0f;
         font-size: 18px;
         padding-top: 10px;
         list-style: none;

@@ -1,3 +1,4 @@
+<!--我的贡献，我的古籍，我的收藏，上传的父组件-->
 <template>
     <div>
         <user_bar></user_bar>

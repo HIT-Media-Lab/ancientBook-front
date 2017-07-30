@@ -1,537 +1,541 @@
 <template>
 
-    <!--品种层-->
-    <div class="layer-input">
-        <div class="form-center">
-            <div>
-                <div class="row">
-                    <div class="col-md-2">
-                        <span class="star">*</span>
-                        <label>书名:</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input id="bookName" v-model="varieties_item.type_name">
-                    </div>
+    <div>
 
-                    <label class="col-md-2">别名:</label>
-                    <div class="col-md-4">
-                        <input v-model="varieties_item.type_other_name" placeholder="多值属性用逗号隔开">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <label class="col-md-2">存佚类型:</label>
-                    <div class="col-md-4">
-                        <select id="ry-type-save">
-                            <option>不详</option>
-                            <option>存</option>
-                            <option>佚</option>
-                            <option>残</option>
-                            <option>疑</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <label class="col-md-2">品种级别：</label>
-                    <div class="col-md-4">
-                        <select id="ry-type-level">
-                            <option>不详</option>
-                            <option>丛书总目</option>
-                            <option>丛书子目</option>
-                            <option>单行本</option>
-                            <option>合订本总目</option>
-                            <option>合订本子目</option>
-                        </select>
-                    </div>
-
-                    <label class="col-md-2">英译：</label>
-                    <div class="col-md-4">
-                        <input v-model="varieties_item.english">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <label class="col-md-2">提要信息：</label>
-                    <div class="col-md-4">
-                        <input id="ry-input-info" v-model="varieties_item.type_summary">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <label class="col-md-2">标准分类：</label>
-                    <div class="col-md-3">
-                        <select id="ry-select-b" @change="">
-                            <option v-for="item in menu_eight">{{item.chinese_name}}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <select id="ry-select-l" @click="get_lei_item()" @change="">
-                            <option v-for="item in lei_items">{{item.chinese_name}}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <select id="ry-select-s" @click="get_shu_item()">
-                            <option v-for="item in shu_items">{{item.chinese_name}}</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <img src="../../../../assets/img/no-use-picture/ink-line.png" height="6" width="843"/>
-            </div>
-
-            <div class="form-variety" v-for="(item,index) in varieties_item.varieties_responsibility">
-                <div class="row">
-                    <div class="col-md-2 float-right">
-                        <button id="btn-add-copy" class="ry-btn-add" @click="add_new_box(index)" v-show="varieties_item.varieties_responsibility[index].value_add">添加</button>
-                    </div>
-                    <div class="col-md-2 float-right">
-                        <button id="btn-delete-copy" class="ry-btn-del" @click="del_new_box(index)" v-show="varieties_item.varieties_responsibility[index].value_del">删除</button>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-2">
-                        <span class="star"></span>
-                        <label>责任开始时间:</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input readonly @click="open_birth()" v-model="item.begin_time">
-                    </div>
-
-                    <div class="col-md-2">
-                        <span class="star"></span>
-                        <label>责任结束时间:</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input readonly @click="open_dead()" v-model="item.end_time">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <label class="col-md-2">责任地点：</label>
-                    <div class="col-md-4">
-                        <input readonly @click="open_location()" v-model="item.location">
-                    </div>
-
-                    <div class="col-md-2">
-                        <span class="star"></span>
-                        <label>责任者名称:</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input readonly @click="open_character()" v-model="item.person">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-2">
-                        <span class="star"></span>
-                        <label>责任者类型：</label>
-                    </div>
-                    <div class="col-md-4">
-                        <select class="ry-v-type">
-                            <option>不详</option>
-                            <option>责任人</option>
-                            <option>责任机构</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-2">
-                        <span class="star"></span>
-                        <label>责任行为：</label>
-                    </div>
-                    <div class="col-md-4">
-                        <select class="ry-v-action">
-                            <option v-for="item in menu_nine">{{item.chinese_name}}</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-2">
-                        <span class="star"></span>
-                        <label>确定性：</label>
-                    </div>
-                    <div class="col-md-4">
-                        <select class="ry-v-confirm">
-                            <option>不详</option>
-                            <option>确定</option>
-                            <option>题</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <label class="col-md-2">责任说明：</label>
-                    <div class="col-md-4">
-                        <input v-model="item.explain" id="ry-input-responsibility">
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <img src="../../../../assets/img/no-use-picture/ink-line.png" height="6" width="843"/>
-            </div>
-
-            <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></time_modal>
-            <time_modal :time_modal="this.time_modal_2" v-on:success_time="dead_time" v-on:close_modal="close_dead()"></time_modal>
-            <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal" :noumenon_number="7" v-on:close_modal="close_location" v-on:add_noumenon_relations="add_location"></search_modal>
-            <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal" :noumenon_number="1" :repeat_arr="[]" v-on:close_modal="close_character" v-on:add_noumenon_relations="add_character"></search_modal>
+        <!--模块名称-->
+        <div class="width950 center">
+            <h3 style="display:inline-block">2上传图文</h3>
+            <button class="float-right ry-btn-cancel-upload" @click="cancel_upload">取消上传</button>
         </div>
+
+        <div class="width1000 center">
+            <img src="../../../../assets/img/no-use-picture/ink-line-long.png" height="7" width="974"/>
+        </div>
+
+        <div class="width600 center">
+            <div id="upload2-box" class="ry-upload-two" v-for="(item,index) in upload_file">
+                <span>册号:</span>
+                <input class="ry-input-upload2" v-model="item.book_num">
+                <button class="ry-btn-add-book" @click="add_new_book(index)" v-show="upload_file[index].value">添加新册</button>
+                <br>
+                <span>册名:</span>
+                <input class="ry-input-upload2" v-model="item.book_name">
+                <div class="width800">
+                    <a href="javascript:;" class="ry-file-picture ry-white">上传图片
+                        <input id="pic-name" type="file" @change="onFileChange" multiple accept="image/jpeg" name="picture">
+                    </a>
+                    <a href="javascript:;" class="ry-file-text ry-white">上传文本
+                        <input id="text-name" type="file" @change="onTextChange" multiple accept="text/plain" name="text">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="width600 center">
+            <p>请严格遵守命名规范上传文件，并保证对应图文文件的名称一致（可以仅上传图片文件）</p>
+            <p>命名规范：“卷-页”，如“卷001-001.jpg”，“卷001-001.txt”</p>
+            <p>若分AB页：“卷-页-A/B”，如“卷001-001-A.jpg”，“卷001-001-B.jpg”，“卷001-001-A.txt”，“卷001-001-B.txt”</p>
+        </div>
+
+        <div class="width600 center">
+            <button class="ry-btn-upload2-next float-right" @click="next_page()">下一步</button>
+            <button class="ry-btn-upload2-last float-right" @click="last_page()">上一步</button>
+        </div>
+
+        <modal :show_modal="this.modal" v-on:fireclose="this.close_modal" class="ry-upload-modal">
+            <div slot="header" class="ry-upload-modal-header">
+                <span>上传图片</span>
+            </div>
+
+            <div slot="body" class="zxw-time-body" style="text-align: center">
+                <div class="row">
+                    <span class="col-md-5">文件名</span>
+                    <span class="col-md-3">大小</span>
+                    <span class="col-md-2">上传至</span>
+                    <span class="col-md-2">状态</span>
+                </div>
+                <img src="../../../../assets/img/no-use-picture/ink-line.png" height="1" width="750"/>
+                <div class="row" v-for="item in upload_file[index].images">
+                    <span class="col-md-5"><img src="../../../../assets/img/no-use-picture/1.png" height="40" width="30"/>{{item.pic_name}}</span>
+                    <span class="col-md-3">{{item.pic_size}}KB</span>
+                    <span class="col-md-2">册1</span>
+                    <span class="col-md-2"><img src="../../../../assets/img/no-use-picture/correct.png" height="25" width="26"/>已上传</span>
+                    <img src="../../../../assets/img/no-use-picture/ink-line.png" height="1" width="750"/>
+                </div>
+            </div>
+
+            <div slot="footer" class="zxw-search-footer">
+                <button class="zxw-prebtn zxw-search-create" @click="close_modal">继续上传</button>
+                <button class="zxwnoumenom-button zxw-search-cancel" @click="close_modal">完成</button>
+            </div>
+        </modal>
+
     </div>
 
 </template>
 
 <script>
-    import time_modal from '../../../../component/time-modal.vue';
-    import search_modal from '../../../../component/search_noumenon.vue';
+    import modal from '../../../../component/modal.vue';
     export default{
         components:{
-            time_modal,
-            search_modal,
+            modal,
         },
 
         data() {
             return{
                 index : 0,
-                search_person:'/ancient_books/get_person_list_by_name.action',
-                search_location:'/ancient_books/get_location_list_by_name.action',
-                time_modal_1 : false,
-                time_modal_2 : false,
-                location_modal : false,
-                character_modal : false,
-                get_lei_items_obj : {},
-                get_shu_items_obj : {},
-                lei_items : [],
-                shu_items : [],
-                get_menu_eight_obj : {},
-                menu_eight : [],
-                get_menu_nine_obj : {},
-                menu_nine : [],
-                varieties_item : {},
+                modal : false,
+                text_name : [],
+                upload_file : [{
+                    value : true,
+                    book_name : '',
+                    book_num : '',
+                    images : [],
+                    texts : [],
+                }],
             }
         },
 
         created : function () {
-            this.get_menu_eight();
-            this.get_menu_nine();
-            this.varieties_item = this.$store.getters.get_varieties_item;
+            this.index = this.$store.getters.get_upload_book_index;
+            this.upload_file = this.$store.getters.get_upload_file;
+            this.text_name = this.$store.getters.get_text_name;
         },
 
         mounted : function () {
-            this.default_selections_variety();
+
         },
 
-        beforeRouteLeave (to, from, next) {
-            this.varieties_item.varieties_responsibility[0].action_value = document.getElementsByClassName("ry-v-action")[0].options[document.getElementsByClassName("ry-v-action")[0].selectedIndex].text;
-            this.$store.commit("get_varieties_contents",this.varieties_item);
-            this.selections_variety();
+        beforeRouteLeave(to, from, next) {
+            this.$store.commit("get_upload_file",this.upload_file);
+            this.$store.commit("get_text_name",this.text_name);
+            this.$store.commit("get_upload_book_index",this.index);
             next();
         },
 
         methods : {
             /**
-             * 获得责任数组指数
+             * 上传进度模态框
              */
-            get_index() {
-                var divs = document.getElementsByClassName("form-variety");
-                for (var i = 0; i < divs.length; i++) {
-                    divs[i].setAttribute("data-i", i);
+            close_modal() {
+                this.modal = false
+            },
+
+
+            /**
+             * 添加上传图片
+             */
+            onFileChange(e) {
+                var files = e.target.files || e.dataTransfer.files;
+                if (!files.length)return;
+                this.createImage(files,this.index);
+                console.log(this.upload_file[this.index].images);
+                this.check_picture_name();
+            },
+
+            createImage(file,index) {
+                if (typeof FileReader === 'undefined') {
+                    alert('您的浏览器不支持图片上传，请升级您的浏览器');
+                    return false;
                 }
-                this.index = event.currentTarget.parentNode.parentNode.parentNode.getAttribute("data-i");
+                var vm = this;
+                var leng = file.length;
+                for (var i = 0; i < leng; i++) {
+                    var name = file[i].name;
+                    var a = file[i].size;
+                    var size = a/1000;
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file[i]);
+                    reader.onload = function(e) {
+                        vm.upload_file[index].images.push({
+                            show:true,
+                            picture:e.target.result,
+                            pic_name:name,
+                            pic_size:size
+                        });
+                    };
+                }
+            },
+
+            check_picture_name() {
+                var key = 0;
+                for (var i = 0; i < this.upload_file[this.index].images.length; i++) {
+                    var name = this.upload_file[this.index].images[i].pic_name;
+                    var one = name.charAt(0);
+                    var two = name.charAt(1);
+                    var three = name.charAt(2);
+                    var four = name.charAt(3);
+                    var five = name.charAt(4);
+                    var six = name.charAt(5);
+                    var seven = name.charAt(6);
+                    var eight = name.charAt(7);
+                    var first = '卷';
+                    var second =  /^[0-9]+.?[0-9]*$/;
+                    var third =  /^[0-9]+.?[0-9]*$/;
+                    var fourth =  /^[0-9]+.?[0-9]*$/;
+                    var fifth =  '-';
+                    var sixth =  /^[0-9]+.?[0-9]*$/;
+                    var seventh =  /^[0-9]+.?[0-9]*$/;
+                    var eighth =  /^[0-9]+.?[0-9]*$/;
+                    if (one != first) {
+                        alert("上传文件名不符合规范，第一个字符应为“卷”，请重新上传");
+                        this.upload_file[this.index].images = [];
+                        key = 1;
+                        break;
+                    }
+                    else if (!second.test(two)) {
+                        alert("上传文件名不符合规范，第二个字符应为数字，请重新上传");
+                        this.upload_file[this.index].images = [];
+                        key = 1;
+                        break;
+                    }
+                    else if (!third.test(three)) {
+                        alert("上传文件名不符合规范，第三个字符应为数字，请重新上传");
+                        this.upload_file[this.index].images = [];
+                        key = 1;
+                        break;
+                    }
+                    else if (!fourth.test(four)) {
+                        alert("上传文件名不符合规范，第四个字符应为数字，请重新上传");
+                        this.upload_file[this.index].images = [];
+                        key = 1;
+                        break;
+                    }
+                    else if (five != fifth) {
+                        alert("上传文件名不符合规范，第五个字符应为“-”，请重新上传");
+                        this.upload_file[this.index].images = [];
+                        key = 1;
+                        break;
+                    }
+                    else if (!sixth.test(six)) {
+                        alert("上传文件名不符合规范，第六个字符应为数字，请重新上传");
+                        this.upload_file[this.index].images = [];
+                        key = 1;
+                        break;
+                    }
+                    else if (!seventh.test(seven)) {
+                        alert("上传文件名不符合规范，第七个字符应为数字，请重新上传");
+                        this.upload_file[this.index].images = [];
+                        key = 1;
+                        break;
+                    }
+                    else if (!eighth.test(eight)) {
+                        alert("上传文件名不符合规范，第八个字符应为数字，请重新上传");
+                        this.upload_file[this.index].images = [];
+                        key = 1;
+                        break;
+                    }
+                }
+                if (key == 0) {
+                    this.modal = true;
+                }
             },
 
 
             /**
-             * 添加责任信息
+             * 上传文本文件
              */
-            add_new_box(p) {
-                this.varieties_item.varieties_responsibility[p].value_add = false;
-                this.varieties_item.varieties_responsibility[p].value_del = false;
-                this.varieties_item.varieties_responsibility.push({
-                    value_add : true,
-                    value_del : true,
-                    location : '',
-                    location_id : '',
-                    person : '',
-                    person_id : '',
-                    begin_time : '',
-                    begin_time_id : '',
-                    end_time : '',
-                    end_time_id :'',
-                    action : '',
-                    action_value : '',
-                    explain : '',
-                    confirm : '',
-                    type : '',
-                    level : 1,
-                });
+            onTextChange(e) {
+                var files = e.target.files || e.dataTransfer.files;
+                if (!files.length)return;
+                this.createText(files,this.index);
+                var obj = document.getElementById("text-name");
+                for(var i = 0; i < obj.files.length; i++) {
+                    var temp = obj.files[i].name;
+                    this.text_name.push(temp);
+                }
+                this.check_text_name();
+            },
+
+            createText(file,index) {
+                var vm = this;
+                var leng = file.length;
+                for (var i = 0; i < leng; i++) {
+                    var　name_check = 0;
+                    var reader = new FileReader();
+                    reader.readAsText(file[i],'gbk');
+
+                    var name = file[i].name;
+                    var first = name.charAt(1);
+                    var second = name.charAt(2);
+                    var third = name.charAt(3);
+                    var fourth = name .charAt(5);
+                    var fifth = name.charAt(6);
+                    var sixth = name.charAt(7);
+                    var text = first + second + third + fourth + fifth + sixth;
+                    var text_index = parseInt(text);
+
+                    for (var j = 0; j < vm.upload_file[index].images.length; j++) {
+                        var pic_name = vm.upload_file[index].images[j].pic_name;
+                        var one = pic_name.charAt(1);
+                        var two = pic_name.charAt(2);
+                        var three = pic_name.charAt(3);
+                        var four = pic_name .charAt(5);
+                        var five = pic_name.charAt(6);
+                        var six = pic_name.charAt(7);
+                        var pic = one + two + three + four + five + six;
+                        var pic_index = parseInt(pic);
+                        if (pic_index == text_index) {
+                            reader.onload = function(e) {
+                                vm.upload_file[index].texts.push(e.target.result);
+                            };
+                            name_check = 1;
+                            break;
+                        }
+                        else if (pic_index < text_index) {
+                            reader.onload = function(e) {
+                                vm.upload_file[index].texts.push(null);
+                            };
+                        }
+                    }
+
+                    if (name_check == 0) {
+                        alert("您上传的文本文件中含有没有与其对应的图片文件，不能上传");
+                        break;
+                    }
+                }
+            },
+
+            check_text_name() {
+                for (var i = 0; i < this.text_name.length; i ++) {
+                    var name = this.text_name[i];
+                    var one = name.charAt(0);
+                    var two = name.charAt(1);
+                    var three = name.charAt(2);
+                    var four = name.charAt(3);
+                    var five = name.charAt(4);
+                    var six = name.charAt(5);
+                    var seven = name.charAt(6);
+                    var eight = name.charAt(7);
+                    var first = '卷';
+                    var second =  /^[0-9]+.?[0-9]*$/;
+                    var third =  /^[0-9]+.?[0-9]*$/;
+                    var fourth =  /^[0-9]+.?[0-9]*$/;
+                    var fifth =  '-';
+                    var sixth =  /^[0-9]+.?[0-9]*$/;
+                    var seventh =  /^[0-9]+.?[0-9]*$/;
+                    var eighth =  /^[0-9]+.?[0-9]*$/;
+                    if (one != first) {
+                        alert("上传文件名不符合规范，第一个字符应为“卷”，请重新上传");
+                        this.text_name = [];
+                        this.upload_file[this.index].texts = [];
+                        break;
+                    }
+                    else if (!second.test(two)) {
+                        alert("上传文件名不符合规范，第二个字符应为数字，请重新上传");
+                        this.text_name = [];
+                        this.upload_file[this.index].texts = [];
+                        break;
+                    }
+                    else if (!third.test(three)) {
+                        alert("上传文件名不符合规范，第三个字符应为数字，请重新上传");
+                        this.text_name = [];
+                        this.upload_file[this.index].texts = [];
+                        break;
+                    }
+                    else if (!fourth.test(four)) {
+                        alert("上传文件名不符合规范，第四个字符应为数字，请重新上传");
+                        this.text_name = [];
+                        this.upload_file[this.index].texts = [];
+                        break;
+                    }
+                    else if (five != fifth) {
+                        alert("上传文件名不符合规范，第五个字符应为“-”，请重新上传");
+                        this.text_name = [];
+                        this.upload_file[this.index].texts = [];
+                        break;
+                    }
+                    else if (!sixth.test(six)) {
+                        alert("上传文件名不符合规范，第六个字符应为数字，请重新上传");
+                        this.text_name = [];
+                        this.upload_file[this.index].texts = [];
+                        break;
+                    }
+                    else if (!seventh.test(seven)) {
+                        alert("上传文件名不符合规范，第七个字符应为数字，请重新上传");
+                        this.text_name = [];
+                        this.upload_file[this.index].texts = [];
+                        break;
+                    }
+                    else if (!eighth.test(eight)) {
+                        alert("上传文件名不符合规范，第八个字符应为数字，请重新上传");
+                        this.text_name = [];
+                        this.upload_file[this.index].texts = [];
+                        break;
+                    }
+                }
             },
 
 
             /**
-             * 删除责任信息
+             * 添加新册
              */
-            del_new_box(p) {
-                if (p == 1) {
-                    this.varieties_item.varieties_responsibility[p-1].value_add = true;
-                    this.varieties_item.varieties_responsibility[p-1].value_del = false;
+            add_new_book(p) {
+                if (this.upload_file[this.index].book_num == '') {
+                    alert("请填写册号")
+                }
+                else if (this.upload_file[this.index].book_name == '') {
+                    alert("请填写册名")
+                }
+                else if (this.upload_file[this.index].images.length == 0) {
+                    alert("请选择要上传的图片文件")
                 }
                 else{
-                    this.varieties_item.varieties_responsibility[p-1].value_add = true;
-                    this.varieties_item.varieties_responsibility[p-1].value_del = true;
-                }
-                this.varieties_item.varieties_responsibility.pop();
-            },
-
-
-            /**
-             * 责任开始时间
-             */
-            open_birth() {
-                this.get_index();
-                this.time_modal_1 = true;
-            },
-
-            birth_time(p) {
-                this.varieties_item.varieties_responsibility[this.index].begin_time_id = p.time_id;
-                this.varieties_item.varieties_responsibility[this.index].begin_time = p.standard_name;
-                this.close_birth();
-            },
-
-            close_birth() {
-                this.time_modal_1 = false;
-            },
-
-
-            /**
-             * 责任结束时间
-             */
-            open_dead() {
-                this.get_index();
-                this.time_modal_2 = true;
-            },
-
-            dead_time(q) {
-                this.varieties_item.varieties_responsibility[this.index].end_time_id = q.time_id;
-                this.varieties_item.varieties_responsibility[this.index].end_time = q.standard_name;
-                this.close_dead();
-            },
-
-            close_dead() {
-                this.time_modal_2 = false;
-            },
-
-
-            /**
-             * 责任地点
-             */
-            open_location() {
-                this.get_index();
-                this.location_modal = true;
-            },
-
-            add_location(p) {
-                this.varieties_item.varieties_responsibility[this.index].location_id = p.noumenon_id;
-                this.varieties_item.varieties_responsibility[this.index].location = p.standard_name;
-            },
-
-            close_location(){
-                this.location_modal = false;
-            },
-
-
-            /**
-             * 责任者名称
-             */
-            open_character(){
-                this.get_index();
-                this.character_modal = true;
-            },
-
-            add_character(p){
-                this.varieties_item.varieties_responsibility[this.index].person_id = p.noumenon_id;
-                this.varieties_item.varieties_responsibility[this.index].person = p.standard_name;
-            },
-
-            close_character(){
-                this.character_modal = false;
-            },
-
-
-            get_menu_nine() {
-                let url = '/ancient_books/get_menu_items.action?model_id=9&&item_1_id=0&&item_2_id=0';
-                this.http_json (url , 'get' , this.get_menu_nine_obj , this.success_get_menu_nine , this.fail_get_menu_nine);
-            },
-
-            success_get_menu_nine(response) {
-                console.log ("success get menu nine");
-                //将后端数据显示在前端页面里
-                if (response.body.length === 0) {
-                    console.log ("没有返回数组！");
-                }
-                else {
-                    for (var j = 0; j <= response.body.length-1; j++) {
-                        this.menu_nine.push({
-                            chinese_name: response.body[j].chinese_name
-                        });
-                    }
+                    this.upload_file[p].value = false;
+                    this.upload_file.push({
+                        value:true,
+                        book_name : '',
+                        book_num : '',
+                        images : [],
+                        texts : [],
+                    });
+                    this.index = this.index + 1;
                 }
             },
 
-            fail_get_menu_nine() {
-                console.log ("fail get menu nine!");
-            },
 
-            get_menu_eight() {
-                let url = '/ancient_books/get_menu_items.action?model_id=8&&item_1_id=0&&item_2_id=0';
-                this.http_json (url , 'get' , this.get_menu_eight_obj , this.success_get_menu_eight , this.fail_get_menu_eight);
-            },
-
-            success_get_menu_eight(response) {
-                console.log ("success get menu eight");
-                //将后端数据显示在前端页面里
-                if (response.body.length === 0) {
-                    console.log ("没有返回数组！");
+            next_page() {
+                if (this.upload_file[this.index].book_num == '') {
+                    alert("请填写册号")
                 }
-                else {
-                    for (var j = 0; j <= response.body.length-1; j++) {
-                        this.menu_eight.push({
-                            chinese_name: response.body[j].chinese_name
-                        });
-                    }
+                else if (this.upload_file[this.index].book_name == '') {
+                    alert("请填写册名")
+                }
+                else if (this.upload_file[this.index].images.length == 0) {
+                    alert("请选择要上传的图片文件")
+                }
+                else{
+                    this.$router.push({path: '/user/upload3'});
                 }
             },
 
-            fail_get_menu_eight() {
-                console.log ("fail get menu eight!");
+            last_page() {
+                this.$router.push({path: '/user/upload1'});
             },
 
-
-            get_lei_item() {
-                var bu = document.getElementById("ry-select-b");
-                var bu_index = bu.selectedIndex + 1;
-                this.http_json ('/ancient_books/get_menu_items.action?model_id=8&&item_1_id=' + bu_index + '&&item_2_id=0' , 'get' , this.get_lei_items_obj , this.success_get_lei_items , this.fail_get_lei_items);
+            cancel_upload() {
+                this.$router.push({path: '/user'});
             },
 
-            success_get_lei_items(response) {
-                console.log ("success get lei items ");
-                //将后端数据显示在前端页面里
-                if (response.body.length === 0) {
-                    console.log ("没有返回数组！");
-                }
-                else {
-                    for (var j = 0; j <= response.body.length-1; j++) {
-                        this.lei_items.push({
-                            chinese_name: response.body[j].chinese_name
-                        });
-                    }
-                }
-            },
-
-            fail_get_lei_items() {
-                console.log ("fail get lei items!");
-            },
-
-            get_shu_item() {
-                var bu = document.getElementById("ry-select-b");
-                var lei = document.getElementById("ry-select-l");
-                var bu_index = bu.selectedIndex + 1;
-                var lei_index = lei.selectedIndex + 1;
-                this.http_json ('/ancient_books/get_menu_items.action?model_id=8&&item_1_id=' + bu_index + '&&item_2_id=' + lei_index , 'get' , this.get_shu_items_obj , this.success_get_shu_items , this.fail_get_shu_items);
-            },
-
-            success_get_shu_items(response) {
-                console.log ("success get shu items ");
-                //将后端数据显示在前端页面里
-                if (response.body.length === 0) {
-                    console.log ("没有返回数组！");
-                }
-                else {
-                    for (var j = 0; j <= response.body.length-1; j++) {
-                        this.shu_items.push({
-                            chinese_name: response.body[j].chinese_name
-                        });
-                    }
-                }
-            },
-
-            fail_get_shu_items() {
-                console.log ("fail get shu items!");
-            },
-
-            /**
-             * 获得用户选择的option并存储
-             */
-            selections_variety() {
-                var type_save = document.getElementById("ry-type-save");
-                var type_save_index = type_save.selectedIndex;
-                this.varieties_item.type_save = type_save_index + 1;
-                var type_level = document.getElementById("ry-type-level");
-                var type_level_index = type_level.selectedIndex;
-                this.varieties_item.type_level = type_level_index + 1;
-                var bu = document.getElementById("ry-select-b");
-                var bu_index = bu.selectedIndex;
-                this.varieties_item.type_bu = bu_index + 1;
-                var lei = document.getElementById("ry-select-l");
-                var lei_index = lei.selectedIndex;
-                this.varieties_item.type_lei = lei_index + 1;
-                var shu = document.getElementById("ry-select-s");
-                var shu_index = shu.selectedIndex;
-                this.varieties_item.type_shu = shu_index + 1;
-
-                var types = document.getElementsByClassName("ry-v-type");
-                for (var i = 0; i < types.length; i++) {
-                    var type_index = types[i].selectedIndex;
-                    this.varieties_item.varieties_responsibility[i].type = type_index + 1;
-                }
-
-                var actions = document.getElementsByClassName("ry-v-action");
-                for (var j = 0; j < actions.length; j++) {
-                    var action_index = actions[j].selectedIndex;
-                    this.varieties_item.varieties_responsibility[j].action = action_index + 1;
-                }
-
-                var confirms = document.getElementsByClassName("ry-v-confirm");
-                for (var k = 0; k < confirms.length; k++) {
-                    var confirm_index = confirms[k].selectedIndex;
-                    this.varieties_item.varieties_responsibility[k].confirm = confirm_index + 1;
-                }
-            },
-
-            /**
-             * 设置默认首选项
-             */
-            default_selections_variety() {
-                var type_save = document.getElementById("ry-type-save");
-                type_save.selectedIndex = this.varieties_item.type_save - 1;
-                var type_level = document.getElementById("ry-type-level");
-                type_level.selectedIndex = this.varieties_item.type_level - 1;
-                var bu = document.getElementById("ry-select-b");
-                bu.selectedIndex = this.varieties_item.type_bu - 1;
-                var lei = document.getElementById("ry-select-l");
-                lei.selectedIndex = this.varieties_item.type_lei - 1;
-                var shu = document.getElementById("ry-select-s");
-                shu.selectedIndex = this.varieties_item.type_shu - 1;
-
-                var types = document.getElementsByClassName("ry-v-type");
-                for (var i = 0; i < types.length; i ++) {
-                    types[i].selectedIndex = this.varieties_item.varieties_responsibility[i].type - 1;
-                }
-
-                var actions = document.getElementsByClassName("ry-v-action");
-                for (var k = 0; k < actions.length; k ++) {
-                    actions[k].selectedIndex = this.varieties_item.varieties_responsibility[k].action - 1;
-                }
-
-                var confirms = document.getElementsByClassName("ry-v-confirm");
-                for (var j = 0; j < confirms.length; j ++) {
-                    confirms[j].selectedIndex = this.varieties_item.varieties_responsibility[j].confirm - 1;
-                }
-            },
-        },
+            remove(item) {
+                var i = this.upload_box.indexOf(item);
+                this.upload_box.splice(i, 1)
+            }
+        }
     }
 </script>
 
+<style>
+    #upload2-box a:hover, a:visited, a:link, a:active{
+        text-decoration: none;
+        color: white;
+        cursor: pointer;
+    }
+
+    .ry-upload-two input{
+        border: none;
+        background-color: transparent;
+        padding-left: 4px;
+    }
+
+    .ry-upload-two button{
+        background-color: transparent;
+        border: none;
+    }
+
+    .ry-btn-upload2-next{
+        color: white;
+        width: 127px;
+        height: 54px;
+        background-image: url("../../../../assets/img/button/create-next-step.png");
+    }
+
+    .ry-btn-upload2-last{
+        color: white;
+        width: 127px;
+        height: 54px;
+        background-image: url("../../../../assets/img/button/create-next-step.png");
+    }
+
+    .ry-input-upload2{
+        margin: 5px 0px;
+        width: 225px;
+        height: 33px;
+        background-image: url("../../../../assets/img/modal-box/book-name.png");
+    }
+
+    .ry-file-picture{
+        position: relative;
+        display: inline-block;
+        color: white;
+        font-size: x-large;
+        width: 175px;
+        height: 74px;
+        background-image:  url("../../../../assets/img/button/create-next-step.png");
+        background-size: 100%;
+        padding-top: 25px;
+        padding-left: 40px;
+        overflow: hidden;
+        text-decoration: none;
+        text-indent: 0;
+        line-height: 20px;
+    }
+
+    .ry-file-picture input{
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
+
+    .ry-file-text{
+        position: relative;
+        display: inline-block;
+        color: white;
+        font-size: x-large;
+        width: 175px;
+        height: 74px;
+        background-image:  url("../../../../assets/img/button/create-next-step.png");
+        background-size: 100%;
+        padding-top: 25px;
+        padding-left: 40px;
+        overflow: hidden;
+        text-decoration: none;
+        text-indent: 0;
+        line-height: 20px;
+    }
+
+    .ry-file-text input{
+        position: absolute;
+        font-size: 100px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
+
+    .ry-btn-add-book{
+        color: white;
+        width: 142px;
+        height: 47px;
+        background-image: url("../../../../assets/img/button/build-button.png");
+    }
+
+    .ry-upload-modal{
+        width:800px;
+        background-repeat: no-repeat;
+        background-size:800px auto;
+    }
+
+    .ry-upload-modal-header{
+        color:gainsboro;
+        font-size: 18px;
+        text-align: center;
+        background-image: url("../../../../assets/img/no-use-picture/modal-header.png");
+        background-size: 100%;
+        background-color: transparent;
+        width:800px;
+        height:50px;
+        padding:10px 0 0 0;
+    }
+</style>

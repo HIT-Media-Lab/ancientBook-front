@@ -100,6 +100,8 @@
             this.index = this.$store.getters.get_upload_book_index;
             this.upload_file = this.$store.getters.get_upload_file;
             this.text_name = this.$store.getters.get_text_name;
+            console.log(this.upload_file[this.index].images);
+            console.log(this.upload_file[this.index].images.length);
         },
 
         mounted : function () {
@@ -125,22 +127,26 @@
             /**
              * 添加上传图片
              */
-             onFileChange(e) {
+            onFileChange(e) {
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)return;
-                this.createImage(files,this.index);
-                console.log(this.upload_file[this.index].images);
-                this.check_picture_name();
-             },
+                var _this = this;
+                this.createImage(files,this.index, function(i, length) {
+                    if (i == length - 1) {
+                        _this.check_picture_name();
+                    }
+                });
 
-            createImage(file,index) {
+            },
+
+            createImage(file,index,callback) {
                 if (typeof FileReader === 'undefined') {
                     alert('您的浏览器不支持图片上传，请升级您的浏览器');
                     return false;
                 }
                 var vm = this;
                 var leng = file.length;
-                for (var i = 0; i < leng; i++) {
+                for (let i = 0; i < leng; i++) {
                     var name = file[i].name;
                     var a = file[i].size;
                     var size = a/1000;
@@ -153,14 +159,59 @@
                             pic_name:name,
                             pic_size:size
                         });
+                        callback(i, leng);
                     };
                 }
             },
 
+
+//            /**
+//             * 添加上传图片
+//             */
+//             onFileChange(e) {
+//                var files = e.target.files || e.dataTransfer.files;
+//                if (!files.length)return;
+//                this.createImage(files,this.index);
+////                console.log(this.upload_file[this.index].images);
+////                console.log(this.upload_file[this.index].images.length);
+//                this.check_picture_name();
+//             },
+//
+//            createImage(file,index,callback) {
+//                if (typeof FileReader === 'undefined') {
+//                    alert('您的浏览器不支持图片上传，请升级您的浏览器');
+//                    return false;
+//                }
+//                var vm = this;
+//                var leng = file.length;
+//                for (var i = 0; i < leng; i++) {
+//                    var name = file[i].name;
+//                    var a = file[i].size;
+//                    var size = a/1000;
+//                    var reader = new FileReader();
+//                    reader.readAsDataURL(file[i]);
+//                    vm.upload_file[index].images.push({key:2});
+//                    reader.onloadend = function(e) {
+//                        vm.upload_file[index].images.pop();
+//                        vm.upload_file[index].images.push({
+//                            show:true,
+//                            picture:e.target.result,
+//                            pic_name:name,
+//                            pic_size:size
+//                        });
+//                    };
+//                    };
+//            },
+
+
+
             check_picture_name() {
+                var vm = this;
                 var key = 0;
-                for (var i = 0; i < this.upload_file[this.index].images.length; i++) {
-                    var name = this.upload_file[this.index].images[i].pic_name;
+                console.log(this.upload_file[this.index].images);
+                console.log(this.upload_file[this.index].images[0]);
+                for (var i = 0; i < this.upload_file[vm.index].images.length; i++) {
+                    var name = this.upload_file[vm.index].images[i].pic_name;
                     var one = name.charAt(0);
                     var two = name.charAt(1);
                     var three = name.charAt(2);
@@ -180,6 +231,7 @@
                     if (one != first) {
                         alert("上传文件名不符合规范，第一个字符应为“卷”，请重新上传");
                         this.upload_file[this.index].images = [];
+                        console.log(this.upload_file[this.index].images);
                         key = 1;
                         break;
                     }

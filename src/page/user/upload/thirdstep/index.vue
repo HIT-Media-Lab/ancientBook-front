@@ -24,7 +24,7 @@
             </div>
             <div class="ry-picture-box">
                 <a href="javascript:;" class="ry-add">
-                    <input id="add" type="file" @change="onFileChange" multiple accept="image/jpeg" name="picture">
+                    <input id="add" type="file" @change="onFileChange" accept="image/jpeg" name="picture">
                 </a>
             </div>
         </div>
@@ -181,6 +181,7 @@
                 var files = e.target.files || e.dataTransfer.files;
                 if (!files.length)return;
                 this.change_image(files,this.book_index);
+                this.hover_modal = false;
             },
 
             change_image(file,index) {
@@ -196,13 +197,65 @@
                     var name = file[i].name;
                     var a = file[i].size;
                     var size = a/1000;
+
+                    var key = 0;
+                    var one = name.charAt(0);
+                    var two = name.charAt(1);
+                    var three = name.charAt(2);
+                    var four = name.charAt(3);
+                    var five = name.charAt(4);
+                    var six = name.charAt(5);
+                    var seven = name.charAt(6);
+                    var eight = name.charAt(7);
+                    var first = '卷';
+                    var second =  /^[0-9]+.?[0-9]*$/;
+                    var third =  /^[0-9]+.?[0-9]*$/;
+                    var fourth =  /^[0-9]+.?[0-9]*$/;
+                    var fifth =  '-';
+                    var sixth =  /^[0-9]+.?[0-9]*$/;
+                    var seventh =  /^[0-9]+.?[0-9]*$/;
+                    var eighth =  /^[0-9]+.?[0-9]*$/;
+                    if (one != first) {
+                        alert("上传文件名不符合规范，第一个字符应为“卷”，请重新上传");
+                        key = 1;
+                    }
+                    else if (!second.test(two)) {
+                        alert("上传文件名不符合规范，第二个字符应为数字，请重新上传");
+                        key = 1;
+                    }
+                    else if (!third.test(three)) {
+                        alert("上传文件名不符合规范，第三个字符应为数字，请重新上传");
+                        key = 1;
+                    }
+                    else if (!fourth.test(four)) {
+                        alert("上传文件名不符合规范，第四个字符应为数字，请重新上传");
+                        key = 1;
+                    }
+                    else if (five != fifth) {
+                        alert("上传文件名不符合规范，第五个字符应为“-”，请重新上传");
+                        key = 1;
+                    }
+                    else if (!sixth.test(six)) {
+                        alert("上传文件名不符合规范，第六个字符应为数字，请重新上传");
+                        key = 1;
+                    }
+                    else if (!seventh.test(seven)) {
+                        alert("上传文件名不符合规范，第七个字符应为数字，请重新上传");
+                        key = 1;
+                    }
+                    else if (!eighth.test(eight)) {
+                        alert("上传文件名不符合规范，第八个字符应为数字，请重新上传");
+                        key = 1;
+                    }
                     reader.onload = function(e) {
-                        vm.$set(vm.upload_file[index].images,vm.index,{
-                            show:true,
-                            picture:e.target.result,
-                            pic_name:name,
-                            pic_size:size
-                        });
+                        if (key == 0){
+                            vm.$set(vm.upload_file[index].images,vm.index,{
+                                show:true,
+                                picture:e.target.result,
+                                pic_name:name,
+                                pic_size:size
+                            });
+                        }
                     };
                 }
             },
@@ -252,13 +305,65 @@
                     var name = file[i].name;
                     var a = file[i].size;
                     var size = a/1000;
+
+                    var key = 0;
+                    var one = name.charAt(0);
+                    var two = name.charAt(1);
+                    var three = name.charAt(2);
+                    var four = name.charAt(3);
+                    var five = name.charAt(4);
+                    var six = name.charAt(5);
+                    var seven = name.charAt(6);
+                    var eight = name.charAt(7);
+                    var first = '卷';
+                    var second =  /^[0-9]+.?[0-9]*$/;
+                    var third =  /^[0-9]+.?[0-9]*$/;
+                    var fourth =  /^[0-9]+.?[0-9]*$/;
+                    var fifth =  '-';
+                    var sixth =  /^[0-9]+.?[0-9]*$/;
+                    var seventh =  /^[0-9]+.?[0-9]*$/;
+                    var eighth =  /^[0-9]+.?[0-9]*$/;
+                    if (one != first) {
+                        alert("上传文件名不符合规范，第一个字符应为“卷”，请重新上传");
+                        key = 1;
+                    }
+                    else if (!second.test(two)) {
+                        alert("上传文件名不符合规范，第二个字符应为数字，请重新上传");
+                        key = 1;
+                    }
+                    else if (!third.test(three)) {
+                        alert("上传文件名不符合规范，第三个字符应为数字，请重新上传");
+                        key = 1;
+                    }
+                    else if (!fourth.test(four)) {
+                        alert("上传文件名不符合规范，第四个字符应为数字，请重新上传");
+                        key = 1;
+                    }
+                    else if (five != fifth) {
+                        alert("上传文件名不符合规范，第五个字符应为“-”，请重新上传");
+                        key = 1;
+                    }
+                    else if (!sixth.test(six)) {
+                        alert("上传文件名不符合规范，第六个字符应为数字，请重新上传");
+                        key = 1;
+                    }
+                    else if (!seventh.test(seven)) {
+                        alert("上传文件名不符合规范，第七个字符应为数字，请重新上传");
+                        key = 1;
+                    }
+                    else if (!eighth.test(eight)) {
+                        alert("上传文件名不符合规范，第八个字符应为数字，请重新上传");
+                        key = 1;
+                    }
                     reader.onload = function(e) {
-                        vm.upload_file[index].images.push({
-                            show:true,
-                            picture:e.target.result,
-                            pic_name:name,
-                            pic_size:size
-                        });
+                        if(key == 0){
+                            vm.upload_file[index].images.push({
+                                show:true,
+                                picture:e.target.result,
+                                pic_name:name,
+                                pic_size:size
+                            });
+                        }
                     };
                 }
             },
