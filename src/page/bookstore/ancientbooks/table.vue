@@ -116,7 +116,7 @@
                 console.log ("fail get 3 layers info!");
             },
 
-            
+
             go_to(book,volume,page) {
                 this.book = book;
                 this.volume = volume;
