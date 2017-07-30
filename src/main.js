@@ -691,17 +691,17 @@ const router = new VueRouter({
                             name: 'book_varieties'
                         },
                         {
-                            path: 'edition',
+                            path: 'edition/:ancient_book_id',
                             component: book_edition,
                             name: 'book_edition'
                         },
                         {
-                            path: 'impression',
+                            path: 'impression/:ancient_book_id',
                             component: book_impression,
                             name: 'book_impression'
                         },
                         {
-                            path: 'copy',
+                            path: 'copy/:ancient_book_id',
                             component: book_copy,
                             name: 'book_copy'
                         },

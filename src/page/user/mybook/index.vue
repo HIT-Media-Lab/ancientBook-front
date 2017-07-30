@@ -115,7 +115,6 @@
              */
             go_to_bookinfo(id){
                 this.$route.params.ancient_book_id = id;
-                console.log(this.$route.params.ancient_book_id);
                 this.$router.push({name: 'book_varieties', params: this.$route.params});
             },
             go_to_more_privatebook(){

@@ -78,7 +78,6 @@
 
         created : function () {
             this.get_ancient_book_id();
-            console.log(this.ancient_book_id);
             this.get_ancient_books_all_info();
             this.get_three_layers_info();
             this.get_first_layer_info();
@@ -97,8 +96,6 @@
              */
             get_ancient_book_id() {
                 this.ancient_book_id = this.$route.params.ancient_book_id;
-                console.log(this.$route.params.ancient_book_id);
-                console.log(this.ancient_book_id);
             },
 
 
@@ -144,7 +141,7 @@
              */
             get_first_layer_info() {
                 var get_obj = {};
-                let url = '/ancient_books/get_ancient_books_all_info_by_id.action?ancient_book_id=' + this.ancient_book_id;
+                let url = '/ancient_books/get_literature_by_id.action?literature_id=' + this.book_all_info.literature_id;
                 this.http_json (url , 'get' , get_obj , this.success_get_first_layer_info , this.fail_get_first_layer_info);
             },
 
