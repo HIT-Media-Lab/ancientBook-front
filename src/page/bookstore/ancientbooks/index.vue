@@ -461,12 +461,6 @@
 </template>
 
 <script>
-    import catalogue from './table.vue';
-    import copy from './copy.vue';
-    import edition from './edition.vue';
-    import impression from './impression.vue';
-    import varieties from './varieties.vue';
-    import catalogueBar from './catalogue-bar.vue';
     export default{
         data() {
             return{
