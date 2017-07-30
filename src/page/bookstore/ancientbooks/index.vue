@@ -69,10 +69,6 @@
                 book_info3:'',
                 book_info4:'',
 
-                varieties_item : {},
-                edition_item : {},
-                impression_item : {},
-                copy_item : {},
             }
         },
 
