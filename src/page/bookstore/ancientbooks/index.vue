@@ -474,6 +474,9 @@
                 book_info_split: [],
                 book_info1:'',
                 book_info2:'',
+                book_info3:'',
+                book_info4:'',
+
 
                 //4层按钮显隐元素
                 variety_text : false,
@@ -503,6 +506,7 @@
         },
 
         mounted : function () {
+            this.change_module();
             this.edition_responsibility_info();
             this.impression_responsibility_info();
             this.copy_responsibility_info();
@@ -670,13 +674,13 @@
                     copy.className = "layer-input";
                 };
                 impression_head.onclick = function () {
-                    variety.className = "layer-input div-now";
+                    variety.className = "layer-input";
                     edition.className = "layer-input";
                     impression.className = "layer-input div-now";
                     copy.className = "layer-input";
                 };
                 copy_head.onclick = function () {
-                    variety.className = "layer-input div-now";
+                    variety.className = "layer-input";
                     edition.className = "layer-input";
                     impression.className = "layer-input";
                     copy.className = "layer-input div-now";
@@ -689,27 +693,27 @@
              */
             edition_responsibility_info() {
                 var vm = this;
-                for (var i = 0; i < three_layers_info.responsibility_infos.length; i++) {
-                    if (three_layers_info.responsibility_infos[i].level == 2) {
-                        vm.edition_responsibility.push(three_layers_info.responsibility_infos[i])
+                for (var i = 0; i < this.three_layers_info.responsibility_infos.length; i++) {
+                    if (this.three_layers_info.responsibility_infos[i].level == 2) {
+                        vm.edition_responsibility.push(this.three_layers_info.responsibility_infos[i])
                     }
                 }
             },
 
             impression_responsibility_info() {
                 var vm = this;
-                for (var i = 0; i < three_layers_info.responsibility_infos.length; i++) {
-                    if (three_layers_info.responsibility_infos[i].level == 3) {
-                        vm.impression_responsibility.push(three_layers_info.responsibility_infos[i])
+                for (var i = 0; i < this.three_layers_info.responsibility_infos.length; i++) {
+                    if (this.three_layers_info.responsibility_infos[i].level == 3) {
+                        vm.impression_responsibility.push(this.three_layers_info.responsibility_infos[i])
                     }
                 }
             },
 
             copy_responsibility_info() {
                 var vm = this;
-                for (var i = 0; i < three_layers_info.responsibility_infos.length; i++) {
-                    if (three_layers_info.responsibility_infos[i].level == 4) {
-                        vm.copy_responsibility.push(three_layers_info.responsibility_infos[i])
+                for (var i = 0; i < this.three_layers_info.responsibility_infos.length; i++) {
+                    if (this.three_layers_info.responsibility_infos[i].level == 4) {
+                        vm.copy_responsibility.push(this.three_layers_info.responsibility_infos[i])
                     }
                 }
             },
