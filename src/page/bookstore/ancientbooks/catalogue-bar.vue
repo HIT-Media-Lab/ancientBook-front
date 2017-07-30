@@ -3,16 +3,16 @@
     <!--4层导航按钮-->
     <div class="ry-menu-bar">
         <ul id="layer-head">
-            <router-link to="{name:'book_varieties', params: this.ancient_book_id}">
+            <router-link to="{name:'book_varieties', params: this.$route.params.ancient_book_id}">
                 <li id="layer-head-variety" @click="click_variety"><span v-show="variety_text">品种层</span><img v-show="variety_pic" src="../../../assets/img/picture-button/variety.png" height="31" width="134"/></li>
             </router-link>
-            <router-link to="/bookstore/book_info/edition/:ancient_book_id">
+            <router-link to="{name:'book_edition', params: this.$route.params.ancient_book_id}">
                 <li id="layer-head-edition" @click="click_edition"><span v-show="edition_text">版本层</span><img v-show="edition_pic" src="../../../assets/img/picture-button/edition.png" height="30" width="133"/></li>
             </router-link>
-            <router-link to="/bookstore/book_info/impression/:ancient_book_id">
+            <router-link to="{name:'book_impression', params: this.$route.params.ancient_book_id}">
                 <li id="layer-head-impression" @click="click_impression"><span v-show="impression_text">印次层</span><img v-show="impression_pic" src="../../../assets/img/picture-button/impression.png" height="30" width="133"/></li>
             </router-link>
-            <router-link to="/bookstore/book_info/copy/:ancient_book_id">
+            <router-link to="{name:'book_copy', params: this.$route.params.ancient_book_id}">
                 <li id="layer-head-copy" @click="click_copy"><span v-show="copy_text">复本层</span><img v-show="copy_pic" src="../../../assets/img/picture-button/copy.png" height="30" width="133"/></li>
             </router-link>
         </ul>
