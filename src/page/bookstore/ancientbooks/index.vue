@@ -2,7 +2,7 @@
     <div class="ry-upload">
         <!--模块名称-->
         <div class="width950 center">
-            <h3 style="display:inline-block">{{first_layer_info.type_name}}</h3>
+            <h3 style="display:inline-block">{{book_all_info.name}}</h3>
             <button class="float-right ry-btn-cancel-upload">加入收藏</button>
         </div>
 

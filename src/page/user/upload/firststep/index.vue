@@ -108,7 +108,7 @@
                 var a = document.getElementById("v-standard-name").innerText;
                 var b = document.getElementById("e-standard-name").innerText;
                 var c = document.getElementById("i-standard-name").innerText;
-                var d = document.getElementsByClassName("c-standard-name").innerText;
+                var d = document.getElementById("c-standard-name").innerText;
                 this.upload_one_info.standard_name = a + b + c + d;
             },
 
