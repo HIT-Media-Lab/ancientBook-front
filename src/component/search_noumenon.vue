@@ -40,30 +40,44 @@
         "content":[
             {
                 "standard_name":"李世民",
+                "type_id|1":1,
+                "name":'李世明啊',
                 "noumenon_id|100":100
             },
             {
                 "standard_name":"李世民",
+                "type_id|1":1,
+                "name":'李世明啊',
                 "noumenon_id|100":100
             },
             {
                 "standard_name":"李世民",
+                "type_id|1":1,
+                "name":'李世明啊',
                 "noumenon_id|100":100
             },
             {
                 "standard_name":"李世民",
+                "type_id|1":1,
+                "name":'李世明啊',
                 "noumenon_id|100":100
             },
             {
                 "standard_name":"李世民",
+                "type_id|1":1,
+                "name":'李世明啊',
                 "noumenon_id|100":100
             },
             {
                 "standard_name":"李世民",
+                "type_id|1":1,
+                "name":'李世明啊',
                 "noumenon_id|100":100
             },
             {
                 "standard_name":"李世民",
+                "type_id|1":1,
+                "name":'李世明啊',
                 "noumenon_id|100":100
             }
         ]
@@ -280,18 +294,38 @@
                 if(response.body.content.length !== 0) {
                     if(response.body.content.length <= 5) {
                         for (let i = 0; i < response.body.content.length; i++) {
-                            this.search_result.push({
-                                standard_name: response.body.content[i].standard_name,
-                                noumenon_id: response.body.content[i].noumenon_id
-                            })
+                            if(response.body.content[i].type_id === 1){
+                                this.search_result.push({
+                                    type_id:response.body.content[i].type_id,
+                                    name:response.body.content[i].name,
+                                    standard_name: response.body.content[i].standard_name,
+                                    noumenon_id: response.body.content[i].noumenon_id
+                                })
+                            } else{
+                                this.search_result.push({
+                                    type_id:response.body.content[i].type_id,
+                                    standard_name: response.body.content[i].standard_name,
+                                    noumenon_id: response.body.content[i].noumenon_id
+                                })
+                            }
                         }
                         console.log(JSON.stringify(this.search_result));
                     } else {
                         for (let i = 0; i < 5; i++) {
-                            this.search_result.push({
-                                standard_name: response.body.content[i].standard_name,
-                                noumenon_id: response.body.content[i].noumenon_id
-                            })
+                            if(response.body.content[i].type_id === 1){
+                                this.search_result.push({
+                                    type_id:response.body.content[i].type_id,
+                                    name:response.body.content[i].name,
+                                    standard_name: response.body.content[i].standard_name,
+                                    noumenon_id: response.body.content[i].noumenon_id
+                                })
+                            } else{
+                                this.search_result.push({
+                                    type_id:response.body.content[i].type_id,
+                                    standard_name: response.body.content[i].standard_name,
+                                    noumenon_id: response.body.content[i].noumenon_id
+                                })
+                            }
                         }
                         console.log(JSON.stringify(this.search_result));
                     }
@@ -315,6 +349,9 @@
             /*添加搜索的本体*/
             add_noumenon_relations(q){
                 console.log(q+':this.search_result:'+JSON.stringify(this.search_result[q]));
+                if(this.search_result[q].type_id === 1){
+                    this.$store.commit('post_character_data',this.search_result[q].name);
+                }
                 this.$emit('add_noumenon_relations',this.search_result[q]);
                 this.close_modal();
             },
@@ -323,11 +360,9 @@
                 if(this.noumenon_number === 1){
                     window.open("/chartwo");
                 } else if(this.noumenon_number === 2){
-
+                    window.open("/littwo");
                 } else if(this.noumenon_number === 3){
                     window.open("/termstwo");
-                } else if(this.noumenon_number === 4){
-
                 } else if(this.noumenon_number === 5){
                     window.open("/offtwo");
                 } else if(this.noumenon_number === 6){
@@ -341,7 +376,6 @@
             repeat_array(){
                 console.log('search repeat: '+JSON.stringify(this.repeat_arr));
                 for(let i =0;i < this.search_result.length;i++ ){
-                    //console.log('::::'+this.repeat_arr.indexOf(this.search_result[i].standard_name));
                     if(this.repeat_arr.indexOf(this.search_result[i].standard_name) !== -1){
                         this.forbidden_btn =true;
                     } else {

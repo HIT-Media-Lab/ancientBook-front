@@ -74,7 +74,6 @@
             <p class="zxwspan-length" v-model="time_content.g_day" v-else>{{time_content.g_day}}日</p>
         </div>
 
-        <button  class="zxwnoumenom-button zxwdelete-character" @click="delete_time()">删除本体</button>
     </div>
 </template>
 
@@ -127,8 +126,8 @@
                     ganzhi_name: '',
                     juedui:null,
                     g_year: null,
-                    g_month: null,
-                    g_day: null,
+                    g_month: '',
+                    g_day:'' ,
                     english: '',
                     jieqi:''
                 },
@@ -154,31 +153,15 @@
                 this.time_content.ganzhi_name = response.body.ganzhi_name;
                 this.time_content.juedui = response.body.juedui;
                 this.time_content.g_year = response.body.gongyuan;
-                this.time_content.g_month = response.body.g_yue;
-                this.time_content.g_day = response.body.g_ri;
+                this.time_content.g_month = response.body.g_yue_name;
+                this.time_content.g_day = response.body.g_ri_name;
                 this.time_content.english = response.body.english;
                 this.time_content.jieqi = response.body.jieqi;
+                console.log(JSON.stringify('time_content: '+this.time_content));
             },
 
             fail_id(response){
                 console.log("具体显示时间失败");
-            },
-
-            /*根据id删除时间*/
-            delete_time(){
-                let delete_object = {};
-                delete_object.id = this.$route.params.nouId;
-                this.http_json(this.delete_time_url,'post',delete_object,this.success_delete,this.fail_delete);
-            },
-
-            success_delete(response){
-                if(response.body.result === 1){
-                    this.$router.push({path:'/noumenon'});
-                }
-            },
-
-            fail_delete(response){
-                console.log("删除时间本体失败")
             }
         }
     }

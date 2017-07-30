@@ -1,0 +1,278 @@
+<template>
+    <div>
+        <noumenon_title :title="this.standard_name">
+            <noumenon_button slot="children" :noumenon_number="2"></noumenon_button>
+        </noumenon_title>
+        <div class="zxw-lit-background">
+            <!--文献版本层信息固有信息-->
+            <div class="zxw-lit-layer">
+                <label class="zxw-lit-label">书名:</label>
+                <p class="zxw-lit-info zxw-lit-info-margin" v-model="type_name">{{type_name}}</p>
+                <label class="zxw-lit-label">别名:</label>
+                <p class="zxw-lit-info" v-model="type_other_name">{{type_other_name}}</p>
+            </div>
+
+            <div class="zxw-lit-layer">
+                <label class="zxw-lit-label">存佚类型：</label>
+                <p class="zxw-lit-info zxw-lit-info-margin" v-model="type_save_name">{{type_save_name}}</p>
+                <label class="zxw-lit-label">品种级别:</label>
+                <p class="zxw-lit-info" v-model="type_level_name">{{type_level_name}}</p>
+
+            </div>
+
+            <div class="zxw-lit-layer">
+                <label class="zxw-lit-label">英译：</label>
+                <p class="zxw-lit-info" v-model="english">{{english}}</p>
+            </div>
+
+            <div class="zxw-lit-layer">
+                <label class="zxw-lit-label">提要信息:</label>
+                <div class="zxw-lit-summery"  v-model="type_summary">{{type_summary}}</div>
+            </div>
+            <div>
+                <label class="zxw-lit-label">标准分类:</label>
+                <p class="zxw-lit-info" v-model="type_bu_name">{{type_bu_name}}</p>
+                <p class="zxw-lit-info" v-model="type_lei_name">{{type_lei_name}}</p>
+                <p class="zxw-lit-info" v-model="type_shu_name">{{type_shu_name}}</p>
+            </div>
+
+            <!--文献版本层信息循坏添加信息-->
+            <div v-for="item in responsibility_infos">
+                <img src="../../../assets/img/no-use-picture/ink-line.png" height="6" width="673"/>
+
+                <div class="zxw-lit-layer">
+                    <label class="zxw-lit-type-label">责任开始时间:</label>
+                    <p class="zxw-lit-info zxw-lit-type-label-margin" v-model="item.begin_time_name">{{item.begin_time_name}}</p>
+                    <label class="zxw-lit-type-label">责任结束时间:</label>
+                    <p class="zxw-lit-info" v-model="item.end_time_name">{{item.end_time_name}}</p>
+                </div>
+
+                <div class="zxw-lit-layer">
+                    <label class="zxw-lit-type-label">责任地点:</label>
+                    <button class="zxw-lit-info zxw-lit-type-label-margin"  v-model="item.location_name">{{item.location_name}}</button>
+                    <label class="zxw-lit-type-label">责任者名称：</label>
+                    <button class="zxw-lit-info" v-model="item.name_standard_name">{{item.name_standard_name}}</button>
+                </div>
+
+                <div class="zxw-lit-layer">
+                    <label class="zxw-lit-type-label">责任者类型:</label>
+                    <p class="zxw-lit-info zxw-lit-type-label-margin" v-model="item.type_name">{{item.type_name}}</p>
+                    <label class="zxw-lit-type-label">责任行为：</label>
+                    <p class="zxw-lit-info" v-model="item.action_name">{{item.action_name}}</p>
+                </div>
+
+                <div class="zxw-lit-layer">
+                    <label class="zxw-lit-type-label">确定性:</label>
+                    <p class="zxw-lit-info" v-model="item.confirm_name">{{item.confirm_name}}</p>
+                </div>
+
+                <div>
+                    <label class="zxw-lit-type-label">责任说明:</label>
+                    <p class="zxw-lit-summery" v-model="item.explain">{{item.explain}}</p>
+                </div>
+            </div>
+        </div>
+        <button  class="zxwnoumenom-button zxw-lit-delete" @click="delete_lit()">删除本体</button>
+    </div>
+</template>
+
+<script>
+    /*let Mock = require('mockjs');
+    //显示用户列表
+    Mock.mock('/ancient_books/get_literature_by_id.action?literature_id=1','get',{
+        "status|200":200,
+        "standard_name":'书名([宋朝]陈赫责任行为1、[宋朝]陈赫责任行为1)',
+        "type_name":'书名',
+        "english": 'shuming',
+        "type_other_name": '书名',
+        "type_save|2":2,
+        "type_save_name": '存',
+        "type_level|1":1,
+        "type_level_name":'不详',
+        "type_bu|1":1,
+        "type_bu_name":'部1',
+        "type_lei|1":1,
+        "type_lei_name": '类1',
+        "type_shu|1":1,
+        "type_shu_name": '属1',
+        "type_summary": '提要信息；提要信息；提要信息；提要信息；提要信息；提要信息；提要信息；提要信息；提要信息；',
+        "responsibility_infos": [
+            {
+                "responsibility_info_id|1":1,
+                "location_id|25":25,
+                "location_name":'太原',
+                "name_id|150":150,
+                "name_standard_name": '陈赫',
+                "name_name":'陈赫',
+                "begin_time_name": '宋朝',
+                "begin_time_id|1":1,
+                "end_time_name": '宋朝',
+                "end_time_id|1":1,
+                "end_time_chaodai":'宋朝',
+                "action|1":1,
+                "action_name":"责任行为1",
+                "explain":'责任说明',
+                "confirm|1":1,
+                "confirm_name":'不详',
+                "type|1":1,
+                'type_name':'不详',
+                "level|1":1,
+                "order|1":1
+            },
+            {
+                "responsibility_info_id|1":1,
+                "location_id|25":25,
+                "location_name":'太原',
+                "name_id|150":150,
+                "name_standard_name": '陈赫',
+                "name_name":'陈赫',
+                "begin_time_name": '宋朝',
+                "begin_time_id|1":1,
+                "end_time_chaodai":'宋朝',
+                "end_time_name": '宋朝',
+                "end_time_id|1":1,
+                "action|1":1,
+                "action_name":"责任行为1",
+                "explain":'责任说明',
+                "confirm|1":1,
+                "confirm_name":'不详',
+                "type|1":1,
+                'type_name':'不详',
+                "level|1":1,
+                "order|2":2
+            }]
+    });*/
+
+
+    import noumenon_title from '../../../component/noumenon-title.vue';
+    import noumenon_button from '../../../component/noumenon-button.vue';
+    export default{
+        created(){
+            this.show_lit();
+        },
+
+        components:{
+            noumenon_title,
+            noumenon_button
+        },
+
+        data(){
+            return{
+                lit_url:'/ancient_books/get_literature_by_id.action',
+                delete_lit_url:'/ancient_books/delete_literature_by_id.action',
+                standard_name:'',
+                type_name:'',
+                type_other_name:'',
+                english:'',
+                type_save_name:'',
+                type_level_name:'',
+                type_summary:'',
+                type_bu_name:'',
+                type_lei_name:'',
+                type_shu_name:'',
+                responsibility_infos:[]
+            }
+        },
+
+        methods:{
+            show_lit(){
+                let object = {};
+                let new_url = this.lit_url+'?literature_id='+this.$route.params.nouId;
+                this.http_json(new_url,'get',object,this.success_lit,this.fail_lit);
+            },
+
+            success_lit(response){
+                this.standard_name = response.body.standard_name;
+                this.english = response.body.english;
+                this.type_name = response.body.type_name;
+                this.type_other_name = response.body.type_other_name;
+                this.type_save_name = response.body.type_save_name;
+                this.type_level_name = response.body.type_level_name;
+                this.type_bu_name = response.body.type_bu_name;
+                this.type_lei_name = response.body.type_lei_name;
+                this.type_shu_name = response.body.type_shu_name;
+                this.type_summary = response.body.type_summary;
+                if(response.body.responsibility_infos.length !== 0){
+                    for(let i = 0; i < response.body.responsibility_infos.length; i++){
+                        this.responsibility_infos.push(
+                            response.body.responsibility_infos[i]
+                        );
+                    }
+                }
+            },
+
+            fail_lit(){
+                console.log("获取文献具体信息失败");
+            },
+
+            delete_lit(){
+                let delete_object = {};
+                delete_object.id = this.$route.params.nouId;
+                this.http_json(this.delete_lit_url,'post',delete_object,this.success_delete,this.fail_delete);
+            },
+
+            success_delete(response){
+                if(response.body.result === 1){
+                    this.$router.push({path:'/noumenon'});
+                }
+            },
+
+            fail_delete(response){
+                console.log("删除本体失败")
+            },
+
+
+
+        }
+    }
+</script>
+
+<style>
+    .zxw-lit-background{
+        background-image: url("../../../assets/img/modal-box/lit_box.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 773px 991px;
+        width:773px;
+        height:991px;
+        margin:20px auto 0 auto;
+        padding: 50px 50px 0 50px;
+    }
+
+    .zxw-lit-label{
+       width:100px;
+    }
+
+    .zxw-lit-info{
+        display: inline-block;
+        width:175px;
+        text-align: left;
+    }
+     .zxw-lit-info-margin{
+         margin:0 90px 0 0;
+     }
+
+    .zxw-lit-layer{
+        margin-bottom: 10px;
+    }
+
+    .zxw-lit-type-label{
+        width:130px;
+    }
+
+    .zxw-lit-type-label-margin{
+        margin:0 30px 0 0;
+    }
+    .zxw-lit-delete{
+        width: 140px;
+        height: 45px;
+        margin: 15px 0 0 130px;
+    }
+
+    .zxw-lit-summery{
+        display: inline-block;
+        width:500px;
+        height:auto;
+        vertical-align: top;
+    }
+</style>

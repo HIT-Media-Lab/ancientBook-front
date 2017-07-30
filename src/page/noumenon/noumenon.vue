@@ -14,7 +14,7 @@
      Mock.mock('/ancient_books/get_recent_noumenons.action','get', {
          "status": 200,
          "noumenons|10": [{
-             'standard_name': '迪丽热巴',
+             'standard_name': '李世民',
              'id|1': 1,
              'type|1': 1
          }]

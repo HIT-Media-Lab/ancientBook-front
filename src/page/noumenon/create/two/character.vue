@@ -29,7 +29,6 @@
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">出生时间：</label>
-               <!-- <input type="text" class="zxw-character-input zxw-character-input-margin" readonly @click="open_birth()"  v-model="input_content.birth_standard_name">-->
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_birth_time = true" @mouseout="show_birth_time = false" v-if="input_content.birth_standard_name !== ''">
@@ -40,7 +39,6 @@
                     <button class="zxw-input-add-character" @click="open_birth()"></button>
                 </div>
                 <label class="zxw-character-span zxw-must-write">死亡时间：</label>
-                <!--<input type="text" class="zxw-character-input zxw-character-input-margin" readonly @click="open_dead()" v-model="input_content.death_standard_name">-->
                 <div  class="zxw-character-input">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_dead_time = true" @mouseout="show_dead_time = false" v-if="input_content.death_standard_name !== ''">

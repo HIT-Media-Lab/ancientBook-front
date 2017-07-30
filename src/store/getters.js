@@ -86,6 +86,15 @@ export default {
     get_build_off:state => {
         return state.create_off
     },
+    get_build_lit:state => {
+        return state.create_literature
+    },
+    get_chaodai_data:state => {
+        return state.chaodai_data
+    },
+    get_character_data:state => {
+        return state.character_data
+    },
     get_fork:state => {
         return state.fork;
     },

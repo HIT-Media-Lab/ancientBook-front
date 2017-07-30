@@ -34,8 +34,8 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">节气：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_jieqi.chinese_name === '' " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_time.selected_jieqi.chinese_name" v-else>
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_jieqi === '' " >
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_time.selected_jieqi" v-else>
             <label class="zxw-character-span">英译：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.english === '' " >
             <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_time.english" v-else>
@@ -98,8 +98,7 @@
                 this.$store.getters.get_build_time.selected_2_month.chinese_name=null;
                 this.$store.getters.get_build_time.selected_2_day.item_1_id='';
                 this.$store.getters.get_build_time.selected_2_day.chinese_name=null;
-                this.$store.getters.get_build_time.selected_jieqi.chinese_name='';
-                this.$store.getters.get_build_time.selected_jieqi.item_1_id='';
+                this.$store.getters.get_build_time.selected_jieqi='';
                 this.$store.getters.get_build_time.english='';
                 //模态框自动关闭
                 window.setTimeout(function () {
@@ -157,7 +156,7 @@
                 this.create_time.g_ri = this.$store.getters.get_build_time.selected_2_day.item_1_id;
                 this.create_time.g_yue = this.$store.getters.get_build_time.selected_2_month.item_1_id;
                 this.create_time.english = this.$store.getters.get_build_time.english;
-                this.create_time.jieqi = this.$store.getters.get_build_time.selected_jieqi.chinese_name;
+                this.create_time.jieqi = this.$store.getters.get_build_time.selected_jieqi;
                 this.http_json(this.create_time_url,'post',this.create_time,this.success_create,this.fail_create);
             },
 

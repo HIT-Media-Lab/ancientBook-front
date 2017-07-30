@@ -158,26 +158,30 @@
             },
 
             clean_g_month(){
-                if(this.g_year === ''){
+                if(this.g_year === ''||this.selected_2_month.chinese_name === '-'){
                     this.selected_2_month.chinese_name = null;
+                    this.selected_2_month.item_1_id= 0;
                 }
             },
 
             clean_g_day(){
-                if(this.selected_2_month.chinese_name === null){
+                if(this.selected_2_month.chinese_name === null||this.selected_2_day.chinese_name === '-'){
                     this.selected_2_day.chinese_name = null;
+                    this.selected_2_day.item_1_id = 0;
                 }
             },
 
             clean_month(){
-                if(this.year === ''){
+                if(this.year === ''||this.selected_1_month.chinese_name === '-'){
                     this.selected_1_month.chinese_name = '';
+                    this.selected_1_month.item_1_id = 0;
                 }
             },
 
             clean_day(){
-                if(this.selected_1_month.chinese_name === ''){
+                if(this.selected_1_month.chinese_name === ''||this.selected_1_day.chinese_name === '-'){
                     this.selected_1_day.chinese_name = '';
+                    this.selected_1_day.item_1_id = 0;
                 }
             },
 
@@ -215,20 +219,17 @@
                 },
                 selected_2_month:{
                     item_1_id:0,
-                    chinese_name:null
+                    chinese_name:''
                 },
                 selected_2_day:{
                     item_1_id:0,
-                    chinese_name:null
+                    chinese_name:''
                 },
                 selected_ganzhi:{
                     item_1_id:0,
                     chinese_name:''
                 },
-                selected_jieqi:{
-                    item_1_id:0,
-                    chinese_name:''
-                },
+                selected_jieqi:'',
                 standard_name: '',
                 year: '',
                 g_year:'',
@@ -270,9 +271,9 @@
                 this.juedui = response.body.juedui;
                 this.g_year = response.body.gongyuan;
                 this.selected_2_month.item_1_id = response.body.g_yue;
-                this.selected_2_month.chinese_name = response.body.g_yue;
+                this.selected_2_month.chinese_name = response.body.g_yue_name;
                 this.selected_2_day.item_1_id= response.body.g_ri;
-                this.selected_2_day.chinese_name= response.body.g_ri;
+                this.selected_2_day.chinese_name= response.body.g_ri_name;
                 this.english = response.body.english;
                 this.selected_jieqi.chinese_name = response.body.jieqi;
             },
@@ -320,7 +321,7 @@
                 edit_object.g_yue=this.selected_2_month.item_1_id;
                 edit_object.g_ri=this.selected_2_day.item_1_id;
                 edit_object.english=this.english;
-                edit_object.jieqi=this.selected_jieqi.chinese_name;
+                edit_object.jieqi=this.selected_jieqi;
                 this.http_json(this.modify_url,'post',edit_object,this.success_modify_time,this.fail_modify_time);
             },
 
@@ -453,15 +454,9 @@
 
             success_jieqi_type(response){
                 for(let i = 0;i < response.body.length;i++){
-                    this.jieqi_type.push({
-                        item_1_id:response.body[i].item_1_id,
-                        chinese_name:response.body[i].chinese_name
-                    })
-                }
-                for(let i = 0; i < this.jieqi_type.length; i++){
-                    if(this.selected_jieqi.chinese_name === this.jieqi_type[i].chinese_name) {
-                        this.selected_jieqi.item_1_id = this.jieqi_type[i].item_1_id;
-                    }
+                    this.jieqi_type.push(
+                        response.body[i].chinese_name
+                    )
                 }
                 this.get_g_month_type();
             },

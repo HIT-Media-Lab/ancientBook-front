@@ -323,20 +323,48 @@ const store = new Vuex.Store({
             g_year:'',
             selected_2_month:{
                 item_1_id:0,
-                chinese_name:null
+                chinese_name:''
             },
             selected_2_day:{
                 item_1_id:0,
-                chinese_name:null
-            },
-            selected_jieqi:{
-                item_1_id:0,
                 chinese_name:''
             },
+            selected_jieqi:'',
             english:''
         },
 
+        create_literature:{
+            standard_name:'',
+            type_name: '',   //书名
+            type_other_name: '', //别名
+            english: '',
+            type_summary: '',
+            selected_save: {    //选择的存佚类型
+                item_1_id: 0,
+                chinese_name: ''
+            },
+            selected_level: {   //选择的品种级别
+                item_1_id: 0,
+                chinese_name: ''
+            },
+            selected_bu: {
+                item_1_id: 0,
+                chinese_name: ''
+            },
+            selected_lei: {
+                item_2_id: 0,
+                chinese_name: ''
+            },
+            selected_shu: {
+                item_3_id: 0,
+                chinese_name: ''
+            },
+            varieties_arr: []
+        },
+
         create_one_selection:0,
+        chaodai_data:'',
+        character_data:'',
 
         sort_item:{},
         sort_item_name:{},

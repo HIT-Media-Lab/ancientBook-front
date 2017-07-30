@@ -61,7 +61,7 @@
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length">上一步</button>
             </router-link>
 
-            <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()" v-bind:disabled="this.$store.getters.get_build_ins.length === 0">确认</button>
+            <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()">确认</button>
         </div>
         <success_create id="show_info" :show_info="show_info"></success_create>
     </div>

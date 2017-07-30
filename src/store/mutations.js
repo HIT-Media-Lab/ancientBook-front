@@ -92,6 +92,18 @@ export default {
         state.create_time = data;
         console.log('state.create_time: '+JSON.stringify(state.create_time));
     },
+    get_create_literature(state,data){
+        state.create_literature = data;
+        console.log('state.create_literature: '+JSON.stringify(state.create_literature));
+    },
+    post_chaodai_data(state,data){
+        state.chaodai_data = data;
+        console.log('state.chaodai_data: '+state.chaodai_data);
+    },
+    post_character_data(state,data){
+        state.character_data = data;
+        console.log('state.character_data: '+state.character_data);
+    },
     change_fork(state, bool){
         state.fork = bool;
     },

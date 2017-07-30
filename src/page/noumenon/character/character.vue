@@ -1,5 +1,5 @@
 <template>
-    <div class="zxwnoumenom-body">
+    <div>
         <noumenon_title :title="this.title">
             <noumenon_button slot="children" :noumenon_number="char_number"></noumenon_button>
         </noumenon_title>

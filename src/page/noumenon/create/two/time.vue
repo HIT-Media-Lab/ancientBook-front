@@ -40,7 +40,7 @@
             <div class="zxw-character-row">
                 <label class="zxw-character-span">节气：</label>
                 <select  class="zxw-ins-select  zxw-character-input-margin" v-model="input_time.selected_jieqi">
-                    <option v-for="item in jieqi_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
+                    <option v-for="item in jieqi_type">{{item}}</option>
                 </select>
                 <label class="zxw-character-span">英译：</label>
                 <input type="text" class="zxw-character-input" v-model="input_time.english">
@@ -201,15 +201,12 @@
     Mock.mock('/ancient_books/get_menu_items.action?model_id=28&&item_1_id=0&&item_2_id=0','get', {
         "g":[
             {"model_id|1": 1,
-                "item_1_id|1": 1,
                 "chinese_name": "节气1"
             },
             {"model_id|1": 1,
-                "item_1_id|2": 2,
                 "chinese_name": "节气2"
             },
             {"model_id|1": 1,
-                "item_1_id|3": 1,
                 "chinese_name": "节气3"
             }
         ]
@@ -274,14 +271,13 @@
                 this.$store.getters.get_build_time.selected_ganzhi.item_1_id = 0;
                 this.$store.getters.get_build_time.selected_ganzhi.chinese_name = '';
                 this.$store.getters.get_build_time.selected_2_month.item_1_id = 0;
-                this.$store.getters.get_build_time.selected_2_month.chinese_name = null;
+                this.$store.getters.get_build_time.selected_2_month.chinese_name = '';
                 this.$store.getters.get_build_time.selected_2_day.item_1_id = 0;
-                this.$store.getters.get_build_time.selected_2_day.chinese_name = null;
+                this.$store.getters.get_build_time.selected_2_day.chinese_name = '';
                 this.$store.getters.get_build_time.year='';
                 this.$store.getters.get_build_time.g_year='';
                 this.$store.getters.get_build_time.juedui='';
-                this.$store.getters.get_build_time.selected_jieqi.item_1_id='';
-                this.$store.getters.get_build_time.selected_jieqi.chinese_name='';
+                this.$store.getters.get_build_time.selected_jieqi='';
                 this.$store.getters.get_build_time.english='';
                 next();
             } else{
@@ -339,35 +335,31 @@
                 }
             },
 
-            compute_ganzhi(){
-                if(this.g_year !== '' && this.show_g_year === false ){
-                    let new_url = this.ganzhi_name+'?gongyuan='+parseInt(this.g_year);
-                    let object = {};
-                    this.http_json(new_url,'get',object,this.success_ganzhi_name,this.fail_ganzhi_name);
-                }
-            },
-
             clean_g_month(){
-                if(this.input_time.g_year === ''){
+                if(this.input_time.g_year === '' || this.input_time.selected_2_month.chinese_name === '-'){
                     this.input_time.selected_2_month.chinese_name = null;
+                    this.input_time.selected_2_month.item_1_id = 0;
                 }
             },
 
             clean_g_day(){
-                if(this.input_time.selected_2_month.chinese_name === null){
+                if(this.input_time.selected_2_month.chinese_name === null || this.input_time.selected_2_day.chinese_name === '-'){
                     this.input_time.selected_2_day.chinese_name = null;
+                    this.input_time.selected_2_day.item_1_id = 0;
                 }
             },
 
             clean_month(){
-                if(this.input_time.year === ''){
+                if(this.input_time.year === ''||this.input_time.selected_1_month.chinese_name=== '-'){
                     this.input_time.selected_1_month.chinese_name = '';
+                    this.input_time.selected_1_month.item_1_id = 0;
                 }
             },
 
             clean_day(){
-                if(this.input_time.selected_1_month.chinese_name === ''){
+                if(this.input_time.selected_1_month.chinese_name === ''||this.input_time.selected_1_day.chinese_name=== '-'){
                     this.input_time.selected_1_day.chinese_name = '';
+                    this.input_time.selected_1_day.item_1_id = 0;
                 }
             },
 
@@ -445,16 +437,13 @@
                     g_year:'',
                     selected_2_month:{
                         item_1_id:0,
-                        chinese_name:null
+                        chinese_name:''
                     },
                     selected_2_day:{
                         item_1_id:0,
-                        chinese_name:null
-                    },
-                    selected_jieqi:{
-                        item_1_id:0,
                         chinese_name:''
                     },
+                    selected_jieqi:'',
                     english:''
                 },
                 check_noumenon_repeat:'/ancient_books/check_noumenon_standard_name.action',
@@ -586,10 +575,9 @@
 
             success_jieqi_type(response){
                 for(let i = 0;i < response.body.length;i++){
-                    this.jieqi_type.push({
-                        item_1_id:response.body[i].item_1_id,
-                        chinese_name:response.body[i].chinese_name
-                    })
+                    this.jieqi_type.push(
+                        response.body[i].chinese_name
+                    )
                 }
             },
 

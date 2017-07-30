@@ -60,6 +60,10 @@ export default{
 
                 this.$router.push({name:'timetwo'});
 
+            } else if(this.noumenon_option[this.number]==='文献'){
+
+                this.$router.push({name:'littwo'});
+
             }
         },
 
