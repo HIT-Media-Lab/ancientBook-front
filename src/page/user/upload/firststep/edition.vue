@@ -1,6 +1,6 @@
 <template>
     <!--版本层-->
-    <div class="layer-input">
+    <div class="layer-input div-now">
         <div id="edition" class="form-center">
             <div>
                 <div class="row">

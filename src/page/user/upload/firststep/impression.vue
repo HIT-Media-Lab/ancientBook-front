@@ -1,7 +1,7 @@
 <template>
 
     <!--印次层-->
-    <div class="layer-input">
+    <div class="layer-input div-now">
         <div class="form-center">
             <div>
                 <div class="row">
