@@ -681,12 +681,12 @@ const router = new VueRouter({
                     children: [
                         {
                             path: '',
-                            redirect: 'book_varieties',
+                            redirect: 'book_varieties/:ancient_book_id',
                             component: book_varieties,
                             name: 'book_varieties'
                         },
                         {
-                            path: 'book_varieties',
+                            path: 'book_varieties/:ancient_book_id',
                             component: book_varieties,
                             name: 'book_varieties'
                         },
