@@ -86,7 +86,7 @@
                 this.$store.getters.get_build_terms.standard_name = '';
                 this.$store.getters.get_build_terms.terms_name='';
                 this.$store.getters.get_build_terms.course_subdivision=1;
-                this.$store.getters.get_build_terms.selected_course.item_1_id = null;
+                this.$store.getters.get_build_terms.selected_course.item_1_id = 0;
                 this.$store.getters.get_build_terms.selected_course.chinese_name = '';
                 this.$store.getters.get_build_terms.english='';
                 this.$store.getters.get_build_terms.explain='';
@@ -166,7 +166,7 @@
                     standard_name:'',
                     terms_name:'',
                     selected_course:{
-                        item_1_id:null,
+                        item_1_id:0,
                         chinese_name:''
                     },
                     course_subdivision:1,

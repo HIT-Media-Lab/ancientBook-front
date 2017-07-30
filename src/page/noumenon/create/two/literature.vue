@@ -241,16 +241,16 @@
                 this.$store.getters.get_build_lit.type_other_name='';
                 this.$store.getters.get_build_lit.type_summary = '';
                 this.$store.getters.get_build_lit.english='';
-                this.$store.getters.get_build_lit.selected_save.item_1_id=null;
+                this.$store.getters.get_build_lit.selected_save.item_1_id=0;
                 this.$store.getters.get_build_lit.selected_save.chinese_name='';
-                this.$store.getters.get_build_lit.selected_level.item_1_id=null;
+                this.$store.getters.get_build_lit.selected_level.item_1_id=0;
                 this.$store.getters.get_build_lit.selected_level.chinese_name='';
                 this.$store.getters.get_build_lit.selected_shu.chinese_name='';
-                this.$store.getters.get_build_lit.selected_shu.item_3_id=null;
+                this.$store.getters.get_build_lit.selected_shu.item_3_id=0;
                 this.$store.getters.get_build_lit.selected_lei.chinese_name='';
-                this.$store.getters.get_build_lit.selected_lei.item_2_id=null;
+                this.$store.getters.get_build_lit.selected_lei.item_2_id=0;
                 this.$store.getters.get_build_lit.selected_bu.chinese_name='';
-                this.$store.getters.get_build_lit.selected_bu.item_1_id=null;
+                this.$store.getters.get_build_lit.selected_bu.item_1_id=0;
                 this.$store.getters.get_build_lit.varieties_arr.splice(0,this.$store.getters.get_build_lit.varieties_arr.length);
                 next();
             } else{
@@ -369,23 +369,23 @@
                     english: '',
                     type_summary: '',
                     selected_save: {    //选择的存佚类型
-                        item_1_id: null,
+                        item_1_id: 0,
                         chinese_name: ''
                     },
                     selected_level: {   //选择的品种级别
-                        item_1_id: null,
+                        item_1_id: 0,
                         chinese_name: ''
                     },
                     selected_bu: {
-                        item_1_id: null,
+                        item_1_id: 0,
                         chinese_name: ''
                     },
                     selected_lei: {
-                        item_2_id: null,
+                        item_2_id: 0,
                         chinese_name: ''
                     },
                     selected_shu: {
-                        item_3_id: null,
+                        item_3_id: 0,
                         chinese_name: ''
                     },
                     varieties_arr: []
@@ -611,15 +611,15 @@
                     character_standard_name: '',
                     character_id: '',
                     selected_type_name: {
-                        item_1_id: null,
+                        item_1_id: 0,
                         chinese_name: ''
                     },
                     selected_action: {
-                        item_1_id: null,
+                        item_1_id: 0,
                         chinese_name: ''
                     },
                     selected_confirm: {
-                        item_1_id: null,
+                        item_1_id: 0,
                         chinese_name: ''
                     },
                     explain: ''
@@ -651,15 +651,15 @@
                     character_standard_name: '',
                     character_id: '',
                     selected_type_name: {
-                        item_1_id: null,
+                        item_1_id: 0,
                         chinese_name: ''
                     },
                     selected_action: {
-                        item_1_id: null,
+                        item_1_id: 0,
                         chinese_name: ''
                     },
                     selected_confirm: {
-                        item_1_id: null,
+                        item_1_id: 0,
                         chinese_name: ''
                     },
                     explain: ''

@@ -109,10 +109,11 @@
                 //清空Vuex
                 this.$store.getters.get_build_off.standard_name = '';
                 this.$store.getters.get_build_off.office_name='';
+                this.$store.getters.get_build_off.level=0;
                 this.$store.getters.get_build_off.english='';
                 this.$store.getters.get_build_off.other_name='';
                 this.$store.getters.get_build_off.dynasty='';
-                this.$store.getters.get_build_off.selected_level.item_1_id=null;
+                this.$store.getters.get_build_off.selected_level.item_1_id=0;
                 this.$store.getters.get_build_off.selected_level.chinese_name='';
                 this.$store.getters.get_build_off.institution_id='';
                 this.$store.getters.get_build_off.institution_name='';
@@ -206,7 +207,7 @@
                     s_office_name:'',
                     dynasty:'',
                     selected_level:{
-                        item_1_id:null,
+                        item_1_id:0,
                         chinese_name:''
                     },
                     begin_time_id:'',

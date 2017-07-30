@@ -173,16 +173,16 @@
                 this.$store.getters.get_build_lit.type_other_name='';
                 this.$store.getters.get_build_lit.type_summary = '';
                 this.$store.getters.get_build_lit.english='';
-                this.$store.getters.get_build_lit.selected_save.item_1_id=null;
+                this.$store.getters.get_build_lit.selected_save.item_1_id=0;
                 this.$store.getters.get_build_lit.selected_save.chinese_name='';
-                this.$store.getters.get_build_lit.selected_level.item_1_id=null;
+                this.$store.getters.get_build_lit.selected_level.item_1_id=0;
                 this.$store.getters.get_build_lit.selected_level.chinese_name='';
                 this.$store.getters.get_build_lit.selected_shu.chinese_name='';
-                this.$store.getters.get_build_lit.selected_shu.item_3_id=null;
+                this.$store.getters.get_build_lit.selected_shu.item_3_id=0;
                 this.$store.getters.get_build_lit.selected_lei.chinese_name='';
-                this.$store.getters.get_build_lit.selected_lei.item_2_id=null;
+                this.$store.getters.get_build_lit.selected_lei.item_2_id=0;
                 this.$store.getters.get_build_lit.selected_bu.chinese_name='';
-                this.$store.getters.get_build_lit.selected_bu.item_1_id=null;
+                this.$store.getters.get_build_lit.selected_bu.item_1_id=0;
                 this.$store.getters.get_build_lit.varieties_arr.splice(0,this.$store.getters.get_build_lit.varieties_arr.length);
 
                 //模态框自动关闭

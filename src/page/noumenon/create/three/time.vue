@@ -52,10 +52,10 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">月：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_2_month.chinese_name === ''">
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_2_month.chinese_name === null">
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="g_month" v-else>
             <label class="zxw-character-span">日：</label>
-            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_2_day.chinese_name === ''">
+            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_2_day.chinese_name === null">
             <input type="text" class="zxw-character-input-content" readonly v-model="g_day" v-else>
         </div>
 
@@ -64,7 +64,7 @@
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length">上一步</button>
             </router-link>
 
-            <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()">确认</button>
+            <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()" v-bind:disabled="this.$store.getters.get_build_time.length === 0">确认</button>
         </div>
         <success_create id="show_info" :show_info="show_info"></success_create>
     </div>
@@ -84,20 +84,20 @@
                 this.$store.getters.get_build_time.year='';
                 this.$store.getters.get_build_time.g_year='';
                 this.$store.getters.get_build_time.juedui='';
-                this.$store.getters.get_build_time.selected_ganzhi.item_1_id=null;
+                this.$store.getters.get_build_time.selected_ganzhi.item_1_id='';
                 this.$store.getters.get_build_time.selected_ganzhi.chinese_name='';
-                this.$store.getters.get_build_time.selected_chaodai.item_1_id=null;
+                this.$store.getters.get_build_time.selected_chaodai.item_1_id='';
                 this.$store.getters.get_build_time.selected_chaodai.chinese_name='';
-                this.$store.getters.get_build_time.selected_nianhao.item_2_id=null;
+                this.$store.getters.get_build_time.selected_nianhao.item_2_id='';
                 this.$store.getters.get_build_time.selected_nianhao.chinese_name='';
-                this.$store.getters.get_build_time.selected_1_month.item_1_id=null;
+                this.$store.getters.get_build_time.selected_1_month.item_1_id='';
                 this.$store.getters.get_build_time.selected_1_month.chinese_name='';
-                this.$store.getters.get_build_time.selected_1_day.item_1_id=null;
+                this.$store.getters.get_build_time.selected_1_day.item_1_id='';
                 this.$store.getters.get_build_time.selected_1_day.chinese_name='';
-                this.$store.getters.get_build_time.selected_2_month.item_1_id=null;
-                this.$store.getters.get_build_time.selected_2_month.chinese_name='';
-                this.$store.getters.get_build_time.selected_2_day.item_1_id=null;
-                this.$store.getters.get_build_time.selected_2_day.chinese_name='';
+                this.$store.getters.get_build_time.selected_2_month.item_1_id='';
+                this.$store.getters.get_build_time.selected_2_month.chinese_name=null;
+                this.$store.getters.get_build_time.selected_2_day.item_1_id='';
+                this.$store.getters.get_build_time.selected_2_day.chinese_name=null;
                 this.$store.getters.get_build_time.selected_jieqi='';
                 this.$store.getters.get_build_time.english='';
                 //模态框自动关闭

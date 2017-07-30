@@ -260,19 +260,19 @@
             if(to.name !== 'timethree'){
                 //清空Vuex
                 this.$store.getters.get_build_time.standard_name = '';
-                this.$store.getters.get_build_time.selected_chaodai.item_1_id = null;
+                this.$store.getters.get_build_time.selected_chaodai.item_1_id = 0;
                 this.$store.getters.get_build_time.selected_chaodai.chinese_name = '';
-                this.$store.getters.get_build_time.selected_nianhao.item_2_id = null;
+                this.$store.getters.get_build_time.selected_nianhao.item_2_id = 0;
                 this.$store.getters.get_build_time.selected_nianhao.chinese_name = '';
-                this.$store.getters.get_build_time.selected_1_month.item_1_id = null;
+                this.$store.getters.get_build_time.selected_1_month.item_1_id = 0;
                 this.$store.getters.get_build_time.selected_1_month.chinese_name = '';
-                this.$store.getters.get_build_time.selected_1_day.item_1_id = null;
+                this.$store.getters.get_build_time.selected_1_day.item_1_id = 0;
                 this.$store.getters.get_build_time.selected_1_day.chinese_name = '';
-                this.$store.getters.get_build_time.selected_ganzhi.item_1_id = null;
+                this.$store.getters.get_build_time.selected_ganzhi.item_1_id = 0;
                 this.$store.getters.get_build_time.selected_ganzhi.chinese_name = '';
-                this.$store.getters.get_build_time.selected_2_month.item_1_id = null;
+                this.$store.getters.get_build_time.selected_2_month.item_1_id = 0;
                 this.$store.getters.get_build_time.selected_2_month.chinese_name = '';
-                this.$store.getters.get_build_time.selected_2_day.item_1_id = null;
+                this.$store.getters.get_build_time.selected_2_day.item_1_id = 0;
                 this.$store.getters.get_build_time.selected_2_day.chinese_name = '';
                 this.$store.getters.get_build_time.year='';
                 this.$store.getters.get_build_time.g_year='';
