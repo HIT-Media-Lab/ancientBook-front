@@ -30,7 +30,7 @@
         props: ['bookid'],
 
         created : function () {
-            this.$store.commit("save_book_all_info",this.book_all_info);
+            this.book_all_info = this.$store.getters.get_book_all_info;
         },
 
         mounted : function () {

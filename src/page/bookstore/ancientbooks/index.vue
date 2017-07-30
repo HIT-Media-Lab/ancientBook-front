@@ -12,7 +12,7 @@
 
         <div class="width950 center">
             <h3 style="display:inline-block" class="float-left">古籍规范名称：</h3>
-            <h4 id="bookName" style="display:inline-block" class="float-left ry-book-name">{{first_layer_info.type_name}}</h4>
+            <h4 id="bookName" style="display:inline-block" class="float-left ry-book-name">{{book_all_info.name}}</h4>
             <div class="ry-4layers" style="display:inline-block">
                 <p>{{book_info1}}</p>
                 <p>{{book_info2}}</p>
