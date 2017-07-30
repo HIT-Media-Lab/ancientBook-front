@@ -341,7 +341,7 @@
             this.change_module();
 //            this.get_picture();
 //            this.get_text();
-//            this.get_edit();
+            this.get_edit();
             this.renew_mark();
             this.renew_comment();
         },
