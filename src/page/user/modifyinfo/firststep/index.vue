@@ -2076,94 +2076,94 @@
              * 确定修改
              */
             confirm_modify() {
-                var delet_responsibility_infos = [];
-                var add_responsibility_infos = [];
-                for (var i = 0; i < this.literature_info.responsibility_infos.length; i++) {
-                    delet_responsibility_infos.push(this.first_layer_info.responsibility_infos[i].responsibility_info_id)
-                }
-                for (var j = 0; j < this.literature_info.responsibility_infos.length; j++) {
-                    delet_responsibility_infos.push(this.three_layers_info.responsibility_infos[j].responsibility_info_id)
-                }
-                for (var k = 0; k < this.variety_item.length; k ++) {
-                    add_responsibility_infos.push(this.variety_item[k])
-                }
-                for (var m = 0; m < this.edition_item.length; m ++) {
-                    add_responsibility_infos.push(this.edition_item[m])
-                }
-                for (var n = 0; n < this.impression_item.length; n ++) {
-                    add_responsibility_infos.push(this.impression_item[n])
-                }
-                for (var o = 0; o < this.copy_item.length; o ++) {
-                    add_responsibility_infos.push(this.copy_item[o])
-                }
-
-                var obj = {};
-                obj.literature_id = this.book_all_info.literature_id;
-                obj.english = this.first_layer_info.english;
-                obj.type_name = this.first_layer_info.type_name;
-                obj.type_other_name = this.first_layer_info.type_other_name;
-                obj.type_save = this.first_layer_info.type_save;
-                obj.type_level = this.first_layer_info.type_level;
-                obj.type_bu = this.first_layer_info.type_bu;
-                obj.type_lei = this.first_layer_info.type_lei;
-                obj.type_shu = this.first_layer_info.type_shu;
-                obj.type_summary = this.first_layer_info.type_summary;
-                obj.literature_standard_name = this.first_layer_info.literature_standard_name;
-
-                obj.ancient_book_info_id = this.book_all_info.ancient_book_info_id;
-                obj.version_volume = parseInt(this.three_layers_info.version_volume);
-                obj.version_type = this.three_layers_info.version_type;
-                obj.version_age = this.three_layers_info.version_age;
-                obj.version_support = this.three_layers_info.version_support;
-                obj.version_binding = this.three_layers_info.version_binding;
-                obj.version_frame_length = parseInt(this.three_layers_info.version_frame_length);
-                obj.version_frame_width = parseInt(this.three_layers_info.version_frame_width);
-                obj.version_format_length = parseInt(this.three_layers_info.version_format_length);
-                obj.version_format_width = parseInt(this.three_layers_info.version_format_width);
-                obj.version_paiji_content = this.three_layers_info.version_paiji_content;
-                obj.version_paiji_location = this.three_layers_info.version_paiji_location;
-                obj.version_half_page_line_number = parseInt(this.three_layers_info.version_half_page_line_number);
-                obj.version_page_line_number = parseInt(this.three_layers_info.version_page_line_number);
-                obj.version_yuwei = this.three_layers_info.version_yuwei;
-                obj.version_double_page_number = parseInt(this.three_layers_info.version_double_page_number);
-                obj.version_bianlan = this.three_layers_info.version_bianlan;
-                obj.version_fenlan = this.three_layers_info.version_fenlan;
-                obj.version_shukou = this.three_layers_info.version_shukou;
-                obj.version_banxin_content = this.three_layers_info.version_banxin_content;
-                obj.version_youshuwuer = this.three_layers_info.version_youshuwuer;
-                obj.version_youwujiazhu = this.three_layers_info.version_youwujiazhu;
-                obj.printing_type = this.three_layers_info.printing_type;
-                obj.printing_number = this.three_layers_info.printing_number;
-                obj.duplicate_book_count = parseInt(this.three_layers_info.duplicate_book_count);
-                obj.duplicate_level = this.three_layers_info.duplicate_level;
-                obj.duplicate_complete = this.three_layers_info.duplicate_complete;
-                obj.duplicate_attachment = this.three_layers_info.duplicate_attachment;
-
-                obj.ancient_book_id = this.ancient_book_id;
-                obj.name = this.first_layer_info.type_name;
-                obj.standard_name = this.first_layer_info.standard_name;
-                obj.pri = this.upload_one_info.pri;
-                obj.summary = this.book_all_info.summary;
-
-                obj.delet_responsibility_infos = delet_responsibility_infos;
-
-                for (var p = 0; p < add_responsibility_infos.length; p++) {
-                    obj.add_responsibility_infos.push({
-                        order : p + 1,
-                        location_id : add_responsibility_infos[p].location_id,
-                        person_id : add_responsibility_infos[p].person_id,
-                        begin_time : add_responsibility_infos[p].begin_time
-                        end_time : add_responsibility_infos[p].end_time,
-                        action : add_responsibility_infos[p].action,
-                        explain : add_responsibility_infos[p].explain,
-                        confirm : add_responsibility_infos[p].confirm,
-                        type : add_responsibility_infos[p].type,
-                        level : add_responsibility_infos[p].level,
-                    })
-                }
-                obj.add_responsibility_infos = add_responsibility_infos;
-                this.before_http(obj);
-                this.http_json('/ancient_books/modify_ancient_book_all_info_with_literature.action' , 'post' , obj , this.success_post_add , this.fail_post_add);
+//                var delet_responsibility_infos = [];
+//                var add_responsibility_infos = [];
+//                for (var i = 0; i < this.literature_info.responsibility_infos.length; i++) {
+//                    delet_responsibility_infos.push(this.first_layer_info.responsibility_infos[i].responsibility_info_id)
+//                }
+//                for (var j = 0; j < this.literature_info.responsibility_infos.length; j++) {
+//                    delet_responsibility_infos.push(this.three_layers_info.responsibility_infos[j].responsibility_info_id)
+//                }
+//                for (var k = 0; k < this.variety_item.length; k ++) {
+//                    add_responsibility_infos.push(this.variety_item[k])
+//                }
+//                for (var m = 0; m < this.edition_item.length; m ++) {
+//                    add_responsibility_infos.push(this.edition_item[m])
+//                }
+//                for (var n = 0; n < this.impression_item.length; n ++) {
+//                    add_responsibility_infos.push(this.impression_item[n])
+//                }
+//                for (var o = 0; o < this.copy_item.length; o ++) {
+//                    add_responsibility_infos.push(this.copy_item[o])
+//                }
+//
+//                var obj = {};
+//                obj.literature_id = this.book_all_info.literature_id;
+//                obj.english = this.first_layer_info.english;
+//                obj.type_name = this.first_layer_info.type_name;
+//                obj.type_other_name = this.first_layer_info.type_other_name;
+//                obj.type_save = this.first_layer_info.type_save;
+//                obj.type_level = this.first_layer_info.type_level;
+//                obj.type_bu = this.first_layer_info.type_bu;
+//                obj.type_lei = this.first_layer_info.type_lei;
+//                obj.type_shu = this.first_layer_info.type_shu;
+//                obj.type_summary = this.first_layer_info.type_summary;
+//                obj.literature_standard_name = this.first_layer_info.literature_standard_name;
+//
+//                obj.ancient_book_info_id = this.book_all_info.ancient_book_info_id;
+//                obj.version_volume = parseInt(this.three_layers_info.version_volume);
+//                obj.version_type = this.three_layers_info.version_type;
+//                obj.version_age = this.three_layers_info.version_age;
+//                obj.version_support = this.three_layers_info.version_support;
+//                obj.version_binding = this.three_layers_info.version_binding;
+//                obj.version_frame_length = parseInt(this.three_layers_info.version_frame_length);
+//                obj.version_frame_width = parseInt(this.three_layers_info.version_frame_width);
+//                obj.version_format_length = parseInt(this.three_layers_info.version_format_length);
+//                obj.version_format_width = parseInt(this.three_layers_info.version_format_width);
+//                obj.version_paiji_content = this.three_layers_info.version_paiji_content;
+//                obj.version_paiji_location = this.three_layers_info.version_paiji_location;
+//                obj.version_half_page_line_number = parseInt(this.three_layers_info.version_half_page_line_number);
+//                obj.version_page_line_number = parseInt(this.three_layers_info.version_page_line_number);
+//                obj.version_yuwei = this.three_layers_info.version_yuwei;
+//                obj.version_double_page_number = parseInt(this.three_layers_info.version_double_page_number);
+//                obj.version_bianlan = this.three_layers_info.version_bianlan;
+//                obj.version_fenlan = this.three_layers_info.version_fenlan;
+//                obj.version_shukou = this.three_layers_info.version_shukou;
+//                obj.version_banxin_content = this.three_layers_info.version_banxin_content;
+//                obj.version_youshuwuer = this.three_layers_info.version_youshuwuer;
+//                obj.version_youwujiazhu = this.three_layers_info.version_youwujiazhu;
+//                obj.printing_type = this.three_layers_info.printing_type;
+//                obj.printing_number = this.three_layers_info.printing_number;
+//                obj.duplicate_book_count = parseInt(this.three_layers_info.duplicate_book_count);
+//                obj.duplicate_level = this.three_layers_info.duplicate_level;
+//                obj.duplicate_complete = this.three_layers_info.duplicate_complete;
+//                obj.duplicate_attachment = this.three_layers_info.duplicate_attachment;
+//
+//                obj.ancient_book_id = this.ancient_book_id;
+//                obj.name = this.first_layer_info.type_name;
+//                obj.standard_name = this.first_layer_info.standard_name;
+//                obj.pri = this.upload_one_info.pri;
+//                obj.summary = this.book_all_info.summary;
+//
+//                obj.delet_responsibility_infos = delet_responsibility_infos;
+//
+//                for (var p = 0; p < add_responsibility_infos.length; p++) {
+//                    obj.add_responsibility_infos.push({
+//                        order : p + 1,
+//                        location_id : add_responsibility_infos[p].location_id,
+//                        person_id : add_responsibility_infos[p].person_id,
+//                        begin_time : add_responsibility_infos[p].begin_time,
+//                        end_time : add_responsibility_infos[p].end_time,
+//                        action : add_responsibility_infos[p].action,
+//                        explain : add_responsibility_infos[p].explain,
+//                        confirm : add_responsibility_infos[p].confirm,
+//                        type : add_responsibility_infos[p].type,
+//                        level : add_responsibility_infos[p].level,
+//                    })
+//                }
+//                obj.add_responsibility_infos = add_responsibility_infos;
+//                this.before_http(obj);
+//                this.http_json('/ancient_books/modify_ancient_book_all_info_with_literature.action' , 'post' , obj , this.success_post_add , this.fail_post_add);
             },
 
             success_post_edit(response) {
