@@ -137,10 +137,6 @@ import  upload3 from  './page/user/upload/thirdstep/index.vue'
 
 
 import  modify1 from  './page/user/modifyinfo/firststep/index.vue'
-import  copy_modify from './page/user/modifyinfo/firststep/copy.vue'
-import  edition_modify from './page/user/modifyinfo/firststep/edition.vue'
-import  impression_modify from './page/user/modifyinfo/firststep/impression.vue'
-import  varieties_modify from  './page/user/modifyinfo/firststep/variety.vue'
 import  modify2 from  './page/user/modifyinfo/secondstep/index.vue'
 import  modify3 from  './page/user/modifyinfo/thirdstep/index.vue'
 
