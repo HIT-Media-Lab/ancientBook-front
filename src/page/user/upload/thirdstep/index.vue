@@ -500,10 +500,11 @@
 
                 for (var i = 0; i < this.varieties_item.varieties_responsibility.length; i++) {
                     this.responsibility_info.push({
+                        order:i,
                         location_id:this.varieties_item.varieties_responsibility[i].location_id,
-                        person_id:this.varieties_item.varieties_responsibility[i].person_id,
-                        begin_time:this.varieties_item.varieties_responsibility[i].begin_time_id,
-                        end_time:this.varieties_item.varieties_responsibility[i].end_time_id,
+                        name_id:this.varieties_item.varieties_responsibility[i].person_id,
+                        begin_time_id:this.varieties_item.varieties_responsibility[i].begin_time_id,
+                        end_time_id:this.varieties_item.varieties_responsibility[i].end_time_id,
                         action:this.varieties_item.varieties_responsibility[i].action,
                         explain:this.varieties_item.varieties_responsibility[i].explain,
                         confirm:this.varieties_item.varieties_responsibility[i].confirm,
@@ -514,10 +515,11 @@
 
                 for (var j = 0; j < this.edition_item.edition_responsibility.length; j++) {
                     this.responsibility_info.push({
+                        order:i,
                         location_id:this.edition_item.edition_responsibility[j].location_id,
-                        person_id:this.edition_item.edition_responsibility[j].person_id,
-                        begin_time:this.edition_item.edition_responsibility[j].begin_time_id,
-                        end_time:this.edition_item.edition_responsibility[j].end_time_id,
+                        name_id:this.edition_item.edition_responsibility[j].person_id,
+                        begin_time_id:this.edition_item.edition_responsibility[j].begin_time_id,
+                        end_time_id:this.edition_item.edition_responsibility[j].end_time_id,
                         action:this.edition_item.edition_responsibility[j].action,
                         explain:this.edition_item.edition_responsibility[j].explain,
                         confirm:this.edition_item.edition_responsibility[j].confirm,
@@ -528,10 +530,11 @@
 
                 for (var k = 0; k < this.impression_item.impression_responsibility.length; k++) {
                     this.responsibility_info.push({
+                        order:k,
                         location_id:this.impression_item.impression_responsibility[k].location_id,
-                        person_id:this.impression_item.impression_responsibility[k].person_id,
-                        begin_time:this.impression_item.impression_responsibility[k].begin_time_id,
-                        end_time:this.impression_item.impression_responsibility[k].end_time_id,
+                        name_id:this.impression_item.impression_responsibility[k].person_id,
+                        begin_time_id:this.impression_item.impression_responsibility[k].begin_time_id,
+                        end_time_id:this.impression_item.impression_responsibility[k].end_time_id,
                         action:this.impression_item.impression_responsibility[k].action,
                         explain:this.impression_item.impression_responsibility[k].explain,
                         confirm:this.impression_item.impression_responsibility[k].confirm,
@@ -542,10 +545,11 @@
 
                 for (var m = 0; m < this.copy_item.copy_responsibility.length; m++) {
                     this.responsibility_info.push({
+                        order:m,
                         location_id:this.copy_item.copy_responsibility[m].location_id,
-                        person_id:this.copy_item.copy_responsibility[m].person_id,
-                        begin_time:this.copy_item.copy_responsibility[m].begin_time_id,
-                        end_time:this.copy_item.copy_responsibility[m].end_time_id,
+                        name_id:this.copy_item.copy_responsibility[m].person_id,
+                        begin_time_id:this.copy_item.copy_responsibility[m].begin_time_id,
+                        end_time_id:this.copy_item.copy_responsibility[m].end_time_id,
                         action:this.copy_item.copy_responsibility[m].action,
                         explain:this.copy_item.copy_responsibility[m].explain,
                         confirm:this.copy_item.copy_responsibility[m].confirm,
