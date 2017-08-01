@@ -631,8 +631,6 @@
                             this.http_json('/ancient_books/upload_page.action' , 'post' , upload_picture_obj , this.success_post_picture , this.fail_post_picture);
                         }
                     }
-
-                    this.$router.push({path:'/user_info/mybook'});
                 }
                 else if (response.body.result === 0) {
                     console.log("fail add");
@@ -646,6 +644,7 @@
             success_post_picture(response) {
                 if (response.body.result === 1) {
                     console.log("success upload picture!");
+                    this.$router.push({path:'/user_info/mybook'});
                 }
                 else if (response.body.result === 0) {
                     console.log("fail upload picture");
