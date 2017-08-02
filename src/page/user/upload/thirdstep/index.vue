@@ -107,6 +107,9 @@
                 upload_file : [],
                 responsibility_info : [],
                 add_book_obj : {},
+
+                post_index1 : 0,
+                posts_index2 : 0,
             }
         },
 
@@ -609,11 +612,11 @@
                 if (response.body.result === 1) {
                     console.log("success add!");
 
-                    for (var i = 0; i < vm.upload_file.length; i++) {
-                        for (var j = 0; j < vm.upload_file[i].images.length; j++) {
+                    for (vm.post_index1 = 0; vm.post_index1 < vm.upload_file.length; vm.post_index1++) {
+                        for (vm.post_index2 = 0; vm.post_index2 < vm.upload_file[vm.post_index1].images.length; vm.post_index2++) {
                             var upload_picture_obj = {};
 
-                            var name = vm.upload_file[i].images[j].pic_name;
+                            var name = vm.upload_file[vm.post_index1].images[vm.post_index2].pic_name;
                             var first = name.charAt(1);
                             var second = name.charAt(2);
                             var third = name.charAt(3);
@@ -621,30 +624,33 @@
                             var volume = parseInt(str);
 
                             upload_picture_obj.ancient_book_id = response.body.id;
-                            upload_picture_obj.book = i + 1;
+                            upload_picture_obj.book = vm.post_index1 + 1;
                             upload_picture_obj.volume = volume;
-                            upload_picture_obj.page = j + 1;
-                            upload_picture_obj.picture = vm.upload_file[i].images[j].picture;
-                            upload_picture_obj.content = vm.upload_file[i].texts[j];
-                            upload_picture_obj.book_name = vm.upload_file[i].book_name;
-                            this.before_http(upload_picture_obj);
-                            this.http_json('/ancient_books/upload_page.action' , 'post' , upload_picture_obj , this.success_post_picture , this.fail_post_picture);
+                            upload_picture_obj.page = vm.post_index2 + 1;
+                            upload_picture_obj.picture = vm.upload_file[vm.post_index1].images[vm.post_index2].picture;
+                            upload_picture_obj.content = vm.upload_file[vm.post_index1].texts[vm.post_index2];
+                            upload_picture_obj.book_name = vm.upload_file[vm.post_index1].book_name;
+                            this.$http.post('/ancient_books/upload_page.action' , upload_picture_obj , {emulateJSON: true}).then((response) => this.success_post_picture , (response) => this.fail_post_picture);
                         }
                     }
                 }
                 else if (response.body.result === 0) {
                     console.log("fail add");
+                    this.responsibility_info = [];
                 }
             },
 
             fail_post_add() {
                 console.log("fail add!");
+                this.responsibility_info = [];
             },
 
             success_post_picture(response) {
                 if (response.body.result === 1) {
                     console.log("success upload picture!");
-                    this.$router.push({path:'/user_info/mybook'});
+                    if (vm.post_index1 == vm.upload_file.length - 1 && vm.post_index2 == vm.upload_file[vm.upload_file.length - 1].images.length - 1) {
+                        this.$router.push({path:'/user_info/mybook'});
+                    }
                 }
                 else if (response.body.result === 0) {
                     console.log("fail upload picture");
