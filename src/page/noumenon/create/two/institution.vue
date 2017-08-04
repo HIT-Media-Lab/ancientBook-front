@@ -25,7 +25,7 @@
             <div class="zxw-character-row">
                 <label class="zxw-character-span">主管职：</label>
                <div  class="zxw-character-input zxw-character-input-margin">
-                  <div class="zxw-div-input" placeholder="点击右侧按钮添加">
+                  <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_ins.chief_office_name !== ''">
                         <span class="zxw-person-relation-span"  @mouseover="show_chief_office = true" @mouseout="show_chief_office = false" v-if="input_ins.chief_office_name !== ''">
                             <span class="zxw-tag-font" v-model="input_ins.chief_office_name" >{{input_ins.chief_office_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_chief_office === true" @click="delete_chief_office()"></button>
@@ -35,7 +35,7 @@
                </div>
                 <label class="zxw-character-span">副官职：</label>
                 <div  class="zxw-character-input">
-                   <div class="zxw-div-input" placeholder="点击右侧按钮添加">
+                   <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_ins.vice_office_name !== ''">
                         <span class="zxw-person-relation-span"  @mouseover="show_vice_office = true" @mouseout="show_vice_office = false" v-if="input_ins.vice_office_name !== ''">
                             <span class="zxw-tag-font" v-model="input_ins.vice_office_name" >{{input_ins.vice_office_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_vice_office === true" @click="delete_vice_office()"></button>
@@ -48,7 +48,7 @@
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">起始时间：</label>
                 <div  class="zxw-character-input zxw-character-input-margin">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_ins.begin_standard_time !== ''">
                         <span class="zxw-person-relation-span"  @mouseover="show_begin_time = true" @mouseout="show_begin_time = false" v-if="input_ins.begin_standard_time !== ''">
                             <span class="zxw-tag-font" v-model="input_ins.begin_standard_time" >{{input_ins.begin_standard_time}}</span>
                             <button class="zxw-add-hover-img" v-show="show_begin_time===true" @click="delete_begin()"></button>
@@ -58,7 +58,7 @@
                 </div>
                 <label class="zxw-character-span zxw-must-write">终止时间：</label>
                 <div  class="zxw-character-input">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_ins.end_standard_time !== ''">
                         <span class="zxw-person-relation-span"  @mouseover="show_end_time = true" @mouseout="show_end_time = false" v-if="input_ins.end_standard_time !== ''">
                             <span class="zxw-tag-font" v-model="input_ins.end_standard_time" >{{input_ins.end_standard_time}}</span>
                             <button class="zxw-add-hover-img" v-show="show_end_time===true" @click="delete_end()"></button>
@@ -71,7 +71,7 @@
             <div class="zxw-character-row">
                 <label class="zxw-character-span">上级机构：</label>
                 <div  class="zxw-character-input zxw-character-input-margin">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_ins.parent_body_name !== ''">
                         <span class="zxw-person-relation-span"  @mouseover="show_parent_ins = true" @mouseout="show_parent_ins = false" v-if="input_ins.parent_body_name !== ''">
                             <span class="zxw-tag-font" v-model="input_ins.parent_body_name" >{{input_ins.parent_body_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_parent_ins === true" @click="delete_parent_ins()"></button>

@@ -66,7 +66,7 @@
                 <div class="zxw-lit-layer">
                     <label class="zxw-lit-type-label zxw-must-write">责任开始时间:</label>
                     <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style">
-                        <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加">
+                        <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.begin_standard_time !== ''">
                         <span class="zxw-person-relation-span" @mouseover="item.show_begin_time = true" @mouseout="item.show_begin_time = false" v-if="item.begin_standard_time !=='' " v-bind:contenteditable="item.begin_standard_time !== ''" @keydown="down_delete()">
                             <span class="zxw-tag-font" v-model="item.begin_standard_time">{{item.begin_standard_time}}</span>
                             <button class="zxw-add-hover-img" v-show="item.show_begin_time===true" @click="delete_lit_begin(index)"></button>
@@ -76,7 +76,7 @@
                     </div>
                     <label class="zxw-lit-type-label zxw-must-write">责任结束时间:</label>
                     <div  class="zxw-lit-info zxw-lit-input-style">
-                        <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加">
+                        <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.end_standard_time !== ''">
                         <span class="zxw-person-relation-span" @mouseover="item.show_end_time = true" @mouseout="item.show_end_time = false" v-if="item.end_standard_time !== ''" v-bind:contenteditable="item.end_standard_time !== ''" @keydown="down_delete()">
                             <span class="zxw-tag-font" v-model="item.end_standard_time">{{item.end_standard_time}}</span>
                             <button class="zxw-add-hover-img" v-show="item.show_end_time===true" @click="delete_lit_end(index)"></button>
@@ -89,7 +89,7 @@
                 <div class="zxw-lit-layer">
                     <label class="zxw-lit-type-label">责任地点:</label>
                     <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style">
-                        <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加">
+                        <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.location_standard_name !== ''">
                         <span class="zxw-person-relation-span" @mouseover="item.show_lit_location = true" @mouseout="item.show_lit_location = false" v-if="item.location_standard_name !== ''" v-bind:contenteditable="item.location_standard_name !== ''" @keydown="down_delete()">
                             <span class="zxw-tag-font" v-model="item.location_standard_name">{{item.location_standard_name}}</span>
                             <button class="zxw-add-hover-img" v-show="item.show_lit_location===true" @click="delete_lit_location(index)"></button>
@@ -99,7 +99,7 @@
                     </div>
                     <label class="zxw-lit-type-label zxw-must-write">责任者名称：</label>
                     <div  class="zxw-lit-info zxw-lit-input-style">
-                        <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加">
+                        <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.character_standard_name !== ''">
                         <span class="zxw-person-relation-span" @mouseover="item.show_lit_character = true" @mouseout="item.show_lit_character = false" v-if="item.character_standard_name !== ''" v-bind:contenteditable="item.character_standard_name !== ''" @keydown="down_delete()">
                             <span class="zxw-tag-font" v-model="item.character_standard_name">{{item.character_standard_name}}</span>
                             <button class="zxw-add-hover-img" v-show="item.show_lit_character===true" @click="delete_lit_character(index)"></button>
@@ -468,6 +468,7 @@
             /*类*/
             get_type_lei(){
                 if (this.lit_content.selected_bu.chinese_name !== '') {
+                    this.type_lei_arr.splice(0,this.type_lei_arr.length);
                     let object = {};
                     let new_url = this.menu_url + '?model_id=8&&item_1_id=' + this.lit_content.selected_bu.item_1_id + '&&item_2_id=0';
                     this.http_json(new_url, 'get', object, this.success_type_lei, this.fail_type_lei);
@@ -477,6 +478,7 @@
             /*属*/
             get_type_shu(){
                 if (this.lit_content.selected_lei.chinese_name !== '') {
+                    this.type_bu_arr.splice(0,this.type_shu_arr.length);
                     let object = {};
                     let new_url = this.menu_url + '?model_id=8&&item_1_id=' + this.lit_content.selected_bu.item_1_id + '&&item_2_id=' + this.lit_content.selected_lei.item_2_id;
                     this.http_json(new_url, 'get', object, this.success_type_shu, this.fail_type_shu);

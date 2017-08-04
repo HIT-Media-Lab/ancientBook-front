@@ -75,11 +75,13 @@
             '$route'(){
                 this.clean_data();
                 this.get_character();
+                console.log("$route");
             }
         },
 
         created(){
             this.get_character();
+            console.log("created");
         },
 
         data(){

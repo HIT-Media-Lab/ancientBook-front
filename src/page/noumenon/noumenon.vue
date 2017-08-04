@@ -38,36 +38,35 @@
         },
         methods: {
             success_recent(response){
-                if(response.body.noumenons.length > 0){
-                    for (let i = 0; i < response.body.noumenons.length; i++) {
-                        this.recent_noumenons.push({
-                            standard_name:response.body.noumenons[i].standard_name,
-                            id:response.body.noumenons[i].id,
-                            type:response.body.noumenons[i].type
-                        });
+                console.log("最近编辑请求成功！");
+                for (let i = 0; i < response.body.noumenons.length; i++) {
+                    this.recent_noumenons.push({
+                        standard_name:response.body.noumenons[i].standard_name,
+                        id:response.body.noumenons[i].id,
+                        type:response.body.noumenons[i].type
+                    });
 
-                        if(response.body.noumenons[i].type === 1){
+                    if(response.body.noumenons[i].type === 1){
 
-                            this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【人物】';
-                        } else if (response.body.noumenons[i].type === 2){
+                        this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【人物】';
+                    } else if (response.body.noumenons[i].type === 2){
 
-                            this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【文献】';
-                        } else if (response.body.noumenons[i].type === 3){
+                        this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【文献】';
+                    } else if (response.body.noumenons[i].type === 3){
 
-                            this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【术语】';
-                        } else if (response.body.noumenons[i].type === 4){
+                        this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【术语】';
+                    } else if (response.body.noumenons[i].type === 4){
 
-                            this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【时间】';
-                        } else if (response.body.noumenons[i].type === 5){
+                        this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【时间】';
+                    } else if (response.body.noumenons[i].type === 5){
 
-                            this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【职官】';
-                        } else if (response.body.noumenons[i].type === 6){
+                        this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【职官】';
+                    } else if (response.body.noumenons[i].type === 6){
 
-                            this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【机构】';
-                        } else if (response.body.noumenons[i].type === 7){
+                        this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【机构】';
+                    } else if (response.body.noumenons[i].type === 7){
 
-                            this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【地名】';
-                        }
+                        this.recent_noumenons[i].standard_name = this.recent_noumenons[i].standard_name+'【地名】';
                     }
                 }
             },

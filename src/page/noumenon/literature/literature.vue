@@ -192,7 +192,7 @@
                 this.type_lei_name = response.body.type_lei_name;
                 this.type_shu_name = response.body.type_shu_name;
                 this.type_summary = response.body.type_summary;
-                if(response.body.responsibility_infos.length !== 0){
+                if(response.body.responsibility_infos.length > 0){
                     for(let i = 0; i < response.body.responsibility_infos.length; i++){
                         this.responsibility_infos.push(
                             response.body.responsibility_infos[i]

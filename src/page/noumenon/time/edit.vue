@@ -149,8 +149,8 @@
             },
 
             get_nianhao_type(){
-                if(this.selected_chaodai.chinese_name !== ''||this.nianhao_type.length !== 0){
-                    //this.nianhao_type.splice(0,this.nianhao_type.length);
+                if(this.selected_chaodai.chinese_name !== ''){
+                    this.nianhao_type.splice(0,this.nianhao_type.length);
                     let object = {};
                     let new_url = this.menu_url+'?model_id=25&&item_1_id='+this.selected_chaodai.item_1_id+'&&item_2_id=0';
                     this.http_json(new_url,'get',object,this.success_nianhao_type,this.fail_nianhao_type);
@@ -255,29 +255,31 @@
 
             success_time(response){
                 this.get_chaodai_type();
-                this.edit_time_title = response.body.standard_name;
-                this.standard_name = response.body.standard_name;
-                this.selected_chaodai.item_1_id = response.body.chaodai;
-                this.selected_chaodai.chinese_name = response.body.chaodai_name;
-                this.selected_nianhao.item_2_id = response.body.nianhao;
-                this.selected_nianhao.chinese_name = response.body.nianhao_name;
-                this.year = response.body.nianfen;
-                this.selected_1_month.item_1_id = response.body.yue;
-                this.selected_1_month.chinese_name = response.body.yue_name;
-                this.selected_1_day.item_1_id = response.body.ri;
-                this.selected_1_day.chinese_name = response.body.ri_name;
-                if(response.body.ganzhi_name !== '-'){
-                    this.selected_ganzhi.item_1_id = response.body.ganzhi;
-                    this.selected_ganzhi.chinese_name = response.body.ganzhi_name;
+                if(response.body.length > 0){
+                    this.edit_time_title = response.body.standard_name;
+                    this.standard_name = response.body.standard_name;
+                    this.selected_chaodai.item_1_id = response.body.chaodai;
+                    this.selected_chaodai.chinese_name = response.body.chaodai_name;
+                    this.selected_nianhao.item_2_id = response.body.nianhao;
+                    this.selected_nianhao.chinese_name = response.body.nianhao_name;
+                    this.year = response.body.nianfen;
+                    this.selected_1_month.item_1_id = response.body.yue;
+                    this.selected_1_month.chinese_name = response.body.yue_name;
+                    this.selected_1_day.item_1_id = response.body.ri;
+                    this.selected_1_day.chinese_name = response.body.ri_name;
+                    if(response.body.ganzhi_name !== '-'){
+                        this.selected_ganzhi.item_1_id = response.body.ganzhi;
+                        this.selected_ganzhi.chinese_name = response.body.ganzhi_name;
+                    }
+                    this.juedui = response.body.juedui;
+                    this.g_year = response.body.gongyuan;
+                    this.selected_2_month.item_1_id = response.body.g_yue;
+                    this.selected_2_month.chinese_name = response.body.g_yue_name;
+                    this.selected_2_day.item_1_id= response.body.g_ri;
+                    this.selected_2_day.chinese_name= response.body.g_ri_name;
+                    this.english = response.body.english;
+                    this.selected_jieqi.chinese_name = response.body.jieqi;
                 }
-                this.juedui = response.body.juedui;
-                this.g_year = response.body.gongyuan;
-                this.selected_2_month.item_1_id = response.body.g_yue;
-                this.selected_2_month.chinese_name = response.body.g_yue_name;
-                this.selected_2_day.item_1_id= response.body.g_ri;
-                this.selected_2_day.chinese_name= response.body.g_ri_name;
-                this.english = response.body.english;
-                this.selected_jieqi.chinese_name = response.body.jieqi;
             },
 
             fail_time(response){

@@ -11,66 +11,66 @@
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">年号：</p>
-            <p class="zxwspan-length zxw-null" v-if="time_content.nianhao === ''">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.nianhao === '')||time_content.length === 0">不详</p>
             <p class="zxwspan-length" v-model="time_content.nianhao" v-else>{{time_content.nianhao}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">年份：</p>
-            <p class="zxwspan-length zxw-null" v-if="time_content.year === ''">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.year === '')||time_content.length === 0">不详</p>
             <span class="zxwspan-length" v-model="time_content.year" v-else>{{time_content.year}}</span>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">月：</p>
-            <p class="zxwspan-length zxw-null" v-if="time_content.month_name === ''">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.month_name === '')||time_content.length === 0 ">不详</p>
             <p class="zxwspan-length" v-model="time_content.month_name" v-else>{{time_content.month_name}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">日：</p>
-            <p class="zxwspan-length zxw-null" v-if="time_content.day_name === ''">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.day_name === '')||time_content.length === 0">不详</p>
             <p class="zxwspan-length" v-model="time_content.day_name" v-else>{{time_content.day_name}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">干支：</p>
-            <p class="zxwspan-length zxw-null" v-if="time_content.ganzhi_name === ''||time_content.ganzhi_name === '-'">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.ganzhi_name === '')||time_content.length === 0">不详</p>
             <p class="zxwspan-length" v-model="time_content.ganzhi_name" v-else>{{time_content.ganzhi_name}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">节气：</p>
-            <p class="zxwspan-length zxw-null" v-if="time_content.jieqi === ''">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.jieqi === '')||time_content.length === 0">不详</p>
             <p class="zxwspan-length" v-model="time_content.jieqi" v-else>{{time_content.jieqi}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">英译：</p>
-            <p class="zxwspan-length zxw-null" v-if="time_content.english === ''">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.english === '')||time_content.length === 0">不详</p>
             <p class="zxwspan-length" v-model="time_content.english" v-else>{{time_content.english}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">绝对日号：</p>
-            <p class="zxwspan-length zxw-null" v-if="time_content.juedui === null">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.juedui === null)||time_content.length === 0">不详</p>
             <p class="zxwspan-length" v-model="time_content.juedui" v-else>{{time_content.juedui}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">公元年份：</p>
-            <p class="zxwspan-length zxw-null" v-if="time_content.g_year ===''">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.g_year ==='')||time_content.length === 0">不详</p>
             <p class="zxwspan-length" v-model="time_content.g_year" v-else>{{time_content.g_year}}年</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">月：</p>
-            <p class="zxwspan-length zxw-null" v-if="time_content.g_month === '' ">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.g_month === '')||time_content.length === 0">不详</p>
             <p class="zxwspan-length" v-model="time_content.g_month" v-else>{{time_content.g_month}}月</p>
         </div>
         <div class="zxw-infospan">
             <p class="zxwspan-length">日：</p>
-            <p class="zxwspan-length zxw-null" v-if="time_content.g_day === ''">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.g_day === '')||time_content.length === 0">不详</p>
             <p class="zxwspan-length" v-model="time_content.g_day" v-else>{{time_content.g_day}}日</p>
         </div>
 
@@ -144,20 +144,20 @@
             },
 
             success_id(response){
-                this.time_content.standard_name = response.body.standard_name;
-                this.time_content.chaodai = response.body.chaodai_name;
-                this.time_content.nianhao = response.body.nianhao_name;
-                this.time_content.year = response.body.nianfen;
-                this.time_content.month_name = response.body.yue_name;
-                this.time_content.day_name = response.body.ri_name;
-                this.time_content.ganzhi_name = response.body.ganzhi_name;
-                this.time_content.juedui = response.body.juedui;
-                this.time_content.g_year = response.body.gongyuan;
-                this.time_content.g_month = response.body.g_yue_name;
-                this.time_content.g_day = response.body.g_ri_name;
-                this.time_content.english = response.body.english;
-                this.time_content.jieqi = response.body.jieqi;
-                console.log(JSON.stringify('time_content: '+this.time_content));
+                    this.time_content.standard_name = response.body.standard_name;
+                    this.time_content.chaodai = response.body.chaodai_name;
+                    this.time_content.nianhao = response.body.nianhao_name;
+                    this.time_content.year = response.body.nianfen;
+                    this.time_content.month_name = response.body.yue_name;
+                    this.time_content.day_name = response.body.ri_name;
+                    this.time_content.ganzhi_name = response.body.ganzhi_name;
+                    this.time_content.juedui = response.body.juedui;
+                    this.time_content.g_year = response.body.gongyuan;
+                    this.time_content.g_month = response.body.g_yue_name;
+                    this.time_content.g_day = response.body.g_ri_name;
+                    this.time_content.english = response.body.english;
+                    this.time_content.jieqi = response.body.jieqi;
+                    console.log(JSON.stringify('time_content: '+this.time_content));
             },
 
             fail_id(response){

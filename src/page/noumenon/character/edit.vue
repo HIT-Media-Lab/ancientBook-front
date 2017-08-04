@@ -26,9 +26,8 @@
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">出生时间：</label>
-                <!--<input type="text" class="zxw-character-input zxw-edit-character-input-margin" readonly @click="open_birth()"  v-model="input_content.birth_standard_name">-->
                 <div  class="zxw-character-input zxw-edit-character-input-margin">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_content.birth_standard_name !== ''">
                         <span class="zxw-person-relation-span"  @mouseover="show_birth_time = true" @mouseout="show_birth_time = false" v-if="input_content.birth_standard_name !== ''">
                             <span v-model="input_content.birth_standard_name" >{{input_content.birth_standard_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_birth_time===true" @click="delete_birth()"></button>
@@ -37,9 +36,8 @@
                     <button class="zxw-input-add-character" @click="open_birth()"></button>
                 </div>
                 <label class="zxw-character-span zxw-must-write">死亡时间：</label>
-                <!--<input type="text" class="zxw-character-input" readonly @click="open_dead()" v-model="input_content.death_standard_name">-->
                 <div  class="zxw-character-input">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_content.death_standard_name !== ''">
                         <span class="zxw-person-relation-span"  @mouseover="show_dead_time = true" @mouseout="show_dead_time = false" v-if="input_content.death_standard_name !== ''">
                             <span v-model="input_content.death_standard_name" >{{input_content.death_standard_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_dead_time===true" @click="delete_dead()"></button>
@@ -52,7 +50,7 @@
             <div class="zxw-character-row">
                 <label class="zxw-character-span">籍贯：</label>
                 <div  class="zxw-character-input zxw-edit-character-input-margin">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_content.location !== ''">
                         <span class="zxw-person-relation-span"  @mouseover="show_location = true" @mouseout="show_location = false" v-if="input_content.location !== ''">
                             <span v-model="input_content.location" >{{input_content.location}}</span>
                             <button class="zxw-add-hover-img" v-show="show_location===true" @click="delete_location()"></button>
@@ -62,7 +60,7 @@
                 </div>
                 <label class="zxw-character-span">父：</label>
                 <div  class="zxw-character-input">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_content.father.person_name !== ''">
                         <span class="zxw-person-relation-span"  @mouseover="show_father = true" @mouseout="show_father = false" v-if="input_content.father.person_id !== undefined">
                             <span v-model="input_content.father.person_name">{{input_content.father.person_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_father===true" @click="delete_father()"></button>
@@ -75,7 +73,7 @@
             <div class="zxw-character-row">
                 <label class="zxw-character-span">母：</label>
                 <div  class="zxw-character-input zxw-edit-character-input-margin">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_content.mother.person_name !== ''">
                         <span class="zxw-person-relation-span" @mouseover="show_mother = true" @mouseout="show_mother = false" v-if="input_content.mother.person_id !== undefined">
                             <span v-model="input_content.mother.person_name">{{input_content.mother.person_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_mother===true" @click="delete_mother()"></button>
@@ -172,7 +170,7 @@
 
             <div class="zxw-edit-btn">
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length" @click="cancel_edit()">取消</button>
-                <button class="zxw-nextbtn zxw-nextbtn-length" @click="finish_edit()" v-bind:disabled="input_content.birth_standard_name === ''|| input_content.death_standard_name === ''||input_content.person_name === ''|| show_input === true|| repeat_id !== '' ||(add_data[0].remark_name === ''&& add_data[0].remark !== '' )||(add_data[1] !== undefined && add_data[1].remark_name === '' && add_data[1].remark !=='')">完成</button>
+                <button class="zxw-nextbtn zxw-nextbtn-length" @click="finish_edit()" v-bind:disabled="input_content.birth_standard_name === ''|| input_content.death_standard_name === ''||input_content.person_name === ''|| show_input === true|| repeat_id !== '' ||(add_data[0].remark_name === ''&& add_data[0].remark !== '' )||(add_data[1] !== undefined && add_data[1].remark_name === '' && add_data[1].remark !=='')"  >完成</button>
             </div>
         </div>
 

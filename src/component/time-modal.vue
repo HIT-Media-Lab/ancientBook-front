@@ -101,7 +101,6 @@
               year_data:[],
               month_data:[],
               day_data:[],
-              time_object:{},
               time_data:{},
               chaodai_data:''
           }
@@ -110,6 +109,16 @@
         methods:{
             close(){
                 this.$emit('close_modal',close);
+                this.selected_1.option = '';
+                this.selected_1.id = 0;
+                this.selected_2.option = '';
+                this.selected_2.id = 0;
+                this.selected_3.option = '';
+                this.selected_3.id = 0;
+                this.selected_4.option = '';
+                this.selected_4.id = 0;
+                this.year_number = '';
+                this.year_data.splice(0,this.year_data.length);
             },
 
             /*朝代下拉框*/
@@ -149,9 +158,12 @@
             },
 
             get_year(){
-                let new_year_url = this.menu_url+'?model_id=25'+'&&item_1_id='+this.selected_1.id+'&&item_2_id=0';
-                let year_object = {};
-                this.http_json(new_year_url,'get',year_object,this.success_year,this.fail_year)
+                if(this.selected_1.option !== ''){
+                    this.year_data.splice(0,this.year_data.length);
+                    let new_year_url = this.menu_url+'?model_id=25'+'&&item_1_id='+this.selected_1.id+'&&item_2_id=0';
+                    let year_object = {};
+                    this.http_json(new_year_url,'get',year_object,this.success_year,this.fail_year)
+                }
             },
 
             /*月份下拉框*/
@@ -202,10 +214,10 @@
                 this.time_data.time_id = response.body.id;
                 this.time_data.standard_name = this.time_object.standard_name;
                 this.$emit('success_time',this.time_data);
-                this.selected_1.option='';
-                this.selected_2.option='';
-                this.selected_3.option='';
-                this.selected_4.option='';
+                //this.selected_1.option='';
+                //this.selected_2.option='';
+                //this.selected_3.option='';
+                //this.selected_4.option='';
                 console.log('this.time_data:'+JSON.stringify(this.time_data));
              },
 
@@ -214,20 +226,21 @@
             },
 
             add_time(){
+                let time_object = {};
                 if(this.selected_1.option !== ''){
                     if(this.selected_2.option === '-'){
                         this.time_object.standard_name = this.selected_1.option+this.year_number+this.selected_3.option+this.selected_4.option;
                     } else {
                         this.time_object.standard_name = this.selected_1.option+this.selected_2.option+this.year_number+this.selected_3.option+this.selected_4.option;
                     }
-                    this.time_object.chaodai = this.selected_1.id;
-                    this.time_object.nianhao = this.selected_2.id;
-                    this.time_object.nianfen = this.year_number;
-                    this.time_object.yue = this.selected_3.id;
-                    this.time_object.ri = this.selected_4.id;
+                    time_object.chaodai = this.selected_1.id;
+                    time_object.nianhao = this.selected_2.id;
+                    time_object.nianfen = this.year_number;
+                    time_object.yue = this.selected_3.id;
+                    time_object.ri = this.selected_4.id;
                     this.$store.commit("post_chaodai_data",this.selected_1.option);
-                    console.log('this.time_object:'+JSON.stringify(this.time_object));
-                    this.http_json(this.time_url,'post',this.time_object,this.success_time,this.fail_time);
+                    console.log('time_object:'+JSON.stringify(time_object));
+                    this.http_json(this.time_url,'post',time_object,this.success_time,this.fail_time);
                 }
             }
         }
