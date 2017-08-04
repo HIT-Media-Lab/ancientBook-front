@@ -614,7 +614,7 @@
 
                     for (vm.post_index1 = 0; vm.post_index1 < vm.upload_file.length; vm.post_index1++) {
                         for (vm.post_index2 = 0; vm.post_index2 < vm.upload_file[vm.post_index1].images.length; vm.post_index2++) {
-                            var upload_picture_obj = {};
+                            var upload_picture_obj = new FormData;
 
                             var name = vm.upload_file[vm.post_index1].images[vm.post_index2].pic_name;
                             var first = name.charAt(1);
@@ -623,13 +623,13 @@
                             var str = first + second + third;
                             var volume = parseInt(str);
 
-                            upload_picture_obj.ancient_book_id = response.body.id;
-                            upload_picture_obj.book = vm.post_index1 + 1;
-                            upload_picture_obj.volume = volume;
-                            upload_picture_obj.page = vm.post_index2 + 1;
-                            upload_picture_obj.picture = vm.upload_file[vm.post_index1].images[vm.post_index2].picture;
-                            upload_picture_obj.content = vm.upload_file[vm.post_index1].texts[vm.post_index2];
-                            upload_picture_obj.book_name = vm.upload_file[vm.post_index1].book_name;
+                            upload_picture_obj.append('ancient_book_id' , response.body.id);
+                            upload_picture_obj.append('book' , vm.post_index1 + 1);
+                            upload_picture_obj.append('volume' , volume);
+                            upload_picture_obj.append('page' , vm.post_index2 + 1);
+                            upload_picture_obj.append('picture' , vm.upload_file[vm.post_index1].images[vm.post_index2].picture);
+                            upload_picture_obj.append('content' , vm.upload_file[vm.post_index1].texts[vm.post_index2]);
+                            upload_picture_obj.append('book_name' , vm.upload_file[vm.post_index1].book_name);
                             this.$http.post('/ancient_books/upload_page.action' , upload_picture_obj , {emulateJSON: true}).then((response) => this.success_post_picture , (response) => this.fail_post_picture);
                         }
                     }
