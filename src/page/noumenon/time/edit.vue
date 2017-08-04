@@ -266,8 +266,10 @@
                 this.selected_1_month.chinese_name = response.body.yue_name;
                 this.selected_1_day.item_1_id = response.body.ri;
                 this.selected_1_day.chinese_name = response.body.ri_name;
-                this.selected_ganzhi.item_1_id = response.body.ganzhi;
-                this.selected_ganzhi.chinese_name = response.body.ganzhi_name;
+                if(response.body.ganzhi_name !== '-'){
+                    this.selected_ganzhi.item_1_id = response.body.ganzhi;
+                    this.selected_ganzhi.chinese_name = response.body.ganzhi_name;
+                }
                 this.juedui = response.body.juedui;
                 this.g_year = response.body.gongyuan;
                 this.selected_2_month.item_1_id = response.body.g_yue;

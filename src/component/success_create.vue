@@ -1,6 +1,6 @@
 <template>
-    <modal :show_modal="this.show_info" class="zxw-modal-character zxw-success-create-body">
-        <div slot="body">
+    <modal :show_modal="this.show_info" class="zxw-success-create-body">
+        <div slot="body" style="height:200px">
             <img src="../assets/img/no-use-picture/success_create.png" class="zxw-success-create-icon">
             <span class="zxw-success-create">已成功创建本体</span>
         </div>
@@ -31,11 +31,11 @@
     }
 
     .zxw-success-create{
-        width: 100px;
-        margin:10px 130px 0 165px;
+        width: 150px;
+        margin:10px 100px 30px 130px;
     }
 
     .zxw-success-create-icon{
-        margin:50px 150px 20px 170px;
+        margin:50px 150px 20px 160px;
     }
 </style>

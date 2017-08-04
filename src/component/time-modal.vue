@@ -52,41 +52,6 @@
         ]
     });
 
-    Mock.mock('/ancient_books/get_menu_items.action?model_id=25&&item_1_id=1&&item_2_id=0','get', {
-        "g":[
-            {"model_id|1": 1,
-                "item_1_id|1": 1,
-                "item_2_id|2":2,
-                "chinese_name": "gy"
-            },
-            {
-                "model_id|1": 1,
-                "item_1_id|1": 1,
-                "item_2_id|3": 3,
-                "chinese_name": "-"
-            },
-            {
-                "model_id|1": 1,
-                "item_1_id|1": 1,
-                "item_2_id|4": 4,
-                "chinese_name": "xy"
-            }
-        ]
-    });
-
-    Mock.mock('/ancient_books/get_menu_items.action?model_id=26&&item_1_id=1&&item_2_id=0','get', {
-    "":[{"model_id|1": 1,
-                "item_1_id|0": 0,
-                "item_2_id|1": 1,
-                "chinese_name": "宋朝hh"},
-        {"model_id|1": 1,
-            "item_1_id|0": 0,
-            "item_2_id|2": 2,
-            "chinese_name": "宋朝hh"}]
-    });
-
-
-
     Mock.mock('/ancient_books/get_time_by_chinese_name.action','post', {
         "status|200":200,
         "result|1":1,

@@ -142,7 +142,6 @@
                         chinese_name:response.body[i].chinese_name
                     })
                 }
-                console.log('nianhao: '+JSON.stringify(this.nianhao_type));
             },
 
             fail_nianhao_type(response){

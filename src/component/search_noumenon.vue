@@ -11,19 +11,21 @@
             </div>
             <p class="zxw-search-tip" v-if="show_tip === true">请在输入框中输入本体规范名称进行搜索</p>
 
+            <!--显示搜索失败的结果-->
+            <div class="zxw-fail-tip" v-if="search_result.length === 0 && fail_tip === true">
+                <p style="width:340px">很抱歉，未搜索到本体：{{fail_search_name}}</p>
+                <p style="width:340px;">
+                    <span class="zxw-search-p-tip">您可以</span>
+                    <button class="zxw-prebtn" @click="new_noumenon_window()">创建本体</button>
+                </p>
+            </div>
+
             <!--显示搜索成功的结果-->
-            <div class="zxw-search-success" v-for="(result,index) in search_result">
+            <div class="zxw-search-success" v-for="(result,index) in search_result" v-else>
                 <p class="zxw-search-result">{{result.standard_name}}</p>
                 <button class="zxw-prebtn zxw-character-add"  @click="add_noumenon_relations(index)" v-model="index" :="repeat_array" :disabled="forbidden_btn">添加</button>
             </div>
 
-            <!--显示搜索失败的结果-->
-            <div class="zxw-fail-tip" v-show="fail_tip">
-                <p>很抱歉，未搜索到本体：{{search_content}}</p>
-                <p><span class="zxw-search-p-tip">您可以</span>
-                    <button class="zxw-prebtn zxw-search-create" @click="new_noumenon_window()">创建本体</button>
-                </p>
-            </div>
         </div>
 
         <div slot="footer" class="zxw-search-footer">
@@ -36,6 +38,11 @@
 
 <script>
     /*let Mock = require('mockjs');
+    Mock.mock('/ancient_books/get_person_list_by_name.action?name=zxw&&page_count=1','get', {
+        "status|200":200,
+        "content":[],
+    });
+
     Mock.mock('/ancient_books/get_person_list_by_name.action?name=lsm&&page_count=1','get', {
         "content":[
             {
@@ -270,7 +277,8 @@
                 create_btn:true,
                 search_content:'',
                 search_result:[],
-                forbidden_btn:false
+                forbidden_btn:false,
+                fail_search_name:''
             }
         },
 
@@ -330,6 +338,7 @@
                         console.log(JSON.stringify(this.search_result));
                     }
                 } else {
+                    this.fail_search_name = this.search_content;
                     this.fail_tip = true;
                     this.create_btn = false;
                 }
@@ -416,9 +425,9 @@
     }
 
     .zxw-search-tip{
-        width:260px;
-        margin:50px 50px 0 80px;
-        font-size:14px;
+        width:300px;
+        margin:30px 50px 30px 50px;
+        font-size:16px;
     }
 
     .zxw-search-create{
@@ -479,9 +488,8 @@
     }
 
     .zxw-fail-tip{
-        font-size: 12px;
-        width:160px;
-        margin:50px 50px 0 120px;
+        width:340px;
+        margin:50px auto 0 60px;
     }
 
     .zxw-search-p-tip{

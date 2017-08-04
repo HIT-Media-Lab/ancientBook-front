@@ -35,7 +35,7 @@
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">干支：</p>
-            <p class="zxwspan-length zxw-null" v-if="time_content.ganzhi_name === ''">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="time_content.ganzhi_name === ''||time_content.ganzhi_name === '-'">不详</p>
             <p class="zxwspan-length" v-model="time_content.ganzhi_name" v-else>{{time_content.ganzhi_name}}</p>
         </div>
 
@@ -59,18 +59,18 @@
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">公元年份：</p>
-            <p class="zxwspan-length zxw-null" v-if="time_content.g_year ===null">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="time_content.g_year ===''">不详</p>
             <p class="zxwspan-length" v-model="time_content.g_year" v-else>{{time_content.g_year}}年</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">月：</p>
-            <p class="zxwspan-length zxw-null" v-if="time_content.g_month === null ">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="time_content.g_month === '' ">不详</p>
             <p class="zxwspan-length" v-model="time_content.g_month" v-else>{{time_content.g_month}}月</p>
         </div>
         <div class="zxw-infospan">
             <p class="zxwspan-length">日：</p>
-            <p class="zxwspan-length zxw-null" v-if="time_content.g_day === null">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="time_content.g_day === ''">不详</p>
             <p class="zxwspan-length" v-model="time_content.g_day" v-else>{{time_content.g_day}}日</p>
         </div>
 
