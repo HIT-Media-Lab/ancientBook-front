@@ -221,7 +221,7 @@
                 window.setTimeout(function () {
                     document.getElementById("show_info").setAttribute('class', 'zxw-show-info');
                     next();
-                }, 500);
+                }, 1500);
             } else{
                 next();
             }

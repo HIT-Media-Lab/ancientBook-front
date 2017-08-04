@@ -203,7 +203,7 @@
             },
 
             get_day(){
-                //日期ID
+                //日期id
                 let new_day_url = this.menu_url+'?model_id=27&&item_1_id=0&&item_2_id=0';
                 let day_object = {};
                 this.http_json(new_day_url,'get',day_object,this.success_day,this.fail_day);
@@ -214,10 +214,6 @@
                 this.time_data.time_id = response.body.id;
                 this.time_data.standard_name = this.time_object.standard_name;
                 this.$emit('success_time',this.time_data);
-                //this.selected_1.option='';
-                //this.selected_2.option='';
-                //this.selected_3.option='';
-                //this.selected_4.option='';
                 console.log('this.time_data:'+JSON.stringify(this.time_data));
              },
 
@@ -229,9 +225,9 @@
                 let time_object = {};
                 if(this.selected_1.option !== ''){
                     if(this.selected_2.option === '-'){
-                        this.time_object.standard_name = this.selected_1.option+this.year_number+this.selected_3.option+this.selected_4.option;
+                        time_object.standard_name = this.selected_1.option+this.year_number+this.selected_3.option+this.selected_4.option;
                     } else {
-                        this.time_object.standard_name = this.selected_1.option+this.selected_2.option+this.year_number+this.selected_3.option+this.selected_4.option;
+                        time_object.standard_name = this.selected_1.option+this.selected_2.option+this.year_number+this.selected_3.option+this.selected_4.option;
                     }
                     time_object.chaodai = this.selected_1.id;
                     time_object.nianhao = this.selected_2.id;
