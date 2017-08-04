@@ -59,7 +59,7 @@
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">公元年份：</p>
-            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.g_year ==='')||time_content.length === 0">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.g_year === null)||time_content.length === 0">不详</p>
             <p class="zxwspan-length" v-model="time_content.g_year" v-else>{{time_content.g_year}}年</p>
         </div>
 
@@ -157,7 +157,7 @@
                     this.time_content.g_day = response.body.g_ri_name;
                     this.time_content.english = response.body.english;
                     this.time_content.jieqi = response.body.jieqi;
-                    console.log(JSON.stringify('time_content: '+this.time_content));
+                    console.log('time_content: '+JSON.stringify(this.time_content));
             },
 
             fail_id(response){
