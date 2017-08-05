@@ -107,21 +107,27 @@
           }
         },
 
+        watch:{
+            'time_modal':function(){
+                if(this.time_modal === false){
+                    this.selected_1.option = '';
+                    this.selected_1.id = 0;
+                    this.selected_2.option = '';
+                    this.selected_2.id = 0;
+                    this.selected_3.option = '';
+                    this.selected_3.id = 0;
+                    this.selected_4.option = '';
+                    this.selected_4.id = 0;
+                    this.year_number = '';
+                    this.year_data.splice(0,this.year_data.length);
+                    this.time_object = {};
+                }
+            }
+        },
+
         methods:{
             close(){
                 this.$emit('close_modal',close);
-                this.selected_1.option = '';
-                this.selected_1.id = 0;
-                this.selected_2.option = '';
-                this.selected_2.id = 0;
-                this.selected_3.option = '';
-                this.selected_3.id = 0;
-                this.selected_4.option = '';
-                this.selected_4.id = 0;
-                this.year_number = '';
-                this.year_data.splice(0,this.year_data.length);
-                this.time_object = {};
-                alert(3);
             },
 
             /*朝代下拉框*/
@@ -216,7 +222,6 @@
             success_time(response){
                 this.time_data.time_id = response.body.id;
                 this.time_data.standard_name = this.time_object.standard_name;
-                alert(1);
                 this.$emit('success_time',this.time_data);
                 console.log('this.time_data:'+JSON.stringify(this.time_data));
              },
