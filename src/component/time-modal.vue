@@ -121,6 +121,7 @@
                 this.year_number = '';
                 this.year_data.splice(0,this.year_data.length);
                 this.time_object = {};
+                alert(3);
             },
 
             /*朝代下拉框*/
@@ -215,6 +216,7 @@
             success_time(response){
                 this.time_data.time_id = response.body.id;
                 this.time_data.standard_name = this.time_object.standard_name;
+                alert(1);
                 this.$emit('success_time',this.time_data);
                 console.log('this.time_data:'+JSON.stringify(this.time_data));
              },
@@ -238,7 +240,7 @@
                     this.time_object.ri = this.selected_4.id;
                     this.$store.commit("post_chaodai_data",this.selected_1.option);
                     console.log('time_object:'+JSON.stringify(this.time_object));
-                    this.http_json(this.time_url,'post',time_object,this.success_time,this.fail_time);
+                    this.http_json(this.time_url,'post',this.time_object,this.success_time,this.fail_time);
                 }
             }
         }
