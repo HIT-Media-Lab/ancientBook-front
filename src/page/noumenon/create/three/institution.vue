@@ -63,7 +63,7 @@
 
             <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()">确认</button>
         </div>
-        <success_create id="show_info_ins" :show_info="show_info"></success_create>
+        <success_create :show_info="show_info"></success_create>
     </div>
 
 </template>
@@ -96,10 +96,16 @@
                 this.$store.getters.get_build_ins.vice_office_id = '';
                 this.$store.getters.get_build_ins.vice_office_name = '';
                 //模态框自动关闭
-                window.setTimeout(function () {
-                    document.getElementById("show_info_ins").setAttribute('class', 'zxw-show-info');
+                if(this.show_info === true){
+                    window.setTimeout(function () {
+                        this.show_info = false;
+                        next();
+                    }, 1500);
+
+                } else{
                     next();
-                }, 500);
+                }
+
             } else {
                 next();
             }

@@ -104,7 +104,7 @@
 
             <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()">确认</button>
         </div>
-        <success_create id="show_info_char" :show_info="show_info"></success_create>
+        <success_create :show_info="show_info"></success_create>
         <!--子的具体信息显示-->
         <modal :show_modal="show_tooltip_son" v-on:fireclose="close_tooltip_son" class="zxw-modal-character">
             <div slot="header" class="zxw-relation-modal-header">
@@ -173,7 +173,6 @@
         "id|123":123
     });*/
 
-
     import create_word from '../../../../component/create-word.vue';
     import success_create from '../../../../component/success_create.vue';
     import modal from '../../../../component/modal.vue';
@@ -216,12 +215,17 @@
                 this.$store.getters.get_build_character.teacher.splice(0, this.$store.getters.get_build_character.teacher_standard_name.length);
                 this.$store.getters.get_build_character.student.splice(0, this.$store.getters.get_build_character.student_standard_name.length);
                 this.$store.getters.get_build_character.friend.splice(0, this.$store.getters.get_build_character.friend_standard_name.length);
-
                 //模态框自动关闭
-                window.setTimeout(function () {
-                    document.getElementById("show_info_char").setAttribute('class', 'zxw-show-info');
+                if(this.show_info === true){
+                    window.setTimeout(function () {
+                        this.show_info = false;
+                        next();
+                    }, 1500);
+
+                } else{
                     next();
-                }, 1500);
+                }
+
             } else{
                 next();
             }
@@ -458,9 +462,6 @@
 
     .zxw-relation-modal-body{
         margin-bottom: 20px;
-    }
-    .zxw-show-info{
-        visibility: hidden;
     }
 
     .zxw-null{

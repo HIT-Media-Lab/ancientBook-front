@@ -74,7 +74,7 @@
 
             <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()">确认</button>
         </div>
-        <success_create id="show_info_pla" :show_info="show_info"></success_create>
+        <success_create :show_info="show_info"></success_create>
         <!--子的具体信息显示-->
         <modal :show_modal="show_tooltip_seat" v-on:fireclose="close_tooltip_seat" class="zxw-modal-character">
             <div slot="header" class="zxw-relation-modal-header">
@@ -125,10 +125,16 @@
                 this.$store.getters.get_build_place.seat_id.splice(0, this.$store.getters.get_build_place.seat_id.length);
                 this.$store.getters.get_build_place.seat_standard_name.splice(0, this.$store.getters.get_build_place.seat_standard_name.length);
                 //模态框自动关闭
-                window.setTimeout(function () {
-                    document.getElementById("show_info_pla").setAttribute('class', 'zxw-show-info');
+                if(this.show_info === true){
+                    window.setTimeout(function () {
+                        this.show_info = false;
+                        next();
+                    }, 1500);
+
+                } else{
                     next();
-                }, 500);
+                }
+
             } else {
                 next();
             }

@@ -204,14 +204,8 @@
     /*let Mock = require('mockjs');
     Mock.mock('/ancient_books/check_noumenon_standard_name.action?name=%E9%B9%BF%E6%99%97(%E5%AE%8B%E6%9C%9D)&&type=1','get', {
         "status|200":200,
-        "result|0":1,
+        "result|1":1,
         "id:|250":250
-    });
-
-    Mock.mock('/ancient_books/check_noumenon_standard_name.action?name=%E5%93%88%E5%93%88(%E5%AE%8B%E6%9C%9D)&&type=1','get', {
-        "status|200":200,
-        "result|1":0,
-        "id:|300":250
     });*/
 
     import create_word from '../../../../component/create-word.vue';
@@ -433,7 +427,7 @@
             birth_time(p){
                 this.input_content.birth_time_id = p.time_id;
                 this.input_content.birth_standard_name = p.standard_name;
-                //this.close_birth();
+                this.close_birth();
                 this.repeat_nou_2();
             },
 

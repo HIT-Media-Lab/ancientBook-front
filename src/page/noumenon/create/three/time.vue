@@ -66,7 +66,7 @@
 
             <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()" v-bind:disabled="this.$store.getters.get_build_time.length === 0">确认</button>
         </div>
-        <success_create id="show_info_time" :show_info="show_info"></success_create>
+        <success_create :show_info="show_info"></success_create>
     </div>
 
 </template>
@@ -101,10 +101,16 @@
                 this.$store.getters.get_build_time.selected_jieqi='';
                 this.$store.getters.get_build_time.english='';
                 //模态框自动关闭
-                window.setTimeout(function () {
-                    document.getElementById("show_info_time").setAttribute('class', 'zxw-show-info');
+                if(this.show_info === true){
+                    window.setTimeout(function () {
+                        this.show_info = false;
+                        next();
+                    }, 1500);
+
+                } else{
                     next();
-                }, 500);
+                }
+
             } else {
                 next();
             }
