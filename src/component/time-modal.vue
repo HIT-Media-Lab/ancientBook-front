@@ -212,7 +212,7 @@
             /*关联时间本体*/
             success_time(response){
                 this.time_data.time_id = response.body.id;
-                this.time_data.standard_name = this.time_object.standard_name;
+                this.time_data.standard_name = time_object.standard_name;
                 this.$emit('success_time',this.time_data);
                 console.log('this.time_data:'+JSON.stringify(this.time_data));
              },
