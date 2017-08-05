@@ -62,7 +62,7 @@
 
             <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()">确认</button>
         </div>
-        <success_create id="show_info" :show_info="show_info"></success_create>
+        <success_create id="show_info_off" :show_info="show_info"></success_create>
     </div>
 
 </template>
@@ -98,7 +98,7 @@
                 this.$store.getters.get_build_off.remark_2 = '';
                 //模态框自动关闭
                 window.setTimeout(function () {
-                    document.getElementById("show_info").setAttribute('class', 'zxw-show-info');
+                    document.getElementById("show_info_off").setAttribute('class', 'zxw-show-info');
                     next();
                 }, 500);
             } else {

@@ -433,7 +433,7 @@
             birth_time(p){
                 this.input_content.birth_time_id = p.time_id;
                 this.input_content.birth_standard_name = p.standard_name;
-                this.close_birth();
+                //this.close_birth();
                 this.repeat_nou_2();
             },
 

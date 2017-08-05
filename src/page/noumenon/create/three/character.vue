@@ -104,7 +104,7 @@
 
             <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()">确认</button>
         </div>
-        <success_create :show_info="show_info"></success_create>
+        <success_create id="show_info_char" :show_info="show_info"></success_create>
         <!--子的具体信息显示-->
         <modal :show_modal="show_tooltip_son" v-on:fireclose="close_tooltip_son" class="zxw-modal-character">
             <div slot="header" class="zxw-relation-modal-header">
@@ -219,7 +219,7 @@
 
                 //模态框自动关闭
                 window.setTimeout(function () {
-                    document.getElementById("show_info").setAttribute('class', 'zxw-show-info');
+                    document.getElementById("show_info_char").setAttribute('class', 'zxw-show-info');
                     next();
                 }, 1500);
             } else{
