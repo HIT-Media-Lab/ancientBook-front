@@ -255,7 +255,6 @@
 
             success_time(response){
                 this.get_chaodai_type();
-                if(response.body.length > 0){
                     console.log("edit: "+JSON.stringify(response.body));
                     this.edit_time_title = response.body.standard_name;
                     this.standard_name = response.body.standard_name;
@@ -280,7 +279,6 @@
                     this.selected_2_day.chinese_name= response.body.g_ri_name;
                     this.english = response.body.english;
                     this.selected_jieqi.chinese_name = response.body.jieqi;
-                }
             },
 
             fail_time(response){
