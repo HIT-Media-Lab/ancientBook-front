@@ -255,7 +255,6 @@
 
             success_time(response){
                 this.get_chaodai_type();
-                    console.log("edit: "+JSON.stringify(response.body));
                     this.edit_time_title = response.body.standard_name;
                     this.standard_name = response.body.standard_name;
                     this.selected_chaodai.item_1_id = response.body.chaodai;
@@ -267,12 +266,14 @@
                     this.selected_1_month.chinese_name = response.body.yue_name;
                     this.selected_1_day.item_1_id = response.body.ri;
                     this.selected_1_day.chinese_name = response.body.ri_name;
-                    if(response.body.ganzhi_name !== '-'){
-                        this.selected_ganzhi.item_1_id = response.body.ganzhi;
-                        this.selected_ganzhi.chinese_name = response.body.ganzhi_name;
+                    this.selected_ganzhi.item_1_id = response.body.ganzhi;
+                    this.selected_ganzhi.chinese_name = response.body.ganzhi_name;
+                    if(response.body.juedui === null){
+                        this.juedui = "";
+                    } else{
+                        this.juedui = toString(response.body.juedui);
                     }
-                    this.juedui = response.body.juedui;
-                    this.g_year = response.body.gongyuan;
+                    this.g_year = toString(response.body.gongyuan);
                     this.selected_2_month.item_1_id = response.body.g_yue;
                     this.selected_2_month.chinese_name = response.body.g_yue_name;
                     this.selected_2_day.item_1_id= response.body.g_ri;
