@@ -86,6 +86,10 @@
     export default{
         created(){
             this.show_time();
+            this.get_month_type();
+            this.get_day_type();
+            this.get_ganzhi_type();
+            this.get_jieqi_type();
         },
 
         components:{
@@ -273,7 +277,12 @@
                     } else{
                         this.juedui = toString(response.body.juedui);
                     }
+
+                if(response.body.gongyuan === null){
+                    this.g_year = "";
+                } else{
                     this.g_year = toString(response.body.gongyuan);
+                }
                     this.selected_2_month.item_1_id = response.body.g_yue;
                     this.selected_2_month.chinese_name = response.body.g_yue_name;
                     this.selected_2_day.item_1_id= response.body.g_ri;
@@ -354,7 +363,6 @@
                         chinese_name:response.body[i].chinese_name
                     })
                 }
-                this.get_month_type();
             },
 
             fail_chaodai_type(response){
@@ -390,7 +398,6 @@
                         chinese_name:response.body[i].chinese_name
                     })
                 }
-                this.get_day_type();
             },
 
             fail_month_type(response){
@@ -411,7 +418,6 @@
                         chinese_name:response.body[i].chinese_name
                     })
                 }
-                this.get_ganzhi_type();
             },
 
             fail_day_type(response){
@@ -432,7 +438,6 @@
                         chinese_name:response.body[i].chinese_name
                     })
                 }
-                this.get_jieqi_type();
             },
 
             fail_ganzhi_type(response){
