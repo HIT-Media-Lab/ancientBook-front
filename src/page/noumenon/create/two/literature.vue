@@ -40,9 +40,9 @@
             <div>
                 <label class="zxw-lit-label">标准分类:</label>
                 <select class="zxw-lit-select zxw-lit-select-margin" v-model="lit_content.selected_bu">
-                    <option v-for="item in type_bu_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}" @change="get_type_lei">{{item.chinese_name}}</option>
+                    <option v-for="item in type_bu_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}" v-bind="get_type_lei">{{item.chinese_name}}</option>
                 </select>
-                <select class="zxw-lit-select zxw-lit-select-margin" v-model="lit_content.selected_lei" @change="get_type_shu">
+                <select class="zxw-lit-select zxw-lit-select-margin" v-model="lit_content.selected_lei" v-bind="get_type_shu">
                     <option v-for="item in type_lei_arr" v-bind:value="{item_2_id:item.item_2_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
                 <select class="zxw-lit-select" v-model="lit_content.selected_shu">
@@ -493,7 +493,28 @@
                         this.all_must_write = this.all_must_write+1;
                     }
                 }
-                console.log('55: '+this.all_must_write);
+            },
+
+            /*类*/
+            get_type_lei(){
+                if(this.lit_content.selected_bu.chinese_name !== ''){
+                    this.type_lei_arr.splice(0,this.type_lei_arr.length);
+                    console.log('lei_arr: '+JSON.stringify(this.type_lei_arr));
+                    let object = {};
+                    let new_url = this.menu_url + '?model_id=8&&item_1_id=' + this.lit_content.selected_bu.item_1_id + '&&item_2_id=0';
+                    this.http_json(new_url, 'get', object, this.success_type_lei, this.fail_type_lei);
+                }
+            },
+
+            /*属*/
+            get_type_shu(){
+                if(this.lit_content.selected_lei.chinese_name !== ''){
+                    this.type_bu_arr.splice(0,this.type_shu_arr.length);
+                    console.log('shu: '+JSON.stringify(this.type_shu_arr));
+                    let object = {};
+                    let new_url = this.menu_url + '?model_id=8&&item_1_id=' + this.lit_content.selected_bu.item_1_id + '&&item_2_id=' + this.lit_content.selected_lei.item_2_id;
+                    this.http_json(new_url, 'get', object, this.success_type_shu, this.fail_type_shu);
+                }
             }
         },
 
@@ -521,14 +542,6 @@
 
 
             /*类*/
-            get_type_lei(){
-                    this.type_lei_arr.splice(0,this.type_lei_arr.length);
-                    console.log('lei_arr: '+JSON.stringify(this.type_lei_arr));
-                    let object = {};
-                    let new_url = this.menu_url + '?model_id=8&&item_1_id=' + this.lit_content.selected_bu.item_1_id + '&&item_2_id=0';
-                    this.http_json(new_url, 'get', object, this.success_type_lei, this.fail_type_lei);
-            },
-
             success_type_lei(response){
                 for (let i = 0; i < response.body.length; i++) {
                     this.type_lei_arr.push({
@@ -544,14 +557,6 @@
             },
 
             /*属*/
-            get_type_shu(){
-                    this.type_bu_arr.splice(0,this.type_shu_arr.length);
-                    console.log('shu: '+JSON.stringify(this.type_shu_arr));
-                    let object = {};
-                    let new_url = this.menu_url + '?model_id=8&&item_1_id=' + this.lit_content.selected_bu.item_1_id + '&&item_2_id=' + this.lit_content.selected_lei.item_2_id;
-                    this.http_json(new_url, 'get', object, this.success_type_shu, this.fail_type_shu);
-            },
-
             success_type_shu(response){
                 for (let i = 0; i < response.body.length; i++) {
                     this.type_shu_arr.push({
