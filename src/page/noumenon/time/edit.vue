@@ -280,7 +280,7 @@
 
                 if(response.body.gongyuan === null){
                     this.g_year = "";
-                } else{
+                } else {
                     this.g_year = toString(response.body.gongyuan);
                 }
                     this.selected_2_month.item_1_id = response.body.g_yue;
