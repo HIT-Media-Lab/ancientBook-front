@@ -177,7 +177,7 @@
         methods:{
             show_lit(){
                 let object = {};
-                let new_url = this.lit_url+'?literature_id='+this.$route.params.nouId;
+                let new_url = this.lit_url+'?id='+this.$route.params.nouId;
                 this.http_json(new_url,'get',object,this.success_lit,this.fail_lit);
             },
 

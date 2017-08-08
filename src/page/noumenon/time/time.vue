@@ -11,66 +11,66 @@
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">年号：</p>
-            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.nianhao === '')||time_content.length === 0">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="time_content.nianhao === ''">不详</p>
             <p class="zxwspan-length" v-model="time_content.nianhao" v-else>{{time_content.nianhao}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">年份：</p>
-            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.year === '')||time_content.length === 0">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="time_content.year === ''">不详</p>
             <span class="zxwspan-length" v-model="time_content.year" v-else>{{time_content.year}}</span>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">月：</p>
-            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.month_name === '')||time_content.length === 0 ">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="time_content.month_name === ''">不详</p>
             <p class="zxwspan-length" v-model="time_content.month_name" v-else>{{time_content.month_name}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">日：</p>
-            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.day_name === '')||time_content.length === 0">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="time_content.day_name === ''">不详</p>
             <p class="zxwspan-length" v-model="time_content.day_name" v-else>{{time_content.day_name}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">干支：</p>
-            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.ganzhi_name === '')||time_content.length === 0">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="time_content.ganzhi_name === ''">不详</p>
             <p class="zxwspan-length" v-model="time_content.ganzhi_name" v-else>{{time_content.ganzhi_name}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">节气：</p>
-            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.jieqi === '')||time_content.length === 0">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="time_content.jieqi === ''">不详</p>
             <p class="zxwspan-length" v-model="time_content.jieqi" v-else>{{time_content.jieqi}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">英译：</p>
-            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.english === '')||time_content.length === 0">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="time_content.english === ''">不详</p>
             <p class="zxwspan-length" v-model="time_content.english" v-else>{{time_content.english}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">绝对日号：</p>
-            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.juedui === null)||time_content.length === 0">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="time_content.juedui === null">不详</p>
             <p class="zxwspan-length" v-model="time_content.juedui" v-else>{{time_content.juedui}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">公元年份：</p>
-            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.g_year === null)||time_content.length === 0">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="time_content.g_year === null">不详</p>
             <p class="zxwspan-length" v-model="time_content.g_year" v-else>{{time_content.g_year}}年</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">月：</p>
-            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.g_month === '')||time_content.length === 0">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="time_content.g_month === ''">不详</p>
             <p class="zxwspan-length" v-model="time_content.g_month" v-else>{{time_content.g_month}}月</p>
         </div>
         <div class="zxw-infospan">
             <p class="zxwspan-length">日：</p>
-            <p class="zxwspan-length zxw-null" v-if="(time_content.length > 0 && time_content.g_day === '')||time_content.length === 0">不详</p>
+            <p class="zxwspan-length zxw-null" v-if="time_content.g_day === ''">不详</p>
             <p class="zxwspan-length" v-model="time_content.g_day" v-else>{{time_content.g_day}}日</p>
         </div>
 
@@ -95,8 +95,8 @@
      "ganzhi|1":1,
      "juedui|1": 1,
      "gongyuan|1": 1,
-     "g_yue|1": 1,
-     "g_ri|2":2,
+         "g_yue_name":"",
+         "g_ri_name":"",
      "english": 'shijian',
      "jieqi": "节气1"
      });*/

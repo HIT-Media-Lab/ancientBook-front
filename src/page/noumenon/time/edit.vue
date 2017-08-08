@@ -5,29 +5,29 @@
             <p class="zxw-create-character" v-model="standard_name" :="standard_title">本体名称：{{standard_name}}</p>
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">朝代：</label>
-                <select  class="zxw-ins-select zxw-edit-character-input-margin" v-model="selected_chaodai" :="repeat_nou_1" v-bind="get_nianhao_type" @change="clean_nianhao()">
+                <select  class="zxw-ins-select zxw-edit-character-input-margin" v-model="selected_chaodai" :="repeat_nou_1" v-bind="get_nianhao_type">
                     <option v-for="item in chaodai_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
 
                 <label class="zxw-character-span">年号：</label>
-                <select  class="zxw-ins-select" v-model="selected_nianhao" :="repeat_nou_1">
+                <select  class="zxw-ins-select" v-model="selected_nianhao" :="repeat_nou_1" v-bind:disabled="selected_chaodai.chinese_name === ''">
                     <option v-for="item in nianhao_type" v-bind:value="{item_2_id:item.item_2_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
             </div>
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span">年份：</label>
-                <input type="text" class="zxw-character-input zxw-edit-character-input-margin" v-model="year" :="repeat_nou_1">
+                <input type="text" class="zxw-character-input zxw-edit-character-input-margin" v-model="year" :="repeat_nou_1" v-bind:disabled="selected_nianhao.chinese_name === ''">
 
                 <label class="zxw-character-span">月：</label>
-                <select  class="zxw-ins-select" v-model="selected_1_month" :="repeat_nou_1" v-bind="clean_month">
+                <select  class="zxw-ins-select" v-model="selected_1_month" :="repeat_nou_1" v-bind="clean_month" v-bind:disabled="year === ''">
                     <option v-for="item in month_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
             </div>
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span">日：</label>
-                <select  class="zxw-ins-select zxw-edit-character-input-margin" v-model="selected_1_day" :="repeat_nou_1" v-bind="clean_day">
+                <select  class="zxw-ins-select zxw-edit-character-input-margin" v-model="selected_1_day" :="repeat_nou_1" v-bind="clean_day" v-bind:disabled="selected_1_month.chinese_name === ''">
                     <option v-for="item in day_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
 
@@ -155,6 +155,8 @@
             get_nianhao_type(){
                 if(this.selected_chaodai.chinese_name !== ''){
                     this.nianhao_type.splice(0,this.nianhao_type.length);
+                    this.selected_nianhao.item_2_id=0;
+                    this.selected_nianhao.chinese_name ='';
                     let object = {};
                     let new_url = this.menu_url+'?model_id=25&&item_1_id='+this.selected_chaodai.item_1_id+'&&item_2_id=0';
                     this.http_json(new_url,'get',object,this.success_nianhao_type,this.fail_nianhao_type);
@@ -163,14 +165,14 @@
 
             clean_g_month(){
                 if(this.g_year === ''||this.selected_2_month.chinese_name === '-'){
-                    this.selected_2_month.chinese_name = null;
+                    this.selected_2_month.chinese_name = '';
                     this.selected_2_month.item_1_id= 0;
                 }
             },
 
             clean_g_day(){
                 if(this.selected_2_month.chinese_name === null||this.selected_2_day.chinese_name === '-'){
-                    this.selected_2_day.chinese_name = null;
+                    this.selected_2_day.chinese_name = '';
                     this.selected_2_day.item_1_id = 0;
                 }
             },
@@ -514,12 +516,6 @@
 
             fail_g_day_type(response){
                 console.log("获取公历日期失败");
-            },
-
-            clean_nianhao(){
-                this.nianhao_type.splice(0,this.nianhao_type.length);
-                this.selected_nianhao.item_2_id=0;
-                this.selected_nianhao.chinese_name ='';
             }
 
         }

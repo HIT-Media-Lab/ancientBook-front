@@ -8,7 +8,7 @@
             <p class="zxw-create-character" v-bind="standard_title"  v-model="input_time.standard_name">本体名称：{{input_time.standard_name}}</p>
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">朝代：</label>
-                <select  class="zxw-ins-select zxw-character-input-margin" v-model="input_time.selected_chaodai" v-bind="get_nianhao_type" :="repeat_nou_1" @change="clean_nianhao">
+                <select  class="zxw-ins-select zxw-character-input-margin" v-model="input_time.selected_chaodai" v-bind="get_nianhao_type" :="repeat_nou_1">
                     <option v-for="item in chaodai_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
                 <label class="zxw-character-span">年号：</label>
@@ -375,6 +375,8 @@
             get_nianhao_type(){
                 if(this.input_time.selected_chaodai.chinese_name !== ''){
                     this.nianhao_type.splice(0,this.nianhao_type.length);
+                    this.input_time.selected_nianhao.item_2_id=0;
+                    this.input_time.selected_nianhao.chinese_name='';
                     let object = {};
                     let new_url = this.menu_url+'?model_id=25&&item_1_id='+this.input_time.selected_chaodai.item_1_id+'&&item_2_id=0';
                     this.http_json(new_url,'get',object,this.success_nianhao_type,this.fail_nianhao_type);
@@ -490,12 +492,6 @@
             fail_nianhao_type(response){
                 console.log("获取年号失败");
             },
-
-           clean_nianhao(){
-                this.nianhao_type.splice(0,this.nianhao_type.length);
-                this.input_time.selected_nianhao.item_2_id=0;
-                this.input_time.selected_nianhao.chinese_name='';
-           },
 
             /*中历月份下拉框*/
             get_month_type(){

@@ -378,8 +378,10 @@
 
             /*类*/
             get_type_lei(){
-                if (this.lit_content.selected_bu.chinese_name !== undefined && this.lit_content.selected_bu.chinese_name !== '') {
+                if (this.lit_content.selected_bu.chinese_name !== '') {
                     this.type_lei_arr.splice(0,this.type_lei_arr.length);
+                    this.lit_content.selected_lei.item_2_id = 0;
+                    this.lit_content.selected_lei.chinese_name = '';
                     let object = {};
                     let new_url = this.menu_url + '?model_id=8&&item_1_id='+this.lit_content.selected_bu.item_1_id + '&&item_2_id=0';
                     this.http_json(new_url, 'get', object, this.success_type_lei, this.fail_type_lei);
@@ -388,8 +390,10 @@
 
             /*属*/
             get_type_shu(){
-                if (this.lit_content.selected_lei.chinese_name !== undefined && this.lit_content.selected_lei.chinese_name !== '') {
+                if (this.lit_content.selected_lei.chinese_name !== '') {
                     this.type_shu_arr.splice(0,this.type_shu_arr.length);
+                    this.lit_content.selected_shu.item_3_id = 0;
+                    this.lit_content.selected_shu.chinese_name = '';
                     let object = {};
                     let new_url = this.menu_url + '?model_id=8&&item_1_id=' + this.lit_content.selected_bu.item_1_id + '&&item_2_id=' + this.lit_content.selected_lei.item_2_id;
                     this.http_json(new_url, 'get', object, this.success_type_shu, this.fail_type_shu);
@@ -755,7 +759,7 @@
             /*根据id获取具体文献信息*/
             get_lit_info(){
                 let object = {};
-                let new_url = this.get_lit_url+'?literature_id='+this.$route.params.nouId;
+                let new_url = this.get_lit_url+'?id='+this.$route.params.nouId;
                 this.http_json(new_url,'get',object,this.success_lit_info,this.fail_lit_info);
             },
 
