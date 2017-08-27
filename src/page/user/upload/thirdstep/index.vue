@@ -670,7 +670,7 @@
 
             after_success (response) {
                 //更新token
-                store.commit("change_token",response.body.token);
+                this.$store.commit("change_token",response.body.token);
             },
 
             error () {
