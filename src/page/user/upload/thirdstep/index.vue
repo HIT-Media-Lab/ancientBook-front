@@ -651,6 +651,32 @@
                 }
             },
 
+            response_post(response, success, fail) {
+                let status = response.status;
+                if (status == 200){
+                    if (response.body.result == 1){
+                        this.after_success(response);
+                        success(response);
+                    } else if (response.body.result == 0){
+                        this.after_success(response);
+                        fail(response);
+                    }
+                } else if (status == 403){
+                    this.$router.push('/403');
+                } else if (status == 404){
+                    this.$router.push('/404');
+                }
+            },
+
+            after_success (response) {
+                //更新token
+                store.commit("change_token",response.body.token);
+            },
+
+            error () {
+
+            },
+
             fail_post_add() {
                 console.log("fail add!");
                 this.responsibility_info = [];
