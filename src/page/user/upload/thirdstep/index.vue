@@ -631,7 +631,7 @@
                             upload_picture_obj.append('content' , vm.upload_file[vm.post_index1].texts[vm.post_index2]);
                             upload_picture_obj.append('book_name' , vm.upload_file[vm.post_index1].book_name);
                             this.$http.post('/ancient_books/upload_page.action' , upload_picture_obj , {emulateJSON: true}).then(function (response) {
-                                response_post(response,this.success_post_picture,this.fail_post_picture);
+                                this.response_post(response,this.success_post_picture,this.fail_post_picture);
                             },function () {
                                 this.error();
                             });
