@@ -632,9 +632,12 @@
                             upload_picture_obj.append('book_name' , vm.upload_file[vm.post_index1].book_name);
 
                             //验证是否有无token
+                            console.log(this.$store.getters.GetToken);
                             upload_picture_obj.token = this.$store.getters.GetToken;
+                            console.log(upload_picture_obj.token);
                             this.before_http(upload_picture_obj);
-                            upload_picture_obj.token =this.$store.getters.GetToken;
+                            upload_picture_obj.token = this.$store.getters.GetToken;
+                            console.log(upload_picture_obj.token);
                             this.$http.post('/ancient_books/upload_page.action' , upload_picture_obj ,
                                     {emulateJSON: true}
                             ).then(function (response) {
