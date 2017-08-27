@@ -635,7 +635,7 @@
                             this.before_http(upload_picture_obj);
                             upload_picture_obj.token = this.$store.getters.GetToken;
                             upload_picture_obj.append('token' , upload_picture_obj.token);
-                            
+
                             this.$http.post('/ancient_books/upload_page.action' , upload_picture_obj ,
                                     {emulateJSON: true}
                             ).then(function (response) {
