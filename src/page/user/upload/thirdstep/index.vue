@@ -518,7 +518,7 @@
 
                 for (var j = 0; j < this.edition_item.edition_responsibility.length; j++) {
                     this.responsibility_info.push({
-                        order:i,
+                        order:j,
                         location_id:this.edition_item.edition_responsibility[j].location_id,
                         name_id:this.edition_item.edition_responsibility[j].person_id,
                         begin_time_id:this.edition_item.edition_responsibility[j].begin_time_id,
