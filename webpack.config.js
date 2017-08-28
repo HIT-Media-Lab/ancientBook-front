@@ -24,11 +24,11 @@ module.exports = {
       },
         {
             test: /\.(png|jpg|gif|svg|woff|woff2|ttf|eot)$/,
-            loader: 'url-loader',
-            // query: {
-            //     limit: 8192,
-            //     name: 'resourse/[name].[ext]'
-            // },
+            loader: 'file-loader',
+            query: {
+                limit: 8192,
+                name: 'resourse/[name].[ext]'
+            },
             options: {
                 name: '[name].[ext]?[hash]'
             }
