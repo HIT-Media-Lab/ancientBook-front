@@ -3,21 +3,21 @@
     <div class="j-book-navbar">
         <!--部 下拉框-->
         <select class="j-book-select" v-model="select_1" id="bu" @change="go_item_2()">
-            <option class="j-option" selected v-bind:value="{id: 'bu',name: ''}">部</option>
+            <option class="j-option1" selected v-bind:value="{id: 'bu',name: ''}"></option>
             <option v-for="item in item_1" class="j-option" v-bind:value="{id: item.item_1_id, name: item.chinese_name}">
                 {{item.chinese_name}}
             </option>
         </select>
         <!--类 下拉框-->
         <select class="j-book-select" v-model="select_2" id="lei" @change="go_item_3()">
-            <option class="j-option" selected v-bind:value="{id: 'lei', name: ''}">类</option>
+            <option class="j-option1" selected v-bind:value="{id: 'lei', name: ''}"></option>
             <option v-for="item in item_2" class="j-option" v-bind:value="{id: item.item_2_id, name: item.chinese_name}">
                 {{item.chinese_name}}
             </option>
         </select>
         <!--属 下拉框-->
         <select class="j-book-select" v-model="select_3" id="shu" @change="go_to_sortbook()">
-            <option class="j-option" selected v-bind:value="{id: 'shu', name: ''}">属</option>
+            <option class="j-option1" selected v-bind:value="{id: 'shu', name: ''}"></option>
             <option v-for="item in item_3" class="j-option" v-bind:value="{id: item.item_3_id, name: item.chinese_name}">
                 {{item.chinese_name}}
             </option>
@@ -173,6 +173,9 @@
     .j-option{
         background-color: #fef7e5;
         color: black;
-
    }
+    .j-option1{
+        background-color: #fef7e5;
+        color: black;
+    }
 </style>

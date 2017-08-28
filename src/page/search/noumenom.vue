@@ -3,7 +3,7 @@
     <div>
         <p class="j-noumenon-word" v-model="info_num">为您找到{{info_num}}条相关的本体信息</p>
         <div class="j-searched-noumenon" v-for="item in page_content">
-            <a class="j-w" @click="go_to_nou_detail(item.type)" :id="item.noumenon_id">{{item.standard_name}}  {{item.type}}</a>
+            <a class="j-w" @click="go_to_nou_detail(item.type, item.noumenon_id)" :id="item.noumenon_id">{{item.standard_name}}  {{item.type}}</a>
             <br/>
         </div>
         <page_button v-model="total_page" :max=this.total_page></page_button>
@@ -114,8 +114,8 @@
             /**
              *前往对应的本体详情页面
              */
-            go_to_nou_detail(type){
-                this.$route.params.nouId = 1;
+            go_to_nou_detail(type, noumenon_id){
+                this.$route.params.nouId = noumenon_id;
                 if (type == '【人物】'){
                     this.$router.push({name: 'char_detail', params: this.$route.params});
                 }else if (type == '【文献】'){
