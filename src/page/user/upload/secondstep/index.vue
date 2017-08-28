@@ -48,23 +48,25 @@
             </div>
 
             <div slot="body" class="zxw-time-body" style="text-align: center">
-                <div class="row">
-                    <span class="col-md-5">文件名</span>
-                    <span class="col-md-3">大小</span>
-                    <span class="col-md-2">上传至</span>
-                    <span class="col-md-2">状态</span>
-                </div>
-                <img src="../../../../assets/img/no-use-picture/ink-line.png" height="1" width="750"/>
-                <div class="row" v-for="item in upload_file[index].images">
-                    <span class="col-md-5"><img src="../../../../assets/img/no-use-picture/1.png" height="40" width="30"/>{{item.pic_name}}</span>
-                    <span class="col-md-3">{{item.pic_size}}KB</span>
-                    <span class="col-md-2">册1</span>
-                    <span class="col-md-2"><img src="../../../../assets/img/no-use-picture/correct.png" height="25" width="26"/>已上传</span>
+                <div style="background-color:white;">
+                    <div class="row">
+                        <span class="col-md-5">文件名</span>
+                        <span class="col-md-3">大小</span>
+                        <span class="col-md-2">上传至</span>
+                        <span class="col-md-2">状态</span>
+                    </div>
                     <img src="../../../../assets/img/no-use-picture/ink-line.png" height="1" width="750"/>
-                </div>
+                    <div class="row" v-for="item in upload_file[index].images">
+                        <span class="col-md-5"><img src="../../../../assets/img/no-use-picture/1.png" height="40" width="30"/>{{item.pic_name}}</span>
+                        <span class="col-md-3">{{item.pic_size}}KB</span>
+                        <span class="col-md-2">册1</span>
+                        <span class="col-md-2"><img src="../../../../assets/img/no-use-picture/correct.png" height="25" width="26"/>已上传</span>
+                        <img src="../../../../assets/img/no-use-picture/ink-line.png" height="1" width="750"/>
+                    </div>
 
-                <button class="zxw-prebtn zxw-search-create" @click="close_modal">继续上传</button>
-                <button class="zxwnoumenom-button zxw-search-cancel" @click="close_modal">完成</button>
+                    <button class="zxw-prebtn" @click="close_modal">继续上传</button>
+                    <button class="zxwnoumenom-button ry-search-cancel" @click="close_modal">完成</button>
+                </div>
             </div>
         </modal>
 
@@ -587,5 +589,12 @@
         width:800px;
         height:50px;
         padding:10px 0 0 0;
+    }
+
+    .ry-search-cancel{
+        width: 80px;
+        height: 50px;
+        margin-right: 20px;
+        background-size: 80px 40px;
     }
 </style>

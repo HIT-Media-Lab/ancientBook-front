@@ -69,7 +69,10 @@
                         <input id="text-name" type="file" @change="change_text" accept="text/plain" name="text">
                     </a>
                 </div>
-                <div id="ry-hover-text" class="ry-hover-text ry-font-20"></div>
+                <div class="ry-hover-text">
+                    <div id="ry-hover-text" class="ry-hover-text1 ry-font-15"></div>
+                    <div class="ry-hover-text2 ry-font-15 ry-font-weight">......</div>
+                </div>
             </div>
 
             <div slot="footer">
@@ -794,11 +797,24 @@
     }
 
     .ry-hover-text{
+        background-color: white;
         display: inline-block;
         width: 200px;
         height: 400px;
         float: right;
+    }
+
+    .ry-hover-text1{
+        padding-left: 10px;
+        width: 200px;
+        height: 380px;
         overflow: hidden;
+    }
+
+    .ry-hover-text2{
+        padding-left: 10px;
+        width: 200px;
+        height: 20px;
     }
 
     .ry-fixed-left{
@@ -850,8 +866,12 @@
         margin-left: 105px;
     }
 
-    .ry-font-20{
+    .ry-font-15{
         font-size: 15px;
+    }
+
+    .ry-font-weight{
+        font-weight: bold;
     }
 
 </style>
