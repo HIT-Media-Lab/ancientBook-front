@@ -27,10 +27,10 @@
             <!--4层导航按钮-->
             <div class="ry-menu-bar">
                 <ul id="layer-head">
-                    <li id="layer-head-variety" @click="click_variety"><span v-show="variety_text">品种层</span><img v-show="variety_pic" src="../assets/img/picture-button/variety.png" height="31" width="134"/></li>
-                    <li id="layer-head-edition" @click="click_edition"><span v-show="edition_text">版本层</span><img v-show="edition_pic" src="../assets/img/picture-button/edition.png" height="30" width="133"/></li>
-                    <li id="layer-head-impression" @click="click_impression"><span v-show="impression_text">印次层</span><img v-show="impression_pic" src="../assets/img/picture-button/impression.png" height="30" width="133"/></li>
-                    <li id="layer-head-copy" @click="click_copy"><span v-show="copy_text">复本层</span><img v-show="copy_pic" src="../assets/img/picture-button/copy.png" height="30" width="133"/></li>
+                    <li id="layer-head-variety" @click="click_variety"><span v-show="variety_text">品种层</span><img v-show="variety_pic" src="../../../../assets/img/picture-button/variety.png" height="31" width="134"/></li>
+                    <li id="layer-head-edition" @click="click_edition"><span v-show="edition_text">版本层</span><img v-show="edition_pic" src="../../../../assets/img/picture-button/edition.png" height="30" width="133"/></li>
+                    <li id="layer-head-impression" @click="click_impression"><span v-show="impression_text">印次层</span><img v-show="impression_pic" src="../../../../assets/img/picture-button/impression.png" height="30" width="133"/></li>
+                    <li id="layer-head-copy" @click="click_copy"><span v-show="copy_text">复本层</span><img v-show="copy_pic" src="../../../../assets/img/picture-button/copy.png" height="30" width="133"/></li>
                 </ul>
             </div>
 
@@ -213,7 +213,7 @@
 
                         <time_modal :time_modal="this.time_modal_v1" v-on:success_time="birth_time_v()" v-on:close_modal="close_birth_v()"></time_modal>
                         <time_modal :time_modal="this.time_modal_v2" v-on:success_time="dead_time_v()" v-on:close_modal="close_dead_v()"></time_modal>
-                        <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal_v" :noumenon_number="7" v-on:close_modal="close_location_v()" v-on:add_noumenon_relations="add_location_v()"></search_modal>
+                        <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal_v" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_location_v()" v-on:add_noumenon_relations="add_location_v()"></search_modal>
                         <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal_v" :noumenon_number="1" :repeat_arr="[]" v-on:close_modal="close_character_v()" v-on:add_noumenon_relations="add_character_v()"></search_modal>
                     </div>
                 </div>
@@ -471,7 +471,7 @@
 
                         <time_modal :time_modal="this.time_modal_e1" v-on:success_time="birth_time_e()" v-on:close_modal="close_birth_e()"></time_modal>
                         <time_modal :time_modal="this.time_modal_e2" v-on:success_time="dead_time_e()" v-on:close_modal="close_dead_e()"></time_modal>
-                        <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal_e" :noumenon_number="7" v-on:close_modal="close_location_e()" v-on:add_noumenon_relations="add_location_e()"></search_modal>
+                        <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal_e" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_location_e()" v-on:add_noumenon_relations="add_location_e()"></search_modal>
                         <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal_e" :noumenon_number="1" :repeat_arr="[]" v-on:close_modal="close_character_e()" v-on:add_noumenon_relations="add_character_e()"></search_modal>
                     </div>
                 </div>
@@ -604,7 +604,7 @@
 
                         <time_modal :time_modal="this.time_modal_i1" v-on:success_time="birth_time_i()" v-on:close_modal="close_birth_i()"></time_modal>
                         <time_modal :time_modal="this.time_modal_i2" v-on:success_time="dead_time_i()" v-on:close_modal="close_dead_i()"></time_modal>
-                        <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal_i" :noumenon_number="7" v-on:close_modal="close_location_i()" v-on:add_noumenon_relations="add_location_i()"></search_modal>
+                        <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal_i" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_location_i()" v-on:add_noumenon_relations="add_location_i()"></search_modal>
                         <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal_i" :noumenon_number="1" :repeat_arr="[]" v-on:close_modal="close_character_i()" v-on:add_noumenon_relations="add_character_i()"></search_modal>
                     </div>
                 </div>
@@ -762,7 +762,7 @@
 
                         <time_modal :time_modal="this.time_modal_c1" v-on:success_time="birth_time_c()" v-on:close_modal="close_birth_c()"></time_modal>
                         <time_modal :time_modal="this.time_modal_c2" v-on:success_time="dead_time_c()" v-on:close_modal="close_dead_c()"></time_modal>
-                        <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal_c" :noumenon_number="7" v-on:close_modal="close_location_c()" v-on:add_noumenon_relations="add_location_c()"></search_modal>
+                        <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal_c" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_location_c()" v-on:add_noumenon_relations="add_location_c()"></search_modal>
                         <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal_c" :noumenon_number="1" :repeat_arr="[]" v-on:close_modal="close_character_c()" v-on:add_noumenon_relations="add_character_c()"></search_modal>
                     </div>
                 </div>
