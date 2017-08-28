@@ -741,16 +741,23 @@
                 this.key_position = [];
                 this.key_position_comment = [];
                 this.key_position_mark = [];
-                var pos = this.content.indexOf(this.search_key);
-                while (pos > -1) {
-                    this.key_position.push(pos);
-                    this.key_position_comment.push(pos);
-                    this.key_position_mark.push(pos);
-                    pos = this.content.indexOf(this.search_key , pos + 1);
+                if(this.search_key != '') {
+                    var pos = this.content.indexOf(this.search_key);
+                    while (pos > -1) {
+                        this.key_position.push(pos);
+                        this.key_position_comment.push(pos);
+                        this.key_position_mark.push(pos);
+                        pos = this.content.indexOf(this.search_key , pos + 1);
+                    }
+                    this.renew_text();
+                    this.renew_text_comment();
+                    this.renew_text_mark();
                 }
-                this.renew_text();
-                this.renew_text_comment();
-                this.renew_text_mark();
+                else if(this.search_key == '') {
+                    this.renew_text();
+                    this.renew_text_comment();
+                    this.renew_text_mark();
+                }
             },
 
             renew_text() {

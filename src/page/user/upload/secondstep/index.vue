@@ -62,9 +62,7 @@
                     <span class="col-md-2"><img src="../../../../assets/img/no-use-picture/correct.png" height="25" width="26"/>已上传</span>
                     <img src="../../../../assets/img/no-use-picture/ink-line.png" height="1" width="750"/>
                 </div>
-            </div>
 
-            <div slot="footer" class="zxw-search-footer">
                 <button class="zxw-prebtn zxw-search-create" @click="close_modal">继续上传</button>
                 <button class="zxwnoumenom-button zxw-search-cancel" @click="close_modal">完成</button>
             </div>

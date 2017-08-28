@@ -69,7 +69,7 @@
                         <input id="text-name" type="file" @change="change_text" accept="text/plain" name="text">
                     </a>
                 </div>
-                <div id="ry-hover-text" class="ry-hover-text"></div>
+                <div id="ry-hover-text" class="ry-hover-text ry-font-20"></div>
             </div>
 
             <div slot="footer">
@@ -848,6 +848,10 @@
     .ry-del-pic{
         position: absolute;
         margin-left: 105px;
+    }
+
+    .ry-font-20{
+        font-size: 20px;
     }
 
 </style>
