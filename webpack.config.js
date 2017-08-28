@@ -37,7 +37,7 @@ module.exports = {
             test: /\.(woff|woff2|eot|ttf|svg|jpg|png|gif)\??.*$/,
             loader: 'url-loader',
             query: {
-                limit: 3000000,
+                limit: 1,
                 name: 'resourse/[name].[ext]'
             }
         },
