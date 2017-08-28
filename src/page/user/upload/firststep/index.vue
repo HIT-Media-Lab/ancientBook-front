@@ -267,7 +267,7 @@
         margin-top: 50px;
     }
 
-    .layer-input input{
+    .form-center input{
         margin: 5px 0px;
         width: 225px;
         height: 33px;

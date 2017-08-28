@@ -109,7 +109,7 @@
                 add_book_obj : {},
 
                 post_index1 : 0,
-                posts_index2 : 0,
+                post_index2 : 0,
             }
         },
 

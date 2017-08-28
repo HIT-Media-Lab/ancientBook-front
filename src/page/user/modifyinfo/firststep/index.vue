@@ -1491,6 +1491,7 @@
 
                 var length1 = vm.first_layer_info.responsibility_infos.length;
                 for (var i = 0; i < length1 - 1; i++) {
+                    vm.variety_item[i].order = vm.first_layer_info.responsibility_infos[i].order;
                     vm.variety_item[i].location_id = vm.first_layer_info.responsibility_infos[i].location_id;
                     vm.variety_item[i].location_name = vm.first_layer_info.responsibility_infos[i].location_name;
                     vm.variety_item[i].name_id = vm.first_layer_info.responsibility_infos[i].name_id;
@@ -1516,6 +1517,7 @@
 
                 var length2 = vm.edition_responsibility.length;
                 for (var j = 0; j < length2 - 1; j++) {
+                    vm.edition_item[j].order = vm.edition_responsibility[j].order;
                     vm.edition_item[j].location_name = vm.edition_responsibility[j].location_name;
                     vm.edition_item[j].name_name = vm.edition_responsibility[j].name_name;
                     vm.edition_item[j].begin_time_name = vm.edition_responsibility[j].begin_time_name;
@@ -1534,6 +1536,7 @@
 
                 var length3 = vm.impression_responsibility.length;
                 for (var k = 0; k < length3 - 1; k++) {
+                    vm.impression_item[k].order = vm.impression_responsibility[k].order;
                     vm.impression_item[k].location_name = vm.impression_responsibility[k].location_name;
                     vm.impression_item[k].name_name = vm.impression_responsibility[k].name_name;
                     vm.impression_item[k].begin_time_name = vm.impression_responsibility[k].begin_time_name;
@@ -1552,6 +1555,7 @@
 
                 var length4 = vm.copy_responsibility.length;
                 for (var m = 0; m < length4 - 1; m++) {
+                    vm.copy_item[m].order = vm.copy_responsibility[m].order;
                     vm.copy_item[m].location_name = vm.copy_responsibility[m].location_name;
                     vm.copy_item[m].name_name = vm.copy_responsibility[m].name_name;
                     vm.copy_item[m].begin_time_name = vm.copy_responsibility[m].begin_time_name;
@@ -2149,7 +2153,7 @@
 //
 //                for (var p = 0; p < add_responsibility_infos.length; p++) {
 //                    obj.add_responsibility_infos.push({
-//                        order : p + 1,
+//                        order : add_responsibility_infos[p].order,
 //                        location_id : add_responsibility_infos[p].location_id,
 //                        person_id : add_responsibility_infos[p].person_id,
 //                        begin_time : add_responsibility_infos[p].begin_time,
@@ -2229,7 +2233,7 @@
                     this.$router.push({path: '/user/modify2'});
                 }
             },
-            
+
 
             cancel_upload() {
                 this.$router.push({path: '/user'});

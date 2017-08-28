@@ -107,6 +107,9 @@
                 upload_file : [],
                 responsibility_info : [],
                 add_book_obj : {},
+
+                post_index1 : 0,
+                post_index2 : 0,
             }
         },
 
@@ -386,157 +389,47 @@
              * post上传请求
              */
             complete_upload() {
-                this.varieties_item = this.$store.getters.get_varieties_item;
-                this.edition_item = this.$store.getters.get_edition_item;
-                this.impression_item = this.$store.getters.get_impression_item;
-                this.copy_item = this.$store.getters.get_copy_item;
-                this.upload_one_info = this.$store.getters.get_upload1_info;
-                this.summary = this.$store.getters.get_book_summary;
+                for (vm.post_index1 = 0; vm.post_index1 < vm.upload_file.length; vm.post_index1++) {
+                    for (vm.post_index2 = 0; vm.post_index2 < vm.upload_file[vm.post_index1].images.length; vm.post_index2++) {
+                        var upload_picture_obj = new FormData;
 
-                for (var i = 0; i < this.varieties_item.varieties_responsibility.length; i++) {
-                    this.responsibility_info.push({
-                        location_id:this.varieties_item.varieties_responsibility[i].location_id,
-                        person_id:this.varieties_item.varieties_responsibility[i].person_id,
-                        begin_time:this.varieties_item.varieties_responsibility[i].begin_time_id,
-                        end_time:this.varieties_item.varieties_responsibility[i].end_time_id,
-                        action:this.varieties_item.varieties_responsibility[i].action,
-                        explain:this.varieties_item.varieties_responsibility[i].explain,
-                        confirm:this.varieties_item.varieties_responsibility[i].confirm,
-                        type:this.varieties_item.varieties_responsibility[i].type,
-                        level:1
-                    })
-                }
+                        var name = vm.upload_file[vm.post_index1].images[vm.post_index2].pic_name;
+                        var first = name.charAt(1);
+                        var second = name.charAt(2);
+                        var third = name.charAt(3);
+                        var str = first + second + third;
+                        var volume = parseInt(str);
 
-                for (var j = 0; j < this.edition_item.edition_responsibility.length; j++) {
-                    this.responsibility_info.push({
-                        location_id:this.edition_item.edition_responsibility[j].location_id,
-                        person_id:this.edition_item.edition_responsibility[j].person_id,
-                        begin_time:this.edition_item.edition_responsibility[j].begin_time_id,
-                        end_time:this.edition_item.edition_responsibility[j].end_time_id,
-                        action:this.edition_item.edition_responsibility[j].action,
-                        explain:this.edition_item.edition_responsibility[j].explain,
-                        confirm:this.edition_item.edition_responsibility[j].confirm,
-                        type:this.edition_item.edition_responsibility[j].type,
-                        level:2
-                    })
-                }
+                        upload_picture_obj.append('ancient_book_id' , response.body.id);
+                        upload_picture_obj.append('book' , vm.post_index1 + 1);
+                        upload_picture_obj.append('volume' , volume);
+                        upload_picture_obj.append('page' , vm.post_index2 + 1);
+                        upload_picture_obj.append('picture' , vm.upload_file[vm.post_index1].images[vm.post_index2].picture);
+                        upload_picture_obj.append('content' , vm.upload_file[vm.post_index1].texts[vm.post_index2]);
+                        upload_picture_obj.append('book_name' , vm.upload_file[vm.post_index1].book_name);
 
-                for (var k = 0; k < this.impression_item.impression_responsibility.length; k++) {
-                    this.responsibility_info.push({
-                        location_id:this.impression_item.impression_responsibility[k].location_id,
-                        person_id:this.impression_item.impression_responsibility[k].person_id,
-                        begin_time:this.impression_item.impression_responsibility[k].begin_time_id,
-                        end_time:this.impression_item.impression_responsibility[k].end_time_id,
-                        action:this.impression_item.impression_responsibility[k].action,
-                        explain:this.impression_item.impression_responsibility[k].explain,
-                        confirm:this.impression_item.impression_responsibility[k].confirm,
-                        type:this.impression_item.impression_responsibility[k].type,
-                        level:3
-                    })
-                }
+                        upload_picture_obj.token = this.$store.getters.GetToken;
+                        this.before_http(upload_picture_obj);
+                        upload_picture_obj.token = this.$store.getters.GetToken;
+                        upload_picture_obj.append('token' , upload_picture_obj.token);
 
-                for (var m = 0; m < this.copy_item.copy_responsibility.length; m++) {
-                    this.responsibility_info.push({
-                        location_id:this.copy_item.copy_responsibility[m].location_id,
-                        person_id:this.copy_item.copy_responsibility[m].person_id,
-                        begin_time:this.copy_item.copy_responsibility[m].begin_time_id,
-                        end_time:this.copy_item.copy_responsibility[m].end_time_id,
-                        action:this.copy_item.copy_responsibility[m].action,
-                        explain:this.copy_item.copy_responsibility[m].explain,
-                        confirm:this.copy_item.copy_responsibility[m].confirm,
-                        type:this.copy_item.copy_responsibility[m].type,
-                        level:4
-                    })
-                }
-
-                this.add_book_obj.english = this.varieties_item.english;
-                this.add_book_obj.type_name = this.varieties_item.type_name;
-                this.add_book_obj.type_other_name = this.varieties_item.type_other_name;
-                this.add_book_obj.type_save = this.varieties_item.type_save;
-                this.add_book_obj.type_level = this.varieties_item.type_level;
-                this.add_book_obj.type_bu = this.varieties_item.type_bu;
-                this.add_book_obj.type_lei = this.varieties_item.type_lei;
-                this.add_book_obj.type_shu = this.varieties_item.type_shu;
-                this.add_book_obj.type_summary = this.varieties_item.type_summary;
-                this.add_book_obj.literature_standard_name = this.varieties_item.literature_standard_name;
-                this.add_book_obj.version_volume = parseInt(this.edition_item.version_volume_str);
-                this.add_book_obj.version_type = this.edition_item.version_type;
-                this.add_book_obj.version_age = this.edition_item.version_age;
-                this.add_book_obj.version_support = this.edition_item.version_support;
-                this.add_book_obj.version_binding = this.edition_item.version_binding;
-                this.add_book_obj.version_frame_length = parseInt(this.edition_item.version_frame_length_str);
-                this.add_book_obj.version_frame_width = parseInt(this.edition_item.version_frame_width_str);
-                this.add_book_obj.version_format_length = parseInt(this.edition_item.version_format_length_str);
-                this.add_book_obj.version_format_width = parseInt(this.edition_item.version_format_width_str);
-                this.add_book_obj.version_paiji_content = this.edition_item.version_paiji_content;
-                this.add_book_obj.version_paiji_location = this.edition_item.version_paiji_location;
-                this.add_book_obj.version_half_page_line_number = parseInt(this.edition_item.version_half_page_line_number_str);
-                this.add_book_obj.version_page_line_number = parseInt(this.edition_item.version_page_line_number_str);
-                this.add_book_obj.version_yuwei = this.edition_item.version_yuwei;
-                this.add_book_obj.version_double_page_number = parseInt(this.edition_item.version_double_page_number_str);
-                this.add_book_obj.version_bianlan = this.edition_item.version_bianlan;
-                this.add_book_obj.version_fenlan = this.edition_item.version_fenlan;
-                this.add_book_obj.version_shukou = this.edition_item.version_shukou;
-                this.add_book_obj.version_banxin_content = this.edition_item.version_banxin_content;
-                this.add_book_obj.version_youshuwuer = this.edition_item.version_youshuwuer;
-                this.add_book_obj.version_youwujiazhu = this.edition_item.version_youwujiazhu;
-                this.add_book_obj.printing_type = this.impression_item.printing_type;
-                this.add_book_obj.printing_number = this.impression_item.printing_number;
-                this.add_book_obj.duplicate_book_count = parseInt(this.copy_item.duplicate_book_count_str);
-                this.add_book_obj.duplicate_level = this.copy_item.duplicate_level;
-                this.add_book_obj.duplicate_complete = this.copy_item.duplicate_complete;
-                this.add_book_obj.duplicate_attachment = this.copy_item.duplicate_attachment;
-                this.add_book_obj.name = this.upload_one_info.name;
-                this.add_book_obj.standard_name = this.upload_one_info.standard_name;
-                this.add_book_obj.pri = this.upload_one_info.pri;
-                this.add_book_obj.summary = this.summary;
-                this.add_book_obj.responsibility_info = this.responsibility_info;
-                this.before_http(this.add_book_obj);
-                this.http_json('/ancient_books/create_ancient_book_with_new_literature.action' , 'post' , this.add_book_obj , this.success_post_add , this.fail_post_add);
-            },
-
-            success_post_add(response) {
-                var vm = this;
-                if (response.body.result === 1) {
-                    console.log("success add!");
-
-                    for (var i = 0; i < vm.upload_file.length; i++) {
-                        for (var j = 0; j < vm.upload_file[i].images.length; j++) {
-                            var upload_picture_obj = {};
-
-                            var name = vm.upload_file[i].images[j].pic_name;
-                            var first = name.charAt(1);
-                            var second = name.charAt(2);
-                            var third = name.charAt(3);
-                            var str = first + second + third;
-                            var volume = parseInt(str);
-
-                            upload_picture_obj.ancient_book_id = response.body.id;
-                            upload_picture_obj.book = i + 1;
-                            upload_picture_obj.volume = volume;
-                            upload_picture_obj.page = j + 1;
-                            upload_picture_obj.picture = vm.upload_file[i].images[j].picture;
-                            upload_picture_obj.content = vm.upload_file[i].texts[j];
-                            upload_picture_obj.book_name = vm.upload_file[i].book_name;
-                            this.before_http(upload_picture_obj);
-                            this.http_json('/ancient_books/upload_page.action' , 'post' , upload_picture_obj , this.success_post_picture , this.fail_post_picture);
-                        }
+                        this.$http.post('/ancient_books/upload_page.action' , upload_picture_obj ,
+                                {emulateJSON: true}
+                        ).then(function (response) {
+                            this.response_post(response,this.success_post_picture,this.fail_post_picture);
+                        },function () {
+                            this.error();
+                        })
                     }
-
-                    this.$router.push({path:'/user_info/mybook'});
                 }
-                else if (response.body.result === 0) {
-                    console.log("fail add");
-                }
-            },
-
-            fail_post_add() {
-                console.log("fail add!");
             },
 
             success_post_picture(response) {
                 if (response.body.result === 1) {
                     console.log("success upload picture!");
+                    if (vm.post_index1 == vm.upload_file.length - 1 && vm.post_index2 == vm.upload_file[vm.upload_file.length - 1].images.length - 1) {
+                        this.$router.push({path:'/user_info/mybook'});
+                    }
                 }
                 else if (response.body.result === 0) {
                     console.log("fail upload picture");
@@ -545,6 +438,32 @@
 
             fail_post_picture() {
                 console.log("fail upload picture!");
+            },
+
+            response_post(response, success, fail) {
+                let status = response.status;
+                if (status == 200){
+                    if (response.body.result == 1){
+                        this.after_success(response);
+                        success(response);
+                    } else if (response.body.result == 0){
+                        this.after_success(response);
+                        fail(response);
+                    }
+                } else if (status == 403){
+                    this.$router.push('/403');
+                } else if (status == 404){
+                    this.$router.push('/404');
+                }
+            },
+
+            after_success (response) {
+                //更新token
+                this.$store.commit("change_token",response.body.token);
+            },
+
+            error () {
+
             },
         },
     }
