@@ -33,14 +33,14 @@ module.exports = {
         //         name: '[name].[ext]?[hash]'
         //     }
         // },
-        // {
-        //     test: /\.(woff|woff2|eot|ttf|svg|jpg|png|gif)\??.*$/,
-        //     loader: 'url-loader',
-        //     query: {
-        //         limit: 1,
-        //         name: 'resourse/[name].[ext]'
-        //     }
-        // },
+        {
+            test: /\.(woff|woff2|eot|ttf|svg|jpg|png|gif)\??.*$/,
+            loader: 'url-loader',
+            query: {
+                limit: 1,
+                name: 'resourse/[name].[ext]'
+            }
+        },
         {
             test: /\.less$/,
             loader: 'style-loader!css-loader!less-loader'
@@ -50,13 +50,13 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/
       },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
-      }
+      // {
+      //   test: /\.(png|jpg|gif|svg)$/,
+      //   loader: 'file-loader',
+      //   options: {
+      //     name: '[name].[ext]?[hash]'
+      //   }
+      // }
     ]
   },
   resolve: {
