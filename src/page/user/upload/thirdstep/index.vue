@@ -851,7 +851,7 @@
     }
 
     .ry-font-20{
-        font-size: 20px;
+        font-size: 15px;
     }
 
 </style>
