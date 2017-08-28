@@ -617,13 +617,10 @@
                 if (response.body.result == 1) {
                     alert("收藏成功")
                 }
-                else{
-                    alert("收藏失败")
-                }
             },
 
             fail_collect() {
-                console.log("没有成功发送收藏请求")
+                console.log("收藏失败")
             },
 
 
