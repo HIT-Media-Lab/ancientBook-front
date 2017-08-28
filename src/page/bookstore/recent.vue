@@ -37,7 +37,7 @@
                 recent_book: [],
                 book_id: '',
                 book_name: [],
-                id_url:'/ancient_books/get_recient_ancient_book_list.action',
+                id_url:'/ancient_books/get_recent_ancient_book_list.action',
                 picture_url: '/ancient_books/get_picture_by_id.action',
                 picture_page_url: "/ancient_books/get_page_id_by_jcy.action",
                 picture_id_url:'',

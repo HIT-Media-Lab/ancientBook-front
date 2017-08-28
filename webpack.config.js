@@ -22,15 +22,23 @@ module.exports = {
           // other vue-loader options go here
         }
       },
+        // {
+        //     test: /\.(png|jpg|gif|svg|woff|woff2|ttf|eot)$/,
+        //     loader: 'file-loader',
+        //     // query: {
+        //     //     limit: 8192,
+        //     //     name: 'resourse/[name].[ext]'
+        //     // },
+        //     options: {
+        //         name: '[name].[ext]?[hash]'
+        //     }
+        // },
         {
-            test: /\.(png|jpg|gif|svg|woff|woff2|ttf|eot)$/,
-            loader: 'file-loader',
+            test: /\.(woff|woff2|eot|ttf|svg|jpg|png|gif)\??.*$/,
+            loader: 'url-loader',
             query: {
-                limit: 8192,
+                limit: 3000000,
                 name: 'resourse/[name].[ext]'
-            },
-            options: {
-                name: '[name].[ext]?[hash]'
             }
         },
         {
