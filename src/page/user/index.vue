@@ -24,7 +24,7 @@
             <router-link to="/user_info/edit/全部本体/page/1">
                 <img src="../../assets/img/picture-button/user-myoffer.png" class="myoffer_img">
             </router-link>
-            <img src="../../assets/img/picture-button/user-logout.png" class="logout" @click="logout">
+            <img src="../../assets/img/picture-button/user-logout.png" class="logout all-link" @click="logout">
         </div>
     </div>
 </template>

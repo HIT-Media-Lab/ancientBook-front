@@ -10,7 +10,7 @@
             </router-link>
             <input placeholder=" 请输入关键字搜索" class="search-input" v-model="sort_box" v-on:keydown.enter="search1">
             <button class="search-btn" @click="search1">搜 索</button>
-            <img src="../assets/img/picture-button/avatar.png" class="user-img" @click="show_login">
+            <img src="../assets/img/picture-button/avatar.png" class="user-img all-link" @click="show_login">
             <button class="user-name" @click="show_login" v-model="user_name">{{user_name}}</button>
             <div class="down-box"  v-show="sort_box.length!=0">
                 <ul>

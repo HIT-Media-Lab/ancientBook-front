@@ -35,9 +35,6 @@
             }
         },
         created: function () {
-            /**
-             * 部类属搜索页面逻辑
-             */
             this.get_bls();
         },
         watch:{
@@ -46,7 +43,9 @@
             }
         },
         methods: {
-
+            /**
+             * 部类属搜索页面逻辑
+             */
             get_bls(){
                 this.books = [];
                 if (this.$route.params.bu_id == undefined || this.$route.params.lei_id == undefined || this.$route.params.shu_id == undefined){
