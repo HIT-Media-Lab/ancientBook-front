@@ -2225,29 +2225,11 @@
                     alert("请填写复本层责任者名称");
                 }
                 else{
-                    let url = '/ancient_books/check_if_ancient_book_already_exist.action?name=' + this.book_all_info.standard_name;
-                    var check_obj = '';
-                    this.http_json (url , 'get' , check_obj , this.success_check , this.fail_check);
+                    this.confirm_modify();
+                    this.$router.push({path: '/user/modify2'});
                 }
             },
-
-            success_check(response) {
-                if (response.body.length === 0) {
-                    console.log ("没有返回判断值！");
-                }
-                else{
-                    if (response.body.result === 1) {
-                        alert("古籍规范名称重复")
-                    }
-                    else{
-                        this.$router.push({path: '/user/modify2'});
-                    }
-                }
-            },
-
-            fail_check() {
-                console.log("error!")
-            },
+            
 
             cancel_upload() {
                 this.$router.push({path: '/user'});
