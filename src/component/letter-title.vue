@@ -25,18 +25,6 @@
 
 <script>
     export default{
-        created(){
-            //this.letter_id = 'A';
-            //console.log("created A");
-        },
-
-        watch:{
-            $route(){
-                //this.letter_id = this.$route.params.letterId;
-                //console.log("$route letter");
-            }
-        },
-
         data(){
             return {
                 letter_id:'',

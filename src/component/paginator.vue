@@ -1,21 +1,21 @@
 <template>
     <!--翻页键-->
     <div class="page-box">
-        <button  class="btn-pages"  @click="prePage()" v-bind:disable="ban_1" tabindex="-1">上一页</button>
+        <button  class="btn-pages"  @click="prePage()" v-bind:disabled="cur_page > max||cur_page <= 1||ban_1 === true">上一页</button>
 
         <div class="btn-pages text-pages">
-            <input  type="text" class="text-input" v-model="cur_page"  tabindex="-1" v-bind:disable="ban_3"><label class="zxw-label" v-model="max">/{{max}}</label>
+            <input  type="text" class="text-input" v-model="cur_page" v-bind:disable="ban_3"><span class="zxw-label" v-model="max">/ {{max}}</span>
         </div>
 
-        <button class="btn-pages btn-go"  @click="skiPage()" tabindex="-1">GO</button>
-        <button class="btn-pages"   @click="nextPage()" v-bind:disable="ban_2" tabindex="-1">下一页</button>
+        <button class="btn-pages btn-go"  @click="skiPage()" v-bind:disabled="cur_page > max || cur_page <= 0">GO</button>
+        <button class="btn-pages"   @click="nextPage()" v-bind:disabled="cur_page > max|| cur_page <= 0||ban_2 === true" >下一页</button>
     </div>
 </template>
 
 <script>
     export default{
         watch:{
-            $route(){
+            '$route'(){
                 this.cur_page = this.$route.params.pageId;
             }
         },
@@ -36,7 +36,7 @@
                     this.ban_1 = true;
                 } else if (this.cur_page > 1 && this.cur_page <= this.max) {
                     this.ban_1 = false;
-                    this.cur_page = --this.cur_page;
+                    this.cur_page = this.cur_page -1;
                     this.gotoPage();
                 }
             },
@@ -47,7 +47,7 @@
                     this.ban_2 = true;
                 } else if (this.cur_page >= 1 && this.cur_page < this.max) {
                     this.ban_2 = false;
-                    this.cur_page = ++this.cur_page;
+                    this.cur_page = this.cur_page+1;
                     this.gotoPage();
                 }
             },
@@ -87,6 +87,8 @@
         width: 120px;
         height: 43px;
         color: gainsboro;
+        vertical-align: top;
+        text-align: center;
     }
 
     .btn-go{
@@ -94,13 +96,15 @@
         height:43px;
         background-size: 100% 100%;
         margin:0 11px 0 0;
-        display: inline-block;
+        font-weight: bold;
     }
 
     /*页数显示位置*/
     .text-pages{
         display: inline-block;
         margin:0 -10px 0 11px;
+        padding-top: 6px;
+        font-weight: bold;
     }
 
     /*输入页数文本框样式*/
@@ -108,7 +112,7 @@
         width:25px;
         background-color: transparent;
         border-style: none;
-        text-align: right;
+        text-align: center;
     }
 
     .zxw-label{

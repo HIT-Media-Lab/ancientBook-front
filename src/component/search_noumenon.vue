@@ -46,7 +46,7 @@
     Mock.mock('/ancient_books/get_person_list_by_name.action?name=lsm&&page_count=1','get', {
         "content":[
             {
-                "standard_name":"李世民",
+                "standard_name":"李世民(1996西周韩国)",
                 "type_id|1":1,
                 "name":'李世明啊',
                 "noumenon_id|100":100
@@ -93,7 +93,7 @@
     Mock.mock('/ancient_books/get_person_list_by_name.action?name=lh&&page_count=1','get', {
         "content":[
             {
-                "standard_name":"鹿晗",
+                "standard_name":"鹿晗(1996西周韩国)",
                 "noumenon_id|200":50
             },
             {
@@ -127,7 +127,7 @@
     Mock.mock('/ancient_books/get_person_list_by_name.action?name=ch&&page_count=1','get', {
         "content":[
             {
-                "standard_name":"陈赫",
+                "standard_name":"陈赫(1996西周韩国)",
                 "noumenon_id|150":50
             },
             {
@@ -454,8 +454,6 @@
 
     .zxw-modal-character{
         width:400px;
-        background-repeat: no-repeat;
-        background-size:400px auto;
     }
 
     .zxw-character-header{

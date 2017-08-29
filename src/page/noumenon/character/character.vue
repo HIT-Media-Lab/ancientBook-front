@@ -129,7 +129,9 @@
                 <p class="zxwspan-length-content" v-model="person_content.remark_2">{{person_content.remark_2}}</p>
             </div>
         </template>
-            <button  class="zxwnoumenom-button zxwdelete-character" @click="delete_character()">删除本体</button>
+            <button  class="zxwnoumenom-button zxwdelete-character" @click="open_delete_character()">删除本体</button>
+
+        <delete_modal :open_modal="open_modal" :delete_warning="'确认删除本体?'" v-on:close_modal="close_modal" v-on:delete_info="delete_character"></delete_modal>
         </div>
 </template>
 
@@ -286,18 +288,25 @@
                 "person_id|100-1000": 1,
                 "person_name|10000": 1
             }]
+    });
+
+    Mock.mock('/ancient_books/delete_person_by_id.action','post', {
+        "status|200":200,
+        "result|1":1,
     });*/
 
 
     import noumenon_title from '../../../component/noumenon-title.vue';
     import noumenon_button from '../../../component/noumenon-button.vue';
+    import delete_modal from '../../../component/delete_modal.vue'
     export default{
         created(){
             this.person_info();
         },
         components:{
             noumenon_title,
-            noumenon_button
+            noumenon_button,
+            delete_modal
         },
         data(){
             return{
@@ -316,7 +325,8 @@
                 student:[],
                 friend:[],
                 show_info:false,
-                delete_info:''
+                delete_info:'',
+                open_modal:false
             }
         },
 
@@ -455,6 +465,20 @@
                 this.http_json(new_url,'get',person_object,this.success_id,this.fail_id);
             },
 
+            open_delete_character(){
+                this.open_modal = true;
+            },
+
+            close_modal(){
+                this.open_modal = false;
+            },
+
+            delete_character(){
+                let delete_object = {};
+                delete_object.id = this.$route.params.nouId;
+                this.http_json(this.delete_character_url,'post',delete_object,this.success_delete,this.fail_delete);
+            },
+
             success_delete(response){
                 if(response.body.result === 1){
                     this.$router.push({path:'/noumenon'});
@@ -462,13 +486,7 @@
             },
 
             fail_delete(response){
-                console.log("")
-            },
-
-            delete_character(){
-                let delete_object = {};
-                delete_object.id = this.$route.params.nouId;
-                this.http_json(this.delete_character_url,'post',delete_object,this.success_delete,this.fail_delete);
+                console.log("删除人物本体失败");
             },
 
             to_character(p){

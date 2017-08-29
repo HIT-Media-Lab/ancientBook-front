@@ -72,7 +72,9 @@
                 </div>
             </div>
         </div>
-        <button  class="zxwnoumenom-button zxw-lit-delete" @click="delete_lit()">删除本体</button>
+        <button  class="zxwnoumenom-button zxw-lit-delete" @click="open_delete_lit()">删除本体</button>
+
+        <delete_modal :open_modal="open_modal" :delete_warning="'确认删除本体?'" v-on:close_modal="close_modal" v-on:delete_info="delete_lit"></delete_modal>
     </div>
 </template>
 
@@ -146,6 +148,7 @@
 
     import noumenon_title from '../../../component/noumenon-title.vue';
     import noumenon_button from '../../../component/noumenon-button.vue';
+    import delete_modal from '../../../component/delete_modal.vue';
     export default{
         created(){
             this.show_lit();
@@ -153,7 +156,8 @@
 
         components:{
             noumenon_title,
-            noumenon_button
+            noumenon_button,
+            delete_modal
         },
 
         data(){
@@ -170,7 +174,8 @@
                 type_bu_name:'',
                 type_lei_name:'',
                 type_shu_name:'',
-                responsibility_infos:[]
+                responsibility_infos:[],
+                open_modal:false
             }
         },
 
@@ -203,6 +208,14 @@
 
             fail_lit(){
                 console.log("获取文献具体信息失败");
+            },
+
+            open_delete_lit(){
+                this.open_modal = true;
+            },
+
+            close_modal(){
+                this.open_modal = false;
             },
 
             delete_lit(){

@@ -30,7 +30,7 @@
         data(){
             return {
                 show_fork: true
-            }
+        }
         },
         props: ['show_modal'],   //控制模态框的显隐
         methods: {

@@ -29,7 +29,7 @@
             'standard_name':'@FIRST',
             'noumenon_id|1':1
         }],
-        "total_page|10-20":1
+        "total_page|20":1
     });
 
     Mock.mock('/ancient_books/get_person_list_by_word.action?word=A&&page_count=2','get',{
@@ -38,7 +38,7 @@
             'standard_name':'@FIRST',
             'noumenon_id|100-1000':1
         }],
-        "total_page|10-20":1
+        "total_page|20":1
     });
 
     Mock.mock('/ancient_books/get_person_list_by_word.action?word=B&&page_count=1','get',{
@@ -101,9 +101,11 @@
                 console.log("字母显示本体列表成功");
                 this.total_page = response.body.total_page;
                 for (let i = 0; i < response.body.content.length; i++) {
-                    this.character_data.push(
-                        response.body.content[i]
-                    );
+                    this.character_data.push({
+                        standard_name: response.body.content[i].standard_name,
+                        type_id:response.body.content[i].type_id,
+                        noumenon_id:response.body.content[i].noumenon_id
+                    });
                 }
                 console.log('response.body.content.length:'+response.body.content.length);
                 console.log('this.character_data:'+JSON.stringify(this.character_data));
@@ -139,15 +141,14 @@
     .zxw-chadail{
         font-size: 18px;
         text-align: left;
-        margin:0 200px 20px 35px;
-        width:200px;
+        margin: 0 10px 10px 20px;
+        width:400px;
         background-color: transparent;
         border-style: none;
     }
 
     .zxw-noumenon-list{
-        margin-left:50px;
+        margin-left:80px;
     }
-
 
 </style>

@@ -213,6 +213,15 @@ import  ins_edit from './page/noumenon/institution/edit.vue'
 import  terms_edit from  './page/noumenon/terms/edit.vue'
 import  time_edit from  './page/noumenon/time/edit.vue'
 
+//本体标记位置查看
+import char_check from './page/noumenon/character/check.vue'
+import ins_check from './page/noumenon/institution/check.vue'
+
+
+
+
+
+
 // 创建一个路由器实例
 // 并且配置路由规则
 const router = new VueRouter({
@@ -421,6 +430,11 @@ const router = new VueRouter({
                     name:'char_edit'
                 },
                 {
+                    path:'char_check/:nouId/:pageId',
+                    component:char_check,
+                    name:'char_check'
+                },
+                {
                     path:'institution/letter/:letterId/page/:pageId',
                     component:institution,
                     name:'institution'
@@ -440,6 +454,11 @@ const router = new VueRouter({
                     path:'ins_edit/:nouId',
                     component:ins_edit,
                     name:'ins_edit'
+                },
+                {
+                    path:'ins_check/:nouId/:pageId',
+                    component:ins_check,
+                    name:'ins_check'
                 },
                 {
                     path:'literature/letter/:letterId/page/:pageId',

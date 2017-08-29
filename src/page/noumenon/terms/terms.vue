@@ -62,7 +62,9 @@
                 <p class="zxwspan-length-content" v-model="terms_content.remark_2">{{terms_content.remark_2}}</p>
             </div>
         </template>
-        <button  class="zxwnoumenom-button zxwdelete-character" @click="delete_terms()">删除本体</button>
+        <button  class="zxwnoumenom-button zxwdelete-character" @click="open_delete_terms()">删除本体</button>
+
+        <delete_modal :open_modal="open_modal" :delete_warning="'确认删除本体?'" v-on:close_modal="close_modal" v-on:delete_info="delete_terms"></delete_modal>
     </div>
 </template>
 
@@ -112,13 +114,15 @@
 
     import noumenon_title from '../../../component/noumenon-title.vue';
     import noumenon_button from '../../../component/noumenon-button.vue';
+    import delete_modal from '../../../component/delete_modal.vue';
     export default{
         created(){
             this.get_course_arr();
         },
         components:{
             noumenon_title,
-            noumenon_button
+            noumenon_button,
+            delete_modal
         },
         data(){
             return{
@@ -143,31 +147,10 @@
                     remark_2_name: ''
                 },
                 course_arr:[],
-                selected_course:''
+                selected_course:'',
+                open_modal:false
             }
         },
-
-        /*watch:{
-            $route(){
-                this.terms_content.standard_name = '';
-                this.terms_content.name = '';
-                this.terms_content.english = '';
-                this.terms_content.other_name = '';
-                this.terms_content.course = 0;
-                this.terms_content.course_subdivision = 0;
-                this.terms_content.begin_time_id = '';
-                this.terms_content.begin_time_name = '';
-                this.terms_content.end_time_id = '';
-                this.terms_content.end_time_name = '';
-                this.terms_content.remark_1_name = '';
-                this.terms_content.remark_2_name = '';
-                this.terms_content.remark_1 = '';
-                this.terms_content.remark_2 = '';
-                this.terms_content.explain = '';
-                this.course_arr.splice(1,this.course_arr.length);
-                this.terms_info();
-            }
-        },*/
 
         methods:{
 
@@ -207,6 +190,14 @@
                 let terms_object={};
                 let new_url = this.get_terms_url +'?id='+this.$route.params.nouId;
                 this.http_json(new_url,'get',terms_object,this.success_id,this.fail_id);
+            },
+
+            open_delete_terms(){
+                this.open_modal = true;
+            },
+
+            close_modal(){
+                this.open_modal = false;
             },
 
             success_delete(response){

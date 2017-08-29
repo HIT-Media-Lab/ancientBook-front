@@ -1,8 +1,8 @@
 <template>
-    <modal :show_modal="this.show_info" class="zxw-success-create-body">
-        <div slot="body" style="height:200px">
+    <modal :show_modal="show_info" class="zxw-success-create-body">
+        <div slot="body" style="height:230px">
             <img src="../assets/img/no-use-picture/success_create.png" class="zxw-success-create-icon">
-            <span class="zxw-success-create">已成功创建本体</span>
+            <p class="zxw-success-create">已成功创建本体</p>
         </div>
     </modal>
 </template>
@@ -32,10 +32,13 @@
 
     .zxw-success-create{
         width: 150px;
-        margin:10px 100px 30px 130px;
+        margin:20px 100px 30px 130px;
     }
 
     .zxw-success-create-icon{
-        margin:50px 150px 20px 160px;
+        width: 80px;
+        height: 80px;
+        margin-left: 160px;
+        margin-top: 50px;
     }
 </style>

@@ -68,7 +68,9 @@
                 <p class="zxwspan-length-content" v-model="ins_content.remark_2">{{ins_content.remark_2}}</p>
             </div>
         </template>
-        <button  class="zxwnoumenom-button zxwdelete-character" @click="delete_ins()">删除本体</button>
+        <button  class="zxwnoumenom-button zxwdelete-character" @click="open_delete_ins()">删除本体</button>
+
+        <delete_modal :open_modal="open_modal" :delete_warning="'确认删除本体?'" v-on:close_modal="close_modal" v-on:delete_info="delete_ins"></delete_modal>
     </div>
 </template>
 
@@ -101,13 +103,15 @@
 
     import noumenon_title from '../../../component/noumenon-title.vue';
     import noumenon_button from '../../../component/noumenon-button.vue';
+    import delete_modal from '../../../component/delete_modal.vue';
     export default{
         created(){
             this.ins_info();
         },
         components:{
             noumenon_title,
-            noumenon_button
+            noumenon_button,
+            delete_modal
         },
         data(){
             return{
@@ -137,7 +141,8 @@
                     remark_2_name: ''
                 },  //成功回调后的对象
                 show_info:false,
-                delete_info:''
+                delete_info:'',
+                open_modal:false
             }
         },
 
@@ -200,6 +205,20 @@
                 this.http_json(new_url,'get',ins_object,this.success_id,this.fail_id);
             },
 
+            open_delete_ins(){
+                this.open_modal = true;
+            },
+
+            close_modal(){
+                this.open_modal = false;
+            },
+
+            delete_ins(){
+                let delete_object = {};
+                delete_object.id = this.$route.params.nouId;
+                this.http_json(this.delete_ins_url,'post',delete_object,this.success_delete,this.fail_delete);
+            },
+
             success_delete(response){
                 if(response.body.result === 1){
                     this.$router.push({path:'/noumenon'});
@@ -208,12 +227,6 @@
 
             fail_delete(response){
                 console.log("删除本体失败");
-            },
-
-            delete_ins(){
-                let delete_object = {};
-                delete_object.id = this.$route.params.nouId;
-                this.http_json(this.delete_ins_url,'post',delete_object,this.success_delete,this.fail_delete);
             },
 
             to_ins(){

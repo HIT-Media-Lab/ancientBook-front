@@ -1,16 +1,15 @@
 <template>
     <div>
-        <!--机构本体标题-->
+        <!--文献本体标题-->
         <noumenon_title :title="this.title">
             <build_button slot="children"></build_button>
         </noumenon_title>
 
         <!--字母title-->
         <letter_title></letter_title>
-
-        <!--机构列表-->
+        <!--文献列表-->
         <div class="zxw-noumenon-list">
-            <button class="zxw-chadail" @click="go_lit(index)" v-for="(item,index) in lit_data">
+            <button class="zxw-lit-list" @click="go_lit(index)" v-for="(item,index) in lit_data">
                 {{ item.standard_name }}
             </button>
         </div>
@@ -26,7 +25,7 @@
      Mock.mock('/ancient_books/get_literature_list_by_word.action?word=A&&page_count=1','get',{
      "result|1":1,
      "content|30":[{
-     'standard_name':'文献本体',
+     'standard_name':'律师诗经([西周]张馨文考订、[西周]张馨文考订)',
      'noumenon_id|1':1
      }],
      "total_page|10-20":1
@@ -63,12 +62,16 @@
                 total_page:0,
                 lit_data:[],
                 word_url:'/ancient_books/get_literature_list_by_word.action',
-                ban:true
+                ban:true,
+                it:false,
+                i:['fg','fg','fg','fg','fg','fg','fg',]
             }
         },
 
         methods:{
-
+            openit(){
+                this.it = true;
+            },
             //通过头字母显示人物本体列表
             success_get(response){
                 console.log("字母显示本体列表成功");
@@ -103,3 +106,14 @@
 
     }
 </script>
+
+<style>
+    .zxw-lit-list{
+        font-size: 18px;
+        text-align: left;
+        background-color: transparent;
+        border-style: none;
+        margin:0 30px 10px 0;
+        width:600px;
+    }
+</style>

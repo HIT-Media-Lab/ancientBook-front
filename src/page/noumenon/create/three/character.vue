@@ -104,14 +104,14 @@
 
             <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()">确认</button>
         </div>
-        <success_create :show_info="show_info"></success_create>
+        <success_create :show_info="show_info" ></success_create>
         <!--子的具体信息显示-->
         <modal :show_modal="show_tooltip_son" v-on:fireclose="close_tooltip_son" class="zxw-modal-character">
-            <div slot="header" class="zxw-relation-modal-header">
-            </div>
+            <div slot="header" class="zxw-character-header"></div>
             <div slot="body" class="zxw-relation-modal-body">
               <p class="zxw-relation-info" v-for="item in this.$store.getters.get_build_character.son_standard_name">{{item}}</p>
             </div>
+            <div slot="footer" class="zxw-relation-modal-footer"></div>
         </modal>
 
         <!--女的具体信息显示-->
@@ -180,6 +180,7 @@
         beforeRouteLeave (to, from, next){
             if(to.name !== 'charactertwo') {
                 //清空Vuex
+                this.$store.getters.get_fork = true;
                 this.$store.getters.get_build_character.standard_name = '';
                 this.$store.getters.get_build_character.person_name = '';
                 this.$store.getters.get_build_character.xing = '';
@@ -240,6 +241,7 @@
 
         created(){
             this.prams = this.$route.name;
+            this.$store.commit('change_fork',false);
         },
 
         computed:{
@@ -464,7 +466,12 @@
         margin-bottom: 20px;
     }
 
+    .zxw-relation-modal-footer{
+        height:10px;
+    }
+
     .zxw-null{
         color:darkgrey;
     }
+
 </style>
