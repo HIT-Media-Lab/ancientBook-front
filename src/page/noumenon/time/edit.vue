@@ -278,11 +278,11 @@
                         this.juedui = response.body.juedui.toString();
                     }
 
-                if(response.body.gongyuan === null){
-                    this.g_year = "";
-                } else {
-                    this.g_year = response.body.gongyuan.toString();
-                }
+                    if(response.body.gongyuan === null){
+                        this.g_year = "";
+                    } else {
+                        this.g_year = response.body.gongyuan.toString();
+                    }
                     this.selected_2_month.item_1_id = response.body.g_yue;
                     this.selected_2_month.chinese_name = response.body.g_yue_name;
                     this.selected_2_day.item_1_id= response.body.g_ri;
