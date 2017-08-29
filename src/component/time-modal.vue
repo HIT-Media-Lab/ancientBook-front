@@ -38,8 +38,8 @@
     Mock.mock('/ancient_books/get_menu_items.action?model_id=25&&item_1_id=0&&item_2_id=0','get', {
         "g":[
             {"model_id|1": 1,
-             "item_1_id|1": 1,
-             "chinese_name": "宋朝"
+                "item_1_id|1": 1,
+                "chinese_name": "宋朝"
             },
             {"model_id|1": 1,
                 "item_1_id|2": 2,
@@ -48,6 +48,40 @@
             {"model_id|1": 1,
                 "item_1_id|3": 3,
                 "chinese_name": "明朝"
+            }
+        ]
+    });
+
+    Mock.mock('/ancient_books/get_menu_items.action?model_id=25&&item_1_id=1&&item_2_id=0','get', {
+        "g":[
+            {"model_id|1": 1,
+                "item_2_id|1": 1,
+                "chinese_name": "天宝"
+            },
+            {"model_id|1": 1,
+                "item_2_id|2": 2,
+                "chinese_name": "元包"
+            },
+            {"model_id|1": 1,
+                "item_2_id|3": 3,
+                "chinese_name": "明朝"
+            }
+        ]
+    });
+
+    Mock.mock('/ancient_books/get_menu_items.action?model_id=25&&item_1_id=2&&item_2_id=0','get', {
+        "g":[
+            {"model_id|1": 1,
+                "item_2_id|1": 1,
+                "chinese_name": "好"
+            },
+            {"model_id|1": 1,
+                "item_2_id|2": 2,
+                "chinese_name": "的"
+            },
+            {"model_id|1": 1,
+                "item_2_id|3": 3,
+                "chinese_name": "好"
             }
         ]
     });

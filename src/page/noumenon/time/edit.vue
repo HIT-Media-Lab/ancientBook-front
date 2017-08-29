@@ -5,7 +5,7 @@
             <p class="zxw-create-character" v-model="standard_name" :="standard_title">本体名称：{{standard_name}}</p>
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">朝代：</label>
-                <select  class="zxw-ins-select zxw-edit-character-input-margin" v-model="selected_chaodai" :="repeat_nou_1" v-bind="get_nianhao_type">
+                <select  class="zxw-ins-select zxw-edit-character-input-margin" v-model="selected_chaodai" :="repeat_nou_1" @change="get_nianhao_type_1()">
                     <option v-for="item in chaodai_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
 
@@ -151,19 +151,6 @@
                 }
             },
 
-            get_nianhao_type(){
-                this.nianhao_type.splice(0,this.nianhao_type.length);
-                this.selected_nianhao.item_2_id=0;
-                this.selected_nianhao.chinese_name ='';
-                if(this.selected_chaodai.chinese_name !== ''&& this.chaodai_type.length > 0 && this.nianhao_type.length === 0){
-                    let object = {};
-                    let new_url = this.menu_url+'?model_id=25&&item_1_id='+this.selected_chaodai.item_1_id+'&&item_2_id=0';
-                    this.http_json(new_url,'get',object,this.success_nianhao_type,this.fail_nianhao_type);
-                } else {
-
-                }
-            },
-
             clean_g_month(){
                 if(this.g_year === ''||this.selected_2_month.chinese_name === '-'){
                     this.selected_2_month.chinese_name = '';
@@ -291,6 +278,8 @@
                     this.selected_2_day.chinese_name= response.body.g_ri_name;
                     this.english = response.body.english;
                     this.selected_jieqi = response.body.jieqi;
+                    console.log(JSON.stringify(this.selected_nianhao));
+                    this.get_nianhao_type_2()
             },
 
             fail_time(response){
@@ -359,13 +348,11 @@
             },
 
             success_chaodai_type(response){
-                if(response.body.length > 0){
-                    for(let i = 0;i < response.body.length;i++){
-                        this.chaodai_type.push({
-                            item_1_id:response.body[i].item_1_id,
-                            chinese_name:response.body[i].chinese_name
-                        })
-                    }
+                for(let i = 0;i < response.body.length;i++){
+                    this.chaodai_type.push({
+                        item_1_id:response.body[i].item_1_id,
+                        chinese_name:response.body[i].chinese_name
+                    })
                 }
                 this.show_time();
             },
@@ -375,6 +362,25 @@
             },
 
             /*年号下拉框*/
+            get_nianhao_type_1(){
+                if(this.selected_chaodai.chinese_name !== ''&& this.chaodai_type.length > 0){
+                    this.nianhao_type.splice(0,this.nianhao_type.length);
+                    this.selected_nianhao.item_2_id = 0;
+                    this.selected_nianhao.chinese_name = '';
+                    let object = {};
+                    let new_url = this.menu_url+'?model_id=25&&item_1_id='+this.selected_chaodai.item_1_id+'&&item_2_id=0';
+                    this.http_json(new_url,'get',object,this.success_nianhao_type,this.fail_nianhao_type);
+                }
+            },
+
+            get_nianhao_type_2(){
+                if(this.selected_chaodai.chinese_name !== ''&& this.chaodai_type.length > 0){
+                    let object = {};
+                    let new_url = this.menu_url+'?model_id=25&&item_1_id='+this.selected_chaodai.item_1_id+'&&item_2_id=0';
+                    this.http_json(new_url,'get',object,this.success_nianhao_type,this.fail_nianhao_type);
+                }
+            },
+
             success_nianhao_type(response){
                 for(let i = 0;i < response.body.length;i++){
                     this.nianhao_type.push({
@@ -518,7 +524,6 @@
             fail_g_day_type(response){
                 console.log("获取公历日期失败");
             }
-
         }
     }
 </script>

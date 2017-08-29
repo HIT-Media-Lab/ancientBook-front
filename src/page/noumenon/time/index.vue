@@ -48,7 +48,7 @@
 
 <script>
 
-    let Mock = require('mockjs');
+    /*let Mock = require('mockjs');
     Mock.mock('/ancient_books/get_time_by_chinese_name.action','post', {
         "status|200":200,
         "result|1":1,
@@ -57,7 +57,7 @@
 
     Mock.mock('/ancient_books/getToken.action','get', {
         "token|100":100,
-    });
+    });*/
 
     import noumenon_title from '../../../component/noumenon-title.vue';
     import build_button from '../../../component/build-button.vue';
