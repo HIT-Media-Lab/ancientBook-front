@@ -167,6 +167,7 @@
     }
     .j-book-select{
         margin:21px 0 25px 200px;
+        width: 100px;
         font-size: 20px;
         color: white;
         display: inline-block;
@@ -177,7 +178,7 @@
     .j-triangle1{
         position: absolute;
         margin-top: -45px;
-        margin-left: 280px;
+        margin-left: 290px;
         width:0;
         height:0;
         border-top:8px solid white;
@@ -188,7 +189,7 @@
     .j-triangle2{
         position: absolute;
         margin-top: -45px;
-        margin-left: 596px;
+        margin-left: 615px;
         width:0;
         height:0;
         border-top:8px solid white;
@@ -199,7 +200,7 @@
     .j-triangle3{
         position: absolute;
         margin-top: -45px;
-        margin-left: 912px;
+        margin-left: 920px;
         width:0;
         height:0;
         border-top:8px solid white;
@@ -213,6 +214,6 @@
    }
     .j-option1{
         background-color: #fef7e5;
-        color: black;
+        color: #fef7e5;
     }
 </style>
