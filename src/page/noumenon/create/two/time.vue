@@ -40,7 +40,7 @@
             <div class="zxw-character-row">
                 <label class="zxw-character-span">节气：</label>
                 <select  class="zxw-ins-select  zxw-character-input-margin" v-model="input_time.selected_jieqi">
-                    <option v-for="item in jieqi_type">{{item}}</option>
+                    <option v-for="item in jieqi_type" v-bind:value="item">{{item}}</option>
                 </select>
                 <label class="zxw-character-span">英译：</label>
                 <input type="text" class="zxw-character-input" v-model="input_time.english">
@@ -388,9 +388,6 @@
                     let new_url = this.ganzhi_name+'?gongyuan='+parseInt(this.input_time.g_year);
                     let object = {};
                     this.http_json(new_url,'get',object,this.success_ganzhi_name,this.fail_ganzhi_name);
-                } else if(this.input_time.g_year ==='' || this.show_g_year === true){
-                    this.input_time.selected_ganzhi.item_1_id=0;
-                    this.input_time.selected_ganzhi.chinese_name = '';
                 }
             },
         },
@@ -576,6 +573,7 @@
                         response.body[i].chinese_name
                     )
                 }
+                console.log(JSON.stringify(this.jieqi_type));
             },
 
             fail_jieqi_type(response){

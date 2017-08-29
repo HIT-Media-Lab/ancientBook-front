@@ -136,9 +136,6 @@
                     let new_url = this.ganzhi_name+'?gongyuan='+parseInt(this.g_year);
                     let object = {};
                     this.http_json(new_url,'get',object,this.success_ganzhi_name,this.fail_ganzhi_name);
-                } else if(this.g_year ==='' || this.show_g_year === true){
-                    this.selected_ganzhi.item_1_id=0;
-                    this.selected_ganzhi.chinese_name = '';
                 }
             },
 
