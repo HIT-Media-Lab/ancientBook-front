@@ -85,7 +85,8 @@
 
     export default{
         created(){
-            this.show_time();
+            //this.show_time();
+            this.get_chaodai_type();
             this.get_month_type();
             this.get_day_type();
             this.get_ganzhi_type();
@@ -260,7 +261,7 @@
             },
 
             success_time(response){
-                this.get_chaodai_type();
+                    //this.get_chaodai_type();
                     this.edit_time_title = response.body.standard_name;
                     this.standard_name = response.body.standard_name;
                     this.selected_chaodai.item_1_id = response.body.chaodai;
@@ -367,6 +368,7 @@
                         })
                     }
                 }
+                this.show_time();
             },
 
             fail_chaodai_type(response){
