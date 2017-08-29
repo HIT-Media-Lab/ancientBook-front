@@ -507,9 +507,6 @@
 
         mounted : function () {
             this.change_module();
-            this.edition_responsibility_info();
-            this.impression_responsibility_info();
-            this.copy_responsibility_info();
         },
 
         methods : {
@@ -594,6 +591,9 @@
                 }
                 else{
                     this.three_layers_info = response.body;
+                    this.edition_responsibility_info();
+                    this.impression_responsibility_info();
+                    this.copy_responsibility_info();
                 }
             },
 
