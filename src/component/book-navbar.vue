@@ -73,6 +73,9 @@
         },
         watch:{
             $route(){
+                this.$route.params.bu_id = 0;
+                this.$route.params.lei_id = 0;
+                this.$route.params.shu_id = 0;
                 this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + 0 + '&&item_2_id=' + 0;
                 this.http_json(this.id,'get',{}, this.success1, this.fail1);
                 this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + 1 + '&&item_2_id=' + 0;
@@ -101,7 +104,7 @@
                 this.item.bu = this.item_1_id;
                 this.select_2 = {id: 'lei', name: ''};
                 this.select_3 = {id: 'shu', name: ''};
-                console.log(this.select_1);
+//                console.log(this.select_1);
             },
             success2(response){
                 this.item_2 = response.body;
