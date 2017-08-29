@@ -573,7 +573,6 @@
                         response.body[i].chinese_name
                     )
                 }
-                console.log(JSON.stringify(this.jieqi_type));
             },
 
             fail_jieqi_type(response){

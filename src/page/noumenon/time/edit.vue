@@ -40,7 +40,7 @@
             <div class="zxw-character-row">
                 <label class="zxw-character-span">节气：</label>
                 <select  class="zxw-ins-select zxw-edit-character-input-margin" v-model="selected_jieqi">
-                    <option v-for="item in jieqi_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
+                    <option v-for="item in jieqi_type" v-bind:value="selected_jieqi">{{item}}</option>
                 </select>
 
                 <label class="zxw-character-span">英译：</label>
@@ -85,12 +85,13 @@
 
     export default{
         created(){
-            //this.show_time();
             this.get_chaodai_type();
             this.get_month_type();
             this.get_day_type();
             this.get_ganzhi_type();
             this.get_jieqi_type();
+            this.get_g_month_type();
+            this.get_g_day_type();
         },
 
         components:{
@@ -258,7 +259,6 @@
             },
 
             success_time(response){
-                    //this.get_chaodai_type();
                     this.edit_time_title = response.body.standard_name;
                     this.standard_name = response.body.standard_name;
                     this.selected_chaodai.item_1_id = response.body.chaodai;
@@ -275,20 +275,20 @@
                     if(response.body.juedui === null){
                         this.juedui = "";
                     } else{
-                        this.juedui = toString(response.body.juedui);
+                        this.juedui = response.body.juedui.toString();
                     }
 
                 if(response.body.gongyuan === null){
                     this.g_year = "";
                 } else {
-                    this.g_year = toString(response.body.gongyuan);
+                    this.g_year = response.body.gongyuan.toString();
                 }
                     this.selected_2_month.item_1_id = response.body.g_yue;
                     this.selected_2_month.chinese_name = response.body.g_yue_name;
                     this.selected_2_day.item_1_id= response.body.g_ri;
                     this.selected_2_day.chinese_name= response.body.g_ri_name;
                     this.english = response.body.english;
-                    this.selected_jieqi.chinese_name = response.body.jieqi;
+                    this.selected_jieqi = response.body.jieqi;
             },
 
             fail_time(response){
@@ -470,7 +470,6 @@
                         response.body[i].chinese_name
                     )
                 }
-                this.get_g_month_type();
             },
 
             fail_jieqi_type(response){
@@ -492,7 +491,6 @@
                         chinese_name:response.body[i].chinese_name
                     })
                 }
-                this.get_g_day_type();
             },
 
             fail_g_month_type(response){
