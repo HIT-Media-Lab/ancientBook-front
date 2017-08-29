@@ -153,7 +153,7 @@
             },
 
             get_nianhao_type(){
-                if(this.selected_chaodai.chinese_name !== ''){
+                if(this.selected_chaodai.chinese_name !== ''||this.chaodai_type.length > 0){
                     this.nianhao_type.splice(0,this.nianhao_type.length);
                     this.selected_nianhao.item_2_id=0;
                     this.selected_nianhao.chinese_name ='';
@@ -359,11 +359,13 @@
             },
 
             success_chaodai_type(response){
-                for(let i = 0;i < response.body.length;i++){
-                    this.chaodai_type.push({
-                        item_1_id:response.body[i].item_1_id,
-                        chinese_name:response.body[i].chinese_name
-                    })
+                if(response.body.length > 0){
+                    for(let i = 0;i < response.body.length;i++){
+                        this.chaodai_type.push({
+                            item_1_id:response.body[i].item_1_id,
+                            chinese_name:response.body[i].chinese_name
+                        })
+                    }
                 }
             },
 
