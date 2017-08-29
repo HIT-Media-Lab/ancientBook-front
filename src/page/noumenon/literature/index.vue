@@ -25,7 +25,7 @@
      Mock.mock('/ancient_books/get_literature_list_by_word.action?word=A&&page_count=1','get',{
      "result|1":1,
      "content|30":[{
-     'standard_name':'律师诗经([西周]张馨文考订、[西周]张馨文考订)',
+     'standard_name':'诗经([西周]张馨文考订、[西周]张馨文考订)',
      'noumenon_id|1':1
      }],
      "total_page|10-20":1

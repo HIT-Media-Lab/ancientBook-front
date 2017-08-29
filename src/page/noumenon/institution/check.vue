@@ -20,10 +20,12 @@
             <!--右侧滑框-->
             <div class="zxw-check-right-body">
                 <p class="zxw-mark-warning" v-if="catalogue.length === 0">该本体尚无任何标记</p>
-                <div v-else>
-                    <div style="margin-bottom: 5px;" v-for="(item,index) in noumenon_location" @mouseover="item.show_btn = true" @mouseout="item.show_btn = false">
-                        <button class="zxw-btn" @click="to_ancientBooks(item.volume,item.page_id)">{{item.content}}</button>
-                        <button class="zxw-delete-mark-btn" v-show="item.show_btn === true" @click="open_delete_mark(index)">删除</button>
+                <div class="zxw-check-right-content" v-else>
+                    <div class="zxw-check-right-detail">
+                        <div v-for="(item,index) in noumenon_location" @mouseover="item.show_btn = true" @mouseout="item.show_btn = false">
+                            <button class="zxw-btn" @click="to_ancientBooks(item.volume,item.page_id)">{{item.content}}</button>
+                            <button class="zxw-delete-mark-btn" v-show="item.show_btn === true" @click="open_delete_mark(index)">删除</button>
+                        </div>
                     </div>
                     <paginator :max="total_page"></paginator>
                 </div>
@@ -37,8 +39,8 @@
 <script>
     /*let Mock = require('mockjs');
 
-    Mock.mock('/ancient_books/getNLocationCatalogue.action?id=1&&type=1','get',{
-        'n_name':'李世明（1996）',
+    Mock.mock('/ancient_books/getNLocationCatalogue.action?id=1&&type=6','get',{
+        'n_name':'尚书省',
         'content':[
             {
                 "ancient_book_name":"全唐书",
@@ -80,35 +82,35 @@
     });
 
 
-    Mock.mock('/ancient_books/getNLocations.action?type=1&&id=1&&book=2&&ancient_book_id=123456789&&page=1','get',{
+    Mock.mock('/ancient_books/getNLocations.action?type=6&&id=1&&book=2&&ancient_book_id=123456789&&page=1','get',{
         'total_page|5':5,
         'content|20':[{
             'id|987654321':1,
             'page_id|1':1,
-            'content':'整句话的内容剑荡四方该动画你还能如果还好',
-            'target':'内容',
+            'content':'机构的本体标记位置查看页面',
+            'target':'机构',
             'volume|3':3
         }]
     });
 
-    Mock.mock('/ancient_books/getNLocations.action?type=1&&id=1&&book=2&&ancient_book_id=123456789&&page=2','get',{
+    Mock.mock('/ancient_books/getNLocations.action?type=6&&id=1&&book=2&&ancient_book_id=123456789&&page=2','get',{
         'total_page|5':5,
         'content|2':[{
             'id|987654321':1,
             'page_id|1':1,
-            'content':'大声疾呼生活费和回复我',
-            'target':'生活费',
+            'content':'三省六部三省六部三省六部三省六部',
+            'target':'省',
             'volume|1':1
         }]
     });
 
-    Mock.mock('/ancient_books/getNLocations.action?type=1&&id=1&&book=5&&ancient_book_id=123&&page=1','get',{
+    Mock.mock('/ancient_books/getNLocations.action?type=6&&id=1&&book=5&&ancient_book_id=123&&page=1','get',{
         'total_page|3':3,
         'content|2':[{
             'id|987654321':1,
             'page_id|1':1,
-            'content':'大范甘迪很高评价分行贷款',
-            'target':'甘迪',
+            'content':'元朝中书省',
+            'target':'中书省',
             'volume|1':1
         }]
     });
@@ -126,11 +128,6 @@
     import delete_modal from '../../../component/delete_modal.vue';
     import paginator from '../../../component/paginator.vue';
     export default{
-        beforeRouteLeave (to, from, next){
-            this.$store.getters.get_fork = true;
-            next();
-        },
-
         components:{
             noumenon_title,
             delete_modal,
@@ -166,7 +163,7 @@
             //得到出现本体的所有古籍
             get_catalogue(){
                 let object = {};
-                let new_url=this.get_catalogue_url+'?id='+this.$route.params.nouId+'&&type=1';
+                let new_url=this.get_catalogue_url+'?id='+this.$route.params.nouId+'&&type=6';
                 this.http_json(new_url,'get',object,this.success_catalogue,this.fail_catalogue);
             },
 
@@ -230,7 +227,7 @@
                 this.book_index1 = index1;
                 this.book_index2 = index2;
                 let object = {};
-                let new_url = this.get_noumenon_location+'?type=1&&id='+this.$route.params.nouId+'&&book='+this.catalogue[index1].book[index2]+'&&ancient_book_id='+this.catalogue[index1].id+'&&page='+this.$route.params.pageId;
+                let new_url = this.get_noumenon_location+'?type=6&&id='+this.$route.params.nouId+'&&book='+this.catalogue[index1].book[index2]+'&&ancient_book_id='+this.catalogue[index1].id+'&&page='+this.$route.params.pageId;
                 this.http_json(new_url,'get',object,this.success_show_location,this.fail_show_location);
             },
 
@@ -242,7 +239,7 @@
                 this.$route.params.pageId = 1;
                 this.$router.push({name:this.$route.name, params: this.$route.params});
                 let object = {};
-                let new_url = this.get_noumenon_location+'?type=1&&id='+this.$route.params.nouId+'&&book='+this.catalogue[index1].book[index2]+'&&ancient_book_id='+this.catalogue[index1].id+'&&page=1';
+                let new_url = this.get_noumenon_location+'?type=6&&id='+this.$route.params.nouId+'&&book='+this.catalogue[index1].book[index2]+'&&ancient_book_id='+this.catalogue[index1].id+'&&page=1';
                 this.http_json(new_url,'get',object,this.success_show_location,this.fail_show_location);
             },
 
@@ -325,10 +322,6 @@
 
             //前往图文对照页
             to_ancientBooks(volume,page){
-                console.log(this.catalogue[this.book_index1].id);
-                console.log(this.catalogue[this.book_index1].book[this.book_index2]);
-                console.log(page);
-                console.log(volume);
                 this.$router.push({name:'ancientbook',params:{
                     book_name:this.catalogue[this.book_index1].id,
                     book:this.catalogue[this.book_index1].book[this.book_index2],

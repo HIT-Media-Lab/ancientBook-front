@@ -49,27 +49,27 @@
 
                  } else if (p === 2){//文献
 
-                     this.$router.push({name:'lit_edit',params:{nouId:id,pageId:1}})
+                     this.$router.push({name:'lit_check',params:{nouId:id,pageId:1}})
 
                  } else if (p === 3){//术语
 
-                     this.$router.push({name:'terms_edit',params:{nouId:id,pageId:1}})
+                     this.$router.push({name:'terms_check',params:{nouId:id,pageId:1}})
 
                  } else if (p === 4){//时间
 
-                     this.$router.push({name:'time_edit',params:{nouId:id,pageId:1}})
+                     this.$router.push({name:'time_check',params:{nouId:id,pageId:1}})
 
                  } else if (p === 5){//职官
 
-                     this.$router.push({name:'off_edit',params:{nouId:id,pageId:1}})
+                     this.$router.push({name:'off_check',params:{nouId:id,pageId:1}})
 
                  } else if (p === 6){//机构
 
-                     this.$router.push({name:'ins_edit',params:{nouId:id,pageId:1}})
+                     this.$router.push({name:'ins_check',params:{nouId:id,pageId:1}})
 
                  } else if (p === 7){//地名
 
-                     this.$router.push({name:'pla_edit',params:{nouId:id,pageId:1}})
+                     this.$router.push({name:'pla_check',params:{nouId:id,pageId:1}})
                  }
              }
      }

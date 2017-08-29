@@ -216,11 +216,11 @@ import  time_edit from  './page/noumenon/time/edit.vue'
 //本体标记位置查看
 import char_check from './page/noumenon/character/check.vue'
 import ins_check from './page/noumenon/institution/check.vue'
-
-
-
-
-
+import lit_check from './page/noumenon/literature/check.vue'
+import off_check from './page/noumenon/office/check.vue'
+import pla_check from './page/noumenon/place/check.vue'
+import terms_check from './page/noumenon/terms/check.vue'
+import time_check from './page/noumenon/time/check.vue'
 
 // 创建一个路由器实例
 // 并且配置路由规则
@@ -482,6 +482,11 @@ const router = new VueRouter({
                     name:'lit_edit'
                 },
                 {
+                    path:'lit_check/:nouId/:pageId',
+                    component:lit_check,
+                    name:'lit_check'
+                },
+                {
                     path:'office/letter/:letterId/page/:pageId',
                     component:office,
                     name:'office'
@@ -501,6 +506,11 @@ const router = new VueRouter({
                     path:'off_edit/:nouId',
                     component:off_edit,
                     name:'off_edit'
+                },
+                {
+                    path:'off_check/:nouId/:pageId',
+                    component:off_check,
+                    name:'off_check'
                 },
                 {
                     path:'place/letter/:letterId/page/:pageId',
@@ -524,6 +534,11 @@ const router = new VueRouter({
                     name:'pla_edit'
                 },
                 {
+                    path:'pla_check/:nouId/:pageId',
+                    component:pla_check,
+                    name:'pla_check'
+                },
+                {
                     path:'terms/letter/:letterId/page/:pageId',
                     component:terms,
                     name:'terms'
@@ -545,6 +560,11 @@ const router = new VueRouter({
                     name:'terms_edit'
                 },
                 {
+                    path:'terms_check/:nouId/:pageId',
+                    component:terms_check,
+                    name:'terms_check'
+                },
+                {
                     path:'time',
                     component:time,
                     name:'time'
@@ -558,7 +578,12 @@ const router = new VueRouter({
                     path: 'time_edit/:nouId',
                     component: time_edit,
                     name: 'time_edit'
-                }
+                },
+                {
+                    path:'time_check/:nouId/:pageId',
+                    component:time_check,
+                    name:'time_check'
+                },
         ]},
         {
             path:'/build',

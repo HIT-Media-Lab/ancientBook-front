@@ -21,10 +21,12 @@
             <!--右侧滑框-->
             <div class="zxw-check-right-body">
                 <p class="zxw-mark-warning" v-if="catalogue.length === 0">该本体尚无任何标记</p>
-                <div v-else>
-                    <div style="margin-bottom: 5px;" v-for="(item,index) in noumenon_location" @mouseover="item.show_btn = true" @mouseout="item.show_btn = false">
-                        <button class="zxw-btn" @click="to_ancientBooks(item.volume,item.page_id)">{{item.content}}</button>
-                        <button class="zxw-delete-mark-btn" v-show="item.show_btn === true" @click="open_delete_mark(index)">删除</button>
+                <div class="zxw-check-right-content" v-else>
+                    <div class="zxw-check-right-detail">
+                        <div v-for="(item,index) in noumenon_location" @mouseover="item.show_btn = true" @mouseout="item.show_btn = false">
+                            <button class="zxw-btn" @click="to_ancientBooks(item.volume,item.page_id)">{{item.content}}</button>
+                            <button class="zxw-delete-mark-btn" v-show="item.show_btn === true" @click="open_delete_mark(index)">删除</button>
+                        </div>
                     </div>
                     <paginator :max="total_page"></paginator>
                 </div>
@@ -127,11 +129,6 @@
     import delete_modal from '../../../component/delete_modal.vue';
     import paginator from '../../../component/paginator.vue';
     export default{
-        beforeRouteLeave (to, from, next){
-            this.$store.getters.get_fork = true;
-            next();
-        },
-
         components:{
             noumenon_title,
             delete_modal,
@@ -459,5 +456,13 @@
         text-align: center;
         margin-top: 200px;
         margin-left: 150px;
+    }
+
+    .zxw-check-right-content{
+        height:650px;
+    }
+
+    .zxw-check-right-detail{
+        height:570px;
     }
 </style>
