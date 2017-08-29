@@ -7,7 +7,7 @@
         </router-link>
         <img src="../assets/img/no-use-picture/spot.png" class="j-spot" v-show="this.$route.name == 'mybook' || this.$route.name =='privatebook' || this.$route.name =='alupload'">
         <select class="j-userbar-title" v-model="mybook" @change="choose_mybook">
-            <option selected class="j-option">我的古籍</option>
+            <option selected class="j-option" v-bind:disabled = true>我的古籍</option>
             <option class="j-option">最近古籍</option>
             <option class="j-option">私密古籍</option>
             <option class="j-option">已上传</option>
@@ -18,7 +18,7 @@
         </router-link>
         <img src="../assets/img/no-use-picture/spot.png" class="j-spot" v-show="this.$route.name == 'edit' || this.$route.name == 'mark'|| this.$route.name == 'comment'|| this.$route.name == 'revise'">
         <select class="j-userbar-title" v-model="my_collection" @change="choose_my_offer">
-            <option selected class="j-option">我的贡献</option>
+            <option selected class="j-option"  v-bind:disabled = true>我的贡献</option>
             <option class="j-option">本体编辑</option>
             <option class="j-option">本体标记</option>
             <option class="j-option">批注</option>
@@ -42,7 +42,11 @@
              * 我的古籍下拉框逻辑
              */
             choose_mybook(){
-                if (this.mybook == '最近古籍'){
+                if (this.mybook == '我的古籍'){
+                    this.$router.push('/user_info/mybook');
+                    this.mybook = '我的古籍';
+                    this.my_collection = '我的贡献';
+                }else if (this.mybook == '最近古籍'){
                     this.$router.push('/user_info/mybook');
                     this.mybook = '我的古籍';
                     this.my_collection = '我的贡献';
@@ -62,7 +66,12 @@
              * 我的贡献下拉框逻辑
              */
             choose_my_offer(){
-                if (this.my_collection ==  '本体编辑'){
+                if (this.my_collection ==  '我的贡献'){
+                    this.$route.params.pageId = 1;
+                    this.$route.params.content = '全部本体';
+                    this.$router.push({name: 'edit', params: this.$route.params}); this.mybook = '我的古籍';
+                    this.my_collection = '我的贡献';
+                }else if (this.my_collection ==  '本体编辑'){
                     this.$route.params.pageId = 1;
                     this.$route.params.content = '全部本体';
                     this.$router.push({name: 'edit', params: this.$route.params}); this.mybook = '我的古籍';
