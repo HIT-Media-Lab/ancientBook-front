@@ -152,13 +152,15 @@
             },
 
             get_nianhao_type(){
-                if(this.selected_chaodai.chinese_name !== ''&& this.chaodai_type.length > 0){
-                    this.nianhao_type.splice(0,this.nianhao_type.length);
-                    this.selected_nianhao.item_2_id=0;
-                    this.selected_nianhao.chinese_name ='';
+                this.nianhao_type.splice(0,this.nianhao_type.length);
+                this.selected_nianhao.item_2_id=0;
+                this.selected_nianhao.chinese_name ='';
+                if(this.selected_chaodai.chinese_name !== ''&& this.chaodai_type.length > 0 && this.nianhao_type.length === 0){
                     let object = {};
                     let new_url = this.menu_url+'?model_id=25&&item_1_id='+this.selected_chaodai.item_1_id+'&&item_2_id=0';
                     this.http_json(new_url,'get',object,this.success_nianhao_type,this.fail_nianhao_type);
+                } else {
+
                 }
             },
 
