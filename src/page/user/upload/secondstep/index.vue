@@ -136,7 +136,6 @@
                         _this.check_picture_name();
                     }
                 });
-
             },
 
             createImage(file,index,callback) {
@@ -295,8 +294,10 @@
                 for(var i = 0; i < obj.files.length; i++) {
                     var temp = obj.files[i].name;
                     this.text_name.push(temp);
+                    if (i == obj.files.length - 1) {
+                        this.check_text_name();
+                    }
                 }
-                this.check_text_name();
             },
 
             createText(file,index) {
@@ -316,7 +317,6 @@
                     var sixth = name.charAt(7);
                     var text = first + second + third + fourth + fifth + sixth;
                     var text_index = parseInt(text);
-
                     for (var j = 0; j < vm.upload_file[index].images.length; j++) {
                         var pic_name = vm.upload_file[index].images[j].pic_name;
                         var one = pic_name.charAt(1);
@@ -334,8 +334,8 @@
                             name_check = 1;
                             break;
                         }
-                        else if (pic_index < text_index) {
-                            reader.onload = function(e) {
+                        else if (pic_index != text_index) {
+                            reader.onload = function() {
                                 vm.upload_file[index].texts.push(null);
                             };
                         }
@@ -343,6 +343,7 @@
 
                     if (name_check == 0) {
                         alert("您上传的文本文件中含有没有与其对应的图片文件，不能上传");
+                        vm.upload_file[index].texts = [];
                         break;
                     }
                 }
@@ -457,7 +458,42 @@
                     alert("请选择要上传的图片文件")
                 }
                 else{
-                    this.$router.push({path: '/user/upload3'});
+//                    for (var i = 0; i < this.upload_file[i].length; i++) {
+//                        var temp;
+//                        for (var j = 0; j < this.upload_file[i].images.length; j++) {
+//                            for (var k = 0; k < this.upload_file[i].images.length - j; k++) {
+//                                var name1 = this.upload_file[i].images[k].pic_name;
+//                                var first = name1.charAt(1);
+//                                var second = name1.charAt(2);
+//                                var third = name1.charAt(3);
+//                                var fourth = name1.charAt(5);
+//                                var fifth = name1.charAt(6);
+//                                var sixth = name1.charAt(7);
+//                                var str1 = first + second + third + fourth + fifth + sixth;
+//                                var key1 = parseInt(str1);
+//
+//                                var name2 = this.upload_file[i].images[k + 1].pic_name;
+//                                var one = name2.charAt(1);
+//                                var two = name2.charAt(2);
+//                                var three = name2.charAt(3);
+//                                var four = name2.charAt(5);
+//                                var five = name2.charAt(6);
+//                                var six = name2.charAt(7);
+//                                var str2 = one + two + three + four + five + six;
+//                                var key2 = parseInt(str2);
+//
+//                                if (key1 > key2) {
+//                                    temp = this.upload_file[i].images[k];
+//                                    this.upload_file[i].images[k] = this.upload_file[i].images[k + 1];
+//                                    this.upload_file[i].images[k + 1] = temp;
+//                                }
+//                            }
+//                        }
+
+//                        if (i == this.upload_file[i].length -1) {
+                            this.$router.push({path: '/user/upload3'});
+//                        }
+
                 }
             },
 

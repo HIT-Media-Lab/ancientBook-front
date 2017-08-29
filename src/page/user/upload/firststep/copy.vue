@@ -98,7 +98,7 @@
                         <label>责任者类型：</label>
                     </div>
                     <div class="col-md-4">
-                        <select class="ry-c-type">
+                        <select class="ry-c-type" @click="get_index()" @change="change_type()">
                             <option>不详</option>
                             <option>责任人</option>
                             <option>责任机构</option>
@@ -155,7 +155,7 @@
         <time_modal :time_modal="this.time_modal_1" v-on:success_time="birth_time" v-on:close_modal="close_birth()"></time_modal>
         <time_modal :time_modal="this.time_modal_2" v-on:success_time="dead_time" v-on:close_modal="close_dead()"></time_modal>
         <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_location" v-on:add_noumenon_relations="add_location"></search_modal>
-        <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal" :noumenon_number="1" :repeat_arr="[]" v-on:close_modal="close_character" v-on:add_noumenon_relations="add_character"></search_modal>
+        <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal" :noumenon_number="this.noumenon_number" :repeat_arr="[]" v-on:close_modal="close_character" v-on:add_noumenon_relations="add_character"></search_modal>
     </div>
 
 </template>
@@ -172,7 +172,8 @@
         data() {
             return{
                 index : 0,
-                search_person:'/ancient_books/get_person_list_by_name.action',
+                noumenon_number : 0,
+                search_person : '',
                 search_location:'/ancient_books/get_location_list_by_name.action',
                 time_modal_1 : false,
                 time_modal_2 : false,
@@ -315,7 +316,9 @@
              */
             open_character(){
                 this.get_index();
-                this.character_modal = true;
+                if (this.noumenon_number != 0) {
+                    this.character_modal = true;
+                }
             },
 
             add_character(p){
@@ -327,6 +330,25 @@
                 this.character_modal = false;
             },
 
+
+            /**
+             * 责任者类型改变
+             */
+            change_type() {
+                var types = document.getElementsByClassName("ry-c-type");
+                if (types[this.index].selectedIndex == 0) {
+                    this.search_person = '';
+                    this.noumenon_number = 0;
+                }
+                else if (types[this.index].selectedIndex == 1) {
+                    this.search_person = '/ancient_books/get_person_list_by_name.action';
+                    this.noumenon_number = 1;
+                }
+                else if (types[this.index].selectedIndex == 2) {
+                    this.search_person = '/ancient_books/get_institution_list_by_name.action';
+                    this.noumenon_number = 6;
+                }
+            },
 
             /**
              * 获得用户选择的option并存储
