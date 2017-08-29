@@ -122,8 +122,29 @@
                 this.select_3 = {id: 'shu', name: ''};
             },
             success3(response){
-                this.item_3 = response.body;
-
+                if (response.body.length == 0){
+                    this.item_3_id = 0;
+                    this.item.shu = this.item_3_id;
+                    this.item_name.shu = '无属';
+//                console.log(this.item.bu);
+//                console.log(this.item.lei);
+//                console.log(this.item.shu);
+                    this.$route.params.bu = this.item_name.bu;
+                    this.$route.params.lei = this.item_name.lei;
+                    this.$route.params.shu = this.item_name.shu;
+                    this.$route.params.bu_id = this.item.bu;
+                    this.$route.params.lei_id = this.item.lei;
+                    this.$route.params.shu_id = this.item.shu;
+                    this.$route.params.pageId = 1;
+                    if (this.item.bu != 0 && this.item.lei != 0){
+                        this.select_1 = {id: 'bu', name: ''};
+                        this.select_2 = {id: 'lei', name: ''};
+                        this.select_3 = {id: 'shu', name: ''};
+                        this.$router.push({name: 'sort_book', params: this.$route.params});
+                    }
+                }else {
+                    this.item_3 = response.body;
+                }
             },
             fail3(){
                 console.log("获取属失败");
@@ -135,9 +156,9 @@
                 this.item_3_id = this.select_3.id;
                 this.item.shu = this.item_3_id;
                 this.item_name.shu = this.select_3.name;
-                console.log(this.item.bu);
-                console.log(this.item.lei);
-                console.log(this.item.shu);
+//                console.log(this.item.bu);
+//                console.log(this.item.lei);
+//                console.log(this.item.shu);
                 this.$route.params.bu = this.item_name.bu;
                 this.$route.params.lei = this.item_name.lei;
                 this.$route.params.shu = this.item_name.shu;
