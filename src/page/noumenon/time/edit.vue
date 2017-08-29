@@ -152,7 +152,7 @@
             },
 
             get_nianhao_type(){
-                if(this.selected_chaodai.chinese_name !== ''&& this.chaodai_type.length > 0&& this.nianhao_type.length === 0){
+                if(this.selected_chaodai.chinese_name !== ''&& this.chaodai_type.length > 0){
                     this.nianhao_type.splice(0,this.nianhao_type.length);
                     this.selected_nianhao.item_2_id=0;
                     this.selected_nianhao.chinese_name ='';
