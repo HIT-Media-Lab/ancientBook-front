@@ -442,6 +442,7 @@
                         images : [],
                         texts : [],
                     });
+
                     this.index = this.index + 1;
                 }
             },
@@ -458,42 +459,44 @@
                     alert("请选择要上传的图片文件")
                 }
                 else{
-//                    for (var i = 0; i < this.upload_file[i].length; i++) {
-//                        var temp;
-//                        for (var j = 0; j < this.upload_file[i].images.length; j++) {
-//                            for (var k = 0; k < this.upload_file[i].images.length - j; k++) {
-//                                var name1 = this.upload_file[i].images[k].pic_name;
-//                                var first = name1.charAt(1);
-//                                var second = name1.charAt(2);
-//                                var third = name1.charAt(3);
-//                                var fourth = name1.charAt(5);
-//                                var fifth = name1.charAt(6);
-//                                var sixth = name1.charAt(7);
-//                                var str1 = first + second + third + fourth + fifth + sixth;
-//                                var key1 = parseInt(str1);
-//
-//                                var name2 = this.upload_file[i].images[k + 1].pic_name;
-//                                var one = name2.charAt(1);
-//                                var two = name2.charAt(2);
-//                                var three = name2.charAt(3);
-//                                var four = name2.charAt(5);
-//                                var five = name2.charAt(6);
-//                                var six = name2.charAt(7);
-//                                var str2 = one + two + three + four + five + six;
-//                                var key2 = parseInt(str2);
-//
-//                                if (key1 > key2) {
-//                                    temp = this.upload_file[i].images[k];
-//                                    this.upload_file[i].images[k] = this.upload_file[i].images[k + 1];
-//                                    this.upload_file[i].images[k + 1] = temp;
-//                                }
-//                            }
-//                        }
+                    for (var i = 0; i < this.upload_file.length; i++) {
+                        var temp;
+                        if (this.upload_file[i].images.length > 1) {
+                            for (var j = 0; j < this.upload_file[i].images.length - 1; j++) {
+                                for (var k = 0; k < this.upload_file[i].images.length - 1 - j; k++) {
+                                    var name1 = this.upload_file[i].images[k].pic_name;
+                                    var first = name1.charAt(1);
+                                    var second = name1.charAt(2);
+                                    var third = name1.charAt(3);
+                                    var fourth = name1.charAt(5);
+                                    var fifth = name1.charAt(6);
+                                    var sixth = name1.charAt(7);
+                                    var str1 = first + second + third + fourth + fifth + sixth;
+                                    var key1 = parseInt(str1);
 
-//                        if (i == this.upload_file[i].length -1) {
+                                    var name2 = this.upload_file[i].images[k + 1].pic_name;
+                                    var one = name2.charAt(1);
+                                    var two = name2.charAt(2);
+                                    var three = name2.charAt(3);
+                                    var four = name2.charAt(5);
+                                    var five = name2.charAt(6);
+                                    var six = name2.charAt(7);
+                                    var str2 = one + two + three + four + five + six;
+                                    var key2 = parseInt(str2);
+
+                                    if (key1 > key2) {
+                                        temp = this.upload_file[i].images[k];
+                                        this.upload_file[i].images[k] = this.upload_file[i].images[k + 1];
+                                        this.upload_file[i].images[k + 1] = temp;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (i == this.upload_file.length - 1) {
                             this.$router.push({path: '/user/upload3'});
-//                        }
-
+                        }
+                    }
                 }
             },
 
