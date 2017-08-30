@@ -3,7 +3,6 @@
         <noumenon_title :title="this.time_content.standard_name">
             <noumenon_button slot="children" :noumenon_number="4"></noumenon_button>
         </noumenon_title>
-
         <div class=" zxw-characterbody">
             <p class="zxwspan-length">朝代：</p>
             <p class="zxwspan-length" v-model="time_content.chaodai">{{time_content.chaodai}}</p>

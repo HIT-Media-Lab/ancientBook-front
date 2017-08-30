@@ -48,13 +48,29 @@
             <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_character.father_standard_name" v-else>
         </div>
 
-        <div class="zxw-character-row">
+        <div>
             <label class="zxw-character-span">母：</label>
             <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.mother_standard_name.length === 0 " >
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.mother_standard_name" v-else>
             <label class="zxw-character-span">子：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.son_standard_name.length === 0 " >
-            <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_character.son_standard_name" @mouseover="show_tooltipinfo_son()" @mouseout="close_tooltip_son()" v-else>
+            <input type="text" style="cursor: pointer" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_character.son_standard_name" @click="show_tooltipinfo_son()"  v-else>
+        </div>
+
+        <div class="zxw-character-row">
+            <div style="width: 330px;height: auto;background-color: rgb(200, 229, 188);margin: 10px 200px 0 0;display: inline-block;" v-if="show_tooltip_mother === true && this.$store.getters.get_build_character.mother_standard_name !== ''" @click="show_tooltipinfo_mother()">
+                <div style="padding: 10px 0 10px 20px">
+                    <p v-model="this.$store.getters.get_build_character.mother_standard_name">{{$store.getters.get_build_character.mother_standard_name}}</p>
+                </div>
+            </div>
+            <div style="width: 330px;height: auto;background-color: rgb(200, 229, 188);margin: 10px 200px 0 0;display: inline-block;" v-else="show_tooltip_mother === false"></div>
+
+            <div style="width: 330px;height: auto;background-color: rgb(200, 229, 188);margin: 10px 0 0 0;display: inline-block;" v-if="show_tooltip_son === true && this.$store.getters.get_build_character.son_standard_name.length > 0" @click="show_tooltipinfo_son()">
+                <div style="padding: 10px 0 10px 20px">
+                    <p v-for="item in this.$store.getters.get_build_character.son_standard_name">{{item}}</p>
+                </div>
+            </div>
+            <div style="width: 330px;height: auto;background-color: rgb(200, 229, 188);margin: 10px 0 0 0;display: inline-block;" v-else="show_tooltip_son === false"></div>
         </div>
 
         <div class="zxw-character-row">
@@ -105,14 +121,14 @@
             <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()">确认</button>
         </div>
         <success_create :show_info="show_info" ></success_create>
-        <!--子的具体信息显示-->
+        <!--子的具体信息显示
         <modal :show_modal="show_tooltip_son" v-on:fireclose="close_tooltip_son" class="zxw-modal-character">
             <div slot="header" class="zxw-character-header"></div>
             <div slot="body" class="zxw-relation-modal-body">
               <p class="zxw-relation-info" v-for="item in this.$store.getters.get_build_character.son_standard_name">{{item}}</p>
             </div>
             <div slot="footer" class="zxw-relation-modal-footer"></div>
-        </modal>
+        </modal>-->
 
         <!--女的具体信息显示-->
         <modal :show_modal="show_tooltip_daughter" v-on:fireclose="close_tooltip_daughter" class="zxw-modal-character">
@@ -262,6 +278,7 @@
 
         data(){
             return{
+                show_tooltip_mother:false,
                 show_tooltip_son:false,
                 show_tooltip_daughter:false,
                 show_tooltip_brother:false,
@@ -349,13 +366,17 @@
 
             /*查看子的人物关系*/
             show_tooltipinfo_son(){
-                if(this.$store.getters.get_build_character.son_standard_name.length !== 0){
+                if(this.$store.getters.get_build_character.son_standard_name.length > 0  && this.show_tooltip_son === false){
                     this.show_tooltip_son = true;
+                } else if(this.$store.getters.get_build_character.son_standard_name.length > 0  && this.show_tooltip_son === true){
+                    this.show_tooltip_son = false;
                 }
             },
 
-            close_tooltip_son(){
-                if(this.$store.getters.get_build_character.son_standard_name.length !== 0){
+            show_tooltipinfo_mother(){
+                if(this.$store.getters.get_build_character.mother_standard_name !== ''  && this.show_tooltip_son === false){
+                    this.show_tooltip_son = true;
+                } else if(this.$store.getters.get_build_character.son_standard_name !== ''  && this.show_tooltip_son === true){
                     this.show_tooltip_son = false;
                 }
             },

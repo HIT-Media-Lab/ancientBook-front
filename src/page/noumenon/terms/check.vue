@@ -23,7 +23,7 @@
                 <div class="zxw-check-right-content" v-else>
                     <div class="zxw-check-right-detail">
                         <div v-for="(item,index) in noumenon_location" @mouseover="item.show_btn = true" @mouseout="item.show_btn = false">
-                            <button class="zxw-btn" @click="to_ancientBooks(item.volume,item.page_id)">{{item.content}}</button>
+                            <button :id="index" @click="to_ancientBooks(item.volume,item.page_id)"></button>
                             <button class="zxw-delete-mark-btn" v-show="item.show_btn === true" @click="open_delete_mark(index)">删除</button>
                         </div>
                     </div>
@@ -243,7 +243,6 @@
                 this.http_json(new_url,'get',object,this.success_show_location,this.fail_show_location);
             },
 
-
             success_show_location(response){
                 this.total_page = response.body.total_page;
                 if(response.body.content.length > 0){
@@ -258,37 +257,44 @@
                         });
                     }
                     console.log(JSON.stringify(this.noumenon_location));
-                    /*let buttons = document.getElementsByClassName("zxw-btn");
 
-                     for(let j = 0; j < this.noumenon_location.length; j++) {
-                     let length = this.noumenon_location[j].target.length;
-                     let index = this.noumenon_location[j].content.indexOf(this.noumenon_location[j].target);
-                     //文本逐字遍历
-                     for (let m = 0; m < this.noumenon_location[j].content.length; m++) {
-
-                     //按顺序依次获得文本中的字
-                     let p = this.noumenon_location[j].content.charAt(m);
-                     if(m >= index && m < index+length){
-                     //该字在搜索关键字中
-                     let span1 = document.createElement("span");
-                     let text1 = document.createTextNode(p);
-                     span1.appendChild(text1);
-                     span1.setAttribute("class", "text");
-                     buttons[j].appendChild(span1);
-                     }else{
-                     //该字不在搜索关键字中
-                     let span2 = document.createElement("span");
-                     let text2 = document.createTextNode(p);
-                     span2.appendChild(text2);
-                     buttons[j].appendChild(span2);
-                     }
-                     }
-                     }*/
+                    this.$nextTick(()=>{
+                        this.input_info();
+                    })
                 }
             },
 
             fail_show_location(){
                 console.log('获取册数具体本体位置失败');
+            },
+
+            //当页面循环完成noumenon_location出现相应的html时再执行添加子节点
+            input_info() {
+                if(this.noumenon_location.length > 0){
+                    for(let j = 0; j < this.noumenon_location.length; j++) {
+                        let length = this.noumenon_location[j].target.length;
+                        let index = this.noumenon_location[j].content.indexOf(this.noumenon_location[j].target);
+                        //文本逐字遍历
+                        //按顺序依次获得文本中的字
+                        for(let m = 0;m < this.noumenon_location[j].content.length;m++){
+                            let p = this.noumenon_location[j].content.charAt(m);
+                            if(m >= index && m < index+length){
+                                //该字在搜索关键字中
+                                let span1 = document.createElement("span");
+                                let text1 = document.createTextNode(p);
+                                span1.appendChild(text1);
+                                span1.setAttribute("class", "text");
+                                document.getElementById(j).appendChild(span1);
+                            } else{
+                                //该字不在搜索关键字中
+                                let span2 = document.createElement("span");
+                                let text2 = document.createTextNode(p);
+                                span2.appendChild(text2);
+                                document.getElementById(j).appendChild(span2);
+                            }
+                        }
+                    }
+                }
             },
 
             clean_data(){

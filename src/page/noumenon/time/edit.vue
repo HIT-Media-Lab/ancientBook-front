@@ -239,7 +239,6 @@
             }
         },
         methods:{
-
             /*根据id获取任务具体信息*/
             show_time(){
                 let object = {};
