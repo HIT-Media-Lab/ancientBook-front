@@ -48,7 +48,7 @@
             /**
              *根据路由，显示不同的本体
              */
-//            this.content = [];
+            this.content = [];
             this.sort_name = this.$route.params.content;
             if (this.$route.params.content == '全部本体'){
                 let item = this.all_edit_url + '?page_count=' + this.$route.params.pageId;
@@ -59,7 +59,7 @@
         },
         watch:{
             $route(){
-//                this.content = [];
+                this.content = [];
                 this.sort_name = this.$route.params.content;
                 if (this.$route.params.content == '全部本体'){
                     let item = this.all_edit_url + '?page_count=' + this.$route.params.pageId;
