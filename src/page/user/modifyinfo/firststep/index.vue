@@ -167,7 +167,7 @@
                                     <label>责任者类型：</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <select class="ry-v-type">
+                                    <select class="ry-v-type" @click="get_index_v()" @change="change_type_v()">
                                         <option>不详</option>
                                         <option>责任人</option>
                                         <option>责任机构</option>
@@ -214,7 +214,7 @@
                         <time_modal :time_modal="this.time_modal_v1" v-on:success_time="birth_time_v()" v-on:close_modal="close_birth_v()"></time_modal>
                         <time_modal :time_modal="this.time_modal_v2" v-on:success_time="dead_time_v()" v-on:close_modal="close_dead_v()"></time_modal>
                         <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal_v" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_location_v()" v-on:add_noumenon_relations="add_location_v()"></search_modal>
-                        <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal_v" :noumenon_number="1" :repeat_arr="[]" v-on:close_modal="close_character_v()" v-on:add_noumenon_relations="add_character_v()"></search_modal>
+                        <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal_v" :noumenon_number="this.noumenon_number_v" :repeat_arr="[]" v-on:close_modal="close_character_v()" v-on:add_noumenon_relations="add_character_v()"></search_modal>
                     </div>
                 </div>
 
@@ -424,7 +424,7 @@
                                     <label>责任者类型：</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <select class="ry-e-type">
+                                    <select class="ry-e-type" @click="get_index_e()" @change="change_type_e()">
                                         <option>不详</option>
                                         <option>责任人</option>
                                         <option>责任机构</option>
@@ -472,7 +472,7 @@
                         <time_modal :time_modal="this.time_modal_e1" v-on:success_time="birth_time_e()" v-on:close_modal="close_birth_e()"></time_modal>
                         <time_modal :time_modal="this.time_modal_e2" v-on:success_time="dead_time_e()" v-on:close_modal="close_dead_e()"></time_modal>
                         <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal_e" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_location_e()" v-on:add_noumenon_relations="add_location_e()"></search_modal>
-                        <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal_e" :noumenon_number="1" :repeat_arr="[]" v-on:close_modal="close_character_e()" v-on:add_noumenon_relations="add_character_e()"></search_modal>
+                        <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal_e" :noumenon_number="this.noumenon_number_e" :repeat_arr="[]" v-on:close_modal="close_character_e()" v-on:add_noumenon_relations="add_character_e()"></search_modal>
                     </div>
                 </div>
 
@@ -557,7 +557,7 @@
                                     <label>责任者类型：</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <select class="ry-i-type">
+                                    <select class="ry-i-type" @click="get_index_i()" @change="change_type_i()">
                                         <option>不详</option>
                                         <option>责任人</option>
                                         <option>责任机构</option>
@@ -605,7 +605,7 @@
                         <time_modal :time_modal="this.time_modal_i1" v-on:success_time="birth_time_i()" v-on:close_modal="close_birth_i()"></time_modal>
                         <time_modal :time_modal="this.time_modal_i2" v-on:success_time="dead_time_i()" v-on:close_modal="close_dead_i()"></time_modal>
                         <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal_i" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_location_i()" v-on:add_noumenon_relations="add_location_i()"></search_modal>
-                        <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal_i" :noumenon_number="1" :repeat_arr="[]" v-on:close_modal="close_character_i()" v-on:add_noumenon_relations="add_character_i()"></search_modal>
+                        <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal_i" :noumenon_number="this.noumenon_number_i" :repeat_arr="[]" v-on:close_modal="close_character_i()" v-on:add_noumenon_relations="add_character_i()"></search_modal>
                     </div>
                 </div>
 
@@ -707,7 +707,7 @@
                                     <label>责任者类型：</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <select class="ry-c-type">
+                                    <select class="ry-c-type" @click="get_index_c()" @change="change_type_c()">
                                         <option>不详</option>
                                         <option>责任人</option>
                                         <option>责任机构</option>
@@ -763,7 +763,7 @@
                         <time_modal :time_modal="this.time_modal_c1" v-on:success_time="birth_time_c()" v-on:close_modal="close_birth_c()"></time_modal>
                         <time_modal :time_modal="this.time_modal_c2" v-on:success_time="dead_time_c()" v-on:close_modal="close_dead_c()"></time_modal>
                         <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal_c" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_location_c()" v-on:add_noumenon_relations="add_location_c()"></search_modal>
-                        <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal_c" :noumenon_number="1" :repeat_arr="[]" v-on:close_modal="close_character_c()" v-on:add_noumenon_relations="add_character_c()"></search_modal>
+                        <search_modal :search_url="this.search_person" :noumenon_modal="this.character_modal_c" :noumenon_number="this.noumenon_number_c" :repeat_arr="[]" v-on:close_modal="close_character_c()" v-on:add_noumenon_relations="add_character_c()"></search_modal>
                     </div>
                 </div>
 
@@ -847,7 +847,11 @@
                 index_e : 0,
                 index_i : 0,
                 index_c : 0,
-                search_person:'/ancient_books/get_person_list_by_name.action',
+                noumenon_number_v : 0,
+                noumenon_number_e : 0,
+                noumenon_number_i : 0,
+                noumenon_number_c : 0,
+                search_person:'',
                 search_location:'/ancient_books/get_location_list_by_name.action',
                 time_modal_v1 : false,
                 time_modal_v2 : false,
@@ -1335,6 +1339,74 @@
 
             fail_get_menu_nineteen() {
                 console.log ("fail get menu nineteen!");
+            },
+
+
+            /**
+             * 责任者类型改变
+             */
+            change_type_v() {
+                var types = document.getElementsByClassName("ry-v-type");
+                if (types[this.index_v].selectedIndex == 0) {
+                    this.search_person = '';
+                    this.noumenon_number_v = 0;
+                }
+                else if (types[this.index_v].selectedIndex == 1) {
+                    this.search_person = '/ancient_books/get_person_list_by_name.action';
+                    this.noumenon_number_v = 1;
+                }
+                else if (types[this.index_v].selectedIndex == 2) {
+                    this.search_person = '/ancient_books/get_institution_list_by_name.action';
+                    this.noumenon_number_v = 6;
+                }
+            },
+
+            change_type_e() {
+                var types = document.getElementsByClassName("ry-e-type");
+                if (types[this.index_e].selectedIndex == 0) {
+                    this.search_person = '';
+                    this.noumenon_number_e = 0;
+                }
+                else if (types[this.index_e].selectedIndex == 1) {
+                    this.search_person = '/ancient_books/get_person_list_by_name.action';
+                    this.noumenon_number_e = 1;
+                }
+                else if (types[this.index_e].selectedIndex == 2) {
+                    this.search_person = '/ancient_books/get_institution_list_by_name.action';
+                    this.noumenon_number_e = 6;
+                }
+            },
+
+            change_type_i() {
+                var types = document.getElementsByClassName("ry-i-type");
+                if (types[this.index_i].selectedIndex == 0) {
+                    this.search_person = '';
+                    this.noumenon_number_i = 0;
+                }
+                else if (types[this.index_i].selectedIndex == 1) {
+                    this.search_person = '/ancient_books/get_person_list_by_name.action';
+                    this.noumenon_number_i = 1;
+                }
+                else if (types[this.index_i].selectedIndex == 2) {
+                    this.search_person = '/ancient_books/get_institution_list_by_name.action';
+                    this.noumenon_number_i = 6;
+                }
+            },
+
+            change_type_c() {
+                var types = document.getElementsByClassName("ry-c-type");
+                if (types[this.index_c].selectedIndex == 0) {
+                    this.search_person = '';
+                    this.noumenon_number_c = 0;
+                }
+                else if (types[this.index_c].selectedIndex == 1) {
+                    this.search_person = '/ancient_books/get_person_list_by_name.action';
+                    this.noumenon_number_c = 1;
+                }
+                else if (types[this.index_c].selectedIndex == 2) {
+                    this.search_person = '/ancient_books/get_institution_list_by_name.action';
+                    this.noumenon_number_c = 6;
+                }
             },
 
 
@@ -2080,94 +2152,94 @@
              * 确定修改
              */
             confirm_modify() {
-//                var delet_responsibility_infos = [];
-//                var add_responsibility_infos = [];
-//                for (var i = 0; i < this.literature_info.responsibility_infos.length; i++) {
-//                    delet_responsibility_infos.push(this.first_layer_info.responsibility_infos[i].responsibility_info_id)
-//                }
-//                for (var j = 0; j < this.literature_info.responsibility_infos.length; j++) {
-//                    delet_responsibility_infos.push(this.three_layers_info.responsibility_infos[j].responsibility_info_id)
-//                }
-//                for (var k = 0; k < this.variety_item.length; k ++) {
-//                    add_responsibility_infos.push(this.variety_item[k])
-//                }
-//                for (var m = 0; m < this.edition_item.length; m ++) {
-//                    add_responsibility_infos.push(this.edition_item[m])
-//                }
-//                for (var n = 0; n < this.impression_item.length; n ++) {
-//                    add_responsibility_infos.push(this.impression_item[n])
-//                }
-//                for (var o = 0; o < this.copy_item.length; o ++) {
-//                    add_responsibility_infos.push(this.copy_item[o])
-//                }
-//
-//                var obj = {};
-//                obj.literature_id = this.book_all_info.literature_id;
-//                obj.english = this.first_layer_info.english;
-//                obj.type_name = this.first_layer_info.type_name;
-//                obj.type_other_name = this.first_layer_info.type_other_name;
-//                obj.type_save = this.first_layer_info.type_save;
-//                obj.type_level = this.first_layer_info.type_level;
-//                obj.type_bu = this.first_layer_info.type_bu;
-//                obj.type_lei = this.first_layer_info.type_lei;
-//                obj.type_shu = this.first_layer_info.type_shu;
-//                obj.type_summary = this.first_layer_info.type_summary;
-//                obj.literature_standard_name = this.first_layer_info.literature_standard_name;
-//
-//                obj.ancient_book_info_id = this.book_all_info.ancient_book_info_id;
-//                obj.version_volume = parseInt(this.three_layers_info.version_volume);
-//                obj.version_type = this.three_layers_info.version_type;
-//                obj.version_age = this.three_layers_info.version_age;
-//                obj.version_support = this.three_layers_info.version_support;
-//                obj.version_binding = this.three_layers_info.version_binding;
-//                obj.version_frame_length = parseInt(this.three_layers_info.version_frame_length);
-//                obj.version_frame_width = parseInt(this.three_layers_info.version_frame_width);
-//                obj.version_format_length = parseInt(this.three_layers_info.version_format_length);
-//                obj.version_format_width = parseInt(this.three_layers_info.version_format_width);
-//                obj.version_paiji_content = this.three_layers_info.version_paiji_content;
-//                obj.version_paiji_location = this.three_layers_info.version_paiji_location;
-//                obj.version_half_page_line_number = parseInt(this.three_layers_info.version_half_page_line_number);
-//                obj.version_page_line_number = parseInt(this.three_layers_info.version_page_line_number);
-//                obj.version_yuwei = this.three_layers_info.version_yuwei;
-//                obj.version_double_page_number = parseInt(this.three_layers_info.version_double_page_number);
-//                obj.version_bianlan = this.three_layers_info.version_bianlan;
-//                obj.version_fenlan = this.three_layers_info.version_fenlan;
-//                obj.version_shukou = this.three_layers_info.version_shukou;
-//                obj.version_banxin_content = this.three_layers_info.version_banxin_content;
-//                obj.version_youshuwuer = this.three_layers_info.version_youshuwuer;
-//                obj.version_youwujiazhu = this.three_layers_info.version_youwujiazhu;
-//                obj.printing_type = this.three_layers_info.printing_type;
-//                obj.printing_number = this.three_layers_info.printing_number;
-//                obj.duplicate_book_count = parseInt(this.three_layers_info.duplicate_book_count);
-//                obj.duplicate_level = this.three_layers_info.duplicate_level;
-//                obj.duplicate_complete = this.three_layers_info.duplicate_complete;
-//                obj.duplicate_attachment = this.three_layers_info.duplicate_attachment;
-//
-//                obj.ancient_book_id = this.ancient_book_id;
-//                obj.name = this.first_layer_info.type_name;
-//                obj.standard_name = this.first_layer_info.standard_name;
-//                obj.pri = this.upload_one_info.pri;
-//                obj.summary = this.book_all_info.summary;
-//
-//                obj.delet_responsibility_infos = delet_responsibility_infos;
-//
-//                for (var p = 0; p < add_responsibility_infos.length; p++) {
-//                    obj.add_responsibility_infos.push({
-//                        order : add_responsibility_infos[p].order,
-//                        location_id : add_responsibility_infos[p].location_id,
-//                        person_id : add_responsibility_infos[p].person_id,
-//                        begin_time : add_responsibility_infos[p].begin_time,
-//                        end_time : add_responsibility_infos[p].end_time,
-//                        action : add_responsibility_infos[p].action,
-//                        explain : add_responsibility_infos[p].explain,
-//                        confirm : add_responsibility_infos[p].confirm,
-//                        type : add_responsibility_infos[p].type,
-//                        level : add_responsibility_infos[p].level,
-//                    })
-//                }
-//                obj.add_responsibility_infos = add_responsibility_infos;
-//                this.before_http(obj);
-//                this.http_json('/ancient_books/modify_ancient_book_all_info_with_literature.action' , 'post' , obj , this.success_post_add , this.fail_post_add);
+                var delet_responsibility_infos = [];
+                var add_responsibility_infos = [];
+                for (var i = 0; i < this.literature_info.responsibility_infos.length; i++) {
+                    delet_responsibility_infos.push(this.first_layer_info.responsibility_infos[i].responsibility_info_id)
+                }
+                for (var j = 0; j < this.literature_info.responsibility_infos.length; j++) {
+                    delet_responsibility_infos.push(this.three_layers_info.responsibility_infos[j].responsibility_info_id)
+                }
+                for (var k = 0; k < this.variety_item.length; k ++) {
+                    add_responsibility_infos.push(this.variety_item[k])
+                }
+                for (var m = 0; m < this.edition_item.length; m ++) {
+                    add_responsibility_infos.push(this.edition_item[m])
+                }
+                for (var n = 0; n < this.impression_item.length; n ++) {
+                    add_responsibility_infos.push(this.impression_item[n])
+                }
+                for (var o = 0; o < this.copy_item.length; o ++) {
+                    add_responsibility_infos.push(this.copy_item[o])
+                }
+
+                var obj = {};
+                obj.literature_id = this.book_all_info.literature_id;
+                obj.english = this.first_layer_info.english;
+                obj.type_name = this.first_layer_info.type_name;
+                obj.type_other_name = this.first_layer_info.type_other_name;
+                obj.type_save = this.first_layer_info.type_save;
+                obj.type_level = this.first_layer_info.type_level;
+                obj.type_bu = this.first_layer_info.type_bu;
+                obj.type_lei = this.first_layer_info.type_lei;
+                obj.type_shu = this.first_layer_info.type_shu;
+                obj.type_summary = this.first_layer_info.type_summary;
+                obj.literature_standard_name = this.first_layer_info.literature_standard_name;
+
+                obj.ancient_book_info_id = this.book_all_info.ancient_book_info_id;
+                obj.version_volume = parseInt(this.three_layers_info.version_volume);
+                obj.version_type = this.three_layers_info.version_type;
+                obj.version_age = this.three_layers_info.version_age;
+                obj.version_support = this.three_layers_info.version_support;
+                obj.version_binding = this.three_layers_info.version_binding;
+                obj.version_frame_length = parseInt(this.three_layers_info.version_frame_length);
+                obj.version_frame_width = parseInt(this.three_layers_info.version_frame_width);
+                obj.version_format_length = parseInt(this.three_layers_info.version_format_length);
+                obj.version_format_width = parseInt(this.three_layers_info.version_format_width);
+                obj.version_paiji_content = this.three_layers_info.version_paiji_content;
+                obj.version_paiji_location = this.three_layers_info.version_paiji_location;
+                obj.version_half_page_line_number = parseInt(this.three_layers_info.version_half_page_line_number);
+                obj.version_page_line_number = parseInt(this.three_layers_info.version_page_line_number);
+                obj.version_yuwei = this.three_layers_info.version_yuwei;
+                obj.version_double_page_number = parseInt(this.three_layers_info.version_double_page_number);
+                obj.version_bianlan = this.three_layers_info.version_bianlan;
+                obj.version_fenlan = this.three_layers_info.version_fenlan;
+                obj.version_shukou = this.three_layers_info.version_shukou;
+                obj.version_banxin_content = this.three_layers_info.version_banxin_content;
+                obj.version_youshuwuer = this.three_layers_info.version_youshuwuer;
+                obj.version_youwujiazhu = this.three_layers_info.version_youwujiazhu;
+                obj.printing_type = this.three_layers_info.printing_type;
+                obj.printing_number = this.three_layers_info.printing_number;
+                obj.duplicate_book_count = parseInt(this.three_layers_info.duplicate_book_count);
+                obj.duplicate_level = this.three_layers_info.duplicate_level;
+                obj.duplicate_complete = this.three_layers_info.duplicate_complete;
+                obj.duplicate_attachment = this.three_layers_info.duplicate_attachment;
+
+                obj.ancient_book_id = this.ancient_book_id;
+                obj.name = this.first_layer_info.type_name;
+                obj.standard_name = this.first_layer_info.standard_name;
+                obj.pri = this.upload_one_info.pri;
+                obj.summary = this.book_all_info.summary;
+
+                obj.delet_responsibility_infos = delet_responsibility_infos;
+
+                for (var p = 0; p < add_responsibility_infos.length; p++) {
+                    obj.add_responsibility_infos.push({
+                        order : add_responsibility_infos[p].order,
+                        location_id : add_responsibility_infos[p].location_id,
+                        person_id : add_responsibility_infos[p].person_id,
+                        begin_time : add_responsibility_infos[p].begin_time,
+                        end_time : add_responsibility_infos[p].end_time,
+                        action : add_responsibility_infos[p].action,
+                        explain : add_responsibility_infos[p].explain,
+                        confirm : add_responsibility_infos[p].confirm,
+                        type : add_responsibility_infos[p].type,
+                        level : add_responsibility_infos[p].level,
+                    })
+                }
+                obj.add_responsibility_infos = add_responsibility_infos;
+                this.before_http(obj);
+                this.http_json('/ancient_books/modify_ancient_book_all_info_with_literature.action' , 'post' , obj , this.success_post_add , this.fail_post_add);
             },
 
             success_post_edit(response) {
