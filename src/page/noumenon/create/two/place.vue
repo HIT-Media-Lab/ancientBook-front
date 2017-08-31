@@ -153,6 +153,7 @@
                 this.$store.getters.get_build_place.s_location_standard_name='';
                 this.$store.getters.get_build_place.l_location_standard_name='';
                 this.$store.getters.get_build_place.seat_id.splice(0,this.$store.getters.get_build_place.seat_id.length);
+                this.$store.getters.get_build_place.seat_standard_name.splice(0,this.$store.getters.get_build_place.seat_standard_name.length);
                 next();
             } else{
                 next();

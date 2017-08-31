@@ -29,29 +29,53 @@
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_place.latitude" v-else>
             <label class="zxw-character-span">今所在：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.location_today === '' " >
-            <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_place.location_today" v-else>
+            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_place.location_today" v-else>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">起始时间：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_place.begin_standard_time">
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_place.begin_standard_time" @click="show_details_begin()">
             <label class="zxw-character-span">终止时间：</label>
-            <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_place.end_standard_time">
+            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_place.end_standard_time" @click="show_details_end()">
+        </div>
+
+        <!--时间具体信息查看-->
+        <div class="zxw-character-row" v-if="show_details[0] === true || show_details[1] === true">
+            <display_details class="zxw-display-details-top" :if_1="this.show_details[0] === true && this.$store.getters.get_build_place.begin_standard_time !== ''" :if_2="this.show_details[0] === false" :selected_details_1="1" :details_list="$store.getters.get_build_place.begin_standard_time" v-on:show_tipinfo="show_details_begin">
+            </display_details>
+
+            <display_details :if_1="show_details[1] === true && this.$store.getters.get_build_place.end_standard_time !== ''" :if_2="show_details[1] === false" :selected_details_1="1" :details_list="this.$store.getters.get_build_place.end_standard_time" v-on:show_tipinfo="show_details_end">
+            </display_details>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">上级地名：</label>
             <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.s_location_standard_name ===''">
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_place.s_location" v-else>
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_place.s_location_standard_name" @click="show_details_s" v-else>
             <label class="zxw-character-span">下级地名：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.l_location_standard_name === '' " >
-            <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_place.l_location" v-else>
+            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_place.l_location_standard_name" @click="show_details_l" v-else>
+        </div>
+
+        <!--地名具体信息查看-->
+        <div class="zxw-character-row" v-if="show_details[2] === true || show_details[3] === true">
+            <display_details class="zxw-display-details-top" :if_1="this.show_details[2] === true && this.$store.getters.get_build_place.s_location_standard_name !== ''" :if_2="this.show_details[2] === false" :selected_details_1="1" :details_list="$store.getters.get_build_place.s_location_standard_name" v-on:show_tipinfo="show_details_s">
+            </display_details>
+
+            <display_details :if_1="show_details[3] === true && this.$store.getters.get_build_place.l_location_standard_name !== ''" :if_2="show_details[3] === false" :selected_details_1="1" :details_list="this.$store.getters.get_build_place.l_location_standard_name" v-on:show_tipinfo="show_details_l">
+            </display_details>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">治所：</label>
             <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.seat_standard_name.length === 0 " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_place.seat_standard_name" @mouseover="show_tooltipinfo_seat()" @mouseout="close_tooltip_seat()"  v-else>
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_place.seat_standard_name" @click="show_details_seat()" v-else>
+        </div>
+
+        <!--治所具体信息查看-->
+        <div class="zxw-character-row" v-if="show_details[4] === true">
+            <display_details :if_1="this.show_details[4] === true && this.$store.getters.get_build_place.seat_standard_name.length > 0" :if_2="this.show_details[4] === false" :selected_details_1="0" :details_list="$store.getters.get_build_place.seat_standard_name" v-on:show_tipinfo="show_details_seat">
+            </display_details>
         </div>
 
         <template v-if="this.$store.getters.get_build_place.remark_1_name !== ''">
@@ -75,14 +99,6 @@
             <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()">确认</button>
         </div>
         <success_create :show_info="show_info"></success_create>
-        <!--子的具体信息显示-->
-        <modal :show_modal="show_tooltip_seat" v-on:fireclose="close_tooltip_seat" class="zxw-modal-character">
-            <div slot="header" class="zxw-relation-modal-header">
-            </div>
-            <div slot="body" class="zxw-relation-modal-body">
-                <p class="zxw-relation-info" v-for="item in this.$store.getters.get_build_place.seat_standard_name">{{item}}</p>
-            </div>
-        </modal>
     </div>
 
 </template>
@@ -98,7 +114,7 @@
 
     import create_word from '../../../../component/create-word.vue';
     import success_create from '../../../../component/success_create.vue';
-    import modal from '../../../../component/modal.vue';
+    import display_details from '../../../../component/display-details.vue';
     export default{
         beforeRouteLeave (to, from, next){
             if(to.name !== 'placetwo') {
@@ -144,7 +160,7 @@
         components:{
             create_word,
             success_create,
-            modal
+            display_details
         },
 
         created(){
@@ -169,7 +185,7 @@
 
         data(){
             return{
-                show_tooltip_seat:false,
+                show_details:[false,false,false,false,false],
                 prams:'',
                 show_info:false,
                 close_icon:true,
@@ -216,16 +232,73 @@
                 this.http_json(this.create_place_url,'post',this.create_place,this.success_create,this.fail_create);
             },
 
-            /*查看治所*/
-            show_tooltipinfo_seat(){
-                if(this.$store.getters.get_build_place.seat_standard_name.length !== 0){
-                    this.show_tooltip_seat = true;
+            show_details_begin(){
+                if(this.show_details[0] === false && this.$store.getters.get_build_place.begin_standard_time !== ''){
+                    for(let i = 0;i < this.show_details.length;i++){
+                        this.show_details[i] = false;
+                    }
+                    this.show_details.splice(0,1,true);
+                } else if(this.show_details[0] === true && this.$store.getters.get_build_place.begin_standard_time !== ''){
+                    for(let i = 0;i < this.show_details.length;i++){
+                        this.show_details[i] = false;
+                    }
+                    this.show_details.splice(0,1,false);
                 }
             },
 
-            close_tooltip_seat(){
-                if(this.$store.getters.get_build_place.seat_standard_name.length !== 0){
-                    this.show_tooltip_seat = false;
+            show_details_end(){
+                if(this.show_details[1] === false && this.$store.getters.get_build_place.end_standard_time !== ''){
+                    for(let i = 0;i < this.show_details.length;i++){
+                        this.show_details[i] = false;
+                    }
+                    this.show_details.splice(1,1,true);
+                } else if(this.show_details[1] === true && this.$store.getters.get_build_place.end_standard_time !== ''){
+                    for(let i = 0;i < this.show_details.length;i++){
+                        this.show_details[i] = false;
+                    }
+                    this.show_details.splice(1,1,false);
+                }
+            },
+
+            show_details_s(){
+                if(this.show_details[2] === false && this.$store.getters.get_build_place.s_location_standard_name !== ''){
+                    for(let i = 0;i < this.show_details.length;i++){
+                        this.show_details[i] = false;
+                    }
+                    this.show_details.splice(2,1,true);
+                } else if(this.show_details[2] === true && this.$store.getters.get_build_place.s_location_standard_name !== ''){
+                    for(let i = 0;i < this.show_details.length;i++){
+                        this.show_details[i] = false;
+                    }
+                    this.show_details.splice(2,1,false);
+                }
+            },
+
+            show_details_l(){
+                if(this.show_details[3] === false && this.$store.getters.get_build_place.l_location_standard_name !== ''){
+                    for(let i = 0;i < this.show_details.length;i++){
+                        this.show_details[i] = false;
+                    }
+                    this.show_details.splice(3,1,true);
+                } else if(this.show_details[3] === true && this.$store.getters.get_build_place.l_location_standard_name !== ''){
+                    for(let i = 0;i < this.show_details.length;i++){
+                        this.show_details[i] = false;
+                    }
+                    this.show_details.splice(3,1,false);
+                }
+            },
+
+            show_details_seat(){
+                if(this.show_details[4] === false && this.$store.getters.get_build_place.seat_standard_name.length > 0){
+                    for(let i = 0;i < this.show_details.length;i++){
+                        this.show_details[i] = false;
+                    }
+                    this.show_details.splice(4,1,true);
+                } else if(this.show_details[4] === true && this.$store.getters.get_build_place.seat_standard_name.length > 0){
+                    for(let i = 0;i < this.show_details.length;i++){
+                        this.show_details[i] = false;
+                    }
+                    this.show_details.splice(4,1,false);
                 }
             }
         }

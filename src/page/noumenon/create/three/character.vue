@@ -34,70 +34,108 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">出生时间：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.birth_standard_name">
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.birth_standard_name" @click="show_tooltipinfo_birth()">
             <label class="zxw-character-span">死亡时间：</label>
-            <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_character.death_standard_name">
+            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.death_standard_name" @click="show_tooltipinfo_death()">
+        </div>
+
+        <!--时间具体信息查看-->
+        <div class="zxw-character-row" v-if="show_tooltip[0] === true || show_tooltip[1] === true">
+            <display_details class="zxw-display-details-top" :if_1="show_tooltip[0] === true && this.$store.getters.get_build_character.birth_standard_name !== ''" :if_2="show_tooltip[0] === false" :selected_details_1="1" :details_list="$store.getters.get_build_character.birth_standard_name" v-on:show_tipinfo="show_tooltipinfo_birth">
+            </display_details>
+
+            <display_details :if_1="show_tooltip[1] === true && this.$store.getters.get_build_character.death_standard_name !== ''" :if_2="show_tooltip[1] === false" :selected_details_1="1" :details_list="this.$store.getters.get_build_character.death_standard_name" v-on:show_tipinfo="show_tooltipinfo_death">
+            </display_details>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">籍贯：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.location === '' " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.location" v-else>
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.location === '' ">
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.location" @click="show_tooltipinfo_location()" v-else>
             <label class="zxw-character-span">父：</label>
-            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.father_standard_name.length === 0 " >
-            <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_character.father_standard_name" v-else>
+            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.father_standard_name.length === 0 ">
+            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.father_standard_name" @click="show_tooltipinfo_father()" v-else>
         </div>
 
-        <div>
-            <label class="zxw-character-span">母：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.mother_standard_name.length === 0 " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.mother_standard_name" v-else>
-            <label class="zxw-character-span">子：</label>
-            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.son_standard_name.length === 0 " >
-            <input type="text" style="cursor: pointer" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_character.son_standard_name" @click="show_tooltipinfo_son()"  v-else>
+        <!--籍贯、父亲具体信息查看-->
+        <div class="zxw-character-row" v-if="show_tooltip[2] === true || show_tooltip[3] === true">
+            <display_details class="zxw-display-details-top" :if_1="show_tooltip[2] === true && this.$store.getters.get_build_character.location !== ''" :if_2="show_tooltip[2] === false" :selected_details_1="1" :details_list="$store.getters.get_build_character.location" v-on:show_tipinfo="show_tooltipinfo_location">
+            </display_details>
+
+            <display_details :if_1="show_tooltip[3] === true && this.$store.getters.get_build_character.father_standard_name !== ''" :if_2="show_tooltip[3] === false" :selected_details_1="1" :details_list="this.$store.getters.get_build_character.father_standard_name" v-on:show_tipinfo="show_tooltipinfo_father">
+            </display_details>
         </div>
 
         <div class="zxw-character-row">
-            <div style="width: 330px;height: auto;background-color: rgb(200, 229, 188);margin: 10px 200px 0 0;display: inline-block;" v-if="show_tooltip_mother === true && this.$store.getters.get_build_character.mother_standard_name !== ''" @click="show_tooltipinfo_mother()">
-                <div style="padding: 10px 0 10px 20px">
-                    <p v-model="this.$store.getters.get_build_character.mother_standard_name">{{$store.getters.get_build_character.mother_standard_name}}</p>
-                </div>
-            </div>
-            <div style="width: 330px;height: auto;background-color: rgb(200, 229, 188);margin: 10px 200px 0 0;display: inline-block;" v-else="show_tooltip_mother === false"></div>
+            <label class="zxw-character-span">母：</label>
+            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.mother_standard_name.length === 0 " >
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.mother_standard_name" @click="show_tooltipinfo_mother()" v-else>
+            <label class="zxw-character-span">子：</label>
+            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.son_standard_name.length === 0 " >
+            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.son_standard_name" @click="show_tooltipinfo_son()"  v-else>
+        </div>
 
-            <div style="width: 330px;height: auto;background-color: rgb(200, 229, 188);margin: 10px 0 0 0;display: inline-block;" v-if="show_tooltip_son === true && this.$store.getters.get_build_character.son_standard_name.length > 0" @click="show_tooltipinfo_son()">
-                <div style="padding: 10px 0 10px 20px">
-                    <p v-for="item in this.$store.getters.get_build_character.son_standard_name">{{item}}</p>
-                </div>
-            </div>
-            <div style="width: 330px;height: auto;background-color: rgb(200, 229, 188);margin: 10px 0 0 0;display: inline-block;" v-else="show_tooltip_son === false"></div>
+        <!--母、子具体信息查看-->
+        <div class="zxw-character-row" v-if="show_tooltip[4] === true || show_tooltip[5] === true">
+            <display_details class="zxw-display-details-top" :if_1="show_tooltip[4] === true && this.$store.getters.get_build_character.mother_standard_name !== ''" :if_2="show_tooltip[4] === false" :selected_details_1="1" :details_list="$store.getters.get_build_character.mother_standard_name" v-on:show_tipinfo="show_tooltipinfo_mother">
+            </display_details>
+
+            <display_details :if_1="show_tooltip[5] === true && this.$store.getters.get_build_character.son_standard_name.length > 0" :if_2="show_tooltip[5] === false" :selected_details_1="0" :details_list="this.$store.getters.get_build_character.son_standard_name" v-on:show_tipinfo="show_tooltipinfo_son">
+            </display_details>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">女：</label>
             <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.daughter_standard_name.length === 0 " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.daughter_standard_name" @mouseover="show_tooltipinfo_daughter()" @mouseout="close_tooltip_daughter()" v-else>
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.daughter_standard_name" @click="show_tooltipinfo_daughter()" v-else>
             <label class="zxw-character-span">兄弟：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.brother_standard_name.length === 0 " >
-            <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_character.brother_standard_name" @mouseover="show_tooltipinfo_brother()" @mouseout="close_tooltip_brother()" v-else>
+            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.brother_standard_name" @click="show_tooltipinfo_brother()" v-else>
+        </div>
+
+        <!--女、兄弟具体信息查看-->
+        <div class="zxw-character-row" v-if="show_tooltip[6] === true || show_tooltip[7] === true">
+            <display_details class="zxw-display-details-top" :if_1="show_tooltip[6] === true && this.$store.getters.get_build_character.daughter_standard_name !== ''" :if_2="show_tooltip[6] === false" :selected_details_1="0" :details_list="$store.getters.get_build_character.daughter_standard_name" v-on:show_tipinfo="show_tooltipinfo_daughter">
+            </display_details>
+
+            <display_details :if_1="show_tooltip[7] === true && this.$store.getters.get_build_character.brother_standard_name.length > 0" :if_2="show_tooltip[7] === false" :selected_details_1="0" :details_list="this.$store.getters.get_build_character.brother_standard_name" v-on:show_tipinfo="show_tooltipinfo_brother">
+            </display_details>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">姐妹：</label>
             <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.sister_standard_name.length === 0 " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.sister_standard_name" @mouseover="show_tooltipinfo_sister()" @mouseout="close_tooltip_sister()" v-else>
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.sister_standard_name" @click="show_tooltipinfo_sister()" v-else>
             <label class="zxw-character-span">师：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.teacher_standard_name.length === 0 " >
-            <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_character.teacher_standard_name" @mouseover="show_tooltipinfo_teacher()" @mouseout="close_tooltip_teacher()" v-else>
+            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.teacher_standard_name" @click="show_tooltipinfo_teacher()" v-else>
+        </div>
+
+        <!--姐妹、师具体信息查看-->
+        <div class="zxw-character-row" v-if="show_tooltip[8] === true || show_tooltip[9] === true">
+            <display_details class="zxw-display-details-top" :if_1="show_tooltip[8] === true && this.$store.getters.get_build_character.sister_standard_name.length > 0" :if_2="show_tooltip[8] === false" :selected_details_1="0" :details_list="$store.getters.get_build_character.sister_standard_name" v-on:show_tipinfo="show_tooltipinfo_sister">
+            </display_details>
+
+            <display_details :if_1="show_tooltip[9] === true && this.$store.getters.get_build_character.teacher_standard_name.length > 0" :if_2="show_tooltip[9] === false" :selected_details_1="0" :details_list="this.$store.getters.get_build_character.teacher_standard_name" v-on:show_tipinfo="show_tooltipinfo_teacher">
+            </display_details>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">学生：</label>
             <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.student_standard_name.length === 0 " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.student_standard_name" @mouseover="show_tooltipinfo_student()" @mouseout="close_tooltip_student()" v-else>
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.student_standard_name" @click="show_tooltipinfo_student()" v-else>
             <label class="zxw-character-span">友：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.friend_standard_name.length === 0 " >
-            <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_character.friend_standard_name" @mouseover="show_tooltipinfo_friend()" @mouseout="close_tooltip_friend()" v-else>
+            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.friend_standard_name" @click="show_tooltipinfo_friend()" v-else>
+        </div>
+
+        <!--学生、友具体信息查看-->
+        <div class="zxw-character-row" v-if="show_tooltip[10] === true || show_tooltip[11] === true">
+            <display_details class="zxw-display-details-top" :if_1="show_tooltip[10] === true && this.$store.getters.get_build_character.student_standard_name.length > 0" :if_2="show_tooltip[10] === false" :selected_details_1="0" :details_list="$store.getters.get_build_character.student_standard_name" v-on:show_tipinfo="show_tooltipinfo_student">
+            </display_details>
+
+            <display_details :if_1="show_tooltip[11] === true && this.$store.getters.get_build_character.friend_standard_name.length > 0" :if_2="show_tooltip[11] === false" :selected_details_1="0" :details_list="this.$store.getters.get_build_character.friend_standard_name" v-on:show_tipinfo="show_tooltipinfo_friend">
+            </display_details>
         </div>
 
         <template v-if="this.$store.getters.get_build_character.remark_1_name !== ''">
@@ -121,62 +159,6 @@
             <button class="zxw-nextbtn zxw-nextbtn-length" @click="open_confirm()">确认</button>
         </div>
         <success_create :show_info="show_info" ></success_create>
-        <!--子的具体信息显示
-        <modal :show_modal="show_tooltip_son" v-on:fireclose="close_tooltip_son" class="zxw-modal-character">
-            <div slot="header" class="zxw-character-header"></div>
-            <div slot="body" class="zxw-relation-modal-body">
-              <p class="zxw-relation-info" v-for="item in this.$store.getters.get_build_character.son_standard_name">{{item}}</p>
-            </div>
-            <div slot="footer" class="zxw-relation-modal-footer"></div>
-        </modal>-->
-
-        <!--女的具体信息显示-->
-        <modal :show_modal="show_tooltip_daughter" v-on:fireclose="close_tooltip_daughter" class="zxw-modal-character">
-            <div slot="header" class="zxw-relation-modal-header"></div>
-            <div slot="body" class="zxw-relation-modal-body">
-                <p class="zxw-relation-info" v-for="item in this.$store.getters.get_build_character.daughter_standard_name">{{item}}</p>
-            </div>
-        </modal>
-
-        <!--兄弟的具体信息显示-->
-        <modal :show_modal="show_tooltip_brother" v-on:fireclose="close_tooltip_brother" class="zxw-modal-character">
-            <div slot="header" class="zxw-relation-modal-header"></div>
-            <div slot="body" class="zxw-relation-modal-body">
-                <p class="zxw-relation-info" v-for="item in this.$store.getters.get_build_character.brother_standard_name">{{item}}</p>
-            </div>
-        </modal>
-
-        <!--姐妹的具体信息显示-->
-        <modal :show_modal="show_tooltip_sister" v-on:fireclose="close_tooltip_sister" class="zxw-modal-character">
-            <div slot="header" class="zxw-relation-modal-header"></div>
-            <div slot="body" class="zxw-relation-modal-body">
-                <p class="zxw-relation-info" v-for="item in this.$store.getters.get_build_character.sister_standard_name">{{item}}</p>
-            </div>
-        </modal>
-
-        <!--师的具体信息显示-->
-        <modal :show_modal="show_tooltip_teacher" v-on:fireclose="close_tooltip_teacher" class="zxw-modal-character">
-            <div slot="header" class="zxw-relation-modal-header"></div>
-            <div slot="body" class="zxw-relation-modal-body">
-                <p class="zxw-relation-info" v-for="item in this.$store.getters.get_build_character.teacher_standard_name">{{item}}</p>
-            </div>
-        </modal>
-
-        <!--生的具体信息显示-->
-        <modal :show_modal="show_tooltip_student" v-on:fireclose="close_tooltip_student" class="zxw-modal-character">
-            <div slot="header" class="zxw-relation-modal-header"></div>
-            <div slot="body" class="zxw-relation-modal-body">
-                <p class="zxw-relation-info" v-for="item in this.$store.getters.get_build_character.student_standard_name">{{item}}</p>
-            </div>
-        </modal>
-
-        <!--友的具体信息显示-->
-        <modal :show_modal="show_tooltip_friend" v-on:fireclose="close_tooltip_friend" class="zxw-modal-character">
-            <div slot="header" class="zxw-relation-modal-header"></div>
-            <div slot="body" class="zxw-relation-modal-body">
-                <p class="zxw-relation-info" v-for="item in this.$store.getters.get_build_character.friend_standard_name">{{item}}</p>
-            </div>
-        </modal>
     </div>
 
 </template>
@@ -192,11 +174,11 @@
     import create_word from '../../../../component/create-word.vue';
     import success_create from '../../../../component/success_create.vue';
     import modal from '../../../../component/modal.vue';
+    import display_details from '../../../../component/display-details.vue';
     export default{
         beforeRouteLeave (to, from, next){
             if(to.name !== 'charactertwo') {
                 //清空Vuex
-                this.$store.getters.get_fork = true;
                 this.$store.getters.get_build_character.standard_name = '';
                 this.$store.getters.get_build_character.person_name = '';
                 this.$store.getters.get_build_character.xing = '';
@@ -252,7 +234,8 @@
         components:{
             create_word,
             success_create,
-            modal
+            modal,
+            display_details
         },
 
         created(){
@@ -278,14 +261,7 @@
 
         data(){
             return{
-                show_tooltip_mother:false,
-                show_tooltip_son:false,
-                show_tooltip_daughter:false,
-                show_tooltip_brother:false,
-                show_tooltip_sister:false,
-                show_tooltip_teacher:false,
-                show_tooltip_student:false,
-                show_tooltip_friend:false,
+                show_tooltip:[false,false,false,false,false,false,false,false,false,false,false,false],
                 prams:'',
                 show_info:false,
                 close_icon:true,
@@ -364,98 +340,184 @@
                 this.http_json(this.create_character_url,'post',this.create_character,this.success_create,this.fail_create);
             },
 
-            /*查看子的人物关系*/
-            show_tooltipinfo_son(){
-                if(this.$store.getters.get_build_character.son_standard_name.length > 0  && this.show_tooltip_son === false){
-                    this.show_tooltip_son = true;
-                } else if(this.$store.getters.get_build_character.son_standard_name.length > 0  && this.show_tooltip_son === true){
-                    this.show_tooltip_son = false;
+            /*查看出生时间*/
+            show_tooltipinfo_birth(){
+                if(this.$store.getters.get_build_character.birth_standard_name !== '' && this.show_tooltip[0] === false){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(0,1,true);
+                } else if(this.$store.getters.get_build_character.birth_standard_name !== '' && this.show_tooltip[0] === true){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(0,1,false);
                 }
             },
 
+            /*查看死亡时间*/
+            show_tooltipinfo_death(){
+                if(this.$store.getters.get_build_character.death_standard_name !== ''  && this.show_tooltip[1] === false){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(1,1,true);
+                } else if(this.$store.getters.get_build_character.death_standard_name !== ''  && this.show_tooltip[1] === true){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(1,1,false);
+                }
+            },
+
+            /*查看籍贯*/
+            show_tooltipinfo_location(){
+                if(this.$store.getters.get_build_character.location !== ''  && this.show_tooltip[2] === false){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(2,1,true);
+                } else if(this.$store.getters.get_build_character.location !== ''  && this.show_tooltip[2] === true){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(2,1,false);
+                }
+            },
+
+            /*查看父亲*/
+            show_tooltipinfo_father(){
+                if(this.$store.getters.get_build_character.father_standard_name !== ''  && this.show_tooltip[3] === false){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(3,1,true);
+                } else if(this.$store.getters.get_build_character.father !== ''  && this.show_tooltip[3] === true){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(3,1,false);
+                }
+            },
+
+            /*查看母亲*/
             show_tooltipinfo_mother(){
-                if(this.$store.getters.get_build_character.mother_standard_name !== ''  && this.show_tooltip_son === false){
-                    this.show_tooltip_son = true;
-                } else if(this.$store.getters.get_build_character.son_standard_name !== ''  && this.show_tooltip_son === true){
-                    this.show_tooltip_son = false;
+                if(this.$store.getters.get_build_character.son_standard_name.length > 0  && this.show_tooltip[4] === false){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(4,1,true);
+                } else if(this.$store.getters.get_build_character.son_standard_name.length > 0  && this.show_tooltip[4] === true){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(4,1,false);
                 }
             },
 
-            /*查看女儿人物关系*/
+            /*查看子*/
+            show_tooltipinfo_son(){
+                if(this.$store.getters.get_build_character.mother_standard_name !== ''  && this.show_tooltip[5] === false){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(5,1,true);
+                } else if(this.$store.getters.get_build_character.mother_standard_name !== ''  && this.show_tooltip[5] === true){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(5,1,false);
+                }
+            },
+
+            /*查看女儿*/
             show_tooltipinfo_daughter(){
-                if(this.$store.getters.get_build_character.daughter_standard_name.length !== 0){
-                    this.show_tooltip_daughter = true;
-                }
-            },
 
-            close_tooltip_daughter(){
-                if(this.$store.getters.get_build_character.daughter_standard_name.length !== 0){
-                    this.show_tooltip_daughter = false;
+                if(this.$store.getters.get_build_character.daughter_standard_name.length > 0  && this.show_tooltip[6] === false){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(6,1,true);
+                } else if(this.$store.getters.get_build_character.daughter_standard_name.length > 0  && this.show_tooltip[6] === true){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(6,1,false);
                 }
             },
 
             /*查看兄弟人物关系*/
             show_tooltipinfo_brother(){
-                if(this.$store.getters.get_build_character.brother_standard_name.length !== 0){
-                    this.show_tooltip_brother = true;
-                }
-            },
-
-            close_tooltip_brother(){
-                if(this.$store.getters.get_build_character.brother_standard_name.length !== 0){
-                    this.show_tooltip_brother = false;
+                if(this.$store.getters.get_build_character.brother_standard_name.length > 0  && this.show_tooltip[7] === false){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(7,1,true);
+                } else if(this.$store.getters.get_build_character.brother_standard_name.length > 0  && this.show_tooltip[7] === true){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(7,1,false);
                 }
             },
 
             /*查看姐妹人物关系*/
             show_tooltipinfo_sister(){
-                if(this.$store.getters.get_build_character.sister_standard_name.length !== 0){
-                    this.show_tooltip_sister = true;
-                }
-            },
-
-            close_tooltip_sister(){
-                if(this.$store.getters.get_build_character.sister_standard_name.length !== 0){
-                    this.show_tooltip_sister = false;
+                if(this.$store.getters.get_build_character.sister_standard_name.length > 0  && this.show_tooltip[8] === false){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(8,1,true);
+                } else if(this.$store.getters.get_build_character.sister_standard_name.length > 0  && this.show_tooltip[8] === true){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(8,1,false);
                 }
             },
 
             /*查看师人物关系*/
             show_tooltipinfo_teacher(){
-                if(this.$store.getters.get_build_character.teacher_standard_name.length !== 0){
-                    this.show_tooltip_teacher = true;
-                }
-            },
-
-            close_tooltip_teacher(){
-                if(this.$store.getters.get_build_character.teacher_standard_name.length !== 0){
-                    this.show_tooltip_teacher = false;
+                if(this.$store.getters.get_build_character.teacher_standard_name.length > 0  && this.show_tooltip[9] === false){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(9,1,true);
+                } else if(this.$store.getters.get_build_character.teacher_standard_name.length > 0  && this.show_tooltip[9] === true){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(9,1,false);
                 }
             },
 
             /*查看生人物关系*/
             show_tooltipinfo_student(){
-                if(this.$store.getters.get_build_character.student_standard_name.length !== 0){
-                    this.show_tooltip_student = true;
-                }
-            },
-
-            close_tooltip_student(){
-                if(this.$store.getters.get_build_character.student_standard_name.length !== 0){
-                    this.show_tooltip_student = false;
+                if(this.$store.getters.get_build_character.student_standard_name.length > 0  && this.show_tooltip[10] === false){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(10,1,true);
+                } else if(this.$store.getters.get_build_character.student_standard_name.length > 0  && this.show_tooltip[10] === true){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(10,1,false);
                 }
             },
 
             /*查看友人物关系*/
             show_tooltipinfo_friend(){
-                if(this.$store.getters.get_build_character.friend_standard_name.length !== 0){
-                    this.show_tooltip_friend = true;
-                }
-            },
-
-            close_tooltip_friend(){
-                if(this.$store.getters.get_build_character.friend_standard_name.length !== 0){
-                    this.show_tooltip_friend = false;
+                if(this.$store.getters.get_build_character.friend_standard_name.length > 0  && this.show_tooltip[11] === false){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(11,1,true);
+                } else if(this.$store.getters.get_build_character.friend_standard_name.length > 0  && this.show_tooltip[11] === true){
+                    for(let i = 0;i < this.show_tooltip.length;i++){
+                        this.show_tooltip[i] = false;
+                    }
+                    this.show_tooltip.splice(11,1,false);
                 }
             }
         }
@@ -471,6 +533,9 @@
         font-weight: bold;
         font-size: 18px;
         text-overflow: ellipsis;
+    }
+    .zxw-display-cursor{
+        cursor: pointer;
     }
 
     .zxw-relation-modal-header{

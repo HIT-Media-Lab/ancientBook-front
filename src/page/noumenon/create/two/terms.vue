@@ -108,7 +108,6 @@
         created(){
             this.prams = this.$route.name;
             this.get_course_type();
-            //this.show_terms_info();
         },
 
         components:{

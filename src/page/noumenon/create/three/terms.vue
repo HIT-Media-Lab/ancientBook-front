@@ -18,16 +18,28 @@
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly value="未有具体数据">
             <label class="zxw-character-span">起始时间：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_terms.begin_standard_time === ''">
-            <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_terms.begin_standard_time" v-else>
+            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_terms.begin_standard_time" @click="show_details_begin()" v-else>
+        </div>
+
+        <div class="zxw-character-row" v-if="show_details[0] === true">
+            <div class="zxw-display-details-1 zxw-display-details-top"></div>
+
+            <display_details :if_1="this.show_details[0] === true && this.$store.getters.get_build_terms.begin_standard_time !== ''" :if_2="this.show_details[0] === false" :selected_details_1="1" :details_list="$store.getters.get_build_terms.begin_standard_time" v-on:show_tipinfo="show_details_begin">
+            </display_details>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">终止时间：</label>
             <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_terms.end_standard_time === ''">
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_terms.end_standard_time" v-else>
+            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_terms.end_standard_time" @click="show_details_end()"  v-else>
             <label class="zxw-character-span">别名：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_terms.other_name === ''">
             <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_terms.other_name" v-else>
+        </div>
+
+        <div class="zxw-character-row" v-if="show_details[1] === true">
+            <display_details :if_1="this.show_details[1] === true && this.$store.getters.get_build_terms.end_standard_time !== ''" :if_2="this.show_details[1] === false" :selected_details_1="1" :details_list="$store.getters.get_build_terms.end_standard_time" v-on:show_tipinfo="show_details_end">
+            </display_details>
         </div>
 
         <div class="zxw-character-row">
@@ -68,7 +80,7 @@
 
     import create_word from '../../../../component/create-word.vue';
     import success_create from '../../../../component/success_create.vue';
-    import modal from '../../../../component/modal.vue';
+    import display_details from '../../../../component/display-details.vue';
     export default{
         beforeRouteLeave (to, from, next){
             if(to.name !== 'termstwo') {
@@ -109,7 +121,7 @@
         components:{
             create_word,
             success_create,
-            modal
+            display_details
         },
 
         created(){
@@ -135,6 +147,7 @@
         data(){
             return{
                 prams:'',
+                show_details:[false,false],
                 show_info:false,
                 remark_1_name:'',
                 remark_1:'',
@@ -169,6 +182,34 @@
                 this.create_terms.remark_2_name = this.$store.getters.get_build_terms.remark_2_name;
                 this.create_terms.remark_2 = this.$store.getters.get_build_terms.remark_2;
                 this.http_json(this.create_terms_url,'post',this.create_terms,this.success_create,this.fail_create);
+            },
+
+            show_details_begin(){
+                if(this.show_details[0] === false && this.$store.getters.get_build_terms.begin_standard_time !== ''){
+                    for(let i = 0;i < this.show_details.length;i++){
+                        this.show_details[i] = false;
+                    }
+                    this.show_details.splice(0,1,true);
+                } else if(this.show_details[0] === true && this.$store.getters.get_build_terms.begin_standard_time !== ''){
+                    for(let i = 0;i < this.show_details.length;i++){
+                        this.show_details[i] = false;
+                    }
+                    this.show_details.splice(0,1,false);
+                }
+            },
+
+            show_details_end(){
+                if(this.show_details[1] === false && this.$store.getters.get_build_terms.end_standard_time !== ''){
+                    for(let i = 0;i < this.show_details.length;i++){
+                        this.show_details[i] = false;
+                    }
+                    this.show_details.splice(1,1,true);
+                } else if(this.show_details[1] === true && this.$store.getters.get_build_terms.end_standard_time !== ''){
+                    for(let i = 0;i < this.show_details.length;i++){
+                        this.show_details[i] = false;
+                    }
+                    this.show_details.splice(1,1,false);
+                }
             }
         }
     }
