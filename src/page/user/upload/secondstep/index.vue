@@ -100,8 +100,6 @@
             this.index = this.$store.getters.get_upload_book_index;
             this.upload_file = this.$store.getters.get_upload_file;
             this.text_name = this.$store.getters.get_text_name;
-            console.log(this.upload_file[this.index].images);
-            console.log(this.upload_file[this.index].images.length);
         },
 
         mounted : function () {
@@ -146,10 +144,10 @@
                 var vm = this;
                 var leng = file.length;
                 for (let i = 0; i < leng; i++) {
-                    var name = file[i].name;
-                    var a = file[i].size;
-                    var size = a/1000;
-                    var reader = new FileReader();
+                    let name = file[i].name;
+                    let a = file[i].size;
+                    let size = a/1000;
+                    let reader = new FileReader();
                     reader.readAsDataURL(file[i]);
                     reader.onload = function(e) {
                         vm.upload_file[index].images.push({
@@ -207,8 +205,6 @@
             check_picture_name() {
                 var vm = this;
                 var key = 0;
-                console.log(this.upload_file[this.index].images);
-                console.log(this.upload_file[this.index].images[0]);
                 for (var i = 0; i < this.upload_file[vm.index].images.length; i++) {
                     var name = this.upload_file[vm.index].images[i].pic_name;
                     var one = name.charAt(0);
