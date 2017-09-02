@@ -391,7 +391,7 @@
                                     <label>责任开始时间:</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input readonly @click="open_birth_e()" v-model="item.begin_time_name">
+                                    <input readonly @click="open_birth_e()" v-model="item.begin_time">
                                 </div>
 
                                 <div class="col-md-2">
@@ -399,7 +399,7 @@
                                     <label>责任结束时间:</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input readonly @click="open_dead_e()" v-model="item.end_time_name">
+                                    <input readonly @click="open_dead_e()" v-model="item.end_time">
                                 </div>
                             </div>
 
@@ -414,7 +414,7 @@
                                     <label>责任者名称:</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input readonly @click="open_character_e()" v-model="item.name_name">
+                                    <input readonly @click="open_character_e()" v-model="item.name">
                                 </div>
                             </div>
 
@@ -524,7 +524,7 @@
                                     <label>责任开始时间:</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input readonly @click="open_birth_i()" v-model="item.begin_time_name">
+                                    <input readonly @click="open_birth_i()" v-model="item.begin_time">
                                 </div>
 
                                 <div class="col-md-2">
@@ -532,7 +532,7 @@
                                     <label>责任结束时间:</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input readonly @click="open_dead_i()" v-model="item.end_time_name">
+                                    <input readonly @click="open_dead_i()" v-model="item.end_time">
                                 </div>
                             </div>
 
@@ -547,7 +547,7 @@
                                     <label>责任者名称:</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input readonly @click="open_character_i()" v-model="item.name_name">
+                                    <input readonly @click="open_character_i()" v-model="item.name">
                                 </div>
                             </div>
 
@@ -674,7 +674,7 @@
                                     <label>责任开始时间:</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input readonly @click="open_birth_c()" v-model="item.begin_time_name">
+                                    <input readonly @click="open_birth_c()" v-model="item.begin_time">
                                 </div>
 
                                 <div class="col-md-2">
@@ -682,7 +682,7 @@
                                     <label>责任结束时间:</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input readonly @click="open_dead_c()" v-model="item.end_time_name">
+                                    <input readonly @click="open_dead_c()" v-model="item.end_time">
                                 </div>
                             </div>
 
@@ -697,7 +697,7 @@
                                     <label>责任者名称：</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input readonly @click="open_character_c()" v-model="item.name_name">
+                                    <input readonly @click="open_character_c()" v-model="item.name">
                                 </div>
                             </div>
 
@@ -1607,11 +1607,11 @@
                         location_id : vm.edition_responsibility[j].location_id,
                         location_name : vm.edition_responsibility[j].location_name,
                         name_id : vm.edition_responsibility[j].name_id,
-                        name_name : vm.edition_responsibility[j].name_name,
+                        name_name : vm.edition_responsibility[j].name,
                         begin_time_id : vm.edition_responsibility[j].begin_time_id,
-                        begin_time_name : vm.edition_responsibility[j].begin_time_name,
+                        begin_time_name : vm.edition_responsibility[j].begin_time,
                         end_time_id : vm.edition_responsibility[j].end_time_id,
-                        end_time_name : vm.edition_responsibility[j].end_time_name,
+                        end_time_name : vm.edition_responsibility[j].end_time,
                         explain : vm.edition_responsibility[j].explain,
                         value_add : false,
                         value_del : false,
@@ -1624,11 +1624,11 @@
                         location_id : vm.edition_responsibility[j].location_id,
                         location_name : vm.edition_responsibility[j].location_name,
                         name_id : vm.edition_responsibility[j].name_id,
-                        name_name : vm.edition_responsibility[j].name_name,
+                        name_name : vm.edition_responsibility[j].name,
                         begin_time_id : vm.edition_responsibility[j].begin_time_id,
-                        begin_time_name : vm.edition_responsibility[j].begin_time_name,
+                        begin_time_name : vm.edition_responsibility[j].begin_time,
                         end_time_id : vm.edition_responsibility[j].end_time_id,
-                        end_time_name : vm.edition_responsibility[j].end_time_name,
+                        end_time_name : vm.edition_responsibility[j].end_time,
                         explain : vm.edition_responsibility[j].explain,
                         value_add : true,
                         value_del : true,
@@ -1642,11 +1642,11 @@
                         location_id : vm.impression_responsibility[k].location_id,
                         location_name : vm.impression_responsibility[k].location_name,
                         name_id : vm.impression_responsibility[k].name_id,
-                        name_name : vm.impression_responsibility[k].name_name,
+                        name_name : vm.impression_responsibility[k].name,
                         begin_time_id : vm.impression_responsibility[k].begin_time_id,
-                        begin_time_name : vm.impression_responsibility[k].begin_time_name,
+                        begin_time_name : vm.impression_responsibility[k].begin_time,
                         end_time_id : vm.impression_responsibility[k].end_time_id,
-                        end_time_name : vm.impression_responsibility[k].end_time_name,
+                        end_time_name : vm.impression_responsibility[k].end_time,
                         explain : vm.impression_responsibility[k].explain,
                         value_add : false,
                         value_del : false,
@@ -1659,11 +1659,11 @@
                         location_id : vm.impression_responsibility[k].location_id,
                         location_name : vm.impression_responsibility[k].location_name,
                         name_id : vm.impression_responsibility[k].name_id,
-                        name_name : vm.impression_responsibility[k].name_name,
+                        name_name : vm.impression_responsibility[k].name,
                         begin_time_id : vm.impression_responsibility[k].begin_time_id,
-                        begin_time_name : vm.impression_responsibility[k].begin_time_name,
+                        begin_time_name : vm.impression_responsibility[k].begin_time,
                         end_time_id : vm.impression_responsibility[k].end_time_id,
-                        end_time_name : vm.impression_responsibility[k].end_time_name,
+                        end_time_name : vm.impression_responsibility[k].end_time,
                         explain : vm.impression_responsibility[k].explain,
                         value_add : true,
                         value_del : true,
@@ -1677,11 +1677,11 @@
                         location_id : vm.copy_responsibility[m].location_id,
                         location_name : vm.copy_responsibility[m].location_name,
                         name_id : vm.copy_responsibility[m].name_id,
-                        name_name : vm.copy_responsibility[m].name_name,
+                        name_name : vm.copy_responsibility[m].name,
                         begin_time_id : vm.copy_responsibility[m].begin_time_id,
-                        begin_time_name : vm.copy_responsibility[m].begin_time_name,
+                        begin_time_name : vm.copy_responsibility[m].begin_time,
                         end_time_id : vm.copy_responsibility[m].end_time_id,
-                        end_time_name : vm.copy_responsibility[m].end_time_name,
+                        end_time_name : vm.copy_responsibility[m].end_time,
                         explain : vm.copy_responsibility[m].explain,
                         value_add : false,
                         value_del : false,
@@ -1694,11 +1694,11 @@
                         location_id : vm.copy_responsibility[k].location_id,
                         location_name : vm.copy_responsibility[k].location_name,
                         name_id : vm.copy_responsibility[k].name_id,
-                        name_name : vm.copy_responsibility[k].name_name,
+                        name_name : vm.copy_responsibility[k].name,
                         begin_time_id : vm.copy_responsibility[k].begin_time_id,
-                        begin_time_name : vm.copy_responsibility[k].begin_time_name,
+                        begin_time_name : vm.copy_responsibility[k].begin_time,
                         end_time_id : vm.copy_responsibility[k].end_time_id,
-                        end_time_name : vm.copy_responsibility[k].end_time_name,
+                        end_time_name : vm.copy_responsibility[k].end_time,
                         explain : vm.copy_responsibility[k].explain,
                         value_add : true,
                         value_del : true,
