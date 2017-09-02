@@ -709,12 +709,9 @@
                 var vm = this;
                 if (response.body.result === 1) {
                     console.log("success upload picture!");
-                    if (vm.post_index1 == vm.upload_file.length - 1 && vm.post_index2 == vm.upload_file[vm.upload_file.length - 1].images.length - 1) {
+                    if (vm.post_index1 == vm.upload_file.length && vm.post_index2 == vm.upload_file[vm.upload_file.length - 1].images.length) {
                         this.$router.push({path:'/user_info/mybook'});
                     }
-                }
-                else if (response.body.result === 0) {
-                    console.log("fail upload picture");
                 }
             },
 
