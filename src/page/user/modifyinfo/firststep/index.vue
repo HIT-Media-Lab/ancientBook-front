@@ -964,7 +964,7 @@
                 alert(2);
                 this.first_layer_info = response.body;
                 alert(3);
-                this.create_vresponsibility_info;
+                this.create_vresponsibility_info();
                 alert(4);
             },
 
