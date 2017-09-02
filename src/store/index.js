@@ -18,7 +18,7 @@ const store = new Vuex.Store({
             'character','recent','char_detail','char_edit','char_check','place','pla_detail','pla_edit','pla_check','institution','ins_detail','ins_edit','ins_check','terms','terms_detail','terms_edit','terms_check','office','off_detail','off_edit',
              'off_check','time','time_detail','time_edit','time_check','literature','lit_detail','lit_edit','lit_check','upload1','upload2',
             'upload3','copy','edition','impression','varieties',
-            'bookstore','book_recent','book_info',
+            'bookstore','book_recent','book_info','modify1','modify2','modify3',
             'book_varieties','book_edition','book_impression',
             'book_copy','sort_book','search_index','search_book',
             'search_noumenon','modify_info','user_info',

@@ -123,13 +123,12 @@
              * 提交修改的信息
              */
             confirm(){
-                let item = {
-//                    token: this.$store.getters.GetToken,
-                    pwd: this.old_pwd,
-                    new_name: this.new_name,
-                    new_pwd: this.new_pwd
-                };
-                this.http_json(this.modify_url, 'post', item, this.confirm_sucess, this.confirm_fail)
+                    let item = {
+                        pwd: this.old_pwd,
+                        new_name: this.new_name,
+                        new_pwd: this.new_pwd
+                    };
+                    this.http_json(this.modify_url, 'post', item, this.confirm_sucess, this.confirm_fail)
             },
             /**
              *修改成功，重新登录
@@ -179,56 +178,60 @@
              * 正则判断，用户输入输入是否规范
              */
             check(){
-                this.disabled = false;
-                this.warning = "";
-                this.Active1=false;
-                this.Active2=false;
-                this.Active3=false;
-                this.Active4=false;
-                let success1=this.check_name(this.new_name);
-                let success2=this.check_pwd(this.old_pwd);
-                let success3=this.check_pwd(this.new_pwd);
-                if (success1) {
-                    this.warning = "";
-                    this.Active1 = false;
+                if(this.new_name == '' || this.old_pwd == '' || this.twi_pwd == '' || this.new_pwd == ''){
+                    this.disabled = true;
+                }else {
                     this.disabled = false;
-                    if (success2){
+                    this.warning = "";
+                    this.Active1=false;
+                    this.Active2=false;
+                    this.Active3=false;
+                    this.Active4=false;
+                    let success1=this.check_name(this.new_name);
+                    let success2=this.check_pwd(this.old_pwd);
+                    let success3=this.check_pwd(this.new_pwd);
+                    if (success1) {
                         this.warning = "";
-                        this.Active2 = false;
+                        this.Active1 = false;
                         this.disabled = false;
-                        if (success3) {
+                        if (success2){
                             this.warning = "";
-                            this.Active3 = false;
+                            this.Active2 = false;
                             this.disabled = false;
-                            if (this.twi_pwd == ''){
+                            if (success3) {
                                 this.warning = "";
                                 this.Active3 = false;
-                                this.disabled = true;
-                            } else {
-                                if ( this.new_pwd == this.twi_pwd){
+                                this.disabled = false;
+                                if (this.twi_pwd == ''){
                                     this.warning = "";
-                                    this.Active4 = false;
-                                    this.disabled = false;
-                                }else {
-                                    this.warning = "两次输入的密码不相符";
-                                    this.Active4 = true;
+                                    this.Active3 = false;
                                     this.disabled = true;
+                                } else {
+                                    if ( this.new_pwd == this.twi_pwd){
+                                        this.warning = "";
+                                        this.Active4 = false;
+                                        this.disabled = false;
+                                    }else {
+                                        this.warning = "两次输入的密码不相符";
+                                        this.Active4 = true;
+                                        this.disabled = true;
+                                    }
                                 }
+                            }else {
+                                this.warning = '新密码格式错误';
+                                this.Active3 = true;
+                                this.disabled = true;
                             }
                         }else {
-                            this.warning = '新密码格式错误';
-                            this.Active3 = true;
+                            this.warning = '旧密码格式错误';
+                            this.Active2 = true;
                             this.disabled = true;
                         }
-                    }else {
-                        this.warning = '旧密码格式错误';
-                        this.Active2 = true;
+                    } else {
+                        this.warning = '用户名格式错误';
+                        this.Active1 = true;
                         this.disabled = true;
                     }
-                } else {
-                    this.warning = '用户名格式错误';
-                    this.Active1 = true;
-                    this.disabled = true;
                 }
             }
         }
@@ -310,7 +313,7 @@
         border: 2px solid red;
     }
     .j-modify1{
-        width: 180px;
+        width: 200px;
         margin: 0 auto
     }
     .j-modify2{
