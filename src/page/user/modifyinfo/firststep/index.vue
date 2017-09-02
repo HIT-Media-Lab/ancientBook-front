@@ -1564,37 +1564,41 @@
 
                 var length1 = vm.first_layer_info.responsibility_infos.length;
                 for (var i = 0; i < length1 - 1; i++) {
-                    vm.variety_item[i].order = vm.first_layer_info.responsibility_infos[i].order;
-                    vm.variety_item[i].location_id = vm.first_layer_info.responsibility_infos[i].location_id;
-                    vm.variety_item[i].location_name = vm.first_layer_info.responsibility_infos[i].location_name;
-                    vm.variety_item[i].name_id = vm.first_layer_info.responsibility_infos[i].name_id;
-                    vm.variety_item[i].name_name = vm.first_layer_info.responsibility_infos[i].name_name;
-                    vm.variety_item[i].begin_time_id = vm.first_layer_info.responsibility_infos[i].begin_time_id;
-                    vm.variety_item[i].begin_time_name = vm.first_layer_info.responsibility_infos[i].begin_time_name;
-                    vm.variety_item[i].end_time_id = vm.first_layer_info.responsibility_infos[i].end_time_id;
-                    vm.variety_item[i].end_time_name = vm.first_layer_info.responsibility_infos[i].end_time_name;
-                    vm.variety_item[i].explain = vm.first_layer_info.responsibility_infos[i].explain;
-                    vm.variety_item[i].action = document.getElementsByClassName("ry-v-action")[i].selectedIndex;
-                    vm.variety_item[i].confirm = document.getElementsByClassName("ry-v-confirm")[i].selectedIndex;
-                    vm.variety_item[i].type = document.getElementsByClassName("ry-v-type")[i].selectedIndex;
-                    vm.variety_item[i].value_add = false;
-                    vm.variety_item[i].value_del = false;
+                    vm.variety_item.push({
+                        order : vm.first_layer_info.responsibility_infos[i].order,
+                        location_id : vm.first_layer_info.responsibility_infos[i].location_id,
+                        location_name : vm.first_layer_info.responsibility_infos[i].location_name,
+                        name_id : vm.first_layer_info.responsibility_infos[i].name_id,
+                        name_name : vm.first_layer_info.responsibility_infos[i].name_name,
+                        begin_time_id : vm.first_layer_info.responsibility_infos[i].begin_time_id,
+                        begin_time_name : vm.first_layer_info.responsibility_infos[i].begin_time_name,
+                        end_time_id : vm.first_layer_info.responsibility_infos[i].end_time_id,
+                        end_time_name : vm.first_layer_info.responsibility_infos[i].end_time_name,
+                        explain : vm.first_layer_info.responsibility_infos[i].explain,
+                        action : document.getElementsByClassName("ry-v-action")[i].selectedIndex,
+                        confirm : document.getElementsByClassName("ry-v-confirm")[i].selectedIndex,
+                        type : document.getElementsByClassName("ry-v-type")[i].selectedIndex,
+                        value_add : false,
+                        value_del : false,
+                    });
                 }
-                vm.variety_item[length1 - 1].order = vm.first_layer_info.responsibility_infos[length1 - 1].order;
-                vm.variety_item[length1 - 1].location_id = vm.first_layer_info.responsibility_infos[length1 - 1].location_id;
-                vm.variety_item[length1 - 1].location_name = vm.first_layer_info.responsibility_infos[length1 - 1].location_name;
-                vm.variety_item[length1 - 1].name_id = vm.first_layer_info.responsibility_infos[length1 - 1].name_id;
-                vm.variety_item[length1 - 1].name_name = vm.first_layer_info.responsibility_infos[length1 - 1].name_name;
-                vm.variety_item[length1 - 1].begin_time_id = vm.first_layer_info.responsibility_infos[length1 - 1].begin_time_id;
-                vm.variety_item[length1 - 1].begin_time_name = vm.first_layer_info.responsibility_infos[length1 - 1].begin_time_name;
-                vm.variety_item[length1 - 1].end_time_id = vm.first_layer_info.responsibility_infos[length1 - 1].end_time_id;
-                vm.variety_item[length1 - 1].end_time_name = vm.first_layer_info.responsibility_infos[length1 - 1].end_time_name;
-                vm.variety_item[length1 - 1].explain = vm.first_layer_info.responsibility_infos[length1 - 1].explain;
-                vm.variety_item[length1 - 1].action = document.getElementsByClassName("ry-v-action")[length1 - 1].selectedIndex;
-                vm.variety_item[length1 - 1].confirm = document.getElementsByClassName("ry-v-confirm")[length1 - 1].selectedIndex;
-                vm.variety_item[length1 - 1].type = document.getElementsByClassName("ry-v-type")[length1 - 1].selectedIndex;
-                vm.variety_item[length1 - 1].value_add = true;
-                vm.variety_item[length1 - 1].value_del = true;
+                vm.variety_item.push({
+                    order : vm.first_layer_info.responsibility_infos[i].order,
+                    location_id : vm.first_layer_info.responsibility_infos[i].location_id,
+                    location_name : vm.first_layer_info.responsibility_infos[i].location_name,
+                    name_id : vm.first_layer_info.responsibility_infos[i].name_id,
+                    name_name : vm.first_layer_info.responsibility_infos[i].name_name,
+                    begin_time_id : vm.first_layer_info.responsibility_infos[i].begin_time_id,
+                    begin_time_name : vm.first_layer_info.responsibility_infos[i].begin_time_name,
+                    end_time_id : vm.first_layer_info.responsibility_infos[i].end_time_id,
+                    end_time_name : vm.first_layer_info.responsibility_infos[i].end_time_name,
+                    explain : vm.first_layer_info.responsibility_infos[i].explain,
+                    action : document.getElementsByClassName("ry-v-action")[i].selectedIndex,
+                    confirm : document.getElementsByClassName("ry-v-confirm")[i].selectedIndex,
+                    type : document.getElementsByClassName("ry-v-type")[i].selectedIndex,
+                    value_add : true,
+                    value_del : true,
+                });
             },
 
             create_3responsibility_info() {
