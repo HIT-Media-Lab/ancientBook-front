@@ -966,6 +966,7 @@
                 }
                 else{
                     this.first_layer_info = response.body;
+                    this.create_vresponsibility_info
                 }
             },
 
@@ -1558,7 +1559,7 @@
             /**
              * 获得4层责任者信息本地数组
              */
-            create_responsibility_info() {
+            create_vresponsibility_info() {
                 var vm = this;
 
                 var length1 = vm.first_layer_info.responsibility_infos.length;
@@ -1568,9 +1569,9 @@
                     vm.variety_item[i].location_name = vm.first_layer_info.responsibility_infos[i].location_name;
                     vm.variety_item[i].name_id = vm.first_layer_info.responsibility_infos[i].name_id;
                     vm.variety_item[i].name_name = vm.first_layer_info.responsibility_infos[i].name_name;
-                    vm.variety_item[i].begin_time = vm.first_layer_info.responsibility_infos[i].begin_time;
+                    vm.variety_item[i].begin_time_id = vm.first_layer_info.responsibility_infos[i].begin_time_id;
                     vm.variety_item[i].begin_time_name = vm.first_layer_info.responsibility_infos[i].begin_time_name;
-                    vm.variety_item[i].end_time = vm.first_layer_info.responsibility_infos[i].end_time;
+                    vm.variety_item[i].end_time_id = vm.first_layer_info.responsibility_infos[i].end_time_id;
                     vm.variety_item[i].end_time_name = vm.first_layer_info.responsibility_infos[i].end_time_name;
                     vm.variety_item[i].explain = vm.first_layer_info.responsibility_infos[i].explain;
                     vm.variety_item[i].action = document.getElementsByClassName("ry-v-action")[i].selectedIndex;
@@ -1579,13 +1580,25 @@
                     vm.variety_item[i].value_add = false;
                     vm.variety_item[i].value_del = false;
                 }
+                vm.variety_item[length1 - 1].order = vm.first_layer_info.responsibility_infos[length1 - 1].order;
+                vm.variety_item[length1 - 1].location_id = vm.first_layer_info.responsibility_infos[length1 - 1].location_id;
                 vm.variety_item[length1 - 1].location_name = vm.first_layer_info.responsibility_infos[length1 - 1].location_name;
+                vm.variety_item[length1 - 1].name_id = vm.first_layer_info.responsibility_infos[length1 - 1].name_id;
                 vm.variety_item[length1 - 1].name_name = vm.first_layer_info.responsibility_infos[length1 - 1].name_name;
+                vm.variety_item[length1 - 1].begin_time_id = vm.first_layer_info.responsibility_infos[length1 - 1].begin_time_id;
                 vm.variety_item[length1 - 1].begin_time_name = vm.first_layer_info.responsibility_infos[length1 - 1].begin_time_name;
+                vm.variety_item[length1 - 1].end_time_id = vm.first_layer_info.responsibility_infos[length1 - 1].end_time_id;
                 vm.variety_item[length1 - 1].end_time_name = vm.first_layer_info.responsibility_infos[length1 - 1].end_time_name;
                 vm.variety_item[length1 - 1].explain = vm.first_layer_info.responsibility_infos[length1 - 1].explain;
+                vm.variety_item[length1 - 1].action = document.getElementsByClassName("ry-v-action")[length1 - 1].selectedIndex;
+                vm.variety_item[length1 - 1].confirm = document.getElementsByClassName("ry-v-confirm")[length1 - 1].selectedIndex;
+                vm.variety_item[length1 - 1].type = document.getElementsByClassName("ry-v-type")[length1 - 1].selectedIndex;
                 vm.variety_item[length1 - 1].value_add = true;
                 vm.variety_item[length1 - 1].value_del = true;
+            },
+
+            create_3responsibility_info() {
+                var vm = this;
 
                 var length2 = vm.edition_responsibility.length;
                 for (var j = 0; j < length2 - 1; j++) {
