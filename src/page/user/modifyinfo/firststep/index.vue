@@ -961,13 +961,9 @@
              */
             success_get_first_layer_info(response) {
                 console.log ("success get first layer info");
-                if (response.body.length === 0) {
-                    console.log ("返回空对象");
-                }
-                else{
-                    this.first_layer_info = response.body;
-                    this.create_vresponsibility_info
-                }
+                this.first_layer_info = response.body;
+                this.create_vresponsibility_info
+
             },
 
             fail_get_first_layer_info() {
