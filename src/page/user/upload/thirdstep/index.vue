@@ -634,7 +634,7 @@
                         for (vm.post_index2 = 0; vm.post_index2 < vm.upload_file[vm.post_index1].images.length; vm.post_index2++) {
                             var upload_picture_obj = new FormData;
 
-                            var blob = dataURItoBlob(vm.upload_file[vm.post_index1].images[vm.post_index2].picture);
+                            var blob = this.dataURItoBlob(vm.upload_file[vm.post_index1].images[vm.post_index2].picture);
 
                             var name = vm.upload_file[vm.post_index1].images[vm.post_index2].pic_name;
                             var first = name.charAt(1);
