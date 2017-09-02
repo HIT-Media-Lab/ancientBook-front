@@ -976,15 +976,14 @@
              */
             success_get_three_layers_info(response) {
                 console.log ("success get 3 layers info");
-                if (response.body === '') {
-                    console.log ("返回空对象");
-                }
-                else{
-                    this.three_layers_info = response.body;
-                    this.edition_responsibility_info();
-                    this.impression_responsibility_info();
-                    this.copy_responsibility_info();
-                }
+                this.three_layers_info = response.body;
+                this.edition_responsibility_info();
+                this.impression_responsibility_info();
+                this.copy_responsibility_info();
+                this.create_3responsibility_info();
+                this.default_selections_edition();
+                this.default_selections_impression();
+                this.default_selections_copy();
             },
 
             fail_get_three_layers_info() {
@@ -1597,8 +1596,12 @@
             create_3responsibility_info() {
                 var vm = this;
 
+                var j = 0;
+                var k = 0;
+                var m = 0;
+
                 var length2 = vm.edition_responsibility.length;
-                for (var j = 0; j < length2 - 1; j++) {
+                for (; j < length2 - 1; j++) {
                     vm.edition_item[j].order = vm.edition_responsibility[j].order;
                     vm.edition_item[j].location_name = vm.edition_responsibility[j].location_name;
                     vm.edition_item[j].name_name = vm.edition_responsibility[j].name_name;
@@ -1617,7 +1620,7 @@
                 vm.edition_item[length2 - 1].value_del = true;
 
                 var length3 = vm.impression_responsibility.length;
-                for (var k = 0; k < length3 - 1; k++) {
+                for (; k < length3 - 1; k++) {
                     vm.impression_item[k].order = vm.impression_responsibility[k].order;
                     vm.impression_item[k].location_name = vm.impression_responsibility[k].location_name;
                     vm.impression_item[k].name_name = vm.impression_responsibility[k].name_name;
@@ -1636,7 +1639,7 @@
                 vm.impression_item[length3 - 1].value_del = true;
 
                 var length4 = vm.copy_responsibility.length;
-                for (var m = 0; m < length4 - 1; m++) {
+                for (; m < length4 - 1; m++) {
                     vm.copy_item[m].order = vm.copy_responsibility[m].order;
                     vm.copy_item[m].location_name = vm.copy_responsibility[m].location_name;
                     vm.copy_item[m].name_name = vm.copy_responsibility[m].name_name;
