@@ -648,7 +648,9 @@
                             upload_picture_obj.append('volume' , volume);
                             upload_picture_obj.append('page' , vm.post_index2 + 1);
                             upload_picture_obj.append('picture' , blob);
-                            upload_picture_obj.append('content' , vm.upload_file[vm.post_index1].texts[vm.post_index2]);
+                            if (vm.upload_file[vm.post_index1].texts[vm.post_index2]) {
+                                upload_picture_obj.append('content' , vm.upload_file[vm.post_index1].texts[vm.post_index2]);
+                            }
                             upload_picture_obj.append('book_name' , vm.upload_file[vm.post_index1].book_name);
 
                             upload_picture_obj.token = this.$store.getters.GetToken;

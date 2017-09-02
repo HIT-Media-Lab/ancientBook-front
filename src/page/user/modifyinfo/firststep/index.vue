@@ -1602,6 +1602,21 @@
 
                 var length2 = vm.edition_responsibility.length;
                 for (; j < length2 - 1; j++) {
+                    vm.variety_item.push({
+                        order : vm.first_layer_info.responsibility_infos[i].order,
+                        location_id : vm.first_layer_info.responsibility_infos[i].location_id,
+                        location_name : vm.first_layer_info.responsibility_infos[i].location_name,
+                        name_id : vm.first_layer_info.responsibility_infos[i].name_id,
+                        name_name : vm.first_layer_info.responsibility_infos[i].name_name,
+                        begin_time_id : vm.first_layer_info.responsibility_infos[i].begin_time_id,
+                        begin_time_name : vm.first_layer_info.responsibility_infos[i].begin_time_name,
+                        end_time_id : vm.first_layer_info.responsibility_infos[i].end_time_id,
+                        end_time_name : vm.first_layer_info.responsibility_infos[i].end_time_name,
+                        explain : vm.first_layer_info.responsibility_infos[i].explain,
+                        value_add : false,
+                        value_del : false,
+                    });
+
                     vm.edition_item[j].order = vm.edition_responsibility[j].order;
                     vm.edition_item[j].location_name = vm.edition_responsibility[j].location_name;
                     vm.edition_item[j].name_name = vm.edition_responsibility[j].name_name;
