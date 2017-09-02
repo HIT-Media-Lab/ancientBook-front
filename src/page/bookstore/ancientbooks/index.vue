@@ -748,17 +748,12 @@
              * 目录跳转到图文对照
              */
             go_to(book,volume,page) {
-                this.book = book;
-                this.volume = volume;
-                this.page = page;
-                this.ancient_book_id = this.bookid;
-
-                this.$route.params.book = this.book;
-                this.$route.params.volume = this.volume;
-                this.$route.params.page = this.page;
-                this.$route.params.ancient_book_id = this.ancient_book_id;
-
-                this.$router.push({name:'ancientbook', params: this.$route.params});
+                this.$router.push({name:'ancientbook',params:{
+                    book_name:this.ancient_book_id,
+                    book:book,
+                    volume:volume,
+                    pageId:page
+                }})
             }
 
         }
