@@ -178,60 +178,51 @@
              * 正则判断，用户输入输入是否规范
              */
             check(){
+                this.warning = "";
+                this.Active1=false;
+                this.Active2=false;
+                this.Active3=false;
+                this.Active4=false;
+                let success1=this.check_name(this.new_name);
+                let success2=this.check_pwd(this.old_pwd);
+                let success3=this.check_pwd(this.new_pwd);
+                if (success1) {
+                    this.warning = "";
+                    this.Active1 = false;
+                    if (success2){
+                        this.warning = "";
+                        this.Active2 = false;
+                        if (success3) {
+                            this.warning = "";
+                            this.Active3 = false;
+                            if (this.twi_pwd == ''){
+                                this.warning = "";
+                                this.Active3 = false;
+                            } else {
+                                if ( this.new_pwd == this.twi_pwd){
+                                    this.warning = "";
+                                    this.Active4 = false;
+                                }else {
+                                    this.warning = "两次输入的密码不相符";
+                                    this.Active4 = true;
+                                }
+                            }
+                        }else {
+                            this.warning = '新密码格式错误';
+                            this.Active3 = true;
+                        }
+                    }else {
+                        this.warning = '旧密码格式错误';
+                        this.Active2 = true;
+                    }
+                } else {
+                    this.warning = '用户名格式错误';
+                    this.Active1 = true;
+                }
                 if(this.new_name == '' || this.old_pwd == '' || this.twi_pwd == '' || this.new_pwd == ''){
                     this.disabled = true;
                 }else {
                     this.disabled = false;
-                    this.warning = "";
-                    this.Active1=false;
-                    this.Active2=false;
-                    this.Active3=false;
-                    this.Active4=false;
-                    let success1=this.check_name(this.new_name);
-                    let success2=this.check_pwd(this.old_pwd);
-                    let success3=this.check_pwd(this.new_pwd);
-                    if (success1) {
-                        this.warning = "";
-                        this.Active1 = false;
-                        this.disabled = false;
-                        if (success2){
-                            this.warning = "";
-                            this.Active2 = false;
-                            this.disabled = false;
-                            if (success3) {
-                                this.warning = "";
-                                this.Active3 = false;
-                                this.disabled = false;
-                                if (this.twi_pwd == ''){
-                                    this.warning = "";
-                                    this.Active3 = false;
-                                    this.disabled = true;
-                                } else {
-                                    if ( this.new_pwd == this.twi_pwd){
-                                        this.warning = "";
-                                        this.Active4 = false;
-                                        this.disabled = false;
-                                    }else {
-                                        this.warning = "两次输入的密码不相符";
-                                        this.Active4 = true;
-                                        this.disabled = true;
-                                    }
-                                }
-                            }else {
-                                this.warning = '新密码格式错误';
-                                this.Active3 = true;
-                                this.disabled = true;
-                            }
-                        }else {
-                            this.warning = '旧密码格式错误';
-                            this.Active2 = true;
-                            this.disabled = true;
-                        }
-                    } else {
-                        this.warning = '用户名格式错误';
-                        this.Active1 = true;
-                        this.disabled = true;
-                    }
                 }
             }
         }

@@ -298,17 +298,17 @@ const router = new VueRouter({
             name:'upload3'
         },
         {
-            path:'/user/modify1',
+            path:'/user/modify1/:ancient_book_id',
             component:modify1,
             name:'modify1',
         },
         {
-            path:'/user/modify2',
+            path:'/user/modify2/:ancient_book_id',
             component:modify2,
             name:'modify2'
         },
         {
-            path:'/user/modify3',
+            path:'/user/modify3/:ancient_book_id',
             component:modify3,
             name:'modify3'
         },
