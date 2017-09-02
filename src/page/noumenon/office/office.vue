@@ -6,52 +6,52 @@
 
         <div class=" zxw-characterbody">
             <p class="zxwspan-length">职官名：</p>
-            <p class="zxwspan-length" v-model="off_content.name">{{off_content.name}}</p>
+            <p class="zxw-info-width" v-model="off_content.name">{{off_content.name}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">英译：</p>
-            <p class="zxwspan-length zxw-null" v-if="off_content.english === ''">不详</p>
-            <p class="zxwspan-length" v-model="off_content.english" v-else>{{off_content.english}}</p>
+            <p class="zxw-info-width zxw-null" v-if="off_content.english === ''">不详</p>
+            <p class="zxw-info-width" v-model="off_content.english" v-else>{{off_content.english}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">别名：</p>
-            <p class="zxwspan-length zxw-null" v-if="off_content.other_name === ''">不详</p>
-            <p class="zxwspan-length" v-model="off_content.other_name" v-else>{{off_content.other_name}}</p>
+            <p class="zxw-info-width zxw-null" v-if="off_content.other_name === ''">不详</p>
+            <p class="zxw-info-width" v-model="off_content.other_name" v-else>{{off_content.other_name}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">隶属机构：</p>
-            <p class="zxwspan-length zxw-null" v-if="off_content.institution_name === ''">不详</p>
-            <button class="zxwbtn-info zxwspan-length" v-model="off_content.institution_name" @click="go_ins()" v-else>{{off_content.institution_name}}</button>
+            <p class="zxw-info-width zxw-null" v-if="off_content.institution_name === ''">不详</p>
+            <button class="zxwbtn-info zxw-info-width" v-model="off_content.institution_name" @click="go_ins()" v-else>{{off_content.institution_name}}</button>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">起始时间：</p>
-            <button class="zxwbtn-info zxwspan-length" v-model="off_content.begin_time_name,off_content.begin_time_id" @click="go_begin_time()">{{off_content.begin_time_name}}</button>
+            <button class="zxwbtn-info zxw-info-width" v-model="off_content.begin_time_name,off_content.begin_time_id" @click="go_begin_time()">{{off_content.begin_time_name}}</button>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">终止时间：</p>
-            <button class="zxwbtn-info zxwspan-length" v-model="off_content.end_time_name,off_content.end_time_id" @click="go_end_time()">{{off_content.end_time_name}}</button>
+            <button class="zxwbtn-info zxw-info-width" v-model="off_content.end_time_name,off_content.end_time_id" @click="go_end_time()">{{off_content.end_time_name}}</button>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">上级职官：</p>
-            <p class="zxwspan-length zxw-null" v-if="off_content.s_office_name === ''">不详</p>
-            <button class="zxwbtn-info zxwspan-length" v-model="off_content.s_office_id,off_content.s_office_name" @click="go_off()" v-else>{{off_content.s_office_name}}</button>
+            <p class="zxw-info-width zxw-null" v-if="off_content.s_office_name === ''">不详</p>
+            <button class="zxwbtn-info zxw-info-width" v-model="off_content.s_office_id,off_content.s_office_name" @click="go_off()" v-else>{{off_content.s_office_name}}</button>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">品级：</p>
-            <p class="zxwspan-length" v-model="selected_level">{{selected_level}}</p>
+            <p class="zxw-info-width" v-model="selected_level">{{selected_level}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">所属朝代：</p>
-            <p class="zxwspan-length zxw-null" v-if="off_content.dynasty === ''">不详</p>
-            <p class="zxwspan-length" v-model="off_content.dynasty" v-else>{{off_content.dynasty}}</p>
+            <p class="zxw-info-width zxw-null" v-if="off_content.dynasty === ''">不详</p>
+            <p class="zxw-info-width" v-model="off_content.dynasty" v-else>{{off_content.dynasty}}</p>
         </div>
 
 

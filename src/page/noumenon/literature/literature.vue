@@ -249,11 +249,12 @@
         background-image: url("../../../assets/img/modal-box/lit_box.png");
         background-repeat: no-repeat;
         background-position: center;
-        background-size: 773px 991px;
+        background-size: 100% 100%;
         width:773px;
-        height:991px;
+        /*height:991px;*/
+        height:auto;
         margin:20px auto 0 auto;
-        padding: 50px 50px 0 50px;
+        padding: 50px 50px 50px 50px;
     }
 
     .zxw-lit-label{

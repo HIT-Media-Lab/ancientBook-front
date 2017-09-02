@@ -6,64 +6,64 @@
 
        <div class=" zxw-characterbody">
             <p class="zxwspan-length">地名：</p>
-            <p class="zxwspan-length" v-model="location_content.name">{{location_content.name}}</p>
+            <p class="zxw-info-width" v-model="location_content.name">{{location_content.name}}</p>
         </div>
 
         <div class="zxw-infospan">
            <p class="zxwspan-length">英译：</p>
-           <p class="zxwspan-length zxw-null" v-if="location_content.english === ''">不详</p>
-           <p class="zxwspan-length" v-model="location_content.english" v-else>{{location_content.english}}</p>
+           <p class="zxw-info-width zxw-null" v-if="location_content.english === ''">不详</p>
+           <p class="zxw-info-width" v-model="location_content.english" v-else>{{location_content.english}}</p>
        </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">别名：</p>
-            <p class="zxwspan-length zxw-null" v-if="location_content.other_name === ''">不详</p>
-            <span class="zxwspan-length" v-model="location_content.other_name" v-else>{{location_content.other_name}}</span>
+            <p class="zxw-info-width zxw-null" v-if="location_content.other_name === ''">不详</p>
+            <span class="zxw-info-width" v-model="location_content.other_name" v-else>{{location_content.other_name}}</span>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">经度：</p>
-            <p class="zxwspan-length zxw-null" v-if="location_content.longitude === ''">不详</p>
-            <p class="zxwspan-length" v-model="location_content.longitude" v-else>{{location_content.longitude}}</p>
+            <p class="zxw-info-width zxw-null" v-if="location_content.longitude === ''">不详</p>
+            <p class="zxw-info-width" v-model="location_content.longitude" v-else>{{location_content.longitude}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">纬度：</p>
-            <p class="zxwspan-length zxw-null" v-if="location_content.latitude === ''">不详</p>
-            <p class="zxwspan-length" v-model="location_content.latitude" v-else>{{location_content.latitude}}</p>
+            <p class="zxw-info-width zxw-null" v-if="location_content.latitude === ''">不详</p>
+            <p class="zxw-info-width" v-model="location_content.latitude" v-else>{{location_content.latitude}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">今所在：</p>
-            <p class="zxwspan-length zxw-null" v-if="location_content.location_today === ''">不详</p>
-            <p class="zxwspan-length" v-model="location_content.location_today" v-else>{{location_content.location_today}}</p>
+            <p class="zxw-info-width zxw-null" v-if="location_content.location_today === ''">不详</p>
+            <p class="zxw-info-width" v-model="location_content.location_today" v-else>{{location_content.location_today}}</p>
         </div>
 
         <div class="zxw-infospan">
              <p class="zxwspan-length">起始时间：</p>
-             <button class="zxwbtn-info zxwspan-length" v-model="location_content.begin_time_name,location_content.begin_time_id" @click="go_begin_time()">{{location_content.begin_time_name}}</button>
+             <button class="zxwbtn-info zxw-info-width" v-model="location_content.begin_time_name,location_content.begin_time_id" @click="go_begin_time()">{{location_content.begin_time_name}}</button>
          </div>
 
          <div class="zxw-infospan">
              <p class="zxwspan-length">终止时间：</p>
-             <button class="zxwbtn-info zxwspan-length" v-model="location_content.end_time_name,location_content.end_time_id" @click="go_end_time()">{{location_content.end_time_name}}</button>
+             <button class="zxwbtn-info zxw-info-width" v-model="location_content.end_time_name,location_content.end_time_id" @click="go_end_time()">{{location_content.end_time_name}}</button>
          </div>
 
          <div class="zxw-infospan">
              <p class="zxwspan-length">上级地名：</p>
-             <p class="zxwspan-length zxw-null" v-if="location_content.s_location_name === ''">不详</p>
-             <button class="zxwbtn-info zxwspan-length" v-model="location_content.s_location_id,location_content.s_location_name" @click="go_s_location()" v-else>{{location_content.s_location_name}}</button>
+             <p class="zxw-info-width zxw-null" v-if="location_content.s_location_name === ''">不详</p>
+             <button class="zxwbtn-info zxw-info-width" v-model="location_content.s_location_id,location_content.s_location_name" @click="go_s_location()" v-else>{{location_content.s_location_name}}</button>
          </div>
 
          <div class="zxw-infospan">
              <p class="zxwspan-length">下级地名 ：</p>
-             <p class="zxwspan-length zxw-null" v-if="location_content.l_location_name === '' ">不详</p>
-             <button class="zxwbtn-info zxwspan-length" v-model="location_content.l_location_name,location_content.l_location_id" @click="go_l_location()"  v-else>{{location_content.l_location_name}}</button>
+             <p class="zxw-info-width zxw-null" v-if="location_content.l_location_name === '' ">不详</p>
+             <button class="zxwbtn-info zxw-info-width" v-model="location_content.l_location_name,location_content.l_location_id" @click="go_l_location()"  v-else>{{location_content.l_location_name}}</button>
          </div>
          <div class="zxw-infospan">
             <p class="zxwspan-length">治所：</p>
-            <p class="zxwspan-length zxw-null" v-if="location_content.seat.length === 0">不详</p>
-            <button class="zxwbtn-info zxwspan-length" v-for="(item,index) in location_content.seat" @click="to_place(item.location_id)" v-else>{{item.location_name}}<span v-if="location_content.seat.length > 1"> ;</span></button>
+            <p class="zxw-info-width zxw-null" v-if="location_content.seat.length === 0">不详</p>
+            <button class="zxwbtn-info zxw-info-width" v-for="(item,index) in location_content.seat" @click="to_place(item.location_id)" v-else>{{item.location_name}}<span v-if="location_content.seat.length > 1"> ;</span></button>
         </div>
 
         <template v-if="location_content.remark_1_name !== ''">

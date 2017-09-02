@@ -6,47 +6,47 @@
 
         <div class=" zxw-characterbody">
             <p class="zxwspan-length">术语名称：</p>
-            <p class="zxw-detail-info" v-model="terms_content.name">{{terms_content.name}}</p>
+            <p class="zxw-info-width" v-model="terms_content.name">{{terms_content.name}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">学科：</p>
-            <p class="zxw-detail-info" v-model="selected_course">{{selected_course}}</p>
+            <p class="zxw-info-width" v-model="selected_course">{{selected_course}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">学科小类：</p>
-            <p class="zxwspan-length zxw-null" v-if="terms_content.course_subdivision === null">不详</p>
-            <p class="zxw-detail-info" style="width:auto;" v-else>未有具体数据</p>
+            <p class="zxw-info-width zxw-null" v-if="terms_content.course_subdivision === null">不详</p>
+            <p class="zxw-info-width" v-else>未有具体数据</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">起始时间：</p>
-            <button class="zxwbtn-info zxw-detail-info" v-model="terms_content.begin_time_name,terms_content.begin_time_id" @click="go_begin_time()">{{terms_content.begin_time_name}}</button>
+            <button class="zxwbtn-info zxw-info-width" v-model="terms_content.begin_time_name,terms_content.begin_time_id" @click="go_begin_time()">{{terms_content.begin_time_name}}</button>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">终止时间：</p>
-            <button class="zxwbtn-info zxw-detail-info" v-model="terms_content.end_time_name,terms_content.end_time_id" @click="go_end_time()">{{terms_content.end_time_name}}</button>
+            <button class="zxwbtn-info zxw-info-width" v-model="terms_content.end_time_name,terms_content.end_time_id" @click="go_end_time()">{{terms_content.end_time_name}}</button>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">别名：</p>
-            <p class="zxwspan-length zxw-null" v-if="terms_content.other_name === ''">不详</p>
-            <p class="zxw-detail-info" v-model="terms_content.other_name" v-else>{{terms_content.other_name}}</p>
+            <p class="zxw-info-width zxw-null" v-if="terms_content.other_name === ''">不详</p>
+            <p class="zxw-info-width" v-model="terms_content.other_name" v-else>{{terms_content.other_name}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">英译：</p>
-            <p class="zxwspan-length zxw-null" v-if="terms_content.english === ''">不详</p>
-            <p class="zxw-detail-info" v-model="terms_content.english" v-else>{{terms_content.english}}</p>
+            <p class="zxw-info-width zxw-null" v-if="terms_content.english === ''">不详</p>
+            <p class="zxw-info-width" v-model="terms_content.english" v-else>{{terms_content.english}}</p>
         </div>
 
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">解释：</p>
-            <p class="zxwspan-length zxw-null" v-if="terms_content.explain === ''">不详</p>
-            <p class="zxw-detail-info" style="width:auto;" v-model="terms_content.explain" v-else>{{terms_content.explain}}</p>
+            <p class="zxw-info-width zxw-null" v-if="terms_content.explain === ''">不详</p>
+            <p class="zxw-info-width" v-model="terms_content.explain" v-else>{{terms_content.explain}}</p>
         </div>
 
         <template v-if="terms_content.remark_1_name !== ''">

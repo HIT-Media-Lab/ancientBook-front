@@ -6,53 +6,53 @@
 
         <div class=" zxw-characterbody">
             <p class="zxwspan-length">机构名：</p>
-            <p class="zxwspan-length" v-model="ins_content.name">{{ins_content.name}}</p>
+            <p class="zxw-info-width" v-model="ins_content.name">{{ins_content.name}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">英译：</p>
-            <p class="zxwspan-length zxw-null" v-if="ins_content.english === ''">不详</p>
-            <p class="zxwspan-length" v-model="ins_content.english" v-else>{{ins_content.english}}</p>
+            <p class="zxw-info-width zxw-null" v-if="ins_content.english === ''">不详</p>
+            <p class="zxw-info-width" v-model="ins_content.english" v-else>{{ins_content.english}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">机构类型：</p>
-            <p class="zxwspan-length zxw-null" v-if="ins_content.type_number === null ||ins_content.type_number === 0">不详</p>
-            <p class="zxwspan-length" v-model="ins_content.type[ins_content.type_number]" v-else>{{ins_content.type[ins_content.type_number]}}</p>
+            <p class="zxw-info-width zxw-null" v-if="ins_content.type_number === null ||ins_content.type_number === 0">不详</p>
+            <p class="zxw-info-width" v-model="ins_content.type[ins_content.type_number]" v-else>{{ins_content.type[ins_content.type_number]}}</p>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">别名：</p>
-            <p class="zxwspan-length zxw-null" v-if="ins_content.other_name === ''">不详</p>
-            <span class="zxwspan-length" v-model="ins_content.other_name" v-else>{{ins_content.other_name}}</span>
+            <p class="zxw-info-width zxw-null" v-if="ins_content.other_name === ''">不详</p>
+            <span class="zxw-info-width" v-model="ins_content.other_name" v-else>{{ins_content.other_name}}</span>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">主管职：</p>
-            <p class="zxwspan-length zxw-null" v-if="ins_content.chief_office_name === ''">不详</p>
-            <button class="zxwbtn-info zxwspan-length" v-model="ins_content.chief_office_id,ins_content.chief_office_name" @click="go_chief_office()" v-else>{{ins_content.chief_office_name}}</button>
+            <p class="zxw-info-width zxw-null" v-if="ins_content.chief_office_name === ''">不详</p>
+            <button class="zxwbtn-info zxw-info-width" v-model="ins_content.chief_office_id,ins_content.chief_office_name" @click="go_chief_office()" v-else>{{ins_content.chief_office_name}}</button>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">副官职：</p>
-            <p class="zxwspan-length zxw-null" v-if="ins_content.vice_office_name === ''">不详</p>
-            <button class="zxwbtn-info zxwspan-length" v-model="ins_content.vice_office_id,ins_content.vice_office_name" @click="go_vice_office()" v-else>{{ins_content.vice_office_name}}</button>
+            <p class="zxw-info-width zxw-null" v-if="ins_content.vice_office_name === ''">不详</p>
+            <button class="zxwbtn-info zxw-info-width" v-model="ins_content.vice_office_id,ins_content.vice_office_name" @click="go_vice_office()" v-else>{{ins_content.vice_office_name}}</button>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">起始时间：</p>
-            <button class="zxwbtn-info zxwspan-length" v-model="ins_content.begin_time_name,ins_content.begin_time_id" @click="go_begin_time()">{{ins_content.begin_time_name}}</button>
+            <button class="zxwbtn-info zxw-info-width" v-model="ins_content.begin_time_name,ins_content.begin_time_id" @click="go_begin_time()">{{ins_content.begin_time_name}}</button>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">终止时间：</p>
-            <button class="zxwbtn-info zxwspan-length" v-model="ins_content.end_time_name,ins_content.end_time_id" @click="go_end_time()">{{ins_content.end_time_name}}</button>
+            <button class="zxwbtn-info zxw-info-width" v-model="ins_content.end_time_name,ins_content.end_time_id" @click="go_end_time()">{{ins_content.end_time_name}}</button>
         </div>
 
         <div class="zxw-infospan">
             <p class="zxwspan-length">上级机构：</p>
-            <p class="zxwspan-length zxw-null" v-if="ins_content.parent_body_name === ''">不详</p>
-            <button class="zxwbtn-info zxwspan-length" v-model="ins_content.parent_body_id,ins_content.parent_body_name" @click="to_ins()" v-else>{{ins_content.parent_body_name}}</button>
+            <p class="zxw-info-width zxw-null" v-if="ins_content.parent_body_name === ''">不详</p>
+            <button class="zxwbtn-info zxw-info-width" v-model="ins_content.parent_body_id,ins_content.parent_body_name" @click="to_ins()" v-else>{{ins_content.parent_body_name}}</button>
         </div>
 
         <template v-if="ins_content.remark_1_name !== ''">

@@ -6,113 +6,113 @@
 
             <div class=" zxw-characterbody">
                 <p class="zxwspan-length">人名：</p>
-                <p class="zxwspan-length" v-model="person_content.name">{{person_content.name}}</p>
+                <p class="zxw-info-width" v-model="person_content.name">{{person_content.name}}</p>
             </div>
 
             <div class="zxw-infospan">
                 <p class="zxwspan-length">英译：</p>
-                <p class="zxwspan-length zxw-null" v-if="person_content.english === ''">不详</p>
-                <p class="zxwspan-length" v-model="person_content.english" v-else>{{person_content.english}}</p>
+                <p class="zxw-info-width zxw-null" v-if="person_content.english === ''">不详</p>
+                <p class="zxw-info-width" v-model="person_content.english" v-else>{{person_content.english}}</p>
             </div>
 
             <div class="zxw-infospan">
                 <p class="zxwspan-length">姓：</p>
-                <p class="zxwspan-length zxw-null" v-if="person_content.xing === ''">不详</p>
-                <span class="zxwspan-length" v-model="person_content.xing" v-else>{{person_content.xing}}</span>
+                <p class="zxw-info-width zxw-null" v-if="person_content.xing === ''">不详</p>
+                <span class="zxw-info-width" v-model="person_content.xing" v-else>{{person_content.xing}}</span>
             </div>
 
             <div class="zxw-infospan">
                 <p class="zxwspan-length">氏：</p>
-                <p class="zxwspan-length zxw-null" v-if="person_content.shi === ''">不详</p>
-                <p class="zxwspan-length" v-model="person_content.shi" v-else>{{person_content.shi}}</p>
+                <p class="zxw-info-width zxw-null" v-if="person_content.shi === ''">不详</p>
+                <p class="zxw-info-width" v-model="person_content.shi" v-else>{{person_content.shi}}</p>
             </div>
 
             <div class="zxw-infospan">
                 <p class="zxwspan-length">字：</p>
-                <p class="zxwspan-length zxw-null" v-if="person_content.zi === ''">不详</p>
-                <p class="zxwspan-length" v-model="person_content.zi" v-else>{{person_content.zi}}</p>
+                <p class="zxw-info-width zxw-null" v-if="person_content.zi === ''">不详</p>
+                <p class="zxw-info-width" v-model="person_content.zi" v-else>{{person_content.zi}}</p>
             </div>
 
             <div class="zxw-infospan">
                 <p class="zxwspan-length">别名：</p>
-                <p class="zxwspan-length zxw-null" v-if="person_content.other_name === ''">不详</p>
-                <p class="zxwspan-length" v-model="person_content.other_name" v-else>{{person_content.other_name}}</p>
+                <p class="zxw-info-width zxw-null" v-if="person_content.other_name === ''">不详</p>
+                <p class="zxw-info-width" v-model="person_content.other_name" v-else>{{person_content.other_name}}</p>
             </div>
 
             <div class="zxw-infospan">
                 <p class="zxwspan-length">出生时间：</p>
-                <button class="zxwbtn-info zxwspan-length" v-model="person_content.birth_time_name,person_content.birth_time_id" @click="go_birth_time()">{{person_content.birth_time_name}}</button>
+                <button class="zxwbtn-info zxw-info-width" v-model="person_content.birth_time_name,person_content.birth_time_id" @click="go_birth_time()">{{person_content.birth_time_name}}</button>
             </div>
 
             <div class="zxw-infospan">
                 <p class="zxwspan-length">死亡时间：</p>
-                <button class="zxwbtn-info zxwspan-length" v-model="person_content.death_time_name,person_content.death_time_id" @click="go_dead_time()">{{person_content.death_time_name}}</button>
+                <button class="zxwbtn-info zxw-info-width" v-model="person_content.death_time_name,person_content.death_time_id" @click="go_dead_time()">{{person_content.death_time_name}}</button>
             </div>
 
             <div class="zxw-infospan">
                 <p class="zxwspan-length">籍贯：</p>
-                <p class="zxwspan-length zxw-null" v-if="person_content.jiguan_location_name === ''">不详</p>
-                <button class="zxwbtn-info zxwspan-length" v-model="person_content.jiguan_location_id,person_content.jiguan_location_name" v-else>{{person_content.jiguan_location_name}}</button>
+                <p class="zxw-info-width zxw-null" v-if="person_content.jiguan_location_name === ''">不详</p>
+                <button class="zxwbtn-info zxw-info-width" v-model="person_content.jiguan_location_id,person_content.jiguan_location_name" v-else>{{person_content.jiguan_location_name}}</button>
             </div>
 
             <div class="zxw-infospan">
                 <p class="zxwspan-length">父：</p>
-                <p class="zxwspan-length zxw-null" v-if="father.length === 0">不详</p>
-                <button class="zxwbtn-info zxwspan-length" v-model="father[0]"  @click="to_character(father[0].person_id)" v-else>{{father[0].person_name}}</button>
+                <p class="zxw-info-width zxw-null" v-if="father.length === 0">不详</p>
+                <button class="zxwbtn-info zxw-info-width" v-model="father[0]"  @click="to_character(father[0].person_id)" v-else>{{father[0].person_name}}</button>
 
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">母：</p>
-                <p class="zxwspan-length zxw-null" v-if="mother.length === 0">不详</p>
-                <button class="zxwbtn-info zxwspan-length" v-model="mother[0]" @click="to_character(mother[0].person_id)" v-else>{{mother[0].person_name}}</button>
+                <p class="zxw-info-width zxw-null" v-if="mother.length === 0">不详</p>
+                <button class="zxwbtn-info zxw-info-width" v-model="mother[0]" @click="to_character(mother[0].person_id)" v-else>{{mother[0].person_name}}</button>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">子：</p>
-                <p class="zxwspan-length zxw-null" v-if="son.length === 0">不详</p>
+                <p class="zxw-info-width zxw-null" v-if="son.length === 0">不详</p>
                 <template v-else>
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in son" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="son.length > 1"> ;</span></button>
+                    <button class="zxwbtn-info zxw-info-width"  v-for="(item,index) in son" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="son.length > 1"> ;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">女：</p>
-                <p class="zxwspan-length zxw-null" v-if="daughter.length === 0">不详</p>
+                <p class="zxw-info-width zxw-null" v-if="daughter.length === 0">不详</p>
                 <template v-else>
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in daughter" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="daughter.length > 1"> ;</span></button>
+                    <button class="zxwbtn-info zxw-info-width"  v-for="(item,index) in daughter" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="daughter.length > 1"> ;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">兄弟：</p>
-                <p class="zxwspan-length zxw-null" v-if="brother.length === 0">不详</p>
+                <p class="zxw-info-width zxw-null" v-if="brother.length === 0">不详</p>
                 <template v-else>
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in brother" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="brother.length > 1"> ;</span></button>
+                    <button class="zxwbtn-info zxw-info-width"  v-for="(item,index) in brother" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="brother.length > 1"> ;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">姐妹：</p>
-                <p class="zxwspan-length zxw-null" v-if="sister.length === 0">不详</p>
+                <p class="zxw-info-width zxw-null" v-if="sister.length === 0">不详</p>
                 <template v-else>
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in sister" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="sister.length > 1"> ;</span></button>
+                    <button class="zxwbtn-info zxw-info-width"  v-for="(item,index) in sister" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="sister.length > 1"> ;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">师：</p>
-                <p class="zxwspan-length zxw-null" v-if="teacher.length === 0">不详</p>
+                <p class="zxw-info-width zxw-null" v-if="teacher.length === 0">不详</p>
                 <template v-else>
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in teacher" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="teacher.length > 1"> ;</span></button>
+                    <button class="zxwbtn-info zxw-info-width"  v-for="(item,index) in teacher" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="teacher.length > 1"> ;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">学生：</p>
-                <p class="zxwspan-length zxw-null" v-if="student.length === 0">不详</p>
+                <p class="zxw-info-width zxw-null" v-if="student.length === 0">不详</p>
                 <template v-else>
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in student" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="student.length > 1"> ;</span></button>
+                    <button class="zxwbtn-info zxw-info-width"  v-for="(item,index) in student" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="student.length > 1"> ;</span></button>
                 </template>
             </div>
             <div class="zxw-infospan">
                 <p class="zxwspan-length">友：</p>
-                <p class="zxwspan-length zxw-null" v-if="friend.length === 0">不详</p>
+                <p class="zxw-info-width zxw-null" v-if="friend.length === 0">不详</p>
                 <template v-else>
-                    <button class="zxwbtn-info zxwspan-length"  v-for="(item,index) in friend" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="friend.length > 1"> ;</span></button>
+                    <button class="zxwbtn-info zxw-info-width"  v-for="(item,index) in friend" @click="to_character(item.person_id)">{{item.person_name}} <span v-if="friend.length > 1"> ;</span></button>
                 </template>
             </div>
 
@@ -301,7 +301,6 @@
         "status|200":200,
         "result|0":0,
     });*/
-
 
     import noumenon_title from '../../../component/noumenon-title.vue';
     import noumenon_button from '../../../component/noumenon-button.vue';
@@ -534,7 +533,7 @@
         text-align: left;
         background-color: transparent;
         border-style: none;
-        width:auto;
+
     }
 
     /*各内容之间的间距*/
@@ -547,6 +546,13 @@
         font-size: 18px;
         font-weight: bold;
         width:100px;
+        display:inline-block;
+    }
+
+    .zxw-info-width{
+        font-size: 18px;
+        font-weight: bold;
+        width:auto;
         display:inline-block;
     }
 
