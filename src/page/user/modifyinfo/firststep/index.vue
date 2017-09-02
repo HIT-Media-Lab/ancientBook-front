@@ -2160,16 +2160,16 @@
                 for (var j = 0; j < this.literature_info.responsibility_infos.length; j++) {
                     delet_responsibility_infos.push(this.three_layers_info.responsibility_infos[j].responsibility_info_id)
                 }
-                for (var k = 0; k < this.variety_item.length; k ++) {
+                for (var k = 0; k < this.variety_item.length; k++) {
                     add_responsibility_infos.push(this.variety_item[k])
                 }
-                for (var m = 0; m < this.edition_item.length; m ++) {
+                for (var m = 0; m < this.edition_item.length; m++) {
                     add_responsibility_infos.push(this.edition_item[m])
                 }
-                for (var n = 0; n < this.impression_item.length; n ++) {
+                for (var n = 0; n < this.impression_item.length; n++) {
                     add_responsibility_infos.push(this.impression_item[n])
                 }
-                for (var o = 0; o < this.copy_item.length; o ++) {
+                for (var o = 0; o < this.copy_item.length; o++) {
                     add_responsibility_infos.push(this.copy_item[o])
                 }
 
@@ -2234,7 +2234,7 @@
                         explain : add_responsibility_infos[p].explain,
                         confirm : add_responsibility_infos[p].confirm,
                         type : add_responsibility_infos[p].type,
-                        level : add_responsibility_infos[p].level,
+                        level : add_responsibility_infos[p].level
                     })
                 }
                 obj.add_responsibility_infos = add_responsibility_infos;
