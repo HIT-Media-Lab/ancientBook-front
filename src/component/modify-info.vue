@@ -34,6 +34,7 @@
                 </header>
                 <div class="dialog-body" slot="body">
                     <div class="j-modify-body">
+                        <p>hhasihsai</p>
                         <div class="j-edit-pwd">
                             <span class="j-edit-pwd-span">用户名：</span>
                             <input type="text" placeholder="请输入您的新用户名" class="j-edit-pwd-input" v-model="new_name" @blur="check()" id="new_name" v-bind:class="{ warnborder: Active1 }">
@@ -219,7 +220,7 @@
                     this.warning = '用户名格式错误';
                     this.Active1 = true;
                 }
-                if(this.new_name == '' || this.old_pwd == '' || this.twi_pwd == '' || this.new_pwd == ''){
+                if(this.new_name == '' && this.old_pwd == '' && this.twi_pwd == '' && this.new_pwd == ''){
                     this.disabled = true;
                 }else {
                     this.disabled = false;

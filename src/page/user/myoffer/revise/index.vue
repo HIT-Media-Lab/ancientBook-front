@@ -14,8 +14,8 @@
                 <tbody>
                 <tr v-for="item in content"> <!--v-for循环数据里的数组数据-->
                     <td class="j-revise-table all-link" style="width: 400px" :title="item.standard_name" @click="go_to_book(item.page_id, item.ancient_book_standard_name)">{{item.ancient_book_standard_name}}</td>
-                    <td class="j-revise-table" style="width: 200px" :title="item.standard_name">{{item.version}}</td>
-                    <td class="j-revise-table" style="width: 200px" :title="item.standard_name">{{item.time}}</td>
+                    <td class="j-revise-table" style="width: 200px" :title="item.version">{{item.version}}</td>
+                    <td class="j-revise-table" style="width: 200px" :title="item.time">{{item.time}}</td>
                 </tr>
                 </tbody>
             </table>

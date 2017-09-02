@@ -25,8 +25,8 @@
                 <tbody>
                 <tr v-for="item in content"> <!--v-for循环数据里的数组数据-->
                     <td class="j-mark-table all-link" style="width: 200px" :title="item.standard_name" @click="go_to_noumenon(item.noumenon_id,item.noumenon_type)">{{item.standard_name}} {{item.noumenon_type}}</td>
-                    <td class="j-mark-table all-link" style="width: 400px" :title="item.standard_name" @click="go_to_book(item.page_id)">{{item.target}}</td>
-                    <td class="j-mark-table " style="width: 200px" :title="item.standard_name">{{item.time}}</td>
+                    <td class="j-mark-table all-link" style="width: 400px" :title="item.target" @click="go_to_book(item.page_id)">{{item.target}}</td>
+                    <td class="j-mark-table " style="width: 200px" :title="item.time">{{item.time}}</td>
                 </tr>
                 </tbody>
             </table>
