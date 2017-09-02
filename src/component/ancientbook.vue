@@ -322,7 +322,6 @@
                 this.page = this.$route.params.page;
                 this.ancient_book_id = this.$route.params.ancient_book_id;
                 this.get_page_id();
-                this.get_page_info();
                 this.get_ancient_books_all_info();
             }
         },
@@ -333,15 +332,11 @@
             this.page = this.$route.params.pageId;
             this.ancient_book_id = this.$route.params.book_name;
             this.get_page_id();
-            this.get_page_info();
             this.get_ancient_books_all_info();
         },
 
         mounted : function () {
             this.change_module();
-            this.get_picture();
-            this.get_text();
-            this.get_edit();
             this.renew_mark();
             this.renew_comment();
         },
@@ -358,6 +353,9 @@
 
             success_get_page_id(response) {
                 this.page_id = response.body.id;
+                this.get_page_info();
+                this.get_picture();
+                this.get_text();
             },
 
             fail_get_page_id() {
@@ -434,6 +432,7 @@
                 }
                 else {
                     this.content = response.body.content;
+                    this.get_edit();
                 }
             },
 
