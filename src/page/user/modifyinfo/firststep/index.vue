@@ -963,6 +963,7 @@
                 console.log ("success get first layer info");
                 this.first_layer_info = response.body;
                 this.create_vresponsibility_info();
+                this.default_selections_variety();
             },
 
             fail_get_first_layer_info() {
