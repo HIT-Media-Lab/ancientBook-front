@@ -330,8 +330,8 @@
         created : function () {
             this.book = this.$route.params.book;
             this.volume = this.$route.params.volume;
-            this.page = this.$route.params.page;
-            this.ancient_book_id = this.$route.params.ancient_book_id;
+            this.page = this.$route.params.pageId;
+            this.ancient_book_id = this.$route.params.book_name;
             this.get_page_id();
             this.get_page_info();
             this.get_ancient_books_all_info();
