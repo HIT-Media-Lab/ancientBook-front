@@ -961,9 +961,11 @@
              */
             success_get_first_layer_info(response) {
                 console.log ("success get first layer info");
+                alert(2);
                 this.first_layer_info = response.body;
+                alert(3);
                 this.create_vresponsibility_info
-
+                alert(4);
             },
 
             fail_get_first_layer_info() {
