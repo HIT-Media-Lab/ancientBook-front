@@ -132,11 +132,18 @@
             <button  class="zxwnoumenom-button zxwdelete-character" @click="open_delete_character()">删除本体</button>
 
         <delete_modal :open_modal="open_modal" :delete_warning="'确认删除本体?'" v-on:close_modal="close_modal" v-on:delete_info="delete_character"></delete_modal>
-        </div>
+
+        <fail_delete :show_info="show_info" v-on:close_modal="close_fail_delete"></fail_delete>
+    </div>
 </template>
 
 <script>
     /*let Mock = require('mockjs');
+
+    Mock.mock('/ancient_books/getToken.action','get', {
+        "token|100":100,
+    });
+
      //显示用户列表
      Mock.mock('/ancient_books/get_person_by_id.action?id=1','get',{
      "status|200":200,
@@ -292,13 +299,14 @@
 
     Mock.mock('/ancient_books/delete_person_by_id.action','post', {
         "status|200":200,
-        "result|1":1,
+        "result|0":0,
     });*/
 
 
     import noumenon_title from '../../../component/noumenon-title.vue';
     import noumenon_button from '../../../component/noumenon-button.vue';
-    import delete_modal from '../../../component/delete_modal.vue'
+    import delete_modal from '../../../component/delete_modal.vue';
+    import fail_delete from '../../../component/fail_delete_noumenon.vue';
     export default{
         created(){
             this.person_info();
@@ -306,10 +314,12 @@
         components:{
             noumenon_title,
             noumenon_button,
-            delete_modal
+            delete_modal,
+            fail_delete
         },
         data(){
             return{
+                show_info:false,
                 char_number:1,
                 title:'',
                 get_person_url:'/ancient_books/get_person_by_id.action',
@@ -324,7 +334,6 @@
                 teacher:[],
                 student:[],
                 friend:[],
-                show_info:false,
                 delete_info:'',
                 open_modal:false
             }
@@ -480,13 +489,12 @@
             },
 
             success_delete(response){
-                if(response.body.result === 1){
-                    this.$router.push({path:'/noumenon'});
-                }
+                this.$router.push({path:'/noumenon'});
             },
 
             fail_delete(response){
-                console.log("删除人物本体失败");
+                this.open_modal = false;
+                this.show_info = true;
             },
 
             to_character(p){
@@ -499,6 +507,10 @@
 
             go_dead_time(){
                 this.$router.push({name:'time_detail',params:{nouId:this.person_content.death_time_id}});
+            },
+
+            close_fail_delete(){
+                this.show_info = false;
             }
         }
     }
@@ -522,6 +534,7 @@
         text-align: left;
         background-color: transparent;
         border-style: none;
+        width:auto;
     }
 
     /*各内容之间的间距*/

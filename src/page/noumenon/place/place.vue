@@ -82,6 +82,7 @@
         <button  class="zxwnoumenom-button zxwdelete-character" @click="open_delete_place()">删除本体</button>
 
         <delete_modal :open_modal="open_modal" :delete_warning="'确认删除本体?'" v-on:close_modal="close_modal" v-on:delete_info="delete_place"></delete_modal>
+        <fail_delete :show_info="show_info" v-on:close_modal="close_fail_delete"></fail_delete>
     </div>
 </template>
 
@@ -161,11 +162,10 @@
 
     });*/
 
-
-
     import noumenon_title from '../../../component/noumenon-title.vue';
     import noumenon_button from '../../../component/noumenon-button.vue';
     import delete_modal from '../../../component/delete_modal.vue';
+    import fail_delete from '../../../component/fail_delete_noumenon.vue';
     export default{
         created(){
             this.place_info();
@@ -173,7 +173,8 @@
         components:{
             noumenon_title,
             noumenon_button,
-            delete_modal
+            delete_modal,
+            fail_delete
         },
         data(){
             return{
@@ -293,13 +294,12 @@
             },
 
             success_delete(response){
-                if(response.body.result === 1){
-                    this.$router.push({path:'/noumenon'});
-                }
+                this.$router.push({path:'/noumenon'});
             },
 
             fail_delete(response){
-                console.log("")
+                this.open_modal = false;
+                this.show_info = true;
             },
 
             to_place(p){
@@ -320,6 +320,10 @@
 
             go_l_location(){
                 this.$router.push({name:'pla_detail',params:{nouId:this.location_content.l_location_id}});
+            },
+
+            close_fail_delete(){
+                this.show_info = false;
             }
         }
     }

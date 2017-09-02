@@ -15,7 +15,6 @@
 
 <script>
     import modal from './modal.vue';
-    import store from '../store/index';
     export default{
         created(){
             this.$store.commit('change_fork',false)

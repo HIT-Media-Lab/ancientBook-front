@@ -71,6 +71,7 @@
         <button  class="zxwnoumenom-button zxwdelete-character" @click="open_delete_off()">删除本体</button>
 
         <delete_modal :open_modal="open_modal" :delete_warning="'确认删除本体?'" v-on:close_modal="close_modal" v-on:delete_info="delete_off"></delete_modal>
+        <fail_delete :show_info="show_info" v-on:close_modal="close_fail_delete"></fail_delete>
     </div>
 </template>
 
@@ -127,6 +128,7 @@
     import noumenon_title from '../../../component/noumenon-title.vue';
     import noumenon_button from '../../../component/noumenon-button.vue';
     import delete_modal from '../../../component/delete_modal.vue';
+    import fail_delete from '../../../component/fail_delete_noumenon.vue';
     export default{
         created(){
             this.off_info();
@@ -134,7 +136,8 @@
         components:{
             noumenon_title,
             noumenon_button,
-            delete_modal
+            delete_modal,
+            fail_delete
         },
         data(){
             return{
@@ -274,7 +277,8 @@
             },
 
             fail_delete(response){
-                console.log("删除本体失败");
+                this.open_modal = false;
+                this.show_info = true;
             },
 
             /*上级职官*/
@@ -293,6 +297,10 @@
 
             go_end_time(){
                 this.$router.push({name:'time_detail',params:{nouId:this.off_content.end_time_id}});
+            },
+
+            close_fail_delete(){
+                this.show_info = false;
             }
         }
     }

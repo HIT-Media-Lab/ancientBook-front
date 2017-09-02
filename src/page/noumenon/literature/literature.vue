@@ -75,6 +75,7 @@
         <button  class="zxwnoumenom-button zxw-lit-delete" @click="open_delete_lit()">删除本体</button>
 
         <delete_modal :open_modal="open_modal" :delete_warning="'确认删除本体?'" v-on:close_modal="close_modal" v-on:delete_info="delete_lit"></delete_modal>
+        <fail_delete :show_info="show_info" v-on:close_modal="close_fail_delete"></fail_delete>
     </div>
 </template>
 
@@ -149,6 +150,7 @@
     import noumenon_title from '../../../component/noumenon-title.vue';
     import noumenon_button from '../../../component/noumenon-button.vue';
     import delete_modal from '../../../component/delete_modal.vue';
+    import fail_delete from '../../../component/fail_delete_noumenon.vue';
     export default{
         created(){
             this.show_lit();
@@ -157,11 +159,13 @@
         components:{
             noumenon_title,
             noumenon_button,
-            delete_modal
+            delete_modal,
+            fail_delete
         },
 
         data(){
             return{
+                show_info:false,
                 lit_url:'/ancient_books/get_literature_by_id.action',
                 delete_lit_url:'/ancient_books/delete_literature_by_id.action',
                 standard_name:'',
@@ -179,11 +183,11 @@
             }
         },
 
-        methods:{
+        methods: {
             show_lit(){
                 let object = {};
-                let new_url = this.lit_url+'?id='+this.$route.params.nouId;
-                this.http_json(new_url,'get',object,this.success_lit,this.fail_lit);
+                let new_url = this.lit_url + '?id=' + this.$route.params.nouId;
+                this.http_json(new_url, 'get', object, this.success_lit, this.fail_lit);
             },
 
             success_lit(response){
@@ -197,8 +201,8 @@
                 this.type_lei_name = response.body.type_lei_name;
                 this.type_shu_name = response.body.type_shu_name;
                 this.type_summary = response.body.type_summary;
-                if(response.body.responsibility_infos.length > 0){
-                    for(let i = 0; i < response.body.responsibility_infos.length; i++){
+                if (response.body.responsibility_infos.length > 0) {
+                    for (let i = 0; i < response.body.responsibility_infos.length; i++) {
                         this.responsibility_infos.push(
                             response.body.responsibility_infos[i]
                         );
@@ -221,21 +225,21 @@
             delete_lit(){
                 let delete_object = {};
                 delete_object.id = this.$route.params.nouId;
-                this.http_json(this.delete_lit_url,'post',delete_object,this.success_delete,this.fail_delete);
+                this.http_json(this.delete_lit_url, 'post', delete_object, this.success_delete, this.fail_delete);
             },
 
             success_delete(response){
-                if(response.body.result === 1){
-                    this.$router.push({path:'/noumenon'});
-                }
+                this.$router.push({path: '/noumenon'});
             },
 
             fail_delete(response){
-                console.log("删除本体失败")
+                this.open_modal = false;
+                this.show_info = true;
             },
 
-
-
+            close_fail_delete(){
+                this.show_info = false;
+            }
         }
     }
 </script>
