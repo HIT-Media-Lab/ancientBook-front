@@ -1561,9 +1561,10 @@
              */
             create_vresponsibility_info() {
                 var vm = this;
+                var i = 0;
 
                 var length1 = vm.first_layer_info.responsibility_infos.length;
-                for (var i = 0; i < length1 - 1; i++) {
+                for (; i < length1 - 1; i++) {
                     vm.variety_item.push({
                         order : vm.first_layer_info.responsibility_infos[i].order,
                         location_id : vm.first_layer_info.responsibility_infos[i].location_id,
@@ -1582,23 +1583,27 @@
                         value_del : false,
                     });
                 }
-                vm.variety_item.push({
-                    order : vm.first_layer_info.responsibility_infos[i].order,
-                    location_id : vm.first_layer_info.responsibility_infos[i].location_id,
-                    location_name : vm.first_layer_info.responsibility_infos[i].location_name,
-                    name_id : vm.first_layer_info.responsibility_infos[i].name_id,
-                    name_name : vm.first_layer_info.responsibility_infos[i].name_name,
-                    begin_time_id : vm.first_layer_info.responsibility_infos[i].begin_time_id,
-                    begin_time_name : vm.first_layer_info.responsibility_infos[i].begin_time_name,
-                    end_time_id : vm.first_layer_info.responsibility_infos[i].end_time_id,
-                    end_time_name : vm.first_layer_info.responsibility_infos[i].end_time_name,
-                    explain : vm.first_layer_info.responsibility_infos[i].explain,
-                    action : document.getElementsByClassName("ry-v-action")[i].selectedIndex,
-                    confirm : document.getElementsByClassName("ry-v-confirm")[i].selectedIndex,
-                    type : document.getElementsByClassName("ry-v-type")[i].selectedIndex,
-                    value_add : true,
-                    value_del : true,
-                });
+                if (i == length1 - 1) {
+                    vm.variety_item.push({
+                        order : vm.first_layer_info.responsibility_infos[i].order,
+                        location_id : vm.first_layer_info.responsibility_infos[i].location_id,
+                        location_name : vm.first_layer_info.responsibility_infos[i].location_name,
+                        name_id : vm.first_layer_info.responsibility_infos[i].name_id,
+                        name_name : vm.first_layer_info.responsibility_infos[i].name_name,
+                        begin_time_id : vm.first_layer_info.responsibility_infos[i].begin_time_id,
+                        begin_time_name : vm.first_layer_info.responsibility_infos[i].begin_time_name,
+                        end_time_id : vm.first_layer_info.responsibility_infos[i].end_time_id,
+                        end_time_name : vm.first_layer_info.responsibility_infos[i].end_time_name,
+                        explain : vm.first_layer_info.responsibility_infos[i].explain,
+                        action : document.getElementsByClassName("ry-v-action")[i].selectedIndex,
+                        confirm : document.getElementsByClassName("ry-v-confirm")[i].selectedIndex,
+                        type : document.getElementsByClassName("ry-v-type")[i].selectedIndex,
+                        value_add : true,
+                        value_del : true,
+                    });
+                    alert(1);
+                    console.log(vm.variety_item)
+                }
             },
 
             create_3responsibility_info() {
