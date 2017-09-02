@@ -233,12 +233,12 @@
                                 <div class="col-md-2">
                                     <label>责任开始时间:</label>
                                 </div>
-                                <div class="col-md-4">{{item.begin_time_name}}</div>
+                                <div class="col-md-4">{{item.begin_time}}</div>
 
                                 <div class="col-md-2">
                                     <label>责任结束时间:</label>
                                 </div>
-                                <div class="col-md-4">{{item.end_time_name}}</div>
+                                <div class="col-md-4">{{item.end_time}}</div>
                             </div>
 
                             <div class="row">
@@ -248,7 +248,7 @@
                                 <div class="col-md-2">
                                     <label>责任者名称:</label>
                                 </div>
-                                <div class="col-md-4">{{item.name_name}}</div>
+                                <div class="col-md-4">{{item.name}}</div>
                             </div>
 
                             <div class="row">
@@ -305,12 +305,12 @@
                                 <div class="col-md-2">
                                     <label>责任开始时间:</label>
                                 </div>
-                                <div class="col-md-4">{{item.begin_time_name}}</div>
+                                <div class="col-md-4">{{item.begin_time}}</div>
 
                                 <div class="col-md-2">
                                     <label>责任结束时间:</label>
                                 </div>
-                                <div class="col-md-4">{{item.end_time_name}}</div>
+                                <div class="col-md-4">{{item.end_time}}</div>
                             </div>
 
                             <div class="row">
@@ -320,7 +320,7 @@
                                 <div class="col-md-2">
                                     <label>责任者名称:</label>
                                 </div>
-                                <div class="col-md-4">{{item.name_name}}</div>
+                                <div class="col-md-4">{{item.name}}</div>
                             </div>
 
                             <div class="row">
@@ -384,12 +384,12 @@
                                 <div class="col-md-2">
                                     <label>责任开始时间:</label>
                                 </div>
-                                <div class="col-md-4">{{item.begin_time_name}}</div>
+                                <div class="col-md-4">{{item.begin_time}}</div>
 
                                 <div class="col-md-2">
                                     <label>责任结束时间:</label>
                                 </div>
-                                <div class="col-md-4">{{item.end_time_name}}</div>
+                                <div class="col-md-4">{{item.end_time}}</div>
                             </div>
 
                             <div class="row">
@@ -399,7 +399,7 @@
                                 <div class="col-md-2">
                                     <label>责任者名称:</label>
                                 </div>
-                                <div class="col-md-4">{{item.name_name}}</div>
+                                <div class="col-md-4">{{item.name}}</div>
                             </div>
 
                             <div class="row">
