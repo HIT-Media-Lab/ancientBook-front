@@ -1602,75 +1602,108 @@
 
                 var length2 = vm.edition_responsibility.length;
                 for (; j < length2 - 1; j++) {
-                    vm.variety_item.push({
-                        order : vm.first_layer_info.responsibility_infos[i].order,
-                        location_id : vm.first_layer_info.responsibility_infos[i].location_id,
-                        location_name : vm.first_layer_info.responsibility_infos[i].location_name,
-                        name_id : vm.first_layer_info.responsibility_infos[i].name_id,
-                        name_name : vm.first_layer_info.responsibility_infos[i].name_name,
-                        begin_time_id : vm.first_layer_info.responsibility_infos[i].begin_time_id,
-                        begin_time_name : vm.first_layer_info.responsibility_infos[i].begin_time_name,
-                        end_time_id : vm.first_layer_info.responsibility_infos[i].end_time_id,
-                        end_time_name : vm.first_layer_info.responsibility_infos[i].end_time_name,
-                        explain : vm.first_layer_info.responsibility_infos[i].explain,
+                    vm.edition_item.push({
+                        order : vm.edition_responsibility[j].order,
+                        location_id : vm.edition_responsibility[j].location_id,
+                        location_name : vm.edition_responsibility[j].location_name,
+                        name_id : vm.edition_responsibility[j].name_id,
+                        name_name : vm.edition_responsibility[j].name_name,
+                        begin_time_id : vm.edition_responsibility[j].begin_time_id,
+                        begin_time_name : vm.edition_responsibility[j].begin_time_name,
+                        end_time_id : vm.edition_responsibility[j].end_time_id,
+                        end_time_name : vm.edition_responsibility[j].end_time_name,
+                        explain : vm.edition_responsibility[j].explain,
                         value_add : false,
                         value_del : false,
                     });
-
-                    vm.edition_item[j].order = vm.edition_responsibility[j].order;
-                    vm.edition_item[j].location_name = vm.edition_responsibility[j].location_name;
-                    vm.edition_item[j].name_name = vm.edition_responsibility[j].name_name;
-                    vm.edition_item[j].begin_time_name = vm.edition_responsibility[j].begin_time_name;
-                    vm.edition_item[j].end_time_name = vm.edition_responsibility[j].end_time_name;
-                    vm.edition_item[j].explain = vm.edition_responsibility[j].explain;
-                    vm.edition_item[j].value_add = false;
-                    vm.edition_item[j].value_del = false;
                 }
-                vm.edition_item[length2 - 1].location_name = vm.edition_responsibility[length2 - 1].location_name;
-                vm.edition_item[length2 - 1].name_name = vm.edition_responsibility[length2 - 1].name_name;
-                vm.edition_item[length2 - 1].begin_time_name = vm.edition_responsibility[length2 - 1].begin_time_name;
-                vm.edition_item[length2 - 1].end_time_name = vm.edition_responsibility[length2 - 1].end_time_name;
-                vm.edition_item[length2 - 1].explain = vm.edition_responsibility[length2 - 1].explain;
-                vm.edition_item[length2 - 1].value_add = true;
-                vm.edition_item[length2 - 1].value_del = true;
+
+                if (j == length2 - 1) {
+                    vm.edition_item.push({
+                        order : vm.edition_responsibility[j].order,
+                        location_id : vm.edition_responsibility[j].location_id,
+                        location_name : vm.edition_responsibility[j].location_name,
+                        name_id : vm.edition_responsibility[j].name_id,
+                        name_name : vm.edition_responsibility[j].name_name,
+                        begin_time_id : vm.edition_responsibility[j].begin_time_id,
+                        begin_time_name : vm.edition_responsibility[j].begin_time_name,
+                        end_time_id : vm.edition_responsibility[j].end_time_id,
+                        end_time_name : vm.edition_responsibility[j].end_time_name,
+                        explain : vm.edition_responsibility[j].explain,
+                        value_add : true,
+                        value_del : true,
+                    });
+                }
 
                 var length3 = vm.impression_responsibility.length;
                 for (; k < length3 - 1; k++) {
-                    vm.impression_item[k].order = vm.impression_responsibility[k].order;
-                    vm.impression_item[k].location_name = vm.impression_responsibility[k].location_name;
-                    vm.impression_item[k].name_name = vm.impression_responsibility[k].name_name;
-                    vm.impression_item[k].begin_time_name = vm.impression_responsibility[k].begin_time_name;
-                    vm.impression_item[k].end_time_name = vm.impression_responsibility[k].end_time_name;
-                    vm.impression_item[k].explain = vm.impression_responsibility[k].explain;
-                    vm.impression_item[k].value_add = false;
-                    vm.impression_item[k].value_del = false;
+                    vm.impression_item.push({
+                        order : vm.impression_responsibility[k].order,
+                        location_id : vm.impression_responsibility[k].location_id,
+                        location_name : vm.impression_responsibility[k].location_name,
+                        name_id : vm.impression_responsibility[k].name_id,
+                        name_name : vm.impression_responsibility[k].name_name,
+                        begin_time_id : vm.impression_responsibility[k].begin_time_id,
+                        begin_time_name : vm.impression_responsibility[k].begin_time_name,
+                        end_time_id : vm.impression_responsibility[k].end_time_id,
+                        end_time_name : vm.impression_responsibility[k].end_time_name,
+                        explain : vm.impression_responsibility[k].explain,
+                        value_add : false,
+                        value_del : false,
+                    });
                 }
-                vm.impression_item[length3 - 1].location_name = vm.impression_responsibility[length3 - 1].location_name;
-                vm.impression_item[length3 - 1].name_name = vm.impression_responsibility[length3 - 1].name_name;
-                vm.impression_item[length3 - 1].begin_time_name = vm.impression_responsibility[length3 - 1].begin_time_name;
-                vm.impression_item[length3 - 1].end_time_name = vm.impression_responsibility[length3 - 1].end_time_name;
-                vm.impression_item[length3 - 1].explain = vm.impression_responsibility[length3 - 1].explain;
-                vm.impression_item[length3 - 1].value_add = true;
-                vm.impression_item[length3 - 1].value_del = true;
+
+                if (k == length3 - 1) {
+                    vm.impression_item.push({
+                        order : vm.impression_responsibility[k].order,
+                        location_id : vm.impression_responsibility[k].location_id,
+                        location_name : vm.impression_responsibility[k].location_name,
+                        name_id : vm.impression_responsibility[k].name_id,
+                        name_name : vm.impression_responsibility[k].name_name,
+                        begin_time_id : vm.impression_responsibility[k].begin_time_id,
+                        begin_time_name : vm.impression_responsibility[k].begin_time_name,
+                        end_time_id : vm.impression_responsibility[k].end_time_id,
+                        end_time_name : vm.impression_responsibility[k].end_time_name,
+                        explain : vm.impression_responsibility[k].explain,
+                        value_add : true,
+                        value_del : true,
+                    });
+                }
 
                 var length4 = vm.copy_responsibility.length;
                 for (; m < length4 - 1; m++) {
-                    vm.copy_item[m].order = vm.copy_responsibility[m].order;
-                    vm.copy_item[m].location_name = vm.copy_responsibility[m].location_name;
-                    vm.copy_item[m].name_name = vm.copy_responsibility[m].name_name;
-                    vm.copy_item[m].begin_time_name = vm.copy_responsibility[m].begin_time_name;
-                    vm.copy_item[m].end_time_name = vm.copy_responsibility[m].end_time_name;
-                    vm.copy_item[m].explain = vm.copy_responsibility[m].explain;
-                    vm.copy_item[m].value_add = false;
-                    vm.copy_item[m].value_del = false;
+                    vm.copy_item.push({
+                        order : vm.copy_responsibility[m].order,
+                        location_id : vm.copy_responsibility[m].location_id,
+                        location_name : vm.copy_responsibility[m].location_name,
+                        name_id : vm.copy_responsibility[m].name_id,
+                        name_name : vm.copy_responsibility[m].name_name,
+                        begin_time_id : vm.copy_responsibility[m].begin_time_id,
+                        begin_time_name : vm.copy_responsibility[m].begin_time_name,
+                        end_time_id : vm.copy_responsibility[m].end_time_id,
+                        end_time_name : vm.copy_responsibility[m].end_time_name,
+                        explain : vm.copy_responsibility[m].explain,
+                        value_add : false,
+                        value_del : false,
+                    });
                 }
-                vm.copy_item[length4 - 1].location_name = vm.copy_responsibility[length4 - 1].location_name;
-                vm.copy_item[length4 - 1].name_name = vm.copy_responsibility[length4 - 1].name_name;
-                vm.copy_item[length4 - 1].begin_time_name = vm.copy_responsibility[length4 - 1].begin_time_name;
-                vm.copy_item[length4 - 1].end_time_name = vm.copy_responsibility[length4 - 1].end_time_name;
-                vm.copy_item[length4 - 1].explain = vm.copy_responsibility[length4 - 1].explain;
-                vm.copy_item[length4 - 1].value_add = true;
-                vm.copy_item[length4 - 1].value_del = true;
+
+                if (m == length4 - 1) {
+                    vm.copy_item.push({
+                        order : vm.copy_responsibility[k].order,
+                        location_id : vm.copy_responsibility[k].location_id,
+                        location_name : vm.copy_responsibility[k].location_name,
+                        name_id : vm.copy_responsibility[k].name_id,
+                        name_name : vm.copy_responsibility[k].name_name,
+                        begin_time_id : vm.copy_responsibility[k].begin_time_id,
+                        begin_time_name : vm.copy_responsibility[k].begin_time_name,
+                        end_time_id : vm.copy_responsibility[k].end_time_id,
+                        end_time_name : vm.copy_responsibility[k].end_time_name,
+                        explain : vm.copy_responsibility[k].explain,
+                        value_add : true,
+                        value_del : true,
+                    });
+                }
             },
 
 

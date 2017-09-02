@@ -60,7 +60,7 @@
                         <span class="col-md-5"><img src="../../../../assets/img/no-use-picture/1.png" height="40" width="30"/>{{item.pic_name}}</span>
                         <span class="col-md-3">{{item.pic_size}}KB</span>
                         <span class="col-md-2">册1</span>
-                        <span class="col-md-2"><img src="../../../../assets/img/no-use-picture/correct.png" height="25" width="26"/>已上传</span>
+                        <span class="col-md-2"><img src="../../../../assets/img/no-use-picture/correct.png" height="25" width="26"/>已添加</span>
                         <img src="../../../../assets/img/no-use-picture/ink-line.png" height="1" width="750"/>
                     </div>
 
