@@ -494,6 +494,21 @@
 
 
             /**
+             * base64转换二进制
+             */
+            dataURItoBlob(dataURI) {
+                var byteString = atob(dataURI.split(',')[1]);
+                var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+                var ab = new ArrayBuffer(byteString.length);
+                var ia = new Uint8Array(ab);
+                for (var i = 0; i < byteString.length; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                }
+                return new Blob([ab], {type: mimeString});
+            },
+
+
+            /**
              * post上传请求
              */
             complete_upload() {
@@ -619,6 +634,8 @@
                         for (vm.post_index2 = 0; vm.post_index2 < vm.upload_file[vm.post_index1].images.length; vm.post_index2++) {
                             var upload_picture_obj = new FormData;
 
+                            var blob = dataURItoBlob(vm.upload_file[vm.post_index1].images[vm.post_index2].picture);
+
                             var name = vm.upload_file[vm.post_index1].images[vm.post_index2].pic_name;
                             var first = name.charAt(1);
                             var second = name.charAt(2);
@@ -630,7 +647,7 @@
                             upload_picture_obj.append('book' , vm.post_index1 + 1);
                             upload_picture_obj.append('volume' , volume);
                             upload_picture_obj.append('page' , vm.post_index2 + 1);
-                            upload_picture_obj.append('picture' , vm.upload_file[vm.post_index1].images[vm.post_index2].picture);
+                            upload_picture_obj.append('picture' , blob);
                             upload_picture_obj.append('content' , vm.upload_file[vm.post_index1].texts[vm.post_index2]);
                             upload_picture_obj.append('book_name' , vm.upload_file[vm.post_index1].book_name);
 
