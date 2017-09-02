@@ -706,6 +706,7 @@
             },
 
             success_post_picture(response) {
+                var vm = this;
                 if (response.body.result === 1) {
                     console.log("success upload picture!");
                     if (vm.post_index1 == vm.upload_file.length - 1 && vm.post_index2 == vm.upload_file[vm.upload_file.length - 1].images.length - 1) {
