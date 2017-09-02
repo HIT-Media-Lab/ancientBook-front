@@ -351,7 +351,7 @@
              * 获取page_id
              */
             get_page_id() {
-                var url = '/ancient_books/get_page_id_by_jcy.action?book=' + this.book + '&&volume=' + this.volume + '&&page=' + this.page + '&&ancient_book_id' + this.ancient_book_id;
+                var url = '/ancient_books/get_page_id_by_jcy.action?book=' + this.book + '&&volume=' + this.volume + '&&page=' + this.page + '&&ancient_book_id=' + this.ancient_book_id;
                 var get_page_id = '';
                 this.http_json (url , 'get' , get_page_id , this.success_get_page_id , this.fail_get_page_id);
             },
