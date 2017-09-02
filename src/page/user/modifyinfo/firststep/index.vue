@@ -964,7 +964,7 @@
                 alert(2);
                 this.first_layer_info = response.body;
                 alert(3);
-                this.create_vresponsibility_info
+                this.create_vresponsibility_info;
                 alert(4);
             },
 
@@ -1561,6 +1561,7 @@
                 var vm = this;
                 var i = 0;
 
+                alert(5);
                 var length1 = vm.first_layer_info.responsibility_infos.length;
                 for (; i < length1 - 1; i++) {
                     vm.variety_item.push({
@@ -1581,6 +1582,8 @@
                         value_del : false,
                     });
                 }
+                alert(6);
+                alert(i);
                 if (i == length1 - 1) {
                     vm.variety_item.push({
                         order : vm.first_layer_info.responsibility_infos[i].order,
