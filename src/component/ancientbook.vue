@@ -354,6 +354,8 @@
                 this.get_page_info();
                 this.get_picture();
                 this.get_text();
+                this.get_comment();
+                this.get_mark();
             },
 
             fail_get_page_id() {
@@ -429,9 +431,7 @@
                     console.log("没有返回文本");
                 }
                 else {
-                    alert(1);
                     this.content = response.body.content;
-                    alert(this.content);
                     this.get_edit();
                     this.renew_mark();
                     this.renew_comment();
@@ -455,10 +455,10 @@
                 console.log("success get comments");
                 //将后端数据显示在前端页面里
                 if( response.body.length === 0) {
-                    console.log("没有返回数组！");
+                    console.log("返回空批注数组！");
                 }
                 else {
-                    for (var i = 0; i <= response.body.length-1; i++) {
+                    for (var i = 0; i <= response.body.length - 1; i++) {
                         this.comment.push({
                             id_comment: response.body[i].id,
                             target_comment: response.body[i].target,
@@ -1377,13 +1377,13 @@
                         span.setAttribute("id", i);
                         span.setAttribute("class", "id=M" + this.mark[jtemp].id_mark + " " + this.mark[jtemp].noumenon_type);
                         text_mark.appendChild(span);
-                    }
-                    var has = span.hasAttribute("class");
-                    if (index == 0 && has == true) {
-                        span.setAttribute("class", "ry-mark id=M" + this.mark[jtemp].id_mark + " " + this.mark[jtemp].noumenon_type);
-                    }
-                    if (index == this.mark[jtemp].noumenon_type && has == true) {
-                        span.setAttribute("class", "ry-mark id=M" + this.mark[jtemp].id_mark + " " + this.mark[jtemp].noumenon_type);
+                        var has = span.hasAttribute("class");
+                        if (index == 0 && has == true) {
+                            span.setAttribute("class", "ry-mark id=M" + this.mark[jtemp].id_mark + " " + this.mark[jtemp].noumenon_type);
+                        }
+                        else if (index == this.mark[jtemp].noumenon_type && has == true) {
+                            span.setAttribute("class", "ry-mark id=M" + this.mark[jtemp].id_mark + " " + this.mark[jtemp].noumenon_type);
+                        }
                     }
                 }
             },
