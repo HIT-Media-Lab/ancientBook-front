@@ -546,7 +546,7 @@
                 this.http_json (url , 'get' , this.noumenon_search_obj , this.success_get_noumenon_search , this.fail_get_noumenon_search);
             },
 
-            success_get_noumenon_search() {
+            success_get_noumenon_search(response) {
                 console.log ("success get noumenon search ");
                 //将后端数据显示在前端页面里
                 if (response.body.content.length !== 0) {
