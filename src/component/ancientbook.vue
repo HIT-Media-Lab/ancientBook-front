@@ -1444,7 +1444,7 @@
                 for (var i = 0; i < this.comment.length; i++) {
                     //依次获得每条批注碎片文字
                     var comments = text_edit.getElementsByClassName("id=C" + this.comment[i].id_comment);
-                    if (comment.length != 0) {
+                    if (comments.length != 0) {
                         //初始化每条批注内容
                         text = '';
                         var id = comments[0].getAttribute("id");
