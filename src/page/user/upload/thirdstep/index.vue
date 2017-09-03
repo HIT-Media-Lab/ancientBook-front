@@ -281,7 +281,7 @@
                 var leng = file.length;
                 for (var i = 0; i < leng; i++) {
                     var reader = new FileReader();
-                    reader.readAsText(file[i],'gbk');
+                    reader.readAsText(file[i],'utf-8');
                     reader.onload = function(e) {
                         vm.$set(vm.texts,vm.index,e.target.result);
                     };
@@ -394,7 +394,7 @@
                 var leng = file.length;
                 for (var i = 0; i < leng; i++) {
                     var reader = new FileReader();
-                    reader.readAsText(file[i],'gbk');
+                    reader.readAsText(file[i],'utf-8');
                     reader.onload = function(e) {
                         vm.texts.push(e.target.result);
                     };

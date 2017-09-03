@@ -302,7 +302,7 @@
                 for (var i = 0; i < leng; i++) {
                     var　name_check = 0;
                     var reader = new FileReader();
-                    reader.readAsText(file[i],'gbk');
+                    reader.readAsText(file[i],'utf-8');
 
                     var name = file[i].name;
                     var first = name.charAt(1);
