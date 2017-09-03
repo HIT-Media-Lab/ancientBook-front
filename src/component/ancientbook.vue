@@ -257,7 +257,7 @@
                 book_all_info : {},
 
                 get_comment_obj : {},
-                comment : [{id_comment:"654654",target_comment:"露为霜。",begin_comment:6,end_comment:10,content_comment:"123123"},{id_comment:"321321",target_comment:"，在水一",begin_comment:14,end_comment:18,content_comment:"456456"}],
+                comment : [],
                 id_comment : '',
                 target_comment : '',
                 begin_comment : '',
@@ -265,7 +265,7 @@
                 content_comment : '',
 
                 get_mark_obj : {},
-                mark : [{id_mark:"123123",target_mark:"，白露为",begin_mark:4,end_mark:8,noumenon_type:1},{id_mark:"456456",target_mark:"伊人，在",begin_mark:12,end_mark:16,noumenon_type:2}],
+                mark : [],
 
                 get_edit_record_obj : {},
                 page_count_edit_record : 1,
@@ -454,7 +454,7 @@
             success_get_comment(response) {
                 console.log("success get comments");
                 //将后端数据显示在前端页面里
-                if( response.body.length === 0) {
+                if (response.body.length === 0) {
                     console.log("返回空批注数组！");
                 }
                 else {
@@ -486,11 +486,11 @@
             success_get_mark(response) {
                 console.log("success get marks ");
                 //将后端数据显示在前端页面里
-                if( response.body.content.length === 0) {
-                    console.log("没有返回数组！");
+                if (response.body.length === 0) {
+                    console.log("返回空标记数组！");
                 }
                 else {
-                    for (var i = 0; i <= response.body.length-1; i++) {
+                    for (var i = 0; i <= response.body.length - 1; i++) {
                         this.mark.push({
                             id_mark: response.body[i].id,
                             noumenon_type: response.body[i].noumenon_type,
