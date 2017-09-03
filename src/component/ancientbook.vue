@@ -431,7 +431,9 @@
                     console.log("没有返回文本");
                 }
                 else {
+                    alert(1);
                     this.content = response.body.content;
+                    alert(this.content);
                     this.get_edit();
                 }
             },
