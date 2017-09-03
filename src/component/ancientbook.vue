@@ -1280,6 +1280,7 @@
                         }
                     }
                     var text_comment = document.getElementById("text-comment");
+                    text_comment.innerHTML = '';
                     //该字不是批注
                     if (a == 0) {
                         var span1 = document.createElement("span");
@@ -1333,6 +1334,7 @@
                         }
                     }
                     var text_mark = document.getElementById("text-mark");
+                    text_mark.innerHTML = '';
                     var span = document.createElement("span");
                     var text = document.createTextNode(p);
                     //该字不是标记
