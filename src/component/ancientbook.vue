@@ -583,7 +583,7 @@
             success_post_edit(response) {
                 if (response.body.result === 1) {
                     console.log ("success edit!");
-                    window.location.reload();   //  重新加载
+                    this.get_page_id();   //  重新加载
                 }
             },
 
@@ -607,7 +607,6 @@
 
             success_update_cm(response) {
                 if (response.body.result === 1) {
-                    alert("修订成功");
                     console.log("success update CM!");
                     this.post_edit();    //  修改古籍文本内容请求
                 }
@@ -633,12 +632,8 @@
 
             success_add_comment(response) {
                 if (response.body.result === 1) {
-                    alert("添加批注成功");
                     console.log("success add comment!");
-                }
-                else if (response.body.result === 0) {
-                    alert("添加批注失败");
-                    console.log("fail add comment");
+                    this.get_page_id();
                 }
             },
 
@@ -665,9 +660,7 @@
             success_add_mark(response) {
                 if (response.body.result === 1) {
                     console.log("success add mark!");
-                }
-                else if (response.body.result === 0) {
-                    console.log("fail add mark");
+                    this.get_page_id();
                 }
             },
 
@@ -687,9 +680,7 @@
             success_delete_mark(response) {
                 if (response.body.result === 1) {
                     console.log("success delete mark!");
-                }
-                else if (response.body.result === 0) {
-                    console.log("fail delete mark");
+                    this.get_page_id();
                 }
             },
 
@@ -708,13 +699,8 @@
 
             success_delete_comment(response) {
                 if (response.body.result === 1) {
-                    alert("删除成功");
                     console.log("success delete comment!");
-                    window.location.reload();
-                }
-                else if (response.body.result === 0) {
-                    alert("删除失败");
-                    console.log("fail delete comment");
+                    this.get_page_id();
                 }
             },
 
