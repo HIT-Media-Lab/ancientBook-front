@@ -257,7 +257,7 @@
                 book_all_info : {},
 
                 get_comment_obj : {},
-                comment : [],
+                comment : [{id_comment:"654654",target_comment:"露为霜。",begin_comment:6,end_comment:10,content_comment:"123123"},{id_comment:"321321",target_comment:"，在水一",begin_comment:14,end_comment:18,content_comment:"456456"}],
                 id_comment : '',
                 target_comment : '',
                 begin_comment : '',
@@ -265,7 +265,7 @@
                 content_comment : '',
 
                 get_mark_obj : {},
-                mark : [],
+                mark : [{id_mark:"123123",target_mark:"，白露为",begin_mark:4,end_mark:8,noumenon_type:1},{id_mark:"456456",target_mark:"伊人，在",begin_mark:12,end_mark:16,noumenon_type:2}],
 
                 get_edit_record_obj : {},
                 page_count_edit_record : 1,
@@ -1474,7 +1474,7 @@
                 for (var i = 0; i < this.comment.length; i++) {
                     //依次获得每条批注碎片文字
                     var comments = text_edit.getElementsByClassName("id=C" + this.comment[i].id_comment);
-                    if (comments.length != 0) {
+                    if (comment.length != 0) {
                         //初始化每条批注内容
                         text = '';
                         var id = comments[0].getAttribute("id");
