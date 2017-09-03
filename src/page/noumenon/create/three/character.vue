@@ -400,12 +400,12 @@
 
             /*查看母亲*/
             show_tooltipinfo_mother(){
-                if(this.$store.getters.get_build_character.son_standard_name.length > 0  && this.show_tooltip[4] === false){
+                if(this.$store.getters.get_build_character.mother_standard_name !== ''&& this.show_tooltip[4] === false){
                     for(let i = 0;i < this.show_tooltip.length;i++){
                         this.show_tooltip[i] = false;
                     }
                     this.show_tooltip.splice(4,1,true);
-                } else if(this.$store.getters.get_build_character.son_standard_name.length > 0  && this.show_tooltip[4] === true){
+                } else if(this.$store.getters.get_build_character.mother_standard_name !== '' && this.show_tooltip[4] === true){
                     for(let i = 0;i < this.show_tooltip.length;i++){
                         this.show_tooltip[i] = false;
                     }
@@ -415,12 +415,12 @@
 
             /*查看子*/
             show_tooltipinfo_son(){
-                if(this.$store.getters.get_build_character.mother_standard_name !== ''  && this.show_tooltip[5] === false){
+                if(this.$store.getters.get_build_character.son_standard_name.length > 0 && this.show_tooltip[5] === false){
                     for(let i = 0;i < this.show_tooltip.length;i++){
                         this.show_tooltip[i] = false;
                     }
                     this.show_tooltip.splice(5,1,true);
-                } else if(this.$store.getters.get_build_character.mother_standard_name !== ''  && this.show_tooltip[5] === true){
+                } else if(this.$store.getters.get_build_character.son_standard_name.length > 0&& this.show_tooltip[5] === true){
                     for(let i = 0;i < this.show_tooltip.length;i++){
                         this.show_tooltip[i] = false;
                     }
@@ -430,7 +430,6 @@
 
             /*查看女儿*/
             show_tooltipinfo_daughter(){
-
                 if(this.$store.getters.get_build_character.daughter_standard_name.length > 0  && this.show_tooltip[6] === false){
                     for(let i = 0;i < this.show_tooltip.length;i++){
                         this.show_tooltip[i] = false;
