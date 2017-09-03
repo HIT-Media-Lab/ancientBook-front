@@ -64,7 +64,7 @@
                     <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style">
                         <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.begin_standard_time !== ''">
                         <span class="zxw-person-relation-span" @mouseover="item.show_begin_time = true" @mouseout="item.show_begin_time = false" v-if="item.begin_standard_time !=='' " v-bind:contenteditable="item.begin_standard_time !== ''" @keydown="down_delete()">
-                            <span class="zxw-tag-font" v-model="item.begin_standard_time">{{item.begin_standard_time}}</span>
+                            <span  class="zxw-tag-font" v-model="item.begin_standard_time">{{item.begin_standard_time}}</span>
                             <button class="zxw-add-hover-img" v-show="item.show_begin_time===true" @click="delete_lit_begin(index)"></button>
                         </span>
                         </div>

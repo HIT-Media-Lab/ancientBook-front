@@ -40,7 +40,7 @@
             <div class="zxw-character-row">
                 <label class="zxw-character-span">节气：</label>
                 <select  class="zxw-ins-select zxw-edit-character-input-margin" v-model="selected_jieqi">
-                    <option v-for="item in jieqi_type" v-bind:value="selected_jieqi">{{item}}</option>
+                    <option v-for="item in jieqi_type" v-bind:value="item">{{item}}</option>
                 </select>
 
                 <label class="zxw-character-span">英译：</label>
