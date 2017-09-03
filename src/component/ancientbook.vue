@@ -353,9 +353,7 @@
                 this.page_id = response.body.id;
                 this.get_page_info();
                 this.get_picture();
-                this.get_text();
                 this.get_comment();
-                this.get_mark();
             },
 
             fail_get_page_id() {
@@ -467,6 +465,7 @@
                             content_comment: response.body[i].content,
                         });
                     }
+                    this.get_mark();
                 }
             },
 
@@ -500,6 +499,7 @@
                             target_mark: response.body[i].target,
                         });
                     }
+                    this.get_text();
                 }
             },
 
