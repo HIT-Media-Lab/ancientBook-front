@@ -8,43 +8,31 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">术语名称：</label>
-            <input type="text" class="zxw-character-input-margin zxw-character-input-content" readonly v-model="this.$store.getters.get_build_terms.terms_name">
+            <input type="text" class="zxw-character-input-content zxw-display-list-margin" readonly v-model="this.$store.getters.get_build_terms.terms_name">
             <label class="zxw-character-span">学科：</label>
             <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_terms.selected_course.chinese_name">
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">学科小类：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly value="未有具体数据">
+            <input type="text" class="zxw-character-input-content zxw-display-list-margin" readonly value="未有具体数据">
             <label class="zxw-character-span">起始时间：</label>
-            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_terms.begin_standard_time === ''">
-            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_terms.begin_standard_time" @click="show_details_begin()" v-else>
-        </div>
-
-        <div class="zxw-character-row" v-if="show_details[0] === true">
-            <div class="zxw-display-details-1 zxw-display-details-top"></div>
-
-            <display_details :if_1="this.show_details[0] === true && this.$store.getters.get_build_terms.begin_standard_time !== ''" :if_2="this.show_details[0] === false" :selected_details_1="1" :details_list="$store.getters.get_build_terms.begin_standard_time" v-on:show_tipinfo="show_details_begin">
-            </display_details>
+            <p class="zxw-character-input-content zxw-display-cursor" v-model="this.$store.getters.get_build_terms.birth_standard_name" @click="show_details_begin()" v-if="show_details[0] === false">{{$store.getters.get_build_terms.begin_standard_time}}</p>
+            <p class="zxw-display-list" v-model="this.$store.getters.get_build_terms.birth_standard_name" @click="show_details_begin()" v-if="show_details[0] === true">{{$store.getters.get_build_terms.begin_standard_time}}</p>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">终止时间：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_terms.end_standard_time === ''">
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_terms.end_standard_time" @click="show_details_end()"  v-else>
+            <p class="zxw-character-input-content zxw-display-list-margin zxw-display-cursor" v-model="this.$store.getters.get_build_terms.end_standard_time" @click="show_details_end()" v-if="show_details[1] === false">{{$store.getters.get_build_terms.end_standard_time}}</p>
+            <p class="zxw-display-list zxw-display-list-margin" v-model="this.$store.getters.get_build_terms.end_standard_time" @click="show_details_end()" v-if="show_details[1] === true">{{$store.getters.get_build_terms.end_standard_time}}</p>
             <label class="zxw-character-span">别名：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_terms.other_name === ''">
             <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_terms.other_name" v-else>
         </div>
 
-        <div class="zxw-character-row" v-if="show_details[1] === true">
-            <display_details :if_1="this.show_details[1] === true && this.$store.getters.get_build_terms.end_standard_time !== ''" :if_2="this.show_details[1] === false" :selected_details_1="1" :details_list="$store.getters.get_build_terms.end_standard_time" v-on:show_tipinfo="show_details_end">
-            </display_details>
-        </div>
-
         <div class="zxw-character-row">
             <label class="zxw-character-span">英译：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_terms.english === ''">
+            <input type="text" class="zxw-display-list-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_terms.english === ''">
             <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_terms.english" v-else>
             <label class="zxw-character-span">解释：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_terms.explain === ''">
@@ -80,7 +68,6 @@
 
     import create_word from '../../../../component/create-word.vue';
     import success_create from '../../../../component/success_create.vue';
-    import display_details from '../../../../component/display-details.vue';
     export default{
         beforeRouteLeave (to, from, next){
             if(to.name !== 'termstwo') {
@@ -120,8 +107,7 @@
 
         components:{
             create_word,
-            success_create,
-            display_details
+            success_create
         },
 
         created(){

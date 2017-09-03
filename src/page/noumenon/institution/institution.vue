@@ -71,7 +71,7 @@
         <button  class="zxwnoumenom-button zxwdelete-character" @click="open_delete_ins()">删除本体</button>
 
         <delete_modal :open_modal="open_modal" :delete_warning="'确认删除本体?'" v-on:close_modal="close_modal" v-on:delete_info="delete_ins"></delete_modal>
-        <fail_delete :show_info="show_info" v-on:close_modal="close_fail_delete"></fail_delete>
+        <fail_delete :show_info="show_info" v-on:close_modal="close_fail_delete" :tip="'该本体已被其他本体引用,无法删除'"></fail_delete>
     </div>
 </template>
 
@@ -105,7 +105,7 @@
     import noumenon_title from '../../../component/noumenon-title.vue';
     import noumenon_button from '../../../component/noumenon-button.vue';
     import delete_modal from '../../../component/delete_modal.vue';
-    import fail_delete from '../../../component/fail_delete_noumenon.vue';
+    import fail_delete from '../../../component/warning_noumenon.vue';
     export default{
         created(){
             this.ins_info();

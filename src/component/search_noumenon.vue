@@ -93,7 +93,7 @@
     Mock.mock('/ancient_books/get_person_list_by_name.action?name=lh&&page_count=1','get', {
         "content":[
             {
-                "standard_name":"鹿晗(1996西周韩国)",
+                "standard_name":"鹿晗(西周韩国哈二十七年十二月三十一日)",
                 "noumenon_id|200":50
             },
             {
@@ -144,7 +144,7 @@
    Mock.mock('/ancient_books/get_location_list_by_name.action?name=ty&&page_count=1','get', {
        "content":[
            {
-               "standard_name":"太原",
+               "standard_name":"太原太原太原太原太原太原太原太原太原太原太原太原太原太原太原太原太原太原太原太原太原太原",
                "noumenon_id|25":25
            },
            {
@@ -209,7 +209,7 @@
     Mock.mock('/ancient_books/get_office_list_by_name.action?name=bbss&&page_count=1','get', {
         "content":[
             {
-                "standard_name":"兵部尚书",
+                "standard_name":"兵部尚书兵部尚书兵部尚书兵部尚书兵部尚书兵部尚",
                 "noumenon_id|27":27
             },
             {
@@ -249,7 +249,7 @@
     Mock.mock('/ancient_books/get_institution_list_by_name.action?name=bb&&page_count=1','get', {
         "content":[
             {
-                "standard_name":"兵部",
+                "standard_name":"兵部兵部兵部兵部v兵部兵部v兵部v兵部v兵部兵部兵部兵部兵部兵部兵部",
                 "noumenon_id|27":28
             },
             {

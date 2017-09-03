@@ -83,9 +83,10 @@ export default{
     }
 
     .zxwcreate-img{
-        height:150px;
+        height:170px;
         width:810px;
         margin:0 0 0 80px;
+        align:
     }
 
     .zxw-noumenon-select{

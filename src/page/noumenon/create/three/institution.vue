@@ -8,7 +8,7 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">机构名：</label>
-            <input type="text" class="zxw-character-input-margin zxw-character-input-content" readonly v-model="this.$store.getters.get_build_ins.ins_name">
+            <input type="text" class="zxw-character-input-content zxw-display-list-margin" readonly v-model="this.$store.getters.get_build_ins.ins_name">
             <label class="zxw-character-span">英译：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_ins.english === '' " >
             <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_ins.english" v-else>
@@ -16,7 +16,7 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">机构类型：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="ins_type[this.$store.getters.get_build_ins.type]">
+            <input type="text" class="zxw-character-input-content zxw-display-list-margin" readonly v-model="ins_type[this.$store.getters.get_build_ins.type]">
             <label class="zxw-character-span">别名：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_ins.other_name === '' " >
             <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_ins.other_name" v-else>
@@ -24,48 +24,31 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">主管职：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_ins.chief_office_name === '' " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_ins.chief_office_name" @click="show_details_chief()" v-else>
+            <p class="zxw-character-input-content zxw-display-list-margin zxw-null" v-if="this.$store.getters.get_build_ins.chief_office_name === ''">不详</p>
+            <p class="zxw-character-input-content zxw-display-list-margin zxw-display-cursor" v-model="this.$store.getters.get_build_ins.chief_office_name" @click="show_details_chief()" v-if="this.$store.getters.get_build_ins.chief_office_name !== '' && show_details[0] === false">{{$store.getters.get_build_ins.chief_office_name}}</p>
+            <p class="zxw-display-list zxw-display-list-margin" v-model="this.$store.getters.get_build_ins.chief_office_name" @click="show_details_chief()" v-if="this.$store.getters.get_build_ins.chief_office_name !== '' && show_details[0] === true">{{$store.getters.get_build_ins.chief_office_name}}</p>
+
             <label class="zxw-character-span">副官职：</label>
-            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_ins.vice_office_name === '' " >
-            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_ins.vice_office_name" @click="show_details_vice()" v-else>
-        </div>
-
-        <!--官职具体信息查看-->
-        <div class="zxw-character-row" v-if="show_details[0] === true || show_details[1] === true">
-            <display_details class="zxw-display-details-top" :if_1="this.show_details[0] === true && this.$store.getters.get_build_ins.chief_office_name !== ''" :if_2="this.show_details[0] === false" :selected_details_1="1" :details_list="$store.getters.get_build_ins.chief_office_name" v-on:show_tipinfo="show_details_chief">
-            </display_details>
-
-            <display_details :if_1="show_details[1] === true && this.$store.getters.get_build_ins.vice_office_name !== ''" :if_2="show_details[1] === false" :selected_details_1="1" :details_list="this.$store.getters.get_build_ins.vice_office_name" v-on:show_tipinfo="show_details_vice">
-            </display_details>
+            <p class="zxw-character-input-content zxw-null" v-if="this.$store.getters.get_build_ins.vice_office_name === ''">不详</p>
+            <p class="zxw-character-input-content zxw-display-cursor" v-model="this.$store.getters.get_build_ins.vice_office_name" @click="show_details_vice()" v-if="this.$store.getters.get_build_ins.vice_office_name !== '' && show_details[1] === false">{{$store.getters.get_build_ins.vice_office_name}}</p>
+            <p class="zxw-display-list" v-model="this.$store.getters.get_build_ins.vice_office_name" @click="show_details_vice()" v-if="this.$store.getters.get_build_ins.vice_office_name !== '' && show_details[1] === true">{{$store.getters.get_build_ins.vice_office_name}}</p>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">起始时间：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_ins.begin_standard_time" @click="show_details_begin()">
+            <p class="zxw-character-input-content zxw-display-list-margin zxw-display-cursor" v-model="this.$store.getters.get_build_ins.begin_standard_time" @click="show_details_begin()" v-if="this.$store.getters.get_build_ins.begin_standard_time !== '' && show_details[2] === false">{{$store.getters.get_build_ins.begin_standard_time}}</p>
+            <p class="zxw-display-list zxw-display-list-margin" v-model="this.$store.getters.get_build_ins.begin_standard_time" @click="show_details_begin()" v-if="this.$store.getters.get_build_ins.begin_standard_time !== '' && show_details[2] === true">{{$store.getters.get_build_ins.begin_standard_time}}</p>
+
             <label class="zxw-character-span">终止时间：</label>
-            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_ins.end_standard_time" @click="show_details_end()">
-        </div>
-
-        <!--时间具体信息查看-->
-        <div class="zxw-character-row" v-if="show_details[2] === true || show_details[3] === true">
-            <display_details class="zxw-display-details-top" :if_1="this.show_details[2] === true && this.$store.getters.get_build_ins.begin_standard_time !== ''" :if_2="this.show_details[2] === false" :selected_details_1="1" :details_list="$store.getters.get_build_ins.begin_standard_time" v-on:show_tipinfo="show_details_begin">
-            </display_details>
-
-            <display_details :if_1="show_details[3] === true && this.$store.getters.get_build_ins.end_standard_time !== ''" :if_2="show_details[3] === false" :selected_details_1="1" :details_list="this.$store.getters.get_build_ins.end_standard_time" v-on:show_tipinfo="show_details_end">
-            </display_details>
+            <p class="zxw-character-input-content zxw-display-cursor" v-model="this.$store.getters.get_build_ins.end_standard_time" @click="show_details_end()" v-if="this.$store.getters.get_build_ins.end_standard_time !== '' && show_details[3] === false">{{$store.getters.get_build_ins.end_standard_time}}</p>
+            <p class="zxw-display-list" v-model="this.$store.getters.get_build_ins.end_standard_time" @click="show_details_end()" v-if="this.$store.getters.get_build_ins.end_standard_time !== '' && show_details[3] === true">{{$store.getters.get_build_ins.end_standard_time}}</p>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">上级机构：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_ins.parent_body_name === ''">
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_ins.parent_body_name" @click="show_details_parent" v-else>
-        </div>
-
-        <!--上级机构具体信息查看-->
-        <div class="zxw-character-row" v-if="show_details[4] === true">
-            <display_details class="zxw-display-details-top" :if_1="this.show_details[4] === true && this.$store.getters.get_build_ins.parent_body_name !== ''" :if_2="this.show_details[2] === false" :selected_details_1="1" :details_list="$store.getters.get_build_ins.parent_body_name" v-on:show_tipinfo="show_details_parent">
-            </display_details>
+            <p class="zxw-character-input-content zxw-display-list-margin zxw-null" v-if="this.$store.getters.get_build_ins.parent_body_name === ''">不详</p>
+            <p class="zxw-character-input-content zxw-display-list-margin zxw-display-cursor" v-model="this.$store.getters.get_build_ins.parent_body_name" @click="show_details_parent()" v-if="this.$store.getters.get_build_ins.parent_body_name !== '' && show_details[4] === false">{{$store.getters.get_build_ins.parent_body_name}}</p>
+            <p class="zxw-display-list zxw-display-list-margin" v-model="this.$store.getters.get_build_ins.parent_body_name" @click="show_details_parent()" v-if="this.$store.getters.get_build_ins.parent_body_name !== '' && show_details[4] === true">{{$store.getters.get_build_ins.parent_body_name}}</p>
         </div>
 
         <template v-if="this.$store.getters.get_build_ins.remark_1_name !== ''">
@@ -96,7 +79,6 @@
 
     import create_word from '../../../../component/create-word.vue';
     import success_create from '../../../../component/success_create.vue';
-    import display_details from '../../../../component/display-details.vue';
     export default{
         beforeRouteLeave (to, from, next){
             if(to.name !== 'institutiontwo') {
@@ -138,8 +120,7 @@
 
         components:{
             create_word,
-            success_create,
-            display_details
+            success_create
         },
 
         created(){

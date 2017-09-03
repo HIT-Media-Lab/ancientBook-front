@@ -8,7 +8,7 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">人名：</label>
-            <input type="text" class="zxw-character-input-margin zxw-character-input-content" readonly v-model="this.$store.getters.get_build_character.person_name">
+            <input type="text" class="zxw-display-list-margin zxw-character-input-content" readonly v-model="this.$store.getters.get_build_character.person_name">
             <label class="zxw-character-span">英译：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.english === '' " >
             <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_character.english" v-else>
@@ -16,8 +16,8 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">姓：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.xing === '' " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.xing" v-else>
+            <input type="text" class="zxw-display-list-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.xing === '' " >
+            <input type="text" class="zxw-character-input-content zxw-display-list-margin" readonly v-model="this.$store.getters.get_build_character.xing" v-else>
             <label class="zxw-character-span">氏：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.shi === '' " >
             <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_character.shi" v-else>
@@ -25,8 +25,8 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">字：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.zi === '' " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_character.zi" v-else>
+            <input type="text" class="zxw-display-list-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.zi === '' " >
+            <input type="text" class="zxw-character-input-content zxw-display-list-margin" readonly v-model="this.$store.getters.get_build_character.zi" v-else>
             <label class="zxw-character-span">别名：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.other_name === '' " >
             <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_character.other_name" v-else>
@@ -34,108 +34,100 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">出生时间：</label>
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.birth_standard_name" @click="show_tooltipinfo_birth()">
+            <p class="zxw-character-input-content zxw-display-list-margin zxw-display-cursor" v-model="this.$store.getters.get_build_character.birth_standard_name" @click="show_tooltipinfo_birth()" v-if="show_tooltip[0] === false">{{$store.getters.get_build_character.birth_standard_name}}</p>
+            <p class="zxw-display-list zxw-display-list-margin" v-model="this.$store.getters.get_build_character.birth_standard_name" @click="show_tooltipinfo_birth()" v-if="show_tooltip[0] === true">{{$store.getters.get_build_character.birth_standard_name}}</p>
+
             <label class="zxw-character-span">死亡时间：</label>
-            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.death_standard_name" @click="show_tooltipinfo_death()">
-        </div>
-
-        <!--时间具体信息查看-->
-        <div class="zxw-character-row" v-if="show_tooltip[0] === true || show_tooltip[1] === true">
-            <display_details class="zxw-display-details-top" :if_1="show_tooltip[0] === true && this.$store.getters.get_build_character.birth_standard_name !== ''" :if_2="show_tooltip[0] === false" :selected_details_1="1" :details_list="$store.getters.get_build_character.birth_standard_name" v-on:show_tipinfo="show_tooltipinfo_birth">
-            </display_details>
-
-            <display_details :if_1="show_tooltip[1] === true && this.$store.getters.get_build_character.death_standard_name !== ''" :if_2="show_tooltip[1] === false" :selected_details_1="1" :details_list="this.$store.getters.get_build_character.death_standard_name" v-on:show_tipinfo="show_tooltipinfo_death">
-            </display_details>
+            <p class="zxw-character-input-content zxw-display-cursor" v-model="this.$store.getters.get_build_character.death_standard_name" @click="show_tooltipinfo_death()" v-if="show_tooltip[1] === false">{{$store.getters.get_build_character.death_standard_name}}</p>
+            <p class="zxw-display-list" v-model="this.$store.getters.get_build_character.death_standard_name" @click="show_tooltipinfo_death()" v-else>{{$store.getters.get_build_character.death_standard_name}}</p>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">籍贯：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.location === '' ">
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.location" @click="show_tooltipinfo_location()" v-else>
+            <p class="zxw-character-input-content zxw-display-list-margin zxw-null" v-if="this.$store.getters.get_build_character.location === '' ">不详</p>
+            <p class="zxw-character-input-content zxw-display-list-margin zxw-display-cursor" v-model="this.$store.getters.get_build_character.location" @click="show_tooltipinfo_location()" v-if="this.$store.getters.get_build_character.location !== '' && show_tooltip[2] === false">{{$store.getters.get_build_character.location}}</p>
+            <p class="zxw-display-list zxw-display-list-margin" v-model="this.$store.getters.get_build_character.location" @click="show_tooltipinfo_location()" v-if="this.$store.getters.get_build_character.location !== '' && show_tooltip[2] === true">{{$store.getters.get_build_character.location}}</p>
+
             <label class="zxw-character-span">父：</label>
-            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.father_standard_name.length === 0 ">
-            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.father_standard_name" @click="show_tooltipinfo_father()" v-else>
-        </div>
-
-        <!--籍贯、父亲具体信息查看-->
-        <div class="zxw-character-row" v-if="show_tooltip[2] === true || show_tooltip[3] === true">
-            <display_details class="zxw-display-details-top" :if_1="show_tooltip[2] === true && this.$store.getters.get_build_character.location !== ''" :if_2="show_tooltip[2] === false" :selected_details_1="1" :details_list="$store.getters.get_build_character.location" v-on:show_tipinfo="show_tooltipinfo_location">
-            </display_details>
-
-            <display_details :if_1="show_tooltip[3] === true && this.$store.getters.get_build_character.father_standard_name !== ''" :if_2="show_tooltip[3] === false" :selected_details_1="1" :details_list="this.$store.getters.get_build_character.father_standard_name" v-on:show_tipinfo="show_tooltipinfo_father">
-            </display_details>
+            <p class="zxw-character-input-content zxw-null" v-if="this.$store.getters.get_build_character.father_standard_name.length === 0 ">不详</p>
+            <p class="zxw-character-input-content zxw-display-cursor" v-model="this.$store.getters.get_build_character.father_standard_name" @click="show_tooltipinfo_father()" v-if="$store.getters.get_build_character.father_standard_name !== '' && show_tooltip[3] === false">{{$store.getters.get_build_character.father_standard_name}}</p>
+            <p class="zxw-display-list" v-model="this.$store.getters.get_build_character.father_standard_name" @click="show_tooltipinfo_father()" v-if="this.$store.getters.get_build_character.father_standard_name !== '' && show_tooltip[3]=== true">{{$store.getters.get_build_character.father_standard_name}}</p>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">母：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.mother_standard_name.length === 0 " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.mother_standard_name" @click="show_tooltipinfo_mother()" v-else>
+            <p class="zxw-character-input-content zxw-display-list-margin zxw-null" v-if="this.$store.getters.get_build_character.mother_standard_name.length === 0 ">不详</p>
+            <p class="zxw-character-input-content zxw-display-list-margin zxw-display-cursor" v-model="this.$store.getters.get_build_character.mother_standard_name" @click="show_tooltipinfo_mother()" v-if="$store.getters.get_build_character.mother_standard_name !== '' && show_tooltip[4] === false">{{$store.getters.get_build_character.mother_standard_name}}</p>
+            <p class="zxw-display-list zxw-display-list-margin" v-model="this.$store.getters.get_build_character.mother_standard_name" @click="show_tooltipinfo_mother()" v-if="$store.getters.get_build_character.mother_standard_name !== '' && show_tooltip[4] === true">{{$store.getters.get_build_character.mother_standard_name}}</p>
+
             <label class="zxw-character-span">子：</label>
-            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.son_standard_name.length === 0 " >
-            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.son_standard_name" @click="show_tooltipinfo_son()"  v-else>
-        </div>
-
-        <!--母、子具体信息查看-->
-        <div class="zxw-character-row" v-if="show_tooltip[4] === true || show_tooltip[5] === true">
-            <display_details class="zxw-display-details-top" :if_1="show_tooltip[4] === true && this.$store.getters.get_build_character.mother_standard_name !== ''" :if_2="show_tooltip[4] === false" :selected_details_1="1" :details_list="$store.getters.get_build_character.mother_standard_name" v-on:show_tipinfo="show_tooltipinfo_mother">
-            </display_details>
-
-            <display_details :if_1="show_tooltip[5] === true && this.$store.getters.get_build_character.son_standard_name.length > 0" :if_2="show_tooltip[5] === false" :selected_details_1="0" :details_list="this.$store.getters.get_build_character.son_standard_name" v-on:show_tipinfo="show_tooltipinfo_son">
-            </display_details>
+            <p    class="zxw-character-input-content zxw-null" v-if="this.$store.getters.get_build_character.son_standard_name.length === 0 ">不详</p>
+            <div  class="zxw-character-input-content zxw-display-cursor" @click="show_tooltipinfo_son()" v-if="$store.getters.get_build_character.son_standard_name.length > 0 && show_tooltip[5] === false">
+                <span class="zxw-display-content" v-for="item in this.$store.getters.get_build_character.son_standard_name">{{item}}</span>
+            </div>
+            <div class="zxw-display-list"  @click="show_tooltipinfo_son()" v-if="$store.getters.get_build_character.son_standard_name.length > 0 && show_tooltip[5] === true">
+                <p class="zxw-display-content" v-for="item in this.$store.getters.get_build_character.son_standard_name">{{item}}</p>
+            </div>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">女：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.daughter_standard_name.length === 0 " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.daughter_standard_name" @click="show_tooltipinfo_daughter()" v-else>
+            <p    class="zxw-character-input-content zxw-display-list-margin zxw-null" v-if="this.$store.getters.get_build_character.daughter_standard_name.length === 0 ">不详</p>
+            <div  class="zxw-character-input-content zxw-display-list-margin zxw-display-cursor" @click="show_tooltipinfo_daughter()" v-if="$store.getters.get_build_character.daughter_standard_name.length > 0 && show_tooltip[6] === false">
+                <span class="zxw-display-content" v-for="item in this.$store.getters.get_build_character.daughter_standard_name">{{item}}</span>
+            </div>
+            <div class="zxw-display-list zxw-display-list-margin"  @click="show_tooltipinfo_daughter()" v-if="$store.getters.get_build_character.daughter_standard_name.length > 0 && show_tooltip[6] === true">
+                <p class="zxw-display-content" v-for="item in this.$store.getters.get_build_character.daughter_standard_name">{{item}}</p>
+            </div>
+
             <label class="zxw-character-span">兄弟：</label>
-            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.brother_standard_name.length === 0 " >
-            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.brother_standard_name" @click="show_tooltipinfo_brother()" v-else>
-        </div>
-
-        <!--女、兄弟具体信息查看-->
-        <div class="zxw-character-row" v-if="show_tooltip[6] === true || show_tooltip[7] === true">
-            <display_details class="zxw-display-details-top" :if_1="show_tooltip[6] === true && this.$store.getters.get_build_character.daughter_standard_name !== ''" :if_2="show_tooltip[6] === false" :selected_details_1="0" :details_list="$store.getters.get_build_character.daughter_standard_name" v-on:show_tipinfo="show_tooltipinfo_daughter">
-            </display_details>
-
-            <display_details :if_1="show_tooltip[7] === true && this.$store.getters.get_build_character.brother_standard_name.length > 0" :if_2="show_tooltip[7] === false" :selected_details_1="0" :details_list="this.$store.getters.get_build_character.brother_standard_name" v-on:show_tipinfo="show_tooltipinfo_brother">
-            </display_details>
+            <p    class="zxw-character-input-content zxw-null" v-if="this.$store.getters.get_build_character.brother_standard_name.length === 0 ">不详</p>
+            <div  class="zxw-character-input-content zxw-display-cursor" @click="show_tooltipinfo_brother()" v-if="$store.getters.get_build_character.brother_standard_name.length > 0 && show_tooltip[7] === false">
+                <span class="zxw-display-content" v-for="item in this.$store.getters.get_build_character.brother_standard_name">{{item}}</span>
+            </div>
+            <div class="zxw-display-list"  @click="show_tooltipinfo_brother()" v-if="$store.getters.get_build_character.brother_standard_name.length > 0 && show_tooltip[7] === true">
+                <p class="zxw-display-content" v-for="item in this.$store.getters.get_build_character.brother_standard_name">{{item}}</p>
+            </div>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">姐妹：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.sister_standard_name.length === 0 " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.sister_standard_name" @click="show_tooltipinfo_sister()" v-else>
+            <p    class="zxw-character-input-content zxw-display-list-margin zxw-null" v-if="this.$store.getters.get_build_character.sister_standard_name.length === 0 ">不详</p>
+            <div  class="zxw-character-input-content zxw-display-list-margin zxw-display-cursor" @click="show_tooltipinfo_sister()" v-if="$store.getters.get_build_character.sister_standard_name.length > 0 && show_tooltip[8] === false">
+                <span class="zxw-display-content" v-for="item in this.$store.getters.get_build_character.sister_standard_name">{{item}}</span>
+            </div>
+            <div class="zxw-display-list zxw-display-list-margin"  @click="show_tooltipinfo_sister()" v-if="$store.getters.get_build_character.sister_standard_name.length > 0 && show_tooltip[8] === true">
+                <p class="zxw-display-content" v-for="item in this.$store.getters.get_build_character.sister_standard_name">{{item}}</p>
+            </div>
+
             <label class="zxw-character-span">师：</label>
-            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.teacher_standard_name.length === 0 " >
-            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.teacher_standard_name" @click="show_tooltipinfo_teacher()" v-else>
-        </div>
-
-        <!--姐妹、师具体信息查看-->
-        <div class="zxw-character-row" v-if="show_tooltip[8] === true || show_tooltip[9] === true">
-            <display_details class="zxw-display-details-top" :if_1="show_tooltip[8] === true && this.$store.getters.get_build_character.sister_standard_name.length > 0" :if_2="show_tooltip[8] === false" :selected_details_1="0" :details_list="$store.getters.get_build_character.sister_standard_name" v-on:show_tipinfo="show_tooltipinfo_sister">
-            </display_details>
-
-            <display_details :if_1="show_tooltip[9] === true && this.$store.getters.get_build_character.teacher_standard_name.length > 0" :if_2="show_tooltip[9] === false" :selected_details_1="0" :details_list="this.$store.getters.get_build_character.teacher_standard_name" v-on:show_tipinfo="show_tooltipinfo_teacher">
-            </display_details>
+            <p    class="zxw-character-input-content zxw-null" v-if="this.$store.getters.get_build_character.teacher_standard_name.length === 0 ">不详</p>
+            <div  class="zxw-character-input-content zxw-display-cursor" @click="show_tooltipinfo_teacher()" v-if="$store.getters.get_build_character.teacher_standard_name.length > 0 && show_tooltip[9] === false">
+                <span class="zxw-display-content" v-for="item in this.$store.getters.get_build_character.teacher_standard_name">{{item}}</span>
+            </div>
+            <div class="zxw-display-list"  @click="show_tooltipinfo_teacher()" v-if="$store.getters.get_build_character.teacher_standard_name.length > 0 && show_tooltip[9] === true">
+                <p class="zxw-display-content" v-for="item in this.$store.getters.get_build_character.teacher_standard_name">{{item}}</p>
+            </div>
         </div>
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">学生：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.student_standard_name.length === 0 " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.student_standard_name" @click="show_tooltipinfo_student()" v-else>
+            <p    class="zxw-character-input-content zxw-display-list-margin zxw-null" v-if="this.$store.getters.get_build_character.student_standard_name.length === 0 ">不详</p>
+            <div  class="zxw-character-input-content zxw-display-list-margin zxw-display-cursor" @click="show_tooltipinfo_student()" v-if="$store.getters.get_build_character.student_standard_name.length > 0 && show_tooltip[10] === false">
+                <span class="zxw-display-content" v-for="item in this.$store.getters.get_build_character.student_standard_name">{{item}}</span>
+            </div>
+            <div class="zxw-display-list zxw-display-list-margin"  @click="show_tooltipinfo_student()" v-if="$store.getters.get_build_character.student_standard_name.length > 0 && show_tooltip[10] === true">
+                <p class="zxw-display-content" v-for="item in this.$store.getters.get_build_character.student_standard_name">{{item}}</p>
+            </div>
+
             <label class="zxw-character-span">友：</label>
-            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_character.friend_standard_name.length === 0 " >
-            <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_character.friend_standard_name" @click="show_tooltipinfo_friend()" v-else>
-        </div>
-
-        <!--学生、友具体信息查看-->
-        <div class="zxw-character-row" v-if="show_tooltip[10] === true || show_tooltip[11] === true">
-            <display_details class="zxw-display-details-top" :if_1="show_tooltip[10] === true && this.$store.getters.get_build_character.student_standard_name.length > 0" :if_2="show_tooltip[10] === false" :selected_details_1="0" :details_list="$store.getters.get_build_character.student_standard_name" v-on:show_tipinfo="show_tooltipinfo_student">
-            </display_details>
-
-            <display_details :if_1="show_tooltip[11] === true && this.$store.getters.get_build_character.friend_standard_name.length > 0" :if_2="show_tooltip[11] === false" :selected_details_1="0" :details_list="this.$store.getters.get_build_character.friend_standard_name" v-on:show_tipinfo="show_tooltipinfo_friend">
-            </display_details>
+            <p    class="zxw-character-input-content zxw-null" v-if="this.$store.getters.get_build_character.friend_standard_name.length === 0 ">不详</p>
+            <div  class="zxw-character-input-content zxw-display-cursor" @click="show_tooltipinfo_friend()" v-if="$store.getters.get_build_character.friend_standard_name.length > 0 && show_tooltip[11] === false">
+                <span class="zxw-display-content" v-for="item in this.$store.getters.get_build_character.friend_standard_name">{{item}}</span>
+            </div>
+            <div class="zxw-display-list"  @click="show_tooltipinfo_friend()" v-if="$store.getters.get_build_character.friend_standard_name.length > 0 && show_tooltip[11] === true">
+                <p class="zxw-display-content" v-for="item in this.$store.getters.get_build_character.friend_standard_name">{{item}}</p>
+            </div>
         </div>
 
         <template v-if="this.$store.getters.get_build_character.remark_1_name !== ''">
@@ -174,7 +166,6 @@
     import create_word from '../../../../component/create-word.vue';
     import success_create from '../../../../component/success_create.vue';
     import modal from '../../../../component/modal.vue';
-    import display_details from '../../../../component/display-details.vue';
     export default{
         beforeRouteLeave (to, from, next){
             if(to.name !== 'charactertwo') {
@@ -234,8 +225,7 @@
         components:{
             create_word,
             success_create,
-            modal,
-            display_details
+            modal
         },
 
         created(){
@@ -244,6 +234,13 @@
         },
 
         computed:{
+            compute_son_title(){
+                let title = '';
+                for(let i = 0;i < this.$store.getters.get_build_character.son_standard_name.length;i++){
+                    title=title+this.$store.getters.get_build_character.son_standard_name[i]+'\n';
+                }
+                return title;
+            },
             show_remark(){
                 if( this.$store.getters.get_build_character.remark_1_name !== ''){
                     this.remark_1_name = this.$store.getters.get_build_character.remark_1_name+' :';
@@ -261,6 +258,7 @@
 
         data(){
             return{
+                testz:[],
                 show_tooltip:[false,false,false,false,false,false,false,false,false,false,false,false],
                 prams:'',
                 show_info:false,
@@ -526,38 +524,40 @@
 
 <style>
     .zxw-character-input-content{
+        display:inline-block;
         background-color: transparent;
         border-style: none;
         height:30px;
-        width:220px;
+        width:310px;
         font-weight: bold;
         font-size: 18px;
         text-overflow: ellipsis;
-    }
-    .zxw-display-cursor{
-        cursor: pointer;
-    }
-
-    .zxw-relation-modal-header{
-        width:50px;
-        height:15px;
-    }
-
-
-    .zxw-relation-info{
-        margin:20px 0 10px 30px;
-    }
-
-    .zxw-relation-modal-body{
-        margin-bottom: 20px;
-    }
-
-    .zxw-relation-modal-footer{
-        height:10px;
+        overflow: hidden;
+        white-space: nowrap;
+        vertical-align: top;
     }
 
     .zxw-null{
         color:darkgrey;
     }
 
+    .zxw-display-cursor{
+        cursor:pointer;
+    }
+    .zxw-display-list{
+         font-size: 18px;
+         width:310px;
+         display:inline-block;
+         vertical-align: top;
+         font-weight: bold;
+         cursor: pointer;
+     }
+
+    .zxw-display-list-margin{
+       margin-right: 110px;
+    }
+
+    .zxw-display-content{
+        font-size: 18px;
+    }
 </style>

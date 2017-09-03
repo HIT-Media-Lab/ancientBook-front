@@ -174,42 +174,44 @@
 
             success_catalogue(response){
                 this.title = response.body.n_name;
-                if(response.body.content.length !== 0){
-                    for(let i = 0; i < response.body.content.length;i++){
-                        if(this.catalogue.length === 0){
-                            this.catalogue.push({
-                                show_ce:true,
-                                ancient_book_name:response.body.content[i].ancient_book_name,
-                                id:response.body.content[i].id,
-                                book:[],
-                                book_name:[]
-                            });
-                            this.catalogue[i].book.push(response.body.content[i].book);
-                            this.catalogue[i].book_name.push(response.body.content[i].book_name);
-                        } else{
-                            let t = 0;
-                            for(let m = 0;m < this.catalogue.length;m++){
-                                if(response.body.content[i].id === this.catalogue[m].id){
-                                    this.catalogue[m].book.push(response.body.content[i].book);
-                                    this.catalogue[m].book_name.push(response.body.content[i].book_name);
-                                    t++;
-                                }
-                            }
-                            if(t === 0){
+                if(response.body.content !== undefined){
+                    if(response.body.content.length !== 0){
+                        for(let i = 0; i < response.body.content.length;i++){
+                            if(this.catalogue.length === 0){
                                 this.catalogue.push({
-                                    show_ce:false,
+                                    show_ce:true,
                                     ancient_book_name:response.body.content[i].ancient_book_name,
                                     id:response.body.content[i].id,
                                     book:[],
                                     book_name:[]
                                 });
-                                this.catalogue[this.catalogue.length-1].book.push(response.body.content[i].book);
-                                this.catalogue[this.catalogue.length-1].book_name.push(response.body.content[i].book_name);
+                                this.catalogue[i].book.push(response.body.content[i].book);
+                                this.catalogue[i].book_name.push(response.body.content[i].book_name);
+                            } else{
+                                let t = 0;
+                                for(let m = 0;m < this.catalogue.length;m++){
+                                    if(response.body.content[i].id === this.catalogue[m].id){
+                                        this.catalogue[m].book.push(response.body.content[i].book);
+                                        this.catalogue[m].book_name.push(response.body.content[i].book_name);
+                                        t++;
+                                    }
+                                }
+                                if(t === 0){
+                                    this.catalogue.push({
+                                        show_ce:false,
+                                        ancient_book_name:response.body.content[i].ancient_book_name,
+                                        id:response.body.content[i].id,
+                                        book:[],
+                                        book_name:[]
+                                    });
+                                    this.catalogue[this.catalogue.length-1].book.push(response.body.content[i].book);
+                                    this.catalogue[this.catalogue.length-1].book_name.push(response.body.content[i].book_name);
+                                }
                             }
                         }
+                        console.log(JSON.stringify(this.catalogue));
+                        this.show_noumenon_location_1(0,0);
                     }
-                    console.log(JSON.stringify(this.catalogue));
-                    this.show_noumenon_location_1(0,0);
                 }
             },
 

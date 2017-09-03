@@ -34,7 +34,7 @@
 
             <div class="zxw-lit-layer">
                 <label class="zxw-lit-label">提要信息:</label>
-                <textarea class="zxw-lit-create-summery" v-model="lit_content.type_summary"></textarea>
+                <div_edit v-model="lit_content.type_summary" v-on:open_warning="summary_length"></div_edit>
             </div>
 
             <div>
@@ -129,14 +129,15 @@
 
                 <div class="zxw-lit-layer">
                     <label class="zxw-lit-type-label">责任说明:</label>
-                    <textarea class="zxw-lit-create-summery" style="width:530px" v-model="item.explain">{{item.explain}}</textarea>
+                    <!--<textarea class="zxw-lit-create-summery" style="width:530px" v-model="item.explain">{{item.explain}}</textarea>-->
+                    <div_edit style="width:530px;" v-model="item.explain" v-on:open_warning="explain_length"></div_edit>
                 </div>
             </div>
         </div>
 
         <div class="zxw-build-step2-btn">
             <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length" @click="pre_step()">上一步</button>
-            <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="lit_content.type_name === ''||this.show_type_name === true|| this.all_must_write !== 0" :="if_wirte">下一步</button>
+            <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="lit_content.type_name === ''||this.show_type_name === true|| this.all_must_write !== 0||this.summary_error === true||this.explain_error === true" :="if_wirte">下一步</button>
         </div>
 
         <time_modal :time_modal="lit_content.varieties_arr[open_time_index].begin_time_modal" v-on:success_time="begin_lit_time" v-on:close_modal="close_lit_begin()"></time_modal>
@@ -147,6 +148,9 @@
 
         <!--若文献本体规范已存在的模态框-->
         <repeat_modal :show_repeat="this.show_repeat" :repeat_name="this.lit_content.standard_name" :repeat_id="this.repeat_id" :repeat_noumenon="this.repeat_noumenon" v-on:close_modal="close_repeat"></repeat_modal>
+
+        <warning_summary :show_info="show_info_1" :tip="'该提示信息已超过最大限度!'" v-on:close_modal="close_summary_error"></warning_summary>
+        <warning_summary :show_info="show_info_2" :tip="'该责任说明已超过最大限度!'" v-on:close_modal="close_explain_error"></warning_summary>
     </div>
 </template>
 
@@ -224,6 +228,8 @@
     import time_modal from '../../../../component/time-modal.vue';
     import search_modal from '../../../../component/search_noumenon.vue';
     import repeat_modal from '../../../../component/repeat_modal.vue';
+    import div_edit from '../../../../component/div_edit.vue';
+    import warning_summary from '../../../../component/warning_noumenon.vue'
     export default{
         created(){
             this.prams = this.$route.name;
@@ -262,7 +268,9 @@
             create_word,
             time_modal,
             search_modal,
-            repeat_modal
+            repeat_modal,
+            warning_summary,
+            div_edit
         },
 
         data(){
@@ -275,6 +283,10 @@
                 character_name_2:'',
                 show_type_name:false,
                 show_repeat:false,
+                summary_error:false,
+                show_info_1:false,
+                explain_error:false,
+                show_info_2:false,
                 repeat_id:'',
                 repeat_noumenon:'文献本体',
                 check_noumenon_repeat:'/ancient_books/check_noumenon_standard_name.action',
@@ -580,10 +592,10 @@
             },
 
             success_action(response){
-                for (let i = 0; i < response.body.length; i++) {
+                for (let i = 0; i < response.body.g.length; i++) {
                     this.action_arr.push({
-                        item_1_id: response.body[i].item_1_id,
-                        chinese_name: response.body[i].chinese_name
+                        item_1_id: response.body.g[i].item_1_id,
+                        chinese_name: response.body.g[i].chinese_name
                     })
                 }
             },
@@ -855,17 +867,34 @@
                 this.show_repeat=false;
             },
 
+            summary_length(p){
+               this.show_info_1 = p;
+               this.summary_error = p;
+            },
+
+            close_summary_error(){
+                this.show_info_1 = false;
+            },
+
+            explain_length(p){
+                this.show_info_2 = p;
+                this.explain_error = p;
+            },
+            close_explain_error(){
+                this.show_info_2 = false;
+            }
         }
     }
 </script>
 
 <style>
     .zxw-lit-create-summery{
+        display:inline-block;
         width: 560px;
-        height: 50px;
+        min-height:60px;
+        _height:60px;
         background-color: transparent;
         border: 2px solid black;
-        overflow-y: hidden;
         vertical-align:top;
     }
 
