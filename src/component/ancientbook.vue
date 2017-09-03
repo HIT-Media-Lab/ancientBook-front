@@ -1258,6 +1258,8 @@
             renew_comment() {
                 //判断变量赋值
                 var a = 0;
+                var text_comment = document.getElementById("text-comment");
+                text_comment.innerHTML = '';
                 //文本逐字遍历
                 for (var i = 0; i < this.content.length; i++) {
                     //按顺序依次获得文本中的字
@@ -1279,8 +1281,6 @@
                             break;
                         }
                     }
-                    var text_comment = document.getElementById("text-comment");
-                    text_comment.innerHTML = '';
                     //该字不是批注
                     if (a == 0) {
                         var span1 = document.createElement("span");
@@ -1312,6 +1312,8 @@
                 var a = 0;
                 var type = document.getElementById("ry-select-mark-type");
                 var index = type.selectedIndex;
+                var text_mark = document.getElementById("text-mark");
+                text_mark.innerHTML = '';
                 //文本逐字遍历
                 for (var i = 0; i < this.content.length; i++) {
                     //按顺序依次获得文本中的字
@@ -1333,8 +1335,6 @@
                             break;
                         }
                     }
-                    var text_mark = document.getElementById("text-mark");
-                    text_mark.innerHTML = '';
                     var span = document.createElement("span");
                     var text = document.createTextNode(p);
                     //该字不是标记
