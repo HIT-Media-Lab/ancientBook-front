@@ -106,7 +106,7 @@
         <repeat_modal :show_repeat="this.show_repeat" :repeat_name="this.input_content.standard_name" :repeat_id="this.repeat_id" :repeat_noumenon="this.repeat_noumenon" v-on:close_modal="close_repeat"></repeat_modal>
 
         <!--添加治所的模态框-->
-        <search_modal :search_url="this.search_location" :noumenon_modal="this.seat_modal" :noumenon_number="7" v-on:close_modal="close_seat" v-on:add_noumenon_relations="add_seat"></search_modal>
+        <search_modal :search_url="this.search_location" :noumenon_modal="this.seat_modal" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_seat" v-on:add_noumenon_relations="add_seat"></search_modal>
     </div>
 </template>
 

@@ -35,10 +35,10 @@
 
             <div>
                 <label class="zxw-lit-label">标准分类:</label>
-                <select class="zxw-lit-select zxw-lit-select-margin" v-model="lit_content.selected_bu" v-bind="get_type_lei">
+                <select class="zxw-lit-select zxw-lit-select-margin" v-model="lit_content.selected_bu" @change="get_type_lei_2">
                     <option v-for="item in type_bu_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
-                <select class="zxw-lit-select zxw-lit-select-margin" v-model="lit_content.selected_lei" v-bind="get_type_shu">
+                <select class="zxw-lit-select zxw-lit-select-margin" v-model="lit_content.selected_lei" @change="get_type_shu">
                     <option v-for="item in type_lei_arr" v-bind:value="{item_2_id:item.item_2_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
                 <select class="zxw-lit-select" v-model="lit_content.selected_shu">
@@ -158,7 +158,6 @@
             this.get_type_level();
             this.get_type_name();
             this.get_confirm();
-            this.get_type_bu();
             this.get_action();
         },
 
@@ -270,64 +269,42 @@
 
             /*本体规范名称组成*/
             standard_title(){
+                if(this.lit_content.varieties_arr.length > 0 && this.character_name !== '' && this.chaodai !== '' && this.lit_content.standard_name !== '') {
                     let chaodai_name = '';
                     let other_names = '';
                     this.lit_content.standard_name = this.lit_content.type_name;
-                    if(this.chaodai !== ''){
-                        chaodai_name = '['+this.chaodai+']';
+                    if (this.chaodai !== '') {
+                        chaodai_name = '[' + this.chaodai + ']';
                         other_names = chaodai_name;
                     }
-                    if(this.character_name !== ''){
-                        other_names = chaodai_name +this.character_name;
+                    if (this.character_name !== '') {
+                        other_names = chaodai_name + this.character_name;
                     }
-                    if(this.lit_content.varieties_arr[0].selected_action.chinese_name !== ''){
-                        other_names = chaodai_name+this.character_name+this.lit_content.varieties_arr[0].selected_action.chinese_name;
+                    if (this.lit_content.varieties_arr[0].selected_action.chinese_name !== '') {
+                        other_names = chaodai_name + this.character_name + this.lit_content.varieties_arr[0].selected_action.chinese_name;
                     }
-                    if(other_names !== ''){
-                        this.lit_content.standard_name = this.lit_content.type_name+'('+other_names+')';
+                    if (other_names !== '') {
+                        this.lit_content.standard_name = this.lit_content.type_name + '(' + other_names + ')';
                     }
 
                     /*若责任者信息有第二个*/
-                    if(this.lit_content.varieties_arr.length > 1){
+                    if (this.lit_content.varieties_arr.length > 1) {
                         let chaodai_name_2 = '';
                         let other_names_2 = '';
-                        if(this.chaodai_2 !== ''){
-                            chaodai_name_2 = '['+this.chaodai_2+']';
+                        if (this.chaodai_2 !== '') {
+                            chaodai_name_2 = '[' + this.chaodai_2 + ']';
                             other_names_2 = chaodai_name_2;
                         }
-                        if(this.character_name_2 !== ''){
-                            other_names_2 = chaodai_name_2 +this.character_name_2;
+                        if (this.character_name_2 !== '') {
+                            other_names_2 = chaodai_name_2 + this.character_name_2;
                         }
-                        if(this.lit_content.varieties_arr[1].selected_action.chinese_name !== ''){
-                            other_names_2 = chaodai_name_2+this.character_name_2+this.lit_content.varieties_arr[1].selected_action.chinese_name;
+                        if (this.lit_content.varieties_arr[1].selected_action.chinese_name !== '') {
+                            other_names_2 = chaodai_name_2 + this.character_name_2 + this.lit_content.varieties_arr[1].selected_action.chinese_name;
                         }
-                        if(other_names_2 !== ''){
-                            this.lit_content.standard_name = this.lit_content.type_name+'('+other_names+'、'+other_names_2+')';
+                        if (other_names_2 !== '') {
+                            this.lit_content.standard_name = this.lit_content.type_name + '(' + other_names + '、' + other_names_2 + ')';
                         }
                     }
-            },
-
-            /*类*/
-            get_type_lei(){
-                if (this.lit_content.selected_bu.chinese_name !== '') {
-                    this.type_lei_arr.splice(0,this.type_lei_arr.length);
-                    this.lit_content.selected_lei.item_2_id = 0;
-                    this.lit_content.selected_lei.chinese_name = '';
-                    let object = {};
-                    let new_url = this.menu_url + '?model_id=8&&item_1_id='+this.lit_content.selected_bu.item_1_id + '&&item_2_id=0';
-                    this.http_json(new_url, 'get', object, this.success_type_lei, this.fail_type_lei);
-                }
-            },
-
-            /*属*/
-            get_type_shu(){
-                if (this.lit_content.selected_lei.chinese_name !== '') {
-                    this.type_shu_arr.splice(0,this.type_shu_arr.length);
-                    this.lit_content.selected_shu.item_3_id = 0;
-                    this.lit_content.selected_shu.chinese_name = '';
-                    let object = {};
-                    let new_url = this.menu_url + '?model_id=8&&item_1_id=' + this.lit_content.selected_bu.item_1_id + '&&item_2_id=' + this.lit_content.selected_lei.item_2_id;
-                    this.http_json(new_url, 'get', object, this.success_type_shu, this.fail_type_shu);
                 }
             },
 
@@ -458,14 +435,36 @@
                         chinese_name: response.body[i].chinese_name
                     })
                 }
+                this.get_type_lei_1();
             },
 
             fail_type_bu(response){
                 console.log("部获取失败");
             },
 
-
             /*类*/
+            get_type_lei_1(){
+                if (this.lit_content.selected_bu.chinese_name !== ''&&this.type_bu_arr.length > 0) {
+                    let object = {};
+                    let new_url = this.menu_url + '?model_id=8&&item_1_id='+this.lit_content.selected_bu.item_1_id + '&&item_2_id=0';
+                    this.http_json(new_url, 'get', object, this.success_type_lei, this.fail_type_lei);
+                }
+            },
+
+            get_type_lei_2(){
+                if (this.lit_content.selected_bu.chinese_name !== ''&&this.type_bu_arr.length > 0) {
+                    this.type_lei_arr.splice(0,this.type_lei_arr.length);
+                    this.lit_content.selected_lei.item_2_id = 0;
+                    this.lit_content.selected_lei.chinese_name = '';
+                    this.type_shu_arr.splice(0,this.type_shu_arr.length);
+                    this.lit_content.selected_shu.item_3_id = 0;
+                    this.lit_content.selected_shu.chinese_name = '';
+                    let object = {};
+                    let new_url = this.menu_url + '?model_id=8&&item_1_id='+this.lit_content.selected_bu.item_1_id + '&&item_2_id=0';
+                    this.http_json(new_url, 'get', object, this.success_type_lei, this.fail_type_lei);
+                }
+            },
+
             success_type_lei(response){
                 for (let i = 0; i < response.body.length; i++) {
                     this.type_lei_arr.push({
@@ -473,6 +472,7 @@
                         chinese_name: response.body[i].chinese_name
                     })
                 }
+                this.get_type_shu();
             },
 
             fail_type_lei(response){
@@ -480,6 +480,14 @@
             },
 
             /*属*/
+            get_type_shu(){
+                if (this.lit_content.selected_lei.chinese_name !== ''&&this.type_lei_arr.length > 0) {
+                    let object = {};
+                    let new_url = this.menu_url + '?model_id=8&&item_1_id=' + this.lit_content.selected_bu.item_1_id + '&&item_2_id=' + this.lit_content.selected_lei.item_2_id;
+                    this.http_json(new_url, 'get', object, this.success_type_shu, this.fail_type_shu);
+                }
+            },
+
             success_type_shu(response){
                 for (let i = 0; i < response.body.length; i++) {
                     this.type_shu_arr.push({
@@ -492,7 +500,6 @@
             fail_type_shu(response){
                 console.log("属获取失败");
             },
-
 
             /*责任行为类型*/
             get_action(){
@@ -924,6 +931,7 @@
                     }
                 }
                 console.log(JSON.stringify(this.lit_content));
+                this.get_type_bu();
             },
 
             fail_lit_info(){

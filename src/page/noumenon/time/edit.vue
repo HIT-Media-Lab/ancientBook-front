@@ -56,7 +56,7 @@
             </div>
 
             <div class="zxw-character-row">
-                <label class="zxw-character-span zxw-must-write">月：</label>
+                <label class="zxw-character-span">月：</label>
                 <select  class="zxw-ins-select zxw-edit-character-input-margin" :disabled="this.g_year === ''" v-model="selected_2_month" :="clean_g_month">
                     <option v-for="item in g_month_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>

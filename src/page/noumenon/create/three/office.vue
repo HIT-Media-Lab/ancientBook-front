@@ -17,7 +17,7 @@
         <div class="zxw-character-row">
             <label class="zxw-character-span">别名：</label>
             <input type="text" class="zxw-character-input-content zxw-null zxw-display-list-margin" readonly value="不详" v-if="this.$store.getters.get_build_off.other_name === '' " >
-            <input type="text" class="zxw-character-input-content  zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_off.other_name" v-else>
+            <input type="text" class="zxw-character-input-content  zxw-display-list-margin" readonly v-model="this.$store.getters.get_build_off.other_name" v-else>
             <label class="zxw-character-span">隶属机构：</label>
             <p class="zxw-character-input-content zxw-null" v-if="this.$store.getters.get_build_off.institution_name === ''">不详</p>
             <p class="zxw-character-input-content zxw-display-cursor" v-model="this.$store.getters.get_build_off.institution_name" @click="show_details_ins()" v-if="this.$store.getters.get_build_off.begin_standard_time !== '' && show_details[0] === false">{{$store.getters.get_build_off.institution_name}}</p>

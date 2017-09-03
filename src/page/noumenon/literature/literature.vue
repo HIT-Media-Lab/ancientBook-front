@@ -82,7 +82,7 @@
 <script>
     /*let Mock = require('mockjs');
     //显示用户列表
-    Mock.mock('/ancient_books/get_literature_by_id.action?literature_id=1','get',{
+    Mock.mock('/ancient_books/get_literature_by_id.action?id=1','get',{
         "status|200":200,
         "standard_name":'书名([宋朝]陈赫责任行为1、[宋朝]陈赫责任行为1)',
         "type_name":'书名',
