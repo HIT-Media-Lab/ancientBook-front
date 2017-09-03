@@ -102,7 +102,6 @@
             this.get_menu();
             this.get_month();
             this.get_day();
-            this.$store.commit('change_fork',true);
         },
         components:{
             modal
@@ -155,6 +154,8 @@
                     this.year_number = '';
                     this.year_data.splice(0,this.year_data.length);
                     this.time_object = {};
+                } else{
+                    this.$store.commit('change_fork',true);
                 }
             }
         },

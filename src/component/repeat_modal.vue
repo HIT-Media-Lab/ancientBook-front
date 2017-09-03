@@ -21,10 +21,6 @@
 <script>
     import modal from './modal.vue';
     export default{
-        create(){
-            this.$store.commit('change_fork',false);
-        },
-
         components:{
             modal
         },
@@ -59,6 +55,16 @@
                     this.$router.push({name:'time_detail',params:{nouId:this.repeat_id}});
                 }
 
+            }
+        },
+
+        watch:{
+            'show_repeat':function(){
+                if(this.show_repeat === true){
+                    this.$store.commit('change_fork',false);
+                } else {
+                    this.$store.commit('change_fork',true);
+                }
             }
         }
     }

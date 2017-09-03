@@ -261,8 +261,12 @@
 
     import modal from "../component/modal.vue";
     export default{
-        created(){
-            this.$store.commit('change_fork',true);
+        watch:{
+            'noumenon_modal':function(){
+                if(this.noumenon_modal === true){
+                    this.$store.commit('change_fork',true);
+                }
+            }
         },
 
         components:{

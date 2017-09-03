@@ -2,6 +2,7 @@
     <div id="1" class="zxw-lit-create-summery"
          v-html="innerText"
          :contenteditable="canEdit"
+         @focus="isLocked === true"
          @blur="changeText"
          v-bind:class="{'zxw-input-number':summary_error}">
     </div>
@@ -27,21 +28,23 @@
         },
         watch: {
             'value'(){
+                this.isLocked = false;
                 if (!this.isLocked || !this.innerText) {
                     this.innerText = this.value;
+                    if(this.innerText.length >= 45){
+                        this.summary_error = true;
+                        this.$emit('open_warning',this.summary_error);
+                    } else {
+                        this.summary_error = false;
+                        this.$emit('open_warning',this.summary_error);
+                    }
                 }
             }
         },
         methods: {
             changeText(){
                 this.$emit('input', this.$el.innerHTML);
-                if(this.$el.innerHTML.length >= 45){
-                    this.summary_error = true;
-                    this.$emit('open_warning',this.summary_error);
-                } else {
-                    this.summary_error = false;
-                    this.$emit('open_warning',this.summary_error);
-                }
+
             }
         }
     }

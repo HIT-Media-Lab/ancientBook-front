@@ -233,6 +233,10 @@
     export default{
         created(){
             this.prams = this.$route.name;
+            this.get_type_save();
+            this.get_type_level();
+            this.get_type_name();
+            this.get_confirm();
             this.get_type_bu();
             this.get_action();
             this.initial_lit();
@@ -293,86 +297,14 @@
                 menu_url: '/ancient_books/get_menu_items.action',
                 search_pla_url: '/ancient_books/get_location_list_by_name.action',
                 search_cha_url: '/ancient_books/get_person_list_by_name.action',
-                type_save_arr: [
-                    {
-                        item_1_id: 1,
-                        chinese_name: '不详'
-                    },
-                    {
-                        item_1_id: 2,
-                        chinese_name: '存'
-                    },
-                    {
-                        item_1_id: 3,
-                        chinese_name: '佚'
-                    },
-                    {
-                        item_1_id: 4,
-                        chinese_name: '残'
-                    },
-                    {
-                        item_1_id: 5,
-                        chinese_name: '疑'
-                    }
-                ],
-                type_level_arr: [
-                    {
-                        item_1_id: 1,
-                        chinese_name: '不详'
-                    },
-                    {
-                        item_1_id: 2,
-                        chinese_name: '丛书总目'
-                    },
-                    {
-                        item_1_id: 3,
-                        chinese_name: '丛书子目'
-                    },
-                    {
-                        item_1_id: 4,
-                        chinese_name: '单行本'
-                    },
-                    {
-                        item_1_id: 5,
-                        chinese_name: '合订本总目'
-                    },
-                    {
-                        item_1_id: 6,
-                        chinese_name: '合订本子目'
-                    }
-                ],
+                type_save_arr: [],
+                type_level_arr: [],
                 type_bu_arr: [],
                 type_lei_arr: [],
                 type_shu_arr: [],
-                type_name_arr: [
-                    {
-                        item_1_id: 1,
-                        chinese_name: '不详'
-                    },
-                    {
-                        item_1_id: 2,
-                        chinese_name: '责任人'
-                    },
-                    {
-                        item_1_id: 3,
-                        chinese_name: '责任机构'
-                    }
-                ],
+                type_name_arr: [],
                 action_arr: [],
-                confirm_arr: [
-                    {
-                        item_1_id: 1,
-                        chinese_name: '不详'
-                    },
-                    {
-                        item_1_id: 2,
-                        chinese_name: '确定'
-                    },
-                    {
-                        item_1_id: 3,
-                        chinese_name: '题'
-                    }
-                ],
+                confirm_arr: [],
                 open_time_index: 0,
                 lit_content: {
                     standard_name:'',
@@ -509,6 +441,85 @@
         },
 
         methods: {
+            /*存佚类型*/
+            get_type_save(){
+                let object = {};
+                let new_url = this.menu_url + '?model_id=6&&item_1_id=0&&item_2_id=0';
+                this.http_json(new_url, 'get', object, this.success_type_save, this.fail_type_save);
+            },
+
+            success_type_save(response){
+                for(let i = 0;i < response.body.length; i++){
+                    this.type_save_arr.push({
+                        item_1_id: response.body[i].item_1_id,
+                        chinese_name: response.body[i].chinese_name
+                    })
+                }
+            },
+
+            fail_type_save(){
+                console.log("存佚类型获取失败");
+            },
+
+            /*品种级别*/
+            get_type_level(){
+                let object = {};
+                let new_url = this.menu_url + '?model_id=7&&item_1_id=0&&item_2_id=0';
+                this.http_json(new_url, 'get', object, this.success_type_level, this.fail_type_level);
+            },
+
+            success_type_level(response){
+                for(let i = 0;i < response.body.length; i++){
+                    this.type_level_arr.push({
+                        item_1_id: response.body[i].item_1_id,
+                        chinese_name: response.body[i].chinese_name
+                    })
+                }
+            },
+
+            fail_type_level(){
+                console.log("品种级别获取失败");
+            },
+
+            /*责任者类型*/
+            get_type_name(){
+                let object = {};
+                let new_url = this.menu_url + '?model_id=4&&item_1_id=0&&item_2_id=0';
+                this.http_json(new_url, 'get', object, this.success_type_name, this.fail_type_name);
+            },
+
+            success_type_name(response){
+                for(let i = 0;i < response.body.length; i++){
+                    this.type_name_arr.push({
+                        item_1_id: response.body[i].item_1_id,
+                        chinese_name: response.body[i].chinese_name
+                    })
+                }
+            },
+
+            fail_type_name(){
+                console.log("责任者类型获取失败");
+            },
+
+            /*确定性*/
+            get_confirm(){
+                let object = {};
+                let new_url = this.menu_url + '?model_id=5&&item_1_id=0&&item_2_id=0';
+                this.http_json(new_url, 'get', object, this.success_confirm, this.fail_confirm);
+            },
+
+            success_confirm(response){
+                for(let i = 0;i < response.body.length; i++){
+                    this.confirm_arr.push({
+                        item_1_id: response.body[i].item_1_id,
+                        chinese_name: response.body[i].chinese_name
+                    })
+                }
+            },
+
+            fail_confirm(){
+                console.log("确定性获取失败");
+            },
 
             /*部*/
             get_type_bu(){
@@ -848,7 +859,7 @@
 
             success_repeat(response){
                 if(response.body.result === 0){
-                    this.$store.commit('change_fork',false);
+                    //this.$store.commit('change_fork',false);
                     this.show_repeat = true;
                     this.repeat_id = response.body.id;
                     console.log("本体重复");
@@ -896,6 +907,8 @@
         background-color: transparent;
         border: 2px solid black;
         vertical-align:top;
+        word-break: break-all;
+        white-space: inherit;
     }
 
     .zxw-lit-select{
