@@ -67,7 +67,7 @@
                     <!--修订板块-->
                     <div id="edit" class="div div-now">
                         <!--文本主体-->
-                        <div id="ry-edit-text" class="body-text">蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。</div>
+                        <div id="ry-edit-text" class="body-text">{{content}}</div>
                         <br>
                         <br>
                         <br>
@@ -185,7 +185,7 @@
             <!--图片工作台-->
             <div>
                 <div class="float-right ry-hide-picture"><img src="../assets/img/picture-button/more.png" height="130" width="29"/></div>
-                <img id="ry-picture-work"/>
+                <img id="ry-picture-work" class="ry-picture-work"/>
             </div>
         </div>
 
@@ -337,8 +337,6 @@
 
         mounted : function () {
             this.change_module();
-            this.renew_mark();
-            this.renew_comment();
         },
 
         methods: {
@@ -435,6 +433,8 @@
                     this.content = response.body.content;
                     alert(this.content);
                     this.get_edit();
+                    this.renew_mark();
+                    this.renew_comment();
                 }
             },
 
@@ -1839,6 +1839,10 @@
         width: 400px;
         height: 200px;
         position: static;
+    }
+
+    .ry-picture-work{
+        background-size: 100%;
     }
 
     /*批注字体样式*/
