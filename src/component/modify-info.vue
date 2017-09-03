@@ -34,7 +34,6 @@
                 </header>
                 <div class="dialog-body" slot="body">
                     <div class="j-modify-body">
-                        <p>hhasihsai</p>
                         <div class="j-edit-pwd">
                             <span class="j-edit-pwd-span">用户名：</span>
                             <input type="text" placeholder="请输入您的新用户名" class="j-edit-pwd-input" v-model="new_name" @blur="check()" id="new_name" v-bind:class="{ warnborder: Active1 }">
