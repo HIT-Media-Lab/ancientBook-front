@@ -329,11 +329,6 @@ const router = new VueRouter({
                     name:'mybook'
                 },
                 {
-                    path:'mybook',
-                    component:mybook,
-                    name:'mybook'
-                },
-                {
                     path:'collection/page/:pageId',
                     component:collection,
                     name:'collection'
