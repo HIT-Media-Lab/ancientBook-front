@@ -585,9 +585,6 @@
                     console.log ("success edit!");
                     window.location.reload();   //  重新加载
                 }
-                else if (response.body.result === 0) {
-                    console.log ("fail edit");
-                }
             },
 
             fail_post_edit() {
@@ -612,10 +609,7 @@
                 if (response.body.result === 1) {
                     alert("修订成功");
                     console.log("success update CM!");
-                }
-                else if (response.body.result === 0) {
-                    alert("修订失败");
-                    console.log("fail update CM");
+                    this.post_edit();    //  修改古籍文本内容请求
                 }
             },
 
@@ -904,8 +898,6 @@
                     this.content = text_edit.innerText;
                     this.commit = text.innerText;
                     this.post_update_cm();   //  批量更新批注标记
-                    this.post_edit();    //  修改古籍文本内容请求
-                    window.location.reload();
                 }
             },
 
@@ -989,7 +981,6 @@
                     }
                     this.content_add_comment = textarea_add_comment.value;
                     this.post_add_comment();
-                    window.location.reload();
                 }
             },
 
@@ -1127,7 +1118,6 @@
                 this.noumenon_id = this.search_noumenon_content[index].noumenon_id;
                 this.post_add_mark();
                 this.add_mark_modal = false;
-                window.location.reload();
             },
 
 
