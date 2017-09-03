@@ -1814,6 +1814,8 @@
     }
 
     .ry-picture-work{
+        width: 470px;
+        height: 470px;
         background-size: 100%;
     }
 
