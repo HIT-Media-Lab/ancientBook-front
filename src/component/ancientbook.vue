@@ -191,7 +191,7 @@
 
         <!--目录模态框-->
         <div>
-            <modal :show_modal.sync = "catalogue_modal" @fireclose = "catalogue_modal = false" class="ry-modal-border">
+            <modal :show_modal.sync = "catalogue_modal" @fireclose = "catalogue_modal = false" class="ry-modal-border ry-modal-menu">
                 <div class="dialog-body" slot="body">
                     <div v-for="(item,index) in book_all_info.catalogue">
                         <div>册{{item.book_count}}{{item.book_name}}</div>
@@ -1817,6 +1817,11 @@
         width: 470px;
         height: 470px;
         background-size: 100%;
+    }
+
+    .ry-modal-menu{
+        width: 450px;
+        height: 450px;
     }
 
     /*批注字体样式*/
