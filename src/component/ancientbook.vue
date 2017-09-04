@@ -1025,12 +1025,13 @@
                     for (var k = 0; k < this.mark.length; k++) {
                         //该点击节点不在该条标记内
                         if (click < this.mark[k].begin_mark || click >= this.mark[k].end_mark) {
+                            alert(click);
                             alert(1);
                             continue;
                         }
                         //该点击在该条标记内
                         if (click >= this.mark[k].begin_mark && click < this.mark[k].end_mark) {
-                            alert(1);
+                            alert(click);
                             this.$route.params.noumenon_type = this.mark[k].noumenon_type;
                             this.$route.params.noumenon_id = this.mark[k].noumenon_id;
                             this.$router.push({name:'', params: this.$route.params});
