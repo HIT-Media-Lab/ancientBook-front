@@ -178,30 +178,6 @@
            {
                "standard_name":"哈尔滨",
                "noumenon_id|26":26
-           },
-           {
-               "standard_name":"哈尔滨",
-               "noumenon_id|26":26
-           },
-           {
-               "standard_name":"哈尔滨",
-               "noumenon_id|26":26
-           },
-           {
-               "standard_name":"哈尔滨",
-               "noumenon_id|26":26
-           },
-           {
-               "standard_name":"哈尔滨",
-               "noumenon_id|26":26
-           },
-           {
-               "standard_name":"哈尔滨",
-               "noumenon_id|26":26
-           },
-           {
-               "standard_name":"哈尔滨",
-               "noumenon_id|26":26
            }
        ]
    });

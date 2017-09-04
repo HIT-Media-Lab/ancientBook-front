@@ -8,7 +8,7 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">朝代：</label>
-            <input type="text" class="zxw-character-input-margin zxw-character-input-content" readonly v-model="this.$store.getters.get_build_time.selected_chaodai.chinese_name">
+            <input type="text" class="zxw-display-list-margin zxw-character-input-content" readonly v-model="this.$store.getters.get_build_time.selected_chaodai.chinese_name">
             <label class="zxw-character-span">年号：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_nianhao.chinese_name === ''" >
             <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_time.selected_nianhao.chinese_name" v-else>
@@ -16,8 +16,8 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">年份：</label>
-            <input type="text" class="zxw-character-input-content zxw-null zxw-character-input-margin" readonly value="不详" v-if="this.$store.getters.get_build_time.year === '' " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_time.year" v-else>
+            <input type="text" class="zxw-character-input-content zxw-null zxw-display-list-margin" readonly value="不详" v-if="this.$store.getters.get_build_time.year === '' " >
+            <input type="text" class="zxw-character-input-content zxw-display-list-margin" readonly v-model="this.$store.getters.get_build_time.year" v-else>
             <label class="zxw-character-span">月：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_1_month.chinese_name === '' " >
             <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_time.selected_1_month.chinese_name" v-else>
@@ -25,8 +25,8 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">日：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_1_day.chinese_name === '' " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_time.selected_1_day.chinese_name" v-else>
+            <input type="text" class=" zxw-display-list-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_1_day.chinese_name === '' " >
+            <input type="text" class="zxw-character-input-content zxw-display-list-margin" readonly v-model="this.$store.getters.get_build_time.selected_1_day.chinese_name" v-else>
             <label class="zxw-character-span">干支：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_ganzhi.chinese_name === '' " >
             <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_time.selected_ganzhi.chinese_name" v-else>
@@ -34,8 +34,8 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">节气：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_jieqi === '' " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_time.selected_jieqi" v-else>
+            <input type="text" class=" zxw-display-list-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_jieqi === '' " >
+            <input type="text" class="zxw-character-input-content zxw-display-list-margin" readonly v-model="this.$store.getters.get_build_time.selected_jieqi" v-else>
             <label class="zxw-character-span">英译：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.english === '' " >
             <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_time.english" v-else>
@@ -43,8 +43,8 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">绝对日号：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.juedui === '' " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_time.juedui" v-else>
+            <input type="text" class=" zxw-display-list-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.juedui === '' " >
+            <input type="text" class="zxw-character-input-content zxw-display-list-margin" readonly v-model="this.$store.getters.get_build_time.juedui" v-else>
             <label class="zxw-character-span">公元年份：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.g_year === '' " >
             <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_time.g_year" v-else>
@@ -52,8 +52,8 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">月：</label>
-            <input type="text" class=" zxw-character-input-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_2_month.chinese_name === null">
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="g_month" v-else>
+            <input type="text" class=" zxw-display-list-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_2_month.chinese_name === null">
+            <input type="text" class="zxw-character-input-content zxw-display-list-margin" readonly v-model="g_month" v-else>
             <label class="zxw-character-span">日：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_2_day.chinese_name === null">
             <input type="text" class="zxw-character-input-content" readonly v-model="g_day" v-else>

@@ -452,10 +452,10 @@
             },
 
             success_chaodai_type(response){
-                for(let i = 0;i < response.body.length;i++){
+                for(let i = 0;i < response.body.g.length;i++){
                     this.chaodai_type.push({
-                        item_1_id:response.body[i].item_1_id,
-                        chinese_name:response.body[i].chinese_name
+                        item_1_id:response.body.g[i].item_1_id,
+                        chinese_name:response.body.g[i].chinese_name
                     })
                 }
             },
@@ -475,10 +475,10 @@
             },
 
             success_nianhao_type(response){
-                for(let i = 0;i < response.body.length;i++){
+                for(let i = 0;i < response.body.g.length;i++){
                     this.nianhao_type.push({
-                        item_2_id:response.body[i].item_2_id,
-                        chinese_name:response.body[i].chinese_name
+                        item_2_id:response.body.g[i].item_2_id,
+                        chinese_name:response.body.g[i].chinese_name
                     })
                 }
                 console.log('nianhao: '+JSON.stringify(this.nianhao_type));

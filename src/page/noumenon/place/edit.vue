@@ -100,13 +100,10 @@
         <time_modal :time_modal="this.time_modal_2" v-on:success_time="end_time" v-on:close_modal="close_end()"></time_modal>
 
         <search_modal :search_url="this.search_location" :noumenon_modal="this.seat_modal" :noumenon_number="7" :repeat_arr="this.input_content.seat_standard_name" v-on:close_modal="close_seat" v-on:add_noumenon_relations="add_seat"></search_modal>
-        <search_modal :search_url="this.search_location" :noumenon_modal="this.s_location_modal" :noumenon_number="7" :repeat_arr="this.input_content.s_location_name" v-on:close_modal="close_s_location" v-on:add_noumenon_relations="add_s_location"></search_modal>
-        <search_modal :search_url="this.search_location" :noumenon_modal="this.l_location_modal" :noumenon_number="7" :repeat_arr="this.input_content.l_location_name" v-on:close_modal="close_l_location" v-on:add_noumenon_relations="add_l_location"></search_modal>
+        <search_modal :search_url="this.search_location" :noumenon_modal="this.s_location_modal" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_s_location" v-on:add_noumenon_relations="add_s_location"></search_modal>
+        <search_modal :search_url="this.search_location" :noumenon_modal="this.l_location_modal" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_l_location" v-on:add_noumenon_relations="add_l_location"></search_modal>
         <!--若地点本体规范已存在的模态框-->
         <repeat_modal :show_repeat="this.show_repeat" :repeat_name="this.input_content.standard_name" :repeat_id="this.repeat_id" :repeat_noumenon="this.repeat_noumenon" v-on:close_modal="close_repeat"></repeat_modal>
-
-        <!--添加治所的模态框-->
-        <search_modal :search_url="this.search_location" :noumenon_modal="this.seat_modal" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_seat" v-on:add_noumenon_relations="add_seat"></search_modal>
     </div>
 </template>
 
