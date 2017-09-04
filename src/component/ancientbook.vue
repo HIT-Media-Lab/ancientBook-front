@@ -957,6 +957,7 @@
                     this.content_add_comment = textarea_add_comment.value;
                     this.post_add_comment();
                 }
+                this.add_comment_modal = false;
             },
 
             /**
@@ -1158,6 +1159,8 @@
              */
             get_edit() {
                 var a = 0;
+                var text_edit = document.getElementById("text-edit");
+                text_edit.innerHTML = '';
                 //文本逐字遍历
                 for (var i = 0; i < this.content.length; i++) {
                     //按顺序依次获得文本中的字
@@ -1202,7 +1205,6 @@
                             break;
                         }
                     }
-                    var text_edit = document.getElementById("text-edit");
                     //该字既不是标记也不是批注
                     if (a == 0) {
                         var span1 = document.createElement("span");
