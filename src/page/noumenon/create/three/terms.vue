@@ -33,7 +33,7 @@
         <div class="zxw-character-row">
             <label class="zxw-character-span">英译：</label>
             <input type="text" class="zxw-display-list-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_terms.english === ''">
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_terms.english" v-else>
+            <input type="text" class="zxw-character-input-content zxw-display-list-margin" readonly v-model="this.$store.getters.get_build_terms.english" v-else>
             <label class="zxw-character-span">解释：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_terms.explain === ''">
             <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_terms.explain" v-else>

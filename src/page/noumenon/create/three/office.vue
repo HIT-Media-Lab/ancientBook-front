@@ -46,7 +46,7 @@
         <div class="zxw-character-row">
             <label class="zxw-character-span">所属朝代：</label>
             <input type="text" class="zxw-character-input-content zxw-display-list-margin zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_off.dynasty === ''">
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_off.dynasty" v-else>
+            <input type="text" class="zxw-character-input-content zxw-display-list-margin" readonly v-model="this.$store.getters.get_build_off.dynasty" v-else>
         </div>
 
         <template v-if="this.$store.getters.get_build_off.remark_1_name !== ''">

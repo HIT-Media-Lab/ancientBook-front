@@ -27,7 +27,7 @@
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span">日：</label>
-                <select  class="zxw-ins-select zxw-edit-character-input-margin" v-model="selected_1_day" :="repeat_nou_1" v-bind="clean_day" v-bind:disabled="selected_1_month.chinese_name === ''">
+                <select  class="zxw-ins-select zxw-edit-character-input-margin" v-model="selected_1_day" :="repeat_nou_1" v-bind="clean_day" v-bind:disabled="selected_1_month.chinese_name === ''||selected_1_month.chinese_name === '-'">
                     <option v-for="item in day_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
 

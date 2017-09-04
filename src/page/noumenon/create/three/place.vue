@@ -17,7 +17,7 @@
         <div class="zxw-character-row">
             <label class="zxw-character-span">别名：</label>
             <input type="text" class="zxw-display-list-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.other_name === '' " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_place.other_name" v-else>
+            <input type="text" class="zxw-character-input-content zxw-display-list-margin" readonly v-model="this.$store.getters.get_build_place.other_name" v-else>
             <label class="zxw-character-span">经度：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.longitude === '' " >
             <input type="text" class="zxw-character-input-content" readonly v-model="this.$store.getters.get_build_place.longitude" v-else>
@@ -26,7 +26,7 @@
         <div class="zxw-character-row">
             <label class="zxw-character-span">纬度：</label>
             <input type="text" class="zxw-display-list-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.latitude === '' " >
-            <input type="text" class="zxw-character-input-content zxw-character-input-margin" readonly v-model="this.$store.getters.get_build_place.latitude" v-else>
+            <input type="text" class="zxw-character-input-content zxw-display-list-margin" readonly v-model="this.$store.getters.get_build_place.latitude" v-else>
             <label class="zxw-character-span">今所在：</label>
             <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_place.location_today === '' " >
             <input type="text" class="zxw-character-input-content zxw-display-cursor" readonly v-model="this.$store.getters.get_build_place.location_today" v-else>

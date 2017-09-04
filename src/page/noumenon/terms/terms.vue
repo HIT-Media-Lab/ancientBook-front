@@ -130,7 +130,7 @@
         data(){
             return{
                 get_terms_url:'/ancient_books/get_technical_by_id.action',
-                delete_terms_url:'/ancient_books/delete_literature_by_id.action',
+                delete_terms_url:'/ancient_books/delete_technical_by_id.action',
                 get_course_url:'/ancient_books/get_menu_items.action',
                 terms_content:{
                     standard_name: '',

@@ -551,7 +551,7 @@
     }
 
     .zxw-modal-body{
-        margin:50px 0 0 0;
+        margin:20px 0 0 0;
     }
 
     .zxw-modal-margin{
@@ -574,7 +574,8 @@
     }
 
     .zxw-admin-modal-footerbtn{
-        margin:0 0 0 180px;
+        height:55px;
+        margin:0 0 0 170px;
     }
     .zxw-modal-btn-margin{
         width:100px;

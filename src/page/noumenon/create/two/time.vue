@@ -8,7 +8,7 @@
             <p class="zxw-create-character" v-bind="standard_title"  v-model="input_time.standard_name">本体名称：{{input_time.standard_name}}</p>
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">朝代：</label>
-                <select  class="zxw-ins-select zxw-character-input-margin" v-model="input_time.selected_chaodai" v-bind="get_nianhao_type" :="repeat_nou_1">
+                <select  class="zxw-ins-select zxw-character-input-margin" v-model="input_time.selected_chaodai" @change="get_nianhao_type" :="repeat_nou_1">
                     <option v-for="item in chaodai_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
                 <label class="zxw-character-span">年号：</label>
@@ -28,7 +28,7 @@
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span">日：</label>
-                <select  class="zxw-ins-select zxw-character-input-margin" :disabled="this.input_time.selected_1_month.chinese_name === ''" v-model="input_time.selected_1_day" :="repeat_nou_1" v-bind="clean_day">
+                <select  class="zxw-ins-select zxw-character-input-margin" :disabled="this.input_time.selected_1_month.chinese_name === ''||this.input_time.selected_1_month.chinese_name === '-'" v-model="input_time.selected_1_day" :="repeat_nou_1" v-bind="clean_day">
                     <option v-for="item in day_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
                 <label class="zxw-character-span">干支：</label>
@@ -372,17 +372,6 @@
                 }
             },
 
-            get_nianhao_type(){
-                if(this.input_time.selected_chaodai.chinese_name !== ''){
-                    this.nianhao_type.splice(0,this.nianhao_type.length);
-                    this.input_time.selected_nianhao.item_2_id=0;
-                    this.input_time.selected_nianhao.chinese_name='';
-                    let object = {};
-                    let new_url = this.menu_url+'?model_id=25&&item_1_id='+this.input_time.selected_chaodai.item_1_id+'&&item_2_id=0';
-                    this.http_json(new_url,'get',object,this.success_nianhao_type,this.fail_nianhao_type);
-                }
-            },
-
             compute_ganzhi(){
                 if(this.input_time.g_year !== '' && this.show_g_year === false ){
                     let new_url = this.ganzhi_name+'?gongyuan='+parseInt(this.input_time.g_year);
@@ -476,6 +465,15 @@
             },
 
             /*年号下拉框*/
+            get_nianhao_type(){
+                    this.nianhao_type.splice(0,this.nianhao_type.length);
+                    this.input_time.selected_nianhao.item_2_id=0;
+                    this.input_time.selected_nianhao.chinese_name='';
+                    let object = {};
+                    let new_url = this.menu_url+'?model_id=25&&item_1_id='+this.input_time.selected_chaodai.item_1_id+'&&item_2_id=0';
+                    this.http_json(new_url,'get',object,this.success_nianhao_type,this.fail_nianhao_type);
+            },
+
             success_nianhao_type(response){
                 for(let i = 0;i < response.body.length;i++){
                     this.nianhao_type.push({

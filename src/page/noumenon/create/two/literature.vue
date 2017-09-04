@@ -222,6 +222,40 @@
                 "chinese_name": "属3"
             }
         ]
+    });
+
+    Mock.mock('/ancient_books/get_menu_items.action?model_id=4&&item_1_id=0&&item_2_id=0','get', {
+        "g":[
+            {"model_id|4": 4,
+                "item_3_id|1": 1,
+                "chinese_name": "不详"
+            },
+            {"model_id|4": 4,
+                "item_3_id|2": 2,
+                "chinese_name": "责任人"
+            },
+            {"model_id|4": 4,
+                "item_3_id|3": 3,
+                "chinese_name": "责任机构"
+            }
+        ]
+    });
+
+    Mock.mock('/ancient_books/get_menu_items.action?model_id=5&&item_1_id=0&&item_2_id=0','get', {
+        "g":[
+            {"model_id|5": 5,
+                "item_3_id|1": 1,
+                "chinese_name": "不详"
+            },
+            {"model_id|5": 5,
+                "item_3_id|2": 2,
+                "chinese_name": "确定"
+            },
+            {"model_id|5": 5,
+                "item_3_id|3": 3,
+                "chinese_name": "题"
+            }
+        ]
     });*/
 
     import create_word from '../../../../component/create-word.vue';

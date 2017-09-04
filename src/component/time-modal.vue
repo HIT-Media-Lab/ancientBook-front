@@ -25,7 +25,7 @@
 
                 <label class="zxw-font-sixteen">日：</label>
                 <select  class="zxw-time-select" v-model="selected_4">
-                    <option v-for="item in day_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}" v-bind:disabled="selected_3.option === ''">{{item.chinese_name}}</option>
+                    <option v-for="item in day_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}" v-bind:disabled="selected_3.option === ''||selected_3.option === '-'">{{item.chinese_name}}</option>
                 </select>
 
                 <button class="zxw-time-add" v-bind:disabled="selected_1.option === ''" @click="add_time()">添加</button>

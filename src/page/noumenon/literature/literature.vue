@@ -9,31 +9,39 @@
                 <label class="zxw-lit-label">书名:</label>
                 <p class="zxw-lit-info zxw-lit-info-margin" v-model="type_name">{{type_name}}</p>
                 <label class="zxw-lit-label">别名:</label>
-                <p class="zxw-lit-info" v-model="type_other_name">{{type_other_name}}</p>
+                <p class="zxw-lit-info zxw-null" v-if="type_other_name === ''">不详</p>
+                <p class="zxw-lit-info" v-model="type_other_name" v-else>{{type_other_name}}</p>
             </div>
 
             <div class="zxw-lit-layer">
                 <label class="zxw-lit-label">存佚类型：</label>
-                <p class="zxw-lit-info zxw-lit-info-margin" v-model="type_save_name">{{type_save_name}}</p>
+                <p class="zxw-lit-info zxw-lit-info-margin zxw-null" v-if="type_save_name === ''">不详</p>
+                <p class="zxw-lit-info  zxw-lit-info-margin" v-model="type_save_name" v-else>{{type_save_name}}</p>
                 <label class="zxw-lit-label">品种级别:</label>
-                <p class="zxw-lit-info" v-model="type_level_name">{{type_level_name}}</p>
+                <p class="zxw-lit-info zxw-null" v-if="type_level_name === ''">不详</p>
+                <p class="zxw-lit-info" v-model="type_level_name" v-else>{{type_level_name}}</p>
 
             </div>
 
             <div class="zxw-lit-layer">
                 <label class="zxw-lit-label">英译：</label>
-                <p class="zxw-lit-info" v-model="english">{{english}}</p>
+                <p class="zxw-lit-info zxw-null" v-if="english === ''">不详</p>
+                <p class="zxw-lit-info" v-model="english" v-else>{{english}}</p>
             </div>
 
             <div class="zxw-lit-layer">
                 <label class="zxw-lit-label">提要信息:</label>
-                <div class="zxw-lit-summery"  v-model="type_summary">{{type_summary}}</div>
+                <p class="zxw-lit-info zxw-null" v-if="type_summary === ''">不详</p>
+                <div class="zxw-lit-summery"  v-model="type_summary" v-else>{{type_summary}}</div>
             </div>
             <div>
                 <label class="zxw-lit-label">标准分类:</label>
+                <p class="zxw-lit-info zxw-null" v-if="type_bu_name === ''">不详</p>
                 <p class="zxw-lit-info" v-model="type_bu_name">{{type_bu_name}}</p>
-                <p class="zxw-lit-info" v-model="type_lei_name">{{type_lei_name}}</p>
-                <p class="zxw-lit-info" v-model="type_shu_name">{{type_shu_name}}</p>
+                <p class="zxw-lit-info zxw-null" v-if="type_lei_name === ''">不详</p>
+                <p class="zxw-lit-info" v-model="type_lei_name" v-else>{{type_lei_name}}</p>
+                <p class="zxw-lit-info zxw-null" v-if="type_shu_name === ''">不详</p>
+                <p class="zxw-lit-info" v-model="type_shu_name" v-else>{{type_shu_name}}</p>
             </div>
 
             <!--文献版本层信息循坏添加信息-->
@@ -49,14 +57,15 @@
 
                 <div class="zxw-lit-layer">
                     <label class="zxw-lit-type-label">责任地点:</label>
-                    <button class="zxw-lit-info zxw-lit-type-label-margin"  v-model="item.location_name">{{item.location_name}}</button>
-                    <label class="zxw-lit-type-label">责任者名称：</label>
-                    <button class="zxw-lit-info" v-model="item.name_standard_name">{{item.name_standard_name}}</button>
+                    <p class="zxw-lit-info zxw-lit-type-label-margin zxw-null" v-if="item.location_name === ''">不详</p>
+                    <button class="zxw-lit-info zxw-lit-type-label-margin"  v-model="item.location_name" v-else>{{item.location_name}}</button>
+                    <label class="zxw-lit-type-label">责任者类型:</label>
+                    <p class="zxw-lit-info" v-model="item.type_name">{{item.type_name}}</p>
                 </div>
 
                 <div class="zxw-lit-layer">
-                    <label class="zxw-lit-type-label">责任者类型:</label>
-                    <p class="zxw-lit-info zxw-lit-type-label-margin" v-model="item.type_name">{{item.type_name}}</p>
+                    <label class="zxw-lit-type-label">责任者名称：</label>
+                    <button class="zxw-lit-info zxw-lit-type-label-margin" v-model="item.name_standard_name">{{item.name_standard_name}}</button>
                     <label class="zxw-lit-type-label">责任行为：</label>
                     <p class="zxw-lit-info" v-model="item.action_name">{{item.action_name}}</p>
                 </div>
@@ -68,6 +77,7 @@
 
                 <div>
                     <label class="zxw-lit-type-label">责任说明:</label>
+                    <p class="zxw-lit-summery zxw-null" v-if="item.explain === ''">不详</p>
                     <p class="zxw-lit-summery" v-model="item.explain">{{item.explain}}</p>
                 </div>
             </div>
