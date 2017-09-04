@@ -97,23 +97,43 @@
                         </div>
                         <button class="zxw-input-add-character" @click="open_lit_location(index)"></button>
                     </div>
+                    <label class="zxw-lit-type-label zxw-must-write">责任者类型:</label>
+                    <select class="zxw-lit-select" v-model="item.selected_type_name" @change="type_name_select(index)">
+                        <option v-for="item in type_name_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
+                    </select>
+                </div>
+
+                <div class="zxw-lit-layer">
                     <label class="zxw-lit-type-label zxw-must-write">责任者名称：</label>
-                    <div  class="zxw-lit-info zxw-lit-input-style">
+                    <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style" v-if="item.selected_type_name.item_1_id === 2||item.selected_type_name.item_1_id === 0">
                         <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.character_standard_name !== ''">
                         <span class="zxw-person-relation-span" @mouseover="item.show_lit_character = true" @mouseout="item.show_lit_character = false" v-if="item.character_standard_name !== ''" v-bind:contenteditable="item.character_standard_name !== ''" @keydown="down_delete()">
                             <span class="zxw-tag-font" v-model="item.character_standard_name">{{item.character_standard_name}}</span>
                             <button class="zxw-add-hover-img" v-show="item.show_lit_character===true" @click="delete_lit_character(index)"></button>
                         </span>
                         </div>
-                        <button class="zxw-input-add-character" @click="open_lit_character(index)"></button>
+                        <button class="zxw-input-add-character" @click="open_lit_character(index)" :disabled="item.selected_type_name.item_1_id===0"></button>
                     </div>
-                </div>
 
-                <div class="zxw-lit-layer">
-                    <label class="zxw-lit-type-label zxw-must-write">责任者类型:</label>
-                    <select class="zxw-lit-select zxw-lit-type-label-margin" v-model="item.selected_type_name">
-                        <option v-for="item in type_name_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
-                    </select>
+                    <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style" v-else-if="item.selected_type_name.item_1_id === 3">
+                        <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.character_standard_name !== ''">
+                        <span class="zxw-person-relation-span" @mouseover="item.show_lit_character = true" @mouseout="item.show_lit_character = false" v-if="item.character_standard_name !== ''" v-bind:contenteditable="item.character_standard_name !== ''" @keydown="down_delete()">
+                            <span class="zxw-tag-font" v-model="item.character_standard_name">{{item.character_standard_name}}</span>
+                            <button class="zxw-add-hover-img" v-show="item.show_lit_character===true" @click="delete_lit_character(index)"></button>
+                        </span>
+                        </div>
+                        <button class="zxw-input-add-character" @click="open_lit_character(index)" :disabled="item.selected_type_name.item_1_id===0"></button>
+                    </div>
+
+                    <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style" v-else-if="item.selected_type_name.item_1_id === 1">
+                        <div class="zxw-lit-div-input">
+                        <span class="zxw-person-relation-span">
+                            <span class="zxw-tag-font">不详</span>
+                        </span>
+                        </div>
+                        <button class="zxw-input-add-character" :disabled="item.selected_type_name.item_1_id===1"></button>
+                    </div>
+
                     <label class="zxw-lit-type-label zxw-must-write">责任行为：</label>
                     <select class="zxw-lit-select" v-model="item.selected_action" :="repeat_nou_1">
                         <option v-for="item in action_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
@@ -145,7 +165,7 @@
 
         <search_modal :search_url="this.search_pla_url" :noumenon_modal="this.lit_content.varieties_arr[this.open_time_index].lit_pla_modal" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_lit_location" v-on:add_noumenon_relations="add_lit_location"></search_modal>
         <search_modal :search_url="this.search_cha_url" :noumenon_modal="this.lit_content.varieties_arr[this.open_time_index].lit_cha_modal" :noumenon_number="1" :repeat_arr="[]" v-on:close_modal="close_lit_character" v-on:add_noumenon_relations="add_lit_character"></search_modal>
-
+        <search_modal :search_url="this.search_ins_url" :noumenon_modal="this.lit_content.varieties_arr[this.open_time_index].lit_ins_modal" :noumenon_number="6" :repeat_arr="[]" v-on:close_modal="close_lit_character" v-on:add_noumenon_relations="add_lit_character"></search_modal>
         <!--若文献本体规范已存在的模态框-->
         <repeat_modal :show_repeat="this.show_repeat" :repeat_name="this.lit_content.standard_name" :repeat_id="this.repeat_id" :repeat_noumenon="this.repeat_noumenon" v-on:close_modal="close_repeat"></repeat_modal>
 
@@ -227,15 +247,15 @@
     Mock.mock('/ancient_books/get_menu_items.action?model_id=4&&item_1_id=0&&item_2_id=0','get', {
         "g":[
             {"model_id|4": 4,
-                "item_3_id|1": 1,
+                "item_1_id|1": 1,
                 "chinese_name": "不详"
             },
             {"model_id|4": 4,
-                "item_3_id|2": 2,
+                "item_1_id|2": 2,
                 "chinese_name": "责任人"
             },
             {"model_id|4": 4,
-                "item_3_id|3": 3,
+                "item_1_id|3": 3,
                 "chinese_name": "责任机构"
             }
         ]
@@ -244,15 +264,15 @@
     Mock.mock('/ancient_books/get_menu_items.action?model_id=5&&item_1_id=0&&item_2_id=0','get', {
         "g":[
             {"model_id|5": 5,
-                "item_3_id|1": 1,
+                "item_1_id|1": 1,
                 "chinese_name": "不详"
             },
             {"model_id|5": 5,
-                "item_3_id|2": 2,
+                "item_1_id|2": 2,
                 "chinese_name": "确定"
             },
             {"model_id|5": 5,
-                "item_3_id|3": 3,
+                "item_1_id|3": 3,
                 "chinese_name": "题"
             }
         ]
@@ -331,6 +351,7 @@
                 menu_url: '/ancient_books/get_menu_items.action',
                 search_pla_url: '/ancient_books/get_location_list_by_name.action',
                 search_cha_url: '/ancient_books/get_person_list_by_name.action',
+                search_ins_url:'/ancient_books/get_institution_list_by_name.action',
                 type_save_arr: [],
                 type_level_arr: [],
                 type_bu_arr: [],
@@ -535,6 +556,21 @@
                 console.log("责任者类型获取失败");
             },
 
+            type_name_select(index){
+                if(this.lit_content.varieties_arr[index].selected_type_name.item_1_id === 1){
+                    this.lit_content.varieties_arr[index].character_standard_name = '不详';
+                    if(index === 0){
+                        this.character_name = '不详';
+                    } else if(index === 1){
+                        this.character_name_2 = '不详';
+                    }
+                    this.repeat_nou_2();
+                } else{
+                    this.lit_content.varieties_arr[index].character_standard_name = '';
+                    this.lit_content.varieties_arr[index].character_id = 0;
+                }
+            },
+
             /*确定性*/
             get_confirm(){
                 let object = {};
@@ -669,6 +705,7 @@
                     location_standard_name: '',
                     location_id: '',
                     lit_cha_modal: false,
+                    lit_ins_modal:false,
                     show_lit_character: false,
                     character_standard_name: '',
                     character_id: '',
@@ -709,6 +746,7 @@
                     location_standard_name: '',
                     location_id: '',
                     lit_cha_modal: false,
+                    lit_ins_modal:false,
                     show_lit_character: false,
                     character_standard_name: '',
                     character_id: '',
@@ -815,7 +853,11 @@
 
             /*责任者名称*/
             open_lit_character(p){
-                this.lit_content.varieties_arr[p].lit_cha_modal = true;
+                if(this.lit_content.varieties_arr[p].selected_type_name.item_1_id === 2 || this.lit_content.varieties_arr[p].selected_type_name.item_1_id === 0){
+                    this.lit_content.varieties_arr[p].lit_cha_modal = true;
+                } else if(this.lit_content.varieties_arr[p].selected_type_name.item_1_id === 3){
+                    this.lit_content.varieties_arr[p].lit_ins_modal = true;
+                }
                 this.open_time_index = p;
             },
 
@@ -843,7 +885,11 @@
             },
 
             close_lit_character(){
-                this.lit_content.varieties_arr[this.open_time_index].lit_cha_modal = false;
+                if(this.lit_content.varieties_arr[this.open_time_index].selected_type_name.item_1_id === 2 || this.lit_content.varieties_arr[this.open_time_index].selected_type_name.item_1_id === 0){
+                    this.lit_content.varieties_arr[this.open_time_index].lit_cha_modal = false;
+                } else if(this.lit_content.varieties_arr[this.open_time_index].selected_type_name.item_1_id === 3){
+                    this.lit_content.varieties_arr[this.open_time_index].lit_ins_modal = false;
+                }
                 this.$store.commit('post_character_data','');
             },
 

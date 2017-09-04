@@ -138,18 +138,32 @@
                 object.english = this.$store.getters.get_build_lit.english;
                 object.responsibility_infos = [];
                 for(let i = 0;i < this.$store.getters.get_build_lit.varieties_arr.length;i++){
-                    object.responsibility_infos.push({
-                        location_id:this.$store.getters.get_build_lit.varieties_arr[i].location_id,
-                        name_id:this.$store.getters.get_build_lit.varieties_arr[i].character_id,
-                        begin_time_id:this.$store.getters.get_build_lit.varieties_arr[i].begin_time_id,
-                        end_time_id:this.$store.getters.get_build_lit.varieties_arr[i].end_time_id,
-                        order:this.$store.getters.get_build_lit.varieties_arr[i].order,
-                        action:this.$store.getters.get_build_lit.varieties_arr[i].selected_action.item_1_id,
-                        explain:this.$store.getters.get_build_lit.varieties_arr[i].explain,
-                        confirm:this.$store.getters.get_build_lit.varieties_arr[i].selected_confirm.item_1_id,
-                        type:this.$store.getters.get_build_lit.varieties_arr[i].selected_type_name.item_1_id,
-                        level:1
-                    })
+                    if(this.$store.getters.get_build_lit.varieties_arr[i].selected_type_name.chinese_name === '不详'){
+                        object.responsibility_infos.push({
+                            location_id:this.$store.getters.get_build_lit.varieties_arr[i].location_id,
+                            begin_time_id:this.$store.getters.get_build_lit.varieties_arr[i].begin_time_id,
+                            end_time_id:this.$store.getters.get_build_lit.varieties_arr[i].end_time_id,
+                            order:this.$store.getters.get_build_lit.varieties_arr[i].order,
+                            action:this.$store.getters.get_build_lit.varieties_arr[i].selected_action.item_1_id,
+                            explain:this.$store.getters.get_build_lit.varieties_arr[i].explain,
+                            confirm:this.$store.getters.get_build_lit.varieties_arr[i].selected_confirm.item_1_id,
+                            type:this.$store.getters.get_build_lit.varieties_arr[i].selected_type_name.item_1_id,
+                            level:1
+                        })
+                    } else{
+                        object.responsibility_infos.push({
+                            location_id:this.$store.getters.get_build_lit.varieties_arr[i].location_id,
+                            name_id:this.$store.getters.get_build_lit.varieties_arr[i].character_id,
+                            begin_time_id:this.$store.getters.get_build_lit.varieties_arr[i].begin_time_id,
+                            end_time_id:this.$store.getters.get_build_lit.varieties_arr[i].end_time_id,
+                            order:this.$store.getters.get_build_lit.varieties_arr[i].order,
+                            action:this.$store.getters.get_build_lit.varieties_arr[i].selected_action.item_1_id,
+                            explain:this.$store.getters.get_build_lit.varieties_arr[i].explain,
+                            confirm:this.$store.getters.get_build_lit.varieties_arr[i].selected_confirm.item_1_id,
+                            type:this.$store.getters.get_build_lit.varieties_arr[i].selected_type_name.item_1_id,
+                            level:1
+                        })
+                    }
                 }
                 console.log('数组里的东西： '+JSON.stringify(object.responsibility_infos));
                 this.http_json(this.create_lit_url,'post',object,this.success_create_lit,this.fail_create_lit);

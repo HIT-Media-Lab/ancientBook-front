@@ -348,7 +348,7 @@
                 this.brother.splice(0,this.brother.length);
                 this.sister.splice(0,this.sister.length);
                 this.teacher.splice(0,this.teacher.length);
-                this.student.splice(0,this.son.length);
+                this.student.splice(0,this.student.length);
                 this.friend.splice(0,this.friend.length);
                 this.person_info();
             }

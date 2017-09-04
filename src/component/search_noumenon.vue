@@ -213,11 +213,11 @@
 
     Mock.mock('/ancient_books/get_office_list_by_name.action?name=jy&&page_count=1','get', {
         "content":[ {
-            "standard_name":"军营",
+            "standard_name":"将军",
             "noumenon_id|30":28
         },
             {
-                "standard_name":"军营",
+                "standard_name":"将军",
                 "noumenon_id|30":28
             }]
     });
