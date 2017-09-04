@@ -185,7 +185,7 @@
             <!--图片工作台-->
             <div>
                 <div class="float-right ry-hide-picture"><img src="../assets/img/picture-button/more.png" height="130" width="29"/></div>
-                <div class="ry-picture-work"><img id="ry-picture-work" style="height:450px; width: 450px;"/></div>
+                <div class="ry-picture-work"><img id="ry-picture-work" style="height:470px; width: 470px;"/></div>
             </div>
         </div>
 
@@ -1029,6 +1029,7 @@
                         }
                         //该点击在该条标记内
                         if (click >= this.mark[k].begin_mark && click < this.mark[k].end_mark) {
+                            alert(1);
                             this.$route.params.noumenon_type = this.mark[k].noumenon_type;
                             this.$route.params.noumenon_id = this.mark[k].noumenon_id;
                             this.$router.push({name:'', params: this.$route.params});
