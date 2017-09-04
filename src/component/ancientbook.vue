@@ -1822,6 +1822,7 @@
     .ry-modal-menu{
         width: 450px;
         height: 450px;
+        background-color: white;
     }
 
     /*批注字体样式*/
