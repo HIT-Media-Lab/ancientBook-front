@@ -1029,6 +1029,12 @@
                         }
                         //该点击在该条标记内
                         if (click > this.mark[k].begin_mark && click <= this.mark[k].end_mark) {
+                            this.$router.push({name:'ancientbook',params:{
+                                book_name:this.ancient_book_id,
+                                book:book,
+                                volume:volume,
+                                pageId:page
+                            }})
                             this.$route.params.noumenon_type = this.mark[k].noumenon_type;
                             this.$route.params.noumenon_id = this.mark[k].noumenon_id;
                             this.$router.push({name:'', params: this.$route.params});
