@@ -1030,8 +1030,10 @@
                             continue;
                         }
                         //该点击在该条标记内
-                        if (click >= this.mark[k].begin_mark && click < this.mark[k].end_mark) {
+                        if (click > this.mark[k].begin_mark && click <= this.mark[k].end_mark) {
                             alert(click);
+                            alert(this.mark[k].begin_mark);
+                            alert(this.mark[k].end_mark);
                             this.$route.params.noumenon_type = this.mark[k].noumenon_type;
                             this.$route.params.noumenon_id = this.mark[k].noumenon_id;
                             this.$router.push({name:'', params: this.$route.params});
