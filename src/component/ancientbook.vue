@@ -451,22 +451,16 @@
 
             success_get_comment(response) {
                 console.log("success get comments");
-                //将后端数据显示在前端页面里
-                if (response.body.length === 0) {
-                    console.log("返回空批注数组！");
+                for (var i = 0; i <= response.body.length - 1; i++) {
+                    this.comment.push({
+                        id_comment: response.body[i].id,
+                        target_comment: response.body[i].target,
+                        begin_comment: response.body[i].begin,
+                        end_comment: response.body[i].end,
+                        content_comment: response.body[i].content,
+                    });
                 }
-                else {
-                    for (var i = 0; i <= response.body.length - 1; i++) {
-                        this.comment.push({
-                            id_comment: response.body[i].id,
-                            target_comment: response.body[i].target,
-                            begin_comment: response.body[i].begin,
-                            end_comment: response.body[i].end,
-                            content_comment: response.body[i].content,
-                        });
-                    }
-                    this.get_mark();
-                }
+                this.get_mark();
             },
 
             fail_get_comment() {
@@ -484,23 +478,18 @@
 
             success_get_mark(response) {
                 console.log("success get marks ");
-                //将后端数据显示在前端页面里
-                if (response.body.length === 0) {
-                    console.log("返回空标记数组！");
+                for (var i = 0; i <= response.body.length - 1; i++) {
+                    this.mark.push({
+                        id_mark: response.body[i].id,
+                        noumenon_type: response.body[i].noumenon_type,
+                        noumenon_id: response.body[i].noumenon_id,
+                        begin_mark: response.body[i].begin,
+                        end_mark: response.body[i].end,
+                        target_mark: response.body[i].target,
+                    });
                 }
-                else {
-                    for (var i = 0; i <= response.body.length - 1; i++) {
-                        this.mark.push({
-                            id_mark: response.body[i].id,
-                            noumenon_type: response.body[i].noumenon_type,
-                            noumenon_id: response.body[i].noumenon_id,
-                            begin_mark: response.body[i].begin,
-                            end_mark: response.body[i].end,
-                            target_mark: response.body[i].target,
-                        });
-                    }
-                    this.get_text();
-                }
+                this.get_text();
+
             },
 
             fail_get_mark() {
