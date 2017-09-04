@@ -1027,6 +1027,8 @@
                         if (click < this.mark[k].begin_mark || click >= this.mark[k].end_mark) {
                             alert(click);
                             alert(1);
+                            alert(this.mark[k].begin_mark);
+                            alert(this.mark[k].end_mark);
                             continue;
                         }
                         //该点击在该条标记内
