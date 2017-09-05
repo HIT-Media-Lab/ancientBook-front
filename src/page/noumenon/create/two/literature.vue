@@ -175,7 +175,7 @@
 </template>
 
 <script>
-    /*let Mock = require('mockjs');
+    let Mock = require('mockjs');
     Mock.mock('/ancient_books/get_menu_items.action?model_id=9&&item_1_id=0&&item_2_id=0','get', {
         "g":[
             {"model_id|9": 1,
@@ -276,7 +276,7 @@
                 "chinese_name": "题"
             }
         ]
-    });*/
+    });
 
     import create_word from '../../../../component/create-word.vue';
     import time_modal from '../../../../component/time-modal.vue';
@@ -544,10 +544,10 @@
             },
 
             success_type_name(response){
-                for(let i = 0;i < response.body.length; i++){
+                for(let i = 0;i < response.body.g.length; i++){
                     this.type_name_arr.push({
-                        item_1_id: response.body[i].item_1_id,
-                        chinese_name: response.body[i].chinese_name
+                        item_1_id: response.body.g[i].item_1_id,
+                        chinese_name: response.body.g[i].chinese_name
                     })
                 }
             },
@@ -579,10 +579,10 @@
             },
 
             success_confirm(response){
-                for(let i = 0;i < response.body.length; i++){
+                for(let i = 0;i < response.body.g.length; i++){
                     this.confirm_arr.push({
-                        item_1_id: response.body[i].item_1_id,
-                        chinese_name: response.body[i].chinese_name
+                        item_1_id: response.body.g[i].item_1_id,
+                        chinese_name: response.body.g[i].chinese_name
                     })
                 }
             },
@@ -673,10 +673,10 @@
             },
 
             success_action(response){
-                for (let i = 0; i < response.body.length; i++) {
+                for (let i = 0; i < response.body.g.length; i++) {
                     this.action_arr.push({
-                        item_1_id: response.body[i].item_1_id,
-                        chinese_name: response.body[i].chinese_name
+                        item_1_id: response.body.g[i].item_1_id,
+                        chinese_name: response.body.g[i].chinese_name
                     })
                 }
             },
@@ -987,8 +987,7 @@
         background-color: transparent;
         border: 2px solid black;
         vertical-align:top;
-        word-break: break-all;
-        white-space: inherit;
+        white-space:nowrap;
     }
 
     .zxw-lit-select{

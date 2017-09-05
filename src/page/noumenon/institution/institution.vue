@@ -4,7 +4,7 @@
             <noumenon_button slot="children" :noumenon_number="6"></noumenon_button>
         </noumenon_title>
 
-        <div class=" zxw-characterbody">
+        <div class="zxw-characterbody">
             <p class="zxwspan-length">机构名：</p>
             <p class="zxw-info-width" v-model="ins_content.name">{{ins_content.name}}</p>
         </div>

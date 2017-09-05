@@ -243,18 +243,22 @@
                         item_1_id: 0,
                         chinese_name: ''
                     },
+
                     selected_level: {   //选择的品种级别
                         item_1_id: 0,
                         chinese_name: ''
                     },
+
                     selected_bu: {
                         item_1_id: 0,
                         chinese_name: ''
                     },
+
                     selected_lei: {
                         item_2_id: 0,
                         chinese_name: ''
                     },
+
                     selected_shu: {
                         item_3_id: 0,
                         chinese_name: ''

@@ -256,7 +256,7 @@
 <style>
     .zxw-lit-background{
         background-image: url("../../../assets/img/modal-box/lit_box.png");
-        background-repeat: no-repeat;
+        background-repeat:repeat-y;
         background-position: center;
         background-size: 100% 100%;
         width:773px;

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-    /*let Mock = require('mockjs');
+    let Mock = require('mockjs');
 
      //显示用户列表
      Mock.mock('/ancient_books/get_literature_list_by_word.action?word=A&&page_count=1','get',{
@@ -29,7 +29,7 @@
      'noumenon_id|1':1
      }],
      "total_page|10-20":1
-     });*/
+     });
 
     import noumenon_title from '../../../component/noumenon-title.vue';
     import letter_title from '../../../component/letter-title.vue';
