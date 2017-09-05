@@ -572,6 +572,7 @@
             success_post_edit(response) {
                 if (response.body.result === 1) {
                     console.log ("success edit!");
+                    alert("成功修订");
                     this.get_page_id();   //  重新加载
                 }
             },
@@ -622,6 +623,7 @@
             success_add_comment(response) {
                 if (response.body.result === 1) {
                     console.log("success add comment!");
+                    alert("成功添加批注");
                     this.get_page_id();
                 }
             },
@@ -649,6 +651,7 @@
             success_add_mark(response) {
                 if (response.body.result === 1) {
                     console.log("success add mark!");
+                    alert("成功添加标记");
                     this.get_page_id();
                 }
             },
@@ -669,6 +672,7 @@
             success_delete_mark(response) {
                 if (response.body.result === 1) {
                     console.log("success delete mark!");
+                    alert("成功删除标记");
                     this.get_page_id();
                 }
             },
@@ -689,6 +693,7 @@
             success_delete_comment(response) {
                 if (response.body.result === 1) {
                     console.log("success delete comment!");
+                    alert("成功删除批注");
                     this.get_page_id();
                 }
             },
@@ -1020,19 +1025,19 @@
                         //该点击在该条标记内
                         if (click > this.mark[k].begin_mark && click <= this.mark[k].end_mark) {
                             if (this.mark[k].noumenon_type == 1){
-                                this.$router.push({name:'time_check',params:{
+                                this.$router.push({name:'char_check',params:{
                                     nouId:this.mark[k].noumenon_id,
                                     pageId:1
                                 }})
                             }
                             else if (this.mark[k].noumenon_type == 2){
-                                this.$router.push({name:'time_check',params:{
+                                this.$router.push({name:'lit_check',params:{
                                     nouId:this.mark[k].noumenon_id,
                                     pageId:1
                                 }})
                             }
                             else if (this.mark[k].noumenon_type == 3){
-                                this.$router.push({name:'time_check',params:{
+                                this.$router.push({name:'terms_check',params:{
                                     nouId:this.mark[k].noumenon_id,
                                     pageId:1
                                 }})
@@ -1044,19 +1049,19 @@
                                 }})
                             }
                             else if (this.mark[k].noumenon_type == 5){
-                                this.$router.push({name:'time_check',params:{
+                                this.$router.push({name:'off_check',params:{
                                     nouId:this.mark[k].noumenon_id,
                                     pageId:1
                                 }})
                             }
                             else if (this.mark[k].noumenon_type == 6){
-                                this.$router.push({name:'time_check',params:{
+                                this.$router.push({name:'ins_check',params:{
                                     nouId:this.mark[k].noumenon_id,
                                     pageId:1
                                 }})
                             }
                             else if (this.mark[k].noumenon_type == 7){
-                                this.$router.push({name:'time_check',params:{
+                                this.$router.push({name:'pla_check',params:{
                                     nouId:this.mark[k].noumenon_id,
                                     pageId:1
                                 }})

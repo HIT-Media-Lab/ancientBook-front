@@ -82,7 +82,7 @@
         },
 
         beforeRouteLeave (to, from, next) {
-            this.varieties_item.literature_standard_name = document.getElementById("v-standard-name").innerText;
+            this.varieties_item.literature_standard_name = this.varieties_item.type_name + document.getElementById("v-standard-name").innerText;
             this.get_upload_one_info();
             this.$store.commit("get_varieties_contents",this.varieties_item);
             this.$store.commit("get_upload1_info",this.upload_one_info);
@@ -109,7 +109,7 @@
                 var b = document.getElementById("e-standard-name").innerText;
                 var c = document.getElementById("i-standard-name").innerText;
                 var d = document.getElementById("c-standard-name").innerText;
-                this.upload_one_info.standard_name = a + b + c + d;
+                this.upload_one_info.standard_name = this.varieties_item.type_name + a + b + c + d;
             },
 
             next_page() {
