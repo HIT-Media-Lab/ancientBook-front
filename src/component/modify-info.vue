@@ -18,11 +18,11 @@
                 <span class="j-modify3" v-model="type">{{type}}</span>
             </p>
             <p class="j-modify4">
-                <span class="j-modify5">账&nbsp&nbsp&nbsp号：</span>
+                <span class="j-modify5">账&nbsp&nbsp&nbsp&nbsp号：</span>
                 <span class="j-modify6" v-model="account">{{account}}</span>
             </p>
             <p class="j-modify4">
-                <span class="j-modify7">用户名：</span>
+                <span class="j-modify7">用&nbsp户&nbsp名：</span>
                 <span class="j-modify8" v-model="name">{{name}}</span>
             </p>
         </div>
@@ -236,7 +236,7 @@
 
     }
     .j-modify-info{
-        width: 300px;
+        width: 350px;
         margin: 45px auto;
         font-weight:700;
         font-style:normal;
@@ -317,13 +317,13 @@
         margin: 15px auto
     }
     .j-modify5{
-        margin-left: 100px
+        margin-left: 90px
     }
     .j-modify6{
         margin-left: 10px
     }
     .j-modify7{
-        margin-left: 110px
+        margin-left: 85px
     }
     .j-modify8{
         margin-left: 10px
