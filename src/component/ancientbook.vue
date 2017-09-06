@@ -501,6 +501,7 @@
              * 获得每页的修订记录列表
              */
             get_edit_record() {
+                this.edit_record = [];
                 var url = '/ancient_books/get_ancient_book_modify_log_by_page.action?page_id=' + this.page_id + '&&page_count=' +this.page_count_edit_record;
                 this.http_json (url , 'get' , this.get_edit_record_obj , this.success_get_edit_record , this.fail_get_edit_record);
             },
@@ -857,6 +858,7 @@
              */
             btn_edit_onclick() {
                 this.edit_modal = true;
+                this.$store.commit('change_fork',true);
             },
 
 
@@ -888,6 +890,7 @@
             edit_record_onclick() {
                 this.get_edit_record();
                 this.edit_record_modal = true;
+                this.$store.commit('change_fork',true);
             },
 
             /**
@@ -922,6 +925,7 @@
                         //该点击在该条批注内
                         if (click >= this.comment[j].begin_comment && click < this.comment[j].end_comment) {
                             this.get_comment_modal = true;
+                            this.$store.commit('change_fork',true);
                             this.now_target = this.comment[j].target_comment;
                             this.now_content = this.comment[j].content_comment;
                             this.comment_id = this.comment[j].id_comment;
@@ -937,6 +941,7 @@
              */
             btn_add_comment_onclick() {
                 this.add_comment_modal = true;
+                this.$store.commit('change_fork',true);
                 var btn_add_comment = document.getElementById("btn-add-comment");
                 btn_add_comment.style.visibility = "hidden";  //  添加批注按钮隐藏
             },
@@ -1078,6 +1083,8 @@
              */
             btn_mark_noumenon_onclick() {
                 this.add_mark_modal = true;
+                this.$store.commit('change_fork',true);
+                this.$store.commit('change_fork',true);
                 var btn_mark_noumenon = document.getElementById("btn-mark-noumenon");
                 btn_mark_noumenon.style.visibility = "hidden";    //  标记本体按钮隐藏
             },
@@ -1146,6 +1153,7 @@
              */
             catalogue_onclick() {
                 this.catalogue_modal = true;
+                this.$store.commit('change_fork',true);
             },
 
             go_to(book,volume,page) {

@@ -111,10 +111,9 @@
                 responsibility_info : [],
                 add_book_obj : {},
 
+                pictures : [],
+                picture_length : 0,
                 post_index1 : 0,
-                post_index2 : 0,
-                post_index3 : 0,
-                post_index4 : 0,
             }
         },
 
@@ -511,7 +510,7 @@
 
 
             /**
-             * post上传请求
+             * post创建古籍请求
              */
             complete_upload() {
                 this.varieties_item = this.$store.getters.get_varieties_item;
@@ -628,57 +627,94 @@
             },
 
             success_post_add(response) {
-                var vm = this;
                 if (response.body.result === 1) {
                     console.log("success add!");
-
-                    for (; vm.post_index1 < vm.upload_file.length; vm.post_index1++){
-                        for (; vm.post_index2 < vm.upload_file[vm.post_index1].images.length; vm.post_index2++){
-                            if (vm.post_index2 == vm.post_index3){
-                                var upload_picture_obj = new FormData;
-
-                                var blob = this.dataURItoBlob(vm.upload_file[vm.post_index1].images[vm.post_index2].picture);
-
-                                var name = vm.upload_file[vm.post_index1].images[vm.post_index2].pic_name;
-                                var first = name.charAt(1);
-                                var second = name.charAt(2);
-                                var third = name.charAt(3);
-                                var str = first + second + third;
-                                var volume = parseInt(str);
-
-                                upload_picture_obj.append('ancient_book_id' , response.body.id);
-                                upload_picture_obj.append('book' , vm.post_index1 + 1);
-                                upload_picture_obj.append('volume' , volume);
-                                upload_picture_obj.append('page' , vm.post_index2 + 1);
-                                upload_picture_obj.append('picture' , blob);
-                                if (vm.upload_file[vm.post_index1].texts[vm.post_index2]) {
-                                    upload_picture_obj.append('content' , vm.upload_file[vm.post_index1].texts[vm.post_index2]);
-                                }
-                                upload_picture_obj.append('book_name' , vm.upload_file[vm.post_index1].book_name);
-
-                                upload_picture_obj.token = this.$store.getters.GetToken;
-                                this.before_http(upload_picture_obj);
-                                upload_picture_obj.token = this.$store.getters.GetToken;
-                                upload_picture_obj.append('token' , upload_picture_obj.token);
-
-                                this.$http.post('/ancient_books/upload_page.action' , upload_picture_obj ,
-                                        {emulateJSON: true}
-                                ).then(function (response) {
-                                    this.response_post(response,this.success_post_picture,this.fail_post_picture);
-                                },function () {
-                                    this.error();
-                                })
-                            }
-                            else{
-                                vm.post_index2 = vm.post_index2 - 1
-                            }
-                        }
-                    }
+                    this.pictures = this.upload_file[this.post_index1].images;
+                    this.picture_length = this.upload_file[this.post_index1].images.length;
+                    this.post_picture(this.picture_length,this.pictures,response);
                 }
                 else if (response.body.result === 0) {
                     console.log("fail add");
                     this.responsibility_info = [];
                 }
+            },
+
+            fail_post_add() {
+                console.log("fail add!");
+                this.responsibility_info = [];
+            },
+
+
+            /**
+             * post上传图片请求
+             */
+            post_picture(picture_length,pictures,response){
+                if(picture_length <= 0){
+                    this.post_index1++;
+                    if (this.post_index1 < this.upload_file.length) {
+                        this.pictures = this.upload_file[this.post_index1].images;
+                        this.picture_length = this.upload_file[this.post_index1].images.length;
+                        this.post_picture(this.picture_length,this.pictures,response);
+                    }
+                    else{
+                        return;
+                    }
+                }
+                else{
+                    var temp = picture_length - 1;
+                    var upload_picture_obj = new FormData;
+
+                    var blob = this.dataURItoBlob(pictures[temp].picture);
+
+                    var name = pictures[temp].pic_name;
+                    var first = name.charAt(1);
+                    var second = name.charAt(2);
+                    var third = name.charAt(3);
+                    var str = first + second + third;
+                    var volume = parseInt(str);
+
+                    upload_picture_obj.append('ancient_book_id' , response.body.id);
+                    upload_picture_obj.append('book' , this.post_index1 + 1);
+                    upload_picture_obj.append('volume' , volume);
+                    upload_picture_obj.append('page' , temp + 1);
+                    upload_picture_obj.append('picture' , blob);
+
+                    if (this.upload_file[this.post_index1].texts[temp]) {
+                        upload_picture_obj.append('content' , this.upload_file[this.post_index1].texts[temp]);
+                    }
+
+                    upload_picture_obj.append('book_name' , vm.upload_file[vm.post_index1].book_name);
+
+                    upload_picture_obj.token = this.$store.getters.GetToken;
+                    this.before_http(upload_picture_obj);
+                    upload_picture_obj.token = this.$store.getters.GetToken;
+                    upload_picture_obj.append('token' , upload_picture_obj.token);
+
+                    this.$http.post('/ancient_books/upload_page.action' , upload_picture_obj ,
+                            {emulateJSON: true}
+                    ).then(function (response) {
+                        this.response_post(response,this.success_post_picture,this.fail_post_picture);
+                    },function () {
+                        this.error();
+                    })
+                }
+            },
+
+            success_post_picture(response) {
+                if (response.body.result === 1) {
+                    console.log("success upload picture!");
+                    this.picture_length--;
+                    this.post_picture(this.picture_length,this.pictures,response);
+
+                    if (this.post_index1 == this.upload_file.length) {
+                        alert("上传成功");
+                        this.$router.push({path:'/user_info/mybook'});
+                    }
+                }
+            },
+
+            fail_post_picture() {
+                console.log("fail upload picture!");
             },
 
             response_post(response, success, fail) {
@@ -705,26 +741,6 @@
 
             error () {
 
-            },
-
-            fail_post_add() {
-                console.log("fail add!");
-                this.responsibility_info = [];
-            },
-
-            success_post_picture(response) {
-                var vm = this;
-                if (response.body.result === 1) {
-                    console.log("success upload picture!");
-                    this.post_index3 = this.post_index3 + 1;
-                    if (vm.post_index1 == vm.upload_file.length && vm.post_index2 == vm.upload_file[vm.upload_file.length - 1].images.length) {
-                        this.$router.push({path:'/user_info/mybook'});
-                    }
-                }
-            },
-
-            fail_post_picture() {
-                console.log("fail upload picture!");
             },
         },
     }
