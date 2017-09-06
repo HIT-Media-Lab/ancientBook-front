@@ -3,159 +3,161 @@
         <noumenon_title :title="edit_lit_title"> </noumenon_title>
 
         <p class="zxw-create-literature" style="margin-left: 130px" v-bind="standard_title"  v-model="lit_content.standard_name">本体名称：{{lit_content.standard_name}}</p>
-        <div class="zxw-lit-background">
-            <!--文献版本层信息固有信息-->
-            <div class="zxw-lit-layer">
-                <label class="zxw-lit-label zxw-must-write">书名:</label>
-                <input type="text" class="zxw-lit-info zxw-lit-info-margin zxw-lit-input-style" v-model="lit_content.type_name" v-bind:class="{'zxw-input-number':show_type_name}" :="repeat_nou_1">
-                <label class="zxw-lit-label">别名:</label>
-                <input type="text" class="zxw-lit-info zxw-lit-input-style" v-model="lit_content.type_other_name">
-            </div>
 
-            <div class="zxw-lit-layer">
-                <label class="zxw-lit-label">存佚类型：</label>
-                <select class="zxw-lit-info zxw-lit-info-margin zxw-lit-select" v-model="lit_content.selected_save">
-                    <option v-for="item in type_save_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
-                </select>
-                <label class="zxw-lit-label">品种级别:</label>
-                <select class="zxw-lit-info zxw-lit-select" v-model="lit_content.selected_level">
-                    <option v-for="item in type_level_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
-                </select>
-            </div>
+        <!--提示文字显示-->
+        <span style="color: #a50000;float:left;margin-top:50px;font-weight: bold;width:100px;" v-if="show_type_name=== true && ancient_book_name === false">书名有且仅有中文!</span>
+        <span style="color: #a50000;float:left;margin-top:50px;font-weight: bold;width:100px;" v-show="ancient_book_name === true">书名不能为空!</span>
 
-            <div class="zxw-lit-layer">
-                <label class="zxw-lit-label">英译：</label>
-                <input type="text" class="zxw-lit-info zxw-lit-input-style" v-model="lit_content.english">
-            </div>
+        <div class="zxw-lit-top">
+            <div class="zxw-lit-bottom">
+                <div class="zxw-lit-centre">
+                    <div class="zxw-lit-content">
+                        <!--文献版本层信息固有信息-->
+                        <div class="zxw-lit-layer">
+                            <label class="zxw-lit-label zxw-must-write">书名:</label>
+                            <input type="text" class="zxw-lit-info zxw-lit-info-margin zxw-lit-input-style" v-model="lit_content.type_name" v-bind:class="{'zxw-input-number':show_type_name}" :="repeat_nou_1" @blur="book_name_null()">
+                            <label class="zxw-lit-label">别名:</label>
+                            <input type="text" class="zxw-lit-info zxw-lit-input-style" v-model="lit_content.type_other_name">
+                        </div>
 
-            <div class="zxw-lit-layer">
-                <label class="zxw-lit-label">提要信息:</label>
-                <textarea class="zxw-lit-create-summery" v-model="lit_content.type_summary"></textarea>
-            </div>
+                        <div class="zxw-lit-layer">
+                            <label class="zxw-lit-label">存佚类型：</label>
+                            <select class="zxw-lit-info zxw-lit-info-margin zxw-lit-select" v-model="lit_content.selected_save">
+                                <option v-for="item in type_save_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
+                            </select>
+                            <label class="zxw-lit-label">品种级别:</label>
+                            <select class="zxw-lit-info zxw-lit-select" v-model="lit_content.selected_level">
+                                <option v-for="item in type_level_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
+                            </select>
+                        </div>
 
-            <div>
-                <label class="zxw-lit-label">标准分类:</label>
-                <select class="zxw-lit-select zxw-lit-select-margin" v-model="lit_content.selected_bu" @change="get_type_lei_2">
-                    <option v-for="item in type_bu_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
-                </select>
-                <select class="zxw-lit-select zxw-lit-select-margin" v-model="lit_content.selected_lei" @change="get_type_shu">
-                    <option v-for="item in type_lei_arr" v-bind:value="{item_2_id:item.item_2_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
-                </select>
-                <select class="zxw-lit-select" v-model="lit_content.selected_shu">
-                    <option v-for="item in type_shu_arr" v-bind:value="{item_3_id:item.item_3_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
-                </select>
-            </div>
+                        <div class="zxw-lit-layer">
+                            <label class="zxw-lit-label">英译：</label>
+                            <input type="text" class="zxw-lit-info zxw-lit-input-style" v-model="lit_content.english">
+                        </div>
 
-            <!--文献版本层信息循坏添加信息-->
-            <div v-for="(item,index) in lit_content.varieties_arr">
-                <img src="../../../assets/img/no-use-picture/ink-line.png" style="width:673px; height:5px;"/>
+                        <div class="zxw-lit-layer">
+                            <label class="zxw-lit-label">提要信息:</label>
+                            <textarea class="zxw-lit-create-summery" v-model="lit_content.type_summary"></textarea>
+                        </div>
 
-                <div class="row zxw-lit-btn-margin">
-                    <div class="col-md-2 float-right">
-                        <button class="ry-btn-add" v-show="lit_content.varieties_arr[index].value_add" @click="add_box(index)">添加</button>
-                    </div>
-                    <div class="col-md-2 float-right">
-                        <button class="ry-btn-del" v-show="lit_content.varieties_arr[index].value_del" @click="del_box(index)">删除</button>
-                    </div>
-                </div>
+                        <div>
+                            <label class="zxw-lit-label">标准分类:</label>
+                            <select class="zxw-lit-select zxw-lit-select-margin" v-model="lit_content.selected_bu" @change="get_type_lei_2">
+                                <option v-for="item in type_bu_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
+                            </select>
+                            <select class="zxw-lit-select zxw-lit-select-margin" v-model="lit_content.selected_lei" @change="get_type_shu">
+                                <option v-for="item in type_lei_arr" v-bind:value="{item_2_id:item.item_2_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
+                            </select>
+                            <select class="zxw-lit-select" v-model="lit_content.selected_shu">
+                                <option v-for="item in type_shu_arr" v-bind:value="{item_3_id:item.item_3_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
+                            </select>
+                        </div>
 
-                <div class="zxw-lit-layer">
-                    <label class="zxw-lit-type-label zxw-must-write">责任开始时间:</label>
-                    <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style">
-                        <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.begin_standard_time !== ''">
+                        <!--文献版本层信息循坏添加信息-->
+                        <div v-for="(item,index) in lit_content.varieties_arr">
+                            <img src="../../../assets/img/no-use-picture/ink-line.png" style="width:673px; height:5px;"/>
+
+                            <div class="row zxw-lit-btn-margin">
+                                <div class="col-md-2 float-right">
+                                    <button class="ry-btn-add" v-show="lit_content.varieties_arr[index].value_add" @click="add_box(index)">添加</button>
+                                </div>
+                                <div class="col-md-2 float-right">
+                                    <button class="ry-btn-del" v-show="lit_content.varieties_arr[index].value_del" @click="del_box(index)">删除</button>
+                                </div>
+                            </div>
+
+                            <div class="zxw-lit-layer">
+                                <label class="zxw-lit-type-label zxw-must-write">责任开始时间:</label>
+                                <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style">
+                                    <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.begin_standard_time !== ''">
                         <span class="zxw-person-relation-span" @mouseover="item.show_begin_time = true" @mouseout="item.show_begin_time = false" v-if="item.begin_standard_time !=='' " v-bind:contenteditable="item.begin_standard_time !== ''" @keydown="down_delete()">
                             <span  class="zxw-tag-font" v-model="item.begin_standard_time">{{item.begin_standard_time}}</span>
                             <button class="zxw-add-hover-img" v-show="item.show_begin_time===true" @click="delete_lit_begin(index)"></button>
                         </span>
-                        </div>
-                        <button class="zxw-input-add-character" @click="open_lit_begin(index)"></button>
-                    </div>
-                    <label class="zxw-lit-type-label zxw-must-write">责任结束时间:</label>
-                    <div  class="zxw-lit-info zxw-lit-input-style">
-                        <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.end_standard_time !== ''">
+                                    </div>
+                                    <button class="zxw-input-add-character" @click="open_lit_begin(index)"></button>
+                                </div>
+                                <label class="zxw-lit-type-label zxw-must-write">责任结束时间:</label>
+                                <div  class="zxw-lit-info zxw-lit-input-style">
+                                    <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.end_standard_time !== ''">
                         <span class="zxw-person-relation-span" @mouseover="item.show_end_time = true" @mouseout="item.show_end_time = false" v-if="item.end_standard_time !== ''" v-bind:contenteditable="item.end_standard_time !== ''" @keydown="down_delete()">
                             <span class="zxw-tag-font" v-model="item.end_standard_time">{{item.end_standard_time}}</span>
                             <button class="zxw-add-hover-img" v-show="item.show_end_time===true" @click="delete_lit_end(index)"></button>
                         </span>
-                        </div>
-                        <button class="zxw-input-add-character" @click="open_lit_end(index)"></button>
-                    </div>
-                </div>
+                                    </div>
+                                    <button class="zxw-input-add-character" @click="open_lit_end(index)"></button>
+                                </div>
+                            </div>
 
-                <div class="zxw-lit-layer">
-                    <label class="zxw-lit-type-label">责任地点:</label>
-                    <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style">
-                        <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.location_standard_name !== ''">
+                            <div class="zxw-lit-layer">
+                                <label class="zxw-lit-type-label">责任地点:</label>
+                                <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style">
+                                    <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.location_standard_name !== ''">
                         <span class="zxw-person-relation-span" @mouseover="item.show_lit_location = true" @mouseout="item.show_lit_location = false" v-if="item.location_standard_name !== ''" v-bind:contenteditable="item.location_standard_name !== ''" @keydown="down_delete()">
                             <span class="zxw-tag-font" v-model="item.location_standard_name">{{item.location_standard_name}}</span>
                             <button class="zxw-add-hover-img" v-show="item.show_lit_location===true" @click="delete_lit_location(index)"></button>
                         </span>
-                        </div>
-                        <button class="zxw-input-add-character" @click="open_lit_location(index)"></button>
-                    </div>
-                    <label class="zxw-lit-type-label zxw-must-write">责任者类型:</label>
-                    <select class="zxw-lit-select" v-model="item.selected_type_name" @change="type_name_select(index)">
-                        <option v-for="item in type_name_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
-                    </select>
-                </div>
+                                    </div>
+                                    <button class="zxw-input-add-character" @click="open_lit_location(index)"></button>
+                                </div>
+                                <label class="zxw-lit-type-label zxw-must-write">责任者类型:</label>
+                                <select class="zxw-lit-select" v-model="item.selected_type_name" @change="type_name_select(index)">
+                                    <option v-for="item in type_name_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
+                                </select>
+                            </div>
 
-                <div class="zxw-lit-layer">
-
-                    <label class="zxw-lit-type-label zxw-must-write">责任者名称：</label>
-                    <!--<div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style">
-                        <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.character_standard_name !== ''">
+                            <div class="zxw-lit-layer">
+                                <label class="zxw-lit-type-label zxw-must-write">责任者名称：</label>
+                                <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style" v-if="item.selected_type_name.item_1_id === 2||item.selected_type_name.item_1_id === 0">
+                                    <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.character_standard_name !== ''">
                         <span class="zxw-person-relation-span" @mouseover="item.show_lit_character = true" @mouseout="item.show_lit_character = false" v-if="item.character_standard_name !== ''" v-bind:contenteditable="item.character_standard_name !== ''" @keydown="down_delete()">
                             <span class="zxw-tag-font" v-model="item.character_standard_name">{{item.character_standard_name}}</span>
                             <button class="zxw-add-hover-img" v-show="item.show_lit_character===true" @click="delete_lit_character(index)"></button>
                         </span>
-                        </div>
-                        <button class="zxw-input-add-character" @click="open_lit_character(index)"></button>
-                    </div>-->
-                    <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style" v-if="item.selected_type_name.item_1_id === 2||item.selected_type_name.item_1_id === 0">
-                        <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.character_standard_name !== ''">
+                                    </div>
+                                    <button class="zxw-input-add-character" @click="open_lit_character(index)"></button>
+                                </div>
+
+                                <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style" v-else-if="item.selected_type_name.item_1_id === 3">
+                                    <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.character_standard_name !== ''">
                         <span class="zxw-person-relation-span" @mouseover="item.show_lit_character = true" @mouseout="item.show_lit_character = false" v-if="item.character_standard_name !== ''" v-bind:contenteditable="item.character_standard_name !== ''" @keydown="down_delete()">
                             <span class="zxw-tag-font" v-model="item.character_standard_name">{{item.character_standard_name}}</span>
                             <button class="zxw-add-hover-img" v-show="item.show_lit_character===true" @click="delete_lit_character(index)"></button>
                         </span>
-                        </div>
-                        <button class="zxw-input-add-character" @click="open_lit_character(index)" :disabled="item.selected_type_name.item_1_id===0"></button>
-                    </div>
+                                    </div>
+                                    <button class="zxw-input-add-character" @click="open_lit_character(index)" :disabled="item.selected_type_name.item_1_id===0"></button>
+                                </div>
 
-                    <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style" v-else-if="item.selected_type_name.item_1_id === 3">
-                        <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.character_standard_name !== ''">
-                        <span class="zxw-person-relation-span" @mouseover="item.show_lit_character = true" @mouseout="item.show_lit_character = false" v-if="item.character_standard_name !== ''" v-bind:contenteditable="item.character_standard_name !== ''" @keydown="down_delete()">
-                            <span class="zxw-tag-font" v-model="item.character_standard_name">{{item.character_standard_name}}</span>
-                            <button class="zxw-add-hover-img" v-show="item.show_lit_character===true" @click="delete_lit_character(index)"></button>
-                        </span>
-                        </div>
-                        <button class="zxw-input-add-character" @click="open_lit_character(index)" :disabled="item.selected_type_name.item_1_id===0"></button>
-                    </div>
-
-                    <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style" v-else-if="item.selected_type_name.item_1_id === 1">
-                        <div class="zxw-lit-div-input">
+                                <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style" v-else-if="item.selected_type_name.item_1_id === 1">
+                                    <div class="zxw-lit-div-input">
                         <span class="zxw-person-relation-span">
                             <span class="zxw-tag-font">不详</span>
                         </span>
+                                    </div>
+                                    <button class="zxw-input-add-character" :disabled="item.selected_type_name.item_1_id===1"></button>
+                                </div>
+
+                                <label class="zxw-lit-type-label zxw-must-write">责任行为：</label>
+                                <select class="zxw-lit-select" v-model="item.selected_action" :="repeat_nou_1">
+                                    <option v-for="item in action_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="zxw-lit-layer">
+                                <label class="zxw-lit-type-label zxw-must-write">确定性:</label>
+                                <select class="zxw-lit-select" v-model="item.selected_confirm" >
+                                    <option v-for="item in confirm_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
+                                </select>
+                                <span style="color: #a50000;margin-left: 30px;font-weight: bold" v-if="item.type_name_none === true && item.selected_type_name.chinese_name === ''">请先选择责任者类型!</span>
+                            </div>
+
+                            <div class="zxw-lit-layer">
+                                <label class="zxw-lit-type-label">责任说明:</label>
+                                <textarea class="zxw-lit-create-summery" style="width:530px" v-model="item.explain">{{item.explain}}</textarea>
+                            </div>
                         </div>
-                        <button class="zxw-input-add-character" :disabled="item.selected_type_name.item_1_id===1"></button>
                     </div>
-
-                    <label class="zxw-lit-type-label zxw-must-write">责任行为：</label>
-                    <select class="zxw-lit-select" v-model="item.selected_action" :="repeat_nou_1">
-                        <option v-for="item in action_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
-                    </select>
-                </div>
-
-                <div class="zxw-lit-layer">
-                    <label class="zxw-lit-type-label zxw-must-write">确定性:</label>
-                    <select class="zxw-lit-select" v-model="item.selected_confirm" >
-                        <option v-for="item in confirm_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
-                    </select>
-                </div>
-
-                <div class="zxw-lit-layer">
-                    <label class="zxw-lit-type-label">责任说明:</label>
-                    <textarea class="zxw-lit-create-summery" style="width:530px" v-model="item.explain">{{item.explain}}</textarea>
                 </div>
             </div>
         </div>
@@ -208,6 +210,7 @@
                 chaodai_2:'',
                 character_name_2:'',
 
+                ancient_book_name:false,
                 show_type_name:false,   //书名输入检查
                 show_repeat:false,  //本体重复检查
                 repeat_id:'',
@@ -375,6 +378,15 @@
         },
 
         methods: {
+
+            book_name_null(){
+                if(this.lit_content.type_name === ''){
+                    this.show_type_name = true;
+                    this.ancient_book_name = true;
+                } else{
+                    this.ancient_book_name = false;
+                }
+            },
 
             /*存佚类型*/
             get_type_save(){
@@ -577,6 +589,7 @@
                     value_add: true,
                     value_del: false,
                     show_input: false,
+                    type_name_none:false,
                     order:1,
                     show_begin_time: false,
                     begin_time_modal: false,
@@ -618,6 +631,7 @@
                     value_add: true,
                     value_del: true,
                     show_input: false,
+                    type_name_none:false,
                     order:this.lit_content.varieties_arr[p].order+1,
                     show_begin_time: false,
                     begin_time_modal: false,
@@ -744,12 +758,16 @@
 
             /*责任者名称*/
             open_lit_character(p){
-                if(this.lit_content.varieties_arr[p].selected_type_name.item_1_id === 2 || this.lit_content.varieties_arr[p].selected_type_name.item_1_id === 0){
-                    this.lit_content.varieties_arr[p].lit_cha_modal = true;
-                } else if(this.lit_content.varieties_arr[p].selected_type_name.item_1_id === 3){
-                    this.lit_content.varieties_arr[p].lit_ins_modal = true;
+                if(this.lit_content.varieties_arr[p].selected_type_name.item_1_id === 0){
+                    this.lit_content.varieties_arr[p].type_name_none = true;
+                }else{
+                    if(this.lit_content.varieties_arr[p].selected_type_name.item_1_id === 2 || this.lit_content.varieties_arr[p].selected_type_name.item_1_id === 0){
+                        this.lit_content.varieties_arr[p].lit_cha_modal = true;
+                    } else if(this.lit_content.varieties_arr[p].selected_type_name.item_1_id === 3){
+                        this.lit_content.varieties_arr[p].lit_ins_modal = true;
+                    }
+                    this.open_time_index = p;
                 }
-                this.open_time_index = p;
             },
 
             add_lit_character(p){
@@ -865,6 +883,7 @@
                         value_add: true,
                         value_del: false,
                         show_input: false,
+                        type_name_none:false,
                         order:response.body.responsibility_infos[0].order,
                         show_begin_time: false,
                         begin_time_modal: false,
@@ -908,6 +927,7 @@
                             value_add: false,
                             value_del: false,
                             show_input: false,
+                            type_name_none:false,
                             order:response.body.responsibility_infos[i].order,
                             show_begin_time: false,
                             begin_time_modal: false,
@@ -946,6 +966,7 @@
                         value_add: true,
                         value_del: true,
                         show_input: false,
+                        type_name_none:false,
                         order:response.body.responsibility_infos[l-1].order,
                         show_begin_time: false,
                         begin_time_modal: false,

@@ -91,7 +91,7 @@
         data(){
             return{
                 title:'地名本体',
-                total_page:0,   //总页数
+                total_page:1,   //总页数
                 place_data:[],
                 word_url:'/ancient_books/get_location_list_by_word.action',
                 ban:true

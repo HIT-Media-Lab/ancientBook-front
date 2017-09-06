@@ -87,7 +87,7 @@
         data(){
             return{
                 title:'人物本体',
-                total_page:3,   //总页数
+                total_page:1,   //总页数
                 character_data:[],
                 word_url:'/ancient_books/get_person_list_by_word.action',
                 ban:true

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <noumenon_title :title="this.title"></noumenon_title>
+        <noumenon_title class="zxw-cursor-title" :title="this.title" v-on:to_noumenon_details="to_time"></noumenon_title>
         <div class="zxw-check-noumenon-body">
             <!--左侧滑框-->
             <div class="zxw-scrollbar" id="style-1">
@@ -149,6 +149,7 @@
             }
         },
         created(){
+            this.$route.params.pageId = 1;
             this.get_catalogue();
         },
 
@@ -160,6 +161,12 @@
         },
 
         methods:{
+
+            //回到本体详情页面
+            to_time(){
+                this.$router.push({name:'time_detail',params:{nouId:this.$route.params.nouId}});
+            },
+
             //得到出现本体的所有古籍
             get_catalogue(){
                 let object = {};
@@ -224,23 +231,27 @@
             //得到指定古籍所在册数的本体位置信息
             /*监听翻页组件参数变化的请求*/
             show_noumenon_location_2(index1,index2){
+                this.clean_data();
                 this.book_index1 = index1;
                 this.book_index2 = index2;
                 let object = {};
-                let new_url = this.get_noumenon_location+'?type=4&&id='+this.$route.params.nouId+'&&book='+this.catalogue[index1].book[index2]+'&&ancient_book_id='+this.catalogue[index1].id+'&&page='+this.$route.params.pageId;
+                let new_url = this.get_noumenon_location+'?type=1&&id='+this.$route.params.nouId+'&&book='+this.catalogue[index1].book[index2]+'&&ancient_book_id='+this.catalogue[index1].id+'&&page='+this.$route.params.pageId;
                 this.http_json(new_url,'get',object,this.success_show_location,this.fail_show_location);
             },
 
             /*点击相应册名或进入该页面执行的请求*/
             show_noumenon_location_1(index1,index2){
-                this.clean_data();
                 this.book_index1 = index1;
                 this.book_index2 = index2;
-                this.$route.params.pageId = 1;
-                this.$router.push({name:this.$route.name, params: this.$route.params});
-                let object = {};
-                let new_url = this.get_noumenon_location+'?type=4&&id='+this.$route.params.nouId+'&&book='+this.catalogue[index1].book[index2]+'&&ancient_book_id='+this.catalogue[index1].id+'&&page=1';
-                this.http_json(new_url,'get',object,this.success_show_location,this.fail_show_location);
+                if(this.$route.params.pageId === 1){
+                    this.clean_data();
+                    let object = {};
+                    let new_url = this.get_noumenon_location+'?type=1&&id='+this.$route.params.nouId+'&&book='+this.catalogue[index1].book[index2]+'&&ancient_book_id='+this.catalogue[index1].id+'&&page=1';
+                    this.http_json(new_url,'get',object,this.success_show_location,this.fail_show_location);
+                } else{
+                    this.$route.params.pageId = 1;
+                    this.$router.push({name:this.$route.name, params: this.$route.params});
+                }
             },
 
             success_show_location(response){

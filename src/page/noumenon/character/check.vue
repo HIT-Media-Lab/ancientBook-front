@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <noumenon_title :title="this.title"></noumenon_title>
+        <noumenon_title class="zxw-cursor-title" :title="this.title" v-on:to_noumenon_details="to_char"></noumenon_title>
         <div class="zxw-check-noumenon-body">
             <!--左侧滑框-->
             <div class="zxw-scrollbar" id="style-1">
@@ -70,7 +70,7 @@
             {
                 "ancient_book_name":"春秋",
                 "id":"456",
-                "book|7":1,
+                "book|7":7,
                 "book_name":"册七"
             },
             {
@@ -83,7 +83,7 @@
     });
 
 
-    Mock.mock('/ancient_books/getNLocations.action?type=1&&id=1&&book=2&&ancient_book_id=123456789&&page=1','get',{
+    Mock.mock('/ancient_books/getNLocations.action?type=1&&id=1&&book=1&&ancient_book_id=123456789&&page=1','get',{
         'total_page|5':5,
         'content|10':[{
             'id|987654321':1,
@@ -94,13 +94,24 @@
         }]
     });
 
-    Mock.mock('/ancient_books/getNLocations.action?type=1&&id=1&&book=2&&ancient_book_id=123456789&&page=2','get',{
+    Mock.mock('/ancient_books/getNLocations.action?type=1&&id=1&&book=1&&ancient_book_id=123456789&&page=2','get',{
         'total_page|5':5,
         'content|2':[{
             'id|987654321':1,
             'page_id|1':1,
             'content':'鱼戏莲叶间，莲叶何田田',
             'target':'莲叶',
+            'volume|1':1
+        }]
+    });
+
+    Mock.mock('/ancient_books/getNLocations.action?type=1&&id=1&&book=2&&ancient_book_id=123456789&&page=1','get',{
+        'total_page|3':3,
+        'content|2':[{
+            'id|987654321':1,
+            'page_id|1':1,
+            'content':'锄禾日当午',
+            'target':'当午',
             'volume|1':1
         }]
     });
@@ -150,12 +161,12 @@
             }
         },
         created(){
+            this.$route.params.pageId = 1;
             this.get_catalogue();
         },
 
         watch:{
             '$route'(){
-                this.clean_data();
                 this.show_noumenon_location_2(this.book_index1,this.book_index2);
             }
         },
@@ -165,6 +176,11 @@
         },
 
         methods:{
+
+            //回到本体详情页面
+            to_char(){
+                this.$router.push({name:'char_detail',params:{nouId:this.$route.params.nouId}});
+            },
             //得到出现本体的所有古籍
             get_catalogue(){
                 let object = {};
@@ -209,7 +225,7 @@
                         }
                     }
                     console.log(JSON.stringify(this.catalogue));
-                    this.show_noumenon_location_1(0,0);
+                    this.show_noumenon_location_2(0,0);
                 }
             },
 
@@ -229,6 +245,7 @@
             //得到指定古籍所在册数的本体位置信息
             /*监听翻页组件参数变化的请求*/
             show_noumenon_location_2(index1,index2){
+                this.clean_data();
                 this.book_index1 = index1;
                 this.book_index2 = index2;
                 let object = {};
@@ -238,14 +255,17 @@
 
             /*点击相应册名或进入该页面执行的请求*/
             show_noumenon_location_1(index1,index2){
-                this.clean_data();
                 this.book_index1 = index1;
                 this.book_index2 = index2;
-                this.$route.params.pageId = 1;
-                this.$router.push({name:this.$route.name, params: this.$route.params});
-                let object = {};
-                let new_url = this.get_noumenon_location+'?type=1&&id='+this.$route.params.nouId+'&&book='+this.catalogue[index1].book[index2]+'&&ancient_book_id='+this.catalogue[index1].id+'&&page=1';
-                this.http_json(new_url,'get',object,this.success_show_location,this.fail_show_location);
+                if(this.$route.params.pageId === 1){
+                    this.clean_data();
+                    let object = {};
+                    let new_url = this.get_noumenon_location+'?type=1&&id='+this.$route.params.nouId+'&&book='+this.catalogue[index1].book[index2]+'&&ancient_book_id='+this.catalogue[index1].id+'&&page=1';
+                    this.http_json(new_url,'get',object,this.success_show_location,this.fail_show_location);
+                } else{
+                    this.$route.params.pageId = 1;
+                    this.$router.push({name:this.$route.name, params: this.$route.params});
+                }
             },
 
 

@@ -6,9 +6,12 @@
 
         <div>
             <p class="zxw-create-character" v-bind="standard_title"  v-model="input_content.standard_name">本体名称：{{input_content.standard_name}}</p>
+            <span style="color:#a50000;margin-left: 150px;" v-show="char_name_none === true">人名不能为空!</span>
+            <span style="color:#a50000;margin-left: 150px;" v-if="show_input === true&&char_name_none === false">人名必须为中文!</span>
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">人名：</label>
-                <input id="person_name" type="text"  class="zxw-character-input zxw-character-input-margin" v-model="input_content.person_name" v-bind:class="{'zxw-input-chinese':show_input}" :="repeat_nou_1">
+                <input id="person_name" type="text"  class="zxw-character-input zxw-character-input-margin" v-model="input_content.person_name" v-bind:class="{'zxw-input-chinese':show_input}" :="repeat_nou_1" @blur="char_name_null()">
+
                 <label class="zxw-character-span">英译：</label>
                 <input type="text" class="zxw-character-input" v-model="input_content.english">
             </div>
@@ -165,7 +168,7 @@
                 </div>
             </div>
 
-            <div v-for="(item ,index) in add_data">
+            <div class="zxw-noumenon-mark" v-for="(item ,index) in add_data">
                 <input type="text" class="zxw-character-input-head zxw-character-input" v-model="item.remark_name">
                 <input type="text" class="zxw-character-input" v-bind:readonly="item.remark_name === ''&&item.remark === ''" v-model="item.remark">
                 <button class="zxw-add-button" @click="add_tip(index)" v-show="add_data[index].value" :disabled="add_data.length >=2">添加</button>
@@ -196,7 +199,6 @@
         <!--添加籍贯的模态框-->
         <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_location" v-on:add_noumenon_relations="add_location"></search_modal>
     </div>
-
 </template>
 
 <script>
@@ -306,6 +308,7 @@
                 search_location:'/ancient_books/get_location_list_by_name.action',
                 show_location:false,
                 show_input:false,
+                char_name_none:false,
                 show_father:false,
                 show_mother:false,
                 show_birth_time:false,
@@ -380,6 +383,16 @@
         },
 
         methods:{
+            /*人名必填不能为空的提示*/
+            char_name_null(){
+                if(this.input_content.person_name === ''){
+                    this.show_input = true;
+                    this.char_name_none = true;
+                }else{
+                    this.char_name_none = false;
+                }
+            },
+
             /*本体是否重复*/
             repeat_nou_2(){
                 if(this.input_content.person_name !== '' && this.input_content.birth_standard_name !== '' && this.show_input === false){
@@ -762,7 +775,8 @@
         font-size: 18px;
         margin:42px 0 34px 0;
         color:#a50000;
-        font-weight: bold ;
+        font-weight: bold;
+        text-align: left;
     }
 
     /*输入框样式*/
@@ -792,6 +806,7 @@
     .zxw-character-span{
         width:100px;
         font-size: 18px;
+        text-align: left;
     }
 
     .zxw-must-write{
@@ -872,4 +887,8 @@
         font-size: 16px;
     }
 
+    .zxw-noumenon-mark{
+        text-align: left;
+        margin-left: 115px;
+    }
 </style>

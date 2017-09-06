@@ -62,7 +62,7 @@
                 </select>
 
                 <label class="zxw-character-span">日：</label>
-                <select  class="zxw-ins-select" :disabled="this.selected_2_month.chinese_name === null" v-model="selected_2_day" :="clean_g_day">
+                <select  class="zxw-ins-select" :disabled="this.selected_2_month.chinese_name === ''" v-model="selected_2_day" :="clean_g_day">
                     <option v-for="item in g_day_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
             </div>

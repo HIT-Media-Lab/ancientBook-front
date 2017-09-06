@@ -7,11 +7,19 @@
         </div>
 
         <p class="zxw-create-literature" v-bind="standard_title"  v-model="lit_content.standard_name">本体名称：{{lit_content.standard_name}}</p>
-        <div class="zxw-lit-background">
+
+        <!--提示文字显示-->
+        <span style="color: #a50000;float:left;margin-top:50px;font-weight: bold" v-if="show_type_name=== true && ancient_book_name === false">书名有且仅有中文!</span>
+        <span style="color: #a50000;float:left;margin-top:50px;font-weight: bold" v-show="ancient_book_name === true">书名不能为空!</span>
+
+        <div id="top" class="zxw-lit-top">
+            <div id="bottom" class="zxw-lit-bottom">
+                <div id="centre" class="zxw-lit-centre">
+                    <div id="content" class="zxw-lit-content">
             <!--文献版本层信息固有信息-->
             <div class="zxw-lit-layer">
                 <label class="zxw-lit-label zxw-must-write">书名:</label>
-                <input type="text" class="zxw-lit-info zxw-lit-info-margin zxw-lit-input-style" v-model="lit_content.type_name" v-bind:class="{'zxw-input-number':show_type_name}" :="repeat_nou_1">
+                <input type="text" class="zxw-lit-info zxw-lit-info-margin zxw-lit-input-style" v-model="lit_content.type_name" v-bind:class="{'zxw-input-number':show_type_name}" :="repeat_nou_1" @blur="book_name_null()">
                 <label class="zxw-lit-label">别名:</label>
                 <input type="text" class="zxw-lit-info zxw-lit-input-style" v-model="lit_content.type_other_name">
             </div>
@@ -105,14 +113,14 @@
 
                 <div class="zxw-lit-layer">
                     <label class="zxw-lit-type-label zxw-must-write">责任者名称：</label>
-                    <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style" v-if="item.selected_type_name.item_1_id === 2||item.selected_type_name.item_1_id === 0">
+                    <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style" v-bind:class="{'zxw-input-number':item.type_name_none}"  v-if="item.selected_type_name.item_1_id === 2||item.selected_type_name.item_1_id === 0">
                         <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.character_standard_name !== ''">
                         <span class="zxw-person-relation-span" @mouseover="item.show_lit_character = true" @mouseout="item.show_lit_character = false" v-if="item.character_standard_name !== ''" v-bind:contenteditable="item.character_standard_name !== ''" @keydown="down_delete()">
                             <span class="zxw-tag-font" v-model="item.character_standard_name">{{item.character_standard_name}}</span>
                             <button class="zxw-add-hover-img" v-show="item.show_lit_character===true" @click="delete_lit_character(index)"></button>
                         </span>
                         </div>
-                        <button class="zxw-input-add-character" @click="open_lit_character(index)" :disabled="item.selected_type_name.item_1_id===0"></button>
+                        <button class="zxw-input-add-character" @click="open_lit_character(index)"></button>
                     </div>
 
                     <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style" v-else-if="item.selected_type_name.item_1_id === 3">
@@ -145,13 +153,16 @@
                     <select class="zxw-lit-select" v-model="item.selected_confirm" >
                         <option v-for="item in confirm_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                     </select>
+                    <span style="color: #a50000;margin-left: 30px;font-weight: bold" v-if="item.type_name_none === true && item.selected_type_name.chinese_name === ''">请先选择责任者类型!</span>
                 </div>
 
                 <div class="zxw-lit-layer">
                     <label class="zxw-lit-type-label">责任说明:</label>
-                    <!--<textarea class="zxw-lit-create-summery" style="width:530px" v-model="item.explain">{{item.explain}}</textarea>-->
                     <div_edit style="width:530px;" v-model="item.explain" v-on:open_warning="explain_length"></div_edit>
                 </div>
+            </div>
+            </div>
+            </div>
             </div>
         </div>
 
@@ -339,6 +350,8 @@
                 character_name:'',
                 chaodai_2:'',
                 character_name_2:'',
+                ancient_book_name:false,//书名为空的判断参数
+                type_name_none:false,//责任者类型未选时的参数
                 show_type_name:false,
                 show_repeat:false,
                 summary_error:false,
@@ -496,6 +509,15 @@
         },
 
         methods: {
+            book_name_null(){
+                if(this.lit_content.type_name === ''){
+                    this.show_type_name = true;
+                    this.ancient_book_name = true;
+                } else{
+                    this.ancient_book_name = false;
+                }
+            },
+
             /*存佚类型*/
             get_type_save(){
                 let object = {};
@@ -691,6 +713,7 @@
                     value_add: true,
                     value_del: false,
                     show_input: false,
+                    type_name_none:false,
                     order: 1,   //责任顺序
                     show_begin_time: false,
                     begin_time_modal: false,
@@ -732,6 +755,7 @@
                     value_add: true,
                     value_del: true,
                     show_input: false,
+                    type_name_none:false,
                     order: this.lit_content.varieties_arr[p].order+1,
                     show_begin_time: false,
                     begin_time_modal: false,
@@ -853,12 +877,16 @@
 
             /*责任者名称*/
             open_lit_character(p){
-                if(this.lit_content.varieties_arr[p].selected_type_name.item_1_id === 2 || this.lit_content.varieties_arr[p].selected_type_name.item_1_id === 0){
-                    this.lit_content.varieties_arr[p].lit_cha_modal = true;
-                } else if(this.lit_content.varieties_arr[p].selected_type_name.item_1_id === 3){
-                    this.lit_content.varieties_arr[p].lit_ins_modal = true;
+                if(this.lit_content.varieties_arr[p].selected_type_name.item_1_id === 0){
+                    this.lit_content.varieties_arr[p].type_name_none = true;
+                }else{
+                    if(this.lit_content.varieties_arr[p].selected_type_name.item_1_id === 2 || this.lit_content.varieties_arr[p].selected_type_name.item_1_id === 0){
+                        this.lit_content.varieties_arr[p].lit_cha_modal = true;
+                    } else if(this.lit_content.varieties_arr[p].selected_type_name.item_1_id === 3){
+                        this.lit_content.varieties_arr[p].lit_ins_modal = true;
+                    }
+                    this.open_time_index = p;
                 }
-                this.open_time_index = p;
             },
 
             add_lit_character(p){
@@ -979,17 +1007,36 @@
 </script>
 
 <style>
-    .zxw-lit-create-summery{
-        display:inline-block;
-        width: 560px;
-        min-height:60px;
-        _height:60px;
-        background-color: transparent;
-        border: 2px solid black;
-        vertical-align:top;
-        white-space:pre;
+    .zxw-lit-top{
+        background-image: url("../../../../assets/img/modal-box/lit_top.png");
+        width:773px;
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        margin:20px auto 0 auto;
     }
 
+    .zxw-lit-bottom{
+        background-image: url("../../../../assets/img/modal-box/lit_bottom.png");
+        width:773px;
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+
+    .zxw-lit-centre{
+        height:auto;
+        background-image: url("../../../../assets/img/modal-box/lit_centre.png");
+        width:773px;
+        background-position: center;
+        background-repeat: repeat-y;
+        background-size: 100%;
+    }
+
+    .zxw-lit-content{
+        margin:20px auto 0 auto;
+        padding: 50px 50px 50px 50px;
+    }
     .zxw-lit-select{
         width:175px;
         height:30px;
@@ -1032,10 +1079,6 @@
         font-weight: bold;
         color:#a50000;
         margin:20px 0 20px 220px;
-    }
-
-    .zxw-input-number{
-        border-color: #a50000;
     }
 
     .zxw-lit-btn-margin{

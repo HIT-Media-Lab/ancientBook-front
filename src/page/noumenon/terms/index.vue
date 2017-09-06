@@ -87,7 +87,7 @@
         data(){
             return{
                 title:'术语本体',
-                total_page:0,   //总页数
+                total_page:1,   //总页数
                 terms_data:[],
                 word_url:'/ancient_books/get_technical_list_by_word.action',
                 ban:true

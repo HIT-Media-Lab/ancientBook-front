@@ -2,7 +2,7 @@
     <div>
         <noumenon_title :title="edit_character_title"> </noumenon_title>
         <div style="margin-left:60px">
-            <p class="zxw-create-character" v-bind="standard_title"  v-model="input_content.standard_name">本体名称：{{input_content.standard_name}}</p>
+            <p class="zxw-create-character" style="margin-left: 0" v-bind="standard_title"  v-model="input_content.standard_name">本体名称：{{input_content.standard_name}}</p>
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">人名：</label>
                 <input id="person_name" type="text"  class="zxw-character-input zxw-edit-character-input-margin" v-model="input_content.person_name" v-bind:class="{'zxw-input-chinese':show_input}" :="repeat_nou_1">
@@ -98,7 +98,7 @@
                 <div  class="zxw-character-input zxw-edit-character-input-margin">
                     <div id="daughter" class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" v-bind:contenteditable="input_content.daughter_standard_name.length !== 0">
                         <span class="zxw-person-relation-span" v-if="item.person_name !== undefined" v-for="(item,index) in input_content.daughter"  @mouseover="show_daughter=index" @mouseout="show_daughter =-1">
-                            <span class="zxw-tag-font">{{item}}</span>
+                            <span class="zxw-tag-font">{{item.person_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_daughter === index" @click="delete_daughter(index)"></button>
                         </span>
                     </div>
@@ -108,7 +108,7 @@
                 <div  class="zxw-character-input">
                     <div id="brother" class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" v-bind:contenteditable="input_content.brother_standard_name.length !== 0">
                         <span class="zxw-person-relation-span" v-if="item.person_name !== undefined" v-for="(item,index) in input_content.brother"  @mouseover="show_brother=index" @mouseout="show_brother =-1">
-                            <span class="zxw-tag-font">{{item}}</span>
+                            <span class="zxw-tag-font">{{item.person_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_brother === index" @click="delete_brother(index)"></button>
                         </span>
                     </div>
@@ -121,7 +121,7 @@
                 <div  class="zxw-character-input zxw-edit-character-input-margin">
                     <div id="sister" class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" v-bind:contenteditable="input_content.sister_standard_name.length !== 0">
                         <span class="zxw-person-relation-span" v-if="item.person_name !== undefined" v-for="(item,index) in input_content.sister"  @mouseover="show_sister=index" @mouseout="show_sister =-1">
-                            <span class="zxw-tag-font">{{item}}</span>
+                            <span class="zxw-tag-font">{{item.person_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_sister === index" @click="delete_sister(index)"></button>
                         </span>
                     </div>
@@ -131,7 +131,7 @@
                 <div  class="zxw-character-input">
                     <div id="teacher" class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" v-bind:contenteditable="input_content.teacher_standard_name.length !== 0">
                         <span class="zxw-person-relation-span" v-if="item.person_name !== undefined" v-for="(item,index) in input_content.teacher"  @mouseover="show_teacher=index" @mouseout="show_teacher =-1">
-                            <span class="zxw-tag-font">{{item}}</span>
+                            <span class="zxw-tag-font">{{item.person_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_teacher === index" @click="delete_teacher(index)"></button>
                         </span>
                     </div>
@@ -144,7 +144,7 @@
                 <div  class="zxw-character-input zxw-edit-character-input-margin">
                     <div id="student" class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" v-bind:contenteditable="input_content.student_standard_name.length !== 0">
                         <span class="zxw-person-relation-span" v-if="item.person_name !== undefined" v-for="(item,index) in input_content.student"  @mouseover="show_student=index" @mouseout="show_student =-1">
-                            <span class="zxw-tag-font">{{item}}</span>
+                            <span class="zxw-tag-font">{{item.person_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_student === index" @click="delete_student(index)"></button>
                         </span>
                     </div>
@@ -154,7 +154,7 @@
                 <div  class="zxw-character-input">
                     <div id="friend" class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" v-bind:contenteditable="input_content.friend_standard_name.length !== 0">
                         <span class="zxw-person-relation-span" v-if="item.person_name !== undefined" v-for="(item,index) in input_content.friend"  @mouseover="show_friend=index" @mouseout="show_friend =-1">
-                            <span class="zxw-tag-font">{{item}}</span>
+                            <span class="zxw-tag-font">{{item.person_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_friend === index" @click="delete_friend(index)"></button>
                         </span>
                     </div>

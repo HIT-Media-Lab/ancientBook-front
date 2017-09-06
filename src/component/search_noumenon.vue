@@ -6,7 +6,7 @@
 
         <div slot="body" class="zxw-noumenon-body">
             <div class="zxw-search-header">
-                <input class="zxw-search-input" type="search" v-model="search_content">
+                <input class="zxw-search-input" type="search" v-model="search_content" @keydown="enter_search()">
                 <button class="zxw-search-icon" @click="search_noumenon()" v-bind:disabled="search_content === ''"></button>
             </div>
             <p class="zxw-search-tip" v-if="show_tip === true">请在输入框中输入本体规范名称进行搜索</p>
@@ -276,6 +276,12 @@
             },
 
             /*搜索本体*/
+            search_noumenon(){
+                let search_object = {};
+                let new_url = this.search_url+'?name='+this.search_content+'&&page_count=1';
+                this.http_json(new_url,'get',search_object,this.success_search,this.fail_search);
+            },
+
             success_search(response){
                 this.show_tip = false;
                 this.search_result.splice(0,this.search_result.length);
@@ -329,10 +335,10 @@
                 console.log("根据名称获取人物列表失败");
             },
 
-            search_noumenon(){
-                let search_object = {};
-                let new_url = this.search_url+'?name='+this.search_content+'&&page_count=1';
-                this.http_json(new_url,'get',search_object,this.success_search,this.fail_search);
+            enter_search(){
+                if(event.keyCode === 13){
+                    this.search_noumenon();
+                }
             },
 
             /*添加搜索的本体*/

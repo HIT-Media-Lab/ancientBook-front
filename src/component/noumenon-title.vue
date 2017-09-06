@@ -1,13 +1,18 @@
 <template>
     <div class="zxwnoumenom-header">
-        <span class="zxwnoumenom-title" v-model="title">{{title}}</span>
+        <span class="zxwnoumenom-title" v-model="title" @click="to_noumenon_details()">{{title}}</span>
         <slot name="children"></slot>
     </div>
 </template>
 
 <script>
     export default{
-        props:['title']
+        props:['title'],
+        methods:{
+            to_noumenon_details(){
+                this.$emit('to_noumenon_details');
+            }
+        }
     }
 </script>
 
@@ -26,6 +31,13 @@
         display:inline-block;
         font-weight: bold;
     }
+
+
+    /*本体标记位置处添加抓手按钮*/
+    .zxw-cursor-title{
+        cursor: pointer;
+    }
+
 
 
 </style>

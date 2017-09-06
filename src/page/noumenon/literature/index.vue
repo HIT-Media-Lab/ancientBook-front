@@ -59,7 +59,7 @@
         data(){
             return{
                 title:'文献本体',
-                total_page:0,
+                total_page:1,
                 lit_data:[],
                 word_url:'/ancient_books/get_literature_list_by_word.action',
                 ban:true,
