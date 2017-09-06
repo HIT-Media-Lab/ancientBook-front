@@ -1030,45 +1030,38 @@
                         //该点击在该条标记内
                         if (click > this.mark[k].begin_mark && click <= this.mark[k].end_mark) {
                             if (this.mark[k].noumenon_type == 1){
-                                this.$router.push({name:'char_check',params:{
-                                    nouId:this.mark[k].noumenon_id,
-                                    pageId:1
+                                this.$router.push({name:'char_detail',params:{
+                                    nouId:this.mark[k].noumenon_id
                                 }})
                             }
                             else if (this.mark[k].noumenon_type == 2){
-                                this.$router.push({name:'lit_check',params:{
-                                    nouId:this.mark[k].noumenon_id,
-                                    pageId:1
+                                this.$router.push({name:'lit_detail',params:{
+                                    nouId:this.mark[k].noumenon_id
                                 }})
                             }
                             else if (this.mark[k].noumenon_type == 3){
-                                this.$router.push({name:'terms_check',params:{
-                                    nouId:this.mark[k].noumenon_id,
-                                    pageId:1
+                                this.$router.push({name:'terms_detail',params:{
+                                    nouId:this.mark[k].noumenon_id
                                 }})
                             }
                             else if (this.mark[k].noumenon_type == 4){
-                                this.$router.push({name:'time_check',params:{
-                                    nouId:this.mark[k].noumenon_id,
-                                    pageId:1
+                                this.$router.push({name:'time_detail',params:{
+                                    nouId:this.mark[k].noumenon_id
                                 }})
                             }
                             else if (this.mark[k].noumenon_type == 5){
-                                this.$router.push({name:'off_check',params:{
-                                    nouId:this.mark[k].noumenon_id,
-                                    pageId:1
+                                this.$router.push({name:'off_detail',params:{
+                                    nouId:this.mark[k].noumenon_id
                                 }})
                             }
                             else if (this.mark[k].noumenon_type == 6){
-                                this.$router.push({name:'ins_check',params:{
-                                    nouId:this.mark[k].noumenon_id,
-                                    pageId:1
+                                this.$router.push({name:'ins_detail',params:{
+                                    nouId:this.mark[k].noumenon_id
                                 }})
                             }
                             else if (this.mark[k].noumenon_type == 7){
-                                this.$router.push({name:'pla_check',params:{
-                                    nouId:this.mark[k].noumenon_id,
-                                    pageId:1
+                                this.$router.push({name:'pla_detail',params:{
+                                    nouId:this.mark[k].noumenon_id
                                 }})
                             }
                             break;
