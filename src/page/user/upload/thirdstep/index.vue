@@ -113,6 +113,8 @@
 
                 post_index1 : 0,
                 post_index2 : 0,
+                post_index3 : 0,
+                post_index4 : 0,
             }
         },
 
@@ -630,41 +632,46 @@
                 if (response.body.result === 1) {
                     console.log("success add!");
 
-                    for (vm.post_index1 = 0; vm.post_index1 < vm.upload_file.length; vm.post_index1++) {
-                        for (vm.post_index2 = 0; vm.post_index2 < vm.upload_file[vm.post_index1].images.length; vm.post_index2++) {
-                            var upload_picture_obj = new FormData;
+                    for (; vm.post_index1 < vm.upload_file.length; vm.post_index1++){
+                        for (; vm.post_index2 < vm.upload_file[vm.post_index1].images.length; vm.post_index2++){
+                            if (vm.post_index2 == vm.post_index3){
+                                var upload_picture_obj = new FormData;
 
-                            var blob = this.dataURItoBlob(vm.upload_file[vm.post_index1].images[vm.post_index2].picture);
+                                var blob = this.dataURItoBlob(vm.upload_file[vm.post_index1].images[vm.post_index2].picture);
 
-                            var name = vm.upload_file[vm.post_index1].images[vm.post_index2].pic_name;
-                            var first = name.charAt(1);
-                            var second = name.charAt(2);
-                            var third = name.charAt(3);
-                            var str = first + second + third;
-                            var volume = parseInt(str);
+                                var name = vm.upload_file[vm.post_index1].images[vm.post_index2].pic_name;
+                                var first = name.charAt(1);
+                                var second = name.charAt(2);
+                                var third = name.charAt(3);
+                                var str = first + second + third;
+                                var volume = parseInt(str);
 
-                            upload_picture_obj.append('ancient_book_id' , response.body.id);
-                            upload_picture_obj.append('book' , vm.post_index1 + 1);
-                            upload_picture_obj.append('volume' , volume);
-                            upload_picture_obj.append('page' , vm.post_index2 + 1);
-                            upload_picture_obj.append('picture' , blob);
-                            if (vm.upload_file[vm.post_index1].texts[vm.post_index2]) {
-                                upload_picture_obj.append('content' , vm.upload_file[vm.post_index1].texts[vm.post_index2]);
+                                upload_picture_obj.append('ancient_book_id' , response.body.id);
+                                upload_picture_obj.append('book' , vm.post_index1 + 1);
+                                upload_picture_obj.append('volume' , volume);
+                                upload_picture_obj.append('page' , vm.post_index2 + 1);
+                                upload_picture_obj.append('picture' , blob);
+                                if (vm.upload_file[vm.post_index1].texts[vm.post_index2]) {
+                                    upload_picture_obj.append('content' , vm.upload_file[vm.post_index1].texts[vm.post_index2]);
+                                }
+                                upload_picture_obj.append('book_name' , vm.upload_file[vm.post_index1].book_name);
+
+                                upload_picture_obj.token = this.$store.getters.GetToken;
+                                this.before_http(upload_picture_obj);
+                                upload_picture_obj.token = this.$store.getters.GetToken;
+                                upload_picture_obj.append('token' , upload_picture_obj.token);
+
+                                this.$http.post('/ancient_books/upload_page.action' , upload_picture_obj ,
+                                        {emulateJSON: true}
+                                ).then(function (response) {
+                                    this.response_post(response,this.success_post_picture,this.fail_post_picture);
+                                },function () {
+                                    this.error();
+                                })
                             }
-                            upload_picture_obj.append('book_name' , vm.upload_file[vm.post_index1].book_name);
-
-                            upload_picture_obj.token = this.$store.getters.GetToken;
-                            this.before_http(upload_picture_obj);
-                            upload_picture_obj.token = this.$store.getters.GetToken;
-                            upload_picture_obj.append('token' , upload_picture_obj.token);
-
-                            this.$http.post('/ancient_books/upload_page.action' , upload_picture_obj ,
-                                    {emulateJSON: true}
-                            ).then(function (response) {
-                                this.response_post(response,this.success_post_picture,this.fail_post_picture);
-                            },function () {
-                                this.error();
-                            })
+                            else{
+                                vm.post_index2 = vm.post_index2 - 1
+                            }
                         }
                     }
                 }
@@ -709,6 +716,7 @@
                 var vm = this;
                 if (response.body.result === 1) {
                     console.log("success upload picture!");
+                    this.post_index3 = this.post_index3 + 1;
                     if (vm.post_index1 == vm.upload_file.length && vm.post_index2 == vm.upload_file[vm.upload_file.length - 1].images.length) {
                         this.$router.push({path:'/user_info/mybook'});
                     }

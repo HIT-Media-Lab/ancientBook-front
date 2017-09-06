@@ -450,7 +450,7 @@
                             <span>{{item.book_name}}</span>
                         </div>
                         <div>
-                            <span v-for="volume in book_all_info.catalogue[index].volume" @click="go_to(item.book_count,volume.volume_count,volume.begin_page)">卷{{volume.volume_count}}</span>
+                            <a v-for="volume in book_all_info.catalogue[index].volume" @click="go_to(item.book_count,volume.volume_count,volume.begin_page)">卷{{volume.volume_count}}</a>
                         </div>
                     </div>
                 </div>
