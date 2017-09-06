@@ -304,7 +304,7 @@
         border: 2px solid red;
     }
     .j-modify1{
-        width: 200px;
+        width: 310px;
         margin: 0 auto
     }
     .j-modify2{

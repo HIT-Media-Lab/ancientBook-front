@@ -5,8 +5,8 @@
         <noumenon_title class="zxw-admin-title" :title="this.title">
             <div slot="children" class="zxwbtn-margin">
                 <button slot="children" class="zxwnoumenom-button zxwnoumenom-button-margin"  @click="edit_info()">编辑</button>
-                <button slot="children" class="zxwnoumenom-button zxwnoumenom-button-margin"  @click="downback()">创建用户</button>
-                <button slot="children" class="zxwnoumenom-button zxwnoumenom-button-margin"  @click="open_dialog()">注销</button>
+                <button slot="children" class="zxwnoumenom-button zxwnoumenom-button-margin"  @click="open_dialog()">创建用户</button>
+                <button slot="children" class="zxwnoumenom-button zxwnoumenom-button-margin"  @click="downback()">注销</button>
             </div>
         </noumenon_title>
 
