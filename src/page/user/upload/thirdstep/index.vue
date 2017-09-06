@@ -683,7 +683,7 @@
                         upload_picture_obj.append('content' , this.upload_file[this.post_index1].texts[temp]);
                     }
 
-                    upload_picture_obj.append('book_name' , vm.upload_file[vm.post_index1].book_name);
+                    upload_picture_obj.append('book_name' , this.upload_file[this.post_index1].book_name);
 
                     upload_picture_obj.token = this.$store.getters.GetToken;
                     this.before_http(upload_picture_obj);
