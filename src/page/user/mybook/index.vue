@@ -7,7 +7,7 @@
             <div class="j-mybook-recent-img">
                 <div class="j-mybook-recent-div" v-for="item in recent_mybook">
                     <img  :id = "item.ancient_book_id" class="j-mybook-recent-img1 all-link" @click="go_to_bookinfo(item.ancient_book_id)">
-                    <p class="j-mybook-p all-link" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
+                    <p class="j-mybook-p all-link" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.name">{{item.name}}</p>
                 </div>
             </div>
             <p class="j-mybook-recent-name">已上传</p>
@@ -21,7 +21,7 @@
                         </div>
                         <img :id = "item.ancient_book_id + 'alup'" class="j-mybook-recent-img1 all-link" @click="go_to_bookinfo(item.ancient_book_id)">
                     </div>
-                    <p class="j-mybook-p all-link" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
+                    <p class="j-mybook-p all-link" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.name">{{item.name}}</p>
                 </div>
                 <!--获取更多古籍按钮-->
                 <div class="j-mybook-morelink" v-show="show_more1">
@@ -40,7 +40,7 @@
                         </div>
                         <img :id = "item.ancient_book_id + 's'" class="j-mybook-recent-img1 all-link" @click="go_to_bookinfo(item.ancient_book_id)">
                     </div>
-                    <p class="j-mybook-p all-link" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
+                    <p class="j-mybook-p all-link" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.name">{{item.name}}</p>
                 </div>
                 <!--获取更多古籍按钮-->
                 <div class="j-mybook-morelink" v-show="show_more2">

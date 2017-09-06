@@ -12,7 +12,7 @@
                     </div>
                     <img :id="item.ancient_book_id" class="j-collection-img all-link" @click="go_to_bookinfo(item.ancient_book_id)">
                 </div>
-                <p class="j-collection-p all-link" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.standard_name">{{item.standard_name}}</p>
+                <p class="j-collection-p all-link" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.name">{{item.name}}</p>
             </div>
         </div>
         <!--翻页组件-->
