@@ -23,15 +23,15 @@
             </div>
         </div>
 
-        <div class="width800 center ry-form-upload">
+        <div class="width800 center">
             <menuBar></menuBar>
             <div id="layer-body" class="ry-form-body">
                 <router-view></router-view>
-            </div>
-            <synopsis></synopsis>
-            <div>
-                <button class="float-right ry-btn-next-step" @click="next_page">下一步</button>
-                <label class="float-right"><input id="ry-one-pri" type="checkbox" name="private" class="ry-check-pri">私密上传</label>
+                <synopsis></synopsis>
+                <div>
+                    <button class="float-right ry-btn-next-step" @click="next_page">下一步</button>
+                    <label class="float-right"><input id="ry-one-pri" type="checkbox" name="private" class="ry-check-pri">私密上传</label>
+                </div>
             </div>
         </div>
 
@@ -265,6 +265,12 @@
 
     .ry-form-body{
         margin-top: 50px;
+        height:auto;
+        background-image: url("../../../../assets/img/modal-box/lit_centre.png");
+        width:968px;
+        background-position: center;
+        background-repeat: repeat-y;
+        background-size: 100%;
     }
 
     .form-center input{
