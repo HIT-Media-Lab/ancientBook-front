@@ -111,6 +111,7 @@
                 responsibility_info : [],
                 add_book_obj : {},
 
+                ancient_book_id : '',
                 pictures : [],
                 picture_length : 0,
                 post_index1 : 0,
@@ -629,6 +630,7 @@
             success_post_add(response) {
                 if (response.body.result === 1) {
                     console.log("success add!");
+                    this.ancient_book_id = response.body.id;
                     this.pictures = this.upload_file[this.post_index1].images;
                     this.picture_length = this.upload_file[this.post_index1].images.length;
                     this.post_picture(this.picture_length,this.pictures,response);
@@ -673,7 +675,7 @@
                     var str = first + second + third;
                     var volume = parseInt(str);
 
-                    upload_picture_obj.append('ancient_book_id' , response.body.id);
+                    upload_picture_obj.append('ancient_book_id' , this.ancient_book_id);
                     upload_picture_obj.append('book' , this.post_index1 + 1);
                     upload_picture_obj.append('volume' , volume);
                     upload_picture_obj.append('page' , temp + 1);
