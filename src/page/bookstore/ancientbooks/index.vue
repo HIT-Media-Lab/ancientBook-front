@@ -21,10 +21,10 @@
             </div>
         </div>
 
-        <div class="width800 center ry-form-upload">
+        <div class="width950 center">
 
             <!--4层按钮-->
-            <div class="ry-menu-bar">
+            <div class="ry-menu-bar ry-border-top">
                 <ul id="layer-head">
                     <li id="layer-head-variety" @click="click_variety"><span v-show="variety_text">品种层</span><img v-show="variety_pic" src="../../../assets/img/picture-button/variety.png" height="31" width="134"/></li>
                     <li id="layer-head-edition" @click="click_edition"><span v-show="edition_text">版本层</span><img v-show="edition_pic" src="../../../assets/img/picture-button/edition.png" height="30" width="133"/></li>
@@ -33,7 +33,7 @@
                 </ul>
             </div>
 
-            <div id="layer-body" class="ry-form-body">
+            <div id="layer-body" class="ry-border-center1">
 
                 <!--品种层-->
                 <div id="variety-layer" class="layer-input div-now">
@@ -433,30 +433,31 @@
                     </div>
                 </div>
 
-            </div>
-            <div>
-                <h3>古籍简介</h3>
-                <p>{{book_all_info.summary}}</p>
-            </div>
-            <div>
-                <img src="../../../assets/img/no-use-picture/ink-line.png" height="6" width="843"/>
-            </div>
-            <div>
-                <h3>目录</h3>
-                <div>
-                    <div v-for="(item,index) in book_all_info.catalogue">
-                        <div>
-                            <span>册{{item.book_count}}</span>
-                            <span>{{item.book_name}}</span>
-                        </div>
-                        <div>
-                            <a v-for="volume in book_all_info.catalogue[index].volume" @click="go_to(item.book_count,volume.volume_count,volume.begin_page)">卷{{volume.volume_count}}</a>
+                <div class="div-now">
+                    <h3>古籍简介</h3>
+                    <p>{{book_all_info.summary}}</p>
+                </div>
+                <div class="div-now">
+                    <img src="../../../assets/img/no-use-picture/ink-line.png" height="6" width="843"/>
+                </div>
+                <div class="div-now">
+                    <h3>目录</h3>
+                    <div>
+                        <div v-for="(item,index) in book_all_info.catalogue">
+                            <div>
+                                <span>册{{item.book_count}}</span>
+                                <span>{{item.book_name}}</span>
+                            </div>
+                            <div>
+                                <a v-for="volume in book_all_info.catalogue[index].volume" @click="go_to(item.book_count,volume.volume_count,volume.begin_page)">卷{{volume.volume_count}}</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
+            <div class="ry-border-bottom"></div>
+        </div>
     </div>
 </template>
 
@@ -788,5 +789,18 @@
 
     #layer-body > div.div-now {
         display: block;
+    }
+
+    .ry-border-center1{
+        padding-bottom: 10px;
+        margin-left: 2px;
+        margin-top: -2px;
+        padding-left: 50px;
+        height: auto;
+        background-image: url("../../../assets/img/modal-box/lit_centre.png");
+        width:953px;
+        background-position: center;
+        background-repeat: repeat-y;
+        background-size: 100%;
     }
 </style>

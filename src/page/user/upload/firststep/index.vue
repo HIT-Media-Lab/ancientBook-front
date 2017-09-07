@@ -250,13 +250,6 @@
         background-image: url("../../../../assets/img/button/build-button.png");
     }
 
-    .ry-form-upload{
-        padding:0;
-        width: 968px;
-        height: 991px;
-        background-image: url("../../../../assets/img/modal-box/box.png");
-    }
-
     .ry-4layers{
         margin: 25px 50px;
     }
@@ -306,15 +299,22 @@
     }
 
     .ry-border-top{
-        padding-left:20px;
+        padding-left:75px;
         width:960px;
+        background-image: url("../../../../assets/img/modal-box/lit_top1.png");
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        height: 100px;
     }
 
     .ry-border-center{
+        margin-top: -52px;
         padding-bottom: 10px;
-        height:auto;
+        margin-left: 2px;
+        height: auto;
         background-image: url("../../../../assets/img/modal-box/lit_centre.png");
-        width:960px;
+        width:953px;
         background-position: center;
         background-repeat: repeat-y;
         background-size: 100%;
@@ -322,7 +322,8 @@
 
     .ry-border-bottom{
         background-image: url("../../../../assets/img/modal-box/lit_bottom.png");
-        width:960px;
+        margin-left: 1px;
+        width:955px;
         height:30px;
         background-position: bottom;
         background-size: 100%;
