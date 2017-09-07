@@ -23,16 +23,19 @@
             </div>
         </div>
 
-        <div class="width800 center">
-            <menuBar></menuBar>
-            <div id="layer-body" class="ry-form-body">
-                <router-view></router-view>
-                <synopsis></synopsis>
-                <div>
-                    <button class="float-right ry-btn-next-step" @click="next_page">下一步</button>
-                    <label class="float-right"><input id="ry-one-pri" type="checkbox" name="private" class="ry-check-pri">私密上传</label>
+        <div class="width950 center">
+            <menuBar class="ry-border-top"></menuBar>
+            <div class="ry-border-center">
+                <div id="layer-body" class="ry-form-body">
+                    <router-view></router-view>
+                </div>
+                <synopsis class="ry-form-body"></synopsis>
+                <div class="ry-form-body">
+                    <label class="ry-pri-label"><input id="ry-one-pri" type="checkbox" name="private" class="ry-check-pri">私密上传</label>
+                    <button class="ry-btn-next-step" @click="next_page">下一步</button>
                 </div>
             </div>
+            <div class="ry-border-bottom"></div>
         </div>
 
     </div>
@@ -248,7 +251,7 @@
     }
 
     .ry-form-upload{
-        padding:0 80px;
+        padding:0;
         width: 968px;
         height: 991px;
         background-image: url("../../../../assets/img/modal-box/box.png");
@@ -264,13 +267,7 @@
     }
 
     .ry-form-body{
-        margin-top: 50px;
-        height:auto;
-        background-image: url("../../../../assets/img/modal-box/lit_centre.png");
-        width:968px;
-        background-position: center;
-        background-repeat: repeat-y;
-        background-size: 100%;
+        margin: 50px;
     }
 
     .form-center input{
@@ -297,11 +294,37 @@
         background-image: url("../../../../assets/img/modal-box/secret-upload-box.png");
     }
 
+    .ry-pri-label{
+        margin-left: 600px;
+    }
+
     .ry-btn-next-step{
         color: white;
-        margin-left: 50px;
         width: 127px;
         height: 54px;
         background-image: url("../../../../assets/img/button/create-next-step.png");
+    }
+
+    .ry-border-top{
+        padding-left:20px;
+        width:960px;
+    }
+
+    .ry-border-center{
+        padding-bottom: 10px;
+        height:auto;
+        background-image: url("../../../../assets/img/modal-box/lit_centre.png");
+        width:960px;
+        background-position: center;
+        background-repeat: repeat-y;
+        background-size: 100%;
+    }
+
+    .ry-border-bottom{
+        background-image: url("../../../../assets/img/modal-box/lit_bottom.png");
+        width:960px;
+        height:30px;
+        background-position: bottom;
+        background-size: 100%;
     }
 </style>
