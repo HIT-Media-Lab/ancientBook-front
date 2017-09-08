@@ -5,7 +5,7 @@
             <p class="zxw-create-character" style="margin-left: 0" v-bind="standard_title"  v-model="input_content.standard_name">本体名称：{{input_content.standard_name}}</p>
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">人名：</label>
-                <input id="person_name" type="text"  class="zxw-character-input zxw-edit-character-input-margin" v-model="input_content.person_name" v-bind:class="{'zxw-input-chinese':show_input}" :="repeat_nou_1">
+                <input id="person_name" type="text"  class="zxw-character-input zxw-edit-character-input-margin zxw-input-placeholder" placeholder="请输入中文" v-model="input_content.person_name" v-bind:class="{'zxw-input-chinese':show_input}" onfocus="placeholder=''" @blur="person_name_tip()">
                 <label class="zxw-character-span">英译：</label>
                 <input type="text" class="zxw-character-input" v-model="input_content.english">
             </div>
@@ -170,7 +170,7 @@
 
             <div class="zxw-edit-btn">
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length" @click="cancel_edit()">取消</button>
-                <button class="zxw-nextbtn zxw-nextbtn-length" @click="finish_edit()" v-bind:disabled="input_content.birth_standard_name === ''|| input_content.death_standard_name === ''||input_content.person_name === ''|| show_input === true|| repeat_id !== '' ||(add_data[0].remark_name === ''&& add_data[0].remark !== '' )||(add_data[1] !== undefined && add_data[1].remark_name === '' && add_data[1].remark !=='')"  >完成</button>
+                <button class="zxw-nextbtn zxw-nextbtn-length" @click="finish_edit()">完成</button>
             </div>
         </div>
 
@@ -192,6 +192,7 @@
 
         <!--添加籍贯的模态框-->
         <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_location" v-on:add_noumenon_relations="add_location"></search_modal>
+        <warning_modal :show_info="show_next_step" :tip="'请填写完整必填信息(红字标注)!'" v-on:close_modal="close_next_error"></warning_modal>
     </div>
 </template>
 
@@ -200,6 +201,7 @@ import noumenon_title from '../../../component/noumenon-title.vue';
 import time_modal from '../../../component/time-modal.vue';
 import search_modal from '../../../component/search_noumenon.vue';
 import repeat_modal from '../../../component/repeat_modal.vue';
+import warning_modal from '../../../component/warning_noumenon.vue';
 
 export default{
     created(){
@@ -211,6 +213,7 @@ export default{
         time_modal,
         search_modal,
         repeat_modal,
+        warning_modal
     },
 
     computed:{
@@ -219,29 +222,6 @@ export default{
                 this.input_content.standard_name = this.input_content.person_name +'('+this.input_content.birth_standard_name+')';
             } else {
                 this.input_content.standard_name = this.input_content.person_name;
-            }
-        },
-
-        repeat_nou_1(){
-            /*检查人名仅能输入中文*/
-            if(this.input_content.person_name !== '') {
-                if(!/^[\u4E00-\u9FA5]*$/.test(this.input_content.person_name)) {
-                    this.show_input = true;
-                } else {
-                    this.show_input = false;
-                }
-            } else if(this.input_content.person_name === ''){
-                this.show_input = false;
-            }
-
-
-            if(this.input_content.person_name !== '' && this.input_content.birth_standard_name !== ''&& this.show_input === false){
-                let new_title = this.input_content.person_name+'('+this.input_content.birth_standard_name+')';
-                if(new_title !== this.edit_character_title){
-                    let repeat_object={};
-                    let new_url= this.check_noumenon_repeat+'?name='+this.input_content.standard_name+'&&type=1';
-                    this.http_json(new_url,'get',repeat_object,this.success_repeat,this.fail_repeat);
-                }
             }
         }
 
@@ -279,6 +259,7 @@ export default{
             teacher_modal:false,
             student_modal:false,
             friend_modal:false,
+            show_next_step:false,
             input_content:{
                 standard_name:'',
                 person_name:'',
@@ -332,6 +313,29 @@ export default{
         }
     },
     methods:{
+        /*人名必填不能为空的提示*/
+        person_name_tip(){
+            if(this.input_content.person_name !== '') {
+                if(!/^[\u4E00-\u9FA5]*$/.test(this.input_content.person_name)) {
+                    this.show_input = true;
+                    this.input_content.person_name ='';
+                    document.getElementById("person_name").placeholder='请输入中文';
+                } else {
+                    this.show_input = false;
+                }
+            } else if(this.input_content.person_name === ''){
+                this.show_input = true;
+                document.getElementById("person_name").placeholder='人名不能为空';
+            }
+
+            /*判断人物本体名称是否重复*/
+            if(this.input_content.person_name !== '' && this.input_content.birth_standard_name !== '' && this.show_input === false){
+                let repeat_object={};
+                let new_url= this.check_noumenon_repeat+'?name='+this.input_content.standard_name+'&&type=1';
+                this.http_json(new_url,'get',repeat_object,this.success_repeat,this.fail_repeat);
+            }
+        },
+
         /*人物本体关系禁止键盘输入*/
         down_delete(){
             let c = event.keyCode;
@@ -820,168 +824,172 @@ export default{
         },
 
         finish_edit(){
-            //父亲关系判断
-           if(this.input_content.father.relation_id === undefined && this.input_content.father.person_id !== undefined){
-               this.person_relations_add.push({
-                   relation_type:this.input_content.father.relation_type,
-                   person_id:this.input_content.father.person_id
-               })
-           } else if(this.input_content.father.relation_id !== undefined && this.input_content.father.person_id === undefined){
-               this.person_relations_delete.push({
-                   relation_id:this.input_content.father.relation_id
-               })
-           } else if(this.input_content.father.relation_id !== undefined && this.input_content.father.person_id !== undefined && this.input_content.father.person_id !== this.father_id ){
-               this.person_relations_modify.push({
-                   relation_id:this.input_content.father.relation_id,
-                   person_id:this.input_content.father.person_id
-               })
-           }
-
-            //母亲关系判断
-            if(this.input_content.mother.relation_id === undefined && this.input_content.mother.person_id !== undefined){
-                this.person_relations_add.push({
-                    relation_type:this.input_content.mother.relation_type,
-                    person_id:this.input_content.mother.person_id
-                })
-            } else if(this.input_content.mother.relation_id !== undefined && this.input_content.mother.person_id === undefined){
-                this.person_relations_delete.push({
-                    relation_id:this.input_content.mother.relation_id
-                })
-            } else if(this.input_content.mother.relation_id !== undefined && this.input_content.mother.person_id !== undefined && this.input_content.mother.person_id !== this.mother_id ){
-                this.person_relations_modify.push({
-                    relation_id:this.input_content.mother.relation_id,
-                    person_id:this.input_content.mother.person_id
-                })
-            }
-
-            for(let i = 0;i < this.input_content.son.length;i++){
-                if(this.input_content.son[i].person_name === undefined){
-                    this.person_relations_delete.push({
-                        relation_id:this.input_content.son[i].relation_id
-                    })
-                }
-                if(this.input_content.son[i].relation_id === undefined){
+            if(this.input_content.birth_standard_name === ''|| this.input_content.death_standard_name === ''||this.input_content.person_name === ''|| this.show_input === true|| this.repeat_id !== '' ||(this.add_data[0].remark_name === '' && this.add_data[0].remark !== '' )||(this.add_data[1] !== undefined && this.add_data[1].remark_name === '' && this.add_data[1].remark !=='')){
+                this.show_next_step=true;
+            } else{
+                //父亲关系判断
+                if(this.input_content.father.relation_id === undefined && this.input_content.father.person_id !== undefined){
                     this.person_relations_add.push({
-                        relation_type:this.input_content.son[i].relation_type,
-                        person_id:this.input_content.son[i].person_id
+                        relation_type:this.input_content.father.relation_type,
+                        person_id:this.input_content.father.person_id
                     })
-                }
-            }
-
-            for(let i = 0;i < this.input_content.daughter.length;i++){
-                if(this.input_content.daughter[i].person_name === undefined){
+                } else if(this.input_content.father.relation_id !== undefined && this.input_content.father.person_id === undefined){
                     this.person_relations_delete.push({
-                        relation_id:this.input_content.daughter[i].relation_id
+                        relation_id:this.input_content.father.relation_id
+                    })
+                } else if(this.input_content.father.relation_id !== undefined && this.input_content.father.person_id !== undefined && this.input_content.father.person_id !== this.father_id ){
+                    this.person_relations_modify.push({
+                        relation_id:this.input_content.father.relation_id,
+                        person_id:this.input_content.father.person_id
                     })
                 }
-                if(this.input_content.daughter[i].relation_id === undefined){
-                    this.person_relations_add.push({
-                        relation_type:this.input_content.daughter[i].relation_type,
-                        person_id:this.input_content.daughter[i].person_id
-                    })
-                }
-            }
 
-            for(let i = 0;i < this.input_content.brother.length;i++){
-                if(this.input_content.brother[i].person_name === undefined){
+                //母亲关系判断
+                if(this.input_content.mother.relation_id === undefined && this.input_content.mother.person_id !== undefined){
+                    this.person_relations_add.push({
+                        relation_type:this.input_content.mother.relation_type,
+                        person_id:this.input_content.mother.person_id
+                    })
+                } else if(this.input_content.mother.relation_id !== undefined && this.input_content.mother.person_id === undefined){
                     this.person_relations_delete.push({
-                        relation_id:this.input_content.brother[i].relation_id
+                        relation_id:this.input_content.mother.relation_id
+                    })
+                } else if(this.input_content.mother.relation_id !== undefined && this.input_content.mother.person_id !== undefined && this.input_content.mother.person_id !== this.mother_id ){
+                    this.person_relations_modify.push({
+                        relation_id:this.input_content.mother.relation_id,
+                        person_id:this.input_content.mother.person_id
                     })
                 }
-                if(this.input_content.brother[i].relation_id === undefined){
-                    this.person_relations_add.push({
-                        relation_type:this.input_content.brother[i].relation_type,
-                        person_id:this.input_content.brother[i].person_id
-                    })
-                }
-            }
 
-            for(let i = 0;i < this.input_content.sister.length;i++){
-                if(this.input_content.sister[i].person_name === undefined){
-                    this.person_relations_delete.push({
-                        relation_id:this.input_content.sister[i].relation_id
-                    })
+                for(let i = 0;i < this.input_content.son.length;i++){
+                    if(this.input_content.son[i].person_name === undefined){
+                        this.person_relations_delete.push({
+                            relation_id:this.input_content.son[i].relation_id
+                        })
+                    }
+                    if(this.input_content.son[i].relation_id === undefined){
+                        this.person_relations_add.push({
+                            relation_type:this.input_content.son[i].relation_type,
+                            person_id:this.input_content.son[i].person_id
+                        })
+                    }
                 }
-                if(this.input_content.sister[i].relation_id === undefined){
-                    this.person_relations_add.push({
-                        relation_type:this.input_content.sister[i].relation_type,
-                        person_id:this.input_content.sister[i].person_id
-                    })
-                }
-            }
 
-            for(let i = 0;i < this.input_content.teacher.length;i++){
-                if(this.input_content.teacher[i].person_name === undefined){
-                    this.person_relations_delete.push({
-                        relation_id:this.input_content.teacher[i].relation_id
-                    })
+                for(let i = 0;i < this.input_content.daughter.length;i++){
+                    if(this.input_content.daughter[i].person_name === undefined){
+                        this.person_relations_delete.push({
+                            relation_id:this.input_content.daughter[i].relation_id
+                        })
+                    }
+                    if(this.input_content.daughter[i].relation_id === undefined){
+                        this.person_relations_add.push({
+                            relation_type:this.input_content.daughter[i].relation_type,
+                            person_id:this.input_content.daughter[i].person_id
+                        })
+                    }
                 }
-                if(this.input_content.teacher[i].relation_id === undefined){
-                    this.person_relations_add.push({
-                        relation_type:this.input_content.teacher[i].relation_type,
-                        person_id:this.input_content.teacher[i].person_id
-                    })
-                }
-            }
 
-            for(let i = 0;i < this.input_content.student.length;i++){
-                if(this.input_content.student[i].person_name === undefined){
-                    this.person_relations_delete.push({
-                        relation_id:this.input_content.student[i].relation_id
-                    })
+                for(let i = 0;i < this.input_content.brother.length;i++){
+                    if(this.input_content.brother[i].person_name === undefined){
+                        this.person_relations_delete.push({
+                            relation_id:this.input_content.brother[i].relation_id
+                        })
+                    }
+                    if(this.input_content.brother[i].relation_id === undefined){
+                        this.person_relations_add.push({
+                            relation_type:this.input_content.brother[i].relation_type,
+                            person_id:this.input_content.brother[i].person_id
+                        })
+                    }
                 }
-                if(this.input_content.student[i].relation_id === undefined){
-                    this.person_relations_add.push({
-                        relation_type:this.input_content.student[i].relation_type,
-                        person_id:this.input_content.student[i].person_id
-                    })
-                }
-            }
 
-            for(let i = 0;i < this.input_content.friend.length;i++){
-                if(this.input_content.friend[i].person_name === undefined){
-                    this.person_relations_delete.push({
-                        relation_id:this.input_content.friend[i].relation_id
-                    })
+                for(let i = 0;i < this.input_content.sister.length;i++){
+                    if(this.input_content.sister[i].person_name === undefined){
+                        this.person_relations_delete.push({
+                            relation_id:this.input_content.sister[i].relation_id
+                        })
+                    }
+                    if(this.input_content.sister[i].relation_id === undefined){
+                        this.person_relations_add.push({
+                            relation_type:this.input_content.sister[i].relation_type,
+                            person_id:this.input_content.sister[i].person_id
+                        })
+                    }
                 }
-                if(this.input_content.friend[i].relation_id === undefined){
-                    this.person_relations_add.push({
-                        relation_type:this.input_content.friend[i].relation_type,
-                        person_id:this.input_content.friend[i].person_id
-                    })
+
+                for(let i = 0;i < this.input_content.teacher.length;i++){
+                    if(this.input_content.teacher[i].person_name === undefined){
+                        this.person_relations_delete.push({
+                            relation_id:this.input_content.teacher[i].relation_id
+                        })
+                    }
+                    if(this.input_content.teacher[i].relation_id === undefined){
+                        this.person_relations_add.push({
+                            relation_type:this.input_content.teacher[i].relation_type,
+                            person_id:this.input_content.teacher[i].person_id
+                        })
+                    }
                 }
-            }
 
-            //备注信息
-            this.input_content.remark_1_name = this.add_data[0].remark_name ;
-            this.input_content.remark_1 = this.add_data[0].remark;
-            if(this.add_data.length > 1){
-                this.input_content.remark_2_name = this.add_data[1].remark_name ;
-                this.input_content.remark_2 = this.add_data[1].remark ;
-            }
-            console.log("post:add_data "+JSON.stringify(this.add_data));
+                for(let i = 0;i < this.input_content.student.length;i++){
+                    if(this.input_content.student[i].person_name === undefined){
+                        this.person_relations_delete.push({
+                            relation_id:this.input_content.student[i].relation_id
+                        })
+                    }
+                    if(this.input_content.student[i].relation_id === undefined){
+                        this.person_relations_add.push({
+                            relation_type:this.input_content.student[i].relation_type,
+                            person_id:this.input_content.student[i].person_id
+                        })
+                    }
+                }
 
-            let edit_object={};
-            edit_object.id=this.$route.params.nouId;
-            edit_object.standard_name=this.input_content.standard_name;
-            edit_object.person_name=this.input_content.person_name;
-            edit_object.xing=this.input_content.xing;
-            edit_object.shi=this.input_content.shi;
-            edit_object.zi=this.input_content.zi;
-            edit_object.other_name=this.input_content.other_name;
-            edit_object.birth_time_id=this.input_content.birth_time_id;
-            edit_object.death_time_id=this.input_content.death_time_id;
-            edit_object.remark_1_name=this.input_content.remark_1_name;
-            edit_object.remark_2_name=this.input_content.remark_2_name;
-            edit_object.remark_1=this.input_content.remark_1;
-            edit_object.remark_2=this.input_content.remark_2;
-            edit_object.english=this.input_content.english;
-            edit_object.location_id=this.input_content.location_id;
-            edit_object.person_relations_delete=this.person_relations_delete;
-            edit_object.person_relations_modify=this.person_relations_modify;
-            edit_object.person_relations_add=this.person_relations_add;
-            console.log('edit object: '+JSON.stringify(edit_object));
-            this.http_json(this.modify_url,'post',edit_object,this.success_modify_char,this.fail_modify_char);
+                for(let i = 0;i < this.input_content.friend.length;i++){
+                    if(this.input_content.friend[i].person_name === undefined){
+                        this.person_relations_delete.push({
+                            relation_id:this.input_content.friend[i].relation_id
+                        })
+                    }
+                    if(this.input_content.friend[i].relation_id === undefined){
+                        this.person_relations_add.push({
+                            relation_type:this.input_content.friend[i].relation_type,
+                            person_id:this.input_content.friend[i].person_id
+                        })
+                    }
+                }
+
+                //备注信息
+                this.input_content.remark_1_name = this.add_data[0].remark_name ;
+                this.input_content.remark_1 = this.add_data[0].remark;
+                if(this.add_data.length > 1){
+                    this.input_content.remark_2_name = this.add_data[1].remark_name ;
+                    this.input_content.remark_2 = this.add_data[1].remark ;
+                }
+                console.log("post:add_data "+JSON.stringify(this.add_data));
+
+                let edit_object={};
+                edit_object.id=this.$route.params.nouId;
+                edit_object.standard_name=this.input_content.standard_name;
+                edit_object.person_name=this.input_content.person_name;
+                edit_object.xing=this.input_content.xing;
+                edit_object.shi=this.input_content.shi;
+                edit_object.zi=this.input_content.zi;
+                edit_object.other_name=this.input_content.other_name;
+                edit_object.birth_time_id=this.input_content.birth_time_id;
+                edit_object.death_time_id=this.input_content.death_time_id;
+                edit_object.remark_1_name=this.input_content.remark_1_name;
+                edit_object.remark_2_name=this.input_content.remark_2_name;
+                edit_object.remark_1=this.input_content.remark_1;
+                edit_object.remark_2=this.input_content.remark_2;
+                edit_object.english=this.input_content.english;
+                edit_object.location_id=this.input_content.location_id;
+                edit_object.person_relations_delete=this.person_relations_delete;
+                edit_object.person_relations_modify=this.person_relations_modify;
+                edit_object.person_relations_add=this.person_relations_add;
+                console.log('edit object: '+JSON.stringify(edit_object));
+                this.http_json(this.modify_url,'post',edit_object,this.success_modify_char,this.fail_modify_char);
+            }
         },
 
         success_modify_char(response){
@@ -992,7 +1000,12 @@ export default{
 
         fail_modify_char(){
             console.log("修改人物本体失败");
-        }
+        },
+
+        close_next_error(){
+            this.show_next_step = false;
+        },
+
     }
 }
 </script>

@@ -8,10 +8,6 @@
 
         <p class="zxw-create-literature" v-bind="standard_title"  v-model="lit_content.standard_name">本体名称：{{lit_content.standard_name}}</p>
 
-        <!--提示文字显示-->
-        <span style="color: #a50000;float:left;margin-top:50px;font-weight: bold" v-if="show_type_name=== true && ancient_book_name === false">书名有且仅有中文!</span>
-        <span style="color: #a50000;float:left;margin-top:50px;font-weight: bold" v-show="ancient_book_name === true">书名不能为空!</span>
-
         <div id="top" class="zxw-lit-top">
             <div id="bottom" class="zxw-lit-bottom">
                 <div id="centre" class="zxw-lit-centre">
@@ -19,7 +15,7 @@
             <!--文献版本层信息固有信息-->
             <div class="zxw-lit-layer">
                 <label class="zxw-lit-label zxw-must-write">书名:</label>
-                <input type="text" class="zxw-lit-info zxw-lit-info-margin zxw-lit-input-style" v-model="lit_content.type_name" v-bind:class="{'zxw-input-number':show_type_name}" :="repeat_nou_1" @blur="book_name_null()">
+                <input id="type_name" type="text" class="zxw-lit-info zxw-lit-info-margin zxw-lit-input-style  zxw-input-placeholder" placeholder="请输入中文" v-model="lit_content.type_name" v-bind:class="{'zxw-input-number':show_type_name}" onfocus="placeholder=''" @blur="ancientBook_tip()">
                 <label class="zxw-lit-label">别名:</label>
                 <input type="text" class="zxw-lit-info zxw-lit-input-style" v-model="lit_content.type_other_name">
             </div>
@@ -106,14 +102,14 @@
                         <button class="zxw-input-add-character" @click="open_lit_location(index)"></button>
                     </div>
                     <label class="zxw-lit-type-label zxw-must-write">责任者类型:</label>
-                    <select class="zxw-lit-select" v-model="item.selected_type_name" @change="type_name_select(index)">
+                    <select class="zxw-lit-select" v-model="item.selected_type_name" v-bind:class="{'zxw-input-number':item.type_name_none}"   @change="type_name_select(index)">
                         <option v-for="item in type_name_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                     </select>
                 </div>
 
                 <div class="zxw-lit-layer">
                     <label class="zxw-lit-type-label zxw-must-write">责任者名称：</label>
-                    <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style" v-bind:class="{'zxw-input-number':item.type_name_none}"  v-if="item.selected_type_name.item_1_id === 2||item.selected_type_name.item_1_id === 0">
+                    <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style" v-if="item.selected_type_name.item_1_id === 2||item.selected_type_name.item_1_id === 0">
                         <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.character_standard_name !== ''">
                         <span class="zxw-person-relation-span" @mouseover="item.show_lit_character = true" @mouseout="item.show_lit_character = false" v-if="item.character_standard_name !== ''" v-bind:contenteditable="item.character_standard_name !== ''" @keydown="down_delete()">
                             <span class="zxw-tag-font" v-model="item.character_standard_name">{{item.character_standard_name}}</span>
@@ -153,7 +149,6 @@
                     <select class="zxw-lit-select" v-model="item.selected_confirm" >
                         <option v-for="item in confirm_arr" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                     </select>
-                    <span style="color: #a50000;margin-left: 30px;font-weight: bold" v-if="item.type_name_none === true && item.selected_type_name.chinese_name === ''">请先选择责任者类型!</span>
                 </div>
 
                 <div class="zxw-lit-layer">
@@ -168,7 +163,7 @@
 
         <div class="zxw-build-step2-btn">
             <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length" @click="pre_step()">上一步</button>
-            <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="lit_content.type_name === ''||this.show_type_name === true|| this.all_must_write !== 0||this.summary_error === true||this.explain_error === true" :="if_wirte">下一步</button>
+            <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" :="if_wirte">下一步</button>
         </div>
 
         <time_modal :time_modal="lit_content.varieties_arr[open_time_index].begin_time_modal" v-on:success_time="begin_lit_time" v-on:close_modal="close_lit_begin()"></time_modal>
@@ -182,6 +177,7 @@
 
         <warning_summary :show_info="show_info_1" :tip="'该提示信息已超过最大限度!'" v-on:close_modal="close_summary_error"></warning_summary>
         <warning_summary :show_info="show_info_2" :tip="'该责任说明已超过最大限度!'" v-on:close_modal="close_explain_error"></warning_summary>
+        <warning_summary :show_info="show_next_step" :tip="'请填写完整必填信息(红字标注)!'" v-on:close_modal="close_next_error"></warning_summary>
     </div>
 </template>
 
@@ -294,7 +290,7 @@
     import search_modal from '../../../../component/search_noumenon.vue';
     import repeat_modal from '../../../../component/repeat_modal.vue';
     import div_edit from '../../../../component/div_edit.vue';
-    import warning_summary from '../../../../component/warning_noumenon.vue'
+    import warning_summary from '../../../../component/warning_noumenon.vue';
     export default{
         created(){
             this.prams = this.$route.name;
@@ -350,14 +346,13 @@
                 character_name:'',
                 chaodai_2:'',
                 character_name_2:'',
-                ancient_book_name:false,//书名为空的判断参数
-                type_name_none:false,//责任者类型未选时的参数
                 show_type_name:false,
                 show_repeat:false,
                 summary_error:false,
                 show_info_1:false,
                 explain_error:false,
                 show_info_2:false,
+                show_next_step:false,
                 repeat_id:'',
                 repeat_noumenon:'文献本体',
                 check_noumenon_repeat:'/ancient_books/check_noumenon_standard_name.action',
@@ -407,17 +402,6 @@
 
         computed: {
             repeat_nou_1(){
-                /*检查书名仅能输入中文*/
-                if(this.lit_content.type_name !== '') {
-                    if(!/^[\u4E00-\u9FA5]*$/.test(this.lit_content.type_name)) {
-                        this.show_type_name = true;
-                    } else {
-                        this.show_type_name = false;
-                    }
-                } else if(this.lit_content.type_name === ''){
-                    this.show_type_name = false;
-                }
-
                 /*判断文献本体名称是否重复*/
                 if(this.lit_content.varieties_arr.length === 1){
                     if(this.lit_content.type_name !== '' && this.chaodai !== '' && this.show_type_name === false && this.character_name !== ''&& this.lit_content.varieties_arr[0].selected_action.chinese_name !== ''){
@@ -509,13 +493,23 @@
         },
 
         methods: {
-            book_name_null(){
-                if(this.lit_content.type_name === ''){
-                    this.show_type_name = true;
-                    this.ancient_book_name = true;
-                } else{
-                    this.ancient_book_name = false;
+
+            /*书名失去焦点判断提示*/
+            ancientBook_tip(){
+                /*检查书名仅能输入中文*/
+                if(this.lit_content.type_name !== '') {
+                    if(!/^[\u4E00-\u9FA5]*$/.test(this.lit_content.type_name)) {
+                        this.show_type_name = true;
+                        this.lit_content.type_name='';
+                        document.getElementById("type_name").placeholder='请输入中文';
+                    } else {
+                        this.show_type_name = false;
+                    }
+                } else if(this.lit_content.type_name === ''){
+                    document.getElementById("type_name").placeholder='书名不能为空';
+                    this.show_type_name=true;
                 }
+                this.repeat_nou_2();
             },
 
             /*存佚类型*/
@@ -579,18 +573,24 @@
             },
 
             type_name_select(index){
-                if(this.lit_content.varieties_arr[index].selected_type_name.item_1_id === 1){
-                    this.lit_content.varieties_arr[index].character_standard_name = '不详';
-                    if(index === 0){
-                        this.character_name = '不详';
-                    } else if(index === 1){
-                        this.character_name_2 = '不详';
-                    }
-                    this.repeat_nou_2();
+                if(this.lit_content.varieties_arr[index].selected_type_name.item_1_id === 0){
+                    this.lit_content.varieties_arr[index].type_name_none =true;
                 } else{
-                    this.lit_content.varieties_arr[index].character_standard_name = '';
-                    this.lit_content.varieties_arr[index].character_id = 0;
+                    this.lit_content.varieties_arr[index].type_name_none = false;
+                    if(this.lit_content.varieties_arr[index].selected_type_name.item_1_id === 1){
+                        this.lit_content.varieties_arr[index].character_standard_name = '不详';
+                        if(index === 0){
+                            this.character_name = '不详';
+                        } else if(index === 1){
+                            this.character_name_2 = '不详';
+                        }
+                        this.repeat_nou_2();
+                    } else{
+                        this.lit_content.varieties_arr[index].character_standard_name = '';
+                        this.lit_content.varieties_arr[index].character_id = 0;
+                    }
                 }
+
             },
 
             /*确定性*/
@@ -931,8 +931,13 @@
 
             /*下一步*/
             next_step(){
-                this.$store.commit("get_create_literature", this.lit_content);
-                this.$router.push({path: '/litthree'});
+                if(this.lit_content.type_name === ''||this.show_type_name === true|| this.all_must_write !== 0||this.summary_error === true||this.explain_error === true||this.repeat_id !== ''){
+                    this.show_next_step = true;
+                } else{
+                    this.$store.commit("get_create_literature", this.lit_content);
+                    this.$router.push({path: '/litthree'});
+                }
+
             },
 
             pre_step(){
@@ -967,7 +972,6 @@
 
             success_repeat(response){
                 if(response.body.result === 0){
-                    //this.$store.commit('change_fork',false);
                     this.show_repeat = true;
                     this.repeat_id = response.body.id;
                     console.log("本体重复");
@@ -1001,6 +1005,10 @@
             },
             close_explain_error(){
                 this.show_info_2 = false;
+            },
+
+            close_next_error(){
+                this.show_next_step = false;
             }
         }
     }

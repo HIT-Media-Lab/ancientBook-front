@@ -157,8 +157,8 @@
                 "explain":'责任说明',
                 "confirm|1":1,
                 "confirm_name":'不详',
-                "type|2":2,
-                'type_name':'责任人',
+                "type|1":2,
+                'type_name':'不详',
                 "level|1":1,
                 "order|2":2
             }]

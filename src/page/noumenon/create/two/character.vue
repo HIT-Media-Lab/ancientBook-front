@@ -6,11 +6,10 @@
 
         <div>
             <p class="zxw-create-character" v-bind="standard_title"  v-model="input_content.standard_name">本体名称：{{input_content.standard_name}}</p>
-            <span style="color:#a50000;margin-left: 150px;" v-show="char_name_none === true">人名不能为空!</span>
-            <span style="color:#a50000;margin-left: 150px;" v-if="show_input === true&&char_name_none === false">人名必须为中文!</span>
+
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">人名：</label>
-                <input id="person_name" type="text"  class="zxw-character-input zxw-character-input-margin" v-model="input_content.person_name" v-bind:class="{'zxw-input-chinese':show_input}" :="repeat_nou_1" @blur="char_name_null()">
+                <input id="person_name" type="text"  class="zxw-character-input zxw-character-input-margin zxw-input-placeholder" placeholder="请输入中文" v-model="input_content.person_name" v-bind:class="{'zxw-input-chinese':show_input}" onfocus="placeholder=''" @blur="person_name_tip()">
 
                 <label class="zxw-character-span">英译：</label>
                 <input type="text" class="zxw-character-input" v-model="input_content.english">
@@ -168,7 +167,7 @@
                 </div>
             </div>
 
-            <div class="zxw-noumenon-mark" v-for="(item ,index) in add_data">
+            <div v-for="(item ,index) in add_data">
                 <input type="text" class="zxw-character-input-head zxw-character-input" v-model="item.remark_name">
                 <input type="text" class="zxw-character-input" v-bind:readonly="item.remark_name === ''&&item.remark === ''" v-model="item.remark">
                 <button class="zxw-add-button" @click="add_tip(index)" v-show="add_data[index].value" :disabled="add_data.length >=2">添加</button>
@@ -176,7 +175,7 @@
 
             <div class="zxw-build-step2-btn">
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length" @click="pre_step()">上一步</button>
-                <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="input_content.birth_standard_name === ''|| input_content.death_standard_name === ''||input_content.person_name === ''|| show_input === true|| repeat_id !== '' ||(add_data[0].remark_name === '' && add_data[0].remark !== '' )||(add_data[1] !== undefined && add_data[1].remark_name === '' && add_data[1].remark !=='')" >下一步</button>
+                <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()">下一步</button>
             </div>
         </div>
 
@@ -198,6 +197,7 @@
 
         <!--添加籍贯的模态框-->
         <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_location" v-on:add_noumenon_relations="add_location"></search_modal>
+        <warning_modal :show_info="show_next_step" :tip="'请填写完整必填信息(红字标注)!'" v-on:close_modal="close_next_error"></warning_modal>
     </div>
 </template>
 
@@ -214,6 +214,7 @@
     import time_modal from '../../../../component/time-modal.vue';
     import search_modal from '../../../../component/search_noumenon.vue';
     import repeat_modal from '../../../../component/repeat_modal.vue';
+    import warning_modal from '../../../../component/warning_noumenon.vue';
     export default{
         beforeRouteLeave(to,from,next){
             if(to.name !== 'characterthree'){
@@ -270,6 +271,7 @@
             time_modal,
             search_modal,
             repeat_modal,
+            warning_modal
         },
 
         computed:{
@@ -279,27 +281,8 @@
                 } else {
                     this.input_content.standard_name = this.input_content.person_name;
                 }
-            },
-
-            repeat_nou_1(){
-                /*检查人名仅能输入中文*/
-                if(this.input_content.person_name !== '') {
-                    if(!/^[\u4E00-\u9FA5]*$/.test(this.input_content.person_name)) {
-                        this.show_input = true;
-                    } else {
-                        this.show_input = false;
-                    }
-                } else if(this.input_content.person_name === ''){
-                    this.show_input = false;
-                }
-
-                /*判断人物本体名称是否重复*/
-                if(this.input_content.person_name !== '' && this.input_content.birth_standard_name !== '' && this.show_input === false){
-                    let repeat_object={};
-                    let new_url= this.check_noumenon_repeat+'?name='+this.input_content.standard_name+'&&type=1';
-                    this.http_json(new_url,'get',repeat_object,this.success_repeat,this.fail_repeat);
-                }
             }
+
         },
 
         data(){
@@ -308,7 +291,6 @@
                 search_location:'/ancient_books/get_location_list_by_name.action',
                 show_location:false,
                 show_input:false,
-                char_name_none:false,
                 show_father:false,
                 show_mother:false,
                 show_birth_time:false,
@@ -333,6 +315,7 @@
                 teacher_modal:false,
                 student_modal:false,
                 friend_modal:false,
+                show_next_step:false,
                 input_content:{
                     standard_name:'',
                     person_name:'',
@@ -384,12 +367,25 @@
 
         methods:{
             /*人名必填不能为空的提示*/
-            char_name_null(){
-                if(this.input_content.person_name === ''){
+            person_name_tip(){
+                if(this.input_content.person_name !== '') {
+                    if(!/^[\u4E00-\u9FA5]*$/.test(this.input_content.person_name)) {
+                        this.show_input = true;
+                        this.input_content.person_name ='';
+                        document.getElementById("person_name").placeholder='请输入中文';
+                    } else {
+                        this.show_input = false;
+                    }
+                } else if(this.input_content.person_name === ''){
                     this.show_input = true;
-                    this.char_name_none = true;
-                }else{
-                    this.char_name_none = false;
+                    document.getElementById("person_name").placeholder='人名不能为空';
+                }
+
+                /*判断人物本体名称是否重复*/
+                if(this.input_content.person_name !== '' && this.input_content.birth_standard_name !== '' && this.show_input === false){
+                    let repeat_object={};
+                    let new_url= this.check_noumenon_repeat+'?name='+this.input_content.standard_name+'&&type=1';
+                    this.http_json(new_url,'get',repeat_object,this.success_repeat,this.fail_repeat);
                 }
             },
 
@@ -733,15 +729,23 @@
 
             /*下一步*/
             next_step(){
-                console.log('add_data:'+JSON.stringify(this.add_data));
-                this.input_content.remark_1_name = this.add_data[0].remark_name;
-                this.input_content.remark_1 = this.add_data[0].remark;
-                if(typeof this.add_data[1] !== 'undefined'){
-                    this.input_content.remark_2_name = this.add_data[1].remark_name;
-                    this.input_content.remark_2 = this.add_data[1].remark;
+                if(this.input_content.birth_standard_name === ''|| this.input_content.death_standard_name === ''||this.input_content.person_name === ''|| this.show_input === true|| this.repeat_id !== '' ||(this.add_data[0].remark_name === '' && this.add_data[0].remark !== '' )||(this.add_data[1] !== undefined && this.add_data[1].remark_name === '' && this.add_data[1].remark !=='')){
+                    this.show_next_step = true;
+                } else{
+                    console.log('add_data:'+JSON.stringify(this.add_data));
+                    this.input_content.remark_1_name = this.add_data[0].remark_name;
+                    this.input_content.remark_1 = this.add_data[0].remark;
+                    if(typeof this.add_data[1] !== 'undefined'){
+                        this.input_content.remark_2_name = this.add_data[1].remark_name;
+                        this.input_content.remark_2 = this.add_data[1].remark;
+                    }
+                    this.$store.commit("get_create_character",this.input_content);
+                    this.$router.push({path:'/charthree'});
                 }
-                this.$store.commit("get_create_character",this.input_content);
-                this.$router.push({path:'/charthree'});
+            },
+
+            close_next_error(){
+                this.show_next_step = false;
             },
 
             /*第三步的“上一步”*/
@@ -887,8 +891,17 @@
         font-size: 16px;
     }
 
-    .zxw-noumenon-mark{
-        text-align: left;
-        margin-left: 115px;
+    .zxw-input-placeholder::-webkit-input-placeholder {
+        font-size: 16px;
     }
+    .zxw-input-placeholder:-ms-input-placeholder { // IE10+
+        font-size:16px;
+    }
+    .zxw-input-placeholder:-moz-placeholder { // Firefox4-18
+        font-size:16px;
+    }
+    .zxw-input-placeholder::-moz-placeholder { // Firefox19+
+        font-size:16px;
+    }
+
 </style>

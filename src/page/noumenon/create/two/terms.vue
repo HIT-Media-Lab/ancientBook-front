@@ -8,9 +8,9 @@
             <p class="zxw-create-character" v-bind="standard_title"  v-model="input_terms.standard_name">本体名称：{{input_terms.standard_name}}</p>
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">术语名称：</label>
-                <input id="person_name" type="text"  class="zxw-character-input zxw-character-input-margin" v-model="input_terms.terms_name" v-bind:class="{'zxw-input-chinese':show_input}" :="repeat_nou_1">
-                <label class="zxw-character-span">学科：</label>
-                <select  class="zxw-ins-select" v-model="input_terms.selected_course">
+                <input id="terms_name" type="text"  class="zxw-character-input zxw-character-input-margin zxw-input-placeholder" placeholder="请输入中文" v-model="input_terms.terms_name" v-bind:class="{'zxw-input-chinese':show_input}" onfocus="placeholder=''" @blur="terms_name_tip()">
+                <label class="zxw-character-span zxw-must-write">学科：</label>
+                <select  class="zxw-ins-select" v-model="input_terms.selected_course" @change="repeat_nou()">
                     <option v-for="item in course_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
             </div>
@@ -18,7 +18,7 @@
             <div class="zxw-character-row">
                 <label class="zxw-character-span">学科小类：</label>
                 <input type="text" class="zxw-character-input zxw-character-input-margin" value="未有具体数据" readonly>
-                <label class="zxw-character-span zxw-must-write">起始时间：</label>
+                <label class="zxw-character-span">起始时间：</label>
                 <div  class="zxw-character-input">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_terms.begin_standard_time !== ''">
                         <span class="zxw-person-relation-span"  @mouseover="show_begin_time = true" @mouseout="show_begin_time = false" v-if="input_terms.begin_standard_time !== ''">
@@ -31,7 +31,7 @@
             </div>
 
             <div class="zxw-character-row">
-                <label class="zxw-character-span zxw-must-write">终止时间：</label>
+                <label class="zxw-character-span">终止时间：</label>
                 <div  class="zxw-character-input zxw-character-input-margin">
                     <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_terms.end_standard_time !== ''">
                         <span class="zxw-person-relation-span"  @mouseover="show_end_time = true" @mouseout="show_end_time = false" v-if="input_terms.end_standard_time !== ''">
@@ -60,7 +60,7 @@
 
             <div class="zxw-build-step2-btn">
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length" @click="pre_step()">上一步</button>
-                <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()" v-bind:disabled="input_terms.terms_name === ''|| show_input === true|| repeat_id !== '' ||(add_data[0].remark_name === '' && add_data[0].remark !== '' )||(add_data[1] !== undefined && add_data[1].remark_name === '' && add_data[1].remark !=='')" >下一步</button>
+                <button class="zxw-nextbtn zxw-nextbtn-length" @click="next_step()">下一步</button>
             </div>
         </div>
 
@@ -69,7 +69,7 @@
 
         <!--若术语本体规范已存在的模态框-->
         <repeat_modal :show_repeat="this.show_repeat" :repeat_name="this.input_terms.standard_name" :repeat_id="this.repeat_id" :repeat_noumenon="this.repeat_noumenon" v-on:close_modal="close_repeat"></repeat_modal>
-
+        <warning_modal :show_info="show_next_step" :tip="'请填写完整必填信息(红字标注)!'" v-on:close_modal="close_next_error"></warning_modal>
     </div>
 </template>
 
@@ -79,6 +79,8 @@
     import time_modal from '../../../../component/time-modal.vue';
     import search_modal from '../../../../component/search_noumenon.vue';
     import repeat_modal from '../../../../component/repeat_modal.vue';
+    import warning_modal from '../../../../component/warning_noumenon.vue';
+
     export default{
         beforeRouteLeave(to,from,next){
             if(to.name !== 'termsthree'){
@@ -115,6 +117,7 @@
             time_modal,
             search_modal,
             repeat_modal,
+            warning_modal
         },
 
         computed:{
@@ -123,27 +126,6 @@
                     this.input_terms.standard_name = this.input_terms.terms_name +'('+this.input_terms.selected_course.chinese_name+')';
                 } else {
                     this.input_terms.standard_name = this.input_terms.terms_name;
-                }
-            },
-
-            repeat_nou_1(){
-                /*检查术语仅能输入中文*/
-                if(this.input_terms.terms_name !== '') {
-                    if(!/^[\u4E00-\u9FA5]*$/.test(this.input_terms.terms_name)) {
-                        this.show_input = true;
-                        console.log(this.input_terms.terms_name);
-                    } else {
-                        this.show_input = false;
-                    }
-                } else if(this.input_terms.terms_name === ''){
-                    this.show_input = false;
-                }
-
-                /*检查术语规范名称是否重复*/
-                if(this.input_terms.terms_name !== '' && this.show_input === false && this.input_terms.selected_course.chinese_name !== ''){
-                    let repeat_object={};
-                    let new_url= this.check_noumenon_repeat+'?name='+this.input_terms.standard_name+'&&type=3';
-                    this.http_json(new_url,'get',repeat_object,this.success_repeat,this.fail_repeat);
                 }
             }
         },
@@ -160,6 +142,7 @@
                 //打开对应的时间模态框
                 time_modal_1:false,
                 time_modal_2:false,
+                show_next_step:false,
                 course_type:[],
                 input_terms:{
                     standard_name:'',
@@ -195,6 +178,32 @@
         },
 
         methods:{
+            terms_name_tip(){
+                /*检查术语仅能输入中文*/
+                if(this.input_terms.terms_name !== '') {
+                    if(!/^[\u4E00-\u9FA5]*$/.test(this.input_terms.terms_name)) {
+                        this.show_input = true;
+                        this.input_terms.terms_name ='';
+                        document.getElementById("terms_name").placeholder='请输入中文';
+                    } else {
+                        this.show_input = false;
+                    }
+                } else if(this.input_terms.terms_name === ''){
+                    this.show_input = true;
+                    document.getElementById("terms_name").placeholder='术语名称不能为空';
+                }
+                this.repeat_nou();
+            },
+
+            repeat_nou(){
+                /*检查术语规范名称是否重复*/
+                if(this.input_terms.terms_name !== '' && this.show_input === false && this.input_terms.selected_course.chinese_name !== ''){
+                    let repeat_object={};
+                    let new_url= this.check_noumenon_repeat+'?name='+this.input_terms.standard_name+'&&type=3';
+                    this.http_json(new_url,'get',repeat_object,this.success_repeat,this.fail_repeat);
+                }
+            },
+
             /*学科类型下拉框*/
             get_course_type(){
                 let object = {};
@@ -307,15 +316,18 @@
 
             /*下一步*/
             next_step(){
-                console.log('add_data:'+JSON.stringify(this.add_data));
-                this.input_terms.remark_1_name = this.add_data[0].remark_name;
-                this.input_terms.remark_1 = this.add_data[0].remark;
-                if(typeof this.add_data[1] !== 'undefined'){
-                    this.input_terms.remark_2_name = this.add_data[1].remark_name;
-                    this.input_terms.remark_2 = this.add_data[1].remark;
+                if(this.input_terms.selected_course.chinese_name === ''||this.input_terms.terms_name === ''|| this.show_input === true|| this.repeat_id !== '' ||(this.add_data[0].remark_name === '' && this.add_data[0].remark !== '' )||(this.add_data[1] !== undefined && this.add_data[1].remark_name === '' && this.add_data[1].remark !=='')){
+                    this.show_next_step=true;
+                } else{
+                    this.input_terms.remark_1_name = this.add_data[0].remark_name;
+                    this.input_terms.remark_1 = this.add_data[0].remark;
+                    if(typeof this.add_data[1] !== 'undefined'){
+                        this.input_terms.remark_2_name = this.add_data[1].remark_name;
+                        this.input_terms.remark_2 = this.add_data[1].remark;
+                    }
+                    this.$store.commit("get_create_terms",this.input_terms);
+                    this.$router.push({path:'/termsthree'});
                 }
-                this.$store.commit("get_create_terms",this.input_terms);
-                this.$router.push({path:'/termsthree'});
             },
 
             /*第三步的“上一步”*/
@@ -335,7 +347,11 @@
             pre_step(){
                 this.$store.commit('get_create_one_selection',6);
                 this.$router.push({name:'build'});
-            }
+            },
+
+            close_next_error(){
+                this.show_next_step = false;
+            },
         }
     }
 </script>

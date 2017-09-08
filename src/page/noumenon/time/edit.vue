@@ -5,29 +5,29 @@
             <p class="zxw-create-character" v-model="standard_name" :="standard_title">本体名称：{{standard_name}}</p>
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">朝代：</label>
-                <select  class="zxw-ins-select zxw-edit-character-input-margin" v-model="selected_chaodai" :="repeat_nou_1" @change="get_nianhao_type_1()">
+                <select  class="zxw-ins-select zxw-edit-character-input-margin" v-bind:class="{'zxw-border-warning':show_chaodai}" v-model="selected_chaodai" :="repeat_nou_1" @change="get_nianhao_type_1()">
                     <option v-for="item in chaodai_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
 
                 <label class="zxw-character-span">年号：</label>
-                <select  class="zxw-ins-select" v-model="selected_nianhao" :="repeat_nou_1" v-bind:disabled="selected_chaodai.chinese_name === ''">
+                <select class="zxw-ins-select" v-bind:class="{'zxw-border-warning':show_nianhao}" v-model="selected_nianhao" :="repeat_nou_1" @click="chaodai_tip()" @change="nianhao_tip()">
                     <option v-for="item in nianhao_type" v-bind:value="{item_2_id:item.item_2_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
             </div>
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span">年份：</label>
-                <input type="text" class="zxw-character-input zxw-edit-character-input-margin" v-model="year" :="repeat_nou_1" v-bind:disabled="selected_nianhao.chinese_name === ''">
+                <input type="text" id="year" class="zxw-character-input zxw-edit-character-input-margin" v-bind:class="{'zxw-border-warning':show_year}" v-model="year" :="repeat_nou_1" @focus="nianhao_tip()" v-bind="get_month_type">
 
                 <label class="zxw-character-span">月：</label>
-                <select  class="zxw-ins-select" v-model="selected_1_month" :="repeat_nou_1" v-bind="clean_month" v-bind:disabled="year === ''">
+                <select  class="zxw-ins-select" v-bind:class="{'zxw-border-warning':show_month}" v-model="selected_1_month" :="repeat_nou_1" v-bind="clean_month" @click="year_tip()" @change="get_day_type()">
                     <option v-for="item in month_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
             </div>
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span">日：</label>
-                <select  class="zxw-ins-select zxw-edit-character-input-margin" v-model="selected_1_day" :="repeat_nou_1" v-bind="clean_day" v-bind:disabled="selected_1_month.chinese_name === ''||selected_1_month.chinese_name === '-'">
+                <select  class="zxw-ins-select zxw-edit-character-input-margin" v-model="selected_1_day" :="repeat_nou_1" v-bind="clean_day" @click="month_tip()">
                     <option v-for="item in day_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
 
@@ -49,32 +49,32 @@
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span">绝对日号：</label>
-                <input type="text" class="zxw-character-input zxw-edit-character-input-margin" v-model="juedui" :class="{'zxw-input-chinese':show_input}" :="juedui_number">
+                <input type="text" id="juedui" class="zxw-character-input zxw-edit-character-input-margin zxw-input-placeholder" placeholder="请输入数字" v-bind:class="{'zxw-border-warning':show_input}" v-model="juedui" onfocus="placeholder=''" @blur="juedui_number()">
 
                 <label class="zxw-character-span">公元年份：</label>
-                <input type="text" class="zxw-character-input" :class="{'zxw-input-chinese':show_g_year}" v-model="g_year" v-bind="g_year_number">
+                <input type="text" id="g_year" class="zxw-character-input zxw-input-placeholder" placeholder="请输入数字" :class="{'zxw-border-warning':show_g_year}" v-model="g_year" onfocus="placeholder=''" @blur="g_year_number" v-bind="get_g_month_type">
             </div>
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span">月：</label>
-                <select  class="zxw-ins-select zxw-edit-character-input-margin" :disabled="this.g_year === ''" v-model="selected_2_month" :="clean_g_month">
+                <select  class="zxw-ins-select zxw-edit-character-input-margin" :class="{'zxw-border-warning':show_g_month}" v-model="selected_2_month" :="clean_g_month" @click="g_year_tip()" @change="get_g_day_type">
                     <option v-for="item in g_month_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
 
                 <label class="zxw-character-span">日：</label>
-                <select  class="zxw-ins-select" :disabled="this.selected_2_month.chinese_name === ''" v-model="selected_2_day" :="clean_g_day">
+                <select  class="zxw-ins-select" :class="{'zxw-border-warning':show_g_day}" v-model="selected_2_day" :="clean_g_day" @click="g_month_tip()">
                     <option v-for="item in g_day_type" v-bind:value="{item_1_id:item.item_1_id,chinese_name:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
             </div>
 
             <div class="zxw-edit-btn">
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length" @click="cancel_edit()">取消</button>
-                <button class="zxw-nextbtn zxw-nextbtn-length" @click="finish_edit()" v-bind:disabled="selected_chaodai.chinese_name === ''|| show_input === true|| repeat_id !== ''||show_g_year === true "  >完成</button>
+                <button class="zxw-nextbtn zxw-nextbtn-length" @click="finish_edit()">完成</button>
             </div>
-
+        </div>
         <!--若术语本体规范已存在的模态框-->
         <repeat_modal :show_repeat="this.show_repeat" :repeat_name="this.standard_name" :repeat_id="this.repeat_id" :repeat_noumenon="this.repeat_noumenon" v-on:close_modal="close_repeat"></repeat_modal>
-    </div>
+        <warning_modal :show_info="show_next_step" :tip="'请填写完整必填信息(红字标注)!'" v-on:close_modal="close_next_error"></warning_modal>
     </div>
 </template>
 
@@ -82,21 +82,19 @@
 
     import noumenon_title from '../../../component/noumenon-title.vue';
     import repeat_modal from '../../../component/repeat_modal.vue';
+    import warning_modal from '../../../component/warning_noumenon.vue';
 
     export default{
         created(){
             this.get_chaodai_type();
-            this.get_month_type();
-            this.get_day_type();
             this.get_ganzhi_type();
             this.get_jieqi_type();
-            this.get_g_month_type();
-            this.get_g_day_type();
         },
 
         components:{
             noumenon_title,
             repeat_modal,
+            warning_modal
         },
 
         computed:{
@@ -108,27 +106,13 @@
                     }
             },
 
-            juedui_number(){
-                if(this.juedui !== ''){
-                    if(!/^(?:[\+\-]?\d+(?:\.\d+)?)?$/.test(this.juedui)){
-                        this.show_input = true;
-                    } else {
-                        this.show_input = false;
-                    }
-                }else {
-                    this.show_input = false;
-                }
-            },
-
-            g_year_number(){
-                if(this.g_year !== ''){
-                    if(!/^(?:[\+\-]?\d+(?:\.\d+)?)?$/.test(this.g_year)){
-                        this.show_g_year = true;
-                    } else {
-                        this.show_g_year = false;
-                    }
-                }else {
-                    this.show_g_year = false;
+            /*月份下拉框*/
+            get_month_type(){
+                if(this.year !== ''&&this.month_type.length === 0){
+                    this.show_year=false;
+                    let object = {};
+                    let new_url = this.menu_url+'?model_id=26&&item_1_id=0&&item_2_id=0';
+                    this.http_json(new_url,'get',object,this.success_month_type,this.fail_month_type);
                 }
             },
 
@@ -137,6 +121,16 @@
                     let new_url = this.ganzhi_name+'?gongyuan='+parseInt(this.g_year);
                     let object = {};
                     this.http_json(new_url,'get',object,this.success_ganzhi_name,this.fail_ganzhi_name);
+                }
+            },
+
+            /*公历月份下拉框*/
+            get_g_month_type(){
+                if(this.g_year !== ''&& this.g_month_type.length === 0){
+                    this.show_g_year = false;
+                    let object = {};
+                    let new_url = this.menu_url+'?model_id=30&&item_1_id=0&&item_2_id=0';
+                    this.http_json(new_url,'get',object,this.success_g_month_type,this.fail_g_month_type);
                 }
             },
 
@@ -229,8 +223,16 @@
                 g_year:'',
                 juedui:'',
                 english: '',
+                show_chaodai:false,
+                show_nianhao:false,
+                show_year:false,
+                show_month:false,
+                show_day:false,
                 show_input:false,
                 show_g_year:false,
+                show_g_month:false,
+                show_g_day:false,
+                show_next_step:false,
                 check_noumenon_repeat:'/ancient_books/check_noumenon_standard_name.action',
                 show_repeat:false,
                 repeat_id:'',
@@ -239,6 +241,56 @@
             }
         },
         methods:{
+            chaodai_tip(){
+                if(this.selected_chaodai.chinese_name === ''){
+                    this.show_chaodai=true;
+                }else{
+                    this.show_chaodai=false;
+                }
+            },
+
+            nianhao_tip(){
+                if(this.selected_nianhao.chinese_name === ''){
+                    this.show_nianhao=true;
+                    document.getElementById("year").disabled=true;
+                }else{
+                    this.show_nianhao=false;
+                    document.getElementById("year").disabled=false;
+                }
+            },
+
+            year_tip(){
+                if(this.selected_nianhao.chinese_name === ''||this.year===''){
+                    this.show_year=true;
+                }else{
+                    this.show_year=false;
+                }
+            },
+
+            month_tip(){
+                if(this.selected_1_month.chinese_name === ''){
+                    this.show_month = true;
+                }else{
+                    this.show_month = false;
+                }
+            },
+
+            g_year_tip(){
+                if(this.g_year === ''){
+                    this.show_g_year = true;
+                }else{
+                    this.show_g_year = false;
+                }
+            },
+
+            g_month_tip(){
+                if(this.selected_2_month.chinese_name === ''){
+                    this.show_g_month = true;
+                }else{
+                    this.show_g_month = false;
+                }
+            },
+
             /*根据id获取任务具体信息*/
             show_time(){
                 let object = {};
@@ -277,7 +329,6 @@
                     this.selected_2_day.chinese_name= response.body.g_ri_name;
                     this.english = response.body.english;
                     this.selected_jieqi = response.body.jieqi;
-                    console.log(JSON.stringify(this.selected_nianhao));
                     this.get_nianhao_type_2()
             },
 
@@ -310,22 +361,26 @@
             },
 
             finish_edit(){
-                let edit_object={};
-                edit_object.id=this.$route.params.nouId;
-                edit_object.standard_name = this.standard_name;
-                edit_object.chaodai = this.selected_chaodai.item_1_id;
-                edit_object.nianhao = this.selected_nianhao.item_2_id;
-                edit_object.nianfen = this.year;
-                edit_object.yue=this.selected_1_month.item_1_id;
-                edit_object.ri=this.selected_1_day.item_1_id;
-                edit_object.ganzhi=this.selected_ganzhi.item_1_id;
-                edit_object.juedui=parseInt(this.juedui);
-                edit_object.gongyuan=parseInt(this.g_year);
-                edit_object.g_yue=this.selected_2_month.item_1_id;
-                edit_object.g_ri=this.selected_2_day.item_1_id;
-                edit_object.english=this.english;
-                edit_object.jieqi=this.selected_jieqi;
-                this.http_json(this.modify_url,'post',edit_object,this.success_modify_time,this.fail_modify_time);
+                if(this.selected_chaodai.chinese_name === ''||this.show_input === true||this.repeat_id !== ''||this.show_g_year === true){
+                    this.show_next_step=true;
+                } else{
+                    let edit_object={};
+                    edit_object.id=this.$route.params.nouId;
+                    edit_object.standard_name = this.standard_name;
+                    edit_object.chaodai = this.selected_chaodai.item_1_id;
+                    edit_object.nianhao = this.selected_nianhao.item_2_id;
+                    edit_object.nianfen = this.year;
+                    edit_object.yue=this.selected_1_month.item_1_id;
+                    edit_object.ri=this.selected_1_day.item_1_id;
+                    edit_object.ganzhi=this.selected_ganzhi.item_1_id;
+                    edit_object.juedui=parseInt(this.juedui);
+                    edit_object.gongyuan=parseInt(this.g_year);
+                    edit_object.g_yue=this.selected_2_month.item_1_id;
+                    edit_object.g_ri=this.selected_2_day.item_1_id;
+                    edit_object.english=this.english;
+                    edit_object.jieqi=this.selected_jieqi;
+                    this.http_json(this.modify_url,'post',edit_object,this.success_modify_time,this.fail_modify_time);
+                }
             },
 
             success_modify_time(response){
@@ -362,6 +417,7 @@
 
             /*年号下拉框*/
             get_nianhao_type_1(){
+                this.chaodai_tip();
                 if(this.selected_chaodai.chinese_name !== ''&& this.chaodai_type.length > 0){
                     this.nianhao_type.splice(0,this.nianhao_type.length);
                     this.selected_nianhao.item_2_id = 0;
@@ -395,12 +451,6 @@
             },
 
             /*月份下拉框*/
-            get_month_type(){
-                let object = {};
-                let new_url = this.menu_url+'?model_id=26&&item_1_id=0&&item_2_id=0';
-                this.http_json(new_url,'get',object,this.success_month_type,this.fail_month_type);
-            },
-
             success_month_type(response){
                 for(let i = 0;i < response.body.length;i++){
                     this.month_type.push({
@@ -416,9 +466,12 @@
 
             /*日下拉框*/
             get_day_type(){
-                let object = {};
-                let new_url = this.menu_url+'?model_id=27&&item_1_id=0&&item_2_id=0';
-                this.http_json(new_url,'get',object,this.success_day_type,this.fail_day_type);
+                if(this.selected_1_month.chinese_name !== ''&&this.day_type.length === 0){
+                    this.show_month = false;
+                    let object = {};
+                    let new_url = this.menu_url+'?model_id=27&&item_1_id=0&&item_2_id=0';
+                    this.http_json(new_url,'get',object,this.success_day_type,this.fail_day_type);
+                }
             },
 
             success_day_type(response){
@@ -433,6 +486,23 @@
             fail_day_type(response){
                 console.log("获取日期失败");
             },
+
+            /*绝对日号判断*/
+            juedui_number(){
+                if(this.juedui !== ''){
+                    if(!/^(?:[\+\-]?\d+(?:\.\d+)?)?$/.test(this.juedui)){
+                        this.show_input = true;
+                        this.juedui='';
+                        document.getElementById("juedui").placeholder='请输入数字';
+                    } else {
+                        this.show_input = false;
+                    }
+                }else {
+                    this.show_input = false;
+                    document.getElementById("juedui").placeholder='请输入数字';
+                }
+            },
+
 
             /*干支下拉框*/
             get_ganzhi_type(){
@@ -483,14 +553,23 @@
                 console.log("获取节气失败");
             },
 
-
-            /*公历月份下拉框*/
-            get_g_month_type(){
-                let object = {};
-                let new_url = this.menu_url+'?model_id=30&&item_1_id=0&&item_2_id=0';
-                this.http_json(new_url,'get',object,this.success_g_month_type,this.fail_g_month_type);
+            /*公历年份判断*/
+            g_year_number(){
+                if(this.g_year !== ''){
+                    if(!/^(?:[\+\-]?\d+(?:\.\d+)?)?$/.test(this.g_year)){
+                        this.show_g_year = true;
+                        this.g_year='';
+                        document.getElementById("g_year").placeholder='请输入数字';
+                    } else {
+                        this.show_g_year = false;
+                    }
+                }else {
+                    this.show_g_year = false;
+                    document.getElementById("g_year").placeholder='请输入数字';
+                }
             },
 
+            /*公历月份下拉框*/
             success_g_month_type(response){
                 for(let i = 0;i < response.body.length;i++){
                     this.g_month_type.push({
@@ -506,9 +585,12 @@
 
             /*公历日下拉框*/
             get_g_day_type(){
-                let object = {};
-                let new_url = this.menu_url+'?model_id=31&&item_1_id=0&&item_2_id=0';
-                this.http_json(new_url,'get',object,this.success_g_day_type,this.fail_g_day_type);
+                if(this.selected_2_month.chinese_name !== ''){
+                    this.show_g_month = false;
+                    let object = {};
+                    let new_url = this.menu_url+'?model_id=31&&item_1_id=0&&item_2_id=0';
+                    this.http_json(new_url,'get',object,this.success_g_day_type,this.fail_g_day_type);
+                }
             },
 
             success_g_day_type(response){
@@ -522,7 +604,16 @@
 
             fail_g_day_type(response){
                 console.log("获取公历日期失败");
-            }
+            },
+
+            close_next_error(){
+                this.show_next_step = false;
+            },
         }
     }
 </script>
+<style>
+    .zxw-border-warning{
+        border-color: #a50000;
+    }
+</style>

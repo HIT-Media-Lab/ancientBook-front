@@ -38,47 +38,12 @@
 </template>
 
 <script>
-    /*let Mock = require('mockjs');
+    let Mock = require('mockjs');
 
     Mock.mock('/ancient_books/getNLocationCatalogue.action?id=1&&type=1','get',{
         'n_name':'李世明（1996）',
         'content':[
-            {
-                "ancient_book_name":"全唐书",
-                "id":"123456789",
-                "book|1":1,
-                "book_name":"册一"
-            },
-            {
-                "ancient_book_name":"全唐书",
-                "id":"123456789",
-                "book|2":2,
-                "book_name":"册二"
-            },
-            {
-                "ancient_book_name":"诗经",
-                "id":"123",
-                "book|5":5,
-                "book_name":"册五"
-            },
-            {
-                "ancient_book_name":"诗经",
-                "id":"123",
-                "book|6":6,
-                "book_name":"册六"
-            },
-            {
-                "ancient_book_name":"春秋",
-                "id":"456",
-                "book|7":7,
-                "book_name":"册七"
-            },
-            {
-                "ancient_book_name":"新唐书",
-                "id":"789",
-                "book|41":41,
-                "book_name":"册四十一"
-            }
+
         ]
     });
 
@@ -134,7 +99,7 @@
 
     Mock.mock('/ancient_books/getToken.action','get', {
         "token|100":100,
-    });*/
+    });
 
     import noumenon_title from '../../../component/noumenon-title.vue';
     import delete_modal from '../../../component/delete_modal.vue';
@@ -495,5 +460,9 @@
 
     .zxw-check-right-detail{
         height:570px;
+    }
+
+    .test{
+        overflow-y: hidden;
     }
 </style>

@@ -94,11 +94,37 @@
      "ganzhi|1":1,
      "juedui|1": 1,
      "gongyuan|1": 1,
-         "g_yue_name":"",
-         "g_ri_name":"",
+         "g_yue_name":"1",
+         "g_yue|1":1,
+         "g_ri|1":1,
+         "g_ri_name":"1",
      "english": 'shijian',
      "jieqi": "节气1"
-     });*/
+     });
+
+    Mock.mock('/ancient_books/get_time_by_id.action?id=7789','get',{
+        "status|200":200,
+        "standard_name": "宋朝",
+        "chaodai|1":1,
+        "chaodai_name": "宋朝",
+        "nianhao|0":1,
+        "nianhao_name": "",
+        "nianfen": "",
+        "yue|0": 1,
+        "yue_name":'',
+        "ri|0": 1,
+        "ri_name":'',
+        "ganzhi_name":'',
+        "ganzhi|0":1,
+        "juedui": null,
+        "gongyuan": null,
+        "g_yue_name":"",
+        "g_yue|0":1,
+        "g_ri|0":1,
+        "g_ri_name":"",
+        "english": '',
+        "jieqi": ""
+    });*/
 
     import noumenon_title from '../../../component/noumenon-title.vue';
     import noumenon_button from '../../../component/noumenon-button.vue';

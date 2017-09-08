@@ -5,7 +5,7 @@
             <p class="zxw-create-character" v-bind="standard_title"  v-model="input_content.standard_name">本体名称：{{input_content.standard_name}}</p>
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">地名：</label>
-                <input id="person_name" type="text"  class="zxw-character-input zxw-edit-character-input-margin" v-model="input_content.location_name" v-bind:class="{'zxw-input-chinese':show_input}" :="repeat_nou_1">
+                <input id="pla_name" type="text"  class="zxw-character-input zxw-edit-character-input-margin zxw-input-placeholder" placeholder="请输入中文" v-model="input_content.location_name" v-bind:class="{'zxw-input-chinese':show_input}" onfocus="placeholder=''" @blur="pla_name_tip()">
                 <label class="zxw-character-span">英译：</label>
                 <input type="text" class="zxw-character-input" v-model="input_content.english">
             </div>
@@ -14,12 +14,12 @@
                 <label class="zxw-character-span">别名：</label>
                 <input type="text" class="zxw-character-input zxw-edit-character-input-margin" v-model="input_content.other_name">
                 <label class="zxw-character-span">经度：</label>
-                <input type="text" class="zxw-character-input" v-model="input_content.longitude" :="number_longitude" v-bind:class="{'zxw-input-chinese':show_longitude}">
+                <input type="text" class="zxw-character-input zxw-input-placeholder" v-model="input_content.longitude" :="number_longitude" v-bind:class="{'zxw-input-chinese':show_longitude}">
             </div>
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span">纬度：</label>
-                <input type="text" class="zxw-character-input zxw-edit-character-input-margin" v-model="input_content.latitude" :="number_latitude" v-bind:class="{'zxw-input-chinese':show_latitude}">
+                <input type="text" class="zxw-character-input zxw-edit-character-input-margin zxw-input-placeholder" v-model="input_content.latitude" :="number_latitude" v-bind:class="{'zxw-input-chinese':show_latitude}">
                 <label class="zxw-character-span">今所在：</label>
                 <input type="text" class="zxw-character-input" v-model="input_content.location_today">
             </div>
@@ -92,7 +92,7 @@
 
             <div class="zxw-edit-btn">
                 <button class="zxw-prebtn zxw-prebtn-margin zxw-prebtn-length" @click="cancel_edit()">取消</button>
-                <button class="zxw-nextbtn zxw-nextbtn-length" @click="finish_edit()" v-bind:disabled="input_content.begin_time_name === ''|| input_content.end_time_name === ''||input_content.location_name === ''|| show_input === true|| repeat_id !== '' ||(add_data[0].remark_name === ''&& add_data[0].remark !== '')||(add_data[1] !== undefined && add_data[1].remark_name === '' && add_data[1].remark !=='')||show_latitude === true||show_longitude === true">完成</button>
+                <button class="zxw-nextbtn zxw-nextbtn-length" @click="finish_edit()">完成</button>
             </div>
         </div>
 
@@ -104,6 +104,7 @@
         <search_modal :search_url="this.search_location" :noumenon_modal="this.l_location_modal" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_l_location" v-on:add_noumenon_relations="add_l_location"></search_modal>
         <!--若地点本体规范已存在的模态框-->
         <repeat_modal :show_repeat="this.show_repeat" :repeat_name="this.input_content.standard_name" :repeat_id="this.repeat_id" :repeat_noumenon="this.repeat_noumenon" v-on:close_modal="close_repeat"></repeat_modal>
+        <warning_modal :show_info="show_next_step" :tip="'请填写完整必填信息(红字标注)!'" v-on:close_modal="close_next_error"></warning_modal>
     </div>
 </template>
 
@@ -112,6 +113,7 @@
     import time_modal from '../../../component/time-modal.vue';
     import search_modal from '../../../component/search_noumenon.vue';
     import repeat_modal from '../../../component/repeat_modal.vue';
+    import warning_modal from '../../../component/warning_noumenon.vue';
     export default{
         created(){
             this.show_place();
@@ -122,6 +124,7 @@
             time_modal,
             search_modal,
             repeat_modal,
+            warning_modal
         },
 
         computed:{
@@ -157,31 +160,7 @@
                 } else {
                     this.input_content.standard_name = this.input_content.location_name;
                 }
-            },
-
-            repeat_nou_1(){
-                /*检查人名仅能输入中文*/
-                if(this.input_content.location_name !== '') {
-                    if(!/^[\u4E00-\u9FA5]*$/.test(this.input_content.location_name)) {
-                        this.show_input = true;
-                    } else {
-                        this.show_input = false;
-                    }
-                } else if(this.input_content.location_name === ''){
-                    this.show_input = false;
-                }
-
-
-                if(this.input_content.location_name !== '' && this.input_content.begin_time_name !== ''&& this.show_input === false){
-                    let new_title = this.input_content.location_name+'('+this.input_content.begin_time_name+')';
-                    if(new_title !== this.edit_place_title){
-                        let repeat_object={};
-                        let new_url= this.check_noumenon_repeat+'?name='+this.input_content.standard_name+'&&type=7';
-                        this.http_json(new_url,'get',repeat_object,this.success_repeat,this.fail_repeat);
-                    }
-                }
             }
-
         },
 
         data(){
@@ -203,6 +182,7 @@
                 time_modal_1:false,
                 time_modal_2:false,
                 seat_modal:false,
+                show_next_step:false,
                 input_content:{
                     standard_name:'',
                     location_name:'',
@@ -242,6 +222,29 @@
             }
         },
         methods:{
+            pla_name_tip(){
+                /*检查地名仅能输入中文*/
+                if(this.input_place.location_name !== '') {
+                    if(!/^[\u4E00-\u9FA5]*$/.test(this.input_place.location_name)) {
+                        this.show_input = true;
+                        this.input_place.location_name = '';
+                        document.getElementById("pla_name").placeholder='请输入中文';
+                    } else {
+                        this.show_input = false;
+                    }
+                } else if(this.input_place.location_name === ''){
+                    this.show_input = true;
+                    document.getElementById("pla_name").placeholder='地名不能为空';
+                }
+
+                /*判断地名本体名称是否重复*/
+                if(this.input_place.location_name !== '' && this.input_place.begin_standard_time !== '' && this.show_input === false){
+                    let repeat_object={};
+                    let new_url= this.check_noumenon_repeat+'?name='+this.input_place.standard_name+'&&type=7';
+                    this.http_json(new_url,'get',repeat_object,this.success_repeat,this.fail_repeat);
+                }
+            },
+
             /*人物本体关系禁止键盘输入*/
             down_delete(){
                 let c = event.keyCode;
@@ -466,51 +469,51 @@
             },
 
             finish_edit(){
-
-                for(let i = 0;i < this.input_content.seat.length;i++){
-                    if(this.input_content.seat[i].relation_id !== undefined && this.input_content.seat[i].location_id === undefined && this.input_content.seat[i].location_name === undefined){
-                        this.seat_delete.push({
-                            relation_id:this.input_content.seat[i].relation_id
-                        })
+                if(this.input_content.begin_time_name === ''|| this.input_content.end_time_name === ''||this.input_content.location_name === ''|| this.show_input === true|| this.repeat_id !== '' ||(this.add_data[0].remark_name === ''&& this.add_data[0].remark !== '')||(this.add_data[1] !== undefined && this.add_data[1].remark_name === '' && this.add_data[1].remark !=='')||this.show_latitude === true||this.show_longitude === true){
+                    this.show_next_step=true;
+                }else{
+                    for(let i = 0;i < this.input_content.seat.length;i++){
+                        if(this.input_content.seat[i].relation_id !== undefined && this.input_content.seat[i].location_id === undefined && this.input_content.seat[i].location_name === undefined){
+                            this.seat_delete.push({
+                                relation_id:this.input_content.seat[i].relation_id
+                            })
+                        }
+                        if(this.input_content.seat[i].relation_id === undefined){
+                            this.seat_add.push({
+                                location_id:this.input_content.seat[i].location_id
+                            })
+                        }
                     }
-                    if(this.input_content.seat[i].relation_id === undefined){
-                        this.seat_add.push({
-                            location_id:this.input_content.seat[i].location_id
-                        })
+
+                    //备注信息
+                    this.input_content.remark_1_name = this.add_data[0].remark_name ;
+                    this.input_content.remark_1 = this.add_data[0].remark;
+                    if(this.add_data.length > 1){
+                        this.input_content.remark_2_name = this.add_data[1].remark_name ;
+                        this.input_content.remark_2 = this.add_data[1].remark ;
                     }
+                    let edit_object={};
+                    edit_object.id=this.$route.params.nouId;
+                    edit_object.standard_name=this.input_content.standard_name;
+                    edit_object.location_name=this.input_content.location_name;
+                    edit_object.longitude=this.input_content.longitude;
+                    edit_object.latitude=this.input_content.latitude;
+                    edit_object.location_today=this.input_content.location_today;
+                    edit_object.other_name=this.input_content.other_name;
+                    edit_object.begin_time_id=this.input_content.begin_time_id;
+                    edit_object.end_time_id=this.input_content.end_time_id;
+                    edit_object.remark_1_name=this.input_content.remark_1_name;
+                    edit_object.remark_2_name=this.input_content.remark_2_name;
+                    edit_object.remark_1=this.input_content.remark_1;
+                    edit_object.remark_2=this.input_content.remark_2;
+                    edit_object.english=this.input_content.english;
+                    edit_object.s_location_id=this.input_content.s_location_id;
+                    edit_object.l_location_id=this.input_content.l_location_id;
+                    edit_object.seat_delete=this.seat_delete;
+                    edit_object.seat_modify=this.seat_modify;
+                    edit_object.seat_add=this.seat_add;
+                    this.http_json(this.modify_url,'post',edit_object,this.success_modify_char,this.fail_modify_char);
                 }
-
-                //备注信息
-                this.input_content.remark_1_name = this.add_data[0].remark_name ;
-                this.input_content.remark_1 = this.add_data[0].remark;
-                if(this.add_data.length > 1){
-                    this.input_content.remark_2_name = this.add_data[1].remark_name ;
-                    this.input_content.remark_2 = this.add_data[1].remark ;
-                }
-                console.log("post:add_data "+JSON.stringify(this.add_data));
-
-                let edit_object={};
-                edit_object.id=this.$route.params.nouId;
-                edit_object.standard_name=this.input_content.standard_name;
-                edit_object.location_name=this.input_content.location_name;
-                edit_object.longitude=this.input_content.longitude;
-                edit_object.latitude=this.input_content.latitude;
-                edit_object.location_today=this.input_content.location_today;
-                edit_object.other_name=this.input_content.other_name;
-                edit_object.begin_time_id=this.input_content.begin_time_id;
-                edit_object.end_time_id=this.input_content.end_time_id;
-                edit_object.remark_1_name=this.input_content.remark_1_name;
-                edit_object.remark_2_name=this.input_content.remark_2_name;
-                edit_object.remark_1=this.input_content.remark_1;
-                edit_object.remark_2=this.input_content.remark_2;
-                edit_object.english=this.input_content.english;
-                edit_object.s_location_id=this.input_content.s_location_id;
-                edit_object.l_location_id=this.input_content.l_location_id;
-                edit_object.seat_delete=this.seat_delete;
-                edit_object.seat_modify=this.seat_modify;
-                edit_object.seat_add=this.seat_add;
-                console.log('edit object: '+JSON.stringify(edit_object));
-                this.http_json(this.modify_url,'post',edit_object,this.success_modify_char,this.fail_modify_char);
             },
 
             success_modify_char(response){
@@ -521,7 +524,11 @@
 
             fail_modify_char(){
                 console.log("修改地点本体失败");
-            }
+            },
+
+            close_next_error(){
+                this.show_next_step = false;
+            },
         }
     }
 </script>
