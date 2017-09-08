@@ -408,8 +408,11 @@
              * 获取图片内容请求
              */
             get_picture() {
-                var url = '/ancient_books/get_picture_by_id.action?page_id=' + this.page_id;
                 var img = document.getElementById("ry-picture-work");
+                if (img.src){
+                    img.removeAttribute("src")
+                }
+                let url = '/ancient_books/get_picture_by_id.action?page_id=' + this.page_id;
                 img.src = url;
             },
 
