@@ -78,7 +78,7 @@
 
 <script>
 
-    let Mock = require('mockjs');
+    /*let Mock = require('mockjs');
     Mock.mock('/ancient_books/get_menu_items.action?model_id=25&&item_1_id=0&&item_2_id=0','get', {
         "g":[
             {"model_id|1": 1,
@@ -250,7 +250,7 @@
     Mock.mock('/ancient_books/get_ganzhi_by_gongyuan.action?gongyuan=2017','get', {
         "ganzhi|2":2,
         "ganzhi_name":'干支2'
-    });
+    });*/
 
 
     import create_word from '../../../../component/create-word.vue';
