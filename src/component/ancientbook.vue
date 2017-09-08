@@ -185,7 +185,7 @@
             <!--图片工作台-->
             <div>
                 <div class="float-right ry-hide-picture"><img src="../assets/img/picture-button/more.png" height="130" width="29"/></div>
-                <div class="ry-picture-work"><img id="ry-picture-work" style="height:470px; width: 470px;"/></div>
+                <div id="ry-picture-work" class="ry-picture-work"><img  style="height:470px; width: 470px;"/></div>
             </div>
         </div>
 

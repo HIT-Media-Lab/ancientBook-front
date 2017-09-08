@@ -667,6 +667,7 @@
                     var upload_picture_obj = new FormData;
 
                     var blob = this.dataURItoBlob(pictures[temp].picture);
+                    console.log(blob);
 
                     var name = pictures[temp].pic_name;
                     var first = name.charAt(1);
