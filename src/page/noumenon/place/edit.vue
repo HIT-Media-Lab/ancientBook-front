@@ -273,9 +273,9 @@
                 this.input_content.begin_time_name = response.body.begin_time_name;
                 this.input_content.end_time_id = response.body.end_time_id;
                 this.input_content.end_time_name = response.body.end_time_name;
-                this.input_content.s_location_id = response.body.s__location_id;
+                this.input_content.s_location_id = response.body.s_location_id;
                 this.input_content.s_location_name = response.body.s_location_name;
-                this.input_content.l_location_id = response.body.l__location_id;
+                this.input_content.l_location_id = response.body.l_location_id;
                 this.input_content.l_location_name = response.body.l_location_name;
                 this.input_content.remark_1_name = response.body.remark_1_name;
                 this.input_content.remark_2_name = response.body.remark_2_name;
