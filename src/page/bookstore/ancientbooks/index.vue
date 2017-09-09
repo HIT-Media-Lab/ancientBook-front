@@ -36,7 +36,7 @@
             <div id="layer-body" class="ry-border-center1">
 
                 <!--品种层-->
-                <div id="variety-layer" class="layer-input div-now">
+                <div id="variety-layer" class="layer-input1 div-now">
                     <div class="form-center">
                         <div>
                             <div class="row">
@@ -134,7 +134,7 @@
                 </div>
 
                 <!--版本层-->
-                <div id="edition-layer" class="layer-input">
+                <div id="edition-layer" class="layer-input1">
                     <div id="edition" class="form-center">
                         <div>
                             <div class="row">
@@ -284,7 +284,7 @@
                 </div>
 
                 <!--印次层-->
-                <div id="impression-layer" class="layer-input">
+                <div id="impression-layer" class="layer-input1">
                     <div class="form-center">
                         <div>
                             <div class="row">
@@ -355,7 +355,7 @@
                 </div>
 
                 <!--复本层-->
-                <div id="copy-layer" class="layer-input">
+                <div id="copy-layer" class="layer-input1">
                     <div class="form-center">
                         <div>
                             <div class="row">
@@ -688,28 +688,28 @@
                 var copy = document.getElementById("copy-layer");
 
                 variety_head.onclick = function () {
-                    variety.className = "layer-input div-now";
-                    edition.className = "layer-input";
-                    impression.className = "layer-input";
-                    copy.className = "layer-input";
+                    variety.className = "layer-input1 div-now";
+                    edition.className = "layer-input1";
+                    impression.className = "layer-input1";
+                    copy.className = "layer-input1";
                 };
                 edition_head.onclick = function () {
-                    variety.className = "layer-input";
-                    edition.className = "layer-input div-now";
-                    impression.className = "layer-input";
-                    copy.className = "layer-input";
+                    variety.className = "layer-input1";
+                    edition.className = "layer-input1 div-now";
+                    impression.className = "layer-input1";
+                    copy.className = "layer-input1";
                 };
                 impression_head.onclick = function () {
-                    variety.className = "layer-input";
-                    edition.className = "layer-input";
-                    impression.className = "layer-input div-now";
-                    copy.className = "layer-input";
+                    variety.className = "layer-input1";
+                    edition.className = "layer-input1";
+                    impression.className = "layer-input1 div-now";
+                    copy.className = "layer-input1";
                 };
                 copy_head.onclick = function () {
-                    variety.className = "layer-input";
-                    edition.className = "layer-input";
-                    impression.className = "layer-input";
-                    copy.className = "layer-input div-now";
+                    variety.className = "layer-input1";
+                    edition.className = "layer-input1";
+                    impression.className = "layer-input1";
+                    copy.className = "layer-input1 div-now";
                 }
             },
 
