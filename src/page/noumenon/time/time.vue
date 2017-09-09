@@ -78,7 +78,7 @@
 
 <script>
     /*let Mock = require('mockjs');
-     Mock.mock('/ancient_books/get_time_by_id.action?id=7789','get',{
+    Mock.mock('/ancient_books/get_time_by_id.action?id=7789','get',{
      "status|200":200,
      "standard_name": "宋朝天宝2017",
      "chaodai|1":1,
@@ -107,17 +107,17 @@
         "standard_name": "宋朝",
         "chaodai|1":1,
         "chaodai_name": "宋朝",
-        "nianhao|0":1,
-        "nianhao_name": "",
-        "nianfen": "",
-        "yue|0": 1,
-        "yue_name":'',
+        "nianhao|1":1,
+        "nianhao_name": "天宝",
+        "nianfen": "1996",
+        "yue|1": 1,
+        "yue_name":'一月',
         "ri|0": 1,
         "ri_name":'',
         "ganzhi_name":'',
         "ganzhi|0":1,
         "juedui": null,
-        "gongyuan": null,
+        "gongyuan": 1996,
         "g_yue_name":"",
         "g_yue|0":1,
         "g_ri|0":1,

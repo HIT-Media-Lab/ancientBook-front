@@ -65,6 +65,7 @@
         <time_modal :time_modal="this.time_modal_1" v-on:success_time="begin_time" v-on:close_modal="close_begin()"></time_modal>
         <time_modal :time_modal="this.time_modal_2" v-on:success_time="end_time" v-on:close_modal="close_end()"></time_modal>
         <warning_modal :show_info="show_next_step" :tip="'请填写完整必填信息(红字标注)!'" v-on:close_modal="close_next_error"></warning_modal>
+        <warning_modal :show_info="show_next_2" :tip="'请填写完整注释部分!'" v-on:close_modal="close_next_2"></warning_modal>
     </div>
 </template>
 
@@ -120,6 +121,7 @@
                 time_modal_1:false,
                 time_modal_2:false,
                 show_next_step:false,
+                show_next_2:false,
                 course_type:[],
                 course_number:0,
                 selected_course:{
@@ -352,9 +354,11 @@
             },
 
             finish_edit(){
-                if(this.input_content.selected_course.chinese_name === ''||this.input_content.terms_name === ''|| this.show_input === true|| this.repeat_id !== '' ||(this.add_data[0].remark_name === ''&& this.add_data[0].remark !== '')||(this.add_data[1] !== undefined && this.add_data[1].remark_name === '' && this.add_data[1].remark !=='')){
+                if(this.input_content.selected_course.chinese_name === ''||this.input_content.terms_name === ''|| this.show_input === true|| this.repeat_id !== ''){
                     this.show_next_step=true;
-                }else {
+                } else if((this.add_data[0].remark_name === ''&& this.add_data[0].remark !== '')||(this.add_data[1] !== undefined && this.add_data[1].remark_name === '' && this.add_data[1].remark !=='')){
+                    this.show_next_2 = true;
+                } else {
                     //备注信息
                     this.input_content.remark_1_name = this.add_data[0].remark_name ;
                     this.input_content.remark_1 = this.add_data[0].remark;
@@ -395,6 +399,10 @@
             close_next_error(){
                 this.show_next_step = false;
             },
+
+            close_next_2(){
+                this.show_next_2 = false;
+            }
         }
     }
 </script>

@@ -94,6 +94,7 @@
         <!--若机构本体规范已存在的模态框-->
         <repeat_modal :show_repeat="this.show_repeat" :repeat_name="this.input_off.standard_name" :repeat_id="this.repeat_id" :repeat_noumenon="this.repeat_noumenon" v-on:close_modal="close_repeat"></repeat_modal>
         <warning_modal :show_info="show_next_step" :tip="'请填写完整必填信息(红字标注)!'" v-on:close_modal="close_next_error"></warning_modal>
+        <warning_modal :show_info="show_next_2" :tip="'请填写完整注释部分!'" v-on:close_modal="close_next_2"></warning_modal>
     </div>
 </template>
 
@@ -171,6 +172,7 @@
                 show_ins:false,
                 show_begin_time:false,
                 show_end_time:false,
+                show_next_2:false,
                 //打开对应的时间模态框
                 time_modal_1:false,
                 time_modal_2:false,
@@ -390,8 +392,10 @@
 
             /*下一步*/
             next_step(){
-                if(this.input_off.begin_time_id === ''|| this.input_off.end_time_id === ''||this.input_off.office_name === ''|| this.show_input === true|| this.repeat_id !== '' ||(this.add_data[0].remark_name === '' && this.add_data[0].remark !== '' )||(this.add_data[1] !== undefined && this.add_data[1].remark_name === '' && this.add_data[1].remark !=='')){
+                if(this.input_off.begin_time_id === ''|| this.input_off.end_time_id === ''||this.input_off.office_name === ''|| this.show_input === true|| this.repeat_id !== ''){
                     this.show_next_step = true;
+                } else if((this.add_data[0].remark_name === '' && this.add_data[0].remark !== '' )||(this.add_data[1] !== undefined && this.add_data[1].remark_name === '' && this.add_data[1].remark !=='')){
+                    this.show_next_2 = true;
                 } else{
                     this.input_off.remark_1_name = this.add_data[0].remark_name;
                     this.input_off.remark_1 = this.add_data[0].remark;
@@ -424,6 +428,10 @@
             close_next_error(){
                 this.show_next_step = false;
             },
+
+            close_next_2(){
+                this.show_next_2 = false;
+            }
         }
     }
 </script>

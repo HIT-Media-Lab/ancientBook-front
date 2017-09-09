@@ -193,6 +193,7 @@
         <!--添加籍贯的模态框-->
         <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_location" v-on:add_noumenon_relations="add_location"></search_modal>
         <warning_modal :show_info="show_next_step" :tip="'请填写完整必填信息(红字标注)!'" v-on:close_modal="close_next_error"></warning_modal>
+        <warning_modal :show_info="show_next_2" :tip="'请填写完整注释部分!'" v-on:close_modal="close_next_2"></warning_modal>
     </div>
 </template>
 
@@ -260,6 +261,7 @@ export default{
             student_modal:false,
             friend_modal:false,
             show_next_step:false,
+            show_next_2:false,
             input_content:{
                 standard_name:'',
                 person_name:'',
@@ -824,8 +826,12 @@ export default{
         },
 
         finish_edit(){
-            if(this.input_content.birth_standard_name === ''|| this.input_content.death_standard_name === ''||this.input_content.person_name === ''|| this.show_input === true|| this.repeat_id !== '' ||(this.add_data[0].remark_name === '' && this.add_data[0].remark !== '' )||(this.add_data[1] !== undefined && this.add_data[1].remark_name === '' && this.add_data[1].remark !=='')){
+            if(this.input_content.birth_standard_name === ''|| this.input_content.death_standard_name === ''||this.input_content.person_name === ''|| this.show_input === true|| this.repeat_id !== ''){
                 this.show_next_step=true;
+
+            } else if((this.add_data[0].remark_name === '' && this.add_data[0].remark !== '' )||(this.add_data[1] !== undefined && this.add_data[1].remark_name === '' && this.add_data[1].remark !=='')){
+                this.show_next_2 = true;
+
             } else{
                 //父亲关系判断
                 if(this.input_content.father.relation_id === undefined && this.input_content.father.person_id !== undefined){
@@ -1005,6 +1011,10 @@ export default{
         close_next_error(){
             this.show_next_step = false;
         },
+
+        close_next_2(){
+            this.show_next_2 = false;
+        }
 
     }
 }

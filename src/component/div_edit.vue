@@ -45,7 +45,6 @@
         methods: {
             changeText(){
                 this.$emit('input', this.$el.innerHTML);
-
             },
 
             forbid_enter(){

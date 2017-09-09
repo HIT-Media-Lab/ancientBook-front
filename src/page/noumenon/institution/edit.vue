@@ -7,8 +7,8 @@
                 <label class="zxw-character-span zxw-must-write">机构名：</label>
                 <input id="ins_name" type="text"  class="zxw-character-input zxw-edit-character-input-margin zxw-input-placeholder" placeholder="请输入中文" v-model="input_content.ins_name" v-bind:class="{'zxw-input-chinese':show_input}" onfocus="placeholder=''" @blur="ins_name_tip()">
                 <label class="zxw-character-span">机构类型：</label>
-                <select  class="zxw-ins-select">
-                    <option v-for="item in input_content.type">{{item.option}}</option>
+                <select  class="zxw-ins-select" v-model="input_content.type_number">
+                    <option v-for="item in input_content.type" v-bind:value="{id:item.id,option:item.option}">{{item.option}}</option>
                 </select>
             </div>
 
@@ -105,6 +105,7 @@
         <!--搜索上级机构-->
         <search_modal :search_url="this.search_ins" :noumenon_modal="this.ins_modal" :noumenon_number="6" :repeat_arr="[]" v-on:close_modal="close_ins" v-on:add_noumenon_relations="add_ins"></search_modal>
         <warning_modal :show_info="show_next_step" :tip="'请填写完整必填信息(红字标注)!'" v-on:close_modal="close_next_error"></warning_modal>
+        <warning_modal :show_info="show_next_2" :tip="'请填写完整注释部分!'" v-on:close_modal="close_next_2"></warning_modal>
     </div>
 </template>
 
@@ -184,6 +185,7 @@
                 show_begin_time:false,
                 show_end_time:false,
                 show_parent_body:false,
+                show_next_2:false,
                 //打开模态框
                 time_modal_1:false,
                 time_modal_2:false,
@@ -194,8 +196,10 @@
                 input_content:{
                     standard_name:'',
                     ins_name:'',
-                    //type:['','全部机构','皇室机构','中央机构','地方机构','民间机构'],
-                    type_number:0,
+                    type_number:{
+                        id:0,
+                        option:''
+                    },
                     type:[],
                     english:'',
                     other_name:'',
@@ -482,9 +486,13 @@
             },
 
             finish_edit(){
-                if(this.input_content.begin_time_name === ''|| this.input_content.end_time_name === ''||this.input_content.ins_name === ''|| this.show_input === true|| this.repeat_id !== '' ||(this.add_data[0].remark_name === ''&& this.add_data[0].remark !== '')||(this.add_data[1] !== undefined && this.add_data[1].remark_name === '' && this.add_data[1].remark !=='')){
+                if(this.input_content.begin_time_name === ''|| this.input_content.end_time_name === ''||this.input_content.ins_name === ''|| this.show_input === true|| this.repeat_id !== ''){
                     this.show_next_step = true;
-                }else{
+
+                } else if((this.add_data[0].remark_name === ''&& this.add_data[0].remark !== '')||(this.add_data[1] !== undefined && this.add_data[1].remark_name === '' && this.add_data[1].remark !=='')){
+                  this.show_next_2 = true;
+
+                } else{
                     //备注信息
                     this.input_content.remark_1_name = this.add_data[0].remark_name ;
                     this.input_content.remark_1 = this.add_data[0].remark;
@@ -497,7 +505,7 @@
                     edit_object.id=this.$route.params.nouId;
                     edit_object.standard_name = this.input_content.standard_name;
                     edit_object.institution_name = this.input_content.ins_name;
-                    edit_object.type=this.input_content.type_number;
+                    edit_object.type=this.input_content.type_number.id;
                     edit_object.english=this.input_content.english;
                     edit_object.other_name=this.input_content.other_name;
                     edit_object.begin_time_id=this.input_content.begin_time_id;
@@ -526,6 +534,10 @@
             close_next_error(){
                 this.show_next_step = false;
             },
+
+            close_next_2(){
+                this.show_next_2 = false;
+            }
         }
     }
 </script>

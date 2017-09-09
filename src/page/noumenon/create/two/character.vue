@@ -197,7 +197,8 @@
 
         <!--添加籍贯的模态框-->
         <search_modal :search_url="this.search_location" :noumenon_modal="this.location_modal" :noumenon_number="7" :repeat_arr="[]" v-on:close_modal="close_location" v-on:add_noumenon_relations="add_location"></search_modal>
-        <warning_modal :show_info="show_next_step" :tip="'请填写完整必填信息(红字标注)!'" v-on:close_modal="close_next_error"></warning_modal>
+        <warning_modal :show_info="show_next_step" :tip="'请填写完整必填信息(红字标注)'" v-on:close_modal="close_next_error"></warning_modal>
+        <warning_modal :show_info="show_next_2" :tip="'请填写完整注释部分!'" v-on:close_modal="close_next_2"></warning_modal>
     </div>
 </template>
 
@@ -316,6 +317,7 @@
                 student_modal:false,
                 friend_modal:false,
                 show_next_step:false,
+                show_next_2:false,
                 input_content:{
                     standard_name:'',
                     person_name:'',
@@ -729,23 +731,29 @@
 
             /*下一步*/
             next_step(){
-                if(this.input_content.birth_standard_name === ''|| this.input_content.death_standard_name === ''||this.input_content.person_name === ''|| this.show_input === true|| this.repeat_id !== '' ||(this.add_data[0].remark_name === '' && this.add_data[0].remark !== '' )||(this.add_data[1] !== undefined && this.add_data[1].remark_name === '' && this.add_data[1].remark !=='')){
+                if(this.input_content.birth_standard_name === ''|| this.input_content.death_standard_name === ''||this.input_content.person_name === ''|| this.show_input === true|| this.repeat_id !== ''){
                     this.show_next_step = true;
+                } else if((this.add_data[0].remark_name === '' && this.add_data[0].remark !== '')||(this.add_data[1] !== undefined && this.add_data[1].remark_name === '' && this.add_data[1].remark !=='')){
+                    this.show_next_2 = true;
                 } else{
-                    console.log('add_data:'+JSON.stringify(this.add_data));
-                    this.input_content.remark_1_name = this.add_data[0].remark_name;
-                    this.input_content.remark_1 = this.add_data[0].remark;
-                    if(typeof this.add_data[1] !== 'undefined'){
-                        this.input_content.remark_2_name = this.add_data[1].remark_name;
-                        this.input_content.remark_2 = this.add_data[1].remark;
+                        console.log('add_data:'+JSON.stringify(this.add_data));
+                        this.input_content.remark_1_name = this.add_data[0].remark_name;
+                        this.input_content.remark_1 = this.add_data[0].remark;
+                        if(typeof this.add_data[1] !== 'undefined'){
+                            this.input_content.remark_2_name = this.add_data[1].remark_name;
+                            this.input_content.remark_2 = this.add_data[1].remark;
+                        }
+                        this.$store.commit("get_create_character",this.input_content);
+                        this.$router.push({path:'/charthree'});
                     }
-                    this.$store.commit("get_create_character",this.input_content);
-                    this.$router.push({path:'/charthree'});
-                }
             },
 
             close_next_error(){
                 this.show_next_step = false;
+            },
+
+            close_next_2(){
+                this.show_next_2 = false;
             },
 
             /*第三步的“上一步”*/

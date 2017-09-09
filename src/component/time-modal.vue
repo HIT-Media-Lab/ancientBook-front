@@ -6,26 +6,26 @@
 
             <div slot="body" class="zxw-time-body">
                 <label class="zxw-time-label zxw-font-sixteen">朝代：</label>
-                <select  class="zxw-time-select" v-model="selected_1" @change="get_year()">
+                <select  class="zxw-time-select" v-bind:class="{'zxw-input-chinese':show_chaodai}" v-model="selected_1" @change="get_year()">
                     <option v-for="item in menu_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}"> {{item.chinese_name}}</option>
                 </select>
 
                 <label class="zxw-font-sixteen">年号：</label>
-                <select class="zxw-time-select" v-model="selected_2">
+                <select class="zxw-time-select" v-bind:class="{'zxw-input-chinese':show_nianhao}" v-model="selected_2" @click="chaodai_tip()" @change="nianhao_tip()">
                     <option v-for="item in year_data" v-bind:value="{id:item.item_2_id,option:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
 
                 <label class="zxw-font-sixteen">年份：</label>
-                <input type="text" class="zxw-time-select zxw-time-input" v-model="year_number" v-bind:disabled="selected_2.option === ''">
+                <input type="text" id="year" class="zxw-time-select zxw-time-input" v-bind:class="{'zxw-input-chinese':show_year}" v-model="year_number" @focus="nianhao_tip()" v-bind="get_month">
 
                 <label class="zxw-font-sixteen">月：</label>
-                <select  class="zxw-time-select" v-model="selected_3">
-                    <option v-for="item in month_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}" v-bind:disabled="year_number === ''">{{item.chinese_name}}</option>
+                <select  class="zxw-time-select" v-model="selected_3" v-bind:class="{'zxw-input-chinese':show_month}" @click="year_tip()" @change="get_day()">
+                    <option v-for="item in month_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
 
                 <label class="zxw-font-sixteen">日：</label>
-                <select  class="zxw-time-select" v-model="selected_4">
-                    <option v-for="item in day_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}" v-bind:disabled="selected_3.option === ''||selected_3.option === '-'">{{item.chinese_name}}</option>
+                <select  class="zxw-time-select" v-model="selected_4" @click="month_tip()">
+                    <option v-for="item in day_data" v-bind:value="{id:item.item_1_id,option:item.chinese_name}">{{item.chinese_name}}</option>
                 </select>
 
                 <button class="zxw-time-add" v-bind:disabled="selected_1.option === ''" @click="add_time()">添加</button>
@@ -65,6 +65,10 @@
             {"model_id|1": 1,
                 "item_2_id|3": 3,
                 "chinese_name": "明朝"
+            },
+            {"model_id|1": 1,
+                "item_2_id|4": 4,
+                "chinese_name": "-"
             }
         ]
     });
@@ -86,6 +90,48 @@
         ]
     });
 
+    Mock.mock('/ancient_books/get_menu_items.action?model_id=26&&item_1_id=0&&item_2_id=0','get', {
+        "g":[
+            {"model_id|1": 1,
+                "item_1_id|1": 1,
+                "chinese_name": "一月"
+            },
+            {"model_id|1": 1,
+                "item_1_id|2": 2,
+                "chinese_name": "二月"
+            },
+            {"model_id|1": 1,
+                "item_1_id|3": 3,
+                "chinese_name": "三月"
+            },
+            {"model_id|1": 1,
+                "item_1_id|4": 3,
+                "chinese_name": "-"
+            }
+        ]
+    });
+
+    Mock.mock('/ancient_books/get_menu_items.action?model_id=27&&item_1_id=0&&item_2_id=0','get', {
+        "g":[
+            {"model_id|1": 1,
+                "item_1_id|1": 1,
+                "chinese_name": "1"
+            },
+            {"model_id|1": 1,
+                "item_1_id|2": 2,
+                "chinese_name": "2"
+            },
+            {"model_id|1": 1,
+                "item_1_id|3": 3,
+                "chinese_name": "3"
+            },
+            {"model_id|1": 1,
+                "item_1_id|4": 3,
+                "chinese_name": "-"
+            }
+        ]
+    });
+
     Mock.mock('/ancient_books/get_time_by_chinese_name.action','post', {
         "status|200":200,
         "result|1":1,
@@ -100,8 +146,6 @@
     export default{
         created(){
             this.get_menu();
-            this.get_month();
-            this.get_day();
         },
         components:{
             modal
@@ -136,7 +180,11 @@
               day_data:[],
               time_data:{},
               time_object:{},
-              chaodai_data:''
+              chaodai_data:'',
+              show_chaodai:false,
+              show_nianhao:false,
+              show_year:false,
+              show_month:false
           }
         },
 
@@ -203,6 +251,7 @@
 
             get_year(){
                 if(this.selected_1.option !== ''){
+                    this.show_chaodai=false;
                     this.year_data.splice(0,this.year_data.length);
                     let new_year_url = this.menu_url+'?model_id=25'+'&&item_1_id='+this.selected_1.id+'&&item_2_id=0';
                     let year_object = {};
@@ -225,11 +274,6 @@
                 console.log("获取月份失败");
             },
 
-            get_month(){
-                let new_month_url = this.menu_url+'?model_id=26&&item_1_id=0&&item_2_id=0';
-                let month_object = {};
-                this.http_json(new_month_url,'get',month_object,this.success_month,this.fail_month);
-            },
 
             /*日期下拉框*/
             success_day(response){
@@ -247,10 +291,16 @@
             },
 
             get_day(){
-                //日期id
-                let new_day_url = this.menu_url+'?model_id=27&&item_1_id=0&&item_2_id=0';
-                let day_object = {};
-                this.http_json(new_day_url,'get',day_object,this.success_day,this.fail_day);
+                if(this.selected_3.option !== ''&& this.day_data.length===0){
+                    //日期id
+                    let new_day_url = this.menu_url+'?model_id=27&&item_1_id=0&&item_2_id=0';
+                    let day_object = {};
+                    this.http_json(new_day_url,'get',day_object,this.success_day,this.fail_day);
+                }else if(this.selected_3.option === '-'){
+                    this.selected_4.id=0;
+                    this.selected_4.option='';
+                    this.day_data.splice(0,this.day_data.length);
+                }
             },
 
             /*关联时间本体*/
@@ -267,6 +317,11 @@
 
             add_time(){
                 let time_object = {};
+                if(this.selected_3.option === '-'){
+                    this.selected_3.option = '';
+                    this.selected_3.id = 0;
+                    this.month_data.splice(0,this.month_data.length);
+                }
                 if(this.selected_1.option !== ''){
                     if(this.selected_2.option === '-'){
                         this.time_object.standard_name = this.selected_1.option+this.year_number+this.selected_3.option+this.selected_4.option;
@@ -281,6 +336,58 @@
                     this.$store.commit("post_chaodai_data",this.selected_1.option);
                     console.log('time_object:'+JSON.stringify(this.time_object));
                     this.http_json(this.time_url,'post',this.time_object,this.success_time,this.fail_time);
+                }
+            },
+
+            chaodai_tip(){
+                if(this.selected_1.option ===''){
+                    this.show_chaodai=true;
+                }else{
+                    this.show_chaodai=false;
+                }
+            },
+
+            nianhao_tip(){
+                if(this.selected_2.option ===''){
+                    this.show_nianhao=true;
+                    document.getElementById("year").disabled=true;
+                }else{
+                    this.show_nianhao=false;
+                    document.getElementById("year").disabled=false;
+                }
+            },
+
+            year_tip(){
+                if(this.year_number ===''){
+                    this.show_year=true;
+                }else{
+                    this.show_year=false;
+                }
+            },
+
+            month_tip(){
+                if(this.selected_3.option ===''){
+                    this.show_month=true;
+                }else{
+                    this.show_month=false;
+                }
+            }
+        },
+
+        computed:{
+            get_month(){
+                if(this.year_number ===''){
+                    this.selected_3.option = '';
+                    this.selected_3.id = 0;
+                    this.month_data.splice(0,this.month_data.length);
+                    this.selected_4.option = '';
+                    this.selected_4.id = 0;
+                    this.day_data.splice(0,this.day_data.length);
+                }else if(this.year_number !== ''&&this.month_data.length === 0){
+                    this.show_year=false;
+                    let new_month_url = this.menu_url+'?model_id=26&&item_1_id=0&&item_2_id=0';
+                    let month_object = {};
+                    this.http_json(new_month_url,'get',month_object,this.success_month,this.fail_month);
                 }
             }
         }

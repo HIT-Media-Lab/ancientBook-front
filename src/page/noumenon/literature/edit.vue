@@ -183,7 +183,7 @@
     import search_modal from '../../../component/search_noumenon.vue';
     import repeat_modal from '../../../component/repeat_modal.vue';
     import warning_modal from '../../../component/warning_noumenon.vue';
-    import div_edit from '../../../component/warning_noumenon.vue';
+    import div_edit from '../../../component/div_edit.vue';
     export default{
         created(){
             this.get_lit_info();

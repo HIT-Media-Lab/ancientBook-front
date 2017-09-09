@@ -52,10 +52,10 @@
 
         <div class="zxw-character-row">
             <label class="zxw-character-span">月：</label>
-            <input type="text" class=" zxw-display-list-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_2_month.chinese_name === null">
+            <input type="text" class=" zxw-display-list-margin zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_2_month.chinese_name === ''">
             <input type="text" class="zxw-character-input-content zxw-display-list-margin" readonly v-model="g_month" v-else>
             <label class="zxw-character-span">日：</label>
-            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_2_day.chinese_name === null">
+            <input type="text" class="zxw-character-input-content zxw-null" readonly value="不详" v-if="this.$store.getters.get_build_time.selected_2_day.chinese_name === ''">
             <input type="text" class="zxw-character-input-content" readonly v-model="g_day" v-else>
         </div>
 
@@ -149,29 +149,52 @@
             },
 
             open_confirm(){
+                if(this.$store.getters.get_build_time.selected_1_month.chinese_name === '-'){
+                    this.create_time.yue=0;
+                }else{
+                    this.create_time.yue = this.$store.getters.get_build_time.selected_1_month.item_1_id;
+                }
+
+                if(this.$store.getters.get_build_time.selected_1_day.chinese_name === '-'){
+                    this.create_time.ri=0;
+                }else{
+                    this.create_time.ri = this.$store.getters.get_build_time.selected_1_day.item_1_id;
+                }
+
+                if(this.$store.getters.get_build_time.selected_2_month.chinese_name === '-'){
+                    this.create_time.g_yue=0;
+                }else{
+                    this.create_time.g_yue = this.$store.getters.get_build_time.selected_2_month.item_1_id;
+                }
+
+                if(this.$store.getters.get_build_time.selected_2_day.chinese_name === '-'){
+                    this.create_time.g_ri=0;
+                }else{
+                    this.create_time.g_ri = this.$store.getters.get_build_time.selected_1_day.item_1_id;
+                }
                 this.create_time.standard_name = this.$store.getters.get_build_time.standard_name;
                 this.create_time.chaodai = this.$store.getters.get_build_time.selected_chaodai.item_1_id;
                 this.create_time.nianhao = this.$store.getters.get_build_time.selected_nianhao.item_2_id;
                 this.create_time.nianfen = this.$store.getters.get_build_time.year;
-                this.create_time.ri = this.$store.getters.get_build_time.selected_1_day.item_1_id;
-                this.create_time.yue = this.$store.getters.get_build_time.selected_1_month.item_1_id;
                 this.create_time.ganzhi = this.$store.getters.get_build_time.selected_ganzhi.item_1_id;
                 this.create_time.juedui = parseInt(this.$store.getters.get_build_time.juedui);
                 this.create_time.gongyuan = parseInt(this.$store.getters.get_build_time.g_year);
-                this.create_time.g_yue = this.$store.getters.get_build_time.selected_2_month.item_1_id;
-                this.create_time.g_ri = this.$store.getters.get_build_time.selected_2_day.item_1_id;
-                this.create_time.g_yue = this.$store.getters.get_build_time.selected_2_month.item_1_id;
                 this.create_time.english = this.$store.getters.get_build_time.english;
                 this.create_time.jieqi = this.$store.getters.get_build_time.selected_jieqi;
                 this.http_json(this.create_time_url,'post',this.create_time,this.success_create,this.fail_create);
             },
 
             g_month_day(){
-                if(this.$store.getters.get_build_time.selected_2_month.chinese_name !== ''){
+                if(this.$store.getters.get_build_time.selected_2_month.chinese_name !== ''&& this.$store.getters.get_build_time.selected_2_month.chinese_name !== '-'){
                     this.g_month = this.$store.getters.get_build_time.selected_2_month.chinese_name+'月'
+                } else if(this.$store.getters.get_build_time.selected_2_month.chinese_name === '-'){
+                    this.g_month = this.$store.getters.get_build_time.selected_2_month.chinese_name;
                 }
-                if(this.$store.getters.get_build_time.selected_2_day.chinese_name !== ''){
+
+                if(this.$store.getters.get_build_time.selected_2_day.chinese_name !== '' && this.$store.getters.get_build_time.selected_2_day.chinese_name !== '-'){
                     this.g_day = this.$store.getters.get_build_time.selected_2_day.chinese_name+'日'
+                }else if(this.$store.getters.get_build_time.selected_2_day.chinese_name === '-'){
+                    this.g_day = this.$store.getters.get_build_time.selected_2_day.chinese_name;
                 }
             }
         }
