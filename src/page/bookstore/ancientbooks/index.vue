@@ -449,7 +449,7 @@
                                 <span>{{item.book_name}}</span>
                             </div>
                             <div>
-                                <a v-for="volume in book_all_info.catalogue[index].volume" @click="go_to(item.book_count,volume.volume_count,volume.begin_page)">卷{{volume.volume_count}}</a>
+                                <a class="ry-menu" v-for="volume in book_all_info.catalogue[index].volume" @click="go_to(item.book_count,volume.volume_count,volume.begin_page)">卷{{volume.volume_count}}</a>
                             </div>
                         </div>
                     </div>
@@ -802,5 +802,9 @@
         background-position: center;
         background-repeat: repeat-y;
         background-size: 100%;
+    }
+
+    .ry-menu{
+        margin-right: 30px;
     }
 </style>

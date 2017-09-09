@@ -3,7 +3,7 @@
 
         <!--目录-->
         <div class="width1000 center">
-            <p>{{page_info.bu_name}}/{{page_info.lei_name}}/<span style="color: red">{{page_info.shu_name}}</span>/<span style="color: red">{{page_info.name}}</span>/册{{page_info.ce}}{{page_info.book_name}}/卷{{page_info.juan}}</p>
+            <p>{{page_info.bu_name}}/{{page_info.lei_name}}/<a style="color: red" @click="go_to_shu()">{{page_info.shu_name}}</a>/<a style="color: red" @click="go_to_book()">{{page_info.name}}</a>/册{{page_info.ce}}{{page_info.book_name}}/卷{{page_info.juan}}</p>
             <img src="../assets/img/no-use-picture/ink-line-long.png" height="7" width="974"/>
         </div>
 
@@ -497,6 +497,29 @@
 
             fail_get_mark() {
                 console.log("fail get marks!");
+            },
+
+
+            /**
+             * 通过属名称跳转到输的内容
+             */
+            go_to_shu(){
+                this.$router.push({name:'sort_book',params:{
+                    bu : this.page_info.bu,
+                    lei : this.page_info.lei,
+                    shu : this.page_info.shu,
+                    pageId : 1
+                }})
+            },
+
+
+            /**
+             * 通过古籍名称跳转到古籍目录页
+             */
+            go_to_book(){
+                this.$router.push({name:'book_info',params:{
+                    ancient_book_id : this.ancient_book_id
+                }})
             },
 
 
@@ -1856,7 +1879,6 @@
 
     .ry-modal-menu{
         width: 450px;
-        height: 450px;
         background-color: white;
     }
 
