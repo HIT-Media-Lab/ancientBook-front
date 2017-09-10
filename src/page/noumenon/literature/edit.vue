@@ -1036,7 +1036,7 @@
 
             /*完成修改*/
             finish_edit(){
-                if(this.lit_content.type_name === ''||this.show_type_name === true|| this.all_must_write !== 0||this.summary_error === true||this.explain_error === true||this.repeat_id === ''){
+                if(this.lit_content.type_name === ''||this.show_type_name === true|| this.all_must_write !== 0||this.summary_error === true||this.explain_error === true||this.repeat_id !== ''){
                     this.show_next_step = true;
                 } else{
                     let edit_object={};

@@ -49,7 +49,7 @@
 
             <div class="zxw-character-row">
                 <label class="zxw-character-span">绝对日号：</label>
-                <input type="text" id="juedui" class="zxw-character-input zxw-edit-character-input-margin zxw-input-placeholder" placeholder="请输入数字" v-bind:class="{'zxw-border-warning':show_input}" v-model="juedui" onfocus="placeholder=''" @blur="juedui_number()">
+                <input type="text" id="juedui" class="zxw-character-input zxw-edit-character-input-margin zxw-input-placeholder" placeholder="请输入数字" v-bind:class="{'zxw-border-warning':show_input}" v-model="juedui" onfocus="placeholder=''" @mouseout="juedui_number()">
 
                 <label class="zxw-character-span">公元年份：</label>
                 <input type="text" id="g_year" class="zxw-character-input zxw-input-placeholder" placeholder="请输入数字" :class="{'zxw-border-warning':show_g_year}" v-model="g_year" onfocus="placeholder=''" @blur="g_year_number()">
@@ -381,7 +381,7 @@
             },
 
             finish_edit(){
-                if(this.selected_chaodai.chinese_name === ''||this.show_input === true||this.repeat_id !== ''||this.show_g_year === true){
+                if(this.selected_chaodai.chinese_name === ''||(this.show_input === true&&this.juedui !== '')||this.repeat_id !== ''||(this.show_g_year === true&&this.g_year !== '')){
                     this.show_next_step=true;
                 } else{
                     let edit_object={};

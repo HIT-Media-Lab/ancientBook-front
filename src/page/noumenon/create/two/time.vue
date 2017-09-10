@@ -629,7 +629,7 @@
 
             /*下一步*/
             next_step(){
-                if(this.input_time.selected_chaodai.chinese_name === ''||this.show_input === true||this.repeat_id !== ''||this.show_g_year === true){
+                if(this.input_time.selected_chaodai.chinese_name === ''||(this.show_input === true && this.input_time.juedui !== '')||this.repeat_id !== ''||(this.show_g_year === true && this.input_time.g_year !== '')){
                     this.show_next_step=true;
                 }else{
                     this.$store.commit("get_create_time",this.input_time);

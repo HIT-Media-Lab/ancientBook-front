@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    /*let Mock = require('mockjs');
+    let Mock = require('mockjs');
     Mock.mock('/ancient_books/get_menu_items.action?model_id=25&&item_1_id=0&&item_2_id=0','get', {
         "g":[
             {"model_id|1": 1,
@@ -140,7 +140,7 @@
 
      Mock.mock('/ancient_books/getToken.action','get', {
         "token|100":100,
-    });*/
+    });
 
     import modal from '../component/modal.vue'
     export default{
@@ -322,6 +322,13 @@
                     this.selected_3.id = 0;
                     this.month_data.splice(0,this.month_data.length);
                 }
+
+                if(this.selected_4.option === '-'){
+                    this.selected_4.option = '';
+                    this.selected_4.id = 0;
+                    this.day_data.splice(0,this.day_data.length);
+                }
+
                 if(this.selected_1.option !== ''){
                     if(this.selected_2.option === '-'){
                         this.time_object.standard_name = this.selected_1.option+this.year_number+this.selected_3.option+this.selected_4.option;
