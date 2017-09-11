@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    let Mock = require('mockjs');
+    /*let Mock = require('mockjs');
     Mock.mock('/ancient_books/get_menu_items.action?model_id=25&&item_1_id=0&&item_2_id=0','get', {
         "g":[
             {"model_id|1": 1,
@@ -140,7 +140,7 @@
 
      Mock.mock('/ancient_books/getToken.action','get', {
         "token|100":100,
-    });
+    });*/
 
     import modal from '../component/modal.vue'
     export default{
