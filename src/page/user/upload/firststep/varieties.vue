@@ -227,6 +227,9 @@
 
         beforeRouteLeave (to, from, next) {
             this.varieties_item.varieties_responsibility[0].action_value = document.getElementsByClassName("ry-v-action")[0].options[document.getElementsByClassName("ry-v-action")[0].selectedIndex].text;
+            if (document.getElementsByClassName("ry-v-action")[1]){
+                this.varieties_item.varieties_responsibility[1].action_value = document.getElementsByClassName("ry-v-action")[1].options[document.getElementsByClassName("ry-v-action")[1].selectedIndex].text;
+            }
             this.$store.commit("get_varieties_contents",this.varieties_item);
             this.selections_variety();
             next();

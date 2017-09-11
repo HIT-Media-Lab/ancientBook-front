@@ -193,6 +193,9 @@
 
         beforeRouteLeave (to, from, next) {
             this.copy_item.copy_responsibility[0].action_value = document.getElementsByClassName("ry-c-action")[0].options[document.getElementsByClassName("ry-c-action")[0].selectedIndex].text;
+            if (document.getElementsByClassName("ry-c-action")[1]){
+                this.copy_item.copy_responsibility[1].action_value = document.getElementsByClassName("ry-c-action")[1].options[document.getElementsByClassName("ry-c-action")[1].selectedIndex].text;
+            }
             this.$store.commit("get_copy_contents",this.copy_item);
             this.selections_copy();
             next();

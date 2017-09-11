@@ -168,6 +168,9 @@
 
         beforeRouteLeave (to, from, next) {
             this.impression_item.impression_responsibility[0].action_value = document.getElementsByClassName("ry-i-action")[0].options[document.getElementsByClassName("ry-i-action")[0].selectedIndex].text;
+            if (document.getElementsByClassName("ry-i-action")[1]){
+                this.impression_item.impression_responsibility[1].action_value = document.getElementsByClassName("ry-i-action")[1].options[document.getElementsByClassName("ry-i-action")[1].selectedIndex].text;
+            }
             this.$store.commit("get_impression_contents",this.impression_item);
             this.selections_impression();
             next();
