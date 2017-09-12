@@ -22,10 +22,10 @@
             </div>
         </div>
 
-        <div class="width800 center ry-form-upload">
+        <div class="width950 center">
 
             <!--4层导航按钮-->
-            <div class="ry-menu-bar">
+            <div class="ry-menu-bar ry-border-top">
                 <ul id="layer-head">
                     <li id="layer-head-variety" @click="click_variety"><span v-show="variety_text">品种层</span><img v-show="variety_pic" src="../../../../assets/img/picture-button/variety.png" height="31" width="134"/></li>
                     <li id="layer-head-edition" @click="click_edition"><span v-show="edition_text">版本层</span><img v-show="edition_pic" src="../../../../assets/img/picture-button/edition.png" height="30" width="133"/></li>
@@ -34,7 +34,7 @@
                 </ul>
             </div>
 
-            <div id="layer-body" class="ry-form-body">
+            <div id="layer-body" class="ry-border-center1">
 
                 <!--品种层-->
                 <div id="variety-layer" class="layer-input div-now">
@@ -767,16 +767,19 @@
                     </div>
                 </div>
 
+                <div class="div-now">
+                    <h3>古籍简介</h3>
+                    <p>{{book_all_info.summary}}</p>
+                </div>
+                <div class="div-now">
+                    <label class="ry-pri-label1"><input id="ry-one-pri" type="checkbox" name="private" class="ry-check-pri">私密上传</label>
+                    <button class="ry-btn-keep-modify" @click="next_page">继续编辑图文</button>
+                    <button class="ry-btn-next-step" @click="confirm_modify">确定</button>
+                </div>
             </div>
-            <div>
-                <h3>古籍简介</h3>
-                <p>{{book_all_info.summary}}</p>
-            </div>
-            <div>
-                <button class="float-right ry-btn-next-step" @click="confirm_modify">确定</button>
-                <button class="float-right ry-btn-keep-modify" @click="next_page">继续编辑图文</button>
-                <label class="float-right"><input id="ry-one-pri" type="checkbox" name="private" class="ry-check-pri">私密上传</label>
-            </div>
+
+            <div class="ry-border-bottom"></div>
+
         </div>
 
     </div>
@@ -2382,6 +2385,10 @@
         width: 142px;
         height: 47px;
         background-image: url("../../../../assets/img/button/build-button.png");
+    }
+
+    .ry-pri-label1{
+        margin-left: 430px;
     }
 </style>
 
