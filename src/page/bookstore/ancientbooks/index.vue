@@ -537,16 +537,16 @@
                     this.book_all_info = response.body;
                     this.book_info_split = response.body.standard_name.split('(');
                     if (this.book_info_split.length > 1){
-                        this.book_info1 = '(' + this.book_info_split[1];
-                        this.book_info2 = '(' + this.book_info_split[2];
-                        this.book_info3 = '(' + this.book_info_split[3];
-                        this.book_info4 = '(' + this.book_info_split[4];
+                        this.book_info1 = '(' + this.book_info_split[1] + '(' + this.book_info_split[2];
+                        this.book_info2 = '(' + this.book_info_split[3] + '(' + this.book_info_split[4];
+                        this.book_info3 = '(' + this.book_info_split[5] + '(' + this.book_info_split[6];
+                        this.book_info4 = '(' + this.book_info_split[7] + '(' + this.book_info_split[8];
                     }else {
                         this.book_info_split = response.body.content[i].standard_name.split('（');
-                        this.book_info1 = '（' + this.book_info_split[1];
-                        this.book_info2 = '（' + this.book_info_split[2];
-                        this.book_info3 = '（' + this.book_info_split[3];
-                        this.book_info4 = '（' + this.book_info_split[4];
+                        this.book_info1 = '（' + this.book_info_split[1] + '（' + this.book_info_split[2];
+                        this.book_info2 = '（' + this.book_info_split[3] + '（' + this.book_info_split[4];
+                        this.book_info3 = '（' + this.book_info_split[5] + '（' + this.book_info_split[6];
+                        this.book_info4 = '（' + this.book_info_split[7] + '（' + this.book_info_split[8];
                     }
 
                     var get_obj1 = {};
