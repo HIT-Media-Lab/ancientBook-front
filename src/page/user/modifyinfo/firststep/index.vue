@@ -966,7 +966,6 @@
                 console.log ("success get first layer info");
                 this.first_layer_info = response.body;
                 this.create_vresponsibility_info();
-                this.default_selections_variety();
             },
 
             fail_get_first_layer_info() {
@@ -981,12 +980,6 @@
                 console.log ("success get 3 layers info");
                 this.three_layers_info = response.body;
                 this.edition_responsibility_info();
-                this.impression_responsibility_info();
-                this.copy_responsibility_info();
-                this.create_3responsibility_info();
-                this.default_selections_edition();
-                this.default_selections_impression();
-                this.default_selections_copy();
             },
 
             fail_get_three_layers_info() {
@@ -1532,6 +1525,9 @@
                     if (this.three_layers_info.responsibility_infos[i].level == 2) {
                         vm.edition_responsibility.push(this.three_layers_info.responsibility_infos[i])
                     }
+                    if (i == this.three_layers_info.responsibility_infos.length - 1){
+                        this.impression_responsibility_info()
+                    }
                 }
             },
 
@@ -1541,6 +1537,9 @@
                     if (this.three_layers_info.responsibility_infos[i].level == 3) {
                         vm.impression_responsibility.push(this.three_layers_info.responsibility_infos[i])
                     }
+                    if (i == this.three_layers_info.responsibility_infos.length - 1){
+                        this.copy_responsibility_info()
+                    }
                 }
             },
 
@@ -1549,6 +1548,9 @@
                 for (var i = 0; i < this.three_layers_info.responsibility_infos.length; i++) {
                     if (this.three_layers_info.responsibility_infos[i].level == 4) {
                         vm.copy_responsibility.push(this.three_layers_info.responsibility_infos[i])
+                    }
+                    if (i == this.three_layers_info.responsibility_infos.length - 1){
+                        this.create_3responsibility_info()
                     }
                 }
             },
@@ -1593,6 +1595,7 @@
                         value_add : true,
                         value_del : true,
                     });
+                    this.default_selections_variety();
                 }
             },
 
@@ -1636,6 +1639,7 @@
                         value_add : true,
                         value_del : true,
                     });
+                    this.default_selections_edition();
                 }
 
                 var length3 = vm.impression_responsibility.length;
@@ -1671,6 +1675,7 @@
                         value_add : true,
                         value_del : true,
                     });
+                    this.default_selections_impression();
                 }
 
                 var length4 = vm.copy_responsibility.length;
@@ -1706,6 +1711,7 @@
                         value_add : true,
                         value_del : true,
                     });
+                    this.default_selections_copy();
                 }
             },
 
