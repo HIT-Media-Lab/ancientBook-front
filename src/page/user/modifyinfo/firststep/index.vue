@@ -1432,6 +1432,7 @@
                 for (var j = 0; j < confirms.length; j ++) {
                     confirms[j].selectedIndex = vm.first_layer_info.responsibility_infos[j].confirm - 1;
                 }
+                console.log("default_selections_variety")
             },
 
             default_selections_edition() {
@@ -1469,6 +1470,7 @@
                 for (var j = 0; j < confirms.length; j ++) {
                     confirms[j].selectedIndex = vm.edition_responsibility[j].confirm - 1;
                 }
+                console.log("default_selections_edition")
             },
 
             default_selections_impression() {
@@ -1490,6 +1492,7 @@
                 for (var j = 0; j < confirms.length; j ++) {
                     confirms[j].selectedIndex = vm.impression_responsibility[j].confirm - 1;
                 }
+                console.log("default_selections_impression")
             },
 
             default_selections_copy() {
@@ -1513,6 +1516,7 @@
                 for (var j = 0; j < confirms.length; j ++) {
                     confirms[j].selectedIndex = vm.copy_responsibility[j].confirm - 1;
                 }
+                console.log("default_selections_copy")
             },
 
 
