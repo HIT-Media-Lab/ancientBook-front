@@ -1527,7 +1527,6 @@
                 var vm = this;
                 for (var i = 0; i < this.three_layers_info.responsibility_infos.length; i++) {
                     if (this.three_layers_info.responsibility_infos[i].level == 2) {
-                        alert("1");
                         vm.edition_responsibility.push(this.three_layers_info.responsibility_infos[i])
                     }
                     if (i == this.three_layers_info.responsibility_infos.length - 1){
@@ -1540,7 +1539,6 @@
                 var vm = this;
                 for (var i = 0; i < this.three_layers_info.responsibility_infos.length; i++) {
                     if (this.three_layers_info.responsibility_infos[i].level == 3) {
-                        alert("2");
                         vm.impression_responsibility.push(this.three_layers_info.responsibility_infos[i])
                     }
                     if (i == this.three_layers_info.responsibility_infos.length - 1){
@@ -1553,7 +1551,6 @@
                 var vm = this;
                 for (var i = 0; i < this.three_layers_info.responsibility_infos.length; i++) {
                     if (this.three_layers_info.responsibility_infos[i].level == 4) {
-                        alert("3");
                         vm.copy_responsibility.push(this.three_layers_info.responsibility_infos[i])
                     }
                     if (i == this.three_layers_info.responsibility_infos.length - 1){
