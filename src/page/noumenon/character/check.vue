@@ -38,7 +38,7 @@
 </template>
 
 <script>
-    let Mock = require('mockjs');
+    /*let Mock = require('mockjs');
 
     Mock.mock('/ancient_books/getNLocationCatalogue.action?id=1&&type=1','get',{
         'n_name':'李世明（1996）',
@@ -99,7 +99,7 @@
 
     Mock.mock('/ancient_books/getToken.action','get', {
         "token|100":100,
-    });
+    });*/
 
     import noumenon_title from '../../../component/noumenon-title.vue';
     import delete_modal from '../../../component/delete_modal.vue';
