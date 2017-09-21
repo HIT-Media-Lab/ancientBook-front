@@ -85,9 +85,6 @@
         },
         watch:{
             $route(){
-//                this.$route.params.bu_id = 0;
-//                this.$route.params.lei_id = 0;
-//                this.$route.params.shu_id = 0;
                 this.item.bu = 0;
                 this.item.lei = 0;
                 this.item.shu = 0;
@@ -141,21 +138,22 @@
              选择类后,实时更新属
              */
             go_item_3(){
-                this.item_2_id = this.select_2.id;
-                this.item_name.lei = this.select_2.name;
-                this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + this.item_1_id + '&&item_2_id=' + this.item_2_id;
-                this.http_json(this.id,'get',this.id,this.success3, this.fail3);
-                this.item.lei = this.item_2_id;
-                this.select_3 = {id: 'shu', name: ''};
+                if (this.item_name.bu == ''){
+                    this.$router.push({name: 'book_recent', params: {}})
+                }else {
+                    this.item_2_id = this.select_2.id;
+                    this.item_name.lei = this.select_2.name;
+                    this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + this.item_1_id + '&&item_2_id=' + this.item_2_id;
+                    this.http_json(this.id,'get',this.id,this.success3, this.fail3);
+                    this.item.lei = this.item_2_id;
+                    this.select_3 = {id: 'shu', name: ''};
+                }
             },
             success3(response){
                 if (response.body.length == 0){
                     this.item_3_id = 0;
                     this.item.shu = this.item_3_id;
                     this.item_name.shu = '无属';
-//                console.log(this.item.bu);
-//                console.log(this.item.lei);
-//                console.log(this.item.shu);
                     this.$route.params.bu = this.item_name.bu;
                     this.$route.params.lei = this.item_name.lei;
                     this.$route.params.shu = this.item_name.shu;
@@ -180,24 +178,25 @@
              选择属后,实时部类属都返回默认，同时跳转路由
              */
             go_to_sortbook(){
-                this.item_3_id = this.select_3.id;
-                this.item.shu = this.item_3_id;
-                this.item_name.shu = this.select_3.name;
-//                console.log(this.item.bu);
-//                console.log(this.item.lei);
-//                console.log(this.item.shu);
-                this.$route.params.bu = this.item_name.bu;
-                this.$route.params.lei = this.item_name.lei;
-                this.$route.params.shu = this.item_name.shu;
-                this.$route.params.bu_id = this.item.bu;
-                this.$route.params.lei_id = this.item.lei;
-                this.$route.params.shu_id = this.item.shu;
-                this.$route.params.pageId = 1;
-                if (this.item.bu != 0 && this.item.lei != 0){
-                    this.select_1 = {id: 'bu', name: ''};
-                    this.select_2 = {id: 'lei', name: ''};
-                    this.select_3 = {id: 'shu', name: ''};
-                    this.$router.push({name: 'sort_book', params: this.$route.params});
+                if (this.item_name.bu == '' || this.item_name.bu == ''){
+                    this.$router.push({name: 'book_recent', params: {}})
+                }else {
+                    this.item_3_id = this.select_3.id;
+                    this.item.shu = this.item_3_id;
+                    this.item_name.shu = this.select_3.name;
+                    this.$route.params.bu = this.item_name.bu;
+                    this.$route.params.lei = this.item_name.lei;
+                    this.$route.params.shu = this.item_name.shu;
+                    this.$route.params.bu_id = this.item.bu;
+                    this.$route.params.lei_id = this.item.lei;
+                    this.$route.params.shu_id = this.item.shu;
+                    this.$route.params.pageId = 1;
+                    if (this.item.bu != 0 && this.item.lei != 0){
+                        this.select_1 = {id: 'bu', name: ''};
+                        this.select_2 = {id: 'lei', name: ''};
+                        this.select_3 = {id: 'shu', name: ''};
+                        this.$router.push({name: 'sort_book', params: this.$route.params});
+                    }
                 }
             }
         }

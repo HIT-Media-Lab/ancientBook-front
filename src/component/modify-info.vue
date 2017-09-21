@@ -149,13 +149,13 @@
                     this.show = false;
                     localStorage.setItem('user', JSON.stringify("guest"));
                     this.$router.push('/login');
-                    bus.$emit('change_name','登录')
+                    bus.$emit('change_name','登录');
                 } else {
-                    alert(response.body.info);
+                    console.log(response.body.info);
                 }
             },
-            confirm_fail(){
-
+            confirm_fail(response){
+                this.warning = response.body.info;
             },
             /**
              * 取消
@@ -322,7 +322,7 @@
         margin-left: 10px
     }
     .j-modify7{
-        margin-left: 85px
+        margin-left: 90px
     }
     .j-modify8{
         margin-left: 10px

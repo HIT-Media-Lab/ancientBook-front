@@ -34,7 +34,12 @@
     import bus from '../../lib/bus'
     export default{
         created(){
-            this.http_json(this.get_info_url, 'get', {}, this.success_info, this.fail_info)
+            this.http_json(this.get_info_url, 'get', {}, this.success_info, this.fail_info);
+        },
+        watch:{
+            $route(){
+                location.reload();
+            }
         },
         data(){
             return{

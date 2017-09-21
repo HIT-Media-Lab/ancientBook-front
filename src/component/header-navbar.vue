@@ -42,7 +42,7 @@
                     </div>
                     <div class="code">
                         <input type="text" placeholder="请输入验证码" class="verification-code-input" v-model="v">
-                        <img src="" id="v_picture" class="code-img" alt="验证码">
+                        <img src="" id="v_picture" class="code-img" >
                         <button class="cover-code" @click="coverCode()" >换一张</button>
                     </div>
                     <div class="auto">
@@ -198,7 +198,7 @@
             },
 
             auto() {
-                this.auto = !this.auto
+                this.auto = !this.auto;
             },
             //登录的回调函数
             login_success(response){
@@ -227,6 +227,7 @@
             //登陆失败函数
             login_fail(response){
                 document.getElementById("v_picture").src = this.code_url + '?' + (new Date()).getTime();
+                this.warning = "账号、密码或验证码有误"
             },
             //点击登录按钮执行函数
             login() {

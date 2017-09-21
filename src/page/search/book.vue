@@ -5,7 +5,7 @@
         <div class="j-searched-book" v-for="item in content">
             <div class="j-shi1">
                 <a>
-                    <img :id="item.id" alt="搜索古籍" class="j-book-img1" @click="go_to_book(item.id)">
+                    <img :id="item.id" alt="搜索古籍图片" class="j-book-img1" @click="go_to_book(item.id)">
                 </a>
                 <div class="j-book1-word">
                     <a>
