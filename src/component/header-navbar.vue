@@ -46,7 +46,7 @@
                         <button class="cover-code" @click="coverCode()" >换一张</button>
                     </div>
                     <div class="auto">
-                        <input type="checkbox" id="save-password"  class="save-password-checkbox" @click="auto()">
+                        <input type="checkbox" id="save_password"  class="save-password-checkbox">
                         <span class="save-password-word" >自动登录</span>
                     </div>
                     <button class="login-button" @click="login()" v-bind:disabled="disabled">登  录</button>
@@ -197,7 +197,7 @@
                 document.getElementById("v_picture").src = this.code_url+'?'+(new Date()).getTime();
             },
 
-            auto() {
+            if_auto(){
                 this.auto = !this.auto;
             },
             //登录的回调函数
@@ -235,6 +235,11 @@
                 this.object.account=this.account;
                 this.object.pwd=this.pwd;
                 this.object.v=this.v;
+                if(document.getElementById('save_password').checkbox.checked==false){
+                    this.auto = false;
+                }else {
+                    this.auto = true;
+                }
                 this.object.auto=this.auto;
                 console.log("全局token"+this.$store.getters.GetToken);
                 // 与后端对接的vue-resource
