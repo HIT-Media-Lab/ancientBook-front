@@ -109,7 +109,7 @@
                 this.print_content();
             },
             fail(){
-                alert("获取信息失败");
+
             },
             /**
              *前往对应的本体详情页面

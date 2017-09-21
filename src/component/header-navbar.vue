@@ -228,7 +228,6 @@
             //登陆失败函数
             login_fail(response){
                 document.getElementById("v_picture").src = this.code_url + '?' + (new Date()).getTime();
-                alert(response.body.info);
             },
             //点击登录按钮执行函数
             login() {

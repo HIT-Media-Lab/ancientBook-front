@@ -113,7 +113,7 @@
                 window.location.reload();
             },
             delete_book_fail(response){
-                alert(response.body.info);
+
             }
         }
     }

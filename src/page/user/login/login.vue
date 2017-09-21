@@ -91,7 +91,7 @@ import store from '../../../store'
                          this.auto_login();
                      }
                  },function () {
-//                 alert("error")
+
                  })
              }
          },
@@ -117,7 +117,7 @@ import store from '../../../store'
                      this.$router.push({path: '/login'});
                  }
              },function () {
-//                 alert("error")
+
              })
          }
      }

@@ -135,7 +135,6 @@
              */
             confirm_sucess(response){
                 if (response.body.result == 1){
-                    alert(response.body.info);
                     this.name = this.new_name;
                     this.new_name = '';
                     this.old_pwd = '';
