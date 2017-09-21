@@ -207,7 +207,7 @@
         <div class="width1000 center">
             <img src="../assets/img/no-use-picture/ink-line-long.png" height="4" width="974"/>
             <div class="ry-bottom-bar">
-                <page_button class="float-right" :max=this.total_page v-on:gotoPage="change_page()"></page_button>
+                <page_button class="float-right" :max=this.total_page></page_button>
                 <button class="ry-btn-menu" @click="catalogue_onclick()">目录</button>
             </div>
         </div>
@@ -317,10 +317,23 @@
 
         watch:{
             $route(){
-                this.book = this.$route.params.book;
-                this.volume = this.$route.params.volume;
-                this.page = this.$route.params.pageId;
                 this.ancient_book_id = this.$route.params.book_name;
+                this.page = this.$route.params.pageId;
+                this.volume = this.$route.params.volume;
+                this.book = this.$route.params.book;
+
+                if (this.book_all_info.catalogue[this.book].volume[this.volume + 1].begin_page == this.page){
+                    this.volume++;
+                    this.$route.params.volume = this.volume;
+                }
+
+                if (this.book_all_info.catalogue[this.book + 1].volume[0].begin_page == this.page){
+                    this.book++;
+                    this.volume++;
+                    this.$route.params.book = this.book;
+                    this.$route.params.volume = this.volume;
+                }
+
                 this.get_page_id();
                 this.get_ancient_books_all_info();
             }
@@ -340,14 +353,6 @@
         },
 
         methods: {
-            /**
-             * 翻页
-             */
-            change_page(){
-
-            },
-
-
             /**
              * 获取page_id
              */

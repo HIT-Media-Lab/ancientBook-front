@@ -514,18 +514,22 @@
                 var lei = document.getElementById("ry-select-l");
                 var lei_index = lei.selectedIndex;
                 var lei_text = lei.options[lei_index].text;
-                for (var m = 0; m < this.lei_items.length; m++){
-                    if (lei_text == this.lei_items[m].chinese_name){
-                        this.varieties_item.type_lei = this.lei_items[m].item_2_id;
+                if (lei_text){
+                    for (var m = 0; m < this.lei_items.length; m++){
+                        if (lei_text == this.lei_items[m].chinese_name){
+                            this.varieties_item.type_lei = this.lei_items[m].item_2_id;
+                        }
                     }
                 }
 
                 var shu = document.getElementById("ry-select-s");
                 var shu_index = shu.selectedIndex;
                 var shu_text = shu.options[shu_index].text;
-                for (var n = 0; n < this.shu_items.length; n++){
-                    if (shu_text == this.shu_items[n].chinese_name){
-                        this.varieties_item.type_shu = this.shu_items[n].item_3_id;
+                if (shu_text){
+                    for (var n = 0; n < this.shu_items.length; n++){
+                        if (shu_text == this.shu_items[n].chinese_name){
+                            this.varieties_item.type_shu = this.shu_items[n].item_3_id;
+                        }
                     }
                 }
 
