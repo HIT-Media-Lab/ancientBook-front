@@ -1063,7 +1063,7 @@
                                 end_time_id:this.lit_content.varieties_arr[i].end_time_id,
                                 action:this.lit_content.varieties_arr[i].selected_action.item_1_id,
                                 explain:this.lit_content.varieties_arr[i].explain,
-                                confirm:this.lit_content.varieties_arr[i].confirm,
+                                confirm:this.lit_content.varieties_arr[i].selected_confirm.item_1_id,
                                 type:this.lit_content.varieties_arr[i].selected_type_name.item_1_id,
                                 level:1,
                                 order:this.lit_content.varieties_arr[i].order
@@ -1077,7 +1077,7 @@
                                 end_time_id:this.lit_content.varieties_arr[i].end_time_id,
                                 action:this.lit_content.varieties_arr[i].selected_action.item_1_id,
                                 explain:this.lit_content.varieties_arr[i].explain,
-                                confirm:this.lit_content.varieties_arr[i].confirm,
+                                confirm:this.lit_content.varieties_arr[i].selected_confirm.item_1_id,
                                 type:this.lit_content.varieties_arr[i].selected_type_name.item_1_id,
                                 level:1,
                                 order:this.lit_content.varieties_arr[i].order

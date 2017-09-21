@@ -354,7 +354,7 @@
             },
 
             finish_edit(){
-                if(this.input_content.selected_course.chinese_name === ''||this.input_content.terms_name === ''|| this.show_input === true|| this.repeat_id !== ''){
+                if(this.selected_course.chinese_name === ''||this.input_content.terms_name === ''|| this.show_input === true|| this.repeat_id !== ''){
                     this.show_next_step=true;
                 } else if((this.add_data[0].remark_name === ''&& this.add_data[0].remark !== '')||(this.add_data[1] !== undefined && this.add_data[1].remark_name === '' && this.add_data[1].remark !=='')){
                     this.show_next_2 = true;

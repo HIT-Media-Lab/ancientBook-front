@@ -146,7 +146,6 @@
     export default{
         created(){
             this.show_ins();
-            this.get_ins_type();
         },
 
         components:{
@@ -227,7 +226,8 @@
                 show_repeat:false,
                 repeat_id:'',
                 repeat_noumenon:'机构本体',
-                modify_url:'/ancient_books/modify_institution_by_id.action'
+                modify_url:'/ancient_books/modify_institution_by_id.action',
+                edit_object:{}
             }
         },
         methods:{
@@ -277,7 +277,7 @@
                 this.input_content.ins_name = response.body.name;
                 this.input_content.english = response.body.english;
                 this.input_content.other_name = response.body.other_name;
-                this.input_content.type_number = response.body.type;
+                this.input_content.type_number.id = response.body.type;
                 this.input_content.chief_office_id = response.body.chief_office_id;
                 this.input_content.chief_office_name = response.body.chief_office_name;
                 this.input_content.vice_office_id = response.body.vice_office_id;
@@ -302,6 +302,7 @@
                         remark:response.body.remark_2
                     })
                 }
+                this.get_ins_type();
                 console.log('input_content: '+JSON.stringify(this.input_content));
                 console.log('add_data: '+JSON.stringify(this.add_data));
             },
@@ -323,6 +324,11 @@
                         id:response.body[i].item_1_id,
                         option:response.body[i].chinese_name
                     })
+                }
+                for(let m = 0;m < this.input_content.type.length;m++){
+                    if(this.input_content.type_number.id === this.input_content.type[m].id){
+                        this.input_content.type_number.option = this.input_content.type[m].option;
+                    }
                 }
             },
 
@@ -488,7 +494,6 @@
             finish_edit(){
                 if(this.input_content.begin_time_name === ''|| this.input_content.end_time_name === ''||this.input_content.ins_name === ''|| this.show_input === true|| this.repeat_id !== ''){
                     this.show_next_step = true;
-
                 } else if((this.add_data[0].remark_name === ''&& this.add_data[0].remark !== '')||(this.add_data[1] !== undefined && this.add_data[1].remark_name === '' && this.add_data[1].remark !=='')){
                   this.show_next_2 = true;
 
@@ -500,24 +505,22 @@
                         this.input_content.remark_2_name = this.add_data[1].remark_name ;
                         this.input_content.remark_2 = this.add_data[1].remark ;
                     }
-
-                    let edit_object={};
-                    edit_object.id=this.$route.params.nouId;
-                    edit_object.standard_name = this.input_content.standard_name;
-                    edit_object.institution_name = this.input_content.ins_name;
-                    edit_object.type=this.input_content.type_number.id;
-                    edit_object.english=this.input_content.english;
-                    edit_object.other_name=this.input_content.other_name;
-                    edit_object.begin_time_id=this.input_content.begin_time_id;
-                    edit_object.end_time_id=this.input_content.end_time_id;
-                    edit_object.remark_1_name=this.input_content.remark_1_name;
-                    edit_object.remark_2_name=this.input_content.remark_2_name;
-                    edit_object.remark_1=this.input_content.remark_1;
-                    edit_object.remark_2=this.input_content.remark_2;
-                    edit_object.chief_office_id=this.input_content.chief_office_id;
-                    edit_object.vice_office_id=this.input_content.vice_office_id;
-                    edit_object.parent_body_id=this.input_content.parent_body_id;
-                    this.http_json(this.modify_url,'post',edit_object,this.success_modify_ins,this.fail_modify_ins);
+                    this.edit_object.id=this.$route.params.nouId;
+                    this.edit_object.standard_name = this.input_content.standard_name;
+                    this.edit_object.institution_name = this.input_content.ins_name;
+                    this.edit_object.type=this.input_content.type_number.id;
+                    this.edit_object.english=this.input_content.english;
+                    this.edit_object.other_name=this.input_content.other_name;
+                    this.edit_object.begin_time_id=this.input_content.begin_time_id;
+                    this.edit_object.end_time_id=this.input_content.end_time_id;
+                    this.edit_object.remark_1_name=this.input_content.remark_1_name;
+                    this.edit_object.remark_2_name=this.input_content.remark_2_name;
+                    this.edit_object.remark_1=this.input_content.remark_1;
+                    this.edit_object.remark_2=this.input_content.remark_2;
+                    this.edit_object.chief_office_id=this.input_content.chief_office_id;
+                    this.edit_object.vice_office_id=this.input_content.vice_office_id;
+                    this.edit_object.parent_body_id=this.input_content.parent_body_id;
+                    this.http_json(this.modify_url,'post',this.edit_object,this.success_modify_ins,this.fail_modify_ins);
                 }
             },
 

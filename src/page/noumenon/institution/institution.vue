@@ -99,7 +99,6 @@
         "remark_2": "三省六部",
         "remark_1_name": "",
         "remark_2_name": "谏书"
-
     });*/
 
     import noumenon_title from '../../../component/noumenon-title.vue';
