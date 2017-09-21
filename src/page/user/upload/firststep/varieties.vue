@@ -453,6 +453,7 @@
                 }
                 else {
                     for (var j = 0; j <= response.body.length-1; j++) {
+                        this.lei_items = [];
                         this.lei_items.push({
                             chinese_name: response.body[j].chinese_name
                         });
@@ -480,6 +481,7 @@
                 }
                 else {
                     for (var j = 0; j <= response.body.length-1; j++) {
+                        this.shu_items = [];
                         this.shu_items.push({
                             chinese_name: response.body[j].chinese_name
                         });
