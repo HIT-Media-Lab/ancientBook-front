@@ -75,7 +75,6 @@
             }else {
                 this.show_bar = true;
             }
-
             bus.$on('toggleLoading', (show) =>{
                 this.showloading = show;
             });
