@@ -197,9 +197,6 @@
                 document.getElementById("v_picture").src = this.code_url+'?'+(new Date()).getTime();
             },
 
-            if_auto(){
-                this.auto = !this.auto;
-            },
             //登录的回调函数
             login_success(response){
                 if (response.body.su == 1) {
@@ -235,7 +232,7 @@
                 this.object.account=this.account;
                 this.object.pwd=this.pwd;
                 this.object.v=this.v;
-                if(document.getElementById('save_password').checkbox.checked==false){
+                if(document.getElementById('save_password').checked==false){
                     this.auto = false;
                 }else {
                     this.auto = true;
