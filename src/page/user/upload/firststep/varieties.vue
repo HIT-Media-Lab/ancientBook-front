@@ -230,8 +230,8 @@
             if (document.getElementsByClassName("ry-v-action")[1]){
                 this.varieties_item.varieties_responsibility[1].action_value = document.getElementsByClassName("ry-v-action")[1].options[document.getElementsByClassName("ry-v-action")[1].selectedIndex].text;
             }
-            this.$store.commit("get_varieties_contents",this.varieties_item);
             this.selections_variety();
+            this.$store.commit("get_varieties_contents",this.varieties_item);
             next();
         },
 
@@ -478,6 +478,7 @@
                 //将后端数据显示在前端页面里
                 if (response.body.length === 0) {
                     console.log ("没有返回数组！");
+                    this.shu_items = [];
                 }
                 else {
                     this.shu_items = [];
