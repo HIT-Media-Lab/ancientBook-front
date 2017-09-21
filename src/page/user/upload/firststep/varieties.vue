@@ -455,6 +455,7 @@
                     this.lei_items = [];
                     for (var j = 0; j <= response.body.length-1; j++) {
                         this.lei_items.push({
+                            item_2_id: response.body[j].item_2_id,
                             chinese_name: response.body[j].chinese_name
                         });
                     }
@@ -484,6 +485,7 @@
                     this.shu_items = [];
                     for (var j = 0; j <= response.body.length-1; j++) {
                         this.shu_items.push({
+                            item_3_id: response.body[j].item_3_id,
                             chinese_name: response.body[j].chinese_name
                         });
                     }
@@ -504,15 +506,28 @@
                 var type_level = document.getElementById("ry-type-level");
                 var type_level_index = type_level.selectedIndex;
                 this.varieties_item.type_level = type_level_index + 1;
+
                 var bu = document.getElementById("ry-select-b");
                 var bu_index = bu.selectedIndex;
                 this.varieties_item.type_bu = bu_index + 1;
+
                 var lei = document.getElementById("ry-select-l");
                 var lei_index = lei.selectedIndex;
-                this.varieties_item.type_lei = lei_index + 1;
+                var lei_text = lei.options[lei_index].text;
+                for (var m = 0; m < this.lei_items.length; m++){
+                    if (lei_text == this.lei_items[m].chinese_name){
+                        this.varieties_item.type_lei = this.lei_items[m].item_2_id;
+                    }
+                }
+
                 var shu = document.getElementById("ry-select-s");
                 var shu_index = shu.selectedIndex;
-                this.varieties_item.type_shu = shu_index + 1;
+                var shu_text = shu.options[shu_index].text;
+                for (var n = 0; n < this.shu_items.length; n++){
+                    if (shu_text == this.shu_items[n].chinese_name){
+                        this.varieties_item.type_shu = this.shu_items[n].item_3_id;
+                    }
+                }
 
                 var types = document.getElementsByClassName("ry-v-type");
                 for (var i = 0; i < types.length; i++) {

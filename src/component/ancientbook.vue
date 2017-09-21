@@ -207,7 +207,7 @@
         <div class="width1000 center">
             <img src="../assets/img/no-use-picture/ink-line-long.png" height="4" width="974"/>
             <div class="ry-bottom-bar">
-                <page_button class="float-right" :max=this.total_page></page_button>
+                <page_button class="float-right" :max=this.total_page v-on:gotoPage="change_page()"></page_button>
                 <button class="ry-btn-menu" @click="catalogue_onclick()">目录</button>
             </div>
         </div>
@@ -340,6 +340,14 @@
         },
 
         methods: {
+            /**
+             * 翻页
+             */
+            change_page(){
+
+            },
+
+
             /**
              * 获取page_id
              */
