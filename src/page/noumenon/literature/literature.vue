@@ -69,7 +69,7 @@
 
                             <div class="zxw-lit-layer">
                                 <label class="zxw-lit-type-label">责任者名称：</label>
-                                <button class="zxw-lit-info zxw-lit-type-label-margin" v-model="item.name_standard_name">{{item.name_standard_name}}</button>
+                                <button class="zxw-lit-info zxw-lit-type-label-margin" v-model="item.name_name">{{item.name_name}}</button>
                                 <label class="zxw-lit-type-label">责任行为：</label>
                                 <p class="zxw-lit-info" v-model="item.action_name">{{item.action_name}}</p>
                             </div>

@@ -64,6 +64,7 @@
             gotoPage(){
                 this.$route.params.pageId = this.cur_page;
                 this.$router.push({name: this.$route.name, params: this.$route.params});
+                this.$emit('gotoPage');
             }
         }
     }

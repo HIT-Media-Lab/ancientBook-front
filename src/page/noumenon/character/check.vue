@@ -41,9 +41,44 @@
     /*let Mock = require('mockjs');
 
     Mock.mock('/ancient_books/getNLocationCatalogue.action?id=1&&type=1','get',{
-        'n_name':'李世明（1996）',
+        'n_name':'李世民(1996)',
         'content':[
-
+            {
+                "ancient_book_name":"全唐书",
+                "id":"123456789",
+                "book|1":1,
+                "book_name":"册一"
+            },
+            {
+                "ancient_book_name":"全唐书",
+                "id":"123456789",
+                "book|2":2,
+                "book_name":"册二"
+            },
+            {
+                "ancient_book_name":"诗经",
+                "id":"123",
+                "book|5":5,
+                "book_name":"册五"
+            },
+            {
+                "ancient_book_name":"诗经",
+                "id":"123",
+                "book|6":6,
+                "book_name":"册六"
+            },
+            {
+                "ancient_book_name":"春秋",
+                "id":"456",
+                "book|7":1,
+                "book_name":"册七"
+            },
+            {
+                "ancient_book_name":"新唐书",
+                "id":"789",
+                "book|41":41,
+                "book_name":"册四十一"
+            }
         ]
     });
 
@@ -77,7 +112,7 @@
             'page_id|1':1,
             'content':'锄禾日当午',
             'target':'当午',
-            'volume|1':1
+            'volume|3':1
         }]
     });
 
@@ -88,7 +123,7 @@
             'page_id|1':1,
             'content':'大范甘迪很高评价分行贷款',
             'target':'甘迪',
-            'volume|1':1
+            'volume|4':1
         }]
     });
 
