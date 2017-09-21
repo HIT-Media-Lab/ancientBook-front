@@ -76,6 +76,9 @@
             this.item_1_id = 1;
             this.item_2_id = 1;
             this.item_3_id = 1;
+            this.select_1 = {id: 'bu', name: ''};
+            this.select_2 = {id: 'lei', name: ''};
+            this.select_3 = {id: 'shu', name: ''};
             this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + 0 + '&&item_2_id=' + 0;
             this.http_json(this.id,'get',{}, this.success1, this.fail1);   // 得到部的下拉框内容
             this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + 1 + '&&item_2_id=' + 0;
@@ -85,6 +88,9 @@
         },
         watch:{
             $route(){
+                console.log(this.$route.params.bu);
+                console.log(this.$route.params.lei);
+                console.log(this.$route.params.shu);
                 this.item.bu = 0;
                 this.item.lei = 0;
                 this.item.shu = 0;
@@ -97,6 +103,9 @@
                 this.item_1_id = 1;
                 this.item_2_id = 1;
                 this.item_3_id = 1;
+                this.select_1 = {id: 'bu', name: ''};
+                this.select_2 = {id: 'lei', name: ''};
+                this.select_3 = {id: 'shu', name: ''};
                 this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + 0 + '&&item_2_id=' + 0;
                 this.http_json(this.id,'get',{}, this.success1, this.fail1);
                 this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + 1 + '&&item_2_id=' + 0;
