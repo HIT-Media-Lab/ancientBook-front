@@ -201,7 +201,8 @@
             login_success(response){
                 if (response.body.su == 1) {
                     localStorage.setItem('user',JSON.stringify("admin"));
-                    this.$router.push({path: '/admin'});
+                    this.$route.params.pageId = 1;
+                    this.$router.push({name: 'admin', params: this.$route.params});
                     console.log("登录成功后的全局Token"+this.$store.getters.GetToken);
                     this.name = response.body.name;
                     this.account = '';
