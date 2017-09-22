@@ -322,16 +322,16 @@
                 this.volume = this.$route.params.volume;
                 this.book = this.$route.params.book;
 
-                if (this.book_all_info.catalogue[this.book]){
-                    if (this.book_all_info.catalogue[this.book].volume[this.volume + 1].begin_page == this.page){
+                if (this.book_all_info.catalogue[this.book - 1]){
+                    if (this.book_all_info.catalogue[this.book - 1].volume[this.volume].begin_page == this.page){
                         this.volume++;
                         this.$route.params.volume = this.volume;
                     }
                 }
 
 
-                if (this.book_all_info.catalogue[this.book + 1]){
-                    if (this.book_all_info.catalogue[this.book + 1].volume[0].begin_page == this.page){
+                if (this.book_all_info.catalogue[this.book]){
+                    if (this.book_all_info.catalogue[this.book].volume[0].begin_page == this.page){
                         this.book++;
                         this.volume++;
                         this.$route.params.book = this.book;
