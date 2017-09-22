@@ -3,6 +3,7 @@
     <div class="all">
         <recent_title class="j-private-bar" :title="this.title"></recent_title>
         <div class="j-private">
+            <p class="j-none--pri" v-show="none_pri_book" v-model="none_pri_book">无 私 密 古 籍 上 传 记 录</p>
             <div class="j-private-div" v-for="(item,index) in content" :id = "index">
                 <div  v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                     <!--封面悬浮出现的两个图标-->
@@ -55,7 +56,8 @@
                 total_page: 1,
                 i: 0,
                 content: [],
-                params:{}
+                params:{},
+                none_pri_book: true
             }
         },
         methods:{
@@ -146,5 +148,10 @@
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
         overflow: hidden;
+    }
+    .j-none--pri{
+        margin: 240px auto;
+        width: 600px;
+        font-size: 45px;
     }
 </style>

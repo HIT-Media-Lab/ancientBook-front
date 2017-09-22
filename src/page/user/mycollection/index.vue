@@ -3,6 +3,7 @@
     <div class="all">
         <recent_title class="j-collection-bar" :title="this.title"></recent_title>
         <div class="j-collection">
+            <p class="j-none-collection" v-show="none_c" v-model="none_c">最 近 无 任 何 收 藏 记 录 </p>
             <div class="j-collection-div" v-for="(item,index) in content">
                 <div  v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                     <!--封面悬浮出现的两个图标-->
@@ -55,7 +56,8 @@
                 total_page: 1,
                 i: 0,
                 content: [],
-                params:{}
+                params:{},
+                none_c: true
             }
         },
         methods:{
@@ -76,11 +78,16 @@
                 document.getElementsByClassName('show-edit1')[index].style.opacity = 0;
             },
             collection_success(response){
-                this.total_page = response.body.total_page;
-                this.content = response.body.content;
-                for (let i = 0; i < response.body.content.length; i++){
-                    let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.content[i].ancient_book_id;
-                    this.http_json(item, 'get', item, this.collection_pic_success, this.collection_fail);
+                if (response.body.content.length == 0){
+                    this.none_c = true;
+                }else {
+                    this.none_c = false;
+                    this.total_page = response.body.total_page;
+                    this.content = response.body.content;
+                    for (let i = 0; i < response.body.content.length; i++){
+                        let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.content[i].ancient_book_id;
+                        this.http_json(item, 'get', item, this.collection_pic_success, this.collection_fail);
+                    }
                 }
             },
             /**
@@ -147,5 +154,10 @@
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
         overflow: hidden;
+    }
+    .j-none-collection{
+        margin: 240px auto;
+        width: 590px;
+        font-size: 45px;
     }
 </style>

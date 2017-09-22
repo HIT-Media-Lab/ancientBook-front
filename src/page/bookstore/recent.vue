@@ -2,6 +2,7 @@
 <template>
     <div class="j-recent">
         <recent_title class="j-recent-bar" :title="this.title"></recent_title>
+        <p class="j-read-none" v-show="read_none" v-model="read_none">最 近 无 古 籍 浏 览 记 录</p>
         <div v-for="item in recent_book" class="j-picture-name" >
             <img :id="item.id" class="j-picture all-link" alt="最近古籍图片" @click="push_success(item.id)" >
             <p class="j-pic-p all-link" @click="push_success(item.id)" :title="item.name">{{item.name}}</p>
@@ -43,7 +44,8 @@
                 picture_id_url:'',
                 book_cover:{},
                 length: 0,
-                i: 0
+                i: 0,
+                read_none: true
             }
         },
         methods: {
@@ -54,9 +56,14 @@
             success_id(response){
                 this.recent_book = response.body;
                 this.length = response.body.length;
-                for(let i = 0; i < this.length; i++) {
-                    let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.recent_book[i].id;
-                    this.http_json(item, 'get', item, this.success_page, this.fail_id);
+                if (this.length = 0){
+                    this.read_none = true;
+                }else {
+                    this.read_none = false;
+                    for(let i = 0; i < this.length; i++) {
+                        let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.recent_book[i].id;
+                        this.http_json(item, 'get', item, this.success_page, this.fail_id);
+                    }
                 }
             },
             fail_id(){
@@ -105,5 +112,10 @@
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
         overflow: hidden;
+    }
+    .j-read-none{
+        margin: 150px auto;
+        width: 480px;
+        font-size: 35px;
     }
 </style>

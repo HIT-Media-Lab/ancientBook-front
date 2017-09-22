@@ -718,76 +718,76 @@ Vue.http.interceptors.push((request, next) => {
 /**
  * 用户权限，以及token的更新，用户权限储存在localstorage里
  */
-router.beforeEach( (to, from, next) => {
-    let admin_acl = router.app.$store.getters.ACL_admin;
-    let user_acl = router.app.$store.getters.ACL_user;
-    let guest_acl = router.app.$store.getters.ACL_guest;
-
-    router.app.$http.get('/ancient_books/get_user_info.action').then(function (response) {
-        if (router.app.$store.getters.GetToken == '') {
-            router.app.$http.get('/ancient_books/getToken.action').then(function (response) {
-                console.log("成功得到token");
-                console.log(response.body.token);
-                router.app.$store.commit("change_token", response.body.token);
-                console.log(router.app.$store.getters.GetToken + "刷新得到token");
-            }, function () {
-
-            })
-        }
-        if (response.body.result == 1) {
-            if (response.body.su == 1) {
-                localStorage.setItem('user', JSON.stringify("admin"));
-            } else if (response.body.su == 0) {
-                localStorage.setItem('user', JSON.stringify("user"));
-            }
-            bus.$emit('change_name', response.body.name);
-        } else if (response.body.result == 0) {
-            localStorage.setItem('user', JSON.stringify("guest"));
-            bus.$emit('change_name', '登录');
-        }
-
-        let user_id = JSON.parse(localStorage.getItem('user'));
-        let flag = false;
-        if (user_id == 'guest'){
-            for (let i = 0; i < guest_acl.length; i++) {
-                if (to.name == guest_acl[i]) {
-                    console.log(to.name);
-                    flag = true;
-                    next();
-                    break;
-                }
-            }
-            if (!flag) {
-                flag = true;
-                next('/login');
-            }
-        } else if (user_id == 'user'){
-            for (let i = 0; i < user_acl.length; i++) {
-                if (to.name == user_acl[i]){
-                    console.log(to.name);
-                    flag = true;
-                    next();
-                    break;
-                }
-            }
-        } else if (user_id == 'admin'){
-            for (let i = 0; i < admin_acl.length; i++){
-                if (to.name == admin_acl[i]){
-                    console.log(to.name);
-                    flag = true;
-                    next();
-                    break;
-                }
-            }
-        }
-        if (!flag) {
-            console.log("go to 403");
-            next('/403');
-        }
-    },function () {
-
-    });
-});
+// router.beforeEach( (to, from, next) => {
+//     let admin_acl = router.app.$store.getters.ACL_admin;
+//     let user_acl = router.app.$store.getters.ACL_user;
+//     let guest_acl = router.app.$store.getters.ACL_guest;
+//
+//     router.app.$http.get('/ancient_books/get_user_info.action').then(function (response) {
+//         if (router.app.$store.getters.GetToken == '') {
+//             router.app.$http.get('/ancient_books/getToken.action').then(function (response) {
+//                 console.log("成功得到token");
+//                 console.log(response.body.token);
+//                 router.app.$store.commit("change_token", response.body.token);
+//                 console.log(router.app.$store.getters.GetToken + "刷新得到token");
+//             }, function () {
+//
+//             })
+//         }
+//         if (response.body.result == 1) {
+//             if (response.body.su == 1) {
+//                 localStorage.setItem('user', JSON.stringify("admin"));
+//             } else if (response.body.su == 0) {
+//                 localStorage.setItem('user', JSON.stringify("user"));
+//             }
+//             bus.$emit('change_name', response.body.name);
+//         } else if (response.body.result == 0) {
+//             localStorage.setItem('user', JSON.stringify("guest"));
+//             bus.$emit('change_name', '登录');
+//         }
+//
+//         let user_id = JSON.parse(localStorage.getItem('user'));
+//         let flag = false;
+//         if (user_id == 'guest'){
+//             for (let i = 0; i < guest_acl.length; i++) {
+//                 if (to.name == guest_acl[i]) {
+//                     console.log(to.name);
+//                     flag = true;
+//                     next();
+//                     break;
+//                 }
+//             }
+//             if (!flag) {
+//                 flag = true;
+//                 next('/login');
+//             }
+//         } else if (user_id == 'user'){
+//             for (let i = 0; i < user_acl.length; i++) {
+//                 if (to.name == user_acl[i]){
+//                     console.log(to.name);
+//                     flag = true;
+//                     next();
+//                     break;
+//                 }
+//             }
+//         } else if (user_id == 'admin'){
+//             for (let i = 0; i < admin_acl.length; i++){
+//                 if (to.name == admin_acl[i]){
+//                     console.log(to.name);
+//                     flag = true;
+//                     next();
+//                     break;
+//                 }
+//             }
+//         }
+//         if (!flag) {
+//             console.log("go to 403");
+//             next('/403');
+//         }
+//     },function () {
+//
+//     });
+// });
 
 // 现在我们可以启动应用了！
 // 路由器会创建一个 App 实例，并且挂载到选择符 #app 匹配的元素上。

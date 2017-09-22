@@ -3,6 +3,7 @@
     <div class="all">
         <recent_title class="j-alup-bar" :title="this.title"></recent_title>
         <div class="j-alup">
+            <p class="j-none-book" v-show="none_book" v-model="none_book">无 任 何 古 籍 上 传 记 录</p>
             <div class="j-alupload-div" v-for="(item,index) in content" :id = "index">
                 <div  v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                     <!--封面悬浮出现的两个图标-->
@@ -55,7 +56,8 @@
                 total_page: 1,
                 i: 0,
                 content: [],
-                params:{}
+                params:{},
+                none_book: true
             }
         },
         methods:{
@@ -76,11 +78,16 @@
                 document.getElementsByClassName('show-edit1')[index].style.opacity = 0;
             },
             alup_success(response){
-                this.total_page = response.body.total_page;
-                this.content = response.body.content;
-                for (let i = 0; i < response.body.content.length; i++){
-                    let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.content[i].ancient_book_id;
-                    this.http_json(item, 'get', item, this.up_page_success, this.alup_fail);
+                if (response.body.content.length == 0){
+                    this.none_book = true;
+                }else {
+                    this.none_book = false;
+                    this.total_page = response.body.total_page;
+                    this.content = response.body.content;
+                    for (let i = 0; i < response.body.content.length; i++){
+                        let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.content[i].ancient_book_id;
+                        this.http_json(item, 'get', item, this.up_page_success, this.alup_fail);
+                    }
                 }
             },
             /**
@@ -146,5 +153,10 @@
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
         overflow: hidden;
+    }
+    .j-none-book{
+        margin: 240px auto;
+        width: 600px;
+        font-size: 45px;
     }
 </style>

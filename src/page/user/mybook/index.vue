@@ -5,6 +5,7 @@
         <div class="j-mybook">
             <p class="j-mybook-recent-name">最近</p>
             <div class="j-mybook-recent-img">
+                <p class="j-recent-none" v-show="recent_none" v-model="recent_none">最 近 无 古 籍 上 传 记 录</p>
                 <div class="j-mybook-recent-div" v-for="item in recent_mybook">
                     <img  :id = "item.ancient_book_id" class="j-mybook-recent-img1 all-link" @click="go_to_bookinfo(item.ancient_book_id)">
                     <p class="j-mybook-p all-link" @click="go_to_bookinfo(item.ancient_book_id)" :title="item.name">{{item.name}}</p>
@@ -12,6 +13,7 @@
             </div>
             <p class="j-mybook-recent-name">已上传</p>
             <div class="j-mybook-al-img">
+                <p class="j-recent-none" v-show="al_none" v-model="al_none"> 无 已 上 传 古 籍 记 录</p>
                 <div class="j-mybook-recent-div" v-for="(item,index) in al_up_book">
                     <div v-on:mouseover="show_edit1(index)" v-on:mouseout="shut_edit1(index)">
                         <!--封面悬浮出现的两个图标-->
@@ -31,6 +33,7 @@
             </div>
             <p class="j-mybook-recent-name">私密古籍</p>
             <div class="j-mybook-al-img">
+                <p class="j-recent-none" v-show="pri_none" v-model="pri_none"> 无 私 密 古 籍 上 传 记 录</p>
                 <div class="j-mybook-recent-div" v-for="(item,index) in private_book">
                     <div v-on:mouseover="show_edit2(index)" v-on:mouseout="shut_edit2(index)">
                         <!--封面悬浮出现的两个图标-->
@@ -88,10 +91,13 @@
                 i: 0,
                 j: 0,
                 k: 0,
-                show_more1: true,
-                show_more2: true,
+                show_more1: false,
+                show_more2: false,
                 name: '',
-                params: {}
+                params: {},
+                recent_none: true,
+                al_none: true,
+                pri_none: true
             }
         },
         methods: {
@@ -126,22 +132,32 @@
                 this.$router.push({name: 'alupload', params: this.$route.params});
             },
             recbook_success(response){
-                this.recent_mybook = response.body.content;
-                for (let i = 0; i < response.body.content.length; i++){
-                    let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.recent_mybook[i].ancient_book_id;
-                    this.http_json(item, 'get', item, this.success_page1, this.recbook_fail);
+                if (response.body.content.length == 0){
+                    this.recent_none = true;
+                }else {
+                    this.recent_none = false;
+                    this.recent_mybook = response.body.content;
+                    for (let i = 0; i < response.body.content.length; i++){
+                        let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.recent_mybook[i].ancient_book_id;
+                        this.http_json(item, 'get', item, this.success_page1, this.recbook_fail);
+                    }
                 }
             },
             up_success(response){
                 this.al_up_book = response.body;
-                if (response.body.length == 3){
-                    this.show_more1 = true;
-                }else{
-                    this.show_more1 = false ;
-                }
-                for (let i = 0; i < response.body.length; i++){
-                    let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.al_up_book[i].ancient_book_id;
-                    this.http_json(item, 'get', item, this.success_page2, this.recbook_fail);
+                if (response.body.length == 0){
+                    this.al_none = true;
+                }else {
+                    this.al_none = false;
+                    if (response.body.length == 3){
+                        this.show_more1 = true;
+                    }else{
+                        this.show_more1 = false ;
+                    }
+                    for (let i = 0; i < response.body.length; i++){
+                        let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.al_up_book[i].ancient_book_id;
+                        this.http_json(item, 'get', item, this.success_page2, this.recbook_fail);
+                    }
                 }
             },
             /**
@@ -149,14 +165,19 @@
              */
             private_get_success(response){
                 this.private_book = response.body.content;
-                if (response.body.content.length == 3){
-                    this.show_more2 = true;
+                if (response.body.content.length == 0){
+                    this.pri_none = true;
                 }else {
-                    this.show_more2 = false;
-                }
-                for (let a = 0; a < response.body.content.length; a++){
-                    let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.private_book[a].ancient_book_id;
-                    this.http_json(item, 'get', item, this.success_page3, this.recbook_fail);
+                    this.pri_none = false;
+                    if (response.body.content.length == 3){
+                        this.show_more2 = true;
+                    }else {
+                        this.show_more2 = false;
+                    }
+                    for (let a = 0; a < response.body.content.length; a++){
+                        let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.private_book[a].ancient_book_id;
+                        this.http_json(item, 'get', item, this.success_page3, this.recbook_fail);
+                    }
                 }
             },
             /**
@@ -280,6 +301,12 @@
         background-color: brown;
         opacity:0;
         position:absolute;
+    }
+    .j-recent-none{
+        margin:0 auto;
+        padding-top: 60px;
+        width: 480px;
+        font-size: 35px;
     }
 </style>
 
