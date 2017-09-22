@@ -7,8 +7,8 @@
             <input  type="text" class="text-input" v-model="cur_page" v-bind:disable="ban_3"><span class="zxw-label" v-model="max">/ {{max}}</span>
         </div>
 
-        <button class="btn-pages btn-go"  @click="skiPage()" v-bind:disabled="cur_page > max || cur_page <= 0">GO</button>
-        <button class="btn-pages"   @click="nextPage()" v-bind:disabled="cur_page > max|| cur_page <= 0||ban_2 === true" >下一页</button>
+        <button class="btn-pages btn-go"  @click="skiPage()" v-bind:disabled="cur_page >= max || cur_page <= 0">GO</button>
+        <button class="btn-pages"   @click="nextPage()" v-bind:disabled="cur_page >= max|| cur_page <= 0||ban_2 === true" >下一页</button>
     </div>
 </template>
 
@@ -64,7 +64,6 @@
             gotoPage(){
                 this.$route.params.pageId = this.cur_page;
                 this.$router.push({name: this.$route.name, params: this.$route.params});
-                this.$emit('gotoPage');
             }
         }
     }
