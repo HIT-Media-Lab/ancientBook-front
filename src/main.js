@@ -694,12 +694,12 @@ const router = new VueRouter({
             component:no_right,
             name:'403'
         },
-        {
-            path: '/',
-            component:login,
-            redirect: '/login',  //默认路由
-            name: '/'
-        }
+        // {
+        //     path: '/',
+        //     component:login,
+        //     redirect: '/login',  //默认路由
+        //     name: '/'
+        // }
 
     ]
 });
