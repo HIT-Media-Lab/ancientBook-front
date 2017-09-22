@@ -696,7 +696,9 @@ const router = new VueRouter({
         },
         {
             path: '/',
-            redirect: '/login'  //默认路由
+            component:login,
+            redirect: '/login',  //默认路由
+            name: '/'
         }
 
     ]

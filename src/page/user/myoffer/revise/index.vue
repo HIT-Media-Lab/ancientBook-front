@@ -13,7 +13,7 @@
                 </thead>
                 <tbody>
                 <tr v-for="item in content"> <!--v-for循环数据里的数组数据-->
-                    <td class="j-revise-table all-link" style="width: 400px" :title="item.ancient_book_standard_name" @click="go_to_book(item.page_id, item.ancient_book_standard_name)">{{item.ancient_book_standard_name}}</td>
+                    <td class="j-revise-table all-link" style="width: 400px" :title="item.ancient_book_standard_name" @click="go_to_book(item.page_id)">{{item.ancient_book_standard_name}}</td>
                     <td class="j-revise-table" style="width: 200px" :title="item.version">{{item.version}}</td>
                     <td class="j-revise-table" style="width: 200px" :title="item.time">{{item.time}}</td>
                 </tr>
@@ -56,7 +56,7 @@
                 count: 0,
                 content: [],
                 page_id: '',
-                standard_name: ''
+                ancient_book_id: ''
 
             }
         },
@@ -72,10 +72,9 @@
             /**
              *获取page_id
              */
-            go_to_book(page_id, standard_name){
+            go_to_book(page_id){
                 let url = this.page_id_url + '?page_id=' + page_id;
                 this.page_id = page_id;
-                this.standard_name = standard_name;
                 this.http_json(url, 'get', url, this.page_success, this.page_fail);
             },
             /**
@@ -83,7 +82,7 @@
              */
             page_success(response){
                 this.$route.params.page_id = this.page_id;
-                this.$route.params.book_name = this.standard_name;
+                this.$route.params.book_name = response.body.ancient_book_id;
                 this.$route.params.book = response.body.ce;
                 this.$route.params.volume = response.body.juan;
                 this.$route.params.pageId = response.body.ye;

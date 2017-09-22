@@ -248,7 +248,7 @@
             },
             page_id_success(response){
                 this.$route.params.page_id = this.page_id;
-                this.$route.params.book_name = response.body.name;
+                this.$route.params.book_name = response.body.ancient_book_id;
                 this.$route.params.book = response.body.ce;
                 this.$route.params.volume = response.body.juan;
                 this.$route.params.pageId = response.body.ye;
