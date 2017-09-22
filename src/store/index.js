@@ -25,7 +25,7 @@ const store = new Vuex.Store({
             'alupload','privatebook','collection','offer',
             'ancientbook','comment','revise','edit','mark',
             'build','charactertwo','characterthree','placetwo','placethree','institutiontwo','institutionthree','termstwo','termsthree','officetwo','officethree','littwo','litthree','timetwo','timethree'],
-        acl_admin:['404','403','admin','modify_info'],
+        acl_admin:['404','403','admin','modify_info','/'],
         acl_guest:['login', '404','403','/'],
         a:{},
         menu_items:[],

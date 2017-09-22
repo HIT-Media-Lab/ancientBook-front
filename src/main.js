@@ -728,10 +728,7 @@ router.beforeEach( (to, from, next) => {
     router.app.$http.get('/ancient_books/get_user_info.action').then(function (response) {
         if (router.app.$store.getters.GetToken == '') {
             router.app.$http.get('/ancient_books/getToken.action').then(function (response) {
-                console.log("成功得到token");
-                console.log(response.body.token);
                 router.app.$store.commit("change_token", response.body.token);
-                console.log(router.app.$store.getters.GetToken + "刷新得到token");
             }, function () {
 
             })
