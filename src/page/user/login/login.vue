@@ -109,7 +109,7 @@ import store from '../../../store'
                      if (response.body.su == 1){
                          localStorage.setItem('user',JSON.stringify("admin"));
                          this.$route.params.pageId = 1;
-                         this.$router.push({name: "admin", params: this.$route.params});
+                         this.$router.push({name: 'admin', params: this.$route.params});
                      }
                  }
                  if (response.body.result == 0){
