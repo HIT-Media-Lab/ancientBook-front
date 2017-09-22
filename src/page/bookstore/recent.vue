@@ -56,12 +56,13 @@
             success_id(response){
                 this.recent_book = response.body;
                 this.length = response.body.length;
-                if (response.body.length = 0){
+                if (this.length = 0){
                     this.read_none = true;
                 }else {
                     this.read_none = false;
-                    for(let i = 0; i < response.body.length; i++) {
-                        let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.response.body[i].id;
+                    for(let j = 0; j < this.length; j++) {
+                        let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.recent_book[j].id;
+                        console.log(item);
                         this.http_json(item, 'get', item, this.success_page, this.fail_id);
                     }
                 }
@@ -76,6 +77,7 @@
                 this.picture_id_url = this.picture_url + '?page_id=' + response.body.id;
                 document.getElementById(this.recent_book[this.i].id).setAttribute("src", this.picture_id_url);
                 this.i = this.i + 1;
+                console.log(this.i);
             },
             /**
              * 点击跳转
