@@ -322,55 +322,71 @@
                 this.volume = this.$route.params.volume;
                 this.book = this.$route.params.book;
 
-                if (this.book_all_info.catalogue[this.book - 1].volume[this.volume]){
-                    if (this.book_all_info.catalogue[this.book - 1].volume[this.volume].begin_page == this.page){
-                        this.volume++;
-                        this.$router.push({name:'ancientbook',params:{
-                            book_name : this.ancient_book_id,
-                            book : this.book,
-                            volume : this.volume,
-                            pageId : this.page
-                        }})
+                for (var i = 0; i < this.book_all_info.catalogue.length; i++){
+                    for (var j = 0; j < this.book_all_info.catalogue[i].volume.length; j++){
+                        if (this.book_all_info.catalogue[i].volume[j + 1]){
+                            if (this.page >= this.book_all_info.catalogue[i].volume[j].begin_page && this.page < this.book_all_info.catalogue[i].volume[j + 1].begin_page){
+                                this.volume = j + 1;
+                                this.$router.push({name:'ancientbook',params:{
+                                    book_name : this.ancient_book_id,
+                                    book : this.book,
+                                    volume : this.volume,
+                                    pageId : this.page
+                                }})
+                            }
+                        }
                     }
                 }
 
-                if (this.book_all_info.catalogue[this.book]){
-                    if (this.book_all_info.catalogue[this.book].volume[0].begin_page == this.page){
-                        this.book++;
-                        this.volume++;
-                        this.$router.push({name:'ancientbook',params:{
-                            book_name : this.ancient_book_id,
-                            book : this.book,
-                            volume : this.volume,
-                            pageId : this.page
-                        }})
-                    }
-                }
-
-                if (this.book_all_info.catalogue[this.book - 1].volume[this.volume - 1]){
-                    if (this.book_all_info.catalogue[this.book - 1].volume[this.volume - 1].begin_page - 1 == this.page){
-                        this.volume--;
-                        this.$router.push({name:'ancientbook',params:{
-                            book_name : this.ancient_book_id,
-                            book : this.book,
-                            volume : this.volume,
-                            pageId : this.page
-                        }})
-                    }
-                }
-
-                if (this.book_all_info.catalogue[this.book - 1]){
-                    if (this.book_all_info.catalogue[this.book - 1].volume[0].begin_page - 1 == this.page){
-                        this.volume--;
-                        this.book--;
-                        this.$router.push({name:'ancientbook',params:{
-                            book_name : this.ancient_book_id,
-                            book : this.book,
-                            volume : this.volume,
-                            pageId : this.page
-                        }})
-                    }
-                }
+//                if (this.book_all_info.catalogue[this.book - 1].volume[this.volume]){
+//                    if (this.book_all_info.catalogue[this.book - 1].volume[this.volume].begin_page == this.page){
+//                        this.volume++;
+//                        this.$router.push({name:'ancientbook',params:{
+//                            book_name : this.ancient_book_id,
+//                            book : this.book,
+//                            volume : this.volume,
+//                            pageId : this.page
+//                        }})
+//                    }
+//                }
+//
+//                if (this.book_all_info.catalogue[this.book]){
+//                    if (this.book_all_info.catalogue[this.book].volume[0].begin_page == this.page){
+//                        this.book++;
+//                        this.volume++;
+//                        this.$router.push({name:'ancientbook',params:{
+//                            book_name : this.ancient_book_id,
+//                            book : this.book,
+//                            volume : this.volume,
+//                            pageId : this.page
+//                        }})
+//                    }
+//                }
+//
+//                if (this.book_all_info.catalogue[this.book - 1].volume[this.volume - 1]){
+//                    if (this.book_all_info.catalogue[this.book - 1].volume[this.volume - 1].begin_page - 1 == this.page){
+//                        this.volume--;
+//                        this.$router.push({name:'ancientbook',params:{
+//                            book_name : this.ancient_book_id,
+//                            book : this.book,
+//                            volume : this.volume,
+//                            pageId : this.page
+//                        }})
+//                    }
+//                }
+//
+//                if (this.book_all_info.catalogue[this.book - 1]){
+//                    if (this.book_all_info.catalogue[this.book - 1].volume[0].begin_page - 1 == this.page){
+//                        this.volume--;
+//                        this.book--;
+//                        this.$router.push({name:'ancientbook',params:{
+//                            book_name : this.ancient_book_id,
+//                            book : this.book,
+//                            volume : this.volume,
+//                            pageId : this.page
+//                        }})
+//                    }
+//                }
 
 
                 this.get_page_id();
