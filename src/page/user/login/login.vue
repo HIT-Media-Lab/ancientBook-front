@@ -83,16 +83,15 @@ import store from '../../../store'
          onload_token(){
              if (this.$store.getters.GetToken == ''){
                  this.$http.get('/ancient_books/getToken.action').then(function (response) {
-                     console.log("成功得到token");
-                     console.log(response.body.token);
                      this.$store.commit("change_token",response.body.token);
-                     console.log(this.$store.getters.GetToken + " 第一次获得token");
                      if (this.$store.getters.GetToken != null){
                          this.auto_login();
                      }
                  },function () {
 
                  })
+             }else {
+                 this.auto_login();
              }
          },
 
@@ -108,6 +107,7 @@ import store from '../../../store'
                      }
                      if (response.body.su == 1){
                          localStorage.setItem('user',JSON.stringify("admin"));
+                         console.log("hhh")
                          this.$route.params.pageId = 1;
                          this.$router.push({name: 'admin', params: this.$route.params});
                      }
