@@ -58,7 +58,7 @@
                 console.log(this.recent_book);
                 this.length = response.body.length;
                 console.log(this.length);
-                if (this.length = 0){
+                if (this.length == 0){
                     this.read_none = true;
                 }else {
                     this.read_none = false;
