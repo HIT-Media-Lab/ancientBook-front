@@ -129,16 +129,14 @@
                 this.item_name.bu = this.select_1.name;
                 this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + this.item_1_id + '&&item_2_id=' + 0;
                 this.http_json(this.id,'get',this.id,this.success2, this.fail2);
-                this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + this.item_1_id + '&&item_2_id=' + 1;
-                this.http_json(this.id,'get',{}, this.success3, this.fail3);
                 this.item.bu = this.item_1_id;
                 this.select_2 = {id: 'lei', name: ''};
                 this.select_3 = {id: 'shu', name: ''};
-//                console.log(this.select_1);
             },
             success2(response){
                 this.item_2 = response.body;
-
+                this.id = this.get_item_url + '?model_id=' + 8 + '&&item_1_id=' + this.item_1_id + '&&item_2_id=' + response.body[0].item_2_id;
+                this.http_json(this.id,'get',{}, this.success3, this.fail3);
             },
             fail2(){
                 console.log("获取类失败");
