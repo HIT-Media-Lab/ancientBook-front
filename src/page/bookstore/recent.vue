@@ -55,7 +55,9 @@
             },
             success_id(response){
                 this.recent_book = response.body;
+                console.log(this.recent_book);
                 this.length = response.body.length;
+                console.log(this.length);
                 if (this.length = 0){
                     this.read_none = true;
                 }else {
