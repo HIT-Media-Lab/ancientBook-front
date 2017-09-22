@@ -80,7 +80,7 @@
                 <!--修订记录模态框-->
                 <div>
                     <modal :show_modal.sync = "edit_record_modal" @fireclose = "edit_record_modal = false" class="ry-modal-border">
-                        <div class="width600 dialog-body" slot="body">
+                        <div class="width600 dialog-body ry-scroll" slot="body">
                             <h4 style="text-align: center">修订记录</h4>
                             <div v-for="item in edit_record">
                                 <p>修訂者：{{item.username_edit_record}}</p>
@@ -1917,5 +1917,9 @@
 
     .ry-search-key{
         color: red;
+    }
+
+    .ry-scroll{
+        overflow: auto;
     }
 </style>
