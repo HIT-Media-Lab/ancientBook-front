@@ -56,12 +56,12 @@
             success_id(response){
                 this.recent_book = response.body;
                 this.length = response.body.length;
-                if (this.length = 0){
+                if (response.body.length = 0){
                     this.read_none = true;
                 }else {
                     this.read_none = false;
-                    for(let i = 0; i < this.length; i++) {
-                        let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.recent_book[i].id;
+                    for(let i = 0; i < response.body.length; i++) {
+                        let item = this.picture_page_url + '?book=' + '1' + '&&volume=' + '1' + '&&page=' + '1' + '&&ancient_book_id=' + this.response.body[i].id;
                         this.http_json(item, 'get', item, this.success_page, this.fail_id);
                     }
                 }
