@@ -238,12 +238,12 @@ const router = new VueRouter({
             component:admin,
             name:'admin'
         },
-        {
-            path:'/admin',
-            redirect: '/admin/page/1',
-            component:admin,
-            name:'admin'
-        },
+        // {
+        //     path:'/admin',
+        //     redirect: '/admin/page/1',
+        //     component:admin,
+        //     name:'admin'
+        // },
         {
             path: '/modify_info',
             component: modify_info,
@@ -747,7 +747,6 @@ router.beforeEach( (to, from, next) => {
             localStorage.setItem('user', JSON.stringify("guest"));
             bus.$emit('change_name', '登录');
         }
-
         let user_id = JSON.parse(localStorage.getItem('user'));
         let flag = false;
         if (user_id == 'guest'){
