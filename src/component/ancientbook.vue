@@ -334,11 +334,35 @@
                     }
                 }
 
-
                 if (this.book_all_info.catalogue[this.book]){
                     if (this.book_all_info.catalogue[this.book].volume[0].begin_page == this.page){
                         this.book++;
                         this.volume++;
+                        this.$router.push({name:'ancientbook',params:{
+                            book_name : this.ancient_book_id,
+                            book : this.book,
+                            volume : this.volume,
+                            pageId : this.page
+                        }})
+                    }
+                }
+
+                if (this.book_all_info.catalogue[this.book - 1]){
+                    if (this.book_all_info.catalogue[this.book - 1].volume[this.volume - 1].begin_page - 1 == this.page){
+                        this.volume--;
+                        this.$router.push({name:'ancientbook',params:{
+                            book_name : this.ancient_book_id,
+                            book : this.book,
+                            volume : this.volume,
+                            pageId : this.page
+                        }})
+                    }
+                }
+
+                if (this.book_all_info.catalogue[this.book - 1]){
+                    if (this.book_all_info.catalogue[this.book - 1].volume[0].begin_page - 1 == this.page){
+                        this.volume--;
+                        this.book--;
                         this.$router.push({name:'ancientbook',params:{
                             book_name : this.ancient_book_id,
                             book : this.book,
