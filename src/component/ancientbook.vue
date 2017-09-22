@@ -325,7 +325,12 @@
                 if (this.book_all_info.catalogue[this.book - 1]){
                     if (this.book_all_info.catalogue[this.book - 1].volume[this.volume].begin_page == this.page){
                         this.volume++;
-                        this.$route.params.volume = this.volume;
+                        this.$router.push({name:'ancientbook',params:{
+                            book_name : this.ancient_book_id,
+                            book : this.book,
+                            volume : this.volume,
+                            pageId : this.page
+                        }})
                     }
                 }
 
@@ -334,8 +339,12 @@
                     if (this.book_all_info.catalogue[this.book].volume[0].begin_page == this.page){
                         this.book++;
                         this.volume++;
-                        this.$route.params.book = this.book;
-                        this.$route.params.volume = this.volume;
+                        this.$router.push({name:'ancientbook',params:{
+                            book_name : this.ancient_book_id,
+                            book : this.book,
+                            volume : this.volume,
+                            pageId : this.page
+                        }})
                     }
                 }
 
