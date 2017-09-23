@@ -98,7 +98,7 @@
 
         watch:{
             $route(){
-
+                this.standard_name()
             }
         },
 
