@@ -78,9 +78,16 @@
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">责任地点：</label>
+                    <div class="col-md-2">
+                        <span class="star"></span>
+                        <label>责任者类型：</label>
+                    </div>
                     <div class="col-md-4">
-                        <input readonly @click="open_location()" v-model="item.location">
+                        <select class="ry-c-type" @click="get_index()" @change="change_type()">
+                            <option>不详</option>
+                            <option>责任人</option>
+                            <option>责任机构</option>
+                        </select>
                     </div>
 
                     <div class="col-md-2">
@@ -93,16 +100,9 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-2">
-                        <span class="star"></span>
-                        <label>责任者类型：</label>
-                    </div>
+                    <label class="col-md-2">责任地点：</label>
                     <div class="col-md-4">
-                        <select class="ry-c-type" @click="get_index()" @change="change_type()">
-                            <option>不详</option>
-                            <option>责任人</option>
-                            <option>责任机构</option>
-                        </select>
+                        <input readonly @click="open_location()" v-model="item.location">
                     </div>
 
                     <div class="col-md-2">

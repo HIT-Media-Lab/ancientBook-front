@@ -16,10 +16,10 @@
             <h3 style="display:inline-block" class="float-left">古籍规范名称：</h3>
             <h4 id="bookName" style="display:inline-block" class="float-left ry-book-name">{{ varieties_item.type_name }}</h4>
             <div class="ry-4layers" style="display:inline-block">
-                <p id="v-standard-name">([{{varieties_item.varieties_responsibility[0].end_time}}]{{varieties_item.varieties_responsibility[0].person}}{{varieties_item.varieties_responsibility[0].action_value}})</p>
-                <p id="e-standard-name">([{{edition_item.edition_responsibility[0].end_time}}]{{edition_item.edition_responsibility[0].person}}{{edition_item.edition_responsibility[0].action_value}})</p>
-                <p id="i-standard-name">([{{impression_item.impression_responsibility[0].end_time}}]{{impression_item.impression_responsibility[0].person}}{{impression_item.impression_responsibility[0].action_value}})</p>
-                <p id="c-standard-name">([{{copy_item.copy_responsibility[0].end_time}}]{{copy_item.copy_responsibility[0].person}}{{copy_item.copy_responsibility[0].action_value}})</p>
+                <p id="v-standard-name"><span v-show="v_standard_name">([</span>{{varieties_item.varieties_responsibility[0].end_time}}<span v-show="v_standard_name">]</span>{{varieties_item.varieties_responsibility[0].person}}{{varieties_item.varieties_responsibility[0].action_value}}<span v-show="v_standard_name">)</span></p>
+                <p id="e-standard-name"><span v-show="e_standard_name">([</span>{{edition_item.edition_responsibility[0].end_time}}<span v-show="e_standard_name">]</span>{{edition_item.edition_responsibility[0].person}}{{edition_item.edition_responsibility[0].action_value}}<span v-show="e_standard_name">)</span></p>
+                <p id="i-standard-name"><span v-show="i_standard_name">([</span>{{impression_item.impression_responsibility[0].end_time}}<span v-show="i_standard_name">]</span>{{impression_item.impression_responsibility[0].person}}{{impression_item.impression_responsibility[0].action_value}}<span v-show="i_standard_name">)</span></p>
+                <p id="c-standard-name"><span v-show="c_standard_name">([</span>{{copy_item.copy_responsibility[0].end_time}}<span v-show="c_standard_name">]</span>{{copy_item.copy_responsibility[0].person}}{{copy_item.copy_responsibility[0].action_value}}<span v-show="c_standard_name">)</span></p>
             </div>
         </div>
 
@@ -70,6 +70,10 @@
                     standard_name : '',
                     name : '',
                 },
+                v_standard_name : false,
+                e_standard_name : false,
+                i_standard_name : false,
+                c_standard_name : false,
             }
         },
 
@@ -81,7 +85,7 @@
         },
 
         mounted : function () {
-
+            this.standard_name()
         },
 
         beforeRouteLeave (to, from, next) {
@@ -99,6 +103,22 @@
         },
 
         methods : {
+            standard_name(){
+                if (this.varieties_item.varieties_responsibility[0].end_time != ''){
+                    this.v_standard_name = true;
+                }
+                if (this.edition_item.edition_responsibility[0].end_time != ''){
+                    this.e_standard_name = true;
+                }
+                if (this.impression_item.impression_responsibility[0].end_time != ''){
+                    this.i_standard_name = true;
+                }
+                if (this.copy_item.copy_responsibility[0].end_time != ''){
+                    this.c_standard_name = true;
+                }
+            },
+
+
             get_upload_one_info() {
                 var pri_check = document.getElementById("ry-one-pri");
                 if (pri_check.checked ==true) {

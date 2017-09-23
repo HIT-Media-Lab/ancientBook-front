@@ -976,6 +976,7 @@
                     this.content = text_edit.innerText;
                     this.commit = text.innerText;
                     this.post_update_cm();   //  批量更新批注标记
+                    this.edit_modal = false;
                 }
             },
 
