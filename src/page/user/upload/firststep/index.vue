@@ -15,11 +15,11 @@
         <div class="width950 center">
             <h3 style="display:inline-block" class="float-left">古籍规范名称：</h3>
             <h4 id="bookName" style="display:inline-block" class="float-left ry-book-name">{{ varieties_item.type_name }}</h4>
-            <div class="ry-4layers" style="display:inline-block" @change="standard_name()">
-                <p id="v-standard-name"><span v-show="v_standard_name">([</span>{{varieties_item.varieties_responsibility[0].end_time}}<span v-show="v_standard_name">]</span>{{varieties_item.varieties_responsibility[0].person}}{{varieties_item.varieties_responsibility[0].action_value}}<span v-show="v_standard_name">)</span></p>
-                <p id="e-standard-name"><span v-show="e_standard_name">([</span>{{edition_item.edition_responsibility[0].end_time}}<span v-show="e_standard_name">]</span>{{edition_item.edition_responsibility[0].person}}{{edition_item.edition_responsibility[0].action_value}}<span v-show="e_standard_name">)</span></p>
-                <p id="i-standard-name"><span v-show="i_standard_name">([</span>{{impression_item.impression_responsibility[0].end_time}}<span v-show="i_standard_name">]</span>{{impression_item.impression_responsibility[0].person}}{{impression_item.impression_responsibility[0].action_value}}<span v-show="i_standard_name">)</span></p>
-                <p id="c-standard-name"><span v-show="c_standard_name">([</span>{{copy_item.copy_responsibility[0].end_time}}<span v-show="c_standard_name">]</span>{{copy_item.copy_responsibility[0].person}}{{copy_item.copy_responsibility[0].action_value}}<span v-show="c_standard_name">)</span></p>
+            <div class="ry-4layers" style="display:inline-block">
+                <p id="v-standard-name" @change="standard_name()"><span v-show="v_standard_name">([</span>{{varieties_item.varieties_responsibility[0].end_time}}<span v-show="v_standard_name">]</span>{{varieties_item.varieties_responsibility[0].person}}{{varieties_item.varieties_responsibility[0].action_value}}<span v-show="v_standard_name">)</span></p>
+                <p id="e-standard-name" @change="standard_name()"><span v-show="e_standard_name">([</span>{{edition_item.edition_responsibility[0].end_time}}<span v-show="e_standard_name">]</span>{{edition_item.edition_responsibility[0].person}}{{edition_item.edition_responsibility[0].action_value}}<span v-show="e_standard_name">)</span></p>
+                <p id="i-standard-name" @change="standard_name()"><span v-show="i_standard_name">([</span>{{impression_item.impression_responsibility[0].end_time}}<span v-show="i_standard_name">]</span>{{impression_item.impression_responsibility[0].person}}{{impression_item.impression_responsibility[0].action_value}}<span v-show="i_standard_name">)</span></p>
+                <p id="c-standard-name" @change="standard_name()"><span v-show="c_standard_name">([</span>{{copy_item.copy_responsibility[0].end_time}}<span v-show="c_standard_name">]</span>{{copy_item.copy_responsibility[0].person}}{{copy_item.copy_responsibility[0].action_value}}<span v-show="c_standard_name">)</span></p>
             </div>
         </div>
 
