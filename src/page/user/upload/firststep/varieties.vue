@@ -61,17 +61,17 @@
                 <div class="row">
                     <label class="col-md-2">标准分类：</label>
                     <div class="col-md-3">
-                        <select id="ry-select-b" @change="">
+                        <select id="ry-select-b" @change="get_lei_item()">
                             <option v-for="item in menu_eight">{{item.chinese_name}}</option>
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select id="ry-select-l" @click="get_lei_item()" @change="">
+                        <select id="ry-select-l" @change="get_shu_item()">
                             <option v-for="item in lei_items">{{item.chinese_name}}</option>
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <select id="ry-select-s" @click="get_shu_item()">
+                        <select id="ry-select-s">
                             <option v-for="item in shu_items">{{item.chinese_name}}</option>
                         </select>
                     </div>
@@ -111,9 +111,16 @@
                 </div>
 
                 <div class="row">
-                    <label class="col-md-2">责任地点：</label>
+                    <div class="col-md-2">
+                        <span class="star"></span>
+                        <label>责任者类型：</label>
+                    </div>
                     <div class="col-md-4">
-                        <input readonly @click="open_location()" v-model="item.location">
+                        <select class="ry-v-type" @click="get_index()" @change="change_type()">
+                            <option>不详</option>
+                            <option>责任人</option>
+                            <option>责任机构</option>
+                        </select>
                     </div>
 
                     <div class="col-md-2">
@@ -126,16 +133,9 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-2">
-                        <span class="star"></span>
-                        <label>责任者类型：</label>
-                    </div>
+                    <label class="col-md-2">责任地点：</label>
                     <div class="col-md-4">
-                        <select class="ry-v-type" @click="get_index()" @change="change_type()">
-                            <option>不详</option>
-                            <option>责任人</option>
-                            <option>责任机构</option>
-                        </select>
+                        <input readonly @click="open_location()" v-model="item.location">
                     </div>
 
                     <div class="col-md-2">
@@ -216,6 +216,8 @@
         },
 
         created : function () {
+            this.get_menu_lei();
+            this.get_menu_shu();
             this.get_menu_eight();
             this.get_menu_nine();
             this.varieties_item = this.$store.getters.get_varieties_item;
@@ -438,6 +440,49 @@
                 console.log ("fail get menu eight!");
             },
 
+            get_menu_lei(){
+                var obj = {};
+                var url = '/ancient_books/get_menu_items.action?model_id=8&&item_1_id=1&&item_2_id=0';
+                this.http_json (url , 'get' , obj , this.success_get_menu_lei , this.fail_get_menu_lei);
+            },
+
+            success_get_menu_lei(response){
+                console.log ("成功获得第一组类");
+                //将后端数据显示在前端页面里
+                this.lei_items = [];
+                for (var j = 0; j <= response.body.length-1; j++) {
+                    this.lei_items.push({
+                        item_2_id: response.body[j].item_2_id,
+                        chinese_name: response.body[j].chinese_name
+                    });
+                }
+            },
+
+            fail_get_menu_lei(){
+                console.log ("失败获得第一组类");
+            },
+
+            get_menu_shu(){
+                var obj = {};
+                var url = '/ancient_books/get_menu_items.action?model_id=8&&item_1_id=1&&item_2_id=1';
+                this.http_json (url , 'get' , obj , this.success_get_menu_shu , this.fail_get_menu_shu);
+            },
+
+            success_get_menu_shu(response){
+                console.log ("成功获得第一组属");
+                //将后端数据显示在前端页面里
+                this.shu_items = [];
+                for (var j = 0; j <= response.body.length-1; j++) {
+                    this.shu_items.push({
+                        item_3_id: response.body[j].item_3_id,
+                        chinese_name: response.body[j].chinese_name
+                    });
+                }
+            },
+
+            fail_get_menu_shu(){
+                console.log ("失败获得第一组属");
+            },
 
             get_lei_item() {
                 var bu = document.getElementById("ry-select-b");
@@ -471,6 +516,18 @@
                 var lei = document.getElementById("ry-select-l");
                 var bu_index = bu.selectedIndex + 1;
                 var lei_index = lei.selectedIndex + 1;
+//                if (bu_index == 2){
+//                    lei_index =
+//                }
+//                else if (bu_index == 3){
+//                    lei_index =
+//                }
+//                else if (bu_index == 4){
+//                    lei_index =
+//                }
+//                else if (bu_index == 5){
+//                    lei_index =
+//                }
                 this.http_json ('/ancient_books/get_menu_items.action?model_id=8&&item_1_id=' + bu_index + '&&item_2_id=' + lei_index , 'get' , this.get_shu_items_obj , this.success_get_shu_items , this.fail_get_shu_items);
             },
 
