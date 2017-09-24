@@ -67,7 +67,6 @@
              *对本体进行分类，分组，并按字符串的长短排序
              */
             success_noumenon(response){
-                console.log(response.body.content.length);
                 for (let i = 0 ; i < response.body.content.length; i++){
                     let type = '';
                     if (response.body.content[i].type_id == 1){
@@ -95,10 +94,10 @@
                     })
                 }
                 this.info_num = response.body.content.length;
-                console.log(this.info_num);
+//                console.log(this.info_num);
                 this.total_page = (this.info_num)/20 ;
                 this.total_page = parseInt(this.total_page.toString());
-                console.log( this.total_page);
+//                console.log( this.total_page);
                 if(this.info_num%20 != 0){
                     this.total_page ++;
                 }

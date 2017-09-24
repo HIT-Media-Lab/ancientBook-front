@@ -574,12 +574,11 @@
              * 通过属名称跳转到输的内容
              */
             go_to_shu(){
-                this.$router.push({name:'sort_book',params:{
-                    bu : this.page_info.bu,
-                    lei : this.page_info.lei,
-                    shu : this.page_info.shu,
-                    pageId : 1
-                }})
+                this.$route.params.bu = this.page_info.bu;
+                this.$route.params.lei = this.page_info.lei;
+                this.$route.params.shu = this.page_info.shu;
+                this.$route.params.pageId = 1;
+                this.$router.push({name:'sort_book',params: this.$route.params})
             },
 
 

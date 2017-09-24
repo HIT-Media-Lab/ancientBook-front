@@ -31,11 +31,31 @@
         },
         created(){
             this.i = 0;
+            this.content = [];
+            this.book_info = '';
+            this.book_info_split = [];
+            this.book_info1 = '';
+            this.book_info2 = '';
+            this.book_info3 = '';
+            this.book_info4 = '';
+            this.search_number = 0;
+            this.search_content = '';
+            this.total_page = 1;
             this.get_search();
         },
         watch:{
             $route(){
                 this.i = 0;
+                this.content = [];
+                this.book_info = '';
+                this.book_info_split = [];
+                this.book_info1 = '';
+                this.book_info2 = '';
+                this.book_info3 = '';
+                this.book_info4 = '';
+                this.search_number = 0;
+                this.search_content = '';
+                this.total_page = 1;
                 this.get_search();
             }
         },

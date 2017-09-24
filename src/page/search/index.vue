@@ -4,12 +4,12 @@
         <ul class="nav nav-tabs">
             <li id="j-book-button" class="active" @click="remove_noumenon_link">
                 <a data-toggle="tab">
-                    古籍库
+                    古籍库{{(search_number_book)}}
                 </a>
             </li>
             <li id="j-noumenon-button" @click="remove_book_link">
                 <a data-toggle="tab">
-                    本体库
+                    本体库{{(search_number_noumenon)}}
                 </a>
             </li>
         </ul>
@@ -31,13 +31,45 @@
         },
         data() {
             return{
-
+                search_content: '',
+                search_url: '/ancient_books/get_ancient_books_list_by_name.action',
+                content_url: '/ancient_books/get_all_noumenon_searched.action',
+                search_number_book: 0,
+                search_number_noumenon: 0
+            }
+        },
+        created(){
+            this.search_content = '';
+            this.search_number_book = 0;
+            this.search_number_noumenon = 0;
+            this.search_content = this.$route.params.content;
+            let url = this.search_url + '?name=' + this.search_content + '&&page_count=' + this.$route.params.pageId;
+            this.http_json( url, 'get', url, this.success1, this.fail1);
+            let item = this.content_url + '?name=' + this.$route.params.content;
+            this.http_json(item, 'get', item, this.success_noumenon, this.fail);
+        },
+        watch:{
+            $route(){
+                this.search_content = '';
+                this.search_number_book = 0;
+                this.search_number_noumenon = 0;
+                this.search_content = this.$route.params.content;
+                let url = this.search_url + '?name=' + this.search_content + '&&page_count=' + this.$route.params.pageId;
+                this.http_json( url, 'get', url, this.success1, this.fail1);
+                let item = this.content_url + '?name=' + this.$route.params.content;
+                this.http_json(item, 'get', item, this.success_noumenon, this.fail);
             }
         },
         mounted() {
           this.change_button()
         },
         methods : {
+            success1(response){
+                this.search_number_book = response.body.total_number;
+            },
+            success_noumenon(response){
+                this.search_number_noumenon = response.body.content.length;
+            },
             /**
              * 按钮效果逻辑，以及路由跳转
              */
