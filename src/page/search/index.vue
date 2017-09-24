@@ -3,13 +3,13 @@
     <div class="j-search-all">
         <ul class="nav nav-tabs">
             <li id="j-book-button" class="active" @click="remove_noumenon_link">
-                <a data-toggle="tab">
-                    古籍库{{(search_number_book)}}
+                <a data-toggle="tab" v-model="search_number_book">
+                    古籍库({{search_number_book}})
                 </a>
             </li>
             <li id="j-noumenon-button" @click="remove_book_link">
-                <a data-toggle="tab">
-                    本体库{{(search_number_noumenon)}}
+                <a data-toggle="tab" v-model="search_number_noumenon">
+                    本体库({{(search_number_noumenon)}})
                 </a>
             </li>
         </ul>
