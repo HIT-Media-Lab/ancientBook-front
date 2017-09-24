@@ -588,9 +588,12 @@
              * 通过属名称跳转到输的内容
              */
             go_to_shu(){
-                this.$route.params.bu = this.page_info.bu;
-                this.$route.params.lei = this.page_info.lei;
-                this.$route.params.shu = this.page_info.shu;
+                this.$route.params.bu_id = this.page_info.bu;
+                this.$route.params.lei_id = this.page_info.lei;
+                this.$route.params.shu_id = this.page_info.shu;
+                this.$route.params.bu = this.page_info.bu_name;
+                this.$route.params.lei = this.page_info.lei_name;
+                this.$route.params.shu = this.page_info.shu_name;
                 this.$route.params.pageId = 1;
                 this.$router.push({name:'sort_book',params: this.$route.params})
             },
