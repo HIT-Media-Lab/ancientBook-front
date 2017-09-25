@@ -340,8 +340,8 @@
                         }
 
                         else{
-                            if (this.page >= this.book_all_info.catalogue[i + 1].volume[0].begin_page && this.page < this.book_all_info.catalogue[i + 1].volume[1].begin_page){
-                                this.volume = this.book_all_info.catalogue[i].volume.length + 1;
+                            if (!this.book_all_info.catalogue[i + 1]){
+                                this.volume = j + 1;
                                 this.book = i + 1;
                                 this.$router.push({name:'ancientbook',params:{
                                     book_name : this.ancient_book_id,
