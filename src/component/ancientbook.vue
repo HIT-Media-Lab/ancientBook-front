@@ -407,8 +407,8 @@
 //                    }
 //                }
 
-                this.get_page_id();
-                this.get_ancient_books_all_info();
+//                this.get_page_id();
+//                this.get_ancient_books_all_info();
             }
         },
 
