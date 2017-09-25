@@ -353,6 +353,21 @@
                                 this.get_ancient_books_all_info();
                                 break;
                             }
+                            else{
+                                if (this.page >= this.book_all_info.catalogue[i].volume[j].begin_page && this.page < this.book_all_info.catalogue[i + 1].volume[0].begin_page){
+                                    this.volume = j + 1;
+                                    this.book = i + 1;
+                                    this.$router.push({name:'ancientbook',params:{
+                                        book_name : this.ancient_book_id,
+                                        book : this.book,
+                                        volume : this.volume,
+                                        pageId : this.page
+                                    }});
+                                    this.get_page_id();
+                                    this.get_ancient_books_all_info();
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
