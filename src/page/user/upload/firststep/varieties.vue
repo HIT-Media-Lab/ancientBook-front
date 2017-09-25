@@ -516,18 +516,18 @@
                 var lei = document.getElementById("ry-select-l");
                 var bu_index = bu.selectedIndex + 1;
                 var lei_index = lei.selectedIndex + 1;
-//                if (bu_index == 2){
-//                    lei_index =
-//                }
-//                else if (bu_index == 3){
-//                    lei_index =
-//                }
-//                else if (bu_index == 4){
-//                    lei_index =
-//                }
-//                else if (bu_index == 5){
-//                    lei_index =
-//                }
+                if (bu_index == 2){
+                    lei_index = lei_index + 22
+                }
+                else if (bu_index == 3){
+                    lei_index = lei_index + 38
+                }
+                else if (bu_index == 4){
+                    lei_index = lei_index + 55
+                }
+                else if (bu_index == 5){
+                    lei_index = lei_index + 61
+                }
                 this.http_json ('/ancient_books/get_menu_items.action?model_id=8&&item_1_id=' + bu_index + '&&item_2_id=' + lei_index , 'get' , this.get_shu_items_obj , this.success_get_shu_items , this.fail_get_shu_items);
             },
 
@@ -673,4 +673,5 @@
 
 
 </style>
+
 
