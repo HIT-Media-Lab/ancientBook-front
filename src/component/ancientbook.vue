@@ -327,7 +327,7 @@
                         var key = 0;
                         if (this.book_all_info.catalogue[i].volume[j + 1]){
                             if (this.page >= this.book_all_info.catalogue[i].volume[j].begin_page && this.page < this.book_all_info.catalogue[i].volume[j + 1].begin_page){
-                                this.volume = j + 1;
+                                this.volume = this.book_all_info.catalogue[i].volume[j].volume_count;
                                 this.$router.push({name:'ancientbook',params:{
                                     book_name : this.ancient_book_id,
                                     book : this.book,
@@ -343,7 +343,7 @@
 
                         else{
                             if (!this.book_all_info.catalogue[i + 1]){
-                                this.volume = j + 1;
+                                this.volume = this.book_all_info.catalogue[i].volume[j].volume_count;
                                 this.book = i + 1;
                                 this.$router.push({name:'ancientbook',params:{
                                     book_name : this.ancient_book_id,
@@ -485,6 +485,9 @@
                 //将后端数据显示在前端页面里
                 if (response.body.content.length === 0) {
                     console.log("没有返回文本");
+                    document.getElementById("text-comment").innerHTML = '';
+                    document.getElementById("text-mark").innerHTML = '';
+                    document.getElementById("ry-edit-text").innerHTML = '';
                 }
                 else {
                     this.content = response.body.content;
