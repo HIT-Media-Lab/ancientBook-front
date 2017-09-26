@@ -115,6 +115,8 @@
                 pictures : [],
                 picture_length : 0,
                 post_index1 : 0,
+
+                page_temp : 0,
             }
         },
 
@@ -673,13 +675,19 @@
                     var first = name.charAt(1);
                     var second = name.charAt(2);
                     var third = name.charAt(3);
-                    var str = first + second + third;
-                    var volume = parseInt(str);
+                    var str1 = first + second + third;
+                    var volume = parseInt(str1);
+
+                    var one = name.charAt(5);
+                    var two = name.charAt(6);
+                    var three = name.charAt(7);
+                    var str2 = one + two + three;
+                    var page = parseInt(str2);
 
                     upload_picture_obj.append('ancient_book_id' , this.ancient_book_id);
                     upload_picture_obj.append('book' , this.post_index1 + 1);
                     upload_picture_obj.append('volume' , volume);
-                    upload_picture_obj.append('page' , temp + 1);
+                    upload_picture_obj.append('page' , page);
                     upload_picture_obj.append('picture' , blob);
 
                     if (this.upload_file[this.post_index1].texts[temp]) {
