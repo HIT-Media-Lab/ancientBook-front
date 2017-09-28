@@ -513,6 +513,7 @@
 
             success_get_comment(response) {
                 console.log("success get comments");
+                this.comment = [];
                 for (var i = 0; i <= response.body.length - 1; i++) {
                     this.comment.push({
                         id_comment: response.body[i].id,
@@ -540,6 +541,7 @@
 
             success_get_mark(response) {
                 console.log("success get marks ");
+                this.mark = [];
                 for (var i = 0; i <= response.body.length - 1; i++) {
                     this.mark.push({
                         id_mark: response.body[i].id,
@@ -1072,6 +1074,7 @@
              */
             btn_confirm_delete_comment_onclick() {
                 this.post_delete_comment();
+                this.get_comment_modal = false;
             },
 
 
@@ -1486,6 +1489,8 @@
              * 将碎片拼接，依次比较对应target，begin，end
              */
             get_mark_change() {
+                this.marks_modify = [];
+                this.marks_delete = [];
                 var text_edit = document.getElementById("text-edit");    //  修订版文本
                 //遍历标记数组
                 var text = '';
@@ -1559,6 +1564,8 @@
              * 将碎片拼接，依次比较对应target，begin，end
              */
             get_comment_change() {
+                this.comments_modify = [];
+                this.comments_delete = [];
                 var text_edit = document.getElementById("text-edit");    //  修订版文本
                 //遍历批注数组
                 var text = '';
