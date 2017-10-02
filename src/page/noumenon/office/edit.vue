@@ -15,7 +15,7 @@
                 <input type="text" class="zxw-character-input  zxw-edit-character-input-margin" v-model="input_content.other_name">
                 <label class="zxw-character-span">隶属机构：</label>
                 <div  class="zxw-character-input">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_content.institution_name !== ''">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_ins = true" @mouseout="show_ins = false" v-if="input_content.institution_name !== ''">
                             <span class="zxw-tag-font" v-model="input_content.institution_name" >{{input_content.institution_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_ins === true" @click="delete_ins()"></button>
@@ -28,7 +28,7 @@
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">起始时间：</label>
                 <div  class="zxw-character-input zxw-edit-character-input-margin">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_content.begin_time_name !== ''">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_begin_time = true" @mouseout="show_begin_time = false" v-if="input_content.begin_time_name !== ''">
                             <span class="zxw-tag-font" v-model="input_content.begin_time_name" >{{input_content.begin_time_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_begin_time===true" @click="delete_begin()"></button>
@@ -38,7 +38,7 @@
                 </div>
                 <label class="zxw-character-span zxw-must-write">终止时间：</label>
                 <div  class="zxw-character-input">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_content.end_time_name !== ''">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_end_time = true" @mouseout="show_end_time = false" v-if="input_content.end_time_name !== ''">
                             <span class="zxw-tag-font" v-model="input_content.end_time_name" >{{input_content.end_time_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_end_time===true" @click="delete_end()"></button>
@@ -52,7 +52,7 @@
             <div class="zxw-character-row">
                 <label class="zxw-character-span">上级职官：</label>
                 <div  class="zxw-character-input  zxw-edit-character-input-margin">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_content.s_office_name !== ''">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_s_office = true" @mouseout="show_s_office = false" v-if="input_content.s_office_name !== ''">
                             <span class="zxw-tag-font" v-model="input_content.s_office_name" >{{input_content.s_office_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_s_office === true" @click="delete_s_office()"></button>

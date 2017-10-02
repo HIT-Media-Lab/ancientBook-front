@@ -66,7 +66,7 @@
                             <div class="zxw-lit-layer">
                                 <label class="zxw-lit-type-label zxw-must-write">责任开始时间:</label>
                                 <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style">
-                                    <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.begin_standard_time !== ''">
+                                    <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span" @mouseover="item.show_begin_time = true" @mouseout="item.show_begin_time = false" v-if="item.begin_standard_time !=='' " v-bind:contenteditable="item.begin_standard_time !== ''" @keydown="down_delete()">
                             <span  class="zxw-tag-font" v-model="item.begin_standard_time">{{item.begin_standard_time}}</span>
                             <button class="zxw-add-hover-img" v-show="item.show_begin_time===true" @click="delete_lit_begin(index)"></button>
@@ -76,7 +76,7 @@
                                 </div>
                                 <label class="zxw-lit-type-label zxw-must-write">责任结束时间:</label>
                                 <div  class="zxw-lit-info zxw-lit-input-style">
-                                    <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.end_standard_time !== ''">
+                                    <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span" @mouseover="item.show_end_time = true" @mouseout="item.show_end_time = false" v-if="item.end_standard_time !== ''" v-bind:contenteditable="item.end_standard_time !== ''" @keydown="down_delete()">
                             <span class="zxw-tag-font" v-model="item.end_standard_time">{{item.end_standard_time}}</span>
                             <button class="zxw-add-hover-img" v-show="item.show_end_time===true" @click="delete_lit_end(index)"></button>
@@ -89,7 +89,7 @@
                             <div class="zxw-lit-layer">
                                 <label class="zxw-lit-type-label">责任地点:</label>
                                 <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style">
-                                    <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.location_standard_name !== ''">
+                                    <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span" @mouseover="item.show_lit_location = true" @mouseout="item.show_lit_location = false" v-if="item.location_standard_name !== ''" v-bind:contenteditable="item.location_standard_name !== ''" @keydown="down_delete()">
                             <span class="zxw-tag-font" v-model="item.location_standard_name">{{item.location_standard_name}}</span>
                             <button class="zxw-add-hover-img" v-show="item.show_lit_location===true" @click="delete_lit_location(index)"></button>
@@ -106,7 +106,7 @@
                             <div class="zxw-lit-layer">
                                 <label class="zxw-lit-type-label zxw-must-write">责任者名称：</label>
                                 <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style" v-if="item.selected_type_name.item_1_id === 2||item.selected_type_name.item_1_id === 0">
-                                    <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.character_standard_name !== ''">
+                                    <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加">
                                         <span class="zxw-person-relation-span" @mouseover="item.show_lit_character = true" @mouseout="item.show_lit_character = false" v-if="item.character_standard_name !== ''" v-bind:contenteditable="item.character_standard_name !== ''" @keydown="down_delete()">
                                             <span class="zxw-tag-font" v-model="item.character_standard_name">{{item.character_standard_name}}</span>
                                             <button class="zxw-add-hover-img" v-show="item.show_lit_character===true" @click="delete_lit_character(index)"></button>
@@ -116,7 +116,7 @@
                                 </div>
 
                                 <div  class="zxw-lit-info zxw-lit-type-label-margin zxw-lit-input-style" v-else-if="item.selected_type_name.item_1_id === 3">
-                                    <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="item.character_standard_name !== ''">
+                                    <div class="zxw-lit-div-input" placeholder="点击右侧按钮添加">
                                         <span class="zxw-person-relation-span" @mouseover="item.show_lit_character = true" @mouseout="item.show_lit_character = false" v-if="item.character_standard_name !== ''" v-bind:contenteditable="item.character_standard_name !== ''" @keydown="down_delete()">
                                             <span class="zxw-tag-font" v-model="item.character_standard_name">{{item.character_standard_name}}</span>
                                             <button class="zxw-add-hover-img" v-show="item.show_lit_character===true" @click="delete_lit_character(index)"></button>

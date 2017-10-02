@@ -30,7 +30,7 @@
             <div class="zxw-character-row">
                 <label class="zxw-character-span zxw-must-write">起始时间：</label>
                 <div  class="zxw-character-input zxw-character-input-margin">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_place.begin_standard_time !== ''">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_begin_time = true" @mouseout="show_begin_time = false" v-if="input_place.begin_standard_time !== ''">
                             <span class="zxw-tag-font" v-model="input_place.begin_standard_time" >{{input_place.begin_standard_time}}</span>
                             <button class="zxw-add-hover-img" v-show="show_begin_time===true" @click="delete_begin()"></button>
@@ -40,7 +40,7 @@
                 </div>
                 <label class="zxw-character-span zxw-must-write">终止时间：</label>
                 <div  class="zxw-character-input">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_place.end_standard_time !== ''">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_end_time = true" @mouseout="show_end_time = false" v-if="input_place.end_standard_time !== ''">
                             <span class="zxw-tag-font" v-model="input_place.end_standard_time" >{{input_place.end_standard_time}}</span>
                             <button class="zxw-add-hover-img" v-show="show_end_time===true" @click="delete_end()"></button>
@@ -53,7 +53,7 @@
             <div class="zxw-character-row">
                 <label class="zxw-character-span">上级地名：</label>
                 <div  class="zxw-character-input zxw-character-input-margin">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_place.s_location_standard_name !== ''">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_s_location = true" @mouseout="show_s_location = false" v-if="input_place.s_location_standard_name !== ''">
                             <span class="zxw-tag-font" v-model="input_place.s_location_standard_name" >{{input_place.s_location_standard_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_s_location===true" @click="delete_s_location()"></button>
@@ -63,7 +63,7 @@
                 </div>
                 <label class="zxw-character-span">下级地名：</label>
                 <div  class="zxw-character-input">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_place.l_location_standard_name !== ''">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_l_location = true" @mouseout="show_l_location = false" v-if="input_place.l_location_standard_name !== ''">
                             <span class="zxw-tag-font" v-model="input_place.l_location_standard_name">{{input_place.l_location_standard_name}}</span>
                             <button class="zxw-add-hover-img" v-show="show_l_location ===true" @click="delete_l_location()"></button>
@@ -76,7 +76,7 @@
             <div class="zxw-character-row">
                 <label class="zxw-character-span">治所：</label>
                 <div  class="zxw-character-input zxw-character-input-margin">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加"  @keydown="down_delete()" v-bind:contenteditable="input_place.seat_standard_name.length !== 0" >
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span" v-for="(item,index) in input_place.seat_standard_name"  @mouseover="show_seat = index" @mouseout="show_seat =-1">
                             <span class="zxw-tag-font">{{item}}</span>
                             <button class="zxw-add-hover-img"  v-show="show_seat === index" @click="delete_seat(index)"></button>
@@ -326,15 +326,6 @@
             close_repeat(){
                 this.show_repeat=false;
             },
-
-            /*治所禁止键盘输入*/
-            down_delete(){
-                let c = event.keyCode;
-                if (c === 8 || c === 46||c===32||c===9||c===12||c===13||c===16||c===17||c===18||c===20||c===27||(c>=32&&c<=36)||c===38||c===40||c===45||(c >= 48 && c <= 57)||(c >= 65 && c <= 90)||(c >= 96 && c <= 123)||(c >= 186 && c <= 192)||(c >= 219 && c <= 222)) {
-                    event.returnValue = false;
-                }
-            },
-
 
             /*起始时间*/
             open_begin(){

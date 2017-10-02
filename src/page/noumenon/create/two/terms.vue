@@ -20,7 +20,7 @@
                 <input type="text" class="zxw-character-input zxw-character-input-margin" value="未有具体数据" readonly>
                 <label class="zxw-character-span">起始时间：</label>
                 <div  class="zxw-character-input">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_terms.begin_standard_time !== ''">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_begin_time = true" @mouseout="show_begin_time = false" v-if="input_terms.begin_standard_time !== ''">
                             <span class="zxw-tag-font" v-model="input_terms.begin_standard_time" >{{input_terms.begin_standard_time}}</span>
                             <button class="zxw-add-hover-img" v-show="show_begin_time===true" @click="delete_begin()"></button>
@@ -33,7 +33,7 @@
             <div class="zxw-character-row">
                 <label class="zxw-character-span">终止时间：</label>
                 <div  class="zxw-character-input zxw-character-input-margin">
-                    <div class="zxw-div-input" placeholder="点击右侧按钮添加" v-bind:contenteditable="input_terms.end_standard_time !== ''">
+                    <div class="zxw-div-input" placeholder="点击右侧按钮添加">
                         <span class="zxw-person-relation-span"  @mouseover="show_end_time = true" @mouseout="show_end_time = false" v-if="input_terms.end_standard_time !== ''">
                             <span class="zxw-tag-font" v-model="input_terms.end_standard_time" >{{input_terms.end_standard_time}}</span>
                             <button class="zxw-add-hover-img" v-show="show_end_time===true" @click="delete_end()"></button>

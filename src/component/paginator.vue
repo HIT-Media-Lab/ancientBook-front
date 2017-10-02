@@ -54,6 +54,7 @@
 
             //跳转页面
             skiPage(){
+                this.cur_page = parseInt(this.cur_page);
                 if(this.cur_page >= 1 && this.cur_page <= this.max ){
                     this.gotoPage();
                 } else {
