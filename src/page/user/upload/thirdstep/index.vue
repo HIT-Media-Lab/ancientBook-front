@@ -17,7 +17,7 @@
                 <div class="ry-picture-box" v-show="item.show">
                     <div class="ry-picture-view ry-fixed">
                         <button class="ry-del-pic" @click="del_picture(index)"><img src="../../../../assets/img/picture-button/add-character-hover.png" height="14" width="15" /></button>
-                        <img :src="item.picture" class="ry-picture-view" @mouseover="view_picture()"/>
+                        <img :src="item.picture" class="ry-picture-view" @click="view_picture()"/>
                     </div>
                     <p class="picture-names" style="text-align: center">{{item.pic_name}}</p>
                 </div>

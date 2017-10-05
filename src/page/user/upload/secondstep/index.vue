@@ -48,7 +48,7 @@
             </div>
 
             <div slot="body" class="zxw-time-body" style="text-align: center">
-                <div style="background-color:white;" class="ry-scroll">
+                <div style="background-color:white;" class="ry-scroll-y ry-height600">
                     <div class="row">
                         <span class="col-md-5">文件名</span>
                         <span class="col-md-3">大小</span>
@@ -631,5 +631,13 @@
         height: 50px;
         margin-right: 20px;
         background-size: 80px 40px;
+    }
+
+    .ry-scroll-y{
+        overflow-y: auto;
+    }
+
+    .ry-height600{
+        height: 600px;
     }
 </style>
