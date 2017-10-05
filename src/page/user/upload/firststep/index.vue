@@ -283,7 +283,7 @@
         margin: 50px;
     }
 
-    #variety#edition#impression#copy input{
+    .form-center input{
         margin: 5px 0px;
         width: 225px;
         height: 33px;
