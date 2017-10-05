@@ -1796,6 +1796,8 @@
         height: 36px;
         border: none;
         padding-left: 4px;
+        -moz-appearance: none;
+        -webkit-appearance: none;
         background-image: url("../assets/img/picture-button/drop-box.png");
     }
 
