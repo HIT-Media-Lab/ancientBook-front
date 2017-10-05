@@ -61,16 +61,14 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star">*</span>
-                        <label>责任开始时间:</label>
+                        <label style="color: red">责任开始时间:</label>
                     </div>
                     <div class="col-md-4">
                         <input readonly @click="open_birth()" v-model="item.begin_time">
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star">*</span>
-                        <label>责任结束时间:</label>
+                        <label style="color: red">责任结束时间:</label>
                     </div>
                     <div class="col-md-4">
                         <input readonly @click="open_dead()" v-model="item.end_time">
@@ -79,8 +77,7 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star">*</span>
-                        <label>责任者类型：</label>
+                        <label style="color: red">责任者类型：</label>
                     </div>
                     <div class="col-md-4">
                         <select class="ry-c-type" @click="get_index()" @change="change_type()">
@@ -91,8 +88,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star">*</span>
-                        <label>责任者名称：</label>
+                        <label style="color: red">责任者名称：</label>
                     </div>
                     <div class="col-md-4">
                         <input readonly @click="open_character()" v-model="item.person">

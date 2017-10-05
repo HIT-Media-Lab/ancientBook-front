@@ -209,7 +209,7 @@
 </script>
 
 <style>
-    #ry-upload1 input{
+    .form-center input{
         border: none;
         background-color: transparent;
         padding-left: 4px;
