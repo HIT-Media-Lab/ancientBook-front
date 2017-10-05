@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div id="ry-upload1" class="width950 center">
+        <div class="width950 center">
             <menuBar class="ry-border-top"></menuBar>
             <div class="ry-border-center">
                 <div id="layer-body" class="ry-form-body">
@@ -209,7 +209,7 @@
 </script>
 
 <style>
-    #variety#edition#impression#copy#book-info input{
+    #book-info input{
         border: none;
         background-color: transparent;
         padding-left: 4px;
@@ -283,7 +283,7 @@
         margin: 50px;
     }
 
-    .form-center input{
+    #variety#edition#impression#copy input{
         margin: 5px 0px;
         width: 225px;
         height: 33px;
