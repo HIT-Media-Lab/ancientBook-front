@@ -209,7 +209,7 @@
 </script>
 
 <style>
-    .form-center input{
+    #variety#edition#impression#copy#book-info input{
         border: none;
         background-color: transparent;
         padding-left: 4px;

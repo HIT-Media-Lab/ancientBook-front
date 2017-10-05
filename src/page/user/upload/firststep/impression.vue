@@ -2,7 +2,7 @@
 
     <!--印次层-->
     <div class="layer-input div-now">
-        <div class="form-center">
+        <div id="impression" class="form-center">
             <div>
                 <div class="row">
                     <label class="col-md-2">印刷类型：</label>

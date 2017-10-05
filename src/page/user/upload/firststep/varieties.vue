@@ -2,7 +2,7 @@
 
     <!--品种层-->
     <div class="layer-input div-now">
-        <div class="form-center">
+        <div id="variety" class="form-center">
             <div>
                 <div class="row">
                     <div class="col-md-2">

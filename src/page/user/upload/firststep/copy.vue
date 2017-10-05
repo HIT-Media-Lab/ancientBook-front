@@ -2,7 +2,7 @@
 
     <!--复本层-->
     <div class="layer-input div-now">
-        <div class="form-center">
+        <div id="copy" class="form-center">
             <div>
                 <div class="row">
                     <label class="col-md-2">册数：</label>
