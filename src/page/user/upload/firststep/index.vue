@@ -145,17 +145,11 @@
                 else if (this.varieties_item.varieties_responsibility[0].end_time == '') {
                     alert("请填写品种层责任结束时间");
                 }
-                else if (this.varieties_item.varieties_responsibility[0].person == '') {
-                    alert("请填写品种层责任者名称");
-                }
                 else if (this.edition_item.edition_responsibility[0].begin_time == '') {
                     alert("请填写版本层责任开始时间");
                 }
                 else if (this.edition_item.edition_responsibility[0].end_time == '') {
                     alert("请填写版本层责任结束时间");
-                }
-                else if (this.edition_item.edition_responsibility[0].person == '') {
-                    alert("请填写版本层责任者名称");
                 }
                 else if (this.impression_item.impression_responsibility[0].begin_time == '') {
                     alert("请填写印次层责任开始时间");
@@ -163,17 +157,11 @@
                 else if (this.impression_item.impression_responsibility[0].end_time == '') {
                     alert("请填写印次层责任结束时间");
                 }
-                else if (this.impression_item.impression_responsibility[0].person == '') {
-                    alert("请填写印次层责任者名称");
-                }
                 else if (this.copy_item.copy_responsibility[0].begin_time == '') {
                     alert("请填写复本层责任开始时间");
                 }
                 else if (this.copy_item.copy_responsibility[0].end_time == '') {
                     alert("请填写复本层责任结束时间");
-                }
-                else if (this.copy_item.copy_responsibility[0].person == '') {
-                    alert("请填写复本层责任者名称");
                 }
                 else{
                     this.get_upload_one_info();

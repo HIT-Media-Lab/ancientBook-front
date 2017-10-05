@@ -48,7 +48,7 @@
             </div>
 
             <div slot="body" class="zxw-time-body" style="text-align: center">
-                <div style="background-color:white;">
+                <div style="background-color:white;" class="ry-scroll">
                     <div class="row">
                         <span class="col-md-5">文件名</span>
                         <span class="col-md-3">大小</span>

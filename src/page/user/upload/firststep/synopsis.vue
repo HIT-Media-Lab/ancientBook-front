@@ -2,7 +2,7 @@
     <!--古籍简介-->
     <div>
         <h4>古籍简介</h4>
-        <input id="book-info" class="height100" v-model="summary">
+        <input id="book-info" class="height100 width800" v-model="summary">
     </div>
 </template>
 
