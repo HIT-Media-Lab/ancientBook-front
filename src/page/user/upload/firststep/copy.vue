@@ -61,7 +61,7 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star"></span>
+                        <span class="star">*</span>
                         <label>责任开始时间:</label>
                     </div>
                     <div class="col-md-4">
@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star"></span>
+                        <span class="star">*</span>
                         <label>责任结束时间:</label>
                     </div>
                     <div class="col-md-4">
@@ -79,7 +79,7 @@
 
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="star"></span>
+                        <span class="star">*</span>
                         <label>责任者类型：</label>
                     </div>
                     <div class="col-md-4">
@@ -91,7 +91,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <span class="star"></span>
+                        <span class="star">*</span>
                         <label>责任者名称：</label>
                     </div>
                     <div class="col-md-4">

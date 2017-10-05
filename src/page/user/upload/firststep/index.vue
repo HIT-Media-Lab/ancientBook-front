@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div class="width950 center">
+        <div id="ry-upload1" class="width950 center">
             <menuBar class="ry-border-top"></menuBar>
             <div class="ry-border-center">
                 <div id="layer-body" class="ry-form-body">
@@ -209,7 +209,7 @@
 </script>
 
 <style>
-    .ry-upload input{
+    #ry-upload1 input{
         border: none;
         background-color: transparent;
         padding-left: 4px;
