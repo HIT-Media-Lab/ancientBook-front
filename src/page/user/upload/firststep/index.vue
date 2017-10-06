@@ -337,7 +337,7 @@
         background-size: 100%;
     }
 
-    .ry-time-modal-v input{
-        border: solid;!important;
+    #ry-time-modal-v input{
+        border: solid;
     }
 </style>
