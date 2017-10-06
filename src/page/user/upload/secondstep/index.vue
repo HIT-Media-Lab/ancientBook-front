@@ -635,6 +635,7 @@
 
     .ry-scroll-y{
         overflow-y: auto;
+        overflow-x: hidden;
     }
 
     .ry-height500{
