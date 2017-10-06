@@ -337,7 +337,7 @@
         background-size: 100%;
     }
 
-    #ry-time-modal-v#ry-time-modal-e#ry-time-modal-i#ry-time-modal-c input{
-        border: solid;
+    .ry-time-modal-v input{
+        border: solid;!important;
     }
 </style>
