@@ -103,11 +103,14 @@ import store from '../../../store'
                  if (response.body.result == 1) {
                      if (response.body.su == 0){
                          localStorage.setItem('user',JSON.stringify("user"));
-                         this.$router.push({path: '/user'});
+                         if (this.$route.name == 'login'){
+                             this.$router.push({path: '/login'});
+                         }else {
+                             this.$router.push({path: '/user'});
+                         }
                      }
                      if (response.body.su == 1){
                          localStorage.setItem('user',JSON.stringify("admin"));
-                         console.log("hhh");
                          this.$route.params.pageId = 1;
                          this.$router.push({name: 'admin', params: this.$route.params});
                      }
