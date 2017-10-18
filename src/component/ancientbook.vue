@@ -488,7 +488,7 @@
                     console.log("没有返回文本");
                     document.getElementById("text-comment").innerHTML = '';
                     document.getElementById("text-mark").innerHTML = '';
-                    document.getElementById("ry-edit-text").innerHTML = '';
+                    this.content = '';
                 }
                 else {
                     this.content = response.body.content;
