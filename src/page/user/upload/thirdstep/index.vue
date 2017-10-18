@@ -15,7 +15,7 @@
         <div class="width950 height650 center ry-scroll">
             <div id="ry-pictures" v-for="(item,index) in upload_file[this.book_index].images" style="display: inline-block">
                 <div class="ry-picture-box" v-show="item.show">
-                    <div class="ry-picture-view ry-fixed">
+                    <div class="ry-picture-view ry-fixed ry-relative">
                         <button class="ry-del-pic" @click="del_picture(index)"><img src="../../../../assets/img/picture-button/add-character-hover.png" height="14" width="15" /></button>
                         <img :src="item.picture" class="ry-picture-view" @click="view_picture()"/>
                     </div>
@@ -783,6 +783,9 @@
     .ry-picture-view{
         width: 120px;
         height: 160px;
+    }
+
+    .ry-relative{
         position: relative;
     }
 
