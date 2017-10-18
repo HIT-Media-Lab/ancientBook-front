@@ -194,7 +194,7 @@
             <modal :show_modal.sync = "catalogue_modal" @fireclose = "catalogue_modal = false" class="ry-modal-border ry-modal-menu">
                 <div class="dialog-body" slot="body">
                     <div v-for="(item,index) in book_all_info.catalogue">
-                        <div>册{{item.book_count}}{{item.book_name}}</div>
+                        <div><span>册{{item.book_count}}</span><span style="margin-left: 5px">{{item.book_name}}</span></div>
                         <div>
                             <a class="ry-menu" v-for="volume in book_all_info.catalogue[index].volume" @click="go_to(item.book_count,volume.volume_count,volume.begin_page)">卷{{volume.volume_count}}</a>
                         </div>
