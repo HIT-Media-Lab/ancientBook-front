@@ -340,4 +340,16 @@
     #ry-time-modal-v input{
         border: solid;
     }
+
+    #ry-time-modal-e input{
+        border: solid;
+    }
+
+    #ry-time-modal-i input{
+        border: solid;
+    }
+
+    #ry-time-modal-c input{
+        border: solid;
+    }
 </style>

@@ -492,6 +492,7 @@
                 }
                 else {
                     this.content = response.body.content;
+                    console.log(this.content);
                     this.get_edit();
                     this.renew_mark();
                     this.renew_comment();
