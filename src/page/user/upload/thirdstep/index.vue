@@ -783,6 +783,7 @@
     .ry-picture-view{
         width: 120px;
         height: 160px;
+        position: relative;
     }
 
     .ry-picture-box{
