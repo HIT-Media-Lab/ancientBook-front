@@ -95,7 +95,8 @@
         margin-bottom: 5px;
         overflow:hidden;
         white-space:nowrap;
-        text-overflow:ellipsis
+        text-overflow:ellipsis;
+        width: 900px;
     }
     .j-bls-bookname:hover{
         color: #a50000;
