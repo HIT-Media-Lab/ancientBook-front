@@ -8,7 +8,7 @@
         </p>
         <div class="j-bls-book1">
             <a class="j-bls-book-link" v-for="(item,index) in books">
-                <p class="j-bls-bookname" @click="go_to_book(item.ancient_book_id)">{{index+1}}、{{item.standard_name}}</p>
+                <p class="j-bls-bookname" @click="go_to_book(item.ancient_book_id)" :title="item.standard_name">{{index+1}}、{{item.standard_name}}</p>
             </a>
         </div>
         <!--翻页组件-->
@@ -67,7 +67,7 @@
             },
             go_to_book(id){
                 this.$route.params.ancient_book_id = id;
-                this.$router.push({name: 'book_varieties', params: this.$route.params});
+                this.$router.push({name: 'book_info', params: this.$route.params});
             }
         }
     }
@@ -93,6 +93,9 @@
     }
     .j-bls-bookname{
         margin-bottom: 5px;
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis
     }
     .j-bls-bookname:hover{
         color: #a50000;
